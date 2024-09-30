@@ -1,0 +1,32 @@
+:root {
+  --font-stack: Helvetica, Arial, sans-serif;
+}
+
+@mixin input-caption-base {
+  color: #404040;
+  font-family: var(--font-stack);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  margin-top: 4px;
+}
+
+.inputCaption {
+  @include input-caption-base;
+}
+
+.inputCaptionError {
+  @include input-caption-base;
+  color: #990000;
+}
+
+.inputCaptionRTL {
+  @include input-caption-base;
+  text-align: right;
+}
+
+.inputCaptionErrorRTL {
+  @include input-caption-base;
+  color: #990000;
+  text-align: right;
+}

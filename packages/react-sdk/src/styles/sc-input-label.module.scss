@@ -1,0 +1,12 @@
+:root {
+  --font-stack: Helvetica, Arial, sans-serif;
+}
+
+.label {
+  color: #292929;
+  font-family: var(--font-stack);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  margin-bottom: 4px;
+}

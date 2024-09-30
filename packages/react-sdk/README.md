@@ -1,0 +1,1 @@
+# Searchcraft React SDK

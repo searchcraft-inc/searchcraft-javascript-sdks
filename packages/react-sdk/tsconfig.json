@@ -1,0 +1,29 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "baseUrl": ".",
+    "jsx": "react-jsx",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@components/*": ["./src/components/*"],
+      "@testing/*": ["./src/test-tools/*"],
+      "@styled/*": ["./styled-system/*"]
+    },
+    "outDir": "dist",
+    "sourceMap": true
+  },
+  "include": ["src", "vite.config.ts"],
+  "typedocOptions": {
+    "plugin": ["typedoc-plugin-markdown"],
+    "entryPoints": [
+      "src/components/providers/SearchcraftProvider.tsx",
+      "src/components/providers/SearchcraftProviderConfig.ts",
+      "src/components/providers/SearchcraftProviderContext.ts",
+      "src/components/ui/BaseSearchForm/index.tsx",
+      "src/components/ui/BaseSearchResult/index.tsx",
+      "src/components/ui/AutoSearchForm/index.tsx"
+    ],
+    "out": "docs"
+  }
+}

@@ -1,0 +1,12 @@
+:root {
+  --font-stack: Helvetica, Arial, sans-serif;
+}
+
+.errorMessage {
+  color: #990000;
+  font-family: var(--font-stack);
+  font-size: 12px;
+  line-height: 16px;
+  margin-bottom: 4px;
+  margin-top: 4px;
+}

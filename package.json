@@ -1,0 +1,22 @@
+{
+  "name": "searchcraft-javascript-sdks",
+  "version": "0.1.0",
+  "description": "The monorepo containing SearchCraft's SDKs.",
+  "main": "index.js",
+  "repository": "https://bitbucket.org/madebychalk/searchcraft-javascript-sdks.git",
+  "author": "Searchcraft",
+  "license": "Apache-2.0",
+  "private": true,
+  "workspaces": ["packages/core-sdk", "packages/react-sdk"],
+  "devDependencies": {
+    "@biomejs/biome": "^1.8.1"
+  },
+  "scripts": {
+    "build:core": "yarn workspace @searchcraft-sdk/core build",
+    "build:sdk-react": "yarn build:core && yarn workspace @searchcraft-sdk/react build",
+    "yalc-pub:sdk-react": "yarn build:react-sdk && yalc publish packages/react-sdk",
+    "test": "yarn test:core && yarn test:react-sdk",
+    "test:core": "yarn workspace @searchcraft-sdk/core test",
+    "test:sdk-react": "yarn workspace @searchcraft-sdk/react test"
+  }
+}

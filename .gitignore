@@ -7,6 +7,10 @@
 node_modules/
 dist/
 
+# yalc files for local development
+.yalc
+yalc.lock
+
 # Compiled Java class files
 *.class
 
@@ -48,3 +52,7 @@ Thumbs.db
 *.mov
 *.wmv
 
+
+## Panda
+styled-system
+styled-system-studio
