@@ -1,5 +1,5 @@
 {
-  "name": "@searchcraft-sdk/core",
+  "name": "@searchcraft/core",
   "private": true,
   "description": "The core functionality shared by SearchCraft's SDKs.",
   "version": "0.1.0",
