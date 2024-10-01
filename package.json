@@ -15,7 +15,7 @@
     "@biomejs/biome": "^1.8.1"
   },
   "scripts": {
-    "build:core": "yarn workspace @searchcraft/core-sdk build",
+    "build:core": "yarn workspace @searchcraft/core build",
     "build:sdk-react": "yarn build:core && yarn workspace @searchcraft/react-sdk build",
     "yalc-pub:sdk-react": "yarn build:react-sdk && yalc publish packages/react-sdk",
     "test": "yarn test:core && yarn test:react-sdk",
