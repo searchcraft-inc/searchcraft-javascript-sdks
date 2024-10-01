@@ -1,9 +1,12 @@
 {
   "name": "searchcraft-javascript-sdks",
   "version": "0.1.0",
-  "description": "The monorepo containing SearchCraft's SDKs.",
+  "description": "The monorepo encompassing the SearchCraft SDKs.",
   "main": "index.js",
-  "repository": "https://bitbucket.org/madebychalk/searchcraft-javascript-sdks.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://bitbucket.org/madebychalk/searchcraft-javascript-sdks.git"
+  },
   "author": "Searchcraft",
   "license": "Apache-2.0",
   "private": true,

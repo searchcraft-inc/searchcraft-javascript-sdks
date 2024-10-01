@@ -12,6 +12,10 @@
     "test": "vitest --watch=false",
     "test:watch": "vitest"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/"
+  },
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=10.0.0"
@@ -32,7 +36,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.1",
-    "@searchcraft-sdk/core": "file:.yalc/@searchcraft-sdk/core",
+    "@searchcraft-sdk/core": "*",
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.1",
     "@types/node": "^20.11.25",
