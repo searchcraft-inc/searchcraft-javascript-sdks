@@ -1,0 +1,50 @@
+:root {
+  --font-stack: Helvetica, Arial, sans-serif;
+}
+
+.button {
+  background-color: #000000;
+  border: 1px solid #E6E6E6;
+  border-radius: 8px;
+  color: #fff;
+  display: flex;
+  font-family: var(--font-stack);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  padding: 11px 20px;
+  position: relative;
+
+  &:hover {
+    background-color: #2E2E2E;
+    cursor: pointer;
+  }
+
+  &:focus {
+    outline: 2px solid #000000;
+  }
+}
+
+.spinnerMarginRight {
+  margin-right: 4px;
+  position: absolute;
+  left: 4px;
+}
+
+.spinnerMarginLeft {
+  margin-left: 4px;
+  position: absolute;
+  left: 4px;
+}
+
+.buttonLabel {
+  animation: rightandback .2s;
+  position: relative;
+}
+
+@keyframes rightandback {
+  0% { right: -6px; }
+  50% { right: -12px; }
+  75% { right: -6px; }
+  100% {right: 0px; }
+}

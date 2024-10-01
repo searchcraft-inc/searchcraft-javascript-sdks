@@ -1,0 +1,75 @@
+:root {
+  --font-stack: Helvetica, Arial, sans-serif;
+}
+
+@mixin input-container-base {
+  position: relative;
+}
+
+@mixin input-base {
+  background-color: #EDEDED;
+  border: none;
+  border-radius: 8px;
+  font-family: var(--font-stack);
+  outline: none;
+  padding-bottom: 15px;
+  padding-top: 15px;
+
+  &::placeholder {
+    color: #737373;
+    font-family: var(--font-stack);
+    font-size: 16px;
+  }
+
+  &:focus {
+    outline: 2px solid #000000;
+  }
+}
+
+@mixin input-error-base {
+  @include input-base;
+  outline: 2px solid #c00;
+
+  &:focus-visible {
+    outline: 2px solid #c00,
+  }
+}
+
+.inputContainer {
+  @include input-container-base;
+}
+
+.inputContainerRTL {
+  @include input-container-base;
+  margin-left: 8px;
+}
+
+.input {
+  @include input-base;
+  margin-right: 8px;
+  padding-left: 36px;
+  padding-right: 16px;
+}
+
+.inputRTL {
+  @include input-base;
+  margin-left: 8px;
+  padding-left: 16px;
+  padding-right: 36px;
+  text-align: right;
+}
+
+.inputError {
+  @include input-error-base;
+  margin-right: 8px;
+  padding-left: 36px;
+  padding-right: 16px;
+}
+
+.inputErrorRTL {
+  @include input-error-base;
+  margin-left: 8px;
+  padding-left: 16px;
+  padding-right: 36px;
+  text-align: right;
+}
