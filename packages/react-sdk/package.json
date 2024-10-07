@@ -6,6 +6,7 @@
   "description": "SearchCraft's React SDK.",
   "type": "module",
   "license": "Apache-2.0",
+  "keywords": ["searchcraft"],
   "scripts": {
     "build": "tsc && vite build",
     "lint": "biome format lint ./src",
