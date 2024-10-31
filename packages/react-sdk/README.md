@@ -48,7 +48,7 @@ import {
   useSearchcraft
 } from '@searchcraft/react-sdk';
 
-// import the styles form the SDk
+// import the styles from the SDk
 import '../node_modules/@searchcraft/react-sdk/dist/style.css'
 
 const ReactSearchComponent = () => {
