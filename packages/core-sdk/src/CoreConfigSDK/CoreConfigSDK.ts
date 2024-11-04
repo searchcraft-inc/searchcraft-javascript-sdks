@@ -13,23 +13,19 @@ export interface CoreConfigSDK {
    */
   endpointPath: string;
   /**
+   * * Host IP Address and port number configured and created using Vektron
+   */
+  endpointURL: string;
+  /**
    * * Name of search database configured using Vektron
    */
   index: string;
-  /**
-   * * Callback invoked when a search request is resolved
-   */
-  setIsRequestingFalse: () => void;
-  /**
-   * * Callback invoked when a search request is initialized
-   */
-  setIsRequestingTrue: () => void;
 }
 
 /**
  * * Individual object returned within a SearchResult
  */
-export interface SearchcraftDocument {
+export interface SearchDocument {
   doc: Type;
   document_id: string;
   score: number;
@@ -40,6 +36,6 @@ export interface SearchcraftDocument {
  */
 export interface SearchResult {
   count: number;
-  hits: SearchcraftDocument[];
+  hits: SearchDocument[];
   time_taken: number;
 }

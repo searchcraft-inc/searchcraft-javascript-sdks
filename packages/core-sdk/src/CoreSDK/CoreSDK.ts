@@ -1,20 +1,28 @@
 import type { CoreConfigSDK, SearchResult } from '../CoreConfigSDK';
 
+export type SearchParams = {
+  query: string;
+  mode: 'fuzzy' | 'normal';
+};
+
+export type SearchError = {
+  message: string;
+  code: number;
+};
+
 /**
  * * Javascript Class providing the functionality to talk to the Searchcraft BE
  */
 export class CoreSDK {
   config: CoreConfigSDK;
-  searchResult: SearchResult | null;
 
   constructor(config: CoreConfigSDK) {
-    if (!config.apiKey || !config.endpointPath || !config.index) {
+    if (!config.endpointPath || !config.endpointURL || !config.index) {
       throw new Error(
-        'API key, endpoint path, and index value(s) must be provided',
+        'Endpoint path, Endpoint URL, and Index value(s) must be provided',
       );
     }
     this.config = config;
-    this.searchResult = null;
   }
 
   /**
@@ -22,16 +30,12 @@ export class CoreSDK {
    * @param {string} mode - Can be either 'fuzzy' or 'normal'
    * @returns {SearchResults} - Returns a `SearchResponse` object with the results from the search or throws an error
    */
-  search = async <T>(
-    query: string,
-    mode: 'fuzzy' | 'normal',
-  ): Promise<T | null> => {
+  search = async (searchParams: SearchParams) => {
     try {
-      this.config.setIsRequestingTrue();
-      const baseUrl = `http://localhost:3000${this.config.endpointPath}`;
+      const baseUrl = `${this.config.endpointURL}/index/${this.config.endpointPath}/search`;
       const requestBody = {
-        query: query,
-        mode,
+        query: searchParams.query,
+        mode: searchParams.mode,
         app: this.config.index,
       };
       const requestOptions = {
@@ -44,14 +48,9 @@ export class CoreSDK {
       };
 
       const request = await fetch(baseUrl, requestOptions);
-      const responseValues = await request.json();
-
-      this.searchResult = responseValues.data;
-      return responseValues;
+      return (await request.json()) as SearchResult;
     } catch (error) {
-      return error as T;
-    } finally {
-      this.config.setIsRequestingFalse();
+      return error as SearchError;
     }
   };
 }

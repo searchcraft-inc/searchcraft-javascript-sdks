@@ -6,7 +6,7 @@ import styles from '@styles/sc-search-form.module.scss';
 import { Input } from '../components/Input';
 import { InputLabel } from '../components/InputLabel';
 
-interface AutoSearchFormProps {
+export interface AutoSearchFormProps {
   handleSubmit: (query: string) => void;
   inputCaptionValue?: string;
   labelForInput?: string;
@@ -15,7 +15,7 @@ interface AutoSearchFormProps {
   rightToLeftOrientation?: boolean;
 }
 /**
- * * Buttonless form used to submit the search query with a timing configurable debounced function.
+ * * Button-less form used to submit the search query with a timing configurable debounced function.
  */
 export const AutoSearchForm: FC<AutoSearchFormProps> = ({
   handleSubmit,

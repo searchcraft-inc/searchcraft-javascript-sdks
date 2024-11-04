@@ -7,7 +7,7 @@ import { ClearInputButton } from '../ClearInputButton';
 
 import styles from '@styles/sc-input.module.scss';
 
-type InputProps = {
+export type InputProps = {
   error?: boolean;
   formClassName?: string;
   inputCaptionClassName?: string;

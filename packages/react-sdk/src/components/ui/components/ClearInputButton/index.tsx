@@ -6,15 +6,13 @@ import { SpinnerLight } from '../Spinner';
 
 import styles from '@styles/sc-clear-input-button.module.scss';
 
-type ClearInputButtonProps = {
-  isAutoSearch?: boolean;
+export type ClearInputButtonProps = {
   isRequesting?: boolean;
   onClearInput?: () => void;
   rightToLeftOrientation?: boolean;
 };
 
 export const ClearInputButton: FC<ClearInputButtonProps> = ({
-  isAutoSearch = false,
   isRequesting = false,
   onClearInput,
   rightToLeftOrientation = false,

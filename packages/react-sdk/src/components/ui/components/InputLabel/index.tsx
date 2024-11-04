@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 import styles from '@styles/sc-input-label.module.scss';
 
-type InputLabelProps = {
+export type InputLabelProps = {
   className?: string;
   label: string;
 };

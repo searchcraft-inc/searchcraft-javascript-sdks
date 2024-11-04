@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 import styles from '@styles/sc-input-caption.module.scss';
 
-type InputCaptionProps = {
+export type InputCaptionProps = {
   error?: boolean;
   inputCaptionClassName?: string;
   inputCaptionValue: string;

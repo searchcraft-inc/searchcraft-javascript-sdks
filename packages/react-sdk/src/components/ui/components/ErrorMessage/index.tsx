@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 import styles from '@styles/sc-input-error-message.module.scss';
 
-type ErrorMessageProps = {
+export type ErrorMessageProps = {
   className?: string;
   errorMessage?: string;
 };

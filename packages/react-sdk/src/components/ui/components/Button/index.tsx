@@ -5,7 +5,7 @@ import { SpinnerDark } from '../Spinner';
 
 import styles from '@styles/sc-button.module.scss';
 
-type ButtonProps = {
+export type ButtonProps = {
   className?: string;
   isRequesting?: boolean;
   iconElement?: ReactNode;

@@ -8,7 +8,7 @@ import { ErrorMessage } from '../components/ErrorMessage';
 import { Input } from '../components/Input';
 import { InputLabel } from '../components/InputLabel';
 
-interface BaseSearchFormProps {
+export interface BaseSearchFormProps {
   errorMessage?: string;
   handleSubmit: (query: string) => void;
   labelForInput?: string;
