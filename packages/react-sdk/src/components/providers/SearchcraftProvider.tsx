@@ -13,8 +13,6 @@ const SearchcraftProvider = ({
     () =>
       new CoreSDK({
         ...config,
-        setIsRequestingFalse: () => setIsRequesting(false),
-        setIsRequestingTrue: () => setIsRequesting(true),
       }),
     [config],
   );
@@ -22,13 +20,19 @@ const SearchcraftProvider = ({
   const [query, setQuery] = useState<string>('');
   const [isRequesting, setIsRequesting] = useState<boolean>(false);
 
+  const search = () => {
+    setIsRequesting(true);
+    core.search;
+    setIsRequesting(false);
+  };
+
   const providerContext: SearchcraftProviderContext = {
     error: null,
     index: core.config.index,
     isRequesting,
     mode: 'fuzzy',
     query,
-    search: core.search,
+    search,
     searchResult: core.searchResult,
     setQuery,
   };

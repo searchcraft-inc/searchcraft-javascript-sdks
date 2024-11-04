@@ -36,7 +36,7 @@ export interface SearchcraftProviderContext {
   /**
    * Function for searching that requires search mode and search type.
    */
-  search: <T>(query: string, mode: 'fuzzy' | 'normal') => Promise<T[] | null>;
+  search: (query: string, mode: 'fuzzy' | 'normal') => void;
 
   searchResult?: {
     count: number;
