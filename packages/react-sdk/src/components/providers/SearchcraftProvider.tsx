@@ -1,39 +1,40 @@
-import { type PropsWithChildren, useContext, useMemo, useState } from 'react';
-import { CoreSDK } from '@searchcraft-sdk/core';
+import { type PropsWithChildren, useContext, useState } from 'react';
+import type {
+  SearchcraftInstance,
+  SearchError,
+  SearchResult,
+} from '@searchcraft/core';
+import { CoreSDK as Searchcraft } from '@searchcraft/core';
 
 import { SearchcraftContext } from './SearchcraftContext';
-import type { SearchcraftProviderConfig } from './SearchcraftProviderConfig';
 import type { SearchcraftProviderContext } from './SearchcraftProviderContext';
 
 const SearchcraftProvider = ({
   children,
-  config,
-}: PropsWithChildren & SearchcraftProviderConfig) => {
-  const core: CoreSDK = useMemo<CoreSDK>(
-    () =>
-      new CoreSDK({
-        ...config,
-      }),
-    [config],
-  );
-
+  searchcraft,
+}: PropsWithChildren & SearchcraftInstance) => {
+  console.log('REACT PROVIDER CORE', searchcraft);
   const [query, setQuery] = useState<string>('');
   const [isRequesting, setIsRequesting] = useState<boolean>(false);
+  const [searchResults, setSearchResults] = useState<
+    SearchResult | SearchError | null
+  >(null);
 
-  const search = () => {
+  const search = async () => {
     setIsRequesting(true);
-    core.search;
+    const results = await searchcraft.search({ query, mode: 'fuzzy' });
+    setSearchResults(results);
     setIsRequesting(false);
   };
 
   const providerContext: SearchcraftProviderContext = {
     error: null,
-    index: core.config.index,
+    index: searchcraft.config.index,
     isRequesting,
     mode: 'fuzzy',
     query,
     search,
-    searchResult: core.searchResult,
+    searchResults,
     setQuery,
   };
 
@@ -47,4 +48,4 @@ const SearchcraftProvider = ({
 const useSearchcraft = () =>
   useContext<SearchcraftProviderContext>(SearchcraftContext);
 
-export { SearchcraftProvider, useSearchcraft };
+export { SearchcraftProvider, useSearchcraft, Searchcraft };

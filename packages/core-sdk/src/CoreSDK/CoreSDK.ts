@@ -1,17 +1,12 @@
-import type { CoreConfigSDK, SearchResult } from '../CoreConfigSDK';
-
-export type SearchParams = {
-  query: string;
-  mode: 'fuzzy' | 'normal';
-};
-
-export type SearchError = {
-  message: string;
-  code: number;
-};
+import type {
+  CoreConfigSDK,
+  SearchError,
+  SearchParams,
+  SearchResult,
+} from '../CoreConfigSDK';
 
 /**
- * * Javascript Class providing the functionality to talk to the Searchcraft BE
+ * * Javascript Class providing the functionality to interact with the Searchcraft BE
  */
 export class CoreSDK {
   config: CoreConfigSDK;
@@ -28,11 +23,13 @@ export class CoreSDK {
   /**
    * @param {string} query - User provided value Searchcraft will use to search against
    * @param {string} mode - Can be either 'fuzzy' or 'normal'
-   * @returns {SearchResults} - Returns a `SearchResponse` object with the results from the search or throws an error
+   * @returns {SearchResult} - Returns a `SearchResponse` object with the results from the search or throws an error
    */
-  search = async (searchParams: SearchParams) => {
+  search = async (searchParams: SearchParams): Promise<SearchResult> => {
     try {
-      const baseUrl = `${this.config.endpointURL}/index/${this.config.endpointPath}/search`;
+      const formattedIndexes = this.config.index.join(',');
+      console.log('formattedIndexes =>', formattedIndexes);
+      const baseUrl = `${this.config.endpointURL}/index/${formattedIndexes}/search`;
       const requestBody = {
         query: searchParams.query,
         mode: searchParams.mode,
@@ -42,7 +39,7 @@ export class CoreSDK {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `${this.config.apiKey}`,
+          Authorization: this.config.apiKey ? `${this.config.apiKey}` : '',
         },
         body: JSON.stringify(requestBody),
       };
