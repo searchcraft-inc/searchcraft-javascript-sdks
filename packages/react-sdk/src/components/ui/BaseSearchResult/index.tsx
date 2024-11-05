@@ -5,7 +5,7 @@ import { ButtonIcon } from '../assets/ButtonIcons';
 import styles from '@styles/sc-search-result.module.scss';
 import { ArrowRightIcon } from '../assets/ClearInputIcon';
 
-export interface BaseSearchResultProps {
+interface BaseSearchResultProps {
   buttonCallbackFn?: () => void;
   buttonLabel?: string;
   imageAltText?: string;
@@ -18,7 +18,7 @@ export interface BaseSearchResultProps {
   resultSubheading?: string;
 }
 
-export const BaseSearchResult: FC<BaseSearchResultProps> = ({
+const BaseSearchResult: FC<BaseSearchResultProps> = ({
   buttonCallbackFn = () => {},
   buttonLabel = '',
   callbackFn = () => {},
@@ -81,3 +81,5 @@ export const BaseSearchResult: FC<BaseSearchResultProps> = ({
     </div>
   );
 };
+
+export default BaseSearchResult;

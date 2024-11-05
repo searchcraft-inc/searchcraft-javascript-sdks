@@ -35,7 +35,7 @@
   }
 }
 
-.inputContainer {
+.inputContainerLTR {
   @include input-container-base;
 }
 
@@ -44,7 +44,7 @@
   margin-left: 8px;
 }
 
-.input {
+.inputLTR {
   @include input-base;
   margin-right: 8px;
   padding-left: 36px;
@@ -59,7 +59,7 @@
   text-align: right;
 }
 
-.inputError {
+.inputErrorLTR {
   @include input-error-base;
   margin-right: 8px;
   padding-left: 36px;

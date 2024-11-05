@@ -28,7 +28,7 @@ export const InputCaption: FC<InputCaptionProps> = ({
   ) : (
     <p
       className={classNames(
-        error ? styles.inputCaptionError : styles.inputCaption,
+        error ? styles.inputCaptionErrorLTR : styles.inputCaptionLTR,
         inputCaptionClassName,
       )}
     >

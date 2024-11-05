@@ -1,11 +1,11 @@
 import type { ChangeEventHandler, FC } from 'react';
 import classNames from 'classnames';
 
+import styles from '@styles/sc-input.module.scss';
+
+import { ClearInputButton } from '../ClearInputButton';
 import { InputCaption } from '../InputCaption';
 import { InputIcon } from '../InputIcon';
-import { ClearInputButton } from '../ClearInputButton';
-
-import styles from '@styles/sc-input.module.scss';
 
 export type InputProps = {
   error?: boolean;
@@ -13,7 +13,6 @@ export type InputProps = {
   inputCaptionClassName?: string;
   inputCaptionValue?: string;
   inputClassName?: string;
-  isRequesting?: boolean;
   onClearInput?: () => void;
   onSearchInputChange: ChangeEventHandler<HTMLInputElement>;
   placeholderValue?: string;
@@ -21,13 +20,12 @@ export type InputProps = {
   query: string;
 };
 
-export const Input: FC<InputProps> = ({
+const Input: FC<InputProps> = ({
   error = false,
   formClassName = '',
   inputCaptionClassName = '',
   inputClassName = '',
   inputCaptionValue = '',
-  isRequesting = false,
   onClearInput,
   onSearchInputChange,
   placeholderValue = 'Enter Search',
@@ -36,17 +34,24 @@ export const Input: FC<InputProps> = ({
 }) => {
   const containerClassName = rightToLeftOrientation
     ? styles.inputContainerRTL
-    : styles.inputContainer;
+    : styles.inputContainerLTR;
   return (
-    <div className={classNames(containerClassName, formClassName)}>
+    <div
+      className={classNames(
+        containerClassName,
+        formClassName,
+        'searchcraft-input-form',
+      )}
+    >
       {rightToLeftOrientation ? (
         <>
           <input
             className={classNames(
               error ? styles.inputErrorRTL : styles.inputRTL,
               inputClassName,
+              'searchcraft-input',
             )}
-            id='sc-input'
+            id='searchcraft-input-id'
             onChange={onSearchInputChange}
             placeholder={placeholderValue}
             type='text'
@@ -61,7 +66,6 @@ export const Input: FC<InputProps> = ({
           )}
           {query.length > 0 && (
             <ClearInputButton
-              isRequesting={isRequesting}
               onClearInput={onClearInput}
               rightToLeftOrientation={rightToLeftOrientation}
             />
@@ -75,10 +79,11 @@ export const Input: FC<InputProps> = ({
         <>
           <input
             className={classNames(
-              error ? styles.inputError : styles.input,
+              error ? styles.inputErrorLTR : styles.inputLTR,
               inputClassName,
+              'searchcraft-input',
             )}
-            id='sc-input'
+            id='searchcraft-input-id'
             onChange={onSearchInputChange}
             placeholder={placeholderValue}
             type='text'
@@ -94,7 +99,6 @@ export const Input: FC<InputProps> = ({
           {query.length > 0 && (
             <ClearInputButton
               onClearInput={onClearInput}
-              isRequesting={isRequesting}
               rightToLeftOrientation={rightToLeftOrientation}
             />
           )}
@@ -104,3 +108,5 @@ export const Input: FC<InputProps> = ({
     </div>
   );
 };
+
+export default Input;

@@ -3,29 +3,35 @@ import { useState, type FC, useEffect, type ChangeEventHandler } from 'react';
 import { useSearchcraft } from '@components/providers/SearchcraftProvider';
 import styles from '@styles/sc-search-form.module.scss';
 
-import { Input } from '../components/Input';
-import { InputLabel } from '../components/InputLabel';
+import Input from '../components/Input';
+import InputLabel from '../components/InputLabel';
+import classNames from 'classnames';
 
 export interface AutoSearchFormProps {
+  autoSearchFormClass?: string;
   handleSubmit: (query: string) => void;
   inputCaptionValue?: string;
   labelForInput?: string;
   onClearedInput?: () => void;
   placeholderValue?: string;
   rightToLeftOrientation?: boolean;
+  searchContainerClass?: string;
 }
+
 /**
  * * Button-less form used to submit the search query with a timing configurable debounced function.
  */
-export const AutoSearchForm: FC<AutoSearchFormProps> = ({
+const AutoSearchForm: FC<AutoSearchFormProps> = ({
+  autoSearchFormClass = '',
   handleSubmit,
   inputCaptionValue = '',
   labelForInput = 'Search',
   onClearedInput = () => {},
   placeholderValue = 'Search here',
   rightToLeftOrientation = false,
+  searchContainerClass = '',
 }) => {
-  const { isRequesting, query, setQuery } = useSearchcraft();
+  const { query, setQuery } = useSearchcraft();
   const [canSearch, setCanSearch] = useState<boolean>(false);
 
   const handleSearchInputChange: ChangeEventHandler<HTMLInputElement> = (
@@ -57,19 +63,30 @@ export const AutoSearchForm: FC<AutoSearchFormProps> = ({
       return;
     }
   }, [canSearch, handleSubmit, query]);
-
+  const autoSearchFormClassname = rightToLeftOrientation
+    ? styles.formRTL
+    : styles.formLTR;
   return (
     <form
-      className={rightToLeftOrientation ? styles.formRTL : styles.formLTR}
-      onSubmit={(e) => {
-        e.preventDefault();
+      className={classNames(
+        autoSearchFormClassname,
+        autoSearchFormClass,
+        'searchcraft-auto-search-form',
+      )}
+      onSubmit={(event) => {
+        event.preventDefault();
       }}
     >
       <InputLabel label={labelForInput} />
-      <div className={styles.searchContainer}>
+      <div
+        className={classNames(
+          styles.searchContainer,
+          searchContainerClass,
+          'searchcraft-input-container',
+        )}
+      >
         <Input
           inputCaptionValue={inputCaptionValue}
-          isRequesting={isRequesting}
           onClearInput={handleClearInput}
           onSearchInputChange={handleSearchInputChange}
           placeholderValue={placeholderValue}
@@ -80,3 +97,5 @@ export const AutoSearchForm: FC<AutoSearchFormProps> = ({
     </form>
   );
 };
+
+export default AutoSearchForm;

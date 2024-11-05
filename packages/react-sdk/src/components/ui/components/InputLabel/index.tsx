@@ -8,13 +8,18 @@ export type InputLabelProps = {
   label: string;
 };
 
-export const InputLabel: FC<InputLabelProps> = ({
+const InputLabel: FC<InputLabelProps> = ({
   className,
   label = 'Enter Search',
 }) => {
   return (
-    <label className={classNames(styles.label, className)} htmlFor='sc-input'>
+    <label
+      className={classNames(styles.label, className)}
+      htmlFor='searchcraft-input-id'
+    >
       {label}
     </label>
   );
 };
+
+export default InputLabel;

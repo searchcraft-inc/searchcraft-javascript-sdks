@@ -3,10 +3,10 @@ import { useState, type FC } from 'react';
 import { useSearchcraft } from '@components/providers/SearchcraftProvider';
 import styles from '@styles/sc-search-form.module.scss';
 
-import { Button } from '../components/Button';
-import { ErrorMessage } from '../components/ErrorMessage';
-import { Input } from '../components/Input';
-import { InputLabel } from '../components/InputLabel';
+import Button from '../components/Button';
+import ErrorMessage from '../components/ErrorMessage';
+import Input from '../components/Input';
+import InputLabel from '../components/InputLabel';
 
 export interface BaseSearchFormProps {
   errorMessage?: string;
@@ -19,14 +19,14 @@ export interface BaseSearchFormProps {
 /**
  * * Form used to submit the search query using a provided search function.
  */
-export const BaseSearchForm: FC<BaseSearchFormProps> = ({
+const BaseSearchForm: FC<BaseSearchFormProps> = ({
   errorMessage,
   handleSubmit,
   labelForInput = 'Search',
   placeholderValue = 'Enter Search Term',
   rightToLeftOrientation = false,
 }) => {
-  const { query, isRequesting, setQuery } = useSearchcraft();
+  const { query, setQuery } = useSearchcraft();
   const [error, setError] = useState<boolean>(false);
 
   const handleFormSubmit = (e: { preventDefault: () => void }) => {
@@ -51,7 +51,7 @@ export const BaseSearchForm: FC<BaseSearchFormProps> = ({
     >
       <InputLabel label={labelForInput} />
       <div className={styles.searchContainer}>
-        {rightToLeftOrientation && <Button isRequesting={isRequesting} />}
+        {rightToLeftOrientation && <Button />}
         <Input
           error={error}
           onClearInput={handleClearInput}
@@ -60,9 +60,11 @@ export const BaseSearchForm: FC<BaseSearchFormProps> = ({
           query={query}
           rightToLeftOrientation={rightToLeftOrientation}
         />
-        {!rightToLeftOrientation && <Button isRequesting={isRequesting} />}
+        {!rightToLeftOrientation && <Button />}
       </div>
       {error && <ErrorMessage errorMessage={errorMessage} />}
     </form>
   );
 };
+
+export default BaseSearchForm;

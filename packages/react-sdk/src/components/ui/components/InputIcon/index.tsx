@@ -15,7 +15,7 @@ export const InputIcon: FC<InputIconProps> = ({
   return error ? (
     <div
       className={
-        rightToLeftOrientation ? styles.inputIconRTL : styles.inputIcon
+        rightToLeftOrientation ? styles.inputIconRTL : styles.inputIconLTR
       }
     >
       <SearchIconError />
@@ -23,7 +23,7 @@ export const InputIcon: FC<InputIconProps> = ({
   ) : (
     <div
       className={
-        rightToLeftOrientation ? styles.inputIconRTL : styles.inputIcon
+        rightToLeftOrientation ? styles.inputIconRTL : styles.inputIconLTR
       }
     >
       <SearchIcon />
