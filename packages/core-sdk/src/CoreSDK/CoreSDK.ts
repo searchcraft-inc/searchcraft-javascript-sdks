@@ -28,7 +28,6 @@ export class CoreSDK {
   search = async (searchParams: SearchParams): Promise<SearchResult> => {
     try {
       const formattedIndexes = this.config.index.join(',');
-      console.log('formattedIndexes =>', formattedIndexes);
       const baseUrl = `${this.config.endpointURL}/index/${formattedIndexes}/search`;
       const requestBody = {
         query: searchParams.query,

@@ -13,7 +13,6 @@ const SearchcraftProvider = ({
   children,
   searchcraft,
 }: PropsWithChildren & SearchcraftInstance) => {
-  console.log('REACT PROVIDER CORE', searchcraft);
   const [query, setQuery] = useState<string>('');
   const [isRequesting, setIsRequesting] = useState<boolean>(false);
   const [searchResults, setSearchResults] = useState<
