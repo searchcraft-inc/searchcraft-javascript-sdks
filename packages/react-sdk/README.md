@@ -16,51 +16,60 @@ Install with NPM:
 $ npm install @searchcraft/react-sdk
 ```
 
-Wrap your app or target a specific interface and wrap the screen with the `SearchcraftProvider` .
+Wrap your app or target a specific interface and wrap them with the `SearchcraftProvider` to expose the functionalities of the SDK.
 
 ```jsx
 
-import { createRoot } from 'react-dom/client'
+import { useMemo } from 'react'
 
-import { SearchcraftProvider } from '@searchcraft/react-sdk'
+import { SearchcraftProvider, Searchcraft } from '@searchcraft/react-sdk'
 
-const providerConfig = {
-  // values are provided via the Searchcraft Vektron Customer Portal
-   config: {
-    index: 'demo_movie_index',
-    apiKey: 'searchcraft_demo_api_key_1234',
-    endpointPath: '/search',
-  }
+// values are created via the Searchcraft Vektron Customer Portal
+const searchcraftConfig = {
+  index: ['test_data'],
+  apiKey: '1234.909.jmk',
+  endpointURL: 'http://127.0.0.1:8000',
 }
 
-createRoot(document.getElementById('root')!).render(
-     <SearchcraftProvider {...providerConfig}>
-      <YourApplicationGoesHere />
-    </SearchcraftProvider>,
-)
-```
-### useSearchcraft
+const Main = () => {
+  // initialize and pass an instance of Searchcraft into the provider
+  const searchcraft = useMemo(() => new Searchcraft(searchcraftConfig),[]);
+  return (
+    <SearchcraftProvider {...{ searchcraft }}>
+      <YourApplicationOrScreenGoHere />
+    </SearchcraftProvider>
+  )
+}
 
-Once your app is wrapped in the `SearchcraftProvider`, you can use the `useSearchcraft` hook.
+```
+### Quickstart with useSearchcraft hook
+
+Once your app is wrapped in the `SearchcraftProvider`, the `useSearchcraft` hook functionalities are available for use.
 
 ```jsx
 import {
   useSearchcraft
 } from '@searchcraft/react-sdk';
 
-// import the styles from the SDk
+// import the styles from the SDK
 import '../node_modules/@searchcraft/react-sdk/dist/style.css'
 
-const ReactSearchComponent = () => {
-const { isRequesting, query, search, searchResult } = useSearchcraft()
+const SearchWithResultsComponent = () => {
+const { isRequesting, query, search, searchResults } = useSearchcraft()
+
+const handleClearInput = () => {
+  setQuery('')
+};
+
   return (
     <>
       <AutoSearchForm
         handleSubmit={handleSubmitForm}
         inputCaptionValue="Search here"
         onClearedInput={handleClearInput}
-        rightToLeftOrientation={true}
+        rightToLeftOrientation
       />
+      <BaseSearchResults />
     </>
   )
 };
@@ -68,18 +77,28 @@ const { isRequesting, query, search, searchResult } = useSearchcraft()
 
 ## UI Components
 
-The SDK provides 3 pre-built UI components with data provided to them by the `SearchcraftProvider`.
+The SDK provides 4 pre-built UI components with data provided to them via the `SearchcraftProvider` and `useSearchcraft` hook.
 
 ```jsx
 import {
+  // Search input without submit button
   AutoSearchForm,
+  // Search input with submit button
   BasicSearchForm,
+  // Single Search Result component that can be customized while iterating over SearchResults
   BasicSearchResult,
+  // Fully encapsulated list of search results with no iteration required
+  BasicSearchResults,
   useSearchcraft
 } from '@searchcraft/react-sdk';
 
-const AutoSearch = () => {
-const { query, search, searchResult } = useSearchcraft()
+const AutoSearchImplementation = () => {
+  const { query, search, searchResults } = useSearchcraft()
+
+  const handleSubmitForm = async () =>  await search(query, 'fuzzy')
+
+  const handleClearInput = () => setQuery('');
+
   return (
     <>
       <AutoSearchForm
@@ -92,12 +111,44 @@ const { query, search, searchResult } = useSearchcraft()
   )
 };
 
-const BasicSearch = () => (
-  <>
-    <BaseSearchForm
-      rightToLeftOrientation={false}
-      handleSubmit={handleSubmitForm}
-    />
-  </>
-);
+const BasicSearchAndResultsImplementation = () => {
+  const { query, search, searchResults } = useSearchcraft();
+
+  const handleSubmitForm = async () => await search(query, 'fuzzy');
+
+  return (
+    <>
+      <BaseSearchForm
+        rightToLeftOrientation={false}
+        handleSubmit={handleSubmitForm}
+      />
+      {searchResults?.hits ? (
+        searchResults?.hits?.map((document, index) => {
+          const { doc: result } = document;
+          const callback = () => {
+            console.log('interactive');
+          };
+          const buttonCallback = () => {
+            console.log('button callback');
+          };
+          return (
+            <BaseSearchResult
+              key={`${result?.id}-${index}`}
+              buttonLabel='View More'
+              buttonCallbackFn={buttonCallback}
+              callbackFn={callback}
+              interactiveResult
+              imageSrc={result?.poster}
+              resultBodyContent={result?.overview}
+              resultHeading={result?.title}
+              resultSubheading={result?.release_date}
+            />
+          );
+        })
+      ) : (
+        <div>no search results found</div>
+      )}
+    </>
+  );
+}
 ```

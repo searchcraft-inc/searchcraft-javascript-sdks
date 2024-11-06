@@ -18,7 +18,7 @@ interface BaseSearchResultProps {
   resultSubheading?: string;
 }
 
-export const BaseSearchResult: FC<BaseSearchResultProps> = ({
+const BaseSearchResult: FC<BaseSearchResultProps> = ({
   buttonCallbackFn = () => {},
   buttonLabel = '',
   callbackFn = () => {},
@@ -81,3 +81,5 @@ export const BaseSearchResult: FC<BaseSearchResultProps> = ({
     </div>
   );
 };
+
+export default BaseSearchResult;

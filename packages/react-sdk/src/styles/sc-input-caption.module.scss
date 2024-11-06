@@ -11,11 +11,11 @@
   margin-top: 4px;
 }
 
-.inputCaption {
+.inputCaptionLTR {
   @include input-caption-base;
 }
 
-.inputCaptionError {
+.inputCaptionErrorLTR {
   @include input-caption-base;
   color: #990000;
 }

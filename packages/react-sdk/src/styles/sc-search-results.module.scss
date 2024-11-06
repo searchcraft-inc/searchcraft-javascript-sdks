@@ -1,0 +1,18 @@
+:root {
+  --font-stack: Helvetica, Arial, sans-serif;
+}
+
+.resultsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 100px 20px;
+
+  & > div {
+    margin-bottom: 20px;
+    img {
+      height: 300px;
+      width: 200px;
+    }
+  }
+}

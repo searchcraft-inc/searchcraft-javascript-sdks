@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import styles from '@styles/sc-input-icon.module.scss';
 import { SearchIcon, SearchIconError } from '../../assets/SearchIcons';
 
-type InputIconProps = {
+export type InputIconProps = {
   error?: boolean;
   rightToLeftOrientation?: boolean;
 };
@@ -15,7 +15,7 @@ export const InputIcon: FC<InputIconProps> = ({
   return error ? (
     <div
       className={
-        rightToLeftOrientation ? styles.inputIconRTL : styles.inputIcon
+        rightToLeftOrientation ? styles.inputIconRTL : styles.inputIconLTR
       }
     >
       <SearchIconError />
@@ -23,7 +23,7 @@ export const InputIcon: FC<InputIconProps> = ({
   ) : (
     <div
       className={
-        rightToLeftOrientation ? styles.inputIconRTL : styles.inputIcon
+        rightToLeftOrientation ? styles.inputIconRTL : styles.inputIconLTR
       }
     >
       <SearchIcon />

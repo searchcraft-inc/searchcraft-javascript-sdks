@@ -1,18 +1,26 @@
-import { type PropsWithChildren, act } from 'react';
+import { type PropsWithChildren, useMemo } from 'react';
 import { renderHook } from '@testing-library/react';
-import { describe, test, expect, vi } from 'vitest';
 
-import type { SearchcraftProviderConfig } from './SearchcraftProviderConfig';
-import { SearchcraftProvider, useSearchcraft } from './SearchcraftProvider';
+import {
+  Searchcraft,
+  SearchcraftProvider,
+  useSearchcraft,
+} from '@components/providers/SearchcraftProvider';
 
-import { TEST_CONFIG } from '../../test-tools/mocks/testConfig';
+import { TEST_REACT_SDK_CONFIGURATION } from '@testing/mocks/testConfig';
 
-const renderWithWrapper = (config: SearchcraftProviderConfig) => {
+const renderWithWrapper = () => {
+  const searchcraft = useMemo(
+    () => new Searchcraft(TEST_REACT_SDK_CONFIGURATION),
+    [],
+  );
   return renderHook(() => useSearchcraft(), {
-    wrapper: ({ children }: PropsWithChildren) => (
-      <SearchcraftProvider {...config}>{children}</SearchcraftProvider>
-    ),
+    wrapper: ({ children }: PropsWithChildren) => {
+      return (
+        <SearchcraftProvider {...{ searchcraft }}>
+          {children}
+        </SearchcraftProvider>
+      );
+    },
   });
 };
-
-// describe('SearchcraftProvider', () => {});

@@ -1,27 +1,28 @@
 import type { FC } from 'react';
+import classNames from 'classnames';
 
-import { ClearInputIcon } from '../../assets/ClearInputIcon';
-
-import { SpinnerLight } from '../Spinner';
-
+import { useSearchcraft } from '@/components/providers/SearchcraftProvider';
 import styles from '@styles/sc-clear-input-button.module.scss';
 
-type ClearInputButtonProps = {
-  isAutoSearch?: boolean;
-  isRequesting?: boolean;
+import { ClearInputIcon } from '../../assets/ClearInputIcon';
+import { SpinnerLight } from '../Spinner';
+
+export type ClearInputButtonProps = {
   onClearInput?: () => void;
   rightToLeftOrientation?: boolean;
 };
 
 export const ClearInputButton: FC<ClearInputButtonProps> = ({
-  isAutoSearch = false,
-  isRequesting = false,
   onClearInput,
   rightToLeftOrientation = false,
 }) => {
+  const { isRequesting } = useSearchcraft();
   return rightToLeftOrientation ? (
     <button
-      className={styles.inputClearButtonRTL}
+      className={classNames(
+        styles.inputClearButtonRTL,
+        '.sc-clear-input-button-rtl',
+      )}
       onClick={onClearInput}
       type='button'
     >
@@ -29,7 +30,10 @@ export const ClearInputButton: FC<ClearInputButtonProps> = ({
     </button>
   ) : (
     <button
-      className={styles.inputClearButton}
+      className={classNames(
+        styles.inputClearButtonLTR,
+        '.sc-clear-input-button-ltr',
+      )}
       onClick={onClearInput}
       type='button'
     >

@@ -4,7 +4,7 @@ import type { SearchcraftProviderContext } from './SearchcraftProviderContext';
 
 const defaultContext: SearchcraftProviderContext = {
   error: null,
-  index: '',
+  index: [''],
   isRequesting: false,
   mode: 'fuzzy',
   query: '',

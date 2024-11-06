@@ -1,5 +1,5 @@
 import type { Dispatch, SetStateAction } from 'react';
-import type { SearchcraftDocument } from '@searchcraft-sdk/core';
+import type { SearchError, SearchResult } from '@searchcraft/core';
 
 /** The context provided by the Searchcraft React SDK */
 export interface SearchcraftProviderContext {
@@ -9,9 +9,9 @@ export interface SearchcraftProviderContext {
   error: Error | null;
 
   /**
-   * The db name created in Vektron to query.
+   * The db name(s) created in Vektron to query.
    */
-  index: string;
+  index: string[];
 
   /**
    * Value exposed when a search is in progress.
@@ -36,11 +36,10 @@ export interface SearchcraftProviderContext {
   /**
    * Function for searching that requires search mode and search type.
    */
-  search: <T>(query: string, mode: 'fuzzy' | 'normal') => Promise<T[] | null>;
+  search: (query: string, mode: 'fuzzy' | 'normal') => void;
 
-  searchResult?: {
-    count: number;
-    hits: SearchcraftDocument[];
-    time_taken: number;
-  } | null;
+  /**
+   * Object that is returned from the Searchcraft API when a search request has resolved
+   */
+  searchResults?: SearchResult | SearchError | null;
 }

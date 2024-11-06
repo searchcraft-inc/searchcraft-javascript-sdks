@@ -1,13 +1,13 @@
 import type { FC, ReactNode } from 'react';
 import classNames from 'classnames';
 
-import { SpinnerDark } from '../Spinner';
-
+import { useSearchcraft } from '@/components/providers/SearchcraftProvider';
 import styles from '@styles/sc-button.module.scss';
 
-type ButtonProps = {
+import { SpinnerDark } from '../Spinner';
+
+export type ButtonProps = {
   className?: string;
-  isRequesting?: boolean;
   iconElement?: ReactNode;
   iconOnly?: boolean;
   iconPosition?: string;
@@ -15,20 +15,24 @@ type ButtonProps = {
   onClick?: () => void;
 };
 
-export const Button: FC<ButtonProps> = ({
+const Button: FC<ButtonProps> = ({
   className,
   iconElement,
   iconOnly = false,
   iconPosition = 'left',
-  isRequesting = false,
   label = 'Search',
   onClick,
 }) => {
+  const { isRequesting } = useSearchcraft();
   return (
     <>
       {iconOnly && (
         <button
-          className={classNames(styles.button, className)}
+          className={classNames(
+            styles.button,
+            className,
+            '.searchcraft-button',
+          )}
           onClick={onClick}
           type='submit'
         >
@@ -37,7 +41,11 @@ export const Button: FC<ButtonProps> = ({
       )}
       {!iconOnly && (
         <button
-          className={classNames(styles.button, className)}
+          className={classNames(
+            styles.button,
+            className,
+            '.searchcraft-button',
+          )}
           onClick={onClick}
           type='submit'
         >
@@ -52,6 +60,7 @@ export const Button: FC<ButtonProps> = ({
             className={classNames(
               isRequesting && styles.buttonLabel,
               className,
+              '.searchcraft-button-label',
             )}
           >
             {label}
@@ -68,3 +77,5 @@ export const Button: FC<ButtonProps> = ({
     </>
   );
 };
+
+export default Button;

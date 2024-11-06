@@ -1,15 +1,23 @@
+import { useMemo } from 'react';
 import { screen, render, fireEvent } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 
-import { BaseSearchForm } from '.';
-import { SearchcraftProvider } from '@components/providers/SearchcraftProvider';
-import { TEST_CONFIG } from '@testing/mocks/testConfig';
+import BaseSearchForm from '.';
+import {
+  Searchcraft,
+  SearchcraftProvider,
+} from '@components/providers/SearchcraftProvider';
+import { TEST_REACT_SDK_CONFIGURATION } from '@testing/mocks/testConfig';
 
 describe('BaseSearchForm', () => {
   test('The form is rendered with a label, an input, and a submit button', () => {
     const onSubmit = vi.fn();
+    const searchcraft = useMemo(
+      () => new Searchcraft(TEST_REACT_SDK_CONFIGURATION),
+      [],
+    );
     render(
-      <SearchcraftProvider {...TEST_CONFIG}>
+      <SearchcraftProvider {...{ searchcraft }}>
         <BaseSearchForm labelForInput='Test label' handleSubmit={onSubmit} />
       </SearchcraftProvider>,
     );
@@ -20,8 +28,12 @@ describe('BaseSearchForm', () => {
   });
   test('The form accepts a query value and submits when search button is clicked', () => {
     const onSubmit = vi.fn();
+    const searchcraft = useMemo(
+      () => new Searchcraft(TEST_REACT_SDK_CONFIGURATION),
+      [],
+    );
     render(
-      <SearchcraftProvider {...TEST_CONFIG}>
+      <SearchcraftProvider {...{ searchcraft }}>
         <BaseSearchForm handleSubmit={onSubmit} />
       </SearchcraftProvider>,
     );
@@ -41,8 +53,12 @@ describe('BaseSearchForm', () => {
 
   test('An error message appears when the input is empty when a form submission occurs', () => {
     const onSubmit = vi.fn();
+    const searchcraft = useMemo(
+      () => new Searchcraft(TEST_REACT_SDK_CONFIGURATION),
+      [],
+    );
     render(
-      <SearchcraftProvider {...TEST_CONFIG}>
+      <SearchcraftProvider {...{ searchcraft }}>
         <BaseSearchForm handleSubmit={onSubmit} />
       </SearchcraftProvider>,
     );
@@ -56,8 +72,12 @@ describe('BaseSearchForm', () => {
   });
   test('The error is cleared when the input is given a valid query', () => {
     const onSubmit = vi.fn();
+    const searchcraft = useMemo(
+      () => new Searchcraft(TEST_REACT_SDK_CONFIGURATION),
+      [],
+    );
     render(
-      <SearchcraftProvider {...TEST_CONFIG}>
+      <SearchcraftProvider {...{ searchcraft }}>
         <BaseSearchForm handleSubmit={onSubmit} />
       </SearchcraftProvider>,
     );

@@ -1,4 +1,4 @@
-import type { Type } from 'typescript';
+import type { CoreSDK } from '../CoreSDK';
 
 /**
  * * All fields must be provided to the framework SDKs to use Searchcraft
@@ -9,37 +9,61 @@ export interface CoreConfigSDK {
    */
   apiKey: string;
   /**
-   * * Indicates what type of search is being made in the request body. Can be either 'search' or 'facet'
+   * * Host IP Address and port number configured and created using Vektron
    */
-  endpointPath: string;
+  endpointURL: string;
   /**
-   * * Name of search database configured using Vektron
+   * * Name of search database(s) configured using Vektron. Given as an array of strings
    */
-  index: string;
-  /**
-   * * Callback invoked when a search request is resolved
-   */
-  setIsRequestingFalse: () => void;
-  /**
-   * * Callback invoked when a search request is initialized
-   */
-  setIsRequestingTrue: () => void;
+  index: string[];
+}
+
+export interface SearchcraftInstance {
+  searchcraft: CoreSDK;
 }
 
 /**
  * * Individual object returned within a SearchResult
  */
-export interface SearchcraftDocument {
-  doc: Type;
-  document_id: string;
-  score: number;
+export interface SearchDocument {
+  doc?: SearchDoc;
+  document_id?: string;
+  score?: number;
 }
 
 /**
  * * Top-level result returned when a search is successful
  */
 export interface SearchResult {
-  count: number;
-  hits: SearchcraftDocument[];
-  time_taken: number;
+  count?: number;
+  hits?: SearchDocument[];
+  time_taken?: number;
 }
+
+/**
+ * * Individual data document returned within a SearchResult
+ */
+export interface SearchDoc {
+  id: number;
+  poster?: string;
+  overview?: string;
+  title?: string;
+  release_date?: string;
+}
+
+/**
+ * * Parameters required for Search request
+ */
+export type SearchParams = {
+  query: string;
+  mode: 'fuzzy' | 'normal';
+};
+
+/**
+ * * Error returned when a search is unsuccessful
+ */
+export type SearchError = {
+  message: string;
+  code: number;
+  hits?: [];
+};

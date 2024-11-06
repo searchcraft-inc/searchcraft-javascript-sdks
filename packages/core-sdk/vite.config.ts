@@ -11,7 +11,7 @@ export default defineConfig({
     sourcemap: true,
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
-      name: '@searchcraft-sdk/core',
+      name: '@searchcraft/core',
       fileName: 'index',
       formats: ['es'],
     },
