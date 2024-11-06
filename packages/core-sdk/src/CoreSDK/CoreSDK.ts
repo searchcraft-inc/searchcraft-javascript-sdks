@@ -12,10 +12,8 @@ export class CoreSDK {
   config: CoreConfigSDK;
 
   constructor(config: CoreConfigSDK) {
-    if (!config.endpointPath || !config.endpointURL || !config.index) {
-      throw new Error(
-        'Endpoint path, Endpoint URL, and Index value(s) must be provided',
-      );
+    if (!config.endpointURL || !config.index) {
+      throw new Error('Endpoint URL and Index value(s) must be provided');
     }
     this.config = config;
   }
@@ -38,6 +36,7 @@ export class CoreSDK {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
           Authorization: this.config.apiKey ? `${this.config.apiKey}` : '',
         },
         body: JSON.stringify(requestBody),

@@ -9,10 +9,6 @@ export interface CoreConfigSDK {
    */
   apiKey: string;
   /**
-   * * Indicates what type of search is being made in the request body. Can be either 'search' or 'facet'
-   */
-  endpointPath: string;
-  /**
    * * Host IP Address and port number configured and created using Vektron
    */
   endpointURL: string;
