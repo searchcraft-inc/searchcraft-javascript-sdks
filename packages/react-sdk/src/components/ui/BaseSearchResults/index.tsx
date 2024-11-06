@@ -7,10 +7,11 @@ import BaseSearchResult from '@components/ui/BaseSearchResult';
 
 const BaseSearchResults: FC = () => {
   const { searchResults } = useSearchcraft();
+
   return (
     <div className={styles.resultsContainer}>
-      {searchResults?.hits ? (
-        searchResults?.hits?.map((document, index) => {
+      {searchResults?.data?.hits ? (
+        searchResults?.data?.hits?.map((document, index) => {
           const { doc: result } = document;
           const callback = () => {
             console.log('interactive');

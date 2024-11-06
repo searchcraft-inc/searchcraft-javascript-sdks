@@ -35,9 +35,11 @@ export interface SearchDocument {
  * * Top-level result returned when a search is successful
  */
 export interface SearchResult {
-  count?: number;
-  hits?: SearchDocument[];
-  time_taken?: number;
+  data: {
+    count?: number;
+    hits?: SearchDocument[];
+    time_taken?: number;
+  };
 }
 
 /**
@@ -63,7 +65,9 @@ export type SearchParams = {
  * * Error returned when a search is unsuccessful
  */
 export type SearchError = {
-  message: string;
-  code: number;
-  hits?: [];
+  data: {
+    message?: string;
+    code?: number;
+    hits?: [];
+  };
 };
