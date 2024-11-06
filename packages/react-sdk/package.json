@@ -2,7 +2,7 @@
   "name": "@searchcraft/react-sdk",
   "private": false,
   "author": "Searchcraft",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "SearchCraft's React SDK.",
   "type": "module",
   "license": "Apache-2.0",
