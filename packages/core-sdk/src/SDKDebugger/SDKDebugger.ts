@@ -10,7 +10,7 @@ interface LoggerOptions {
   logFormatter?: (level: LogLevel, message: string) => string;
 }
 
-export class SDKDebugLogger {
+export class SDKDebugger {
   private logLevel: LogLevel;
   private logFormatter: (level: LogLevel, message: string) => string;
 
@@ -51,7 +51,7 @@ export class SDKDebugLogger {
 
 // how to use
 
-const logger = new SDKDebugLogger({ logLevel: LogLevel.DEBUG });
+const logger = new SDKDebugger({ logLevel: LogLevel.DEBUG });
 
 logger.debug('This is a debug message.');
 logger.info('This is an info message.');

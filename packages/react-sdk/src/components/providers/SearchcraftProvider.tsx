@@ -4,12 +4,12 @@ import type {
   SearchError,
   SearchResult,
 } from '@searchcraft/core';
-import { CoreSDK as Searchcraft } from '@searchcraft/core';
+import { CoreSDK as SearchcraftCore } from '@searchcraft/core';
 
-import { SearchcraftContext } from './SearchcraftContext';
-import type { SearchcraftProviderContext } from './SearchcraftProviderContext';
+import { SearchcraftContext } from '@components/providers/SearchcraftContext';
+import type { SearchcraftProviderContext as SearchcraftContextType } from '@components/providers/SearchcraftProviderContext';
 
-const SearchcraftProvider = ({
+const Provider = ({
   children,
   searchcraft,
 }: PropsWithChildren & SearchcraftInstance) => {
@@ -26,7 +26,7 @@ const SearchcraftProvider = ({
     setIsRequesting(false);
   };
 
-  const providerContext: SearchcraftProviderContext = {
+  const providerContext: SearchcraftContextType = {
     error: null,
     index: searchcraft.config.index,
     isRequesting,
@@ -44,7 +44,14 @@ const SearchcraftProvider = ({
   );
 };
 
-const useSearchcraft = () =>
-  useContext<SearchcraftProviderContext>(SearchcraftContext);
+const useSearchcraft = () => {
+  const context = useContext<SearchcraftContextType>(SearchcraftContext);
+  if (!context) {
+    throw new Error(
+      'Searchcraft compound components must be used within a Searchcraft',
+    );
+  }
+  return context;
+};
 
-export { SearchcraftProvider, useSearchcraft, Searchcraft };
+export { Provider, useSearchcraft, SearchcraftCore };

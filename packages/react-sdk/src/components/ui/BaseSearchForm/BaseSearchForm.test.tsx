@@ -2,24 +2,23 @@ import { useMemo } from 'react';
 import { screen, render, fireEvent } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 
-import BaseSearchForm from '.';
-import {
-  Searchcraft,
-  SearchcraftProvider,
-} from '@components/providers/SearchcraftProvider';
+import { SearchcraftCore } from '@components/providers/SearchcraftProvider';
 import { TEST_REACT_SDK_CONFIGURATION } from '@testing/mocks/testConfig';
+
+import Searchcraft from '../../../Searchcraft/Searchcraft';
+import BaseSearchForm from '.';
 
 describe('BaseSearchForm', () => {
   test('The form is rendered with a label, an input, and a submit button', () => {
     const onSubmit = vi.fn();
     const searchcraft = useMemo(
-      () => new Searchcraft(TEST_REACT_SDK_CONFIGURATION),
+      () => new SearchcraftCore(TEST_REACT_SDK_CONFIGURATION),
       [],
     );
     render(
-      <SearchcraftProvider {...{ searchcraft }}>
+      <Searchcraft.Provider {...{ searchcraft }}>
         <BaseSearchForm labelForInput='Test label' handleSubmit={onSubmit} />
-      </SearchcraftProvider>,
+      </Searchcraft.Provider>,
     );
 
     expect(screen.getByLabelText('Test label')).toBeInTheDocument();
@@ -29,13 +28,13 @@ describe('BaseSearchForm', () => {
   test('The form accepts a query value and submits when search button is clicked', () => {
     const onSubmit = vi.fn();
     const searchcraft = useMemo(
-      () => new Searchcraft(TEST_REACT_SDK_CONFIGURATION),
+      () => new SearchcraftCore(TEST_REACT_SDK_CONFIGURATION),
       [],
     );
     render(
-      <SearchcraftProvider {...{ searchcraft }}>
+      <Searchcraft.Provider {...{ searchcraft }}>
         <BaseSearchForm handleSubmit={onSubmit} />
-      </SearchcraftProvider>,
+      </Searchcraft.Provider>,
     );
 
     const input = screen.getByRole('textbox');
@@ -54,13 +53,13 @@ describe('BaseSearchForm', () => {
   test('An error message appears when the input is empty when a form submission occurs', () => {
     const onSubmit = vi.fn();
     const searchcraft = useMemo(
-      () => new Searchcraft(TEST_REACT_SDK_CONFIGURATION),
+      () => new SearchcraftCore(TEST_REACT_SDK_CONFIGURATION),
       [],
     );
     render(
-      <SearchcraftProvider {...{ searchcraft }}>
+      <Searchcraft.Provider {...{ searchcraft }}>
         <BaseSearchForm handleSubmit={onSubmit} />
-      </SearchcraftProvider>,
+      </Searchcraft.Provider>,
     );
 
     const submitButton = screen.getByRole('button', { name: 'Search' });
@@ -73,13 +72,13 @@ describe('BaseSearchForm', () => {
   test('The error is cleared when the input is given a valid query', () => {
     const onSubmit = vi.fn();
     const searchcraft = useMemo(
-      () => new Searchcraft(TEST_REACT_SDK_CONFIGURATION),
+      () => new SearchcraftCore(TEST_REACT_SDK_CONFIGURATION),
       [],
     );
     render(
-      <SearchcraftProvider {...{ searchcraft }}>
+      <Searchcraft.Provider {...{ searchcraft }}>
         <BaseSearchForm handleSubmit={onSubmit} />
-      </SearchcraftProvider>,
+      </Searchcraft.Provider>,
     );
 
     const input = screen.getByRole('textbox');

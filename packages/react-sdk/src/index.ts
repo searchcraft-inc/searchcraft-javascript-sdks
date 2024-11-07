@@ -1,20 +1,20 @@
+import Searchcraft from './Searchcraft/Searchcraft';
 import {
-  SearchcraftProvider,
   useSearchcraft,
-  Searchcraft,
-} from './components/providers/SearchcraftProvider';
-import type { SearchcraftProviderConfig } from './components/providers/SearchcraftProviderConfig';
-import type { SearchcraftProviderContext } from './components/providers/SearchcraftProviderContext';
+  SearchcraftCore,
+} from '@/components/providers/SearchcraftProvider';
+import type { SearchcraftProviderConfig } from '@/components/providers/SearchcraftProviderConfig';
+import type { SearchcraftProviderContext } from '@/components/providers/SearchcraftProviderContext';
 
-import BaseSearchForm from './components/ui/BaseSearchForm';
-import AutoSearchForm from './components/ui/AutoSearchForm';
-import BaseSearchResult from './components/ui/BaseSearchResult';
-import BaseSearchResults from './components/ui/BaseSearchResults';
+import BaseSearchForm from '@/components/ui/BaseSearchForm';
+import AutoSearchForm from '@/components/ui/AutoSearchForm';
+import BaseSearchResult from '@/components/ui/BaseSearchResult';
+import BaseSearchResults from '@/components/ui/BaseSearchResults';
 
-import Button from './components/ui/components/Button';
-import ErrorMessage from './components/ui/components/ErrorMessage';
-import Input from './components/ui/components/Input';
-import InputLabel from './components/ui/components/InputLabel';
+import Button from '@/components/ui/components/Button';
+import ErrorMessage from '@/components/ui/components/ErrorMessage';
+import Input from '@/components/ui/components/Input';
+import InputLabel from '@/components/ui/components/InputLabel';
 
 export {
   AutoSearchForm,
@@ -25,9 +25,10 @@ export {
   ErrorMessage,
   Input,
   InputLabel,
-  SearchcraftProvider,
+  SearchcraftCore,
   type SearchcraftProviderConfig,
   type SearchcraftProviderContext,
   useSearchcraft,
-  Searchcraft,
 };
+
+export default Searchcraft;
