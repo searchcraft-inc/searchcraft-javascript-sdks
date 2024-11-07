@@ -8,6 +8,10 @@
   justify-content: center;
   margin: 100px 20px;
 
+  & > p {
+    align-self: center;
+  }
+
   & > div {
     margin-bottom: 20px;
     img {
