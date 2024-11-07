@@ -12,6 +12,7 @@ export interface BaseSearchFormProps {
   errorMessage?: string;
   handleSubmit: (query: string) => void;
   labelForInput?: string;
+  onClearInput?: () => void;
   placeholderValue?: string;
   rightToLeftOrientation?: boolean;
 }
@@ -23,6 +24,7 @@ const BaseSearchForm: FC<BaseSearchFormProps> = ({
   errorMessage,
   handleSubmit,
   labelForInput = 'Search',
+  onClearInput = () => {},
   placeholderValue = 'Enter Search Term',
   rightToLeftOrientation = false,
 }) => {
@@ -42,7 +44,13 @@ const BaseSearchForm: FC<BaseSearchFormProps> = ({
   const handleSearchInputChange = (event: { target: { value: string } }) =>
     setQuery(event.target.value);
 
-  const handleClearInput = () => setQuery('');
+  /**
+   * * Exposes a callback for convenience when the input's value is cleared by the user
+   */
+  const handleClearInput = () => {
+    setQuery('');
+    onClearInput();
+  };
 
   return (
     <form

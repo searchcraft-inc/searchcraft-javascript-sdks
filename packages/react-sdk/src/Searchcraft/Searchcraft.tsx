@@ -40,7 +40,7 @@ const Searchcraft: FC & {
   InputCaption: FC<InputCaptionProps>;
   InputIcon: FC;
   InputLabel: FC<InputLabelProps>;
-  Provider: FC<{ searchcraft: CoreSDK }>;
+  Provider: FC<{ searchcraft: CoreSDK; debug?: boolean }>;
 } = () => null;
 
 Searchcraft.AutoSearchForm = AutoSearchForm;

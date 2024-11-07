@@ -1,11 +1,11 @@
-enum LogLevel {
+export enum LogLevel {
   DEBUG = 0,
   INFO = 1,
   WARN = 2,
   ERROR = 3,
 }
 
-interface LoggerOptions {
+export interface SDKDebuggerOptions {
   logLevel: LogLevel;
   logFormatter?: (level: LogLevel, message: string) => string;
 }
@@ -14,7 +14,7 @@ export class SDKDebugger {
   private logLevel: LogLevel;
   private logFormatter: (level: LogLevel, message: string) => string;
 
-  constructor(options: LoggerOptions) {
+  constructor(options: SDKDebuggerOptions) {
     this.logLevel = options.logLevel || LogLevel.INFO;
     this.logFormatter = options.logFormatter || this.defaultFormatter;
   }
@@ -48,12 +48,3 @@ export class SDKDebugger {
     }
   }
 }
-
-// how to use
-
-const logger = new SDKDebugger({ logLevel: LogLevel.DEBUG });
-
-logger.debug('This is a debug message.');
-logger.info('This is an info message.');
-logger.warn('This is a warning message.');
-logger.error('This is an error message.');
