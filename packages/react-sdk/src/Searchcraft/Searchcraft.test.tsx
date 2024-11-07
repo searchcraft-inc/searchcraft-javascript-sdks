@@ -16,7 +16,7 @@ const renderWithWrapper = () => {
   return renderHook(() => useSearchcraft(), {
     wrapper: ({ children }: PropsWithChildren) => {
       return (
-        <Searchcraft.Provider {...{ searchcraft }}>
+        <Searchcraft.Provider {...{ searchcraft, debug: true }}>
           {children}
         </Searchcraft.Provider>
       );

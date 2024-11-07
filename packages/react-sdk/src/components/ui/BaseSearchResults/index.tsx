@@ -14,7 +14,7 @@ const BaseSearchResults: FC = () => {
       {searchResults?.data?.hits?.map((document, index) => {
         const { doc: result } = document;
         const callback = () => {
-          console.log('interactive');
+          console.log('interactive element');
         };
         const buttonCallback = () => {
           console.log('button callback');
@@ -34,7 +34,9 @@ const BaseSearchResults: FC = () => {
         );
       })}
       {query.length > 0 && searchResults?.data?.hits?.length === 0 && (
-        <ErrorMessage errorMessage={`No Results found for ${query} query`} />
+        <ErrorMessage
+          errorMessage={`No search results found for ${query} query`}
+        />
       )}
     </div>
   );

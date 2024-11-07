@@ -34,8 +34,9 @@ const searchcraftConfig = {
 const Main = () => {
   // initialize and pass an instance of SearchcraftCore into the provider
   const searchcraft = useMemo(() => new SearchcraftCore(searchcraftConfig),[]);
+  // debug is optional
   return (
-    <Searchcraft.Provider {...{ searchcraft }}>
+    <Searchcraft.Provider {...{ searchcraft, debug: true }}>
       <YourApplicationOrScreenGoHere />
     </Searchcraft.Provider>
   )

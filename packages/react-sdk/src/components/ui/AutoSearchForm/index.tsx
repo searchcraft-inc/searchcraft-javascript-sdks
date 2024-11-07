@@ -12,7 +12,7 @@ export interface AutoSearchFormProps {
   handleSubmit: (query: string) => void;
   inputCaptionValue?: string;
   labelForInput?: string;
-  onClearedInput?: () => void;
+  onClearInput?: () => void;
   placeholderValue?: string;
   rightToLeftOrientation?: boolean;
   searchContainerClass?: string;
@@ -26,7 +26,7 @@ const AutoSearchForm: FC<AutoSearchFormProps> = ({
   handleSubmit,
   inputCaptionValue = '',
   labelForInput = 'Search',
-  onClearedInput = () => {},
+  onClearInput = () => {},
   placeholderValue = 'Search here',
   rightToLeftOrientation = false,
   searchContainerClass = '',
@@ -53,7 +53,7 @@ const AutoSearchForm: FC<AutoSearchFormProps> = ({
    */
   const handleClearInput = () => {
     setQuery('');
-    onClearedInput();
+    onClearInput();
   };
 
   /**

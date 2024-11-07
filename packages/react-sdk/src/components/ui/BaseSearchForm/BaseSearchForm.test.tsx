@@ -16,7 +16,7 @@ describe('BaseSearchForm', () => {
       [],
     );
     render(
-      <Searchcraft.Provider {...{ searchcraft }}>
+      <Searchcraft.Provider {...{ searchcraft, debug: true }}>
         <BaseSearchForm labelForInput='Test label' handleSubmit={onSubmit} />
       </Searchcraft.Provider>,
     );
@@ -32,7 +32,7 @@ describe('BaseSearchForm', () => {
       [],
     );
     render(
-      <Searchcraft.Provider {...{ searchcraft }}>
+      <Searchcraft.Provider {...{ searchcraft, debug: true }}>
         <BaseSearchForm handleSubmit={onSubmit} />
       </Searchcraft.Provider>,
     );
@@ -57,7 +57,7 @@ describe('BaseSearchForm', () => {
       [],
     );
     render(
-      <Searchcraft.Provider {...{ searchcraft }}>
+      <Searchcraft.Provider {...{ searchcraft, debug: true }}>
         <BaseSearchForm handleSubmit={onSubmit} />
       </Searchcraft.Provider>,
     );
@@ -76,7 +76,7 @@ describe('BaseSearchForm', () => {
       [],
     );
     render(
-      <Searchcraft.Provider {...{ searchcraft }}>
+      <Searchcraft.Provider {...{ searchcraft, debug: true }}>
         <BaseSearchForm handleSubmit={onSubmit} />
       </Searchcraft.Provider>,
     );
