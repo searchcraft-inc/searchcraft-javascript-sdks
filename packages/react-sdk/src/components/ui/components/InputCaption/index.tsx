@@ -10,7 +10,7 @@ export type InputCaptionProps = {
   rightToLeftOrientation?: boolean;
 };
 
-export const InputCaption: FC<InputCaptionProps> = ({
+const InputCaption: FC<InputCaptionProps> = ({
   error = false,
   inputCaptionClassName,
   inputCaptionValue = 'Enter Search',
@@ -36,3 +36,5 @@ export const InputCaption: FC<InputCaptionProps> = ({
     </p>
   );
 };
+
+export default InputCaption;

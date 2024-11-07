@@ -12,7 +12,7 @@ export type ClearInputButtonProps = {
   rightToLeftOrientation?: boolean;
 };
 
-export const ClearInputButton: FC<ClearInputButtonProps> = ({
+const ClearInputButton: FC<ClearInputButtonProps> = ({
   onClearInput,
   rightToLeftOrientation = false,
 }) => {
@@ -41,3 +41,5 @@ export const ClearInputButton: FC<ClearInputButtonProps> = ({
     </button>
   );
 };
+
+export default ClearInputButton;
