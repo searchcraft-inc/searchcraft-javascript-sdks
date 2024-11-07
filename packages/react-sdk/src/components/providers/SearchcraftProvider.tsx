@@ -1,9 +1,5 @@
 import { type PropsWithChildren, useContext, useState } from 'react';
-import type {
-  SearchcraftInstance,
-  SearchError,
-  SearchResult,
-} from '@searchcraft/core';
+import type { SearchError, SearchResult } from '@searchcraft/core';
 import { CoreSDK as SearchcraftCore } from '@searchcraft/core';
 
 import { SearchcraftContext } from '@components/providers/SearchcraftContext';
@@ -12,7 +8,7 @@ import type { SearchcraftProviderContext as SearchcraftContextType } from '@comp
 const Provider = ({
   children,
   searchcraft,
-}: PropsWithChildren & SearchcraftInstance) => {
+}: PropsWithChildren<{ searchcraft: SearchcraftCore }>) => {
   const [query, setQuery] = useState<string>('');
   const [isRequesting, setIsRequesting] = useState<boolean>(false);
   const [searchResults, setSearchResults] = useState<
@@ -48,7 +44,7 @@ const useSearchcraft = () => {
   const context = useContext<SearchcraftContextType>(SearchcraftContext);
   if (!context) {
     throw new Error(
-      'Searchcraft compound components must be used within a Searchcraft',
+      'Searchcraft compound components must be used within Searchcraft.Provider',
     );
   }
   return context;
