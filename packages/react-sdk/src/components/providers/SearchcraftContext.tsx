@@ -1,8 +1,8 @@
 import React from 'react';
 
-import type { SearchcraftProviderContext } from './SearchcraftProviderContext';
+import type { SearchcraftProviderContext as SearchcraftContextType } from './SearchcraftProviderContext';
 
-const defaultContext: SearchcraftProviderContext = {
+const defaultContext: SearchcraftContextType = {
   error: null,
   index: [''],
   isRequesting: false,
@@ -13,4 +13,4 @@ const defaultContext: SearchcraftProviderContext = {
 };
 
 export const SearchcraftContext =
-  React.createContext<SearchcraftProviderContext>(defaultContext);
+  React.createContext<SearchcraftContextType>(defaultContext);

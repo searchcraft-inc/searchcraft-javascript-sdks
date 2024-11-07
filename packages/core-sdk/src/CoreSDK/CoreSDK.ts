@@ -36,7 +36,6 @@ export class CoreSDK {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
           Authorization: this.config.apiKey ? `${this.config.apiKey}` : '',
         },
         body: JSON.stringify(requestBody),

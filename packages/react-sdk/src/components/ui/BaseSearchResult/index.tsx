@@ -5,7 +5,7 @@ import { ButtonIcon } from '../assets/ButtonIcons';
 import styles from '@styles/sc-search-result.module.scss';
 import { ArrowRightIcon } from '../assets/ClearInputIcon';
 
-interface BaseSearchResultProps {
+export interface BaseSearchResultProps {
   buttonCallbackFn?: () => void;
   buttonLabel?: string;
   imageAltText?: string;

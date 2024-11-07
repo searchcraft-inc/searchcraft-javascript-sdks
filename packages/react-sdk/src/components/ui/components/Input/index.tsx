@@ -3,8 +3,8 @@ import classNames from 'classnames';
 
 import styles from '@styles/sc-input.module.scss';
 
-import { ClearInputButton } from '../ClearInputButton';
-import { InputCaption } from '../InputCaption';
+import ClearInputButton from '../ClearInputButton';
+import InputCaption from '../InputCaption';
 import { InputIcon } from '../InputIcon';
 
 export type InputProps = {

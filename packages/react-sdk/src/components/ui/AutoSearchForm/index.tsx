@@ -34,6 +34,10 @@ const AutoSearchForm: FC<AutoSearchFormProps> = ({
   const { query, setQuery } = useSearchcraft();
   const [canSearch, setCanSearch] = useState<boolean>(false);
 
+  const autoSearchFormClassname = rightToLeftOrientation
+    ? styles.formRTL
+    : styles.formLTR;
+
   const handleSearchInputChange: ChangeEventHandler<HTMLInputElement> = (
     event,
   ) => {
@@ -63,9 +67,7 @@ const AutoSearchForm: FC<AutoSearchFormProps> = ({
       return;
     }
   }, [canSearch, handleSubmit, query]);
-  const autoSearchFormClassname = rightToLeftOrientation
-    ? styles.formRTL
-    : styles.formLTR;
+
   return (
     <form
       className={classNames(

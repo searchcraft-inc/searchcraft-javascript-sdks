@@ -16,13 +16,13 @@ Install with NPM:
 $ npm install @searchcraft/react-sdk
 ```
 
-Wrap your app or target a specific interface and wrap them with the `SearchcraftProvider` to expose the functionalities of the SDK.
+Wrap your app or target a specific interface and wrap them with the `Searchcraft.Provider` to expose the functionalities of the SDK.
 
 ```jsx
 
 import { useMemo } from 'react'
 
-import { SearchcraftProvider, Searchcraft } from '@searchcraft/react-sdk'
+import Searchcraft, { SearchcraftCore } from '@searchcraft/react-sdk'
 
 // values are created via the Searchcraft Vektron Customer Portal
 const searchcraftConfig = {
@@ -32,24 +32,22 @@ const searchcraftConfig = {
 }
 
 const Main = () => {
-  // initialize and pass an instance of Searchcraft into the provider
-  const searchcraft = useMemo(() => new Searchcraft(searchcraftConfig),[]);
+  // initialize and pass an instance of SearchcraftCore into the provider
+  const searchcraft = useMemo(() => new SearchcraftCore(searchcraftConfig),[]);
   return (
-    <SearchcraftProvider {...{ searchcraft }}>
+    <Searchcraft.Provider {...{ searchcraft }}>
       <YourApplicationOrScreenGoHere />
-    </SearchcraftProvider>
+    </Searchcraft.Provider>
   )
 }
 
 ```
 ### Quickstart with useSearchcraft hook
 
-Once your app is wrapped in the `SearchcraftProvider`, the `useSearchcraft` hook functionalities are available for use.
+Once your app is wrapped in the `Searchcraft.Provider`, the `useSearchcraft` hook functionalities are available for use.
 
 ```jsx
-import {
-  useSearchcraft
-} from '@searchcraft/react-sdk';
+import Searchcraft, { useSearchcraft, AutoSearchForm } from '@searchcraft/react-sdk'
 
 // import the styles from the SDK
 import '../node_modules/@searchcraft/react-sdk/dist/style.css'
@@ -69,7 +67,7 @@ const handleClearInput = () => {
         onClearedInput={handleClearInput}
         rightToLeftOrientation
       />
-      <BaseSearchResults />
+      <Searchcraft.BaseSearchResults />
     </>
   )
 };
@@ -77,20 +75,22 @@ const handleClearInput = () => {
 
 ## UI Components
 
-The SDK provides 4 pre-built UI components with data provided to them via the `SearchcraftProvider` and `useSearchcraft` hook.
+The SDK provides 4 pre-built UI components with data provided to them via the `Searchcraft.Provider` and `useSearchcraft` hook.
 
 ```jsx
 import {
   // Search input without submit button
   AutoSearchForm,
   // Search input with submit button
-  BasicSearchForm,
+  BaseSearchForm,
   // Single Search Result component that can be customized while iterating over SearchResults
-  BasicSearchResult,
+  BaseSearchResult,
   // Fully encapsulated list of search results with no iteration required
-  BasicSearchResults,
+  BaseSearchResults,
   useSearchcraft
 } from '@searchcraft/react-sdk';
+OR
+import Searchcraft, { useSearchcraft } from '@searchcraft/react-sdk'
 
 const AutoSearchImplementation = () => {
   const { query, search, searchResults } = useSearchcraft()
@@ -101,7 +101,7 @@ const AutoSearchImplementation = () => {
 
   return (
     <>
-      <AutoSearchForm
+      <Searchcraft.AutoSearchForm
         handleSubmit={handleSubmitForm}
         inputCaptionValue="Search here"
         onClearedInput={handleClearInput}
@@ -111,14 +111,14 @@ const AutoSearchImplementation = () => {
   )
 };
 
-const BasicSearchAndResultsImplementation = () => {
+const BaseSearchAndResultsImplementation = () => {
   const { query, search, searchResults } = useSearchcraft();
 
   const handleSubmitForm = async () => await search(query, 'fuzzy');
 
   return (
     <>
-      <BaseSearchForm
+      <Searchcraft.BaseSearchForm
         rightToLeftOrientation={false}
         handleSubmit={handleSubmitForm}
       />
@@ -132,7 +132,7 @@ const BasicSearchAndResultsImplementation = () => {
             console.log('button callback');
           };
           return (
-            <BaseSearchResult
+            <Searchcraft.BaseSearchResult
               key={`${result?.id}-${index}`}
               buttonLabel='View More'
               buttonCallbackFn={buttonCallback}
@@ -151,4 +151,43 @@ const BasicSearchAndResultsImplementation = () => {
     </>
   );
 }
+```
+
+Additionally, you can import individual sub-components that comprise the pre-built UI components.
+
+```jsx
+import { Input, useSearchcraft } from '@searchcraft/react-sdk';
+
+const InputComponent = () => {
+  const { query, setQuery } = useSearchcraft();
+  const [error, setError] = useState<boolean>(false);
+
+  const handleFormSubmit = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    if (query.trim() === '') {
+      setError(true);
+    } else {
+      setError(false);
+      handleSubmit(query);
+    }
+  };
+
+  const handleSearchInputChange = (event: { target: { value: string } }) =>
+    setQuery(event.target.value);
+
+  const handleClearInput = () => setQuery('');
+
+  return (
+    <>
+      <Input
+        error={error}
+        onClearInput={handleClearInput}
+        onSearchInputChange={handleSearchInputChange}
+        placeholderValue={placeholderValue}
+        query={query}
+        rightToLeftOrientation={rightToLeftOrientation}
+      />
+    </>
+  )
+};
 ```
