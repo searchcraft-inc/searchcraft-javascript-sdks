@@ -2,10 +2,7 @@ import type { FC } from 'react';
 import type { CoreSDK } from '@searchcraft/core';
 import { CoreSDK as SearchcraftCore } from '@searchcraft/core';
 
-import {
-  Provider,
-  useSearchcraft,
-} from '@/components/providers/SearchcraftProvider';
+import { Provider, useSearchcraft } from '@/components/providers/Provider';
 import AutoSearchForm, {
   type AutoSearchFormProps,
 } from '@components/ui/AutoSearchForm';

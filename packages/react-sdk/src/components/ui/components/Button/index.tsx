@@ -1,7 +1,7 @@
 import type { FC, ReactNode } from 'react';
 import classNames from 'classnames';
 
-import { useSearchcraft } from '@/components/providers/SearchcraftProvider';
+import { useSearchcraft } from '@/components/providers/Provider';
 import styles from '@styles/sc-button.module.scss';
 
 import { SpinnerDark } from '../Spinner';

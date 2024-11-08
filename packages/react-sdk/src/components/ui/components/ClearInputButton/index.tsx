@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import classNames from 'classnames';
 
-import { useSearchcraft } from '@/components/providers/SearchcraftProvider';
+import { useSearchcraft } from '@/components/providers/Provider';
 import styles from '@styles/sc-clear-input-button.module.scss';
 
 import { ClearInputIcon } from '../../assets/ClearInputIcon';

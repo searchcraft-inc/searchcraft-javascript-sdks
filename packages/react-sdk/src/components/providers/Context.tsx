@@ -1,6 +1,6 @@
 import React from 'react';
 
-import type { SearchcraftProviderContext as SearchcraftContextType } from './SearchcraftProviderContext';
+import type { ProviderContextTypes as SearchcraftContextType } from './ProviderContextTypes';
 
 const defaultContext: SearchcraftContextType = {
   error: null,

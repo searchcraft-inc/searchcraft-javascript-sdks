@@ -1,5 +1,4 @@
 import {
-  type FC,
   type PropsWithChildren,
   useContext,
   useEffect,
@@ -13,8 +12,8 @@ import {
   LogLevel,
 } from '@searchcraft/core';
 
-import { SearchcraftContext } from '@components/providers/SearchcraftContext';
-import type { SearchcraftProviderContext as SearchcraftContextType } from '@components/providers/SearchcraftProviderContext';
+import { SearchcraftContext } from '@/components/providers/Context';
+import type { ProviderContextTypes as SearchcraftContextType } from '@/components/providers/ProviderContextTypes';
 
 interface SearchcraftProviderProps extends PropsWithChildren {
   searchcraft: SearchcraftCore;

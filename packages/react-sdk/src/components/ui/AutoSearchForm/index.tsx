@@ -1,6 +1,6 @@
 import { useState, type FC, useEffect, type ChangeEventHandler } from 'react';
 
-import { useSearchcraft } from '@components/providers/SearchcraftProvider';
+import { useSearchcraft } from '@/components/providers/Provider';
 import styles from '@styles/sc-search-form.module.scss';
 
 import Input from '../components/Input';

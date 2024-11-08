@@ -2,7 +2,7 @@ import type { Dispatch, SetStateAction } from 'react';
 import type { SearchError, SearchResult } from '@searchcraft/core';
 
 /** The context provided by the Searchcraft React SDK */
-export interface SearchcraftProviderContext {
+export interface ProviderContextTypes {
   /**
    * Error occurred while making a search query.
    */
