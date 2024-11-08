@@ -65,7 +65,7 @@ const handleClearInput = () => {
       <AutoSearchForm
         handleSubmit={handleSubmitForm}
         inputCaptionValue="Search here"
-        onClearedInput={handleClearInput}
+        onClearInput={handleClearInput}
         rightToLeftOrientation
       />
       <Searchcraft.BaseSearchResults />
@@ -105,7 +105,7 @@ const AutoSearchImplementation = () => {
       <Searchcraft.AutoSearchForm
         handleSubmit={handleSubmitForm}
         inputCaptionValue="Search here"
-        onClearedInput={handleClearInput}
+        onClearInput={handleClearInput}
         rightToLeftOrientation={true}
       />
     </>
