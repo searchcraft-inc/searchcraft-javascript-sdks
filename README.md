@@ -1,6 +1,6 @@
 # Searchcraft SDKs
 
-This repo manages the Searchcraft React SDK.
+This monorepo manages the Searchcraft SDKs.
 
 Each SDK in this repo offers the following APIs:
 - Send a preconfigured search request using the Searchcraft engine
@@ -9,14 +9,15 @@ Each SDK in this repo offers the following APIs:
     * BaseSearchForm
     * AutoSearchForm
     * BaseSearchResult
+    * BaseSearchResults
 
 ## Local Development
 
-Install the react sdk yalc add @searchcraft-sdk/react
+Install the react sdk -> `yalc add @searchcraft-sdk/react`
 
-Install dependencies `yarn install`
+Install dependencies -> `yarn install`
 
-The SDKs share a core package that contains shared functionality written in Javascript. The core package is built everytime you build the react SDK.
+The SDKs share a core package that contains shared functionality written in Javascript. The core package is built every time you build the React SDK.
 
 The Searchcraft quickstart react example project in under construction.
 
