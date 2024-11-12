@@ -22,6 +22,7 @@
       "src/components/providers/ProviderContextTypes.ts",
       "src/components/ui/BaseSearchForm/index.tsx",
       "src/components/ui/BaseSearchResult/index.tsx",
+      "src/components/ui/BaseSearchResults/index.tsx",
       "src/components/ui/AutoSearchForm/index.tsx"
     ],
     "out": "docs"

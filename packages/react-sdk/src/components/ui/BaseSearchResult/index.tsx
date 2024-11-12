@@ -1,8 +1,8 @@
 import type { FC } from 'react';
 
-import { ButtonIcon } from '../assets/ButtonIcons';
-
 import styles from '@styles/sc-search-result.module.scss';
+
+import { ButtonIcon } from '../assets/ButtonIcons';
 import { ArrowRightIcon } from '../assets/ClearInputIcon';
 
 export interface BaseSearchResultProps {

@@ -1,9 +1,11 @@
+@import 'utils/theme';
+
 :root {
   --font-stack: Helvetica, Arial, sans-serif;
 }
 
 .button {
-  background-color: #000000;
+  background-color: $light-background;
   border: 1px solid #E6E6E6;
   border-radius: 8px;
   color: #fff;
@@ -38,11 +40,11 @@
 }
 
 .buttonLabel {
-  animation: rightandback .2s;
+  animation: right-and-back .2s;
   position: relative;
 }
 
-@keyframes rightandback {
+@keyframes right-and-back {
   0% { right: -6px; }
   50% { right: -12px; }
   75% { right: -6px; }
