@@ -1,6 +1,9 @@
-import React from 'react';
+import { createContext } from 'react';
 
-import type { ProviderContextTypes as SearchcraftContextType } from './ProviderContextTypes';
+import type {
+  ProviderContextTypes as SearchcraftContextType,
+  ThemeContextType,
+} from './ProviderContextTypes';
 
 const defaultContext: SearchcraftContextType = {
   error: null,
@@ -13,4 +16,8 @@ const defaultContext: SearchcraftContextType = {
 };
 
 export const SearchcraftContext =
-  React.createContext<SearchcraftContextType>(defaultContext);
+  createContext<SearchcraftContextType>(defaultContext);
+
+export const ThemeContext = createContext<ThemeContextType | undefined>(
+  undefined,
+);

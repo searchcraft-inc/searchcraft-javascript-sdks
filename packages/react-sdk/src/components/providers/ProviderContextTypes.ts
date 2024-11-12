@@ -43,3 +43,10 @@ export interface ProviderContextTypes {
    */
   searchResults?: SearchResult | SearchError | null;
 }
+
+export type ThemeOptionType = 'light' | 'dark';
+
+export interface ThemeContextType {
+  theme: ThemeOptionType;
+  toggleTheme: () => void;
+}

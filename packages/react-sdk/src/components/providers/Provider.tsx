@@ -1,5 +1,6 @@
 import {
   type PropsWithChildren,
+  useCallback,
   useContext,
   useEffect,
   useMemo,
@@ -12,8 +13,14 @@ import {
   LogLevel,
 } from '@searchcraft/core';
 
-import { SearchcraftContext } from '@/components/providers/Context';
-import type { ProviderContextTypes as SearchcraftContextType } from '@/components/providers/ProviderContextTypes';
+import {
+  SearchcraftContext,
+  ThemeContext,
+} from '@/components/providers/Context';
+import type {
+  ProviderContextTypes as SearchcraftContextType,
+  ThemeOptionType,
+} from '@/components/providers/ProviderContextTypes';
 
 interface SearchcraftProviderProps extends PropsWithChildren {
   searchcraft: SearchcraftCore;
@@ -30,6 +37,7 @@ const Provider = ({
   const [searchResults, setSearchResults] = useState<
     SearchResult | SearchError | null
   >(null);
+  const [theme, setTheme] = useState<ThemeOptionType>('light');
 
   const debuggerInstance = useMemo(() => {
     return debug ? new SDKDebugger({ logLevel: LogLevel.DEBUG }) : null;
@@ -93,9 +101,23 @@ const Provider = ({
     setQuery,
   };
 
+  const toggleTheme = useCallback(() => {
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+  }, []);
+
+  const themeContextValue = useMemo(
+    () => ({
+      theme,
+      toggleTheme,
+    }),
+    [theme, toggleTheme],
+  );
+
   return (
     <SearchcraftContext.Provider value={providerContext}>
-      {children}
+      <ThemeContext.Provider value={themeContextValue}>
+        {children}
+      </ThemeContext.Provider>
     </SearchcraftContext.Provider>
   );
 };
@@ -110,4 +132,12 @@ const useSearchcraft = () => {
   return context;
 };
 
-export { Provider, useSearchcraft, SearchcraftCore };
+const useTheme = () => {
+  const context = useContext(ThemeContext);
+  if (!context) {
+    throw new Error('useTheme must be used within a ThemeProvider');
+  }
+  return context;
+};
+
+export { Provider, SearchcraftCore, useSearchcraft, useTheme };
