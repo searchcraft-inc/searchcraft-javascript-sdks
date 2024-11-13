@@ -3,7 +3,7 @@ import type {
   SearchError,
   SearchParams,
   SearchResult,
-} from '../CoreConfigSDK';
+} from '../CoreSDKTypes';
 
 /**
  * * Javascript Class providing the functionality to interact with the Searchcraft BE

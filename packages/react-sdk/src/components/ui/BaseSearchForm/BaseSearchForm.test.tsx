@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { screen, render, fireEvent } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 
-import { SearchcraftCore } from '@components/providers/SearchcraftProvider';
+import { SearchcraftCore } from '@/components/providers/Provider';
 import { TEST_REACT_SDK_CONFIGURATION } from '@testing/mocks/testConfig';
 
 import Searchcraft from '../../../Searchcraft/Searchcraft';

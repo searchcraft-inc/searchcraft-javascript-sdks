@@ -1,5 +1,31 @@
+@import 'utils/theme';
+
 :root {
   --font-stack: Helvetica, Arial, sans-serif;
+}
+
+@mixin interactive-result-container-base {
+  align-items: flex-start;
+  border-radius: 16px;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  gap: 16px;
+  padding: 8px;
+
+  @media (min-width: 600px) {
+    flex-direction: row;
+  }
+}
+
+.interactiveResultContainerLight {
+  background-color: $light-search-result-container-background;
+  @include interactive-result-container-base;
+}
+
+.interactiveResultContainerDark {
+  background-color: $dark-search-result-container-background;
+  @include interactive-result-container-base;
 }
 
 .resultContainer {
@@ -13,26 +39,11 @@
   }
 }
 
-.interactiveResultContainer {
-  align-items: flex-start;
-  background-color: #FAFAFA;
-  border-radius: 16px;
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  gap: 16px;
-  padding: 8px;
-
-  @media (min-width: 600px) {
-    flex-direction: row;
-  }
-}
-
 .interactiveIconLarge {
+  display: inline-block;
   position: absolute;
   right: 5px;
   top: 8px;
-  display: inline-block;
 
 
   @media (max-width: 600px) {
@@ -71,16 +82,24 @@
   }
 }
 
-.image {
+@mixin image-base {
   aspect-ratio: 2 / 1;
   border-radius: 8px;
-  border: 1px solid #D9D9D9;
   max-height: 100%;
   max-width: 100%;
 }
 
-.heading {
-  color: #292929;
+.imageLight {
+  @include image-base;
+  border: 1px solid $light-search-result-image-border;
+}
+
+.imageDark {
+  @include image-base;
+  border: 1px solid $dark-search-result-image-border;
+}
+
+@mixin heading-base {
   font-family: var(--font-stack);
   font-size: 16px;
   font-weight: 700;
@@ -90,8 +109,17 @@
   position: relative;
 }
 
-.subheading {
-  color: #737373;
+.headingLight {
+  @include heading-base;
+  color: $light-search-result-heading-color;
+}
+
+.headingDark {
+  @include heading-base;
+  color: $dark-search-result-heading-color;
+}
+
+@mixin subheading-base {
   font-family: var(--font-stack);
   font-size: 12px;
   font-weight: 400;
@@ -100,28 +128,31 @@
   margin-top: 0px;
 }
 
-.bodyContent {
-    color: #404040;
-    font-family: var(--font-stack);
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 20px;
-    margin-top: 0px;
-    margin-bottom: 4px;
+.subheadingLight {
+  @include subheading-base;
+  color: $light-search-result-subheading-color;
 }
 
-.button {
-  background-color: #000;
-  border: 1px solid #E6E6E6;
-  border-radius: 8px;
-  color: #FFF;
-  display: flex;
-  font-weight: 700;
-  line-height: 20px;
-  padding: 10px 20px;
-  margin-top: 16px;
+.subheadingDark {
+  @include subheading-base;
+  color: $dark-search-result-subheading-color
+}
 
-  & span {
-    margin-left: 4px;
-  }
+@mixin body-content-base {
+  font-family: var(--font-stack);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  margin-bottom: 4px;
+  margin-top: 0px;
+}
+
+.bodyContentLight {
+  @include body-content-base;
+  color: $light-search-result-body-content-color;
+}
+
+.bodyContentDark {
+  @include body-content-base;
+  color: $dark-search-result-body-content-color;
 }

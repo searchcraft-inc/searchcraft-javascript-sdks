@@ -1,10 +1,11 @@
 import Searchcraft from './Searchcraft/Searchcraft';
 import {
-  useSearchcraft,
   SearchcraftCore,
-} from '@/components/providers/SearchcraftProvider';
-import type { SearchcraftProviderConfig } from '@/components/providers/SearchcraftProviderConfig';
-import type { SearchcraftProviderContext } from '@/components/providers/SearchcraftProviderContext';
+  useSearchcraft,
+  useTheme,
+} from '@/components/providers/Provider';
+import type { ProviderConfigTypes } from '@/components/providers/ProviderConfigTypes';
+import type { ProviderContextTypes } from '@/components/providers/ProviderContextTypes';
 
 import BaseSearchForm from '@/components/ui/BaseSearchForm';
 import AutoSearchForm from '@/components/ui/AutoSearchForm';
@@ -26,9 +27,10 @@ export {
   Input,
   InputLabel,
   SearchcraftCore,
-  type SearchcraftProviderConfig,
-  type SearchcraftProviderContext,
+  type ProviderConfigTypes,
+  type ProviderContextTypes,
   useSearchcraft,
+  useTheme,
 };
 
 export default Searchcraft;

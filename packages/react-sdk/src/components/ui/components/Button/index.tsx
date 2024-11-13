@@ -1,7 +1,7 @@
 import type { FC, ReactNode } from 'react';
 import classNames from 'classnames';
 
-import { useSearchcraft } from '@/components/providers/SearchcraftProvider';
+import { useSearchcraft, useTheme } from '@/components/providers/Provider';
 import styles from '@styles/sc-button.module.scss';
 
 import { SpinnerDark } from '../Spinner';
@@ -24,15 +24,14 @@ const Button: FC<ButtonProps> = ({
   onClick,
 }) => {
   const { isRequesting } = useSearchcraft();
+  const { theme } = useTheme();
+  const buttonStyle =
+    theme === 'light' ? styles.buttonLight : styles.buttonDark;
   return (
     <>
       {iconOnly && (
         <button
-          className={classNames(
-            styles.button,
-            className,
-            '.searchcraft-button',
-          )}
+          className={classNames(buttonStyle, className, '.searchcraft-button')}
           onClick={onClick}
           type='submit'
         >
@@ -41,11 +40,7 @@ const Button: FC<ButtonProps> = ({
       )}
       {!iconOnly && (
         <button
-          className={classNames(
-            styles.button,
-            className,
-            '.searchcraft-button',
-          )}
+          className={classNames(buttonStyle, className, '.searchcraft-button')}
           onClick={onClick}
           type='submit'
         >
@@ -65,13 +60,6 @@ const Button: FC<ButtonProps> = ({
           >
             {label}
           </span>
-          {iconPosition === 'right' && isRequesting ? (
-            <div className={styles.spinnerMarginLeft}>
-              <SpinnerDark />
-            </div>
-          ) : (
-            iconElement
-          )}
         </button>
       )}
     </>

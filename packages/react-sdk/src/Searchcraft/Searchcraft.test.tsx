@@ -4,7 +4,7 @@ import Searchcraft from './Searchcraft';
 import {
   SearchcraftCore,
   useSearchcraft,
-} from '@components/providers/SearchcraftProvider';
+} from '@/components/providers/Provider';
 
 import { TEST_REACT_SDK_CONFIGURATION } from '@testing/mocks/testConfig';
 

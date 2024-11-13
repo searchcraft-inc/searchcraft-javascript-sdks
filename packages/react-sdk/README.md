@@ -1,4 +1,4 @@
-# Searchcraft's React SDK
+# Searchcraft React SDK
 
 This kit provides basic tools for building out a simple search interface using the Searchcraft API. Searching, tracking the request state, and displaying results are all available in this kit.
 
@@ -34,7 +34,7 @@ const searchcraftConfig = {
 const Main = () => {
   // initialize and pass an instance of SearchcraftCore into the provider
   const searchcraft = useMemo(() => new SearchcraftCore(searchcraftConfig),[]);
-  // debug is optional
+  // debug is optional and has a default value of false
   return (
     <Searchcraft.Provider {...{ searchcraft, debug: true }}>
       <YourApplicationOrScreenGoHere />
@@ -50,11 +50,23 @@ Once your app is wrapped in the `Searchcraft.Provider`, the `useSearchcraft` hoo
 ```jsx
 import Searchcraft, { useSearchcraft, AutoSearchForm } from '@searchcraft/react-sdk'
 
+// values available when using the useSearchcraft hook
+const useSearchContextValues = {
+    error,
+    index,
+    isRequesting,
+    mode,
+    query,
+    search,
+    searchResults,
+    setQuery,
+  };
+
 // import the styles from the SDK
 import '../node_modules/@searchcraft/react-sdk/dist/style.css'
 
 const SearchWithResultsComponent = () => {
-const { isRequesting, query, search, searchResults } = useSearchcraft()
+const { isRequesting, query, search, searchResults } = useSearchcraft();
 
 const handleClearInput = () => {
   setQuery('')
@@ -65,7 +77,7 @@ const handleClearInput = () => {
       <AutoSearchForm
         handleSubmit={handleSubmitForm}
         inputCaptionValue="Search here"
-        onClearedInput={handleClearInput}
+        onClearInput={handleClearInput}
         rightToLeftOrientation
       />
       <Searchcraft.BaseSearchResults />
@@ -90,7 +102,9 @@ import {
   BaseSearchResults,
   useSearchcraft
 } from '@searchcraft/react-sdk';
-OR
+
+// OR
+
 import Searchcraft, { useSearchcraft } from '@searchcraft/react-sdk'
 
 const AutoSearchImplementation = () => {
@@ -102,56 +116,53 @@ const AutoSearchImplementation = () => {
 
   return (
     <>
+    // example using compound component pattern
       <Searchcraft.AutoSearchForm
         handleSubmit={handleSubmitForm}
         inputCaptionValue="Search here"
-        onClearedInput={handleClearInput}
+        onClearInput={handleClearInput}
         rightToLeftOrientation={true}
       />
     </>
   )
 };
 
-const BaseSearchAndResultsImplementation = () => {
-  const { query, search, searchResults } = useSearchcraft();
-
-  const handleSubmitForm = async () => await search(query, 'fuzzy');
+const BaseSearchResults: FC = () => {
+  const { searchResults, query } = useSearchcraft();
 
   return (
     <>
-      <Searchcraft.BaseSearchForm
-        rightToLeftOrientation={false}
-        handleSubmit={handleSubmitForm}
-      />
-      {searchResults?.hits ? (
-        searchResults?.hits?.map((document, index) => {
-          const { doc: result } = document;
-          const callback = () => {
-            console.log('interactive');
-          };
-          const buttonCallback = () => {
-            console.log('button callback');
-          };
-          return (
-            <Searchcraft.BaseSearchResult
-              key={`${result?.id}-${index}`}
-              buttonLabel='View More'
-              buttonCallbackFn={buttonCallback}
-              callbackFn={callback}
-              interactiveResult
-              imageSrc={result?.poster}
-              resultBodyContent={result?.overview}
-              resultHeading={result?.title}
-              resultSubheading={result?.release_date}
-            />
-          );
-        })
-      ) : (
-        <div>no search results found</div>
+      {searchResults?.data?.hits?.map((document, index) => {
+        const { doc: result } = document;
+        const callback = () => {
+          console.log('interactive element');
+        };
+        const buttonCallback = () => {
+          console.log('button callback');
+        };
+        return (
+          // example using named import component
+          <BaseSearchResult
+            key={`${result?.id}-${index}`}
+            buttonLabel='View More'
+            buttonCallbackFn={buttonCallback}
+            callbackFn={callback}
+            interactiveResult
+            imageSrc={result?.poster}
+            resultBodyContent={result?.overview}
+            resultHeading={result?.title}
+            resultSubheading={result?.release_date}
+          />
+        );
+      })}
+      {query.length > 0 && searchResults?.data?.hits?.length === 0 && (
+        <ErrorMessage
+          errorMessage={`No search results found for ${query} query`}
+        />
       )}
     </>
   );
-}
+};
 ```
 
 Additionally, you can import individual sub-components that comprise the pre-built UI components.

@@ -1,9 +1,15 @@
 import type { FC } from 'react';
 
-import { ButtonIcon } from '../assets/ButtonIcons';
-
 import styles from '@styles/sc-search-result.module.scss';
-import { ArrowRightIcon } from '../assets/ClearInputIcon';
+
+import { useTheme } from '@/components/providers/Provider';
+import Button from '@/components/ui/components/Button';
+
+import { ButtonIcon } from '../assets/ButtonIcons';
+import {
+  ArrowRightIconLight,
+  ArrowRightIconDark,
+} from '../assets/ClearInputIcon';
 
 export interface BaseSearchResultProps {
   buttonCallbackFn?: () => void;
@@ -30,8 +36,9 @@ const BaseSearchResult: FC<BaseSearchResultProps> = ({
   resultHeading = '',
   resultSubheading = '',
 }) => {
-  const buttonFn = (event: { stopPropagation: () => void }) => {
-    event.stopPropagation();
+  const { theme } = useTheme();
+  const isLightTheme = theme === 'light';
+  const buttonFn = () => {
     buttonCallbackFn();
   };
 
@@ -47,7 +54,9 @@ const BaseSearchResult: FC<BaseSearchResultProps> = ({
     <div
       className={
         interactiveResult
-          ? styles.interactiveResultContainer
+          ? isLightTheme
+            ? styles.interactiveResultContainerLight
+            : styles.interactiveResultContainerDark
           : styles.resultContainer
       }
       id='searchcraft-item'
@@ -56,27 +65,40 @@ const BaseSearchResult: FC<BaseSearchResultProps> = ({
     >
       {interactiveResult && (
         <div className={styles.interactiveIconLarge}>
-          <ArrowRightIcon />
+          {isLightTheme ? <ArrowRightIconLight /> : <ArrowRightIconDark />}
         </div>
       )}
       <div className={styles.imageContainer}>
-        <img alt={imageAltText} className={styles.image} src={imageSrc} />
+        <img
+          alt={imageAltText}
+          className={isLightTheme ? styles.imageLight : styles.imageDark}
+          src={imageSrc}
+        />
       </div>
       <div className={styles.contentContainer}>
-        <h2 className={styles.heading}>
+        <h2 className={isLightTheme ? styles.headingLight : styles.headingDark}>
           {resultHeading}{' '}
           {interactiveResult && (
             <div className={styles.interactiveIconSmall}>
-              <ArrowRightIcon />
+              {isLightTheme ? <ArrowRightIconLight /> : <ArrowRightIconDark />}
             </div>
           )}
         </h2>
-        <h3 className={styles.subheading}>{resultSubheading}</h3>
-        <p className={styles.bodyContent}>{resultBodyContent}</p>
-        <button className={styles.button} onClick={buttonFn} type='button'>
-          <ButtonIcon />
-          <span>{buttonLabel}</span>
-        </button>
+        <h3
+          className={
+            isLightTheme ? styles.subheadingLight : styles.subheadingDark
+          }
+        >
+          {resultSubheading}
+        </h3>
+        <p
+          className={
+            isLightTheme ? styles.bodyContentLight : styles.bodyContentDark
+          }
+        >
+          {resultBodyContent}
+        </p>
+        <Button label={buttonLabel} onClick={buttonFn} />
       </div>
     </div>
   );

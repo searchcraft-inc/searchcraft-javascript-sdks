@@ -5,7 +5,8 @@ import { CoreSDK as SearchcraftCore } from '@searchcraft/core';
 import {
   Provider,
   useSearchcraft,
-} from '@/components/providers/SearchcraftProvider';
+  useTheme,
+} from '@/components/providers/Provider';
 import AutoSearchForm, {
   type AutoSearchFormProps,
 } from '@components/ui/AutoSearchForm';
@@ -71,6 +72,7 @@ export {
   Provider,
   SearchcraftCore,
   useSearchcraft,
+  useTheme,
 };
 
 export default Searchcraft;

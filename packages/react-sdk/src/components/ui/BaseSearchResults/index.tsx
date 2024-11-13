@@ -2,7 +2,7 @@ import type { FC } from 'react';
 
 import styles from '@styles/sc-search-results.module.scss';
 
-import { useSearchcraft } from '@/components/providers/SearchcraftProvider';
+import { useSearchcraft } from '@/components/providers/Provider';
 import BaseSearchResult from '@components/ui/BaseSearchResult';
 import ErrorMessage from '@components/ui/components/ErrorMessage';
 

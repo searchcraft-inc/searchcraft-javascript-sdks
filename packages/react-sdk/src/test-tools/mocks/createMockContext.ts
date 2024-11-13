@@ -1,9 +1,9 @@
-import type { SearchcraftProviderContext } from '@components/providers/SearchcraftProviderContext';
+import type { ProviderContextTypes } from '@/components/providers/ProviderContextTypes';
 import { vi } from 'vitest';
 
 export const createMockContext = (
-  context: Partial<SearchcraftProviderContext>,
-): SearchcraftProviderContext => ({
+  context: Partial<ProviderContextTypes>,
+): ProviderContextTypes => ({
   error: context.error ?? null,
   isRequesting: context.isRequesting ?? false,
   index: context.index ?? [],

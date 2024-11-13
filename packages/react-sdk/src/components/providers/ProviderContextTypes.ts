@@ -2,7 +2,7 @@ import type { Dispatch, SetStateAction } from 'react';
 import type { SearchError, SearchResult } from '@searchcraft/core';
 
 /** The context provided by the Searchcraft React SDK */
-export interface SearchcraftProviderContext {
+export interface ProviderContextTypes {
   /**
    * Error occurred while making a search query.
    */
@@ -42,4 +42,11 @@ export interface SearchcraftProviderContext {
    * Object that is returned from the Searchcraft API when a search request has resolved
    */
   searchResults?: SearchResult | SearchError | null;
+}
+
+export type ThemeOptionType = 'light' | 'dark';
+
+export interface ThemeContextType {
+  theme: ThemeOptionType;
+  toggleTheme: () => void;
 }

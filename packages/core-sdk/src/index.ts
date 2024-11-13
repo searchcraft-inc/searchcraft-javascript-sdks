@@ -1,3 +1,3 @@
 export * from './CoreSDK';
-export * from './CoreConfigSDK';
+export * from './CoreSDKTypes';
 export * from './SDKDebugger';

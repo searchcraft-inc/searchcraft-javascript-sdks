@@ -1,6 +1,8 @@
 import type { ChangeEventHandler, FC } from 'react';
 import classNames from 'classnames';
 
+import { useTheme } from '@/Searchcraft/Searchcraft';
+
 import styles from '@styles/sc-input.module.scss';
 
 import ClearInputButton from '../ClearInputButton';
@@ -32,6 +34,8 @@ const Input: FC<InputProps> = ({
   rightToLeftOrientation = false,
   query = '',
 }) => {
+  const { theme } = useTheme();
+  const isLightTheme = theme === 'light';
   const containerClassName = rightToLeftOrientation
     ? styles.inputContainerRTL
     : styles.inputContainerLTR;
@@ -47,7 +51,13 @@ const Input: FC<InputProps> = ({
         <>
           <input
             className={classNames(
-              error ? styles.inputErrorRTL : styles.inputRTL,
+              error
+                ? isLightTheme
+                  ? styles.inputErrorLightRTL
+                  : styles.inputErrorDarkRTL
+                : isLightTheme
+                  ? styles.inputLightRTL
+                  : styles.inputDarkRTL,
               inputClassName,
               'searchcraft-input',
             )}
@@ -79,7 +89,13 @@ const Input: FC<InputProps> = ({
         <>
           <input
             className={classNames(
-              error ? styles.inputErrorLTR : styles.inputLTR,
+              error
+                ? isLightTheme
+                  ? styles.inputErrorLightLTR
+                  : styles.inputErrorDarkLTR
+                : isLightTheme
+                  ? styles.inputLightLTR
+                  : styles.inputDarkLTR,
               inputClassName,
               'searchcraft-input',
             )}

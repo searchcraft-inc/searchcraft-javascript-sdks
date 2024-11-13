@@ -1,9 +1,10 @@
+@import 'utils/theme';
+
 :root {
   --font-stack: Helvetica, Arial, sans-serif;
 }
 
 @mixin input-caption-base {
-  color: #404040;
   font-family: var(--font-stack);
   font-size: 12px;
   font-weight: 400;
@@ -11,22 +12,52 @@
   margin-top: 4px;
 }
 
-.inputCaptionLTR {
+@mixin input-caption-base-light {
   @include input-caption-base;
+  color: $light-input-caption-color;
 }
 
-.inputCaptionErrorLTR {
+@mixin input-caption-base-dark {
   @include input-caption-base;
-  color: #990000;
+  color: $dark-input-caption-color;
 }
 
-.inputCaptionRTL {
+.inputCaptionLightLTR {
+  @include input-caption-base-light;
+}
+
+.inputCaptionDarkLTR {
+  @include input-caption-base-dark;
+}
+
+.inputCaptionErrorLightLTR {
   @include input-caption-base;
+  color: $light-input-caption-color-error;
+}
+
+.inputCaptionErrorDarkLTR {
+  @include input-caption-base;
+  color: $dark-input-caption-color-error;
+}
+
+.inputCaptionLightRTL {
+  @include input-caption-base-light;
   text-align: right;
 }
 
-.inputCaptionErrorRTL {
+.inputCaptionDarkRTL {
+  @include input-caption-base-dark;
+  text-align: right;
+}
+
+.inputCaptionErrorLightRTL {
   @include input-caption-base;
-  color: #990000;
+  color: $light-input-caption-color-error;
+  text-align: right;
+}
+
+.inputCaptionErrorDarkRTL {
+  @include input-caption-base;
+  color: $dark-input-caption-color-error;
   text-align: right;
 }

@@ -17,11 +17,12 @@
   "typedocOptions": {
     "plugin": ["typedoc-plugin-markdown"],
     "entryPoints": [
-      "src/components/providers/SearchcraftProvider.tsx",
-      "src/components/providers/SearchcraftProviderConfig.ts",
-      "src/components/providers/SearchcraftProviderContext.ts",
+      "src/components/providers/Provider.tsx",
+      "src/components/providers/ProviderConfigTypes.ts",
+      "src/components/providers/ProviderContextTypes.ts",
       "src/components/ui/BaseSearchForm/index.tsx",
       "src/components/ui/BaseSearchResult/index.tsx",
+      "src/components/ui/BaseSearchResults/index.tsx",
       "src/components/ui/AutoSearchForm/index.tsx"
     ],
     "out": "docs"

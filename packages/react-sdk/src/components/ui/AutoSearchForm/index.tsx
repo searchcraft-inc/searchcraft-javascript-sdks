@@ -1,11 +1,12 @@
 import { useState, type FC, useEffect, type ChangeEventHandler } from 'react';
+import classNames from 'classnames';
 
-import { useSearchcraft } from '@components/providers/SearchcraftProvider';
+import { useSearchcraft } from '@/components/providers/Provider';
+
 import styles from '@styles/sc-search-form.module.scss';
 
 import Input from '../components/Input';
 import InputLabel from '../components/InputLabel';
-import classNames from 'classnames';
 
 export interface AutoSearchFormProps {
   autoSearchFormClass?: string;
