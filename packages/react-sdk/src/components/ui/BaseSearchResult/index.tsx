@@ -3,7 +3,11 @@ import type { FC } from 'react';
 import styles from '@styles/sc-search-result.module.scss';
 
 import { ButtonIcon } from '../assets/ButtonIcons';
-import { ArrowRightIcon } from '../assets/ClearInputIcon';
+import {
+  ArrowRightIconLight,
+  ArrowRightIconDark,
+} from '../assets/ClearInputIcon';
+import { useTheme } from '@/Searchcraft/Searchcraft';
 
 export interface BaseSearchResultProps {
   buttonCallbackFn?: () => void;
@@ -30,6 +34,8 @@ const BaseSearchResult: FC<BaseSearchResultProps> = ({
   resultHeading = '',
   resultSubheading = '',
 }) => {
+  const { theme } = useTheme();
+  const isLightTheme = theme === 'light';
   const buttonFn = (event: { stopPropagation: () => void }) => {
     event.stopPropagation();
     buttonCallbackFn();
@@ -56,7 +62,7 @@ const BaseSearchResult: FC<BaseSearchResultProps> = ({
     >
       {interactiveResult && (
         <div className={styles.interactiveIconLarge}>
-          <ArrowRightIcon />
+          {isLightTheme ? <ArrowRightIconLight /> : <ArrowRightIconDark />}
         </div>
       )}
       <div className={styles.imageContainer}>
@@ -67,7 +73,7 @@ const BaseSearchResult: FC<BaseSearchResultProps> = ({
           {resultHeading}{' '}
           {interactiveResult && (
             <div className={styles.interactiveIconSmall}>
-              <ArrowRightIcon />
+              {isLightTheme ? <ArrowRightIconLight /> : <ArrowRightIconDark />}
             </div>
           )}
         </h2>
