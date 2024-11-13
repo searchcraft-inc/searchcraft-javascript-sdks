@@ -48,7 +48,7 @@ const Main = () => {
 Once your app is wrapped in the `Searchcraft.Provider`, the `useSearchcraft` hook functionalities are available for use.
 
 ```jsx
-import Searchcraft, { useSearchcraft, AutoSearchForm } from '@searchcraft/react-sdk'
+import Searchcraft, { useSearchcraft, AutoSearchForm, useTheme } from '@searchcraft/react-sdk'
 
 // values available when using the useSearchcraft hook
 const useSearchContextValues = {
@@ -67,6 +67,8 @@ import '../node_modules/@searchcraft/react-sdk/dist/style.css'
 
 const SearchWithResultsComponent = () => {
 const { isRequesting, query, search, searchResults } = useSearchcraft();
+// useTheme hook is exposed to control the dark and light UIs available. Configured values are 'light' and 'dark'.
+const { toggleTheme, theme } = useTheme();
 
 const handleClearInput = () => {
   setQuery('')
@@ -74,6 +76,7 @@ const handleClearInput = () => {
 
   return (
     <>
+    <button onClick={toggleTheme}>Toggle Theme</button>
       <AutoSearchForm
         handleSubmit={handleSubmitForm}
         inputCaptionValue="Search here"
