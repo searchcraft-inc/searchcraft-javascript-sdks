@@ -1,3 +1,5 @@
+@import 'utils/theme';
+
 :root {
   --font-stack: Helvetica, Arial, sans-serif;
 }
@@ -7,7 +9,6 @@
 }
 
 @mixin input-base {
-  background-color: #EDEDED;
   border: none;
   border-radius: 8px;
   font-family: var(--font-stack);
@@ -16,22 +17,54 @@
   padding-top: 15px;
 
   &::placeholder {
-    color: #737373;
     font-family: var(--font-stack);
     font-size: 16px;
   }
+}
+
+@mixin input-base-light {
+  @include input-base;
+  background-color: $light-input-background-color;
+  color: $light-input-label-color;
+
+  &::placeholder {
+    color: $light-input-placeholder-color;
+  }
 
   &:focus {
-    outline: 2px solid #000000;
+    outline: 2px solid $light-input-outline-focus;
   }
 }
 
-@mixin input-error-base {
+@mixin input-base-dark {
   @include input-base;
-  outline: 2px solid #c00;
+  background-color: $dark-input-background-color;
+  color: $dark-input-label-color;
+
+  &::placeholder {
+    color: $dark-input-placeholder-color;
+  }
+
+  &:focus {
+    outline: 2px solid $dark-input-outline-focus;
+  }
+}
+
+@mixin input-error-base-light {
+  @include input-base-light;
+  outline: 2px solid $light-input-error-outline;
 
   &:focus-visible {
-    outline: 2px solid #c00,
+    outline: 2px solid $light-input-error-outline,
+  }
+}
+
+@mixin input-error-base-dark {
+  @include input-base-dark;
+  outline: 2px solid $dark-input-error-outline;
+
+  &:focus-visible {
+    outline: 2px solid $dark-input-error-outline;
   }
 }
 
@@ -44,32 +77,55 @@
   margin-left: 8px;
 }
 
-.inputLTR {
-  @include input-base;
+@mixin align-LTR {
   margin-right: 8px;
   padding-left: 36px;
   padding-right: 16px;
 }
 
-.inputRTL {
-  @include input-base;
+.inputLightLTR {
+  @include input-base-light;
+  @include align-LTR;
+}
+
+.inputDarkLTR {
+  @include input-base-dark;
+  @include align-LTR;
+}
+
+.inputErrorLightLTR {
+  @include input-error-base-light;
+  @include align-LTR;
+}
+
+.inputErrorDarkLTR {
+  @include input-error-base-dark;
+  @include align-LTR;
+}
+
+@mixin align-RTL {
   margin-left: 8px;
   padding-left: 16px;
   padding-right: 36px;
   text-align: right;
 }
 
-.inputErrorLTR {
-  @include input-error-base;
-  margin-right: 8px;
-  padding-left: 36px;
-  padding-right: 16px;
+.inputLightRTL {
+  @include input-base-light;
+  @include align-RTL;
 }
 
-.inputErrorRTL {
-  @include input-error-base;
-  margin-left: 8px;
-  padding-left: 16px;
-  padding-right: 36px;
-  text-align: right;
+.inputDarkRTL {
+  @include input-base-dark;
+  @include align-RTL;
+}
+
+.inputErrorLightRTL {
+  @include input-error-base-light;
+  @include align-RTL;
+}
+
+.inputErrorDarkRTL {
+  @include input-error-base-dark;
+  @include align-RTL;
 }
