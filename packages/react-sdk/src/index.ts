@@ -1,7 +1,8 @@
 import Searchcraft from './Searchcraft/Searchcraft';
 import {
-  useSearchcraft,
   SearchcraftCore,
+  useSearchcraft,
+  useTheme,
 } from '@/components/providers/Provider';
 import type { ProviderConfigTypes } from '@/components/providers/ProviderConfigTypes';
 import type { ProviderContextTypes } from '@/components/providers/ProviderContextTypes';
@@ -29,6 +30,7 @@ export {
   type ProviderConfigTypes,
   type ProviderContextTypes,
   useSearchcraft,
+  useTheme,
 };
 
 export default Searchcraft;
