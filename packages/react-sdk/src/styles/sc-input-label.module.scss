@@ -1,12 +1,23 @@
+@import 'utils/theme';
+
 :root {
   --font-stack: Helvetica, Arial, sans-serif;
 }
 
-.label {
-  color: #292929;
+@mixin input-label-base {
   font-family: var(--font-stack);
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 400;
   line-height: 16px;
-  margin-bottom: 4px;
+  margin-top: 4px;
+}
+
+.labelLight {
+  @include input-label-base;
+  color: $light-input-label-color;
+}
+
+.labelDark {
+  @include input-label-base;
+  color: $dark-input-label-color;
 }
