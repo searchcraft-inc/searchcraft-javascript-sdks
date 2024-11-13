@@ -4,11 +4,8 @@
   --font-stack: Helvetica, Arial, sans-serif;
 }
 
-.button {
-  background-color: $light-background;
-  border: 1px solid #E6E6E6;
+@mixin button-base {
   border-radius: 8px;
-  color: #fff;
   display: flex;
   font-family: var(--font-stack);
   font-size: 16px;
@@ -18,25 +15,50 @@
   position: relative;
 
   &:hover {
-    background-color: #2E2E2E;
     cursor: pointer;
+  }
+}
+
+.buttonLight {
+  @include button-base;
+  background-color: $light-background;
+  border: 1px solid $light-button-border;
+  color: $light-button-color;
+
+  &:hover {
+    background-color: $light-button-hover;
   }
 
   &:focus {
-    outline: 2px solid #000000;
+    outline: 2px solid $light-button-outline-focus;
+  }
+}
+
+.buttonDark {
+  @include button-base;
+  background-color: $dark-background;
+  border: 1px solid $dark-button-border;
+  color: $dark-button-color;
+
+  &:hover {
+    background-color: $dark-button-hover;
+  }
+
+  &:focus {
+    outline: 2px solid $dark-button-outline-focus;
   }
 }
 
 .spinnerMarginRight {
+  left: 4px;
   margin-right: 4px;
   position: absolute;
-  left: 4px;
 }
 
 .spinnerMarginLeft {
+  left: 4px;
   margin-left: 4px;
   position: absolute;
-  left: 4px;
 }
 
 .buttonLabel {
