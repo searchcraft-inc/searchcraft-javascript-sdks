@@ -60,13 +60,6 @@ const Button: FC<ButtonProps> = ({
           >
             {label}
           </span>
-          {iconPosition === 'right' && isRequesting ? (
-            <div className={styles.spinnerMarginLeft}>
-              <SpinnerDark />
-            </div>
-          ) : (
-            iconElement
-          )}
         </button>
       )}
     </>
