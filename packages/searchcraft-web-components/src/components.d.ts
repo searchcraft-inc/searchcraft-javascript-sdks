@@ -16,6 +16,9 @@ export namespace Components {
         "searchContainerClass": string;
     }
     interface ScBaseSearchForm {
+        "errorMessage": string;
+        "labelForInput": string;
+        "rightToLeftOrientation": boolean;
     }
     interface ScBaseSearchResult {
         "buttonCallbackFn": () => void;
@@ -134,7 +137,7 @@ declare global {
         new (): HTMLScBaseSearchResultsElement;
     };
     interface HTMLScButtonElementEventMap {
-        "buttonClick": any;
+        "buttonClick": void;
     }
     interface HTMLScButtonElement extends Components.ScButton, HTMLStencilElement {
         addEventListener<K extends keyof HTMLScButtonElementEventMap>(type: K, listener: (this: HTMLScButtonElement, ev: ScButtonCustomEvent<HTMLScButtonElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -252,6 +255,9 @@ declare namespace LocalJSX {
         "searchContainerClass"?: string;
     }
     interface ScBaseSearchForm {
+        "errorMessage"?: string;
+        "labelForInput"?: string;
+        "rightToLeftOrientation"?: boolean;
     }
     interface ScBaseSearchResult {
         "buttonCallbackFn"?: () => void;
@@ -273,7 +279,7 @@ declare namespace LocalJSX {
         "iconOnly"?: boolean;
         "iconPosition"?: string;
         "label"?: string;
-        "onButtonClick"?: (event: ScButtonCustomEvent<any>) => void;
+        "onButtonClick"?: (event: ScButtonCustomEvent<void>) => void;
     }
     interface ScClearInputButton {
         "isRequesting"?: boolean;

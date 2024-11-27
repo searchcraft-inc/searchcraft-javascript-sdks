@@ -1,7 +1,8 @@
-import { Component, h, State } from '@stencil/core';
+import { Component, h, Prop, State } from '@stencil/core';
 import { CoreSDK as SearchcraftCore } from '@searchcraft/core';
 
 import { useSearchcraftStore, useThemeStore } from '../../providers/Provider';
+import type { ScInputCustomEvent } from '../sc-input/sc-input';
 
 @Component({
   tag: 'sc-base-search-form',
@@ -9,26 +10,40 @@ import { useSearchcraftStore, useThemeStore } from '../../providers/Provider';
   shadow: true,
 })
 export class ScBaseSearchForm {
+  @Prop() errorMessage = 'Search was unsuccessful';
+  @Prop() labelForInput = 'Search';
+  @Prop() rightToLeftOrientation = false;
+
+  @State() error = false;
   @State() query = '';
   @State() searchResults: string | null = null;
 
   private searchStore = useSearchcraftStore.getState();
   private themeStore = useThemeStore.getState();
 
-  componentWillLoad() {
+  componentDidLoad = () => {
     const searchcraft = new SearchcraftCore({
       index: ['scraftdemo_movies'],
       apiKey: '1234.909.jmk',
       endpointURL: 'http://localhost:3000',
     });
     this.searchStore.initialize(searchcraft, true);
-  }
+  };
 
-  handleSearch = async () => {
-    this.searchStore.setQuery(this.query);
-    await this.searchStore.search();
-    console.log(this.searchStore);
-    this.searchResults = JSON.stringify(this.searchStore.searchResults);
+  handleFormSubmit = async (event) => {
+    event.preventDefault();
+    if (this.query.trim() === '') {
+      this.error = true;
+    } else {
+      this.error = false;
+      this.searchStore.setQuery(this.query);
+      await this.searchStore.search();
+      this.searchResults = JSON.stringify(this.searchStore.searchResults);
+    }
+  };
+
+  handleSearchInputChange = (event: ScInputCustomEvent<string>) => {
+    this.query = event.detail;
   };
 
   toggleTheme = () => {
@@ -37,23 +52,23 @@ export class ScBaseSearchForm {
 
   render() {
     return (
-      <div>
-        <button onClick={this.toggleTheme} type='button'>
-          Toggle Theme
-        </button>
-        <input
-          type='text'
-          value={this.query}
-          onInput={(event: InputEvent) => {
-            const input = event.target as HTMLInputElement;
-            this.query = input.value;
-          }}
-        />
-        <button onClick={this.handleSearch} type='button'>
-          Search
-        </button>
-        <pre>{this.searchResults}</pre>
-      </div>
+      <form
+        class={this.rightToLeftOrientation ? 'formRTL' : 'formLTR'}
+        onSubmit={this.handleFormSubmit}
+      >
+        <sc-input-label label={this.labelForInput} />
+        <div class='searchContainer'>
+          {this.rightToLeftOrientation && <sc-button />}
+          <sc-input
+            onSearchInputChange={this.handleSearchInputChange}
+            query={this.query}
+          />
+          {!this.rightToLeftOrientation && (
+            <sc-button onButtonClick={this.handleFormSubmit} />
+          )}
+        </div>
+        {this.error && <sc-error-message errorMessage={this.errorMessage} />}
+      </form>
     );
   }
 }

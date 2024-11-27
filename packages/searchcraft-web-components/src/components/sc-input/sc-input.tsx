@@ -9,11 +9,6 @@ import {
 } from '@stencil/core';
 import classNames from 'classnames';
 
-import { ScInputCaption } from '../sc-input-caption/sc-input-caption';
-import { ScInputIcon } from '../sc-input-icon/sc-input-icon';
-import { ScClearInputButton } from '../sc-clear-input-button/sc-clear-input-button';
-
-// Define and export the custom event type
 export interface ScInputCustomEvent<T> extends CustomEvent<T> {
   detail: T;
   target: HTMLScInputElement;
@@ -96,19 +91,19 @@ export class ScInput {
               value={this.query}
             />
             {this.inputCaptionValue && (
-              <ScInputCaption
+              <sc-input-caption
                 inputCaptionClassName={this.inputCaptionClassName}
                 inputCaptionValue={this.inputCaptionValue}
                 rightToLeftOrientation={this.rightToLeftOrientation}
               />
             )}
-            {this.query.length > 0 && (
-              <ScClearInputButton
+            {/* {this.query.length > 0 && (
+              <sc-clear-input-button
                 onClearInput={this.clearInput}
                 rightToLeftOrientation={this.rightToLeftOrientation}
               />
-            )}
-            <ScInputIcon
+            )} */}
+            <sc-input-icon
               error={this.error}
               rightToLeftOrientation={this.rightToLeftOrientation}
             />
@@ -134,18 +129,18 @@ export class ScInput {
               value={this.query}
             />
             {this.inputCaptionValue && (
-              <ScInputCaption
+              <sc-input-caption
                 inputCaptionClassName={this.inputCaptionClassName}
                 inputCaptionValue={this.inputCaptionValue}
                 rightToLeftOrientation={this.rightToLeftOrientation}
               />
             )}
-            {this.query.length > 0 && (
-              <ScClearInputButton
+            {/* {this.query.length > 0 && (
+              <sc-clear-input-button
                 onClearInput={this.clearInput}
                 rightToLeftOrientation={this.rightToLeftOrientation}
               />
-            )}
+            )} */}
             <slot />
           </Fragment>
         )}

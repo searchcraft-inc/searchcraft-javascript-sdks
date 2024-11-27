@@ -1,4 +1,12 @@
-import { Component, Event, Prop, h, State, Fragment } from '@stencil/core';
+import {
+  Component,
+  Event,
+  type EventEmitter,
+  Prop,
+  h,
+  State,
+  Fragment,
+} from '@stencil/core';
 import classNames from 'classnames';
 
 @Component({
@@ -11,7 +19,8 @@ export class ScButton {
   @Prop() iconOnly = false;
   @Prop() iconPosition = 'left';
   @Prop() label = 'Search';
-  @Event() buttonClick?: () => void;
+
+  @Event() buttonClick!: EventEmitter<void>;
 
   @State() isRequesting = false;
   @State() theme = 'light';
@@ -21,9 +30,7 @@ export class ScButton {
   }
 
   private handleClick = () => {
-    if (this.buttonClick) {
-      this.buttonClick();
-    }
+    this.buttonClick.emit(); // Emit the event instead of calling a function
   };
 
   render() {

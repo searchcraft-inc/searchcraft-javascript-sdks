@@ -19,13 +19,17 @@
 </head>
 <body>
   <div class="container">
-    <h1>Example Search Application</h1>
     <!-- Search Form -->
-     <div>
-       <sc-base-search-form />
-     </div>
-    <!-- Search Results -->
+    <sc-base-search-form />
+  </div>
+  <!-- Search Results -->
+  <div class="resultsContainer">
     <sc-base-search-results />
   </div>
 </body>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('Stencil components ready');
+  });
+</script>
 </html>

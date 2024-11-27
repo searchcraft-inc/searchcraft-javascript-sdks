@@ -17,12 +17,16 @@
 
 ## Events
 
-| Event         | Description | Type               |
-| ------------- | ----------- | ------------------ |
-| `buttonClick` |             | `CustomEvent<any>` |
+| Event         | Description | Type                |
+| ------------- | ----------- | ------------------- |
+| `buttonClick` |             | `CustomEvent<void>` |
 
 
 ## Dependencies
+
+### Used by
+
+ - [sc-base-search-form](../sc-base-search-form)
 
 ### Depends on
 
@@ -32,6 +36,7 @@
 ```mermaid
 graph TD;
   sc-button --> sc-spinner-dark
+  sc-base-search-form --> sc-button
   style sc-button fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

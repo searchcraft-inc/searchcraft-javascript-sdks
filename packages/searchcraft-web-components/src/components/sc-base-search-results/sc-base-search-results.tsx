@@ -1,5 +1,6 @@
 import { Component, h, State } from '@stencil/core';
 import type { SearchResult } from '@searchcraft/core';
+
 import { useSearchcraftStore } from '../../providers/Provider';
 
 @Component({
@@ -34,11 +35,14 @@ export class ScBaseSearchResults {
   }
 
   render() {
+    if (!this.searchResults?.data) {
+      console.warn('No search results data available');
+      return <div>No results to display.</div>;
+    }
     return (
       <div class='resultsContainer'>
         {this.searchResults?.data?.hits?.map((document, index) => {
           const { doc: result } = document;
-          console.log(document);
           return (
             <sc-base-search-result
               key={`${result?.id}-${index}`}

@@ -22,6 +22,19 @@
 | `theme`             | `theme`               |             | `"dark" \| "light"` | `'light'`  |
 
 
+## Dependencies
+
+### Used by
+
+ - [sc-base-search-results](../sc-base-search-results)
+
+### Graph
+```mermaid
+graph TD;
+  sc-base-search-results --> sc-base-search-result
+  style sc-base-search-result fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

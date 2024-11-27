@@ -17,7 +17,7 @@ import { ScSpinnerDark } from '../sc-spinner-dark/sc-spinner-dark';
 export class ScClearInputButton {
   @Prop() isRequesting? = false;
   @Prop() rightToLeftOrientation = false;
-  @Event() clearInput?: () => void;
+  @Event() clearInput?: (event: MouseEvent) => void;
   @State() theme = 'light';
 
   private isLightTheme() {
