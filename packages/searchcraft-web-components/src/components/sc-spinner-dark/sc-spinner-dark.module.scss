@@ -1,0 +1,31 @@
+$spinner-size: 20px;
+
+.spinnerContainer {
+  background-color: transparent;
+  height: $spinner-size;
+  width: $spinner-size;
+}
+
+.spinnerDark {
+  height: 100%;
+  width: 100%;
+  background: conic-gradient(#000 50%, #FFFFFF);
+  clip-path: circle(50%);
+  mask-image: radial-gradient(circle at center, rgba(0,0,0,0) calc($spinner-size/3), rgba(0,0,0,1) calc($spinner-size/3));
+  animation: spinning 1s linear infinite;
+}
+
+.spinnerLight {
+  height: 100%;
+  width: 100%;
+  background: conic-gradient(#737373 50%, #FFFFFF);
+  clip-path: circle(50%);
+  mask-image: radial-gradient(circle at center, rgba(0,0,0,0) calc($spinner-size/3), rgba(0,0,0,1) calc($spinner-size/3));
+  animation: spinning 1s linear infinite;
+}
+
+@keyframes spinning {
+  0% { transform: rotate(0deg); }
+  50% {transform: rotate(180deg);}
+  100% { transform: rotate(360deg); }
+}

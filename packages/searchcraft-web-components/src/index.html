@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search and Display Results</title>
+  <script type="module" src="/build/searchcraft-web-components.esm.js"></script>
+  <style>
+    .container {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+    }
+    .resultsContainer {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Example Search Application</h1>
+    <!-- Search Form -->
+     <div>
+       <sc-base-search-form />
+     </div>
+    <!-- Search Results -->
+    <sc-base-search-results />
+  </div>
+</body>
+</html>
