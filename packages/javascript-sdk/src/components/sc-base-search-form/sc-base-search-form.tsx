@@ -1,5 +1,8 @@
 import { Component, h, Event, Prop, State } from '@stencil/core';
-import { CoreSDK as SearchcraftCore } from '@searchcraft/core';
+import {
+  type CoreConfigSDK,
+  CoreSDK as SearchcraftCore,
+} from '@searchcraft/core';
 
 import { useSearchcraftStore, useThemeStore } from '../../providers/Provider';
 import type { ScInputCustomEvent } from '../sc-input/sc-input';
@@ -13,6 +16,11 @@ export class ScBaseSearchForm {
   @Prop() errorMessage = 'Search was unsuccessful';
   @Prop() labelForInput = 'Search';
   @Prop() rightToLeftOrientation = false;
+  @Prop() config: CoreConfigSDK = {
+    apiKey: '',
+    endpointURL: '',
+    index: [],
+  };
 
   @Event() clearInput = () => {};
 
@@ -24,11 +32,7 @@ export class ScBaseSearchForm {
   private themeStore = useThemeStore.getState();
 
   componentDidLoad = () => {
-    const searchcraft = new SearchcraftCore({
-      index: ['scraftdemo_movies'],
-      apiKey: '1234.909.jmk',
-      endpointURL: 'http://localhost:3000',
-    });
+    const searchcraft = new SearchcraftCore(this.config);
     this.searchStore.initialize(searchcraft, true);
   };
 

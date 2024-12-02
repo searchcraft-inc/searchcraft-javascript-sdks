@@ -7,22 +7,23 @@
 
 ## Properties
 
-| Property                 | Attribute                   | Description | Type         | Default         |
-| ------------------------ | --------------------------- | ----------- | ------------ | --------------- |
-| `autoSearchFormClass`    | `auto-search-form-class`    |             | `string`     | `''`            |
-| `clearInput`             | --                          |             | `() => void` | `() => {}`      |
-| `inputCaptionValue`      | `input-caption-value`       |             | `string`     | `''`            |
-| `labelForInput`          | `label-for-input`           |             | `string`     | `'Search'`      |
-| `placeholderValue`       | `placeholder-value`         |             | `string`     | `'Search here'` |
-| `rightToLeftOrientation` | `right-to-left-orientation` |             | `boolean`    | `false`         |
-| `searchContainerClass`   | `search-container-class`    |             | `string`     | `''`            |
+| Property                 | Attribute                   | Description | Type            | Default                                                     |
+| ------------------------ | --------------------------- | ----------- | --------------- | ----------------------------------------------------------- |
+| `autoSearchFormClass`    | `auto-search-form-class`    |             | `string`        | `''`                                                        |
+| `clearInput`             | --                          |             | `() => void`    | `() => {}`                                                  |
+| `config`                 | --                          |             | `CoreConfigSDK` | `{     apiKey: '',     endpointURL: '',     index: [],   }` |
+| `inputCaptionValue`      | `input-caption-value`       |             | `string`        | `''`                                                        |
+| `labelForInput`          | `label-for-input`           |             | `string`        | `'Search'`                                                  |
+| `placeholderValue`       | `placeholder-value`         |             | `string`        | `'Search here'`                                             |
+| `rightToLeftOrientation` | `right-to-left-orientation` |             | `boolean`       | `false`                                                     |
+| `searchContainerClass`   | `search-container-class`    |             | `string`        | `''`                                                        |
 
 
 ## Events
 
-| Event         | Description                                      | Type                  |
-| ------------- | ------------------------------------------------ | --------------------- |
-| `querySubmit` | Event emitted when the search query is submitted | `CustomEvent<string>` |
+| Event         | Description                                 | Type                  |
+| ------------- | ------------------------------------------- | --------------------- |
+| `querySubmit` | Event emitted when the search query changes | `CustomEvent<string>` |
 
 
 ## Dependencies

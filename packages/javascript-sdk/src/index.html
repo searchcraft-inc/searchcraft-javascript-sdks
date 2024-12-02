@@ -5,6 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Search and Display Results</title>
   <script type="module" src="/build/searchcraft-web-components.esm.js"></script>
+  <script type="module">
+    document.addEventListener('DOMContentLoaded', () => {
+      // Define the configuration object
+      const config = {
+        index: ['scraftdemo_movies'],
+        apiKey: '1234.909.jmk',
+        endpointURL: 'http://localhost:3000',
+      };
+
+      // Check for the presence of the search form components
+      const baseSearchForm = document.querySelector('sc-base-search-form');
+      const autoSearchForm = document.querySelector('sc-auto-search-form');
+
+      // Apply the config to the appropriate component
+      if (baseSearchForm) {
+        baseSearchForm.config = config;
+      } else if (autoSearchForm) {
+        autoSearchForm.config = config;
+      } else {
+        console.error('No compatible search form component found.');
+      }
+    });
+  </script>
   <style>
     .container {
       align-items: center;
@@ -19,8 +42,9 @@
 </head>
 <body>
   <div class="container">
-    <!-- Search Form -->
+    <!-- Search Forms -->
     <sc-base-search-form />
+    <!-- <sc-auto-search-form /> -->
   </div>
   <!-- Search Results -->
   <div class="resultsContainer">
