@@ -2,7 +2,7 @@ import type { Config } from '@stencil/core';
 import { sass } from '@stencil/sass';
 
 export const config: Config = {
-  namespace: 'searchcraft-web-components',
+  namespace: 'searchcraft-javascript-sdk',
   plugins: [
     sass({
       injectGlobalPaths: ['src/utils/_theme.scss'],
