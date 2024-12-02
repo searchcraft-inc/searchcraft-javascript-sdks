@@ -36,6 +36,7 @@
 graph TD;
   sc-auto-search-form --> sc-input
   sc-input --> sc-input-caption
+  sc-input --> sc-clear-input-button
   sc-input --> sc-input-icon
   style sc-auto-search-form fill:#f9f,stroke:#333,stroke-width:4px
 ```

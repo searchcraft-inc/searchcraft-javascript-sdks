@@ -43,7 +43,9 @@ export class ScInput {
   }
 
   handleClearInput() {
-    this.clearInput.emit();
+    if (this.clearInput) {
+      this.clearInput.emit();
+    }
   }
 
   render() {
@@ -97,12 +99,12 @@ export class ScInput {
                 rightToLeftOrientation={this.rightToLeftOrientation}
               />
             )}
-            {/* {this.query.length > 0 && (
+            {this.query.length > 0 && (
               <sc-clear-input-button
-                onClearInput={this.clearInput}
+                onClearInput={this.handleClearInput}
                 rightToLeftOrientation={this.rightToLeftOrientation}
               />
-            )} */}
+            )}
             <sc-input-icon
               error={this.error}
               rightToLeftOrientation={this.rightToLeftOrientation}
@@ -135,13 +137,12 @@ export class ScInput {
                 rightToLeftOrientation={this.rightToLeftOrientation}
               />
             )}
-            {/* {this.query.length > 0 && (
+            {this.query.length > 0 && (
               <sc-clear-input-button
-                onClearInput={this.clearInput}
+                onClearInput={this.handleClearInput}
                 rightToLeftOrientation={this.rightToLeftOrientation}
               />
-            )} */}
-            <slot />
+            )}
           </Fragment>
         )}
       </div>

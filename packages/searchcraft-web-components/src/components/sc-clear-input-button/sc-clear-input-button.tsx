@@ -1,4 +1,11 @@
-import { Component, Event, Prop, h, State } from '@stencil/core';
+import {
+  Component,
+  Event,
+  type EventEmitter,
+  Prop,
+  h,
+  State,
+} from '@stencil/core';
 import classNames from 'classnames';
 
 import {
@@ -17,18 +24,27 @@ import { ScSpinnerDark } from '../sc-spinner-dark/sc-spinner-dark';
 export class ScClearInputButton {
   @Prop() isRequesting? = false;
   @Prop() rightToLeftOrientation = false;
-  @Event() clearInput?: (event: MouseEvent) => void;
+
+  // Updated `clearInput` to an EventEmitter
+  @Event() clearInput: EventEmitter<void>;
+
   @State() theme = 'light';
 
   private isLightTheme() {
     return this.theme === 'light';
   }
 
+  // Added a click handler to emit the event
+  private handleClearClick = (event: MouseEvent) => {
+    event.preventDefault(); // Prevent default if necessary
+    this.clearInput.emit(); // Emit the event
+  };
+
   render() {
     return this.rightToLeftOrientation ? (
       <button
         class={classNames('inputClearButtonRTL', '.sc-clear-input-button-rtl')}
-        onClick={this.clearInput}
+        onClick={this.handleClearClick} // Use the handler
         type='button'
       >
         {this.isRequesting ? (
@@ -46,7 +62,7 @@ export class ScClearInputButton {
     ) : (
       <button
         class={classNames('inputClearButtonLTR', '.sc-clear-input-button-ltr')}
-        onClick={this.clearInput}
+        onClick={this.handleClearClick} // Use the handler
         type='button'
       >
         {this.isRequesting ? (

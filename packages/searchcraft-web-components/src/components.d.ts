@@ -88,6 +88,10 @@ export interface ScAutoSearchFormCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLScAutoSearchFormElement;
 }
+export interface ScBaseSearchFormCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLScBaseSearchFormElement;
+}
 export interface ScButtonCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLScButtonElement;
@@ -118,7 +122,18 @@ declare global {
         prototype: HTMLScAutoSearchFormElement;
         new (): HTMLScAutoSearchFormElement;
     };
+    interface HTMLScBaseSearchFormElementEventMap {
+        "clearInput": any;
+    }
     interface HTMLScBaseSearchFormElement extends Components.ScBaseSearchForm, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLScBaseSearchFormElementEventMap>(type: K, listener: (this: HTMLScBaseSearchFormElement, ev: ScBaseSearchFormCustomEvent<HTMLScBaseSearchFormElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLScBaseSearchFormElementEventMap>(type: K, listener: (this: HTMLScBaseSearchFormElement, ev: ScBaseSearchFormCustomEvent<HTMLScBaseSearchFormElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLScBaseSearchFormElement: {
         prototype: HTMLScBaseSearchFormElement;
@@ -154,7 +169,7 @@ declare global {
         new (): HTMLScButtonElement;
     };
     interface HTMLScClearInputButtonElementEventMap {
-        "clearInput": any;
+        "clearInput": void;
     }
     interface HTMLScClearInputButtonElement extends Components.ScClearInputButton, HTMLStencilElement {
         addEventListener<K extends keyof HTMLScClearInputButtonElementEventMap>(type: K, listener: (this: HTMLScClearInputButtonElement, ev: ScClearInputButtonCustomEvent<HTMLScClearInputButtonElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -257,6 +272,7 @@ declare namespace LocalJSX {
     interface ScBaseSearchForm {
         "errorMessage"?: string;
         "labelForInput"?: string;
+        "onClearInput"?: (event: ScBaseSearchFormCustomEvent<any>) => void;
         "rightToLeftOrientation"?: boolean;
     }
     interface ScBaseSearchResult {
@@ -283,7 +299,7 @@ declare namespace LocalJSX {
     }
     interface ScClearInputButton {
         "isRequesting"?: boolean;
-        "onClearInput"?: (event: ScClearInputButtonCustomEvent<any>) => void;
+        "onClearInput"?: (event: ScClearInputButtonCustomEvent<void>) => void;
         "rightToLeftOrientation"?: boolean;
     }
     interface ScErrorMessage {

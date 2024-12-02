@@ -14,6 +14,13 @@
 | `rightToLeftOrientation` | `right-to-left-orientation` |             | `boolean` | `false`                     |
 
 
+## Events
+
+| Event        | Description | Type               |
+| ------------ | ----------- | ------------------ |
+| `clearInput` |             | `CustomEvent<any>` |
+
+
 ## Dependencies
 
 ### Depends on
@@ -32,6 +39,7 @@ graph TD;
   sc-base-search-form --> sc-error-message
   sc-button --> sc-spinner-dark
   sc-input --> sc-input-caption
+  sc-input --> sc-clear-input-button
   sc-input --> sc-input-icon
   style sc-base-search-form fill:#f9f,stroke:#333,stroke-width:4px
 ```

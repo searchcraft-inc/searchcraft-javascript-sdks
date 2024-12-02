@@ -1,4 +1,4 @@
-import { Component, h, Prop, State } from '@stencil/core';
+import { Component, h, Event, Prop, State } from '@stencil/core';
 import { CoreSDK as SearchcraftCore } from '@searchcraft/core';
 
 import { useSearchcraftStore, useThemeStore } from '../../providers/Provider';
@@ -13,6 +13,8 @@ export class ScBaseSearchForm {
   @Prop() errorMessage = 'Search was unsuccessful';
   @Prop() labelForInput = 'Search';
   @Prop() rightToLeftOrientation = false;
+
+  @Event() clearInput = () => {};
 
   @State() error = false;
   @State() query = '';
@@ -46,6 +48,11 @@ export class ScBaseSearchForm {
     this.query = event.detail;
   };
 
+  handleClearInput = () => {
+    this.query = '';
+    this?.clearInput();
+  };
+
   toggleTheme = () => {
     this.themeStore.toggleTheme();
   };
@@ -60,6 +67,8 @@ export class ScBaseSearchForm {
         <div class='searchContainer'>
           {this.rightToLeftOrientation && <sc-button />}
           <sc-input
+            onClearInput={this.handleClearInput}
+            rightToLeftOrientation={this.rightToLeftOrientation}
             onSearchInputChange={this.handleSearchInputChange}
             query={this.query}
           />

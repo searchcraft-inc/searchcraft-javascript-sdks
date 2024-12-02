@@ -37,12 +37,14 @@
 ### Depends on
 
 - [sc-input-caption](../sc-input-caption)
+- [sc-clear-input-button](../sc-clear-input-button)
 - [sc-input-icon](../sc-input-icon)
 
 ### Graph
 ```mermaid
 graph TD;
   sc-input --> sc-input-caption
+  sc-input --> sc-clear-input-button
   sc-input --> sc-input-icon
   sc-auto-search-form --> sc-input
   sc-base-search-form --> sc-input
