@@ -7,6 +7,9 @@
 node_modules/
 dist/
 
+# Stencil 
+.editorconfig
+
 # yalc files for local development
 .yalc
 yalc.lock
