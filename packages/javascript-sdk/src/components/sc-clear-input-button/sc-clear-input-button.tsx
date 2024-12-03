@@ -11,10 +11,10 @@ import classNames from 'classnames';
 import {
   ClearInputIconLight,
   ClearInputIconDark,
-} from '../../assets/ClearInputIcon';
+} from '@assets/ClearInputIcon';
 
-import { ScSpinnerLight } from '../sc-spinner-light/sc-spinner-light';
-import { ScSpinnerDark } from '../sc-spinner-dark/sc-spinner-dark';
+import { ScSpinnerDark } from '@components/sc-spinner-dark/sc-spinner-dark';
+import { ScSpinnerLight } from '@components/sc-spinner-light/sc-spinner-light';
 
 @Component({
   tag: 'sc-clear-input-button',

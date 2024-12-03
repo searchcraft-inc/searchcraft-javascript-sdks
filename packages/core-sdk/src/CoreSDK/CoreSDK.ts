@@ -1,6 +1,5 @@
 import type {
   CoreConfigSDK,
-  SearchError,
   SearchParams,
   SearchResult,
 } from '../CoreSDKTypes';
@@ -23,8 +22,6 @@ export class CoreSDK {
    * @returns {Promise<SearchResult>} - Returns a `SearchResult` object with the results from the search or throws an error.
    */
   search = async (searchParams: SearchParams): Promise<SearchResult> => {
-    console.log('SEARCH PARAMS', searchParams);
-
     const quoteCount = (searchParams.query.match(/"/g) || []).length;
     if (quoteCount % 2 !== 0) {
       throw new Error(
@@ -60,8 +57,6 @@ export class CoreSDK {
             : 'asc';
       }
 
-      console.log('REQUEST BODY', requestBody);
-
       const requestOptions = {
         method: 'POST',
         headers: {
@@ -71,10 +66,18 @@ export class CoreSDK {
         body: JSON.stringify(requestBody),
       };
 
-      const request = await fetch(baseUrl, requestOptions);
-      return (await request.json()) as SearchResult;
+      const response = await fetch(baseUrl, requestOptions);
+      console.log('REQUEST RESPONSE', response);
+
+      if (!response.ok) {
+        throw new Error(
+          `Error: ${response.statusText} (Status: ${response.status})`,
+        );
+      }
+      return await response.json();
     } catch (error) {
-      return error as SearchError;
+      console.error('Error parsing response:', error);
+      throw error;
     }
   };
 }

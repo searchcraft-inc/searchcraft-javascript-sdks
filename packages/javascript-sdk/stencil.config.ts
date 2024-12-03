@@ -11,11 +11,12 @@ export const config: Config = {
   outputTargets: [
     {
       type: 'dist',
-      esmLoaderPath: '../loader',
+      esmLoaderPath: './loader',
     },
     {
       type: 'dist-custom-elements',
       customElementsExportBehavior: 'auto-define-custom-elements',
+      generateTypeDeclarations: true,
       externalRuntime: false,
     },
     {

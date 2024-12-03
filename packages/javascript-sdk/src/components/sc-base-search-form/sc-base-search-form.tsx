@@ -4,8 +4,9 @@ import {
   CoreSDK as SearchcraftCore,
 } from '@searchcraft/core';
 
-import { useSearchcraftStore, useThemeStore } from '../../providers/Provider';
-import type { ScInputCustomEvent } from '../sc-input/sc-input';
+import { useSearchcraftStore, useThemeStore } from '@provider/store';
+
+import type { ScInputCustomEvent } from '@components/sc-input/sc-input';
 
 @Component({
   tag: 'sc-base-search-form',
@@ -13,14 +14,14 @@ import type { ScInputCustomEvent } from '../sc-input/sc-input';
   shadow: true,
 })
 export class ScBaseSearchForm {
-  @Prop() errorMessage = 'Search was unsuccessful';
-  @Prop() labelForInput = 'Search';
-  @Prop() rightToLeftOrientation = false;
   @Prop() config: CoreConfigSDK = {
     apiKey: '',
     endpointURL: '',
     index: [],
   };
+  @Prop() errorMessage = 'Search was unsuccessful';
+  @Prop() labelForInput = 'Search';
+  @Prop() rightToLeftOrientation = false;
 
   @Event() clearInput = () => {};
 

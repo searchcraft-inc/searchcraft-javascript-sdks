@@ -1,7 +1,7 @@
 import { Component, h, State } from '@stencil/core';
 import type { SearchResult } from '@searchcraft/core';
 
-import { useSearchcraftStore } from '../../providers/Provider';
+import { useSearchcraftStore } from '@provider/store';
 
 @Component({
   tag: 'sc-base-search-results',
@@ -9,8 +9,8 @@ import { useSearchcraftStore } from '../../providers/Provider';
   shadow: true,
 })
 export class ScBaseSearchResults {
-  @State() searchResults: SearchResult | null = null;
   @State() query = '';
+  @State() searchResults: SearchResult | null = null;
   private unsubscribe: () => void;
 
   componentDidLoad() {
