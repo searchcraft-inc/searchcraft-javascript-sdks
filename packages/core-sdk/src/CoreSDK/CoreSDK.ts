@@ -19,24 +19,54 @@ export class CoreSDK {
   }
 
   /**
-   * @param {string} query - User provided value Searchcraft will use to search against
-   * @param {string} mode - Can be either 'fuzzy' or 'normal'
-   * @returns {SearchResult} - Returns a `SearchResponse` object with the results from the search or throws an error
+   * @param {SearchParams} searchParams - The parameters for the search.
+   * @returns {Promise<SearchResult>} - Returns a `SearchResult` object with the results from the search or throws an error.
    */
   search = async (searchParams: SearchParams): Promise<SearchResult> => {
+    console.log('SEARCH PARAMS', searchParams);
+
+    const quoteCount = (searchParams.query.match(/"/g) || []).length;
+    if (quoteCount % 2 !== 0) {
+      throw new Error(
+        'The search term contains an uneven number of quote characters.',
+      );
+    }
+
     try {
       const formattedIndexes = this.config.index.join(',');
-      const baseUrl = `${this.config.endpointURL}/search`;
-      const requestBody = {
-        query: searchParams.query,
-        mode: searchParams.mode,
-        app: formattedIndexes,
+      const baseUrl = `${this.config.endpointURL}/index/${formattedIndexes}/search`;
+      const requestBody: {
+        query: {
+          [key: string]: { ctx: string };
+        };
+        limit: number;
+        order_by?: string;
+        sort?: 'asc' | 'desc';
+      } = {
+        query: {
+          [searchParams.mode]: { ctx: searchParams.query },
+        },
+        limit: 20,
       };
+
+      // Handles dynamic sorting and order_by logic
+      if (searchParams.order_by) {
+        requestBody.order_by = searchParams.order_by;
+
+        // Ensure sort defaults to 'asc' if not provided or given an invalid
+        requestBody.sort =
+          searchParams.sort === 'desc' || searchParams.sort === 'asc'
+            ? searchParams.sort
+            : 'asc';
+      }
+
+      console.log('REQUEST BODY', requestBody);
+
       const requestOptions = {
         method: 'POST',
         headers: {
+          Authorization: this.config.apiKey,
           'Content-Type': 'application/json',
-          Authorization: this.config.apiKey ? `${this.config.apiKey}` : '',
         },
         body: JSON.stringify(requestBody),
       };
