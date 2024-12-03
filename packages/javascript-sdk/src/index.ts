@@ -9,3 +9,6 @@
  */
 
 export type * from './components';
+
+// Export Zustand store and any custom hooks
+export { useSearchcraftStore, useThemeStore } from './provider/store';

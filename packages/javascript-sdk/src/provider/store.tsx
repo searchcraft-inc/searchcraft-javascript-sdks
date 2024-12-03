@@ -64,7 +64,6 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
       setIsRequesting(true);
       try {
         const results = await searchcraft.search({ query, mode: 'fuzzy' });
-        console.log(results);
         setSearchResults(results);
         log(LogLevel.DEBUG, `Search results: ${JSON.stringify(results)}`);
       } catch (error) {
