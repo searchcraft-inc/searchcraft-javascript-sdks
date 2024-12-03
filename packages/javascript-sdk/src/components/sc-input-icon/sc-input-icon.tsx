@@ -5,7 +5,7 @@ import {
   SearchIconDark,
   SearchIconLightError,
   SearchIconDarkError,
-} from '../../assets/SearchIcons';
+} from '@assets/SearchIcons';
 
 @Component({
   tag: 'sc-input-icon',

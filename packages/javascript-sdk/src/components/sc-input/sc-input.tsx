@@ -28,6 +28,7 @@ export class ScInput {
   @Prop() placeholderValue = 'Enter Search';
   @Prop() rightToLeftOrientation = false;
   @Prop() query = '';
+
   @Event() searchInputChange: EventEmitter<string>;
   @Event() clearInput: EventEmitter<void>;
 

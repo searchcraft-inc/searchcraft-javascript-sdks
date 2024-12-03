@@ -1,8 +1,9 @@
 import { Component, h, Prop } from '@stencil/core';
+
 import {
   ArrowRightIconLight,
   ArrowRightIconDark,
-} from '../../assets/ClearInputIcon';
+} from '@assets/ClearInputIcon';
 
 @Component({
   tag: 'sc-base-search-result',
@@ -12,10 +13,10 @@ import {
 export class ScBaseSearchResult {
   @Prop() buttonCallbackFn: () => void = () => {};
   @Prop() buttonLabel = '';
+  @Prop() callbackFn: () => void = () => {};
   @Prop() imageAltText = '';
   @Prop() imageSrc = '';
   @Prop() interactiveResult = false;
-  @Prop() callbackFn: () => void = () => {};
   @Prop() keyDownCallbackFn: () => void = () => {};
   @Prop() resultBodyContent = '';
   @Prop() resultHeading = '';

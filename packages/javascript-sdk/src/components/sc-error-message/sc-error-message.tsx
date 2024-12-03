@@ -6,7 +6,7 @@ import classNames from 'classnames';
   styleUrl: 'sc-error-message.module.scss',
   shadow: true, // Enable shadow DOM if desired
 })
-export class ErrorMessage {
+export class ScErrorMessage {
   /**
    * The error message to display. Defaults to a standard message if not provided.
    */

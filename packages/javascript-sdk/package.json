@@ -26,7 +26,10 @@
     "type": "git",
     "url": "https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/"
   },
-  "files": ["dist/", "loader/"],
+  "files": [
+    "dist/",
+    "loader/"
+  ],
   "scripts": {
     "build": "stencil build",
     "start": "stencil build --dev --watch --serve",
@@ -35,7 +38,7 @@
     "generate": "stencil generate"
   },
   "devDependencies": {
-    "@searchcraft/core": "*",
+    "@searchcraft/core": "file:.yalc/@searchcraft/core",
     "@stencil/core": "^4.7.0",
     "@stencil/sass": "^3.0.12",
     "@types/jest": "^29.5.6",

@@ -1,5 +1,11 @@
 {
   "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@assets/*": ["assets/*"],
+      "@provider/*": ["provider/*"],
+      "@components/*": ["components/*"]
+    },
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,
     "declaration": false,

@@ -10,8 +10,9 @@ import {
   type CoreConfigSDK,
   CoreSDK as SearchcraftCore,
 } from '@searchcraft/core';
-import type { ScInputCustomEvent } from '../sc-input/sc-input';
-import { useSearchcraftStore } from '../../providers/Provider';
+
+import type { ScInputCustomEvent } from '@components/sc-input/sc-input';
+import { useSearchcraftStore } from '@provider/store';
 
 @Component({
   tag: 'sc-auto-search-form',
@@ -20,25 +21,25 @@ import { useSearchcraftStore } from '../../providers/Provider';
 })
 export class ScAutoSearchForm {
   @Prop() autoSearchFormClass = '';
-  @Prop() inputCaptionValue = '';
-  @Prop() labelForInput = 'Search';
-  @Prop() placeholderValue = 'Search here';
-  @Prop() rightToLeftOrientation = false;
-  @Prop() searchContainerClass = '';
   @Prop() clearInput: () => void = () => {}; // Default assignment ensures no undefined error
   @Prop() config: CoreConfigSDK = {
     apiKey: '',
     endpointURL: '',
     index: [],
   };
+  @Prop() inputCaptionValue = '';
+  @Prop() labelForInput = 'Search';
+  @Prop() placeholderValue = 'Search here';
+  @Prop() rightToLeftOrientation = false;
+  @Prop() searchContainerClass = '';
 
   /**
    * Event emitted when the search query changes
    */
   @Event() querySubmit: EventEmitter<string>;
 
-  @State() query = '';
   @State() error = false;
+  @State() query = '';
   @State() searchResults = '';
 
   private debounceTimeout: ReturnType<typeof setTimeout> | null = null;

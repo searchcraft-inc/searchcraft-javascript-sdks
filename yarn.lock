@@ -900,6 +900,9 @@
     argparse "~1.0.9"
     string-argv "~0.3.1"
 
+"@searchcraft/core@file:packages/javascript-sdk/.yalc/@searchcraft/core":
+  version "0.1.1"
+
 "@sinclair/typebox@^0.27.8":
   version "0.27.8"
   resolved "https://registry.yarnpkg.com/@sinclair/typebox/-/typebox-0.27.8.tgz#6667fac16c436b5434a387a34dedb013198f6e6e"
