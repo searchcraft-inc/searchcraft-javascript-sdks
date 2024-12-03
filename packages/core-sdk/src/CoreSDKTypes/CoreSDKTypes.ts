@@ -54,11 +54,30 @@ export interface SearchDoc {
 }
 
 /**
- * * Parameters required for Search request
+ * * Parameters required for the Search request
  */
 export type SearchParams = {
-  query: string;
+  /**
+   * The search mode, which can be either 'fuzzy' or 'normal'.
+   */
   mode: 'fuzzy' | 'normal';
+
+  /**
+   * The field to order the results by (e.g., 'date_published', 'title', etc.).
+   * Optional parameter.
+   */
+  order_by?: string;
+
+  /**
+   * The search query provided by the user.
+   */
+  query: string;
+
+  /**
+   * The sort order, which can be either 'asc' or 'desc'.
+   * Optional parameter.
+   */
+  sort?: 'asc' | 'desc';
 };
 
 /**

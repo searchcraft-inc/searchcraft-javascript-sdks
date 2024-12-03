@@ -2,7 +2,7 @@
   "name": "@searchcraft/core",
   "private": true,
   "description": "The core functionality shared by SearchCraft's SDKs.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -16,9 +16,6 @@
   },
   "devDependencies": {
     "@types/node": "^22.5.0",
-    "typescript": "^5.5.3",
-    "vite": "^5.4.1",
-    "vite-plugin-dts": "^4.0.3",
-    "vitest": "^2.0.5"
+    "typescript": "^5.5.3"
   }
 }
