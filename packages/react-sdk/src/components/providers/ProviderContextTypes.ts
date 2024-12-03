@@ -24,24 +24,55 @@ export interface ProviderContextTypes {
   mode: 'fuzzy' | 'normal';
 
   /**
+   * The field to order the results by (e.g., 'date_published', 'title', etc.).
+   * Optional parameter.
+   */
+  order_by?: string;
+
+  /**
    * Input value given by the user to query the DB by.
    */
   query: string;
 
   /**
-   * Setter function to update the value being sent to the SDK.
+   * Setter function to update the search value being sent to the SDK.
    */
   setQuery: Dispatch<SetStateAction<string>>;
 
   /**
-   * Function for searching that requires search mode and search type.
+   * Setter function to update the search mode value being sent to the SDK.
    */
-  search: (query: string, mode: 'fuzzy' | 'normal') => void;
+  setMode: Dispatch<SetStateAction<'fuzzy' | 'normal'>>;
 
   /**
-   * Object that is returned from the Searchcraft API when a search request has resolved
+   * Setter function to update the search results order value being sent to the SDK.
+   */
+  setOrderResultsBy: Dispatch<SetStateAction<string>>;
+
+  /**
+   * Setter function to update the search results sort value being sent to the SDK.
+   */
+  setSortResultsBy: Dispatch<SetStateAction<'asc' | 'desc' | undefined>>;
+
+  /**
+   * Function for searching that requires search mode and search type.
+   */
+  search: (
+    query: string,
+    mode: 'fuzzy' | 'normal',
+    order_by?: string,
+    sort?: string,
+  ) => void;
+
+  /**
+   * Object that is returned from the Searchcraft API when a search request has resolved.
    */
   searchResults?: SearchResult | SearchError | null;
+
+  /**
+   * String value for how the data should be sorted.
+   */
+  sort?: string;
 }
 
 export type ThemeOptionType = 'light' | 'dark';

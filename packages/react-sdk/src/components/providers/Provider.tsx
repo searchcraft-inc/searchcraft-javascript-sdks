@@ -33,7 +33,12 @@ const Provider = ({
   searchcraft,
   debug = false,
 }: SearchcraftProviderProps) => {
+  const [mode, setMode] = useState<'fuzzy' | 'normal'>('fuzzy');
   const [query, setQuery] = useState<string>('');
+  const [orderResultsBy, setOrderResultsBy] = useState<string>('');
+  const [sortResultsBy, setSortResultsBy] = useState<
+    'asc' | 'desc' | undefined
+  >('asc');
   const [isRequesting, setIsRequesting] = useState<boolean>(false);
   const [searchResults, setSearchResults] = useState<
     SearchResult | SearchError | null
@@ -69,7 +74,12 @@ const Provider = ({
     log(LogLevel.INFO, `Starting search with query: "${query}"`);
     setIsRequesting(true);
     try {
-      const results = await searchcraft.search({ query, mode: 'fuzzy' });
+      const results = await searchcraft.search({
+        query,
+        mode,
+        order_by: orderResultsBy,
+        sort: sortResultsBy,
+      });
       setSearchResults(results);
       log(LogLevel.DEBUG, `Search results: ${JSON.stringify(results)}`);
     } catch (error) {
@@ -96,10 +106,15 @@ const Provider = ({
     index: searchcraft.config.index,
     isRequesting,
     mode: 'fuzzy',
+    order_by: orderResultsBy,
     query,
     search,
     searchResults,
+    setMode,
+    setOrderResultsBy,
     setQuery,
+    sort: sortResultsBy,
+    setSortResultsBy,
   };
 
   const toggleTheme = useCallback(() => {

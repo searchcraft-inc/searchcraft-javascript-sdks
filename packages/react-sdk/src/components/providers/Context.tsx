@@ -10,9 +10,14 @@ const defaultContext: SearchcraftContextType = {
   index: [''],
   isRequesting: false,
   mode: 'fuzzy',
+  order_by: '',
   query: '',
-  setQuery: (query) => query,
   search: async () => null,
+  setMode: (mode) => mode,
+  setOrderResultsBy: (order) => order,
+  setQuery: (query) => query,
+  setSortResultsBy: (sort) => sort,
+  sort: 'desc',
 };
 
 export const SearchcraftContext =

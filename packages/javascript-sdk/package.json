@@ -1,7 +1,9 @@
 {
   "name": "@searchcraft/javascript-sdk",
+  "private": false,
   "version": "0.0.1",
   "description": "Searchcraft Javascript SDK",
+  "author": "Searchcraft",
   "license": "Apache-2.0",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
