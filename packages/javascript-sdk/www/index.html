@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Search and Display Results</title> <link rel="modulepreload" href="/build/p-06b104ac.js"><link rel="modulepreload" href="/build/p-1ef23e15.js"><link rel="modulepreload" href="/build/p-329c3f66.js"><link rel="modulepreload" href="/build/p-5cdc6210.js"><link rel="modulepreload" href="/build/p-6f0eaec6.js"><script type="module" src="/build/p-06b104ac.js" data-stencil data-resources-url="/build/" data-stencil-namespace="searchcraft-javascript-sdk"></script> <script type="module">
+<!doctype html><html lang="en"><head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Search and Display Results</title> <script type="module" src="/build/searchcraft-javascript-sdk.esm.js" data-stencil></script> <script type="module">
     document.addEventListener('DOMContentLoaded', () => {
       // Define the configuration object
       const config = {
@@ -28,4 +28,13 @@
     }
     .resultsContainer {
       margin-top: 20px;
-    }</style> </head> <body> <div class="container"> <searchcraft-auto-search-form custom-styles-for-input="{&quot;borderRadius&quot;: &quot;100px&quot;, &quot;padding&quot;: &quot;16px&quot;, &quot;paddingLeft&quot;: &quot;32px&quot;, &quot;width&quot;: &quot;1280px&quot;, &quot;placeholderFontSize&quot;: &quot;28px&quot;}"></searchcraft-auto-search-form></div> <div class="resultsContainer"> <searchcraft-base-search-results></searchcraft-base-search-results></div> </body></html>
+    }</style> </head> <body> <div class="container"> <searchcraft-auto-search-form custom-styles-for-input="{&quot;borderRadius&quot;: &quot;100px&quot;, &quot;padding&quot;: &quot;16px&quot;, &quot;paddingLeft&quot;: &quot;32px&quot;, &quot;width&quot;: &quot;1280px&quot;, &quot;placeholderFontSize&quot;: &quot;28px&quot;}"></searchcraft-auto-search-form></div> <div class="resultsContainer"> <searchcraft-base-search-results></searchcraft-base-search-results></div> <script>
+if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+  // auto-unregister service worker during dev mode
+  navigator.serviceWorker.getRegistration().then(function(registration) {
+    if (registration) {
+      registration.unregister().then(function() { location.reload(true) });
+    }
+  });
+}
+</script></body></html>
