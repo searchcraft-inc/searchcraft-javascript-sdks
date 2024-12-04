@@ -53,8 +53,6 @@ export class SearchcraftAutoSearchForm {
 
   handleInputChange = (event: ScInputCustomEvent<string>) => {
     this.query = event.detail;
-    console.log('Input changed:', this.query);
-
     this.querySubmit.emit(this.query);
 
     // Clear the previous debounce timeout
@@ -86,8 +84,6 @@ export class SearchcraftAutoSearchForm {
   };
 
   private runSearch = async () => {
-    console.log('Running search with query:', this.query);
-
     if (this.query.trim() === '') {
       this.error = true;
       this.searchResults = '';
@@ -98,16 +94,13 @@ export class SearchcraftAutoSearchForm {
       try {
         await this.searchStore.search();
         this.searchResults = JSON.stringify(this.searchStore.searchResults);
-        console.log('Search results:', this.searchResults);
       } catch (error) {
-        console.error('Search error:', error);
         this.error = true;
       }
     }
   };
 
   handleFormSubmit = async (event: Event) => {
-    console.log('Form submitted');
     event.preventDefault();
     await this.runSearch();
   };

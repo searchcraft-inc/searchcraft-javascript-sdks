@@ -14,7 +14,7 @@
 | `config`                 | --                          |             | `CoreConfigSDK`                      | `{     apiKey: '',     endpointURL: '',     index: [],   }` |
 | `customStylesForInput`   | `custom-styles-for-input`   |             | `string \| { [x: string]: string; }` | `{}`                                                        |
 | `inputCaptionValue`      | `input-caption-value`       |             | `string`                             | `''`                                                        |
-| `labelForInput`          | `label-for-input`           |             | `string`                             | `'Search'`                                                  |
+| `labelForInput`          | `label-for-input`           |             | `string`                             | `''`                                                        |
 | `placeholderValue`       | `placeholder-value`         |             | `string`                             | `'Search here'`                                             |
 | `rightToLeftOrientation` | `right-to-left-orientation` |             | `boolean`                            | `false`                                                     |
 | `searchContainerClass`   | `search-container-class`    |             | `string`                             | `''`                                                        |
@@ -31,12 +31,16 @@
 
 ### Depends on
 
+- [searchcraft-input-label](../searchcraft-input-label)
 - [searchcraft-input](../searchcraft-input)
+- [searchcraft-error-message](../searchcraft-error-message)
 
 ### Graph
 ```mermaid
 graph TD;
+  searchcraft-auto-search-form --> searchcraft-input-label
   searchcraft-auto-search-form --> searchcraft-input
+  searchcraft-auto-search-form --> searchcraft-error-message
   searchcraft-input --> searchcraft-input-caption
   searchcraft-input --> searchcraft-clear-input-button
   searchcraft-input --> searchcraft-input-icon
