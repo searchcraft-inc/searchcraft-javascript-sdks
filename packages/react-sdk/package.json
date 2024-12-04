@@ -3,7 +3,7 @@
   "private": false,
   "author": "Searchcraft",
   "version": "0.1.4",
-  "description": "SearchCraft React SDK.",
+  "description": "Searchcraft React SDK.",
   "type": "module",
   "license": "Apache-2.0",
   "keywords": ["searchcraft"],
