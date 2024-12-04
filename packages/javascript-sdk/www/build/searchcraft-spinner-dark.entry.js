@@ -7,7 +7,7 @@ const SearchcraftSpinnerDark = class {
         registerInstance(this, hostRef);
     }
     render() {
-        return (h("div", { key: '70b727f1e62f34a6c9c385f6907b3745ac05ba46', class: 'spinnerContainer' }, h("div", { key: '91fbb736910dfc3e5df697d26ff410c128a12436', class: 'spinnerDark' })));
+        return (h("div", { key: '60b629930c2e2795236f6768b40c95ce9390e882', class: 'spinnerContainer' }, h("div", { key: 'bfef3329f2e81ecf6538738ac0213da6259dd1c3', class: 'spinnerDark' })));
     }
 };
 SearchcraftSpinnerDark.style = searchcraftSpinnerDarkModuleCss;

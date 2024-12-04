@@ -22,13 +22,13 @@ import { useSearchcraftStore } from '@provider/store';
 })
 export class SearchcraftAutoSearchForm {
   @Prop() autoSearchFormClass = '';
-  @Prop() clearInput: () => void = () => {}; // Default assignment ensures no undefined error
+  @Prop() clearInput: () => void = () => {};
   @Prop() config: CoreConfigSDK = {
     apiKey: '',
     endpointURL: '',
     index: [],
   };
-  @Prop() customStylesForInput: string | Record<string, string> = {}; // Accept string or object
+  @Prop() customStylesForInput: string | Record<string, string> = {};
   @Prop() inputCaptionValue = '';
   @Prop() labelForInput = '';
   @Prop() placeholderValue = 'Search here';
@@ -43,29 +43,36 @@ export class SearchcraftAutoSearchForm {
 
   private debounceTimeout: ReturnType<typeof setTimeout> | null = null;
   private debounceDelay = 300; // 300ms debounce delay
+  private searchStore = useSearchcraftStore.getState();
 
-  componentDidLoad = () => {
+  componentDidLoad() {
     const searchcraft = new SearchcraftCore(this.config);
     this.searchStore.initialize(searchcraft, true);
-  };
-
-  private searchStore = useSearchcraftStore.getState();
+    console.log('Component initialized');
+  }
 
   handleInputChange = (event: ScInputCustomEvent<string>) => {
     this.query = event.detail;
+    console.log('Input changed:', this.query);
+
     this.querySubmit.emit(this.query);
 
+    // Clear the previous debounce timeout
     if (this.debounceTimeout) {
       clearTimeout(this.debounceTimeout);
     }
 
+    // Set a new debounce timeout
     this.debounceTimeout = setTimeout(() => {
+      console.log('Debounced search triggered');
       this.runSearch();
     }, this.debounceDelay);
   };
 
   handleClearInput = () => {
     this.query = '';
+    console.log('Input cleared');
+
     if (typeof this.clearInput === 'function') {
       this.clearInput();
     }
@@ -79,18 +86,28 @@ export class SearchcraftAutoSearchForm {
   };
 
   private runSearch = async () => {
+    console.log('Running search with query:', this.query);
+
     if (this.query.trim() === '') {
       this.error = true;
       this.searchResults = '';
     } else {
       this.error = false;
       this.searchStore.setQuery(this.query);
-      await this.searchStore.search();
-      this.searchResults = JSON.stringify(this.searchStore.searchResults);
+
+      try {
+        await this.searchStore.search();
+        this.searchResults = JSON.stringify(this.searchStore.searchResults);
+        console.log('Search results:', this.searchResults);
+      } catch (error) {
+        console.error('Search error:', error);
+        this.error = true;
+      }
     }
   };
 
   handleFormSubmit = async (event: Event) => {
+    console.log('Form submitted');
     event.preventDefault();
     await this.runSearch();
   };

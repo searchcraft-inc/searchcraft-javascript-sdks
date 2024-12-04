@@ -67,7 +67,12 @@ export class SearchcraftInput {
           : 'inputDarkLTR',
       'searchcraft-input',
     );
+
     const validatedCustomStyles = parseCustomStyles(this.customStyles);
+
+    const placeholderStyle = {
+      fontSize: validatedCustomStyles.placeholderFontSize || '16px',
+    };
     return (
       <div
         class={classNames(
@@ -87,6 +92,13 @@ export class SearchcraftInput {
               value={this.query}
               style={validatedCustomStyles}
             />
+            <style>
+              {`
+                #searchcraft-input-id::placeholder {
+                  font-size: ${placeholderStyle.fontSize};
+                }
+              `}
+            </style>
             {this.inputCaptionValue && (
               <searchcraft-input-caption
                 inputCaptionClassName={this.inputCaptionClassName}
@@ -106,7 +118,7 @@ export class SearchcraftInput {
             />
           </Fragment>
         ) : (
-          <Fragment>
+          <div class='inputWrapper'>
             <searchcraft-input-icon
               error={this.error}
               rightToLeftOrientation={this.rightToLeftOrientation}
@@ -120,6 +132,13 @@ export class SearchcraftInput {
               value={this.query}
               style={validatedCustomStyles}
             />
+            <style>
+              {`
+                #searchcraft-input-id::placeholder {
+                  font-size: ${placeholderStyle.fontSize};
+                }
+              `}
+            </style>
             {this.inputCaptionValue && (
               <searchcraft-input-caption
                 inputCaptionClassName={this.inputCaptionClassName}
@@ -133,7 +152,7 @@ export class SearchcraftInput {
                 rightToLeftOrientation={this.rightToLeftOrientation}
               />
             )}
-          </Fragment>
+          </div>
         )}
       </div>
     );

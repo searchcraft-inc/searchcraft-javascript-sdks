@@ -6,6 +6,7 @@
 
 @mixin input-container-base {
   position: relative;
+  width: 100%;
 }
 
 @mixin input-base {
@@ -15,6 +16,7 @@
   outline: none;
   padding-bottom: 15px;
   padding-top: 15px;
+  width: 100%;
 
   &::placeholder {
     font-family: var(--font-stack);
@@ -128,4 +130,11 @@
 .inputErrorDarkRTL {
   @include input-error-base-dark;
   @include align-RTL;
+}
+
+.inputWrapper {
+  align-items: center;
+  display: flex;
+  position: relative;
+  width: 100%;
 }

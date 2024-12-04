@@ -2,7 +2,7 @@ import { r as registerInstance, a as createEvent, h } from './index-be6bffea.js'
 import { c as classNames } from './index-d6567b9c.js';
 import './_commonjsHelpers-63cbe26c.js';
 
-const searchcraftClearInputButtonModuleCss = ":root{--font-stack:Helvetica, Arial, sans-serif}.inputClearButtonLTR{align-items:center;background:none;border:none;display:flex;height:20px;justify-content:center;padding:0;position:absolute;right:25px;top:11px;width:20px}.inputClearButtonRTL{align-items:center;background:none;border:none;display:flex;height:20px;justify-content:center;left:25px;padding:0;position:absolute;top:11px;width:20px}";
+const searchcraftClearInputButtonModuleCss = ":root{--font-stack:Helvetica, Arial, sans-serif}.inputClearButtonLTR{align-items:center;background:none;border:none;display:flex;height:20px;justify-content:center;padding:0;position:absolute;right:25px;top:50%;transform:translateY(-50%);width:20px}.inputClearButtonRTL{align-items:center;background:none;border:none;display:flex;height:20px;justify-content:center;left:25px;padding:0;position:absolute;top:50%;transform:translateY(-50%);width:20px}";
 
 const SearchcraftClearInputButton = class {
     constructor(hostRef) {
