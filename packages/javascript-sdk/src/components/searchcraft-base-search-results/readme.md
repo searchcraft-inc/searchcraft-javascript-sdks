@@ -9,15 +9,16 @@
 
 ### Depends on
 
-- [sc-base-search-result](../sc-base-search-result)
-- [sc-error-message](../sc-error-message)
+- [searchcraft-base-search-result](../searchcraft-base-search-result)
+- [searchcraft-error-message](../searchcraft-error-message)
 
 ### Graph
 ```mermaid
 graph TD;
-  sc-base-search-results --> sc-base-search-result
-  sc-base-search-results --> sc-error-message
-  style sc-base-search-results fill:#f9f,stroke:#333,stroke-width:4px
+  searchcraft-base-search-results --> searchcraft-base-search-result
+  searchcraft-base-search-results --> searchcraft-error-message
+  searchcraft-base-search-result --> searchcraft-clear-icon-set
+  style searchcraft-base-search-results fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

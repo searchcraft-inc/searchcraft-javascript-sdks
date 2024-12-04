@@ -42,7 +42,7 @@ const SearchcraftInput = class {
             : this.isLightTheme
                 ? 'inputLightLTR'
                 : 'inputDarkLTR', 'searchcraft-input');
-        return (h("div", { key: 'e01ddc1b195f5fc47ec2cbedddec059515e9f0d0', class: classNames(containerClassName, this.formClassName, 'searchcraft-input-form') }, this.rightToLeftOrientation ? (h(Fragment, null, h("input", { class: classNames(this.error
+        return (h("div", { key: '7d7c70ff768651412bcae0287aeb45757d2b6312', class: classNames(containerClassName, this.formClassName, 'searchcraft-input-form') }, this.rightToLeftOrientation ? (h(Fragment, null, h("input", { class: classNames(this.error
                 ? this.isLightTheme
                     ? 'inputErrorLightRTL'
                     : 'inputErrorDarkRTL'

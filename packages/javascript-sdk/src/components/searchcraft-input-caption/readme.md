@@ -19,13 +19,13 @@
 
 ### Used by
 
- - [sc-input](../sc-input)
+ - [searchcraft-input](../searchcraft-input)
 
 ### Graph
 ```mermaid
 graph TD;
-  sc-input --> sc-input-caption
-  style sc-input-caption fill:#f9f,stroke:#333,stroke-width:4px
+  searchcraft-input --> searchcraft-input-caption
+  style searchcraft-input-caption fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

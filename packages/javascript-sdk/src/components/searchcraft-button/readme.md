@@ -26,18 +26,18 @@
 
 ### Used by
 
- - [sc-base-search-form](../sc-base-search-form)
+ - [searchcraft-base-search-form](../searchcraft-base-search-form)
 
 ### Depends on
 
-- [sc-spinner-dark](../sc-spinner-dark)
+- [searchcraft-spinner-dark](../searchcraft-spinner-dark)
 
 ### Graph
 ```mermaid
 graph TD;
-  sc-button --> sc-spinner-dark
-  sc-base-search-form --> sc-button
-  style sc-button fill:#f9f,stroke:#333,stroke-width:4px
+  searchcraft-button --> searchcraft-spinner-dark
+  searchcraft-base-search-form --> searchcraft-button
+  style searchcraft-button fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

@@ -17,13 +17,13 @@
 
 ### Used by
 
- - [sc-base-search-form](../sc-base-search-form)
+ - [searchcraft-base-search-form](../searchcraft-base-search-form)
 
 ### Graph
 ```mermaid
 graph TD;
-  sc-base-search-form --> sc-input-label
-  style sc-input-label fill:#f9f,stroke:#333,stroke-width:4px
+  searchcraft-base-search-form --> searchcraft-input-label
+  style searchcraft-input-label fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

@@ -30,16 +30,20 @@
 
 ### Depends on
 
-- [sc-input](../sc-input)
+- [searchcraft-input](../searchcraft-input)
 
 ### Graph
 ```mermaid
 graph TD;
-  sc-auto-search-form --> sc-input
-  sc-input --> sc-input-caption
-  sc-input --> sc-clear-input-button
-  sc-input --> sc-input-icon
-  style sc-auto-search-form fill:#f9f,stroke:#333,stroke-width:4px
+  searchcraft-auto-search-form --> searchcraft-input
+  searchcraft-input --> searchcraft-input-caption
+  searchcraft-input --> searchcraft-clear-input-button
+  searchcraft-input --> searchcraft-input-icon
+  searchcraft-clear-input-button --> searchcraft-spinner-light
+  searchcraft-clear-input-button --> searchcraft-spinner-dark
+  searchcraft-clear-input-button --> searchcraft-clear-icon-set
+  searchcraft-input-icon --> searchcraft-search-icon-set
+  style searchcraft-auto-search-form fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

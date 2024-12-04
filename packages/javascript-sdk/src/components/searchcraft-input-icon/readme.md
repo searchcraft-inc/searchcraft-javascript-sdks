@@ -17,13 +17,18 @@
 
 ### Used by
 
- - [sc-input](../sc-input)
+ - [searchcraft-input](../searchcraft-input)
+
+### Depends on
+
+- [searchcraft-search-icon-set](../../assets)
 
 ### Graph
 ```mermaid
 graph TD;
-  sc-input --> sc-input-icon
-  style sc-input-icon fill:#f9f,stroke:#333,stroke-width:4px
+  searchcraft-input-icon --> searchcraft-search-icon-set
+  searchcraft-input --> searchcraft-input-icon
+  style searchcraft-input-icon fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

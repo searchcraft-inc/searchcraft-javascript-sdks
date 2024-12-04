@@ -26,13 +26,18 @@
 
 ### Used by
 
- - [sc-base-search-results](../sc-base-search-results)
+ - [searchcraft-base-search-results](../searchcraft-base-search-results)
+
+### Depends on
+
+- [searchcraft-clear-icon-set](../../assets)
 
 ### Graph
 ```mermaid
 graph TD;
-  sc-base-search-results --> sc-base-search-result
-  style sc-base-search-result fill:#f9f,stroke:#333,stroke-width:4px
+  searchcraft-base-search-result --> searchcraft-clear-icon-set
+  searchcraft-base-search-results --> searchcraft-base-search-result
+  style searchcraft-base-search-result fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

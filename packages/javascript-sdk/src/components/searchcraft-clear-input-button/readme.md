@@ -24,13 +24,22 @@
 
 ### Used by
 
- - [sc-input](../sc-input)
+ - [searchcraft-input](../searchcraft-input)
+
+### Depends on
+
+- [searchcraft-spinner-light](../searchcraft-spinner-light)
+- [searchcraft-spinner-dark](../searchcraft-spinner-dark)
+- [searchcraft-clear-icon-set](../../assets)
 
 ### Graph
 ```mermaid
 graph TD;
-  sc-input --> sc-clear-input-button
-  style sc-clear-input-button fill:#f9f,stroke:#333,stroke-width:4px
+  searchcraft-clear-input-button --> searchcraft-spinner-light
+  searchcraft-clear-input-button --> searchcraft-spinner-dark
+  searchcraft-clear-input-button --> searchcraft-clear-icon-set
+  searchcraft-input --> searchcraft-clear-input-button
+  style searchcraft-clear-input-button fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

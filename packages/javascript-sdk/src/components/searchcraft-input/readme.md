@@ -31,24 +31,28 @@
 
 ### Used by
 
- - [sc-auto-search-form](../sc-auto-search-form)
- - [sc-base-search-form](../sc-base-search-form)
+ - [searchcraft-auto-search-form](../searchcraft-auto-search-form)
+ - [searchcraft-base-search-form](../searchcraft-base-search-form)
 
 ### Depends on
 
-- [sc-input-caption](../sc-input-caption)
-- [sc-clear-input-button](../sc-clear-input-button)
-- [sc-input-icon](../sc-input-icon)
+- [searchcraft-input-caption](../searchcraft-input-caption)
+- [searchcraft-clear-input-button](../searchcraft-clear-input-button)
+- [searchcraft-input-icon](../searchcraft-input-icon)
 
 ### Graph
 ```mermaid
 graph TD;
-  sc-input --> sc-input-caption
-  sc-input --> sc-clear-input-button
-  sc-input --> sc-input-icon
-  sc-auto-search-form --> sc-input
-  sc-base-search-form --> sc-input
-  style sc-input fill:#f9f,stroke:#333,stroke-width:4px
+  searchcraft-input --> searchcraft-input-caption
+  searchcraft-input --> searchcraft-clear-input-button
+  searchcraft-input --> searchcraft-input-icon
+  searchcraft-clear-input-button --> searchcraft-spinner-light
+  searchcraft-clear-input-button --> searchcraft-spinner-dark
+  searchcraft-clear-input-button --> searchcraft-clear-icon-set
+  searchcraft-input-icon --> searchcraft-search-icon-set
+  searchcraft-auto-search-form --> searchcraft-input
+  searchcraft-base-search-form --> searchcraft-input
+  style searchcraft-input fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

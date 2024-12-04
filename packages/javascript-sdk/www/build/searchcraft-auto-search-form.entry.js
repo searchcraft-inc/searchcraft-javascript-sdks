@@ -87,7 +87,7 @@ const SearchcraftAutoSearchForm = class {
     }
     render() {
         const formClass = this.rightToLeftOrientation ? 'formRTL' : 'formLTR';
-        return (h("form", { key: '78c766ff0837c84ca34f2c41cb24033217bc9a06', class: `${formClass}`, onSubmit: this.handleFormSubmit }, h("label", { key: '7a5a41ee27e32a4563b35a117a38ded38b5c5881' }, this.labelForInput), h("div", { key: 'a2c42a9328ee678559b4fb906b0541a5b9cbf9dd', class: 'searchContainer' }, h("searchcraft-input", { key: '04cc28d38f4bed56d37b253b8ba25d72f8d9f83a', "placeholder-value": this.placeholderValue, query: this.query, "input-caption-value": this.inputCaptionValue, "right-to-left-orientation": this.rightToLeftOrientation, onSearchInputChange: this.handleInputChange, onClearInput: this.handleClearInput })), this.error && h("p", { key: '1335fd7c16d367515d8688ee44af58145fb5b156', class: 'error' }, "Please enter a search query.")));
+        return (h("form", { key: '7c9449de779f78de65b25ef4335f01f989913673', class: `${formClass}`, onSubmit: this.handleFormSubmit }, h("label", { key: '6c3a67f6474e2bf0513d711326a22e2bcfad7ec0' }, this.labelForInput), h("div", { key: 'f14822bc32f119918a9185f93d4a2e531927fcc4', class: 'searchContainer' }, h("searchcraft-input", { key: '498c23c013fe438136e2db7f070f263813e3d597', "placeholder-value": this.placeholderValue, query: this.query, "input-caption-value": this.inputCaptionValue, "right-to-left-orientation": this.rightToLeftOrientation, onSearchInputChange: this.handleInputChange, onClearInput: this.handleClearInput })), this.error && h("p", { key: '4e0c4dba2386790d9bdbd8dbec863fed740ec8fd', class: 'error' }, "Please enter a search query.")));
     }
 };
 SearchcraftAutoSearchForm.style = searchcraftAutoSearchFormModuleCss;

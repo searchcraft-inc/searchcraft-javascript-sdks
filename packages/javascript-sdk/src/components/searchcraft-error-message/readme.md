@@ -17,15 +17,15 @@
 
 ### Used by
 
- - [sc-base-search-form](../sc-base-search-form)
- - [sc-base-search-results](../sc-base-search-results)
+ - [searchcraft-base-search-form](../searchcraft-base-search-form)
+ - [searchcraft-base-search-results](../searchcraft-base-search-results)
 
 ### Graph
 ```mermaid
 graph TD;
-  sc-base-search-form --> sc-error-message
-  sc-base-search-results --> sc-error-message
-  style sc-error-message fill:#f9f,stroke:#333,stroke-width:4px
+  searchcraft-base-search-form --> searchcraft-error-message
+  searchcraft-base-search-results --> searchcraft-error-message
+  style searchcraft-error-message fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------
