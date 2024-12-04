@@ -2,9 +2,9 @@ import { r as registerInstance, a as createEvent, h } from './index-b6929a4b.js'
 import { c as classNames } from './index-d6567b9c.js';
 import './_commonjsHelpers-63cbe26c.js';
 
-const scClearInputButtonModuleCss = ":root{--font-stack:Helvetica, Arial, sans-serif}.inputClearButtonLTR{align-items:center;background:none;border:none;display:flex;height:20px;justify-content:center;padding:0;position:absolute;right:25px;top:11px;width:20px}.inputClearButtonRTL{align-items:center;background:none;border:none;display:flex;height:20px;justify-content:center;left:25px;padding:0;position:absolute;top:11px;width:20px}";
+const searchcraftClearInputButtonModuleCss = ":root{--font-stack:Helvetica, Arial, sans-serif}.inputClearButtonLTR{align-items:center;background:none;border:none;display:flex;height:20px;justify-content:center;padding:0;position:absolute;right:25px;top:11px;width:20px}.inputClearButtonRTL{align-items:center;background:none;border:none;display:flex;height:20px;justify-content:center;left:25px;padding:0;position:absolute;top:11px;width:20px}";
 
-const ScClearInputButton = class {
+const SearchcraftClearInputButton = class {
     constructor(hostRef) {
         registerInstance(this, hostRef);
         this.clearInput = createEvent(this, "clearInput", 7);
@@ -24,8 +24,8 @@ const ScClearInputButton = class {
         return this.rightToLeftOrientation ? (h("button", { class: classNames('inputClearButtonRTL', '.sc-clear-input-button-rtl'), onClick: this.handleClearClick, type: 'button' }, this.isRequesting ? (this.isLightTheme ? (h("searchcraft-spinner-light", null)) : (h("searchcraft-spinner-dark", null))) : this.isLightTheme ? (h("searchcraft-clear-icon-set", { type: 'clear-light' })) : (h("searchcraft-clear-icon-set", { type: 'clear-dark' })))) : (h("button", { class: classNames('inputClearButtonLTR', '.sc-clear-input-button-ltr'), onClick: this.handleClearClick, type: 'button' }, this.isRequesting ? (this.isLightTheme ? (h("searchcraft-spinner-light", null)) : (h("searchcraft-spinner-dark", null))) : this.isLightTheme ? (h("searchcraft-clear-icon-set", { type: 'clear-light' })) : (h("searchcraft-clear-icon-set", { type: 'clear-dark' }))));
     }
 };
-ScClearInputButton.style = scClearInputButtonModuleCss;
+SearchcraftClearInputButton.style = searchcraftClearInputButtonModuleCss;
 
-export { ScClearInputButton as sc_clear_input_button };
+export { SearchcraftClearInputButton as searchcraft_clear_input_button };
 
-//# sourceMappingURL=sc-clear-input-button.entry.js.map
+//# sourceMappingURL=searchcraft-clear-input-button.entry.js.map

@@ -16,7 +16,7 @@ const ScInputLabel = class {
     }
     render() {
         const labelStyle = this.isLightTheme ? 'labelLight' : 'labelDark';
-        return (h("label", { key: 'a4ed0dfde3c0439c30c8b2515a9b284911ffbac8', class: classNames(labelStyle, this.inputLabelClassName), htmlFor: 'searchcraft-input-id' }, this.label));
+        return (h("label", { key: '22a3435206640f4eb63085fbd5dc1b45ce14f6d6', class: classNames(labelStyle, this.inputLabelClassName), htmlFor: 'searchcraft-input-id' }, this.label));
     }
 };
 ScInputLabel.style = scInputLabelModuleCss;

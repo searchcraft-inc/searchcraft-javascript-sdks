@@ -12,7 +12,7 @@ const ScErrorMessage = class {
     }
     render() {
         const errorMessageStyle = this.theme === 'light' ? 'errorMessageLight' : 'errorMessageDark';
-        return (h("p", { key: '2b6df5f391386e6a0bb4abccb1ecfdce1d5c3ff3', class: classNames(errorMessageStyle) }, this.errorMessage || 'Search term is required.'));
+        return (h("p", { key: '1da83ddff1932c999be5a0db763726bf55dee456', class: classNames(errorMessageStyle) }, this.errorMessage || 'Search term is required.'));
     }
 };
 ScErrorMessage.style = scErrorMessageModuleCss;

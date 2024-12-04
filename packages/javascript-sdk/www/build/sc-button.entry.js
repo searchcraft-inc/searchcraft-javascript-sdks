@@ -23,7 +23,7 @@ const ScButton = class {
     }
     render() {
         const buttonStyle = this.getButtonStyle();
-        return (h(Fragment, { key: '2b9ad3f3dc49251ff7c8979d0d49dfeb95553f1f' }, this.iconOnly ? (h("button", { class: classNames(buttonStyle, 'searchcraft-button'), onClick: this.handleClick, type: 'submit' }, this.isRequesting ? h("sc-spinner-dark", null) : this.iconElement)) : (h("button", { class: classNames(buttonStyle, 'searchcraft-button'), onClick: this.handleClick, type: 'submit' }, this.iconPosition === 'left' && this.isRequesting ? (h("div", { class: 'spinner-margin-right' }, h("sc-spinner-dark", null))) : (this.iconElement), h("span", { class: classNames(this.isRequesting && 'button-label', 'searchcraft-button-label') }, this.label)))));
+        return (h(Fragment, { key: '26a8308aef626458ccf42d4fa01f53cdc9bc7882' }, this.iconOnly ? (h("button", { class: classNames(buttonStyle, 'searchcraft-button'), onClick: this.handleClick, type: 'submit' }, this.isRequesting ? h("sc-spinner-dark", null) : this.iconElement)) : (h("button", { class: classNames(buttonStyle, 'searchcraft-button'), onClick: this.handleClick, type: 'submit' }, this.iconPosition === 'left' && this.isRequesting ? (h("div", { class: 'spinner-margin-right' }, h("sc-spinner-dark", null))) : (this.iconElement), h("span", { class: classNames(this.isRequesting && 'button-label', 'searchcraft-button-label') }, this.label)))));
     }
 };
 ScButton.style = scButtonModuleCss;
