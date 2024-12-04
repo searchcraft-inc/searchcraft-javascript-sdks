@@ -8,11 +8,6 @@ import {
 } from '@stencil/core';
 import classNames from 'classnames';
 
-import {
-  ClearInputIconLight,
-  ClearInputIconDark,
-} from '@assets/ClearInputIcon';
-
 import { ScSpinnerDark } from '@components/sc-spinner-dark/sc-spinner-dark';
 import { ScSpinnerLight } from '@components/sc-spinner-light/sc-spinner-light';
 
@@ -44,7 +39,7 @@ export class ScClearInputButton {
     return this.rightToLeftOrientation ? (
       <button
         class={classNames('inputClearButtonRTL', '.sc-clear-input-button-rtl')}
-        onClick={this.handleClearClick} // Use the handler
+        onClick={this.handleClearClick}
         type='button'
       >
         {this.isRequesting ? (
@@ -54,15 +49,15 @@ export class ScClearInputButton {
             <ScSpinnerDark />
           )
         ) : this.isLightTheme ? (
-          <ClearInputIconLight />
+          <searchcraft-clear-icon-set type='clear-light' />
         ) : (
-          <ClearInputIconDark />
+          <searchcraft-clear-icon-set type='clear-dark' />
         )}
       </button>
     ) : (
       <button
         class={classNames('inputClearButtonLTR', '.sc-clear-input-button-ltr')}
-        onClick={this.handleClearClick} // Use the handler
+        onClick={this.handleClearClick}
         type='button'
       >
         {this.isRequesting ? (
@@ -72,9 +67,9 @@ export class ScClearInputButton {
             <ScSpinnerDark />
           )
         ) : this.isLightTheme ? (
-          <ClearInputIconLight />
+          <searchcraft-clear-icon-set type='clear-light' />
         ) : (
-          <ClearInputIconDark />
+          <searchcraft-clear-icon-set type='clear-dark' />
         )}
       </button>
     );

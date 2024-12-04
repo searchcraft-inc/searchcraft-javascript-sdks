@@ -87,6 +87,20 @@ export namespace Components {
     }
     interface ScSpinnerLight {
     }
+    interface SearchcraftButtonIcon {
+    }
+    interface SearchcraftClearIconSet {
+        /**
+          * Type of the icon to display. Options: 'clear-light', 'clear-dark', 'arrow-light', 'arrow-dark'
+         */
+        "type": 'clear-light' | 'clear-dark' | 'arrow-light' | 'arrow-dark';
+    }
+    interface SearchcraftSearchIconSet {
+        /**
+          * Type of the icon to display. Options: ''search-light', search-dark', 'error-light', 'error-dark'
+         */
+        "type": 'search-light' | 'search-dark' | 'error-light' | 'error-dark';
+    }
 }
 export interface ScAutoSearchFormCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -243,6 +257,24 @@ declare global {
         prototype: HTMLScSpinnerLightElement;
         new (): HTMLScSpinnerLightElement;
     };
+    interface HTMLSearchcraftButtonIconElement extends Components.SearchcraftButtonIcon, HTMLStencilElement {
+    }
+    var HTMLSearchcraftButtonIconElement: {
+        prototype: HTMLSearchcraftButtonIconElement;
+        new (): HTMLSearchcraftButtonIconElement;
+    };
+    interface HTMLSearchcraftClearIconSetElement extends Components.SearchcraftClearIconSet, HTMLStencilElement {
+    }
+    var HTMLSearchcraftClearIconSetElement: {
+        prototype: HTMLSearchcraftClearIconSetElement;
+        new (): HTMLSearchcraftClearIconSetElement;
+    };
+    interface HTMLSearchcraftSearchIconSetElement extends Components.SearchcraftSearchIconSet, HTMLStencilElement {
+    }
+    var HTMLSearchcraftSearchIconSetElement: {
+        prototype: HTMLSearchcraftSearchIconSetElement;
+        new (): HTMLSearchcraftSearchIconSetElement;
+    };
     interface HTMLElementTagNameMap {
         "sc-auto-search-form": HTMLScAutoSearchFormElement;
         "sc-base-search-form": HTMLScBaseSearchFormElement;
@@ -257,6 +289,9 @@ declare global {
         "sc-input-label": HTMLScInputLabelElement;
         "sc-spinner-dark": HTMLScSpinnerDarkElement;
         "sc-spinner-light": HTMLScSpinnerLightElement;
+        "searchcraft-button-icon": HTMLSearchcraftButtonIconElement;
+        "searchcraft-clear-icon-set": HTMLSearchcraftClearIconSetElement;
+        "searchcraft-search-icon-set": HTMLSearchcraftSearchIconSetElement;
     }
 }
 declare namespace LocalJSX {
@@ -348,6 +383,20 @@ declare namespace LocalJSX {
     }
     interface ScSpinnerLight {
     }
+    interface SearchcraftButtonIcon {
+    }
+    interface SearchcraftClearIconSet {
+        /**
+          * Type of the icon to display. Options: 'clear-light', 'clear-dark', 'arrow-light', 'arrow-dark'
+         */
+        "type"?: 'clear-light' | 'clear-dark' | 'arrow-light' | 'arrow-dark';
+    }
+    interface SearchcraftSearchIconSet {
+        /**
+          * Type of the icon to display. Options: ''search-light', search-dark', 'error-light', 'error-dark'
+         */
+        "type"?: 'search-light' | 'search-dark' | 'error-light' | 'error-dark';
+    }
     interface IntrinsicElements {
         "sc-auto-search-form": ScAutoSearchForm;
         "sc-base-search-form": ScBaseSearchForm;
@@ -362,6 +411,9 @@ declare namespace LocalJSX {
         "sc-input-label": ScInputLabel;
         "sc-spinner-dark": ScSpinnerDark;
         "sc-spinner-light": ScSpinnerLight;
+        "searchcraft-button-icon": SearchcraftButtonIcon;
+        "searchcraft-clear-icon-set": SearchcraftClearIconSet;
+        "searchcraft-search-icon-set": SearchcraftSearchIconSet;
     }
 }
 export { LocalJSX as JSX };
@@ -381,6 +433,9 @@ declare module "@stencil/core" {
             "sc-input-label": LocalJSX.ScInputLabel & JSXBase.HTMLAttributes<HTMLScInputLabelElement>;
             "sc-spinner-dark": LocalJSX.ScSpinnerDark & JSXBase.HTMLAttributes<HTMLScSpinnerDarkElement>;
             "sc-spinner-light": LocalJSX.ScSpinnerLight & JSXBase.HTMLAttributes<HTMLScSpinnerLightElement>;
+            "searchcraft-button-icon": LocalJSX.SearchcraftButtonIcon & JSXBase.HTMLAttributes<HTMLSearchcraftButtonIconElement>;
+            "searchcraft-clear-icon-set": LocalJSX.SearchcraftClearIconSet & JSXBase.HTMLAttributes<HTMLSearchcraftClearIconSetElement>;
+            "searchcraft-search-icon-set": LocalJSX.SearchcraftSearchIconSet & JSXBase.HTMLAttributes<HTMLSearchcraftSearchIconSetElement>;
         }
     }
 }

@@ -1,12 +1,5 @@
 import { Component, Prop, h, State } from '@stencil/core';
 
-import {
-  SearchIconLight,
-  SearchIconDark,
-  SearchIconLightError,
-  SearchIconDarkError,
-} from '@assets/SearchIcons';
-
 @Component({
   tag: 'sc-input-icon',
   styleUrl: 'sc-input-icon.module.scss',
@@ -26,13 +19,21 @@ export class ScInputIcon {
       <div
         class={this.rightToLeftOrientation ? 'inputIconRTL' : 'inputIconLTR'}
       >
-        {this.isLightTheme ? <SearchIconLightError /> : <SearchIconDarkError />}
+        {this.isLightTheme ? (
+          <searchcraft-search-icon-set type='error-light' />
+        ) : (
+          <searchcraft-search-icon-set type='error-dark' />
+        )}
       </div>
     ) : (
       <div
         class={this.rightToLeftOrientation ? 'inputIconRTL' : 'inputIconLTR'}
       >
-        {this.isLightTheme ? <SearchIconLight /> : <SearchIconDark />}
+        {this.isLightTheme ? (
+          <searchcraft-search-icon-set type='search-light' />
+        ) : (
+          <searchcraft-search-icon-set type='search-dark' />
+        )}
       </div>
     );
   }

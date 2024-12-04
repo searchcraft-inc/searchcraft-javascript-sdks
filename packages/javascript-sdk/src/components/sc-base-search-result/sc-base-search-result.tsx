@@ -1,10 +1,5 @@
 import { Component, h, Prop } from '@stencil/core';
 
-import {
-  ArrowRightIconLight,
-  ArrowRightIconDark,
-} from '@assets/ClearInputIcon';
-
 @Component({
   tag: 'sc-base-search-result',
   styleUrl: 'sc-base-search-result.module.scss',
@@ -52,7 +47,11 @@ export class ScBaseSearchResult {
       >
         {this.interactiveResult && (
           <div class='interactiveIconLarge'>
-            {isLightTheme ? <ArrowRightIconLight /> : <ArrowRightIconDark />}
+            {isLightTheme ? (
+              <searchcraft-clear-icon-set type='arrow-light' />
+            ) : (
+              <searchcraft-clear-icon-set type='arrow-dark' />
+            )}
           </div>
         )}
         <div class='imageContainer'>
@@ -68,9 +67,9 @@ export class ScBaseSearchResult {
             {this.interactiveResult && (
               <div class='interactiveIconSmall'>
                 {isLightTheme ? (
-                  <ArrowRightIconLight />
+                  <searchcraft-clear-icon-set type='arrow-light' />
                 ) : (
-                  <ArrowRightIconDark />
+                  <searchcraft-clear-icon-set type='arrow-dark' />
                 )}
               </div>
             )}

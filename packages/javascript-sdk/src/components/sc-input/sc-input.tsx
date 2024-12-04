@@ -113,6 +113,10 @@ export class ScInput {
           </Fragment>
         ) : (
           <Fragment>
+            <sc-input-icon
+              error={this.error}
+              rightToLeftOrientation={this.rightToLeftOrientation}
+            />
             <input
               class={classNames(
                 this.error

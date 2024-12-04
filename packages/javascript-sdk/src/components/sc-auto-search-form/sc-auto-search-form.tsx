@@ -131,7 +131,6 @@ export class ScAutoSearchForm {
           />
         </div>
         {this.error && <p class='error'>Please enter a search query.</p>}
-        {this.searchResults && <pre class='results'>{this.searchResults}</pre>}
       </form>
     );
   }
