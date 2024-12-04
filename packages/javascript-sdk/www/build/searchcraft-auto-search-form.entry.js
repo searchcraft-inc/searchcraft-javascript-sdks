@@ -1,5 +1,6 @@
-import { r as registerInstance, a as createEvent, h } from './index-b6929a4b.js';
+import { r as registerInstance, a as createEvent, h } from './index-be6bffea.js';
 import { g, u as useSearchcraftStore } from './store-7f65fa54.js';
+import { p as parseCustomStyles } from './utils-f221d91f.js';
 import './_commonjsHelpers-63cbe26c.js';
 
 const searchcraftAutoSearchFormModuleCss = ":root{--font-stack:Helvetica, Arial, sans-serif}.formLTR{text-align:left}.formRTL{text-align:right}.searchContainer{align-items:center;display:flex}";
@@ -14,42 +15,28 @@ const SearchcraftAutoSearchForm = class {
             const searchcraft = new g(this.config);
             this.searchStore.initialize(searchcraft, true);
         };
-        // Initialize searchStore as a private field
         this.searchStore = useSearchcraftStore.getState();
-        /**
-         * Handles the input change event from input
-         */
         this.handleInputChange = (event) => {
-            console.log(event);
-            this.query = event.detail; // Update the query state with input value
-            if (this.debounceTimeout) {
-                clearTimeout(this.debounceTimeout); // Clear any existing timeout
-            }
-            // Emit querySubmit immediately for real-time updates
+            this.query = event.detail;
             this.querySubmit.emit(this.query);
-            // Set a new debounce timeout to execute search after delay
+            if (this.debounceTimeout) {
+                clearTimeout(this.debounceTimeout);
+            }
             this.debounceTimeout = setTimeout(() => {
-                this.runSearch(); // Execute search logic after typing stops
+                this.runSearch();
             }, this.debounceDelay);
         };
-        /**
-         * Handles the clear input event from input
-         */
         this.handleClearInput = () => {
             this.query = '';
             if (typeof this.clearInput === 'function') {
                 this.clearInput();
             }
             if (this.debounceTimeout) {
-                clearTimeout(this.debounceTimeout); // Clear the debounce timeout
+                clearTimeout(this.debounceTimeout);
             }
-            // Reset error and search results
             this.error = false;
             this.searchResults = '';
         };
-        /**
-         * Runs the search logic
-         */
         this.runSearch = async () => {
             if (this.query.trim() === '') {
                 this.error = true;
@@ -57,17 +44,14 @@ const SearchcraftAutoSearchForm = class {
             }
             else {
                 this.error = false;
-                this.searchStore.setQuery(this.query); // Set the query in the searchStore
-                await this.searchStore.search(); // Perform the search
-                this.searchResults = JSON.stringify(this.searchStore.searchResults); // Store search results as JSON
+                this.searchStore.setQuery(this.query);
+                await this.searchStore.search();
+                this.searchResults = JSON.stringify(this.searchStore.searchResults);
             }
         };
-        /**
-         * Handles the form submission logic
-         */
         this.handleFormSubmit = async (event) => {
             event.preventDefault();
-            await this.runSearch(); // Trigger search logic on form submit
+            await this.runSearch();
         };
         this.autoSearchFormClass = '';
         this.clearInput = () => { };
@@ -76,8 +60,9 @@ const SearchcraftAutoSearchForm = class {
             endpointURL: '',
             index: [],
         };
+        this.customStylesForInput = {};
         this.inputCaptionValue = '';
-        this.labelForInput = 'Search';
+        this.labelForInput = '';
         this.placeholderValue = 'Search here';
         this.rightToLeftOrientation = false;
         this.searchContainerClass = '';
@@ -87,7 +72,8 @@ const SearchcraftAutoSearchForm = class {
     }
     render() {
         const formClass = this.rightToLeftOrientation ? 'formRTL' : 'formLTR';
-        return (h("form", { key: '7c9449de779f78de65b25ef4335f01f989913673', class: `${formClass}`, onSubmit: this.handleFormSubmit }, h("label", { key: '6c3a67f6474e2bf0513d711326a22e2bcfad7ec0' }, this.labelForInput), h("div", { key: 'f14822bc32f119918a9185f93d4a2e531927fcc4', class: 'searchContainer' }, h("searchcraft-input", { key: '498c23c013fe438136e2db7f070f263813e3d597', "placeholder-value": this.placeholderValue, query: this.query, "input-caption-value": this.inputCaptionValue, "right-to-left-orientation": this.rightToLeftOrientation, onSearchInputChange: this.handleInputChange, onClearInput: this.handleClearInput })), this.error && h("p", { key: '4e0c4dba2386790d9bdbd8dbec863fed740ec8fd', class: 'error' }, "Please enter a search query.")));
+        const parsedCustomStyles = parseCustomStyles(this.customStylesForInput);
+        return (h("form", { key: 'ad3c5d4afbebb5f3bb7700f12016c983fd7291b7', class: `${formClass}`, onSubmit: this.handleFormSubmit }, h("searchcraft-input-label", { key: '3122a9cbf6977607a1724b945c4c776dde283197', label: this.labelForInput }), h("div", { key: '6039f6ac1c406cf5216dde7f98d2c58eea910a4e', class: 'searchContainer' }, h("searchcraft-input", { key: '4367b73405da3971dac581e2f22fd18721c0422e', customStyles: parsedCustomStyles, "input-caption-value": this.inputCaptionValue, onClearInput: this.handleClearInput, onSearchInputChange: this.handleInputChange, "placeholder-value": this.placeholderValue, query: this.query, "right-to-left-orientation": this.rightToLeftOrientation })), this.error && (h("searchcraft-error-message", { key: '40d65cb341a4323ba09b7c1993f2abb80af8772f', errorMessage: 'Please enter a search query.' }))));
     }
 };
 SearchcraftAutoSearchForm.style = searchcraftAutoSearchFormModuleCss;

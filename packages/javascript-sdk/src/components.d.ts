@@ -12,6 +12,7 @@ export namespace Components {
         "autoSearchFormClass": string;
         "clearInput": () => void;
         "config": CoreConfigSDK;
+        "customStylesForInput": string | Record<string, string>;
         "inputCaptionValue": string;
         "labelForInput": string;
         "placeholderValue": string;
@@ -68,6 +69,7 @@ export namespace Components {
         "theme": 'light' | 'dark';
     }
     interface SearchcraftInput {
+        "customStyles": string | Record<string, string>;
         "error": boolean;
         "formClassName": string;
         "inputCaptionClassName": string;
@@ -89,7 +91,7 @@ export namespace Components {
     }
     interface SearchcraftInputLabel {
         "inputLabelClassName"?: string;
-        "label": string;
+        "label"?: string;
     }
     interface SearchcraftSearchIconSet {
         /**
@@ -222,8 +224,8 @@ declare global {
         new (): HTMLSearchcraftErrorMessageElement;
     };
     interface HTMLSearchcraftInputElementEventMap {
-        "searchInputChange": string;
         "clearInput": void;
+        "searchInputChange": string;
     }
     interface HTMLSearchcraftInputElement extends Components.SearchcraftInput, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSearchcraftInputElementEventMap>(type: K, listener: (this: HTMLSearchcraftInputElement, ev: SearchcraftInputCustomEvent<HTMLSearchcraftInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -299,11 +301,9 @@ declare namespace LocalJSX {
         "autoSearchFormClass"?: string;
         "clearInput"?: () => void;
         "config"?: CoreConfigSDK;
+        "customStylesForInput"?: string | Record<string, string>;
         "inputCaptionValue"?: string;
         "labelForInput"?: string;
-        /**
-          * Event emitted when the search query changes
-         */
         "onQuerySubmit"?: (event: SearchcraftAutoSearchFormCustomEvent<string>) => void;
         "placeholderValue"?: string;
         "rightToLeftOrientation"?: boolean;
@@ -362,6 +362,7 @@ declare namespace LocalJSX {
         "theme"?: 'light' | 'dark';
     }
     interface SearchcraftInput {
+        "customStyles"?: string | Record<string, string>;
         "error"?: boolean;
         "formClassName"?: string;
         "inputCaptionClassName"?: string;

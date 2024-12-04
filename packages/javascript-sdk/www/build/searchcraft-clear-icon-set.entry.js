@@ -1,4 +1,4 @@
-import { r as registerInstance, h } from './index-b6929a4b.js';
+import { r as registerInstance, h } from './index-be6bffea.js';
 
 const SearchcraftClearIconSet = class {
     constructor(hostRef) {

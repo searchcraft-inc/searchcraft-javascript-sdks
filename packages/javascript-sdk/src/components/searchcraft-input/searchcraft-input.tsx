@@ -9,6 +9,8 @@ import {
 } from '@stencil/core';
 import classNames from 'classnames';
 
+import { parseCustomStyles } from '@utils/utils';
+
 export interface ScInputCustomEvent<T> extends CustomEvent<T> {
   detail: T;
   target: HTMLSearchcraftInputElement;
@@ -20,6 +22,7 @@ export interface ScInputCustomEvent<T> extends CustomEvent<T> {
   shadow: true,
 })
 export class SearchcraftInput {
+  @Prop() customStyles: string | Record<string, string> = {};
   @Prop() error = false;
   @Prop() formClassName = '';
   @Prop() inputCaptionClassName = '';
@@ -29,8 +32,8 @@ export class SearchcraftInput {
   @Prop() rightToLeftOrientation = false;
   @Prop() query = '';
 
-  @Event() searchInputChange: EventEmitter<string>;
   @Event() clearInput: EventEmitter<void>;
+  @Event() searchInputChange: EventEmitter<string>;
 
   @State() theme = 'light';
 
@@ -64,7 +67,7 @@ export class SearchcraftInput {
           : 'inputDarkLTR',
       'searchcraft-input',
     );
-
+    const validatedCustomStyles = parseCustomStyles(this.customStyles);
     return (
       <div
         class={classNames(
@@ -76,22 +79,13 @@ export class SearchcraftInput {
         {this.rightToLeftOrientation ? (
           <Fragment>
             <input
-              class={classNames(
-                this.error
-                  ? this.isLightTheme
-                    ? 'inputErrorLightRTL'
-                    : 'inputErrorDarkRTL'
-                  : this.isLightTheme
-                    ? 'inputLightRTL'
-                    : 'inputDarkRTL',
-                inputClassName,
-                'searchcraft-input',
-              )}
+              class={classNames(inputClassName, 'searchcraft-input')}
               id='searchcraft-input-id'
               onChange={this.handleInputChange.bind(this)}
               placeholder={this.placeholderValue}
               type='text'
               value={this.query}
+              style={validatedCustomStyles}
             />
             {this.inputCaptionValue && (
               <searchcraft-input-caption
@@ -118,22 +112,13 @@ export class SearchcraftInput {
               rightToLeftOrientation={this.rightToLeftOrientation}
             />
             <input
-              class={classNames(
-                this.error
-                  ? this.isLightTheme
-                    ? 'inputErrorLightLTR'
-                    : 'inputErrorDarkLTR'
-                  : this.isLightTheme
-                    ? 'inputLightLTR'
-                    : 'inputDarkLTR',
-                inputClassName,
-                'searchcraft-input',
-              )}
+              class={classNames(inputClassName, 'searchcraft-input')}
               id='searchcraft-input-id'
               onChange={this.handleInputChange.bind(this)}
               placeholder={this.placeholderValue}
               type='text'
               value={this.query}
+              style={validatedCustomStyles}
             />
             {this.inputCaptionValue && (
               <searchcraft-input-caption

@@ -1,4 +1,4 @@
-import { r as registerInstance, h } from './index-b6929a4b.js';
+import { r as registerInstance, h } from './index-be6bffea.js';
 
 const searchcraftSpinnerLightModuleCss = ".spinnerContainer{background-color:transparent;height:20px;width:20px}.spinnerLight{height:100%;width:100%;background:conic-gradient(#737373 50%, #FFFFFF);clip-path:circle(50%);mask-image:radial-gradient(circle at center, rgba(0, 0, 0, 0) 6.6666666667px, rgb(0, 0, 0) 6.6666666667px);animation:spinning 1s linear infinite}@keyframes spinning{0%{transform:rotate(0deg)}50%{transform:rotate(180deg)}100%{transform:rotate(360deg)}}";
 
@@ -7,7 +7,7 @@ const SearchcraftSpinnerLight = class {
         registerInstance(this, hostRef);
     }
     render() {
-        return (h("div", { key: '7bd4d997ef43d35ee60033a27b6bc46c6d693c33', class: 'spinnerContainer' }, h("div", { key: 'f8cc9948aa6a264719ffc54d25a10af27dc0f802', class: 'spinnerLight' })));
+        return (h("div", { key: 'a5d33f47093fe8b5529153241b93fd8303e72c03', class: 'spinnerContainer' }, h("div", { key: 'd50e9a2d1393f25fa94babf757b56108d75ae01e', class: 'spinnerLight' })));
     }
 };
 SearchcraftSpinnerLight.style = searchcraftSpinnerLightModuleCss;

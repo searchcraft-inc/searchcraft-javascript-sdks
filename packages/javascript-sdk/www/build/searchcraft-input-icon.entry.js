@@ -1,4 +1,4 @@
-import { r as registerInstance, h } from './index-b6929a4b.js';
+import { r as registerInstance, h } from './index-be6bffea.js';
 
 const searchcraftInputIconModuleCss = ":root{--font-stack:Helvetica, Arial, sans-serif}.inputIconLTR{height:20px;left:10px;position:absolute;top:11px;width:20px}.inputIconRTL{height:20px;position:absolute;right:10px;top:11px;width:20px}";
 

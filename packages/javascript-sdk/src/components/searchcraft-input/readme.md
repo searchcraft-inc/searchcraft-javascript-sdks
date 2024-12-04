@@ -7,16 +7,17 @@
 
 ## Properties
 
-| Property                 | Attribute                   | Description | Type      | Default          |
-| ------------------------ | --------------------------- | ----------- | --------- | ---------------- |
-| `error`                  | `error`                     |             | `boolean` | `false`          |
-| `formClassName`          | `form-class-name`           |             | `string`  | `''`             |
-| `inputCaptionClassName`  | `input-caption-class-name`  |             | `string`  | `''`             |
-| `inputCaptionValue`      | `input-caption-value`       |             | `string`  | `''`             |
-| `inputClassName`         | `input-class-name`          |             | `string`  | `''`             |
-| `placeholderValue`       | `placeholder-value`         |             | `string`  | `'Enter Search'` |
-| `query`                  | `query`                     |             | `string`  | `''`             |
-| `rightToLeftOrientation` | `right-to-left-orientation` |             | `boolean` | `false`          |
+| Property                 | Attribute                   | Description | Type                                 | Default          |
+| ------------------------ | --------------------------- | ----------- | ------------------------------------ | ---------------- |
+| `customStyles`           | `custom-styles`             |             | `string \| { [x: string]: string; }` | `{}`             |
+| `error`                  | `error`                     |             | `boolean`                            | `false`          |
+| `formClassName`          | `form-class-name`           |             | `string`                             | `''`             |
+| `inputCaptionClassName`  | `input-caption-class-name`  |             | `string`                             | `''`             |
+| `inputCaptionValue`      | `input-caption-value`       |             | `string`                             | `''`             |
+| `inputClassName`         | `input-class-name`          |             | `string`                             | `''`             |
+| `placeholderValue`       | `placeholder-value`         |             | `string`                             | `'Enter Search'` |
+| `query`                  | `query`                     |             | `string`                             | `''`             |
+| `rightToLeftOrientation` | `right-to-left-orientation` |             | `boolean`                            | `false`          |
 
 
 ## Events

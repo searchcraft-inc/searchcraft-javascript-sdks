@@ -1,4 +1,4 @@
-import { r as registerInstance, h } from './index-b6929a4b.js';
+import { r as registerInstance, h } from './index-be6bffea.js';
 import { u as useSearchcraftStore } from './store-7f65fa54.js';
 import './_commonjsHelpers-63cbe26c.js';
 

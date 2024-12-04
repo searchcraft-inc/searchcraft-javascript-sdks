@@ -1,4 +1,4 @@
-import { r as registerInstance, h } from './index-b6929a4b.js';
+import { r as registerInstance, h } from './index-be6bffea.js';
 import { c as classNames } from './index-d6567b9c.js';
 import './_commonjsHelpers-63cbe26c.js';
 
@@ -8,15 +8,19 @@ const SearchcraftInputLabel = class {
     constructor(hostRef) {
         registerInstance(this, hostRef);
         this.inputLabelClassName = '';
-        this.label = 'Enter Search';
+        this.label = undefined;
         this.theme = 'light';
     }
     isLightTheme() {
         return this.theme === 'light';
     }
     render() {
-        const labelStyle = this.isLightTheme ? 'labelLight' : 'labelDark';
-        return (h("label", { key: '8dc8f2edc083ded37799518df8e15adfafab4ffb', class: classNames(labelStyle, this.inputLabelClassName), htmlFor: 'searchcraft-input-id' }, this.label));
+        // Render nothing if no label prop is provided
+        if (!this.label) {
+            return null;
+        }
+        const labelStyle = this.isLightTheme() ? 'labelLight' : 'labelDark';
+        return (h("label", { class: classNames(labelStyle, this.inputLabelClassName), htmlFor: 'searchcraft-input-id' }, this.label));
     }
 };
 SearchcraftInputLabel.style = searchcraftInputLabelModuleCss;

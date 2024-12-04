@@ -1,4 +1,4 @@
-import { r as registerInstance, a as createEvent, h } from './index-b6929a4b.js';
+import { r as registerInstance, a as createEvent, h } from './index-be6bffea.js';
 import { u as useSearchcraftStore, a as useThemeStore, g } from './store-7f65fa54.js';
 import './_commonjsHelpers-63cbe26c.js';
 
@@ -50,7 +50,7 @@ const SearchcraftBaseSearchForm = class {
         this.searchResults = null;
     }
     render() {
-        return (h("form", { key: '6460e91d9c4a48c40476c18762b8b4873c157653', class: this.rightToLeftOrientation ? 'formRTL' : 'formLTR', onSubmit: this.handleFormSubmit }, h("searchcraft-input-label", { key: '9d0a89868c4dafae20e7437101c5639466fc2ffa', label: this.labelForInput }), h("div", { key: '441c0923111995fc0b04b0acb799ade4b2018be0', class: 'searchContainer' }, this.rightToLeftOrientation && h("searchcraft-button", { key: '2a0dc24c906917cd1ec5bd605e25a0a67bffee21' }), h("searchcraft-input", { key: '6744a36c97e03fbd10cc354653e32f0f7eac1c00', onClearInput: this.handleClearInput, rightToLeftOrientation: this.rightToLeftOrientation, onSearchInputChange: this.handleSearchInputChange, query: this.query }), !this.rightToLeftOrientation && (h("searchcraft-button", { key: '50ea437efebe7a62d6122fb6a76942861003884a', onButtonClick: this.handleFormSubmit }))), this.error && (h("searchcraft-error-message", { key: 'ae4b2fa7d874771af0b88757244abe5d50679d55', errorMessage: this.errorMessage }))));
+        return (h("form", { key: '65016c1b51cb3da0dba9cc4bdfbc09b9bfc224c1', class: this.rightToLeftOrientation ? 'formRTL' : 'formLTR', onSubmit: this.handleFormSubmit }, h("searchcraft-input-label", { key: '748c637043ef19e12db1ce2659007951f1d0fff2', label: this.labelForInput }), h("div", { key: '8974e4c4b958e71498301d1b902bf95d80664d83', class: 'searchContainer' }, this.rightToLeftOrientation && h("searchcraft-button", { key: 'cea22bbfb43d476d9051286d780efd2ad676ec72' }), h("searchcraft-input", { key: 'b42319043967fdbac5ce5f379603e3bc7f187c96', onClearInput: this.handleClearInput, rightToLeftOrientation: this.rightToLeftOrientation, onSearchInputChange: this.handleSearchInputChange, query: this.query }), !this.rightToLeftOrientation && (h("searchcraft-button", { key: '80eabe2c102ede78d9573b9c99ddecb7fa045e96', onButtonClick: this.handleFormSubmit }))), this.error && (h("searchcraft-error-message", { key: 'e4d55dc2ea745bde17cb6948f2c185d3efc04d44', errorMessage: this.errorMessage }))));
     }
 };
 SearchcraftBaseSearchForm.style = searchcraftBaseSearchFormModuleCss;

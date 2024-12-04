@@ -10,5 +10,8 @@
 
 export type * from './components';
 
+// Export utility functions
+export { parseCustomStyles } from './utils/utils';
+
 // Export Zustand store and any custom hooks
 export { useSearchcraftStore, useThemeStore } from './provider/store';

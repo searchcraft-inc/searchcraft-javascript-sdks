@@ -12,6 +12,7 @@ import {
 } from '@searchcraft/core';
 
 import type { ScInputCustomEvent } from '@components/searchcraft-input/searchcraft-input';
+import { parseCustomStyles } from '@utils/utils';
 import { useSearchcraftStore } from '@provider/store';
 
 @Component({
@@ -27,15 +28,13 @@ export class SearchcraftAutoSearchForm {
     endpointURL: '',
     index: [],
   };
+  @Prop() customStylesForInput: string | Record<string, string> = {}; // Accept string or object
   @Prop() inputCaptionValue = '';
-  @Prop() labelForInput = 'Search';
+  @Prop() labelForInput = '';
   @Prop() placeholderValue = 'Search here';
   @Prop() rightToLeftOrientation = false;
   @Prop() searchContainerClass = '';
 
-  /**
-   * Event emitted when the search query changes
-   */
   @Event() querySubmit: EventEmitter<string>;
 
   @State() error = false;
@@ -50,32 +49,21 @@ export class SearchcraftAutoSearchForm {
     this.searchStore.initialize(searchcraft, true);
   };
 
-  // Initialize searchStore as a private field
   private searchStore = useSearchcraftStore.getState();
 
-  /**
-   * Handles the input change event from input
-   */
   handleInputChange = (event: ScInputCustomEvent<string>) => {
-    console.log(event);
-    this.query = event.detail; // Update the query state with input value
-
-    if (this.debounceTimeout) {
-      clearTimeout(this.debounceTimeout); // Clear any existing timeout
-    }
-
-    // Emit querySubmit immediately for real-time updates
+    this.query = event.detail;
     this.querySubmit.emit(this.query);
 
-    // Set a new debounce timeout to execute search after delay
+    if (this.debounceTimeout) {
+      clearTimeout(this.debounceTimeout);
+    }
+
     this.debounceTimeout = setTimeout(() => {
-      this.runSearch(); // Execute search logic after typing stops
+      this.runSearch();
     }, this.debounceDelay);
   };
 
-  /**
-   * Handles the clear input event from input
-   */
   handleClearInput = () => {
     this.query = '';
     if (typeof this.clearInput === 'function') {
@@ -83,54 +71,50 @@ export class SearchcraftAutoSearchForm {
     }
 
     if (this.debounceTimeout) {
-      clearTimeout(this.debounceTimeout); // Clear the debounce timeout
+      clearTimeout(this.debounceTimeout);
     }
 
-    // Reset error and search results
     this.error = false;
     this.searchResults = '';
   };
 
-  /**
-   * Runs the search logic
-   */
   private runSearch = async () => {
     if (this.query.trim() === '') {
       this.error = true;
       this.searchResults = '';
     } else {
       this.error = false;
-      this.searchStore.setQuery(this.query); // Set the query in the searchStore
-      await this.searchStore.search(); // Perform the search
-      this.searchResults = JSON.stringify(this.searchStore.searchResults); // Store search results as JSON
+      this.searchStore.setQuery(this.query);
+      await this.searchStore.search();
+      this.searchResults = JSON.stringify(this.searchStore.searchResults);
     }
   };
 
-  /**
-   * Handles the form submission logic
-   */
   handleFormSubmit = async (event: Event) => {
     event.preventDefault();
-    await this.runSearch(); // Trigger search logic on form submit
+    await this.runSearch();
   };
 
   render() {
     const formClass = this.rightToLeftOrientation ? 'formRTL' : 'formLTR';
-
+    const parsedCustomStyles = parseCustomStyles(this.customStylesForInput);
     return (
       <form class={`${formClass}`} onSubmit={this.handleFormSubmit}>
-        <label>{this.labelForInput}</label>
+        <searchcraft-input-label label={this.labelForInput} />
         <div class='searchContainer'>
           <searchcraft-input
+            customStyles={parsedCustomStyles}
+            input-caption-value={this.inputCaptionValue}
+            onClearInput={this.handleClearInput}
+            onSearchInputChange={this.handleInputChange}
             placeholder-value={this.placeholderValue}
             query={this.query}
-            input-caption-value={this.inputCaptionValue}
             right-to-left-orientation={this.rightToLeftOrientation}
-            onSearchInputChange={this.handleInputChange}
-            onClearInput={this.handleClearInput}
           />
         </div>
-        {this.error && <p class='error'>Please enter a search query.</p>}
+        {this.error && (
+          <searchcraft-error-message errorMessage='Please enter a search query.' />
+        )}
       </form>
     );
   }
