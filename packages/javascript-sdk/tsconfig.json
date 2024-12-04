@@ -4,7 +4,8 @@
     "paths": {
       "@assets/*": ["assets/*"],
       "@provider/*": ["provider/*"],
-      "@components/*": ["components/*"]
+      "@components/*": ["components/*"],
+      "@utils/*": ["utils/*"]
     },
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,

@@ -1,0 +1,69 @@
+import { Component, h, State } from '@stencil/core';
+import type { SearchResult } from '@searchcraft/core';
+
+import { useSearchcraftStore } from '@provider/store';
+
+@Component({
+  tag: 'searchcraft-base-search-results',
+  styleUrl: 'searchcraft-base-search-results.module.scss',
+  shadow: true,
+})
+export class SearchcraftBaseSearchResults {
+  @State() query = '';
+  @State() searchResults: SearchResult | null = null;
+  private unsubscribe: () => void;
+
+  componentDidLoad() {
+    // Subscribe to state changes
+    this.unsubscribe = useSearchcraftStore.subscribe((state) => {
+      console.log('Store updated:', state);
+      this.searchResults = { ...state.searchResults };
+      this.query = state.query;
+    });
+
+    // Fetch initial state
+    const { searchResults, query } = useSearchcraftStore.getState();
+    console.log('Initial state:', searchResults, query);
+    this.searchResults = searchResults;
+    this.query = query;
+  }
+
+  disconnectedCallback() {
+    if (this.unsubscribe) {
+      this.unsubscribe();
+    }
+  }
+
+  render() {
+    if (!this.searchResults?.data) {
+      console.warn('No search results data available');
+      return <div>No results to display.</div>;
+    }
+    return (
+      <div class='resultsContainer'>
+        {this.searchResults?.data?.hits?.map((document, index) => {
+          const { doc: result } = document;
+          return (
+            <searchcraft-base-search-result
+              key={`${result?.id}-${index}`}
+              button-label='View More'
+              callback-fn={() => console.log('interactive element')}
+              button-callback-fn={() => console.log('button callback')}
+              interactive-result={true}
+              image-src={result?.poster}
+              result-body-content={result?.overview}
+              result-heading={result?.title}
+              result-subheading={result?.release_date}
+            />
+          );
+        })}
+        {this.query.length > 0 &&
+          this.searchResults?.data?.hits?.length === 0 && (
+            <searchcraft-error-message
+              error-message={`No search results found for "${this.query}" query`}
+            />
+          )}
+      </div>
+    );
+  }
+}
