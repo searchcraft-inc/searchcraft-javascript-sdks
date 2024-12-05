@@ -1,2 +1,49 @@
-import{p as e,b as t}from"./p-0ba9029b.js";export{s as setNonce}from"./p-0ba9029b.js";import{g as a}from"./p-e1255160.js";var r=()=>{const t=import.meta.url;const a={};if(t!==""){a.resourcesUrl=new URL(".",t).href}return e(a)};r().then((async e=>{await a();return t([["p-437c6ef9",[[1,"searchcraft-auto-search-form",{autoSearchFormClass:[1,"auto-search-form-class"],clearInput:[16],config:[16],customStylesForInput:[1,"custom-styles-for-input"],inputCaptionValue:[1,"input-caption-value"],labelForInput:[1,"label-for-input"],placeholderValue:[1,"placeholder-value"],rightToLeftOrientation:[4,"right-to-left-orientation"],searchContainerClass:[1,"search-container-class"],error:[32],query:[32],searchResults:[32]}],[1,"searchcraft-base-search-results",{searchKeys:[1,"search-keys"],customStylesForResults:[1,"custom-styles-for-results"],query:[32],searchResults:[32]}],[1,"searchcraft-base-search-result",{buttonText:[1,"button-text"],imageDescription:[1,"image-description"],imageSource:[1,"image-source"],isInteractive:[4,"is-interactive"],primaryContent:[1,"primary-content"],secondaryContent:[1,"secondary-content"],tertiaryContent:[1,"tertiary-content"],headingText:[1,"heading-text"],subheadingText:[1,"subheading-text"],themeMode:[1,"theme-mode"],customStyles:[16]}],[1,"searchcraft-input",{customStyles:[1,"custom-styles"],error:[4],formClassName:[1,"form-class-name"],inputCaptionClassName:[1,"input-caption-class-name"],inputCaptionValue:[1,"input-caption-value"],inputClassName:[1,"input-class-name"],placeholderValue:[1,"placeholder-value"],rightToLeftOrientation:[4,"right-to-left-orientation"],query:[1],theme:[32]}],[1,"searchcraft-input-label",{inputLabelClassName:[1,"input-label-class-name"],label:[1],theme:[32]}],[1,"searchcraft-clear-input-button",{isRequesting:[4,"is-requesting"],rightToLeftOrientation:[4,"right-to-left-orientation"],theme:[32]}],[1,"searchcraft-input-icon",{error:[4],rightToLeftOrientation:[4,"right-to-left-orientation"],theme:[32]}],[1,"searchcraft-error-message",{errorMessage:[1,"error-message"],theme:[1]}],[1,"searchcraft-input-caption",{error:[4],inputCaptionClassName:[1,"input-caption-class-name"],inputCaptionValue:[1,"input-caption-value"],rightToLeftOrientation:[4,"right-to-left-orientation"],theme:[32]}],[1,"searchcraft-search-icon-set",{type:[1]}],[1,"searchcraft-spinner-light"],[1,"searchcraft-spinner-dark"],[1,"searchcraft-clear-icon-set",{type:[1]}]]],["p-562e923d",[[1,"searchcraft-base-search-form",{config:[16],errorMessage:[1,"error-message"],labelForInput:[1,"label-for-input"],rightToLeftOrientation:[4,"right-to-left-orientation"],error:[32],query:[32],searchResults:[32]}]]],["p-eb632a89",[[1,"searchcraft-button-icon"]]],["p-5959cd6a",[[1,"searchcraft-button",{iconElement:[16],iconOnly:[4,"icon-only"],iconPosition:[1,"icon-position"],label:[1],isRequesting:[32],theme:[32]}]]]],e)}));
+import { B as BUILD, c as consoleDevInfo, H, d as doc, N as NAMESPACE, p as promiseResolve, b as bootstrapLazy } from './index-be6bffea.js';
+export { s as setNonce } from './index-be6bffea.js';
+import { g as globalScripts } from './app-globals-0f993ce5.js';
+
+/*
+ Stencil Client Patch Browser v4.22.3 | MIT Licensed | https://stenciljs.com
+ */
+var patchBrowser = () => {
+  if (BUILD.isDev && !BUILD.isTesting) {
+    consoleDevInfo("Running in development mode.");
+  }
+  if (BUILD.cloneNodeFix) {
+    patchCloneNodeFix(H.prototype);
+  }
+  const scriptElm = BUILD.scriptDataOpts ? Array.from(doc.querySelectorAll("script")).find(
+    (s) => new RegExp(`/${NAMESPACE}(\\.esm)?\\.js($|\\?|#)`).test(s.src) || s.getAttribute("data-stencil-namespace") === NAMESPACE
+  ) : null;
+  const importMeta = import.meta.url;
+  const opts = BUILD.scriptDataOpts ? (scriptElm || {})["data-opts"] || {} : {};
+  if (importMeta !== "") {
+    opts.resourcesUrl = new URL(".", importMeta).href;
+  }
+  return promiseResolve(opts);
+};
+var patchCloneNodeFix = (HTMLElementPrototype) => {
+  const nativeCloneNodeFn = HTMLElementPrototype.cloneNode;
+  HTMLElementPrototype.cloneNode = function(deep) {
+    if (this.nodeName === "TEMPLATE") {
+      return nativeCloneNodeFn.call(this, deep);
+    }
+    const clonedNode = nativeCloneNodeFn.call(this, false);
+    const srcChildNodes = this.childNodes;
+    if (deep) {
+      for (let i = 0; i < srcChildNodes.length; i++) {
+        if (srcChildNodes[i].nodeType !== 2) {
+          clonedNode.appendChild(srcChildNodes[i].cloneNode(true));
+        }
+      }
+    }
+    return clonedNode;
+  };
+};
+
+patchBrowser().then(async (options) => {
+  await globalScripts();
+  return bootstrapLazy([["searchcraft-base-search-form",[[1,"searchcraft-base-search-form",{"config":[16],"errorMessage":[1,"error-message"],"labelForInput":[1,"label-for-input"],"rightToLeftOrientation":[4,"right-to-left-orientation"],"error":[32],"query":[32],"searchResults":[32]}]]],["searchcraft-auto-search-form",[[1,"searchcraft-auto-search-form",{"autoSearchFormClass":[1,"auto-search-form-class"],"clearInput":[16],"config":[16],"customStylesForInput":[1,"custom-styles-for-input"],"inputCaptionValue":[1,"input-caption-value"],"labelForInput":[1,"label-for-input"],"placeholderValue":[1,"placeholder-value"],"rightToLeftOrientation":[4,"right-to-left-orientation"],"searchContainerClass":[1,"search-container-class"],"error":[32],"query":[32],"searchResults":[32]}]]],["searchcraft-button",[[1,"searchcraft-button",{"iconElement":[16],"iconOnly":[4,"icon-only"],"iconPosition":[1,"icon-position"],"label":[1],"isRequesting":[32],"theme":[32]}]]],["searchcraft-base-search-result",[[1,"searchcraft-base-search-result",{"buttonText":[1,"button-text"],"imageDescription":[1,"image-description"],"imageSource":[1,"image-source"],"isInteractive":[4,"is-interactive"],"primaryContent":[1,"primary-content"],"secondaryContent":[1,"secondary-content"],"tertiaryContent":[1,"tertiary-content"],"headingText":[1,"heading-text"],"subheadingText":[1,"subheading-text"],"themeMode":[1,"theme-mode"],"customStyles":[1,"custom-styles"]}]]],["searchcraft-error-message",[[1,"searchcraft-error-message",{"errorMessage":[1,"error-message"],"theme":[1]}]]],["searchcraft-base-search-results",[[1,"searchcraft-base-search-results",{"searchKeys":[1,"search-keys"],"customStylesForResults":[1,"custom-styles-for-results"],"query":[32],"searchResults":[32]}]]],["searchcraft-button-icon",[[1,"searchcraft-button-icon"]]],["searchcraft-spinner-light",[[1,"searchcraft-spinner-light"]]],["searchcraft-clear-input-button",[[1,"searchcraft-clear-input-button",{"isRequesting":[4,"is-requesting"],"rightToLeftOrientation":[4,"right-to-left-orientation"],"theme":[32]}]]],["searchcraft-search-icon-set",[[1,"searchcraft-search-icon-set",{"type":[1]}]]],["searchcraft-input-icon",[[1,"searchcraft-input-icon",{"error":[4],"rightToLeftOrientation":[4,"right-to-left-orientation"],"theme":[32]}]]],["searchcraft-input-caption",[[1,"searchcraft-input-caption",{"error":[4],"inputCaptionClassName":[1,"input-caption-class-name"],"inputCaptionValue":[1,"input-caption-value"],"rightToLeftOrientation":[4,"right-to-left-orientation"],"theme":[32]}]]],["searchcraft-input",[[1,"searchcraft-input",{"customStyles":[1,"custom-styles"],"error":[4],"formClassName":[1,"form-class-name"],"inputCaptionClassName":[1,"input-caption-class-name"],"inputCaptionValue":[1,"input-caption-value"],"inputClassName":[1,"input-class-name"],"placeholderValue":[1,"placeholder-value"],"rightToLeftOrientation":[4,"right-to-left-orientation"],"query":[1],"theme":[32]}]]],["searchcraft-input-label",[[1,"searchcraft-input-label",{"inputLabelClassName":[1,"input-label-class-name"],"label":[1],"theme":[32]}]]],["searchcraft-clear-icon-set",[[1,"searchcraft-clear-icon-set",{"type":[1]}]]],["searchcraft-spinner-dark",[[1,"searchcraft-spinner-dark"]]]], options);
+});
+
 //# sourceMappingURL=searchcraft-javascript-sdk.esm.js.map

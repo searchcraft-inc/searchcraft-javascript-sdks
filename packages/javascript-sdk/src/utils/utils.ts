@@ -1,8 +1,3 @@
-/**
- * Utility function to parse custom styles from a string or object.
- * @param styles - Custom styles as a stringified JSON or an object.
- * @returns {Record<string, string>} - Parsed styles as an object.
- */
 export function parseCustomStyles(
   styles: string | Record<string, string>,
 ): Record<string, string> {
@@ -46,4 +41,15 @@ export function extractDynamicProperties(
     extractedProperties[key] = document[key] || '';
   });
   return extractedProperties;
+}
+
+export function serializeStyles(
+  styles: Record<string, Record<string, string>>,
+): string {
+  try {
+    return JSON.stringify(styles);
+  } catch (error) {
+    console.error('Error serializing styles:', error);
+    return '{}';
+  }
 }

@@ -7,10 +7,10 @@
 
 ## Properties
 
-| Property                 | Attribute                   | Description                                                                                                                 | Type                                 | Default |
-| ------------------------ | --------------------------- | --------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ | ------- |
-| `customStylesForResults` | `custom-styles-for-results` | Custom styles to apply to search results. Expected format: JSON string, e.g., '{"borderRadius": "10px", "padding": "16px"}' | `string \| { [x: string]: string; }` | `{}`    |
-| `searchKeys`             | `search-keys`               | Array of keys to dynamically extract properties from each document. Must be explicitly set by the parent component.         | `string`                             | `''`    |
+| Property                 | Attribute                   | Description                                                                                                                 | Type                                                 | Default |
+| ------------------------ | --------------------------- | --------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- | ------- |
+| `customStylesForResults` | `custom-styles-for-results` | Custom styles to apply to search results. Expected format: JSON string, e.g., '{"borderRadius": "10px", "padding": "16px"}' | `string \| { [x: string]: Record<string, string>; }` | `{}`    |
+| `searchKeys`             | `search-keys`               | Array of keys to dynamically extract properties from each document. Must be explicitly set by the parent component.         | `string`                                             | `''`    |
 
 
 ## Dependencies
@@ -25,7 +25,6 @@
 graph TD;
   searchcraft-base-search-results --> searchcraft-base-search-result
   searchcraft-base-search-results --> searchcraft-error-message
-  searchcraft-base-search-result --> searchcraft-clear-icon-set
   style searchcraft-base-search-results fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
