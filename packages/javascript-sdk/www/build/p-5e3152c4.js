@@ -1,2 +1,0 @@
-function r(r){if(typeof r==="string"){try{return JSON.parse(r)}catch(t){console.error("Invalid customStyles format:",r);return{}}}return r||{}}function t(r){try{const t=JSON.parse(r);if(Array.isArray(t)&&t.every((r=>typeof r==="string"))){return t}console.warn("searchKeys must be a JSON array of strings. Defaulting to an empty array.");return[]}catch(r){console.error("Failed to parse searchKeys:",r);return[]}}function e(r,t){const e={};t.forEach((t=>{e[t]=r[t]||""}));return e}export{t as a,e,r as p};
-//# sourceMappingURL=p-5e3152c4.js.map

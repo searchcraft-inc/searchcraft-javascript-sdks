@@ -16,7 +16,7 @@ export class SearchcraftBaseSearchResult {
   @Prop() headingText = ''; // Text for the heading
   @Prop() subheadingText = ''; // Text for the subheading
   @Prop() themeMode: 'light' | 'dark' = 'light'; // Light or dark theme context
-  @Prop() customStyles: Record<string, string> = {}; // Custom styles passed from parent
+  @Prop() customStyles = '{}'; // New string prop for serialized styles.
 
   @Event() buttonCallback: () => void = () => {}; // Callback for button click
   @Event() keyDownCallback: () => void = () => {}; // Callback for key down event
@@ -32,9 +32,20 @@ export class SearchcraftBaseSearchResult {
     }
   };
 
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  private parseStyles(): Record<string, any> {
+    try {
+      return JSON.parse(this.customStyles);
+    } catch (error) {
+      console.error('Error parsing custom styles:', error);
+      return {};
+    }
+  }
+
   render() {
     const isLightTheme = this.themeMode === 'light';
-    const containerStyle = { ...this.customStyles };
+    const styles = this.parseStyles();
+
     return (
       <div
         class={
@@ -44,50 +55,40 @@ export class SearchcraftBaseSearchResult {
               : 'interactiveResultContainerDark'
             : 'resultContainer'
         }
-        id='searchcraft-item'
+        style={styles.container || {}}
+        tabindex='0'
         onClick={this.handleContainerClick}
         onKeyDown={this.keyDownCallback}
-        style={containerStyle}
-        tabindex='0'
       >
-        {this.isInteractive && (
-          <div class='interactiveIconLarge'>
-            {isLightTheme ? (
-              <searchcraft-clear-icon-set type='arrow-light' />
-            ) : (
-              <searchcraft-clear-icon-set type='arrow-dark' />
-            )}
-          </div>
-        )}
         <div class='imageContainer'>
           <img
             alt={this.imageDescription}
-            class={isLightTheme ? 'imageLight' : 'imageDark'}
             src={this.imageSource}
+            style={styles.image || {}}
+            class={isLightTheme ? 'imageLight' : 'imageDark'}
           />
         </div>
         <div class='contentContainer'>
-          <h2 class={isLightTheme ? 'headingLight' : 'headingDark'}>
+          <h2
+            style={styles.heading || {}}
+            class={isLightTheme ? 'headingLight' : 'headingDark'}
+          >
             {this.headingText}
-            {this.isInteractive && (
-              <div class='interactiveIconSmall'>
-                {isLightTheme ? (
-                  <searchcraft-clear-icon-set type='arrow-light' />
-                ) : (
-                  <searchcraft-clear-icon-set type='arrow-dark' />
-                )}
-              </div>
-            )}
           </h2>
-          <h3 class={isLightTheme ? 'subheadingLight' : 'subheadingDark'}>
+          <h3
+            style={styles.subheading || {}}
+            class={isLightTheme ? 'subheadingLight' : 'subheadingDark'}
+          >
             {this.subheadingText}
           </h3>
           <p
+            style={styles.primaryContent || {}}
             class={isLightTheme ? 'primaryContentLight' : 'primaryContentDark'}
           >
             {this.primaryContent}
           </p>
           <p
+            style={styles.secondaryContent || {}}
             class={
               isLightTheme ? 'secondaryContentLight' : 'secondaryContentDark'
             }
@@ -95,6 +96,7 @@ export class SearchcraftBaseSearchResult {
             {this.secondaryContent}
           </p>
           <p
+            style={styles.tertiaryContent || {}}
             class={
               isLightTheme ? 'tertiaryContentLight' : 'tertiaryContentDark'
             }
@@ -102,7 +104,11 @@ export class SearchcraftBaseSearchResult {
             {this.tertiaryContent}
           </p>
           {this.buttonText && (
-            <button onClick={this.handleButtonClick} type='button'>
+            <button
+              onClick={this.handleButtonClick}
+              style={styles.button || {}}
+              type='button'
+            >
               {this.buttonText}
             </button>
           )}

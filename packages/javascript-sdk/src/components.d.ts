@@ -27,7 +27,7 @@ export namespace Components {
     }
     interface SearchcraftBaseSearchResult {
         "buttonText": string;
-        "customStyles": Record<string, string>;
+        "customStyles": string;
         "headingText": string;
         "imageDescription": string;
         "imageSource": string;
@@ -42,7 +42,8 @@ export namespace Components {
         /**
           * Custom styles to apply to search results. Expected format: JSON string, e.g., '{"borderRadius": "10px", "padding": "16px"}'
          */
-        "customStylesForResults": string | Record<string, string>;
+        "customStylesForResults": | string
+    | Record<string, Record<string, string>>;
         /**
           * Array of keys to dynamically extract properties from each document. Must be explicitly set by the parent component.
          */
@@ -343,7 +344,7 @@ declare namespace LocalJSX {
     }
     interface SearchcraftBaseSearchResult {
         "buttonText"?: string;
-        "customStyles"?: Record<string, string>;
+        "customStyles"?: string;
         "headingText"?: string;
         "imageDescription"?: string;
         "imageSource"?: string;
@@ -361,7 +362,8 @@ declare namespace LocalJSX {
         /**
           * Custom styles to apply to search results. Expected format: JSON string, e.g., '{"borderRadius": "10px", "padding": "16px"}'
          */
-        "customStylesForResults"?: string | Record<string, string>;
+        "customStylesForResults"?: | string
+    | Record<string, Record<string, string>>;
         /**
           * Array of keys to dynamically extract properties from each document. Must be explicitly set by the parent component.
          */

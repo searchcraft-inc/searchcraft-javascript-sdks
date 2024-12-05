@@ -7,19 +7,19 @@
 
 ## Properties
 
-| Property           | Attribute           | Description | Type                       | Default   |
-| ------------------ | ------------------- | ----------- | -------------------------- | --------- |
-| `buttonText`       | `button-text`       |             | `string`                   | `''`      |
-| `customStyles`     | --                  |             | `{ [x: string]: string; }` | `{}`      |
-| `headingText`      | `heading-text`      |             | `string`                   | `''`      |
-| `imageDescription` | `image-description` |             | `string`                   | `''`      |
-| `imageSource`      | `image-source`      |             | `string`                   | `''`      |
-| `isInteractive`    | `is-interactive`    |             | `boolean`                  | `false`   |
-| `primaryContent`   | `primary-content`   |             | `string`                   | `''`      |
-| `secondaryContent` | `secondary-content` |             | `string`                   | `''`      |
-| `subheadingText`   | `subheading-text`   |             | `string`                   | `''`      |
-| `tertiaryContent`  | `tertiary-content`  |             | `string`                   | `''`      |
-| `themeMode`        | `theme-mode`        |             | `"dark" \| "light"`        | `'light'` |
+| Property           | Attribute           | Description | Type                | Default   |
+| ------------------ | ------------------- | ----------- | ------------------- | --------- |
+| `buttonText`       | `button-text`       |             | `string`            | `''`      |
+| `customStyles`     | `custom-styles`     |             | `string`            | `'{}'`    |
+| `headingText`      | `heading-text`      |             | `string`            | `''`      |
+| `imageDescription` | `image-description` |             | `string`            | `''`      |
+| `imageSource`      | `image-source`      |             | `string`            | `''`      |
+| `isInteractive`    | `is-interactive`    |             | `boolean`           | `false`   |
+| `primaryContent`   | `primary-content`   |             | `string`            | `''`      |
+| `secondaryContent` | `secondary-content` |             | `string`            | `''`      |
+| `subheadingText`   | `subheading-text`   |             | `string`            | `''`      |
+| `tertiaryContent`  | `tertiary-content`  |             | `string`            | `''`      |
+| `themeMode`        | `theme-mode`        |             | `"dark" \| "light"` | `'light'` |
 
 
 ## Events
@@ -37,14 +37,9 @@
 
  - [searchcraft-base-search-results](../searchcraft-base-search-results)
 
-### Depends on
-
-- [searchcraft-clear-icon-set](../../assets)
-
 ### Graph
 ```mermaid
 graph TD;
-  searchcraft-base-search-result --> searchcraft-clear-icon-set
   searchcraft-base-search-results --> searchcraft-base-search-result
   style searchcraft-base-search-result fill:#f9f,stroke:#333,stroke-width:4px
 ```

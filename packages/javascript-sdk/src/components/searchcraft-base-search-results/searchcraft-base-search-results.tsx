@@ -1,11 +1,11 @@
-import { Component, h, Prop, State, Element } from '@stencil/core';
+import { Component, h, Prop, State } from '@stencil/core';
 import type { SearchcraftResponse } from '@searchcraft/core';
 
 import { useSearchcraftStore } from '@provider/store';
 import {
   extractDynamicProperties,
-  parseCustomStyles,
   parseSearchKeys,
+  serializeStyles,
 } from '@utils/utils';
 
 @Component({
@@ -22,31 +22,27 @@ export class SearchcraftBaseSearchResults {
    * Must be explicitly set by the parent component.
    */
   @Prop() searchKeys = '';
-
   /**
    * Custom styles to apply to search results.
    * Expected format: JSON string, e.g., '{"borderRadius": "10px", "padding": "16px"}'
    */
-  @Prop() customStylesForResults: string | Record<string, string> = {};
-
-  @Element() hostElement: HTMLElement; // Reference to the host element
+  @Prop() customStylesForResults:
+    | string
+    | Record<string, Record<string, string>> = {};
 
   private unsubscribe: () => void;
 
   componentDidLoad() {
-    // Initialize searchKeys if not provided
     if (!this.searchKeys || this.searchKeys.length === 0) {
       console.warn('No searchKeys provided; using empty keys array.');
-      this.searchKeys = ''; // Ensure it's explicitly set as an empty array
+      this.searchKeys = '';
     }
 
-    // Subscribe to state changes
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {
       this.searchResults = { ...state.searchResults };
       this.query = state.query;
     });
 
-    // Fetch initial state
     const { searchResults, query } = useSearchcraftStore.getState();
     this.searchResults = searchResults;
     this.query = query;
@@ -65,7 +61,11 @@ export class SearchcraftBaseSearchResults {
     }
 
     const parsedSearchKeys = parseSearchKeys(this.searchKeys);
-    const parsedCustomStyles = parseCustomStyles(this.customStylesForResults);
+    const serializedStyles =
+      typeof this.customStylesForResults === 'string'
+        ? this.customStylesForResults
+        : serializeStyles(this.customStylesForResults);
+
     return (
       <div class='resultsContainer'>
         {this.searchResults?.data?.hits?.map((document, index) => {
@@ -75,27 +75,6 @@ export class SearchcraftBaseSearchResults {
             parsedSearchKeys,
           );
 
-          // Render the custom element if present, otherwise fallback to default
-          const customElement = this.hostElement.querySelector(
-            '[slot="result-template"]',
-          );
-          if (customElement) {
-            // Clone the custom element and pass data to it
-            const customElementClone = customElement.cloneNode(
-              true,
-            ) as HTMLElement;
-            customElementClone.removeAttribute('slot'); // Remove the slot attribute
-            customElementClone.setAttribute(
-              'data-result',
-              JSON.stringify(result),
-            );
-            return (
-              <div key={`${dynamicProperties.id}-${index}`}>
-                {customElementClone.outerHTML}
-              </div>
-            );
-          }
-          // Fallback to the default element
           return (
             <searchcraft-base-search-result
               key={`${dynamicProperties.id}-${index}`}
@@ -111,20 +90,16 @@ export class SearchcraftBaseSearchResults {
               image-source={
                 dynamicProperties[parsedSearchKeys[parsedSearchKeys.length - 1]]
               }
-              customStyles={parsedCustomStyles}
+              custom-styles={serializedStyles}
             />
           );
         })}
-
         {this.query.length > 0 &&
           this.searchResults?.data?.hits?.length === 0 && (
             <searchcraft-error-message
               error-message={`No search results found for "${this.query}" query`}
             />
           )}
-
-        {/* Slot for custom element */}
-        <slot name='result-template' />
       </div>
     );
   }
