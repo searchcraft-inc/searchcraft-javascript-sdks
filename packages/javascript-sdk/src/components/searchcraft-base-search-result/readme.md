@@ -7,18 +7,19 @@
 
 ## Properties
 
-| Property           | Attribute           | Description | Type                | Default   |
-| ------------------ | ------------------- | ----------- | ------------------- | --------- |
-| `buttonText`       | `button-text`       |             | `string`            | `''`      |
-| `headingText`      | `heading-text`      |             | `string`            | `''`      |
-| `imageDescription` | `image-description` |             | `string`            | `''`      |
-| `imageSource`      | `image-source`      |             | `string`            | `''`      |
-| `isInteractive`    | `is-interactive`    |             | `boolean`           | `false`   |
-| `primaryContent`   | `primary-content`   |             | `string`            | `''`      |
-| `secondaryContent` | `secondary-content` |             | `string`            | `''`      |
-| `subheadingText`   | `subheading-text`   |             | `string`            | `''`      |
-| `tertiaryContent`  | `tertiary-content`  |             | `string`            | `''`      |
-| `themeMode`        | `theme-mode`        |             | `"dark" \| "light"` | `'light'` |
+| Property           | Attribute           | Description | Type                       | Default   |
+| ------------------ | ------------------- | ----------- | -------------------------- | --------- |
+| `buttonText`       | `button-text`       |             | `string`                   | `''`      |
+| `customStyles`     | --                  |             | `{ [x: string]: string; }` | `{}`      |
+| `headingText`      | `heading-text`      |             | `string`                   | `''`      |
+| `imageDescription` | `image-description` |             | `string`                   | `''`      |
+| `imageSource`      | `image-source`      |             | `string`                   | `''`      |
+| `isInteractive`    | `is-interactive`    |             | `boolean`                  | `false`   |
+| `primaryContent`   | `primary-content`   |             | `string`                   | `''`      |
+| `secondaryContent` | `secondary-content` |             | `string`                   | `''`      |
+| `subheadingText`   | `subheading-text`   |             | `string`                   | `''`      |
+| `tertiaryContent`  | `tertiary-content`  |             | `string`                   | `''`      |
+| `themeMode`        | `theme-mode`        |             | `"dark" \| "light"`        | `'light'` |
 
 
 ## Events

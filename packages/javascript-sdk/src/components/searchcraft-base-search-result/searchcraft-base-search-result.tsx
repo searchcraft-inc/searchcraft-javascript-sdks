@@ -16,6 +16,7 @@ export class SearchcraftBaseSearchResult {
   @Prop() headingText = ''; // Text for the heading
   @Prop() subheadingText = ''; // Text for the subheading
   @Prop() themeMode: 'light' | 'dark' = 'light'; // Light or dark theme context
+  @Prop() customStyles: Record<string, string> = {}; // Custom styles passed from parent
 
   @Event() buttonCallback: () => void = () => {}; // Callback for button click
   @Event() keyDownCallback: () => void = () => {}; // Callback for key down event
@@ -33,7 +34,7 @@ export class SearchcraftBaseSearchResult {
 
   render() {
     const isLightTheme = this.themeMode === 'light';
-
+    const containerStyle = { ...this.customStyles };
     return (
       <div
         class={
@@ -46,6 +47,7 @@ export class SearchcraftBaseSearchResult {
         id='searchcraft-item'
         onClick={this.handleContainerClick}
         onKeyDown={this.keyDownCallback}
+        style={containerStyle}
         tabindex='0'
       >
         {this.isInteractive && (

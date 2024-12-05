@@ -48,8 +48,17 @@
   </div>
   <div class="resultsContainer">
     <searchcraft-base-search-results
-    search-keys='["headline", "sub_headline", "body", "date_published", "author_name", "medium_image"]'>
+    search-keys='["headline", "sub_headline", "body", "date_published", "author_name", "medium_image"]'
+    custom-styles-for-results='{"borderRadius": "100px", "padding": "16px", "paddingLeft": "32px", "width": "1280px", "background": "green"}'>
   </searchcraft-base-search-results>
   </div>
+  <!-- <div>
+    <searchcraft-base-search-results
+    search-keys='["headline", "sub_headline", "body", "date_published", "author_name", "medium_image"]'>
+      <div slot="result-template" class="custom-result">
+        <h2>Custom Result</h2>
+      </div>
+    </searchcraft-base-search-results>
+  </div> -->
 </body>
 </html>

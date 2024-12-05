@@ -7,9 +7,10 @@
 
 ## Properties
 
-| Property     | Attribute     | Description                                                                                                         | Type     | Default |
-| ------------ | ------------- | ------------------------------------------------------------------------------------------------------------------- | -------- | ------- |
-| `searchKeys` | `search-keys` | Array of keys to dynamically extract properties from each document. Must be explicitly set by the parent component. | `string` | `''`    |
+| Property                 | Attribute                   | Description                                                                                                                 | Type                                 | Default |
+| ------------------------ | --------------------------- | --------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ | ------- |
+| `customStylesForResults` | `custom-styles-for-results` | Custom styles to apply to search results. Expected format: JSON string, e.g., '{"borderRadius": "10px", "padding": "16px"}' | `string \| { [x: string]: string; }` | `{}`    |
+| `searchKeys`             | `search-keys`               | Array of keys to dynamically extract properties from each document. Must be explicitly set by the parent component.         | `string`                             | `''`    |
 
 
 ## Dependencies
