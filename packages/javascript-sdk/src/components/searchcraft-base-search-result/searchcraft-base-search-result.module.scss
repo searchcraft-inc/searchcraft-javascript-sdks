@@ -147,12 +147,32 @@
   margin-top: 0px;
 }
 
-.bodyContentLight {
+.primaryContentLight {
   @include body-content-base;
   color: $light-search-result-body-content-color;
 }
 
-.bodyContentDark {
+.primaryContentDark {
+  @include body-content-base;
+  color: $dark-search-result-body-content-color;
+}
+
+.secondaryContentLight {
+  @include body-content-base;
+  color: $light-search-result-body-content-color;
+}
+
+.secondaryContentDark {
+  @include body-content-base;
+  color: $dark-search-result-body-content-color;
+}
+
+.tertiaryContentLight {
+  @include body-content-base;
+  color: $light-search-result-body-content-color;
+}
+
+.tertiaryContentDark {
   @include body-content-base;
   color: $dark-search-result-body-content-color;
 }

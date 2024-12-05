@@ -7,19 +7,27 @@
 
 ## Properties
 
-| Property            | Attribute             | Description | Type                | Default    |
-| ------------------- | --------------------- | ----------- | ------------------- | ---------- |
-| `buttonCallbackFn`  | --                    |             | `() => void`        | `() => {}` |
-| `buttonLabel`       | `button-label`        |             | `string`            | `''`       |
-| `callbackFn`        | --                    |             | `() => void`        | `() => {}` |
-| `imageAltText`      | `image-alt-text`      |             | `string`            | `''`       |
-| `imageSrc`          | `image-src`           |             | `string`            | `''`       |
-| `interactiveResult` | `interactive-result`  |             | `boolean`           | `false`    |
-| `keyDownCallbackFn` | --                    |             | `() => void`        | `() => {}` |
-| `resultBodyContent` | `result-body-content` |             | `string`            | `''`       |
-| `resultHeading`     | `result-heading`      |             | `string`            | `''`       |
-| `resultSubheading`  | `result-subheading`   |             | `string`            | `''`       |
-| `theme`             | `theme`               |             | `"dark" \| "light"` | `'light'`  |
+| Property           | Attribute           | Description | Type                | Default   |
+| ------------------ | ------------------- | ----------- | ------------------- | --------- |
+| `buttonText`       | `button-text`       |             | `string`            | `''`      |
+| `headingText`      | `heading-text`      |             | `string`            | `''`      |
+| `imageDescription` | `image-description` |             | `string`            | `''`      |
+| `imageSource`      | `image-source`      |             | `string`            | `''`      |
+| `isInteractive`    | `is-interactive`    |             | `boolean`           | `false`   |
+| `primaryContent`   | `primary-content`   |             | `string`            | `''`      |
+| `secondaryContent` | `secondary-content` |             | `string`            | `''`      |
+| `subheadingText`   | `subheading-text`   |             | `string`            | `''`      |
+| `tertiaryContent`  | `tertiary-content`  |             | `string`            | `''`      |
+| `themeMode`        | `theme-mode`        |             | `"dark" \| "light"` | `'light'` |
+
+
+## Events
+
+| Event             | Description | Type               |
+| ----------------- | ----------- | ------------------ |
+| `buttonCallback`  |             | `CustomEvent<any>` |
+| `keyDownCallback` |             | `CustomEvent<any>` |
+| `resultCallback`  |             | `CustomEvent<any>` |
 
 
 ## Dependencies

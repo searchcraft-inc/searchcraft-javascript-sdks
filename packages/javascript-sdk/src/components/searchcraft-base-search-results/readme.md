@@ -5,6 +5,13 @@
 <!-- Auto Generated Below -->
 
 
+## Properties
+
+| Property     | Attribute     | Description                                                                                                         | Type     | Default |
+| ------------ | ------------- | ------------------------------------------------------------------------------------------------------------------- | -------- | ------- |
+| `searchKeys` | `search-keys` | Array of keys to dynamically extract properties from each document. Must be explicitly set by the parent component. | `string` | `''`    |
+
+
 ## Dependencies
 
 ### Depends on

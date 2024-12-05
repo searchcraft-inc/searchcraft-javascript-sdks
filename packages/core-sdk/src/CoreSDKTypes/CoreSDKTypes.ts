@@ -29,8 +29,18 @@ export interface SearchcraftInstance {
  */
 export interface SearchcraftResponse {
   status: number; // HTTP status code of the response
-  data: SearchResult; // The main search result data
+  data: SearchResult | SearchError; // The main search result data
 }
+
+/**
+ * * Error returned when a search is unsuccessful.
+ */
+export type SearchError = {
+  status: number; // HTTP status code of the response
+  message?: string; // Error message (optional).
+  code?: number; // Error code (optional).
+  hits?: []; // Always an empty array when an error occurs (optional).
+};
 
 /**
  * * Top-level result returned when a search is successful.
@@ -46,12 +56,9 @@ export interface SearchResult {
  * * Represents the structure of facets, which group search results into categories.
  */
 export interface Facets {
-  sections: Record<
-    string,
-    {
-      counts: Record<string, number>; // Dynamic keys with counts of matching documents
-    }
-  >; // A record of sections where each section contains counts
+  [facetName: string]: {
+    counts: Record<string, number>; // Dynamic keys with counts of matching documents
+  };
 }
 
 /**
@@ -100,15 +107,4 @@ export type SearchParams = {
    * Optional parameter.
    */
   sort?: 'asc' | 'desc';
-};
-
-/**
- * * Error returned when a search is unsuccessful.
- */
-export type SearchError = {
-  data: {
-    message?: string; // Error message (optional).
-    code?: number; // Error code (optional).
-    hits?: []; // Always an empty array when an error occurs (optional).
-  };
 };
