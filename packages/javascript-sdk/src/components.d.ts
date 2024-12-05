@@ -26,19 +26,22 @@ export namespace Components {
         "rightToLeftOrientation": boolean;
     }
     interface SearchcraftBaseSearchResult {
-        "buttonCallbackFn": () => void;
-        "buttonLabel": string;
-        "callbackFn": () => void;
-        "imageAltText": string;
-        "imageSrc": string;
-        "interactiveResult": boolean;
-        "keyDownCallbackFn": () => void;
-        "resultBodyContent": string;
-        "resultHeading": string;
-        "resultSubheading": string;
-        "theme": 'light' | 'dark';
+        "buttonText": string;
+        "headingText": string;
+        "imageDescription": string;
+        "imageSource": string;
+        "isInteractive": boolean;
+        "primaryContent": string;
+        "secondaryContent": string;
+        "subheadingText": string;
+        "tertiaryContent": string;
+        "themeMode": 'light' | 'dark';
     }
     interface SearchcraftBaseSearchResults {
+        /**
+          * Array of keys to dynamically extract properties from each document. Must be explicitly set by the parent component.
+         */
+        "searchKeys": string;
     }
     interface SearchcraftButton {
         "iconElement"?: Element;
@@ -112,6 +115,10 @@ export interface SearchcraftBaseSearchFormCustomEvent<T> extends CustomEvent<T> 
     detail: T;
     target: HTMLSearchcraftBaseSearchFormElement;
 }
+export interface SearchcraftBaseSearchResultCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSearchcraftBaseSearchResultElement;
+}
 export interface SearchcraftButtonCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSearchcraftButtonElement;
@@ -159,7 +166,20 @@ declare global {
         prototype: HTMLSearchcraftBaseSearchFormElement;
         new (): HTMLSearchcraftBaseSearchFormElement;
     };
+    interface HTMLSearchcraftBaseSearchResultElementEventMap {
+        "buttonCallback": any;
+        "keyDownCallback": any;
+        "resultCallback": any;
+    }
     interface HTMLSearchcraftBaseSearchResultElement extends Components.SearchcraftBaseSearchResult, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSearchcraftBaseSearchResultElementEventMap>(type: K, listener: (this: HTMLSearchcraftBaseSearchResultElement, ev: SearchcraftBaseSearchResultCustomEvent<HTMLSearchcraftBaseSearchResultElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSearchcraftBaseSearchResultElementEventMap>(type: K, listener: (this: HTMLSearchcraftBaseSearchResultElement, ev: SearchcraftBaseSearchResultCustomEvent<HTMLSearchcraftBaseSearchResultElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSearchcraftBaseSearchResultElement: {
         prototype: HTMLSearchcraftBaseSearchResultElement;
@@ -317,19 +337,25 @@ declare namespace LocalJSX {
         "rightToLeftOrientation"?: boolean;
     }
     interface SearchcraftBaseSearchResult {
-        "buttonCallbackFn"?: () => void;
-        "buttonLabel"?: string;
-        "callbackFn"?: () => void;
-        "imageAltText"?: string;
-        "imageSrc"?: string;
-        "interactiveResult"?: boolean;
-        "keyDownCallbackFn"?: () => void;
-        "resultBodyContent"?: string;
-        "resultHeading"?: string;
-        "resultSubheading"?: string;
-        "theme"?: 'light' | 'dark';
+        "buttonText"?: string;
+        "headingText"?: string;
+        "imageDescription"?: string;
+        "imageSource"?: string;
+        "isInteractive"?: boolean;
+        "onButtonCallback"?: (event: SearchcraftBaseSearchResultCustomEvent<any>) => void;
+        "onKeyDownCallback"?: (event: SearchcraftBaseSearchResultCustomEvent<any>) => void;
+        "onResultCallback"?: (event: SearchcraftBaseSearchResultCustomEvent<any>) => void;
+        "primaryContent"?: string;
+        "secondaryContent"?: string;
+        "subheadingText"?: string;
+        "tertiaryContent"?: string;
+        "themeMode"?: 'light' | 'dark';
     }
     interface SearchcraftBaseSearchResults {
+        /**
+          * Array of keys to dynamically extract properties from each document. Must be explicitly set by the parent component.
+         */
+        "searchKeys"?: string;
     }
     interface SearchcraftButton {
         "iconElement"?: Element;

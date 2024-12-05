@@ -9,9 +9,9 @@
     document.addEventListener('DOMContentLoaded', () => {
       // Define the configuration object
       const config = {
-        index: ['scraftdemo_movies'],
-        apiKey: '1234.909.jmk',
-        endpointURL: 'http://localhost:3000',
+        index: ['1_post_bulletin'],
+        apiKey: '3KOBPiti9QPZBIvcbr1HwFhPbiUDz8edMs30qEBkZKtEpoymSfXXwUaGtZGDQote',
+        endpointURL: 'https://runegard.search.searchcraft.io',
       };
 
       // Check for the presence of the search form components
@@ -47,7 +47,9 @@
     />
   </div>
   <div class="resultsContainer">
-    <searchcraft-base-search-results />
+    <searchcraft-base-search-results
+    search-keys='["headline", "sub_headline", "body", "date_published", "author_name", "medium_image"]'>
+  </searchcraft-base-search-results>
   </div>
 </body>
 </html>

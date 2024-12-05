@@ -1,7 +1,7 @@
 import type {
   CoreConfigSDK,
+  SearchcraftResponse,
   SearchParams,
-  SearchResult,
 } from '../CoreSDKTypes';
 
 /**
@@ -19,9 +19,9 @@ export class CoreSDK {
 
   /**
    * @param {SearchParams} searchParams - The parameters for the search.
-   * @returns {Promise<SearchResult>} - Returns a `SearchResult` object with the results from the search or throws an error.
+   * @returns {Promise<SearchcraftResponse>} - Returns a `SearchResult` object with the results from the search or throws an error.
    */
-  search = async (searchParams: SearchParams): Promise<SearchResult> => {
+  search = async (searchParams: SearchParams): Promise<SearchcraftResponse> => {
     const quoteCount = (searchParams.query.match(/"/g) || []).length;
     if (quoteCount % 2 !== 0) {
       throw new Error(

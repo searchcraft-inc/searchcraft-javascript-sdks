@@ -1,18 +1,17 @@
 import { create } from 'zustand';
 import {
-  type SearchError,
-  type SearchResult,
   type CoreSDK as SearchcraftCore,
   SDKDebugger,
   LogLevel,
+  type SearchcraftResponse,
 } from '@searchcraft/core';
 
 interface SearchcraftState {
   query: string;
   isRequesting: boolean;
-  searchResults: SearchResult | SearchError | null;
+  searchResults: SearchcraftResponse | null;
   setQuery: (query: string) => void;
-  setSearchResults: (results: SearchResult | SearchError | null) => void;
+  setSearchResults: (results: SearchcraftResponse | null) => void;
   setIsRequesting: (isRequesting: boolean) => void;
   search: () => Promise<void>;
   initialize: (searchcraft: SearchcraftCore, debug?: boolean) => void;
