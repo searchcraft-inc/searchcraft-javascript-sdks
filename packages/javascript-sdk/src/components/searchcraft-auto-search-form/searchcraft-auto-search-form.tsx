@@ -73,7 +73,6 @@ export class SearchcraftAutoSearchForm {
 
     // Set a new debounce timeout
     this.debounceTimeout = setTimeout(() => {
-      console.log('Debounced search triggered');
       this.runSearch();
     }, this.debounceDelay);
   };
@@ -116,7 +115,6 @@ export class SearchcraftAutoSearchForm {
   };
 
   render() {
-    console.log(this.isRequesting);
     const formClass = this.rightToLeftOrientation ? 'formRTL' : 'formLTR';
     const parsedCustomStyles = parseCustomStyles(this.customStylesForInput);
     return (

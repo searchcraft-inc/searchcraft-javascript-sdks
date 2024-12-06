@@ -33,7 +33,6 @@ export class SearchcraftClearInputButton {
   };
 
   render() {
-    console.log(this.isRequesting);
     return this.rightToLeftOrientation ? (
       <button
         class={classNames('inputClearButtonRTL', '.sc-clear-input-button-rtl')}
