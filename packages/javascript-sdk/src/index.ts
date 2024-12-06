@@ -15,6 +15,7 @@ export {
   extractDynamicProperties,
   parseCustomStyles,
   parseSearchKeys,
+  serializeStyles,
 } from './utils/utils';
 
 // Export Zustand store and useTheme hook
