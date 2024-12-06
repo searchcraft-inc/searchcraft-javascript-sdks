@@ -67,7 +67,6 @@ export class CoreSDK {
       };
 
       const response = await fetch(baseUrl, requestOptions);
-      console.log('REQUEST RESPONSE', response);
 
       if (!response.ok) {
         throw new Error(

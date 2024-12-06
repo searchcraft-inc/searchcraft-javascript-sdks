@@ -30,6 +30,17 @@ export class SearchcraftBaseSearchResults {
     | string
     | Record<string, Record<string, string>> = {};
 
+  /**
+   * Place ad at the end of the results.
+   */
+  @Prop() placeAdAtEnd = false;
+
+  /**
+   * Place ad every N results (e.g., every 4 results).
+   * Default value: 4
+   */
+  @Prop() adInterval = 4;
+
   private unsubscribe: () => void;
 
   componentDidLoad() {
@@ -66,34 +77,67 @@ export class SearchcraftBaseSearchResults {
         ? this.customStylesForResults
         : serializeStyles(this.customStylesForResults);
 
+    const resultsComponents = this.searchResults?.data?.hits?.map(
+      (document, index) => {
+        const { doc: result } = document;
+        const dynamicProperties = extractDynamicProperties(
+          result,
+          parsedSearchKeys,
+        );
+
+        return (
+          <searchcraft-base-search-result
+            key={`${document.document_id}-${index}`}
+            button-callback={() => console.log('button callback')}
+            result-callback={() => console.log('interactive element')}
+            keydown-callback={() => console.log('keydown')}
+            is-interactive={true}
+            heading-text={dynamicProperties[parsedSearchKeys[0]]}
+            subheading-text={dynamicProperties[parsedSearchKeys[1]]}
+            primary-content={dynamicProperties[parsedSearchKeys[2]]}
+            secondary-content={dynamicProperties[parsedSearchKeys[3]]}
+            tertiary-content={dynamicProperties[parsedSearchKeys[4]]}
+            image-source={
+              dynamicProperties[parsedSearchKeys[parsedSearchKeys.length - 1]]
+            }
+            custom-styles={serializedStyles}
+          />
+        );
+      },
+    );
+
+    const finalComponents: JSX.Element[] = [];
+
+    // Add ads at specified intervals
+    if (this.adInterval > 0) {
+      resultsComponents.forEach((component, index) => {
+        finalComponents.push(component);
+        if ((index + 1) % this.adInterval === 0) {
+          finalComponents.push(
+            <div key={`ad-section-${index + 1}`} class='adSection'>
+              <span>##</span>
+              <p> Ad Impressions</p>
+            </div>,
+          );
+        }
+      });
+    } else {
+      finalComponents.push(...resultsComponents);
+    }
+
+    // Add ad at the end if specified
+    if (this.placeAdAtEnd) {
+      finalComponents.push(
+        <div key='ad-section-end' class='adSection'>
+          <span>##</span>
+          <p> Ad Impressions</p>
+        </div>,
+      );
+    }
+
     return (
       <div class='resultsContainer'>
-        {this.searchResults?.data?.hits?.map((document, index) => {
-          const { doc: result } = document;
-          const dynamicProperties = extractDynamicProperties(
-            result,
-            parsedSearchKeys,
-          );
-
-          return (
-            <searchcraft-base-search-result
-              key={`${dynamicProperties.id}-${index}`}
-              button-callback={() => console.log('button callback')}
-              result-callback={() => console.log('interactive element')}
-              keydown-callback={() => console.log('keydown')}
-              is-interactive={true}
-              heading-text={dynamicProperties[parsedSearchKeys[0]]}
-              subheading-text={dynamicProperties[parsedSearchKeys[1]]}
-              primary-content={dynamicProperties[parsedSearchKeys[2]]}
-              secondary-content={dynamicProperties[parsedSearchKeys[3]]}
-              tertiary-content={dynamicProperties[parsedSearchKeys[4]]}
-              image-source={
-                dynamicProperties[parsedSearchKeys[parsedSearchKeys.length - 1]]
-              }
-              custom-styles={serializedStyles}
-            />
-          );
-        })}
+        {finalComponents}
         {this.query.length > 0 &&
           this.searchResults?.data?.hits?.length === 0 && (
             <searchcraft-error-message

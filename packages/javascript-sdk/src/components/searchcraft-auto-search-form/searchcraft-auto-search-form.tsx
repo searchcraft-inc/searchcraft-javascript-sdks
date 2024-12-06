@@ -38,17 +38,28 @@ export class SearchcraftAutoSearchForm {
   @Event() querySubmit: EventEmitter<string>;
 
   @State() error = false;
+  @State() isRequesting = false;
   @State() query = '';
   @State() searchResults = '';
 
   private debounceTimeout: ReturnType<typeof setTimeout> | null = null;
   private debounceDelay = 300; // 300ms debounce delay
   private searchStore = useSearchcraftStore.getState();
+  unsubscribe: () => void;
 
   componentDidLoad() {
     const searchcraft = new SearchcraftCore(this.config);
     this.searchStore.initialize(searchcraft, true);
-    console.log('Component initialized');
+
+    this.unsubscribe = useSearchcraftStore.subscribe((state) => {
+      this.isRequesting = state.isRequesting;
+    });
+  }
+
+  disconnectedCallback() {
+    if (this.unsubscribe) {
+      this.unsubscribe();
+    }
   }
 
   handleInputChange = (event: ScInputCustomEvent<string>) => {
@@ -69,7 +80,6 @@ export class SearchcraftAutoSearchForm {
 
   handleClearInput = () => {
     this.query = '';
-    console.log('Input cleared');
 
     if (typeof this.clearInput === 'function') {
       this.clearInput();
@@ -106,6 +116,7 @@ export class SearchcraftAutoSearchForm {
   };
 
   render() {
+    console.log(this.isRequesting);
     const formClass = this.rightToLeftOrientation ? 'formRTL' : 'formLTR';
     const parsedCustomStyles = parseCustomStyles(this.customStylesForInput);
     return (
@@ -115,6 +126,7 @@ export class SearchcraftAutoSearchForm {
           <searchcraft-input
             customStyles={parsedCustomStyles}
             input-caption-value={this.inputCaptionValue}
+            is-requesting={this.isRequesting}
             onClearInput={this.handleClearInput}
             onSearchInputChange={this.handleInputChange}
             placeholder-value={this.placeholderValue}

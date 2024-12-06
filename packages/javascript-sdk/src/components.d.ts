@@ -40,10 +40,18 @@ export namespace Components {
     }
     interface SearchcraftBaseSearchResults {
         /**
+          * Place ad every N results (e.g., every 4 results). Default value: 4
+         */
+        "adInterval": number;
+        /**
           * Custom styles to apply to search results. Expected format: JSON string, e.g., '{"borderRadius": "10px", "padding": "16px"}'
          */
         "customStylesForResults": | string
     | Record<string, Record<string, string>>;
+        /**
+          * Place ad at the end of the results.
+         */
+        "placeAdAtEnd": boolean;
         /**
           * Array of keys to dynamically extract properties from each document. Must be explicitly set by the parent component.
          */
@@ -84,6 +92,7 @@ export namespace Components {
         "inputCaptionClassName": string;
         "inputCaptionValue": string;
         "inputClassName": string;
+        "isRequesting": boolean;
         "placeholderValue": string;
         "query": string;
         "rightToLeftOrientation": boolean;
@@ -360,10 +369,18 @@ declare namespace LocalJSX {
     }
     interface SearchcraftBaseSearchResults {
         /**
+          * Place ad every N results (e.g., every 4 results). Default value: 4
+         */
+        "adInterval"?: number;
+        /**
           * Custom styles to apply to search results. Expected format: JSON string, e.g., '{"borderRadius": "10px", "padding": "16px"}'
          */
         "customStylesForResults"?: | string
     | Record<string, Record<string, string>>;
+        /**
+          * Place ad at the end of the results.
+         */
+        "placeAdAtEnd"?: boolean;
         /**
           * Array of keys to dynamically extract properties from each document. Must be explicitly set by the parent component.
          */
@@ -406,6 +423,7 @@ declare namespace LocalJSX {
         "inputCaptionClassName"?: string;
         "inputCaptionValue"?: string;
         "inputClassName"?: string;
+        "isRequesting"?: boolean;
         "onClearInput"?: (event: SearchcraftInputCustomEvent<void>) => void;
         "onSearchInputChange"?: (event: SearchcraftInputCustomEvent<string>) => void;
         "placeholderValue"?: string;
