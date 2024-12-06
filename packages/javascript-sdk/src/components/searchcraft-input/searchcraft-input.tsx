@@ -28,6 +28,8 @@ export class SearchcraftInput {
   @Prop() inputCaptionClassName = '';
   @Prop() inputCaptionValue = '';
   @Prop() inputClassName = '';
+  @Prop() inputIconHeight = 20;
+  @Prop() inputIconWidth = 20;
   @Prop() isRequesting = false;
   @Prop() placeholderValue = 'Enter Search';
   @Prop() rightToLeftOrientation = false;
@@ -116,14 +118,18 @@ export class SearchcraftInput {
             )}
             <searchcraft-input-icon
               error={this.error}
+              height={this.inputIconHeight}
               rightToLeftOrientation={this.rightToLeftOrientation}
+              width={this.inputIconWidth}
             />
           </Fragment>
         ) : (
           <div class='inputWrapper'>
             <searchcraft-input-icon
               error={this.error}
+              height={this.inputIconHeight}
               rightToLeftOrientation={this.rightToLeftOrientation}
+              width={this.inputIconWidth}
             />
             <input
               class={classNames(inputClassName, 'searchcraft-input')}

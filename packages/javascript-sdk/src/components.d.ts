@@ -14,6 +14,8 @@ export namespace Components {
         "config": CoreConfigSDK;
         "customStylesForInput": string | Record<string, string>;
         "inputCaptionValue": string;
+        "inputIconHeight": number;
+        "inputIconWidth": number;
         "labelForInput": string;
         "placeholderValue": string;
         "rightToLeftOrientation": boolean;
@@ -92,6 +94,8 @@ export namespace Components {
         "inputCaptionClassName": string;
         "inputCaptionValue": string;
         "inputClassName": string;
+        "inputIconHeight": number;
+        "inputIconWidth": number;
         "isRequesting": boolean;
         "placeholderValue": string;
         "query": string;
@@ -104,18 +108,28 @@ export namespace Components {
         "rightToLeftOrientation": boolean;
     }
     interface SearchcraftInputIcon {
+        /**
+          * Determines if an error icon should be displayed.
+         */
         "error"?: boolean;
+        "height": number;
+        /**
+          * Determines if the layout should be right-to-left.
+         */
         "rightToLeftOrientation": boolean;
+        "width": number;
     }
     interface SearchcraftInputLabel {
         "inputLabelClassName"?: string;
         "label"?: string;
     }
     interface SearchcraftSearchIconSet {
+        "height": number;
         /**
-          * Type of the icon to display. Options: ''search-light', search-dark', 'error-light', 'error-dark'
+          * Type of the icon to display. Options: 'search-light', 'search-dark', 'error-light', 'error-dark'
          */
         "type": 'search-light' | 'search-dark' | 'error-light' | 'error-dark';
+        "width": number;
     }
     interface SearchcraftSpinnerDark {
     }
@@ -338,6 +352,8 @@ declare namespace LocalJSX {
         "config"?: CoreConfigSDK;
         "customStylesForInput"?: string | Record<string, string>;
         "inputCaptionValue"?: string;
+        "inputIconHeight"?: number;
+        "inputIconWidth"?: number;
         "labelForInput"?: string;
         "onQuerySubmit"?: (event: SearchcraftAutoSearchFormCustomEvent<string>) => void;
         "placeholderValue"?: string;
@@ -423,6 +439,8 @@ declare namespace LocalJSX {
         "inputCaptionClassName"?: string;
         "inputCaptionValue"?: string;
         "inputClassName"?: string;
+        "inputIconHeight"?: number;
+        "inputIconWidth"?: number;
         "isRequesting"?: boolean;
         "onClearInput"?: (event: SearchcraftInputCustomEvent<void>) => void;
         "onSearchInputChange"?: (event: SearchcraftInputCustomEvent<string>) => void;
@@ -437,18 +455,28 @@ declare namespace LocalJSX {
         "rightToLeftOrientation"?: boolean;
     }
     interface SearchcraftInputIcon {
+        /**
+          * Determines if an error icon should be displayed.
+         */
         "error"?: boolean;
+        "height"?: number;
+        /**
+          * Determines if the layout should be right-to-left.
+         */
         "rightToLeftOrientation"?: boolean;
+        "width"?: number;
     }
     interface SearchcraftInputLabel {
         "inputLabelClassName"?: string;
         "label"?: string;
     }
     interface SearchcraftSearchIconSet {
+        "height"?: number;
         /**
-          * Type of the icon to display. Options: ''search-light', search-dark', 'error-light', 'error-dark'
+          * Type of the icon to display. Options: 'search-light', 'search-dark', 'error-light', 'error-dark'
          */
         "type"?: 'search-light' | 'search-dark' | 'error-light' | 'error-dark';
+        "width"?: number;
     }
     interface SearchcraftSpinnerDark {
     }

@@ -7,18 +7,21 @@ import { Component, Prop, h } from '@stencil/core';
 export class SearchcraftSearchIconSet {
   /**
    * Type of the icon to display.
-   * Options: ''search-light', search-dark', 'error-light', 'error-dark'
+   * Options: 'search-light', 'search-dark', 'error-light', 'error-dark'
    */
   @Prop() type: 'search-light' | 'search-dark' | 'error-light' | 'error-dark' =
     'search-dark';
+  @Prop() width = 20;
+  @Prop() height = 20;
 
   render() {
+    const { width, height } = this;
     switch (this.type) {
       case 'search-light':
         return (
           <svg
-            width='20'
-            height='20'
+            width={width}
+            height={height}
             viewBox='0 0 20 20'
             fill='none'
             xmlns='http://www.w3.org/2000/svg'
@@ -37,8 +40,8 @@ export class SearchcraftSearchIconSet {
       case 'search-dark':
         return (
           <svg
-            width='18'
-            height='18'
+            width={width}
+            height={height}
             viewBox='0 0 18 18'
             fill='none'
             xmlns='http://www.w3.org/2000/svg'
@@ -57,8 +60,8 @@ export class SearchcraftSearchIconSet {
       case 'error-light':
         return (
           <svg
-            width='20'
-            height='20'
+            width={width}
+            height={height}
             viewBox='0 0 20 20'
             fill='none'
             xmlns='http://www.w3.org/2000/svg'
@@ -79,8 +82,8 @@ export class SearchcraftSearchIconSet {
       case 'error-dark':
         return (
           <svg
-            width='18'
-            height='18'
+            width={width}
+            height={height}
             viewBox='0 0 18 18'
             fill='none'
             xmlns='http://www.w3.org/2000/svg'
