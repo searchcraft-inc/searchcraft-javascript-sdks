@@ -30,6 +30,8 @@ export class SearchcraftAutoSearchForm {
   };
   @Prop() customStylesForInput: string | Record<string, string> = {};
   @Prop() inputCaptionValue = '';
+  @Prop() inputIconHeight = 20;
+  @Prop() inputIconWidth = 20;
   @Prop() labelForInput = '';
   @Prop() placeholderValue = 'Search here';
   @Prop() rightToLeftOrientation = false;
@@ -125,6 +127,8 @@ export class SearchcraftAutoSearchForm {
             customStyles={parsedCustomStyles}
             input-caption-value={this.inputCaptionValue}
             is-requesting={this.isRequesting}
+            input-icon-height={this.inputIconHeight}
+            input-icon-width={this.inputIconWidth}
             onClearInput={this.handleClearInput}
             onSearchInputChange={this.handleInputChange}
             placeholder-value={this.placeholderValue}

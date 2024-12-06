@@ -14,6 +14,8 @@
 | `config`                 | --                          |             | `CoreConfigSDK`                      | `{     apiKey: '',     endpointURL: '',     index: [],   }` |
 | `customStylesForInput`   | `custom-styles-for-input`   |             | `string \| { [x: string]: string; }` | `{}`                                                        |
 | `inputCaptionValue`      | `input-caption-value`       |             | `string`                             | `''`                                                        |
+| `inputIconHeight`        | `input-icon-height`         |             | `number`                             | `20`                                                        |
+| `inputIconWidth`         | `input-icon-width`          |             | `number`                             | `20`                                                        |
 | `labelForInput`          | `label-for-input`           |             | `string`                             | `''`                                                        |
 | `placeholderValue`       | `placeholder-value`         |             | `string`                             | `'Search here'`                                             |
 | `rightToLeftOrientation` | `right-to-left-orientation` |             | `boolean`                            | `false`                                                     |

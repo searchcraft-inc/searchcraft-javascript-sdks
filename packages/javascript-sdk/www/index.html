@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Search and Display Results</title> <link rel="modulepreload" href="/build/p-d5f8fc1d.js"><link rel="modulepreload" href="/build/p-17c94ac1.js"><link rel="modulepreload" href="/build/p-5cdc6210.js"><link rel="modulepreload" href="/build/p-9c617862.js"><link rel="modulepreload" href="/build/p-e6f6972c.js"><script type="module" src="/build/p-d5f8fc1d.js" data-stencil data-resources-url="/build/" data-stencil-namespace="searchcraft-javascript-sdk"></script> <script type="module">
+<!doctype html><html lang="en"><head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Search and Display Results</title> <script type="module" src="/build/searchcraft-javascript-sdk.esm.js" data-stencil></script> <script type="module">
     document.addEventListener('DOMContentLoaded', () => {
       // Define the configuration object
       const config = {
@@ -28,7 +28,7 @@
     }
     .resultsContainer {
       margin-top: 20px;
-    }</style> </head> <body> <div class="container"> <searchcraft-auto-search-form custom-styles-for-input="{&quot;borderRadius&quot;: &quot;100px&quot;, &quot;padding&quot;: &quot;16px&quot;, &quot;paddingLeft&quot;: &quot;32px&quot;, &quot;width&quot;: &quot;880px&quot;, &quot;placeholderFontSize&quot;: &quot;28px&quot;}"></searchcraft-auto-search-form></div> <div class="resultsContainer"> <searchcraft-base-search-results search-keys="[&quot;headline&quot;, &quot;sub_headline&quot;, &quot;body&quot;, &quot;date_published&quot;, &quot;author_name&quot;, &quot;medium_image&quot;]" custom-styles-for-results="{
+    }</style> </head> <body> <div class="container"> <searchcraft-auto-search-form custom-styles-for-input="{&quot;borderRadius&quot;: &quot;100px&quot;, &quot;padding&quot;: &quot;16px&quot;, &quot;paddingLeft&quot;: &quot;32px&quot;, &quot;width&quot;: &quot;880px&quot;, &quot;placeholderFontSize&quot;: &quot;28px&quot;}" input-icon-height="27" input-icon-width="27"></searchcraft-auto-search-form></div> <div class="resultsContainer"> <searchcraft-base-search-results search-keys="[&quot;headline&quot;, &quot;sub_headline&quot;, &quot;body&quot;, &quot;date_published&quot;, &quot;author_name&quot;, &quot;medium_image&quot;]" custom-styles-for-results="{
       &quot;container&quot;: {&quot;padding&quot;: &quot;16px&quot;, &quot;border&quot;: &quot;1px solid #ccc&quot;, &quot;borderRadius&quot;: &quot;8px&quot;, &quot;marginBottom&quot;: &quot;16px&quot;},
       &quot;heading&quot;: {&quot;fontSize&quot;: &quot;24px&quot;, &quot;color&quot;: &quot;#333&quot;, &quot;marginBottom&quot;: &quot;8px&quot;},
       &quot;subheading&quot;: {&quot;fontSize&quot;: &quot;20px&quot;, &quot;color&quot;: &quot;green&quot;, &quot;marginBottom&quot;: &quot;8px&quot;},
@@ -36,4 +36,13 @@
       &quot;secondaryContent&quot;: {&quot;fontSize&quot;: &quot;14px&quot;, &quot;color&quot;: &quot;#999&quot;, &quot;marginTop&quot;: &quot;4px&quot;},
       &quot;tertiaryContent&quot;: {&quot;fontSize&quot;: &quot;12px&quot;, &quot;color&quot;: &quot;#bbb&quot;, &quot;marginTop&quot;: &quot;4px&quot;},
       &quot;button&quot;: {&quot;backgroundColor&quot;: &quot;#007BFF&quot;, &quot;color&quot;: &quot;#fff&quot;, &quot;padding&quot;: &quot;8px 16px&quot;, &quot;border&quot;: &quot;none&quot;, &quot;borderRadius&quot;: &quot;4px&quot;}
-    }" ad-interval="3"></searchcraft-base-search-results> </div> </body></html>
+    }" ad-interval="3"></searchcraft-base-search-results> </div> <script>
+if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+  // auto-unregister service worker during dev mode
+  navigator.serviceWorker.getRegistration().then(function(registration) {
+    if (registration) {
+      registration.unregister().then(function() { location.reload(true) });
+    }
+  });
+}
+</script></body></html>

@@ -7,10 +7,12 @@
 
 ## Properties
 
-| Property                 | Attribute                   | Description | Type      | Default     |
-| ------------------------ | --------------------------- | ----------- | --------- | ----------- |
-| `error`                  | `error`                     |             | `boolean` | `undefined` |
-| `rightToLeftOrientation` | `right-to-left-orientation` |             | `boolean` | `false`     |
+| Property                 | Attribute                   | Description                                       | Type      | Default     |
+| ------------------------ | --------------------------- | ------------------------------------------------- | --------- | ----------- |
+| `error`                  | `error`                     | Determines if an error icon should be displayed.  | `boolean` | `undefined` |
+| `height`                 | `height`                    |                                                   | `number`  | `20`        |
+| `rightToLeftOrientation` | `right-to-left-orientation` | Determines if the layout should be right-to-left. | `boolean` | `false`     |
+| `width`                  | `width`                     |                                                   | `number`  | `20`        |
 
 
 ## Dependencies
