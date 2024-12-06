@@ -58,9 +58,8 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
       if (!searchcraft) {
         throw new Error('Searchcraft instance is not initialized.');
       }
-
-      log(LogLevel.INFO, `Starting search with query: "${query}"`);
       setIsRequesting(true);
+      log(LogLevel.INFO, `Starting search with query: "${query}"`);
       try {
         const results = await searchcraft.search({ query, mode: 'fuzzy' });
         setSearchResults(results);

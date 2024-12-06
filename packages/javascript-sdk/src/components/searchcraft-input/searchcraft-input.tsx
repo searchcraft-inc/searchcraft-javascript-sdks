@@ -28,6 +28,7 @@ export class SearchcraftInput {
   @Prop() inputCaptionClassName = '';
   @Prop() inputCaptionValue = '';
   @Prop() inputClassName = '';
+  @Prop() isRequesting = false;
   @Prop() placeholderValue = 'Enter Search';
   @Prop() rightToLeftOrientation = false;
   @Prop() query = '';
@@ -108,6 +109,7 @@ export class SearchcraftInput {
             )}
             {this.query.length > 0 && (
               <searchcraft-clear-input-button
+                isRequesting={this.isRequesting}
                 onClearInput={this.handleClearInput}
                 rightToLeftOrientation={this.rightToLeftOrientation}
               />
@@ -148,6 +150,7 @@ export class SearchcraftInput {
             )}
             {this.query.length > 0 && (
               <searchcraft-clear-input-button
+                isRequesting={this.isRequesting}
                 onClearInput={this.handleClearInput}
                 rightToLeftOrientation={this.rightToLeftOrientation}
               />

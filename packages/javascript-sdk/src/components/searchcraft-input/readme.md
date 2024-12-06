@@ -15,6 +15,7 @@
 | `inputCaptionClassName`  | `input-caption-class-name`  |             | `string`                             | `''`             |
 | `inputCaptionValue`      | `input-caption-value`       |             | `string`                             | `''`             |
 | `inputClassName`         | `input-class-name`          |             | `string`                             | `''`             |
+| `isRequesting`           | `is-requesting`             |             | `boolean`                            | `false`          |
 | `placeholderValue`       | `placeholder-value`         |             | `string`                             | `'Enter Search'` |
 | `query`                  | `query`                     |             | `string`                             | `''`             |
 | `rightToLeftOrientation` | `right-to-left-orientation` |             | `boolean`                            | `false`          |

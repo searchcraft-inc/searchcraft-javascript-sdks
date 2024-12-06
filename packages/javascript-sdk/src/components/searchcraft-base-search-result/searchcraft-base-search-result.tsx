@@ -32,8 +32,7 @@ export class SearchcraftBaseSearchResult {
     }
   };
 
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  private parseStyles(): Record<string, any> {
+  private parseStyles(): Record<string, { [key: string]: string }> {
     try {
       return JSON.parse(this.customStyles);
     } catch (error) {
@@ -87,22 +86,24 @@ export class SearchcraftBaseSearchResult {
           >
             {this.primaryContent}
           </p>
-          <p
-            style={styles.secondaryContent || {}}
-            class={
-              isLightTheme ? 'secondaryContentLight' : 'secondaryContentDark'
-            }
-          >
-            {this.secondaryContent}
-          </p>
-          <p
-            style={styles.tertiaryContent || {}}
-            class={
-              isLightTheme ? 'tertiaryContentLight' : 'tertiaryContentDark'
-            }
-          >
-            {this.tertiaryContent}
-          </p>
+          <div>
+            <p
+              style={styles.secondaryContent || {}}
+              class={
+                isLightTheme ? 'secondaryContentLight' : 'secondaryContentDark'
+              }
+            >
+              {this.secondaryContent}
+            </p>
+            <p
+              style={styles.tertiaryContent || {}}
+              class={
+                isLightTheme ? 'tertiaryContentLight' : 'tertiaryContentDark'
+              }
+            >
+              {this.tertiaryContent}
+            </p>
+          </div>
           {this.buttonText && (
             <button
               onClick={this.handleButtonClick}
