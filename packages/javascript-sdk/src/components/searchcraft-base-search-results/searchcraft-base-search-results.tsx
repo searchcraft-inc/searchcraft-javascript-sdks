@@ -17,29 +17,14 @@ export class SearchcraftBaseSearchResults {
   @State() query = '';
   @State() searchResults: SearchcraftResponse | null = null;
 
-  /**
-   * Array of keys to dynamically extract properties from each document.
-   * Must be explicitly set by the parent component.
-   */
   @Prop() searchKeys = '';
-  /**
-   * Custom styles to apply to search results.
-   * Expected format: JSON string, e.g., '{"borderRadius": "10px", "padding": "16px"}'
-   */
   @Prop() customStylesForResults:
     | string
     | Record<string, Record<string, string>> = {};
-
-  /**
-   * Place ad at the end of the results.
-   */
+  @Prop() placeAdAtStart = true;
   @Prop() placeAdAtEnd = false;
-
-  /**
-   * Place ad every N results (e.g., every 4 results).
-   * Default value: 4
-   */
   @Prop() adInterval = 4;
+  @Prop() formatTime = true;
 
   private unsubscribe: () => void;
 
@@ -65,10 +50,34 @@ export class SearchcraftBaseSearchResults {
     }
   }
 
+  timeAgo(timestamp: string): string {
+    const now = new Date();
+    const inputTime = new Date(timestamp);
+    const diffInSeconds = Math.floor(
+      (now.getTime() - inputTime.getTime()) / 1000,
+    );
+
+    const minutes = Math.floor(diffInSeconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+    const years = Math.floor(days / 365);
+
+    if (minutes < 60) {
+      return `${minutes}m ago`;
+    }
+    if (hours < 24) {
+      return `${hours}h ago`;
+    }
+    if (days < 365) {
+      return `${days}d ago`;
+    }
+    return `${years}y ago`;
+  }
+
   render() {
     if (!this.searchResults?.data) {
       console.warn('No search results data available');
-      return <div>No results to display.</div>;
+      return <div class='emptyState'>No results to display.</div>;
     }
 
     const parsedSearchKeys = parseSearchKeys(this.searchKeys);
@@ -84,6 +93,22 @@ export class SearchcraftBaseSearchResults {
           result,
           parsedSearchKeys,
         );
+
+        // Apply timeAgo formatting if formatTime is true
+        if (this.formatTime) {
+          for (const key of parsedSearchKeys) {
+            if (dynamicProperties[key]) {
+              const value = dynamicProperties[key];
+              // Check if the value is a valid ISO timestamp
+              if (
+                typeof value === 'string' &&
+                !Number.isNaN(Date.parse(value))
+              ) {
+                dynamicProperties[key] = this.timeAgo(value);
+              }
+            }
+          }
+        }
 
         return (
           <searchcraft-base-search-result
@@ -108,7 +133,15 @@ export class SearchcraftBaseSearchResults {
 
     const finalComponents: JSX.Element[] = [];
 
-    // Add ads at specified intervals
+    if (this.placeAdAtStart) {
+      finalComponents.push(
+        <div key='ad-section-start' class='adSection'>
+          <span>##</span>
+          <p> Ad Impressions</p>
+        </div>,
+      );
+    }
+
     if (this.adInterval > 0) {
       resultsComponents.forEach((component, index) => {
         finalComponents.push(component);
@@ -125,7 +158,6 @@ export class SearchcraftBaseSearchResults {
       finalComponents.push(...resultsComponents);
     }
 
-    // Add ad at the end if specified
     if (this.placeAdAtEnd) {
       finalComponents.push(
         <div key='ad-section-end' class='adSection'>
