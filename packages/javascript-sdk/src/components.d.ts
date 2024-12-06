@@ -41,22 +41,12 @@ export namespace Components {
         "themeMode": 'light' | 'dark';
     }
     interface SearchcraftBaseSearchResults {
-        /**
-          * Place ad every N results (e.g., every 4 results). Default value: 4
-         */
         "adInterval": number;
-        /**
-          * Custom styles to apply to search results. Expected format: JSON string, e.g., '{"borderRadius": "10px", "padding": "16px"}'
-         */
         "customStylesForResults": | string
     | Record<string, Record<string, string>>;
-        /**
-          * Place ad at the end of the results.
-         */
+        "formatTime": boolean;
         "placeAdAtEnd": boolean;
-        /**
-          * Array of keys to dynamically extract properties from each document. Must be explicitly set by the parent component.
-         */
+        "placeAdAtStart": boolean;
         "searchKeys": string;
     }
     interface SearchcraftButton {
@@ -384,22 +374,12 @@ declare namespace LocalJSX {
         "themeMode"?: 'light' | 'dark';
     }
     interface SearchcraftBaseSearchResults {
-        /**
-          * Place ad every N results (e.g., every 4 results). Default value: 4
-         */
         "adInterval"?: number;
-        /**
-          * Custom styles to apply to search results. Expected format: JSON string, e.g., '{"borderRadius": "10px", "padding": "16px"}'
-         */
         "customStylesForResults"?: | string
     | Record<string, Record<string, string>>;
-        /**
-          * Place ad at the end of the results.
-         */
+        "formatTime"?: boolean;
         "placeAdAtEnd"?: boolean;
-        /**
-          * Array of keys to dynamically extract properties from each document. Must be explicitly set by the parent component.
-         */
+        "placeAdAtStart"?: boolean;
         "searchKeys"?: string;
     }
     interface SearchcraftButton {
