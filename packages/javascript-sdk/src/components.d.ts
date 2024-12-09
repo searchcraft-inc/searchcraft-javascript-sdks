@@ -77,6 +77,9 @@ export namespace Components {
          */
         "theme": 'light' | 'dark';
     }
+    interface SearchcraftFiltersList {
+        "filters": Array<{ label: string; value: string }>;
+    }
     interface SearchcraftInput {
         "customStyles": string | Record<string, string>;
         "error": boolean;
@@ -145,6 +148,10 @@ export interface SearchcraftButtonCustomEvent<T> extends CustomEvent<T> {
 export interface SearchcraftClearInputButtonCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSearchcraftClearInputButtonElement;
+}
+export interface SearchcraftFiltersListCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSearchcraftFiltersListElement;
 }
 export interface SearchcraftInputCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -262,6 +269,23 @@ declare global {
         prototype: HTMLSearchcraftErrorMessageElement;
         new (): HTMLSearchcraftErrorMessageElement;
     };
+    interface HTMLSearchcraftFiltersListElementEventMap {
+        "filtersUpdated": string[];
+    }
+    interface HTMLSearchcraftFiltersListElement extends Components.SearchcraftFiltersList, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSearchcraftFiltersListElementEventMap>(type: K, listener: (this: HTMLSearchcraftFiltersListElement, ev: SearchcraftFiltersListCustomEvent<HTMLSearchcraftFiltersListElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSearchcraftFiltersListElementEventMap>(type: K, listener: (this: HTMLSearchcraftFiltersListElement, ev: SearchcraftFiltersListCustomEvent<HTMLSearchcraftFiltersListElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLSearchcraftFiltersListElement: {
+        prototype: HTMLSearchcraftFiltersListElement;
+        new (): HTMLSearchcraftFiltersListElement;
+    };
     interface HTMLSearchcraftInputElementEventMap {
         "clearInput": void;
         "searchInputChange": string;
@@ -326,6 +350,7 @@ declare global {
         "searchcraft-clear-icon-set": HTMLSearchcraftClearIconSetElement;
         "searchcraft-clear-input-button": HTMLSearchcraftClearInputButtonElement;
         "searchcraft-error-message": HTMLSearchcraftErrorMessageElement;
+        "searchcraft-filters-list": HTMLSearchcraftFiltersListElement;
         "searchcraft-input": HTMLSearchcraftInputElement;
         "searchcraft-input-caption": HTMLSearchcraftInputCaptionElement;
         "searchcraft-input-icon": HTMLSearchcraftInputIconElement;
@@ -412,6 +437,10 @@ declare namespace LocalJSX {
          */
         "theme"?: 'light' | 'dark';
     }
+    interface SearchcraftFiltersList {
+        "filters"?: Array<{ label: string; value: string }>;
+        "onFiltersUpdated"?: (event: SearchcraftFiltersListCustomEvent<string[]>) => void;
+    }
     interface SearchcraftInput {
         "customStyles"?: string | Record<string, string>;
         "error"?: boolean;
@@ -472,6 +501,7 @@ declare namespace LocalJSX {
         "searchcraft-clear-icon-set": SearchcraftClearIconSet;
         "searchcraft-clear-input-button": SearchcraftClearInputButton;
         "searchcraft-error-message": SearchcraftErrorMessage;
+        "searchcraft-filters-list": SearchcraftFiltersList;
         "searchcraft-input": SearchcraftInput;
         "searchcraft-input-caption": SearchcraftInputCaption;
         "searchcraft-input-icon": SearchcraftInputIcon;
@@ -494,6 +524,7 @@ declare module "@stencil/core" {
             "searchcraft-clear-icon-set": LocalJSX.SearchcraftClearIconSet & JSXBase.HTMLAttributes<HTMLSearchcraftClearIconSetElement>;
             "searchcraft-clear-input-button": LocalJSX.SearchcraftClearInputButton & JSXBase.HTMLAttributes<HTMLSearchcraftClearInputButtonElement>;
             "searchcraft-error-message": LocalJSX.SearchcraftErrorMessage & JSXBase.HTMLAttributes<HTMLSearchcraftErrorMessageElement>;
+            "searchcraft-filters-list": LocalJSX.SearchcraftFiltersList & JSXBase.HTMLAttributes<HTMLSearchcraftFiltersListElement>;
             "searchcraft-input": LocalJSX.SearchcraftInput & JSXBase.HTMLAttributes<HTMLSearchcraftInputElement>;
             "searchcraft-input-caption": LocalJSX.SearchcraftInputCaption & JSXBase.HTMLAttributes<HTMLSearchcraftInputCaptionElement>;
             "searchcraft-input-icon": LocalJSX.SearchcraftInputIcon & JSXBase.HTMLAttributes<HTMLSearchcraftInputIconElement>;

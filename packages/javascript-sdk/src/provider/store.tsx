@@ -6,20 +6,24 @@ import {
   type SearchcraftResponse,
 } from '@searchcraft/core';
 
+interface ThemeState {
+  theme: 'light' | 'dark';
+  toggleTheme: () => void;
+}
+
 interface SearchcraftState {
   query: string;
   isRequesting: boolean;
   searchResults: SearchcraftResponse | null;
+  facets: Record<string, { counts: Record<string, number> }> | null;
   setQuery: (query: string) => void;
   setSearchResults: (results: SearchcraftResponse | null) => void;
+  setFacets: (
+    facets: Record<string, { counts: Record<string, number> }> | null,
+  ) => void;
   setIsRequesting: (isRequesting: boolean) => void;
   search: () => Promise<void>;
   initialize: (searchcraft: SearchcraftCore, debug?: boolean) => void;
-}
-
-interface ThemeState {
-  theme: 'light' | 'dark';
-  toggleTheme: () => void;
 }
 
 // Zustand store for Searchcraft state
@@ -50,11 +54,13 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
     query: '',
     isRequesting: false,
     searchResults: null,
+    facets: null,
     setQuery: (query) => set({ query }),
     setSearchResults: (results) => set({ searchResults: results }),
+    setFacets: (facets) => set({ facets }),
     setIsRequesting: (isRequesting) => set({ isRequesting }),
     search: async () => {
-      const { query, setIsRequesting, setSearchResults } = get();
+      const { query, setIsRequesting, setSearchResults, setFacets } = get();
       if (!searchcraft) {
         throw new Error('Searchcraft instance is not initialized.');
       }
@@ -63,7 +69,13 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
       try {
         const results = await searchcraft.search({ query, mode: 'fuzzy' });
         setSearchResults(results);
+
+        // Extract facets from the results and update the state
+        const facets = results.data.facets || null;
+        setFacets(facets);
+
         log(LogLevel.DEBUG, `Search results: ${JSON.stringify(results)}`);
+        log(LogLevel.DEBUG, `Facets: ${JSON.stringify(facets)}`);
       } catch (error) {
         console.error(`Search failed: ${(error as Error).message}`);
         log(

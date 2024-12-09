@@ -40,6 +40,7 @@ export type SearchError = {
   message?: string; // Error message (optional).
   code?: number; // Error code (optional).
   hits?: []; // Always an empty array when an error occurs (optional).
+  facets?: null;
 };
 
 /**
