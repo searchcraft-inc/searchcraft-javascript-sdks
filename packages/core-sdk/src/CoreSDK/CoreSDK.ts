@@ -1,5 +1,6 @@
 import type {
   CoreConfigSDK,
+  QueryObject,
   SearchcraftResponse,
   SearchParams,
 } from '../CoreSDKTypes';
@@ -11,8 +12,10 @@ export class CoreSDK {
   config: CoreConfigSDK;
 
   constructor(config: CoreConfigSDK) {
-    if (!config.endpointURL || !config.index) {
-      throw new Error('Endpoint URL and Index value(s) must be provided');
+    if (!config.endpointURL || !config.index || !config.apiKey) {
+      throw new Error(
+        'Endpoint URL, Index value(s), and API Key must be provided',
+      );
     }
     this.config = config;
   }
@@ -32,19 +35,39 @@ export class CoreSDK {
     try {
       const formattedIndexes = this.config.index.join(',');
       const baseUrl = `${this.config.endpointURL}/index/${formattedIndexes}/search`;
-      const requestBody: {
-        query: {
-          [key: string]: { ctx: string };
+
+      // Build the query object with support for 'occur' parameter
+      const buildQueryObject = (): QueryObject => {
+        if (Array.isArray(searchParams.query)) {
+          // Support complex BooleanQuery structure
+          return searchParams.query.map((subQuery) => ({
+            occur: subQuery.occur || 'should', // Default to 'should'
+            queryType: {
+              [subQuery.type]: { ctx: subQuery.ctx }, // Ensure queryType is correctly formed
+            },
+          }));
+        }
+        // Simple query fallback
+        return {
+          [searchParams.mode]: { ctx: searchParams.query },
         };
+      };
+
+      const requestBody: {
+        query: QueryObject;
         limit: number;
+        offset?: number;
         order_by?: string;
         sort?: 'asc' | 'desc';
       } = {
-        query: {
-          [searchParams.mode]: { ctx: searchParams.query },
-        },
-        limit: 20,
+        query: buildQueryObject(),
+        limit: searchParams.limit ?? 20, // Default to 20 if not provided
       };
+
+      // Add offset if provided
+      if (searchParams.offset !== undefined) {
+        requestBody.offset = searchParams.offset;
+      }
 
       // Handles dynamic sorting and order_by logic
       if (searchParams.order_by) {
