@@ -83,13 +83,25 @@ export interface SearchDocument<
 }
 
 /**
- * * Parameters required to make a successful the Search request.
+ * * Parameters required to make a successful Search request.
  */
 export type SearchParams = {
+  /**
+   * * The maximum number of results to return per page.
+   * Optional parameter. Defaults to 20 if not provided.
+   */
+  limit?: number;
+
   /**
    * * The search mode, which can be either 'fuzzy' or 'normal'.
    */
   mode: 'fuzzy' | 'normal';
+
+  /**
+   * * The starting point for the results, used for pagination.
+   * Optional parameter.
+   */
+  offset?: number;
 
   /**
    * * The field to order the results by (e.g., 'date_published', 'title', etc.).
@@ -108,3 +120,14 @@ export type SearchParams = {
    */
   sort?: 'asc' | 'desc';
 };
+
+type SimpleQuery = {
+  [mode: string]: { ctx: string };
+};
+
+type ComplexQuery = Array<{
+  occur: 'must' | 'should';
+  queryType: { [key: string]: { ctx: string } }; // Correctly structured query type
+}>;
+
+export type QueryObject = SimpleQuery | ComplexQuery;
