@@ -124,6 +124,10 @@ export namespace Components {
         "type": 'search-light' | 'search-dark' | 'error-light' | 'error-dark';
         "width": number;
     }
+    interface SearchcraftSlider {
+        "maxYear": number;
+        "minYear": number;
+    }
     interface SearchcraftSpinnerDark {
     }
     interface SearchcraftSpinnerLight {
@@ -334,6 +338,12 @@ declare global {
         prototype: HTMLSearchcraftSearchIconSetElement;
         new (): HTMLSearchcraftSearchIconSetElement;
     };
+    interface HTMLSearchcraftSliderElement extends Components.SearchcraftSlider, HTMLStencilElement {
+    }
+    var HTMLSearchcraftSliderElement: {
+        prototype: HTMLSearchcraftSliderElement;
+        new (): HTMLSearchcraftSliderElement;
+    };
     interface HTMLSearchcraftSpinnerDarkElement extends Components.SearchcraftSpinnerDark, HTMLStencilElement {
     }
     var HTMLSearchcraftSpinnerDarkElement: {
@@ -368,6 +378,7 @@ declare global {
         "searchcraft-input-icon": HTMLSearchcraftInputIconElement;
         "searchcraft-input-label": HTMLSearchcraftInputLabelElement;
         "searchcraft-search-icon-set": HTMLSearchcraftSearchIconSetElement;
+        "searchcraft-slider": HTMLSearchcraftSliderElement;
         "searchcraft-spinner-dark": HTMLSearchcraftSpinnerDarkElement;
         "searchcraft-spinner-light": HTMLSearchcraftSpinnerLightElement;
         "searchcraft-toggle-button": HTMLSearchcraftToggleButtonElement;
@@ -500,6 +511,10 @@ declare namespace LocalJSX {
         "type"?: 'search-light' | 'search-dark' | 'error-light' | 'error-dark';
         "width"?: number;
     }
+    interface SearchcraftSlider {
+        "maxYear"?: number;
+        "minYear"?: number;
+    }
     interface SearchcraftSpinnerDark {
     }
     interface SearchcraftSpinnerLight {
@@ -526,6 +541,7 @@ declare namespace LocalJSX {
         "searchcraft-input-icon": SearchcraftInputIcon;
         "searchcraft-input-label": SearchcraftInputLabel;
         "searchcraft-search-icon-set": SearchcraftSearchIconSet;
+        "searchcraft-slider": SearchcraftSlider;
         "searchcraft-spinner-dark": SearchcraftSpinnerDark;
         "searchcraft-spinner-light": SearchcraftSpinnerLight;
         "searchcraft-toggle-button": SearchcraftToggleButton;
@@ -550,6 +566,7 @@ declare module "@stencil/core" {
             "searchcraft-input-icon": LocalJSX.SearchcraftInputIcon & JSXBase.HTMLAttributes<HTMLSearchcraftInputIconElement>;
             "searchcraft-input-label": LocalJSX.SearchcraftInputLabel & JSXBase.HTMLAttributes<HTMLSearchcraftInputLabelElement>;
             "searchcraft-search-icon-set": LocalJSX.SearchcraftSearchIconSet & JSXBase.HTMLAttributes<HTMLSearchcraftSearchIconSetElement>;
+            "searchcraft-slider": LocalJSX.SearchcraftSlider & JSXBase.HTMLAttributes<HTMLSearchcraftSliderElement>;
             "searchcraft-spinner-dark": LocalJSX.SearchcraftSpinnerDark & JSXBase.HTMLAttributes<HTMLSearchcraftSpinnerDarkElement>;
             "searchcraft-spinner-light": LocalJSX.SearchcraftSpinnerLight & JSXBase.HTMLAttributes<HTMLSearchcraftSpinnerLightElement>;
             "searchcraft-toggle-button": LocalJSX.SearchcraftToggleButton & JSXBase.HTMLAttributes<HTMLSearchcraftToggleButtonElement>;

@@ -15,6 +15,7 @@ interface ThemeState {
 interface SearchParams {
   mode: 'fuzzy' | 'normal';
   sort: 'asc' | 'desc';
+  yearsRange?: [number, number];
 }
 
 interface SearchcraftState {
@@ -28,6 +29,7 @@ interface SearchcraftState {
   setFacets: (facets: Facets) => void;
   setIsRequesting: (isRequesting: boolean) => void;
   setSearchParams: (params: Partial<SearchParams>) => void; // Allow partial updates
+  setYearsRange: (yearsRange: [number, number]) => void; // Add this method
   search: () => Promise<void>;
   initialize: (searchcraft: SearchcraftCore, debug?: boolean) => void;
 }
@@ -76,6 +78,13 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
           ...params, // Merge partial updates
         },
       })),
+    setYearsRange: (yearsRange) =>
+      set((state) => ({
+        searchParams: {
+          ...state.searchParams,
+          yearsRange,
+        },
+      })),
     search: async () => {
       const {
         query,
@@ -97,6 +106,7 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
           mode: searchParams.mode,
           sort: searchParams.sort,
           facets,
+          yearsRange: searchParams.yearsRange,
         };
 
         console.log('Search Request:', searchRequest);
