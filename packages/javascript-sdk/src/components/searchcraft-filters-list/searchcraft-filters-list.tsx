@@ -50,7 +50,6 @@ export class SearchcraftFiltersList {
   }
 
   handleFilterChange = (value: string, checked: boolean) => {
-    // Update the selected filters
     if (checked) {
       this.selectedFilters.add(value);
     } else {
@@ -59,7 +58,6 @@ export class SearchcraftFiltersList {
 
     const selectedFiltersArray = Array.from(this.selectedFilters);
 
-    // Determine the data source dynamically
     const filtersToRender =
       this.dynamicFilters.length > 0 ? this.dynamicFilters : this.filters;
 
@@ -80,7 +78,6 @@ export class SearchcraftFiltersList {
       },
     };
 
-    // Filter the original data based on the selected filters
     const checkedCategories = selectedFiltersArray.map(
       (filter) => filter.split(':')[1],
     );
@@ -117,22 +114,26 @@ export class SearchcraftFiltersList {
       this.dynamicFilters.length > 0 ? this.dynamicFilters : this.filters;
 
     return (
-      <div class='filters-list'>
-        {filtersToRender.map((filter) => (
-          <label key={filter.label}>
-            <input
-              type='checkbox'
-              value={filter.value}
-              onChange={(event: Event) =>
-                this.handleFilterChange(
-                  filter.value,
-                  (event.target as HTMLInputElement).checked,
-                )
-              }
-            />
-            {filter.label}
-          </label>
-        ))}
+      <div class='filtersList'>
+        {filtersToRender.map((filter) => {
+          const filterLabel = filter.label.split(':')[1] || filter.label;
+          return (
+            <label class='checkboxLabel' key={filter.label}>
+              <input
+                class='filterListCheckbox'
+                onChange={(event: Event) =>
+                  this.handleFilterChange(
+                    filter.value,
+                    (event.target as HTMLInputElement).checked,
+                  )
+                }
+                type='checkbox'
+                value={filter.value}
+              />
+              {filterLabel}
+            </label>
+          );
+        })}
       </div>
     );
   }

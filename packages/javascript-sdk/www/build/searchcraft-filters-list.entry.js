@@ -2,7 +2,7 @@ import { r as registerInstance, a as createEvent, h } from './index-17269461.js'
 import { u as useSearchcraftStore } from './store-defec345.js';
 import './_commonjsHelpers-63cbe26c.js';
 
-const searchcraftFiltersListModuleCss = "";
+const searchcraftFiltersListModuleCss = "@charset \"UTF-8\";.filtersList{font-size:14px;color:#333;padding:20px;border:1px solid #ddd;border-radius:5px;background-color:#f9f9f9}.checkboxLabel{align-items:center;color:#292929;display:flex;font-weight:500;gap:12px}.checkboxLabel input[type=checkbox]{appearance:none;width:20px;height:20px;border:1px solid #D9D9D9;border-radius:4px;display:flex;align-items:center;justify-content:center;cursor:pointer;background-color:#EDEDED}.checkboxLabel input[type=checkbox]:checked{background-color:#000}.checkboxLabel input[type=checkbox]:checked::before{content:\"✔\";color:#fff;font-size:14px}";
 
 const SearchcraftFiltersList = class {
     constructor(hostRef) {
@@ -10,7 +10,6 @@ const SearchcraftFiltersList = class {
         this.filtersUpdated = createEvent(this, "filtersUpdated", 7);
         this.searchStore = useSearchcraftStore.getState();
         this.handleFilterChange = (value, checked) => {
-            // Update the selected filters
             if (checked) {
                 this.selectedFilters.add(value);
             }
@@ -18,7 +17,6 @@ const SearchcraftFiltersList = class {
                 this.selectedFilters.delete(value);
             }
             const selectedFiltersArray = Array.from(this.selectedFilters);
-            // Determine the data source dynamically
             const filtersToRender = this.dynamicFilters.length > 0 ? this.dynamicFilters : this.filters;
             // Construct the original data dynamically from filtersToRender
             const originalData = {
@@ -30,7 +28,6 @@ const SearchcraftFiltersList = class {
                     }, {}),
                 },
             };
-            // Filter the original data based on the selected filters
             const checkedCategories = selectedFiltersArray.map((filter) => filter.split(':')[1]);
             const filteredCounts = Object.keys(originalData.section.counts)
                 .filter((key) => checkedCategories.includes(key))
@@ -81,7 +78,10 @@ const SearchcraftFiltersList = class {
     }
     render() {
         const filtersToRender = this.dynamicFilters.length > 0 ? this.dynamicFilters : this.filters;
-        return (h("div", { key: '3ca5a3727e32dcd3bd81ea0d122b1e996626ce07', class: 'filters-list' }, filtersToRender.map((filter) => (h("label", { key: filter.label }, h("input", { type: 'checkbox', value: filter.value, onChange: (event) => this.handleFilterChange(filter.value, event.target.checked) }), filter.label)))));
+        return (h("div", { key: 'a6127ed66173ff501ec90eb040cf415efc4ac6e0', class: 'filtersList' }, filtersToRender.map((filter) => {
+            const filterLabel = filter.label.split(':')[1] || filter.label;
+            return (h("label", { class: 'checkboxLabel', key: filter.label }, h("input", { class: 'filterListCheckbox', onChange: (event) => this.handleFilterChange(filter.value, event.target.checked), type: 'checkbox', value: filter.value }), filterLabel));
+        })));
     }
 };
 SearchcraftFiltersList.style = searchcraftFiltersListModuleCss;
