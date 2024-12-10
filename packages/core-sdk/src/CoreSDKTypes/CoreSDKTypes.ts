@@ -57,8 +57,10 @@ export interface SearchResult {
  * * Represents the structure of facets, which group search results into categories.
  */
 export interface Facets {
-  [facetName: string]: {
-    counts: Record<string, number>; // Dynamic keys with counts of matching documents
+  facets: {
+    [facetName: string]: {
+      counts: Record<string, number>; // Dynamic keys with counts of matching documents
+    };
   };
 }
 
@@ -87,6 +89,12 @@ export interface SearchDocument<
  * * Parameters required to make a successful Search request.
  */
 export type SearchParams = {
+  /**
+   * * Facet data, useful for filtering results
+   * Optional parameter.
+   */
+  facets?: Facets;
+
   /**
    * * The maximum number of results to return per page.
    * Optional parameter. Defaults to 20 if not provided.

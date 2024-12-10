@@ -1,5 +1,6 @@
 import type {
   CoreConfigSDK,
+  Facets,
   QueryObject,
   SearchcraftResponse,
   SearchParams,
@@ -59,6 +60,7 @@ export class CoreSDK {
         offset?: number;
         order_by?: string;
         sort?: 'asc' | 'desc';
+        facets?: Facets;
       } = {
         query: buildQueryObject(),
         limit: searchParams.limit ?? 20, // Default to 20 if not provided
@@ -69,11 +71,16 @@ export class CoreSDK {
         requestBody.offset = searchParams.offset;
       }
 
+      // Add facets if they exist
+      if (searchParams.facets) {
+        requestBody.facets = searchParams.facets;
+      }
+
       // Handles dynamic sorting and order_by logic
       if (searchParams.order_by) {
         requestBody.order_by = searchParams.order_by;
 
-        // Ensure sort defaults to 'asc' if not provided or given an invalid
+        // Ensure sort defaults to 'asc' if not provided or given an invalid value
         requestBody.sort =
           searchParams.sort === 'desc' || searchParams.sort === 'asc'
             ? searchParams.sort

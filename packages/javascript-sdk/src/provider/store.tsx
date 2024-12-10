@@ -4,6 +4,7 @@ import {
   SDKDebugger,
   LogLevel,
   type SearchcraftResponse,
+  type Facets,
 } from '@searchcraft/core';
 
 interface ThemeState {
@@ -15,12 +16,10 @@ interface SearchcraftState {
   query: string;
   isRequesting: boolean;
   searchResults: SearchcraftResponse | null;
-  facets: Record<string, { counts: Record<string, number> }> | null;
+  facets: Facets | null;
   setQuery: (query: string) => void;
   setSearchResults: (results: SearchcraftResponse | null) => void;
-  setFacets: (
-    facets: Record<string, { counts: Record<string, number> }> | null,
-  ) => void;
+  setFacets: (facets: Facets) => void;
   setIsRequesting: (isRequesting: boolean) => void;
   search: () => Promise<void>;
   initialize: (searchcraft: SearchcraftCore, debug?: boolean) => void;
@@ -60,22 +59,45 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
     setFacets: (facets) => set({ facets }),
     setIsRequesting: (isRequesting) => set({ isRequesting }),
     search: async () => {
-      const { query, setIsRequesting, setSearchResults, setFacets } = get();
+      const { query, facets, setIsRequesting, setSearchResults, setFacets } =
+        get();
       if (!searchcraft) {
         throw new Error('Searchcraft instance is not initialized.');
       }
       setIsRequesting(true);
       log(LogLevel.INFO, `Starting search with query: "${query}"`);
+
       try {
-        const results = await searchcraft.search({ query, mode: 'fuzzy' });
+        const searchParams: {
+          query: string;
+          mode: 'fuzzy' | 'normal';
+          facets?: Facets;
+        } = {
+          query,
+          mode: 'fuzzy',
+        };
+
+        console.log(facets);
+
+        // Add facets if they exist
+        if (facets) {
+          searchParams.facets = facets;
+          log(
+            LogLevel.DEBUG,
+            `Including facets in the search: ${JSON.stringify(facets)}`,
+          );
+        }
+
+        const results = await searchcraft.search(searchParams);
         setSearchResults(results);
+        console.log(results.data.facets);
 
         // Extract facets from the results and update the state
-        const facets = results.data.facets || null;
-        setFacets(facets);
+        const updatedFacets = results.data.facets || null;
+        setFacets(updatedFacets);
 
         log(LogLevel.DEBUG, `Search results: ${JSON.stringify(results)}`);
-        log(LogLevel.DEBUG, `Facets: ${JSON.stringify(facets)}`);
+        log(LogLevel.DEBUG, `Updated facets: ${JSON.stringify(updatedFacets)}`);
       } catch (error) {
         console.error(`Search failed: ${(error as Error).message}`);
         log(
