@@ -128,6 +128,12 @@ export namespace Components {
     }
     interface SearchcraftSpinnerLight {
     }
+    interface SearchcraftToggleButton {
+        /**
+          * Type of the toggle - determines what it controls 'mode': toggles between 'fuzzy' and 'normal' 'sort': toggles between 'asc' and 'desc'
+         */
+        "type": 'mode' | 'sort';
+    }
 }
 export interface SearchcraftAutoSearchFormCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -340,6 +346,12 @@ declare global {
         prototype: HTMLSearchcraftSpinnerLightElement;
         new (): HTMLSearchcraftSpinnerLightElement;
     };
+    interface HTMLSearchcraftToggleButtonElement extends Components.SearchcraftToggleButton, HTMLStencilElement {
+    }
+    var HTMLSearchcraftToggleButtonElement: {
+        prototype: HTMLSearchcraftToggleButtonElement;
+        new (): HTMLSearchcraftToggleButtonElement;
+    };
     interface HTMLElementTagNameMap {
         "searchcraft-auto-search-form": HTMLSearchcraftAutoSearchFormElement;
         "searchcraft-base-search-form": HTMLSearchcraftBaseSearchFormElement;
@@ -358,6 +370,7 @@ declare global {
         "searchcraft-search-icon-set": HTMLSearchcraftSearchIconSetElement;
         "searchcraft-spinner-dark": HTMLSearchcraftSpinnerDarkElement;
         "searchcraft-spinner-light": HTMLSearchcraftSpinnerLightElement;
+        "searchcraft-toggle-button": HTMLSearchcraftToggleButtonElement;
     }
 }
 declare namespace LocalJSX {
@@ -491,6 +504,12 @@ declare namespace LocalJSX {
     }
     interface SearchcraftSpinnerLight {
     }
+    interface SearchcraftToggleButton {
+        /**
+          * Type of the toggle - determines what it controls 'mode': toggles between 'fuzzy' and 'normal' 'sort': toggles between 'asc' and 'desc'
+         */
+        "type"?: 'mode' | 'sort';
+    }
     interface IntrinsicElements {
         "searchcraft-auto-search-form": SearchcraftAutoSearchForm;
         "searchcraft-base-search-form": SearchcraftBaseSearchForm;
@@ -509,6 +528,7 @@ declare namespace LocalJSX {
         "searchcraft-search-icon-set": SearchcraftSearchIconSet;
         "searchcraft-spinner-dark": SearchcraftSpinnerDark;
         "searchcraft-spinner-light": SearchcraftSpinnerLight;
+        "searchcraft-toggle-button": SearchcraftToggleButton;
     }
 }
 export { LocalJSX as JSX };
@@ -532,6 +552,7 @@ declare module "@stencil/core" {
             "searchcraft-search-icon-set": LocalJSX.SearchcraftSearchIconSet & JSXBase.HTMLAttributes<HTMLSearchcraftSearchIconSetElement>;
             "searchcraft-spinner-dark": LocalJSX.SearchcraftSpinnerDark & JSXBase.HTMLAttributes<HTMLSearchcraftSpinnerDarkElement>;
             "searchcraft-spinner-light": LocalJSX.SearchcraftSpinnerLight & JSXBase.HTMLAttributes<HTMLSearchcraftSpinnerLightElement>;
+            "searchcraft-toggle-button": LocalJSX.SearchcraftToggleButton & JSXBase.HTMLAttributes<HTMLSearchcraftToggleButtonElement>;
         }
     }
 }
