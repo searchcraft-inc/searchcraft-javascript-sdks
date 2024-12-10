@@ -40,6 +40,7 @@ export type SearchError = {
   message?: string; // Error message (optional).
   code?: number; // Error code (optional).
   hits?: []; // Always an empty array when an error occurs (optional).
+  facets?: null;
 };
 
 /**
@@ -56,7 +57,7 @@ export interface SearchResult {
  * * Represents the structure of facets, which group search results into categories.
  */
 export interface Facets {
-  [facetName: string]: {
+  section: {
     counts: Record<string, number>; // Dynamic keys with counts of matching documents
   };
 }
@@ -81,11 +82,16 @@ export interface SearchDocument<
   id: number; // Unique identifier for the document
   [key: string]: string | number | T[keyof T]; // Supports dynamic properties with string or number values
 }
-
 /**
  * * Parameters required to make a successful Search request.
  */
 export type SearchParams = {
+  /**
+   * * Facet data, useful for filtering results.
+   * Optional parameter.
+   */
+  facets?: Facets;
+
   /**
    * * The maximum number of results to return per page.
    * Optional parameter. Defaults to 20 if not provided.
@@ -119,15 +125,42 @@ export type SearchParams = {
    * Optional parameter.
    */
   sort?: 'asc' | 'desc';
+
+  /**
+   * * Range of years to filter results by.
+   * Optional parameter.
+   */
+  yearsRange?: [number, number];
+
+  /**
+   * * Array of sections to filter results by.
+   * Optional parameter.
+   */
+  sections?: string[];
 };
 
-type SimpleQuery = {
+/**
+ * Represents a single condition in a complex query.
+ */
+export interface QueryItem {
+  occur?: string;
+  normal?: { ctx: string };
+  fuzzy?: { ctx: string };
+}
+
+/**
+ * Represents a simple query structure with a mode and context string.
+ */
+export type SimpleQuery = {
   [mode: string]: { ctx: string };
 };
 
-type ComplexQuery = Array<{
-  occur: 'must' | 'should';
-  queryType: { [key: string]: { ctx: string } }; // Correctly structured query type
-}>;
+/**
+ * Represents a complex query structure supporting multiple conditions.
+ */
+export type ComplexQuery = QueryItem[];
 
+/**
+ * QueryObject type can be either a simple or complex query.
+ */
 export type QueryObject = SimpleQuery | ComplexQuery;
