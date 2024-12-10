@@ -12,15 +12,24 @@ interface ThemeState {
   toggleTheme: () => void;
 }
 
+interface SearchParams {
+  mode: 'fuzzy' | 'normal';
+  sort: 'asc' | 'desc';
+  yearsRange?: [number, number];
+}
+
 interface SearchcraftState {
   query: string;
   isRequesting: boolean;
   searchResults: SearchcraftResponse | null;
   facets: Facets | null;
+  searchParams: SearchParams; // Add searchParams to manage mode and sort
   setQuery: (query: string) => void;
   setSearchResults: (results: SearchcraftResponse | null) => void;
   setFacets: (facets: Facets) => void;
   setIsRequesting: (isRequesting: boolean) => void;
+  setSearchParams: (params: Partial<SearchParams>) => void; // Allow partial updates
+  setYearsRange: (yearsRange: [number, number]) => void; // Add this method
   search: () => Promise<void>;
   initialize: (searchcraft: SearchcraftCore, debug?: boolean) => void;
 }
@@ -54,13 +63,37 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
     isRequesting: false,
     searchResults: null,
     facets: null,
+    searchParams: {
+      mode: 'fuzzy', // Default mode
+      sort: 'desc', // Default sort order
+    },
     setQuery: (query) => set({ query }),
     setSearchResults: (results) => set({ searchResults: results }),
     setFacets: (facets) => set({ facets }),
     setIsRequesting: (isRequesting) => set({ isRequesting }),
+    setSearchParams: (params) =>
+      set((state) => ({
+        searchParams: {
+          ...state.searchParams,
+          ...params, // Merge partial updates
+        },
+      })),
+    setYearsRange: (yearsRange) =>
+      set((state) => ({
+        searchParams: {
+          ...state.searchParams,
+          yearsRange,
+        },
+      })),
     search: async () => {
-      const { query, facets, setIsRequesting, setSearchResults, setFacets } =
-        get();
+      const {
+        query,
+        facets,
+        setIsRequesting,
+        setSearchResults,
+        setFacets,
+        searchParams,
+      } = get();
       if (!searchcraft) {
         throw new Error('Searchcraft instance is not initialized.');
       }
@@ -68,27 +101,17 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
       log(LogLevel.INFO, `Starting search with query: "${query}"`);
 
       try {
-        const searchParams: {
-          query: string;
-          mode: 'fuzzy' | 'normal';
-          facets?: Facets;
-        } = {
+        const searchRequest = {
           query,
-          mode: 'fuzzy',
+          mode: searchParams.mode,
+          sort: searchParams.sort,
+          facets,
+          yearsRange: searchParams.yearsRange,
         };
 
-        console.log(facets);
+        console.log('Search Request:', searchRequest);
 
-        // Add facets if they exist
-        if (facets) {
-          searchParams.facets = facets;
-          log(
-            LogLevel.DEBUG,
-            `Including facets in the search: ${JSON.stringify(facets)}`,
-          );
-        }
-
-        const results = await searchcraft.search(searchParams);
+        const results = await searchcraft.search(searchRequest);
         setSearchResults(results);
         console.log(results.data.facets);
 

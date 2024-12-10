@@ -3001,29 +3001,37 @@ const useSearchcraftStore = zustand.create((set, get) => {
         isRequesting: false,
         searchResults: null,
         facets: null,
+        searchParams: {
+            mode: 'fuzzy', // Default mode
+            sort: 'desc', // Default sort order
+        },
         setQuery: (query) => set({ query }),
         setSearchResults: (results) => set({ searchResults: results }),
         setFacets: (facets) => set({ facets }),
         setIsRequesting: (isRequesting) => set({ isRequesting }),
+        setSearchParams: (params) => set((state) => ({
+            searchParams: Object.assign(Object.assign({}, state.searchParams), params),
+        })),
+        setYearsRange: (yearsRange) => set((state) => ({
+            searchParams: Object.assign(Object.assign({}, state.searchParams), { yearsRange }),
+        })),
         search: async () => {
-            const { query, facets, setIsRequesting, setSearchResults, setFacets } = get();
+            const { query, facets, setIsRequesting, setSearchResults, setFacets, searchParams, } = get();
             if (!searchcraft) {
                 throw new Error('Searchcraft instance is not initialized.');
             }
             setIsRequesting(true);
             log(c.INFO, `Starting search with query: "${query}"`);
             try {
-                const searchParams = {
+                const searchRequest = {
                     query,
-                    mode: 'fuzzy',
+                    mode: searchParams.mode,
+                    sort: searchParams.sort,
+                    facets,
+                    yearsRange: searchParams.yearsRange,
                 };
-                console.log(facets);
-                // Add facets if they exist
-                if (facets) {
-                    searchParams.facets = facets;
-                    log(c.DEBUG, `Including facets in the search: ${JSON.stringify(facets)}`);
-                }
-                const results = await searchcraft.search(searchParams);
+                console.log('Search Request:', searchRequest);
+                const results = await searchcraft.search(searchRequest);
                 setSearchResults(results);
                 console.log(results.data.facets);
                 // Extract facets from the results and update the state
@@ -3057,4 +3065,4 @@ const useThemeStore = zustand.create((set) => ({
 
 export { useThemeStore as a, p, useSearchcraftStore as u };
 
-//# sourceMappingURL=store-defec345.js.map
+//# sourceMappingURL=store-81542f52.js.map

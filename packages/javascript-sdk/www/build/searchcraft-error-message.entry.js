@@ -12,7 +12,7 @@ const SearchcraftErrorMessage = class {
     }
     render() {
         const errorMessageStyle = this.theme === 'light' ? 'errorMessageLight' : 'errorMessageDark';
-        return (h("p", { key: 'c5f8120250a226e123726e3a893eb91b2b299996', class: classNames(errorMessageStyle) }, this.errorMessage || 'Search term is required.'));
+        return (h("p", { key: 'f520ac38f2f42e9780454aef5e25576095ae5ee9', class: classNames(errorMessageStyle) }, this.errorMessage || 'Search term is required.'));
     }
 };
 SearchcraftErrorMessage.style = searchcraftErrorMessageModuleCss;

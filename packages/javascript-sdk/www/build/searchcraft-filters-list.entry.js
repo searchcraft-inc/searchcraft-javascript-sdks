@@ -1,8 +1,8 @@
 import { r as registerInstance, a as createEvent, h } from './index-17269461.js';
-import { u as useSearchcraftStore } from './store-defec345.js';
+import { u as useSearchcraftStore } from './store-81542f52.js';
 import './_commonjsHelpers-63cbe26c.js';
 
-const searchcraftFiltersListModuleCss = "@charset \"UTF-8\";.filtersList{font-size:14px;color:#333;padding:20px;border:1px solid #ddd;border-radius:5px;background-color:#f9f9f9}.checkboxLabel{align-items:center;color:#292929;display:flex;font-weight:500;gap:12px}.checkboxLabel input[type=checkbox]{appearance:none;width:20px;height:20px;border:1px solid #D9D9D9;border-radius:4px;display:flex;align-items:center;justify-content:center;cursor:pointer;background-color:#EDEDED}.checkboxLabel input[type=checkbox]:checked{background-color:#000}.checkboxLabel input[type=checkbox]:checked::before{content:\"✔\";color:#fff;font-size:14px}";
+const searchcraftFiltersListModuleCss = "@charset \"UTF-8\";.filtersList{padding:16px}.checkboxLabel{align-items:center;color:#292929;display:flex;font-size:14px;font-weight:600;gap:12px}.checkboxLabel input[type=checkbox]{align-items:center;appearance:none;background-color:#EDEDED;border:1px solid #D9D9D9;cursor:pointer;display:flex;height:24px;justify-content:center;width:24px}.checkboxLabel input[type=checkbox]:checked{background-color:#000}.checkboxLabel input[type=checkbox]:checked::before{color:#fff;content:\"✔\";font-size:14px}";
 
 const SearchcraftFiltersList = class {
     constructor(hostRef) {
@@ -78,7 +78,7 @@ const SearchcraftFiltersList = class {
     }
     render() {
         const filtersToRender = this.dynamicFilters.length > 0 ? this.dynamicFilters : this.filters;
-        return (h("div", { key: 'a6127ed66173ff501ec90eb040cf415efc4ac6e0', class: 'filtersList' }, filtersToRender.map((filter) => {
+        return (h("div", { key: '595a148c35071683f7612d115ee53ab23b926af4', class: 'filtersList' }, filtersToRender.map((filter) => {
             const filterLabel = filter.label.split(':')[1] || filter.label;
             return (h("label", { class: 'checkboxLabel', key: filter.label }, h("input", { class: 'filterListCheckbox', onChange: (event) => this.handleFilterChange(filter.value, event.target.checked), type: 'checkbox', value: filter.value }), filterLabel));
         })));

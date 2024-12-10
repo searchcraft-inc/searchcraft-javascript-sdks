@@ -51,7 +51,7 @@ const SearchcraftInput = class {
         const placeholderStyle = {
             fontSize: validatedCustomStyles.placeholderFontSize || '16px',
         };
-        return (h("div", { key: 'c91229d4902779d569d30947a1de1472befcf81e', class: classNames(containerClassName, this.formClassName, 'searchcraft-input-form') }, this.rightToLeftOrientation ? (h(Fragment, null, h("input", { class: classNames(inputClassName, 'searchcraft-input'), id: 'searchcraft-input-id', onChange: this.handleInputChange.bind(this), placeholder: this.placeholderValue, type: 'text', value: this.query, style: validatedCustomStyles }), h("style", null, `
+        return (h("div", { key: '41f29f98e95d5811e81dd885cd282cd8f50cb776', class: classNames(containerClassName, this.formClassName, 'searchcraft-input-form') }, this.rightToLeftOrientation ? (h(Fragment, null, h("input", { class: classNames(inputClassName, 'searchcraft-input'), id: 'searchcraft-input-id', onChange: this.handleInputChange.bind(this), placeholder: this.placeholderValue, type: 'text', value: this.query, style: validatedCustomStyles }), h("style", null, `
                 #searchcraft-input-id::placeholder {
                   font-size: ${placeholderStyle.fontSize};
                 }
