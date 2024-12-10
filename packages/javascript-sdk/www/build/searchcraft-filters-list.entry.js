@@ -1,0 +1,91 @@
+import { r as registerInstance, a as createEvent, h } from './index-17269461.js';
+import { u as useSearchcraftStore } from './store-defec345.js';
+import './_commonjsHelpers-63cbe26c.js';
+
+const searchcraftFiltersListModuleCss = "";
+
+const SearchcraftFiltersList = class {
+    constructor(hostRef) {
+        registerInstance(this, hostRef);
+        this.filtersUpdated = createEvent(this, "filtersUpdated", 7);
+        this.searchStore = useSearchcraftStore.getState();
+        this.handleFilterChange = (value, checked) => {
+            // Update the selected filters
+            if (checked) {
+                this.selectedFilters.add(value);
+            }
+            else {
+                this.selectedFilters.delete(value);
+            }
+            const selectedFiltersArray = Array.from(this.selectedFilters);
+            // Determine the data source dynamically
+            const filtersToRender = this.dynamicFilters.length > 0 ? this.dynamicFilters : this.filters;
+            // Construct the original data dynamically from filtersToRender
+            const originalData = {
+                section: {
+                    counts: filtersToRender.reduce((countsAcc, filter) => {
+                        const [, facetValue] = filter.value.split(':');
+                        countsAcc[`${facetValue}`] = Number.parseInt((filter.label.match(/\((\d+)\)$/) || [])[1] || '0', 10);
+                        return countsAcc;
+                    }, {}),
+                },
+            };
+            // Filter the original data based on the selected filters
+            const checkedCategories = selectedFiltersArray.map((filter) => filter.split(':')[1]);
+            const filteredCounts = Object.keys(originalData.section.counts)
+                .filter((key) => checkedCategories.includes(key))
+                .reduce((acc, key) => {
+                acc[key] = originalData.section.counts[key];
+                return acc;
+            }, {});
+            const filteredData = {
+                section: {
+                    counts: filteredCounts,
+                },
+            };
+            // Transform the filtered data into the facets structure
+            const transformedFacets = {
+                section: {
+                    counts: filteredData.section.counts,
+                },
+            };
+            // Emit the updated selected filters and update the search store
+            this.filtersUpdated.emit(selectedFiltersArray);
+            this.searchStore.setFacets(transformedFacets);
+            this.searchStore.search();
+        };
+        this.filters = [];
+        this.selectedFilters = new Set();
+        this.dynamicFilters = [];
+    }
+    connectedCallback() {
+        this.unsubscribe = useSearchcraftStore.subscribe((state) => {
+            var _a;
+            const facets = (_a = state.searchResults) === null || _a === void 0 ? void 0 : _a.data.facets;
+            if (facets) {
+                this.populateFiltersFromFacets(facets);
+            }
+        });
+    }
+    disconnectedCallback() {
+        if (this.unsubscribe) {
+            this.unsubscribe();
+        }
+    }
+    populateFiltersFromFacets(facets) {
+        const newFilters = Object.entries(facets).flatMap(([facetKey, facetData]) => Object.entries(facetData.counts).map(([value, count]) => ({
+            label: `${facetKey}: ${value.replace(/^\//, '')} (${count})`,
+            value: `${facetKey}:${value}`,
+        })));
+        this.dynamicFilters = newFilters;
+    }
+    render() {
+        const filtersToRender = this.dynamicFilters.length > 0 ? this.dynamicFilters : this.filters;
+        return (h("div", { key: '3ca5a3727e32dcd3bd81ea0d122b1e996626ce07', class: 'filters-list' }, filtersToRender.map((filter) => (h("label", { key: filter.label }, h("input", { type: 'checkbox', value: filter.value, onChange: (event) => this.handleFilterChange(filter.value, event.target.checked) }), filter.label)))));
+    }
+};
+SearchcraftFiltersList.style = searchcraftFiltersListModuleCss;
+
+export { SearchcraftFiltersList as searchcraft_filters_list };
+
+//# sourceMappingURL=searchcraft-filters-list.entry.js.map

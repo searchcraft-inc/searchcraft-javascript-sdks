@@ -4,10 +4,11 @@ import type {
   QueryObject,
   SearchcraftResponse,
   SearchParams,
+  QueryItem,
 } from '../CoreSDKTypes';
 
 /**
- * * Javascript Class providing the functionality to interact with the Searchcraft BE
+ * Javascript Class providing the functionality to interact with the Searchcraft BE
  */
 export class CoreSDK {
   config: CoreConfigSDK;
@@ -22,8 +23,51 @@ export class CoreSDK {
   }
 
   /**
+   * Builds a query object for the search request.
    * @param {SearchParams} searchParams - The parameters for the search.
-   * @returns {Promise<SearchcraftResponse>} - Returns a `SearchResult` object with the results from the search or throws an error.
+   * @returns {QueryObject} - A properly formatted query object.
+   */
+  private buildQueryObject(searchParams: SearchParams): QueryObject {
+    const queryItems: QueryItem[] = [];
+    let occur: 'must' | 'should' = 'should';
+
+    // Handle yearsRange if provided
+    if (searchParams.yearsRange) {
+      occur = 'must';
+      const startDate = new Date(`${searchParams.yearsRange[0]}-01-01`);
+      const endDate = new Date(`${searchParams.yearsRange[1]}-12-31`);
+      queryItems.push({
+        occur,
+        normal: {
+          ctx: `date_published:[${startDate.toISOString()} TO ${endDate.toISOString()}]`,
+        },
+      });
+    }
+
+    const facetKeys = Object.keys(searchParams?.facets?.section.counts || {});
+    // Handle facets if provided
+    if (facetKeys && facetKeys.length > 0) {
+      occur = 'must';
+      queryItems.push({
+        occur,
+        normal: {
+          ctx: `section: IN [${facetKeys.join(' ')}]`,
+        },
+      });
+    }
+
+    queryItems.push({
+      occur, // Valid, as 'occur' is a required property in QueryItem
+      [searchParams.mode]: { ctx: searchParams.query }, // Ensure dynamic mode is inside queryType
+    });
+
+    return queryItems;
+  }
+
+  /**
+   * Performs a search operation.
+   * @param {SearchParams} searchParams - The parameters for the search.
+   * @returns {Promise<SearchcraftResponse>} - Returns the search response or throws an error.
    */
   search = async (searchParams: SearchParams): Promise<SearchcraftResponse> => {
     const quoteCount = (searchParams.query.match(/"/g) || []).length;
@@ -37,23 +81,7 @@ export class CoreSDK {
       const formattedIndexes = this.config.index.join(',');
       const baseUrl = `${this.config.endpointURL}/index/${formattedIndexes}/search`;
 
-      // Build the query object with support for 'occur' parameter
-      const buildQueryObject = (): QueryObject => {
-        if (Array.isArray(searchParams.query)) {
-          // Support complex BooleanQuery structure
-          return searchParams.query.map((subQuery) => ({
-            occur: subQuery.occur || 'should', // Default to 'should'
-            queryType: {
-              [subQuery.type]: { ctx: subQuery.ctx }, // Ensure queryType is correctly formed
-            },
-          }));
-        }
-        // Simple query fallback
-        return {
-          [searchParams.mode]: { ctx: searchParams.query },
-        };
-      };
-
+      // Build the request body
       const requestBody: {
         query: QueryObject;
         limit: number;
@@ -62,7 +90,7 @@ export class CoreSDK {
         sort?: 'asc' | 'desc';
         facets?: Facets;
       } = {
-        query: buildQueryObject(),
+        query: this.buildQueryObject(searchParams),
         limit: searchParams.limit ?? 20, // Default to 20 if not provided
       };
 

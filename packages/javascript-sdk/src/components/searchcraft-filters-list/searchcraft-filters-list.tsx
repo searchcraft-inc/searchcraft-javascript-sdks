@@ -7,6 +7,7 @@ import {
   type EventEmitter,
 } from '@stencil/core';
 import { useSearchcraftStore } from '@provider/store';
+import type { Facets } from '@searchcraft/core';
 
 @Component({
   tag: 'searchcraft-filters-list',
@@ -24,7 +25,6 @@ export class SearchcraftFiltersList {
   unsubscribe: () => void;
 
   connectedCallback() {
-    // Subscribe to search results from the store
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {
       const facets = state.searchResults?.data.facets;
       if (facets) {
@@ -39,42 +39,75 @@ export class SearchcraftFiltersList {
     }
   }
 
-  populateFiltersFromFacets(
-    facets: Record<string, { counts: Record<string, number> }>,
-  ) {
+  populateFiltersFromFacets(facets: Facets) {
     const newFilters = Object.entries(facets).flatMap(([facetKey, facetData]) =>
       Object.entries(facetData.counts).map(([value, count]) => ({
-        label: `${facetKey}: ${value} (${count})`,
-        value,
+        label: `${facetKey}: ${value.replace(/^\//, '')} (${count})`,
+        value: `${facetKey}:${value}`,
       })),
     );
     this.dynamicFilters = newFilters;
   }
 
   handleFilterChange = (value: string, checked: boolean) => {
+    // Update the selected filters
     if (checked) {
       this.selectedFilters.add(value);
     } else {
       this.selectedFilters.delete(value);
     }
+
     const selectedFiltersArray = Array.from(this.selectedFilters);
 
-    // Transform the selected filters into the expected facets structure
-    const transformedFacets: Record<
-      string,
-      { counts: Record<string, number> }
-    > = selectedFiltersArray.reduce((acc, filter) => {
-      const [facetKey, facetValue] = filter.split(':');
-      if (!acc[facetKey]) {
-        acc[facetKey] = { counts: {} };
-      }
-      acc[facetKey].counts[facetValue] = 1; // Assign a count of 1 for simplicity
-      return acc;
-    }, {});
+    // Determine the data source dynamically
+    const filtersToRender =
+      this.dynamicFilters.length > 0 ? this.dynamicFilters : this.filters;
 
+    // Construct the original data dynamically from filtersToRender
+    const originalData = {
+      section: {
+        counts: filtersToRender.reduce(
+          (countsAcc, filter) => {
+            const [, facetValue] = filter.value.split(':');
+            countsAcc[`${facetValue}`] = Number.parseInt(
+              (filter.label.match(/\((\d+)\)$/) || [])[1] || '0',
+              10,
+            );
+            return countsAcc;
+          },
+          {} as Record<string, number>,
+        ),
+      },
+    };
+
+    // Filter the original data based on the selected filters
+    const checkedCategories = selectedFiltersArray.map(
+      (filter) => filter.split(':')[1],
+    );
+    const filteredCounts = Object.keys(originalData.section.counts)
+      .filter((key) => checkedCategories.includes(key))
+      .reduce(
+        (acc, key) => {
+          acc[key] = originalData.section.counts[key];
+          return acc;
+        },
+        {} as Record<string, number>,
+      );
+    const filteredData = {
+      section: {
+        counts: filteredCounts,
+      },
+    };
+
+    // Transform the filtered data into the facets structure
+    const transformedFacets: Facets = {
+      section: {
+        counts: filteredData.section.counts,
+      },
+    };
+
+    // Emit the updated selected filters and update the search store
     this.filtersUpdated.emit(selectedFiltersArray);
-
-    // Update the search store with the transformed facets
     this.searchStore.setFacets(transformedFacets);
     this.searchStore.search();
   };
