@@ -67,16 +67,6 @@ export class SearchcraftAutoSearchForm {
   handleInputChange = (event: ScInputCustomEvent<string>) => {
     this.query = event.detail;
     this.querySubmit.emit(this.query);
-
-    // Clear the previous debounce timeout
-    if (this.debounceTimeout) {
-      clearTimeout(this.debounceTimeout);
-    }
-
-    // Set a new debounce timeout
-    this.debounceTimeout = setTimeout(() => {
-      this.runSearch();
-    }, this.debounceDelay);
   };
 
   handleInputKeyUp = (event: ScInputCustomEvent<string>) => {
@@ -89,7 +79,7 @@ export class SearchcraftAutoSearchForm {
     }
 
     this.debounceTimeout = setTimeout(() => {
-      this.runSearch();
+      this.query.trim() !== '' && this.runSearch();
     }, this.debounceDelay);
   };
 
