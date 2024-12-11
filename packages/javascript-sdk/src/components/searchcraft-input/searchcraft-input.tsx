@@ -37,6 +37,7 @@ export class SearchcraftInput {
 
   @Event() clearInput: EventEmitter<void>;
   @Event() searchInputChange: EventEmitter<string>;
+  @Event() inputKeyUp: EventEmitter<string>;
 
   @State() theme = 'light';
 
@@ -47,6 +48,11 @@ export class SearchcraftInput {
   handleInputChange(event: Event) {
     const input = event.target as HTMLInputElement;
     this.searchInputChange.emit(input.value);
+  }
+
+  handleInputKeyUp(event: KeyboardEvent) {
+    const input = event.target as HTMLInputElement;
+    this.inputKeyUp.emit(input.value);
   }
 
   handleClearInput() {
@@ -90,6 +96,7 @@ export class SearchcraftInput {
               class={classNames(inputClassName, 'searchcraft-input')}
               id='searchcraft-input-id'
               onChange={this.handleInputChange.bind(this)}
+              onKeyUp={this.handleInputKeyUp.bind(this)}
               placeholder={this.placeholderValue}
               type='text'
               value={this.query}
@@ -135,6 +142,7 @@ export class SearchcraftInput {
               class={classNames(inputClassName, 'searchcraft-input')}
               id='searchcraft-input-id'
               onChange={this.handleInputChange.bind(this)}
+              onKeyUp={this.handleInputKeyUp.bind(this)}
               placeholder={this.placeholderValue}
               type='text'
               value={this.query}

@@ -23,13 +23,15 @@ interface SearchcraftState {
   isRequesting: boolean;
   searchResults: SearchcraftResponse | null;
   facets: Facets | null;
-  searchParams: SearchParams; // Add searchParams to manage mode and sort
+  selectedFilters: string[]; // Add this to store selected filters
+  searchParams: SearchParams;
   setQuery: (query: string) => void;
   setSearchResults: (results: SearchcraftResponse | null) => void;
   setFacets: (facets: Facets) => void;
+  setSelectedFilters: (filters: string[]) => void; // Update selected filters
   setIsRequesting: (isRequesting: boolean) => void;
-  setSearchParams: (params: Partial<SearchParams>) => void; // Allow partial updates
-  setYearsRange: (yearsRange: [number, number]) => void; // Add this method
+  setSearchParams: (params: Partial<SearchParams>) => void;
+  setYearsRange: (yearsRange: [number, number]) => void;
   search: () => Promise<void>;
   initialize: (searchcraft: SearchcraftCore, debug?: boolean) => void;
 }
@@ -63,19 +65,21 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
     isRequesting: false,
     searchResults: null,
     facets: null,
+    selectedFilters: [], // Initialize selected filters as an empty array
     searchParams: {
-      mode: 'fuzzy', // Default mode
-      sort: 'desc', // Default sort order
+      mode: 'fuzzy',
+      sort: 'desc',
     },
     setQuery: (query) => set({ query }),
     setSearchResults: (results) => set({ searchResults: results }),
     setFacets: (facets) => set({ facets }),
+    setSelectedFilters: (filters) => set({ selectedFilters: filters }), // Update the selected filters
     setIsRequesting: (isRequesting) => set({ isRequesting }),
     setSearchParams: (params) =>
       set((state) => ({
         searchParams: {
           ...state.searchParams,
-          ...params, // Merge partial updates
+          ...params,
         },
       })),
     setYearsRange: (yearsRange) =>
@@ -88,7 +92,7 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
     search: async () => {
       const {
         query,
-        facets,
+        selectedFilters,
         setIsRequesting,
         setSearchResults,
         setFacets,
@@ -101,11 +105,22 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
       log(LogLevel.INFO, `Starting search with query: "${query}"`);
 
       try {
+        const counts: Record<string, number> = selectedFilters.reduce(
+          (acc, filter) => {
+            const cleanedFilter = filter.replace(/^section:/, ''); // Remove 'section:' prefix
+            acc[cleanedFilter] = 1; // Assign a dummy count of 1 (or use actual values if available)
+            return acc;
+          },
+          {} as Record<string, number>,
+        );
+
+        console.log(counts);
+
         const searchRequest = {
           query,
           mode: searchParams.mode,
           sort: searchParams.sort,
-          facets,
+          facets: selectedFilters.length > 0 ? { section: { counts } } : null,
           yearsRange: searchParams.yearsRange,
         };
 

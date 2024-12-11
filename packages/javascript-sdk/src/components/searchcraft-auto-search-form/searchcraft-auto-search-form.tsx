@@ -67,15 +67,19 @@ export class SearchcraftAutoSearchForm {
   handleInputChange = (event: ScInputCustomEvent<string>) => {
     this.query = event.detail;
     this.querySubmit.emit(this.query);
+  };
 
-    // Clear the previous debounce timeout
+  handleInputKeyUp = (event: ScInputCustomEvent<string>) => {
+    const target = event.detail;
+    this.query = target;
+    this.querySubmit.emit(this.query);
+
     if (this.debounceTimeout) {
       clearTimeout(this.debounceTimeout);
     }
 
-    // Set a new debounce timeout
     this.debounceTimeout = setTimeout(() => {
-      this.runSearch();
+      this.query.trim() !== '' && this.runSearch();
     }, this.debounceDelay);
   };
 
@@ -130,6 +134,7 @@ export class SearchcraftAutoSearchForm {
             input-icon-height={this.inputIconHeight}
             input-icon-width={this.inputIconWidth}
             onClearInput={this.handleClearInput}
+            onInputKeyUp={this.handleInputKeyUp}
             onSearchInputChange={this.handleInputChange}
             placeholder-value={this.placeholderValue}
             query={this.query}

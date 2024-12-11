@@ -28,6 +28,7 @@
 | Event               | Description | Type                  |
 | ------------------- | ----------- | --------------------- |
 | `clearInput`        |             | `CustomEvent<void>`   |
+| `inputKeyUp`        |             | `CustomEvent<string>` |
 | `searchInputChange` |             | `CustomEvent<string>` |
 
 
