@@ -114,8 +114,6 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
           {} as Record<string, number>,
         );
 
-        console.log(counts);
-
         const searchRequest = {
           query,
           mode: searchParams.mode,
@@ -124,11 +122,8 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
           yearsRange: searchParams.yearsRange,
         };
 
-        console.log('Search Request:', searchRequest);
-
         const results = await searchcraft.search(searchRequest);
         setSearchResults(results);
-        console.log(results.data.facets);
 
         // Extract facets from the results and update the state
         const updatedFacets = results.data.facets || null;

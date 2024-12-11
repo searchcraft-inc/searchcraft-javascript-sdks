@@ -15,8 +15,6 @@ export class SearchcraftToggleButton {
   @Prop() type: 'mode' | 'sort' = 'mode';
 
   @State() isActive = false;
-
-  // Zustand store hook
   private searchStore = useSearchcraftStore.getState();
 
   private handleToggle = async () => {
@@ -46,7 +44,7 @@ export class SearchcraftToggleButton {
       this.type === 'mode'
         ? 'Exact Match'
         : this.type === 'sort'
-          ? 'Sort Order'
+          ? 'Most Recent'
           : '';
 
     return (
