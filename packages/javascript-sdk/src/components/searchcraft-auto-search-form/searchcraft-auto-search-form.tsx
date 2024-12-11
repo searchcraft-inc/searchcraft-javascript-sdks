@@ -79,6 +79,20 @@ export class SearchcraftAutoSearchForm {
     }, this.debounceDelay);
   };
 
+  handleInputKeyUp = (event: ScInputCustomEvent<string>) => {
+    const target = event.detail;
+    this.query = target;
+    this.querySubmit.emit(this.query);
+
+    if (this.debounceTimeout) {
+      clearTimeout(this.debounceTimeout);
+    }
+
+    this.debounceTimeout = setTimeout(() => {
+      this.runSearch();
+    }, this.debounceDelay);
+  };
+
   handleClearInput = () => {
     this.query = '';
 
@@ -130,6 +144,7 @@ export class SearchcraftAutoSearchForm {
             input-icon-height={this.inputIconHeight}
             input-icon-width={this.inputIconWidth}
             onClearInput={this.handleClearInput}
+            onInputKeyUp={this.handleInputKeyUp}
             onSearchInputChange={this.handleInputChange}
             placeholder-value={this.placeholderValue}
             query={this.query}
