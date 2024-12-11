@@ -1,5 +1,5 @@
 import { r as registerInstance, a as createEvent, h } from './index-17269461.js';
-import { u as useSearchcraftStore, p } from './store-81542f52.js';
+import { u as useSearchcraftStore, p } from './store-881233b3.js';
 import { p as parseCustomStyles } from './utils-7bff0c78.js';
 import './_commonjsHelpers-63cbe26c.js';
 
@@ -94,7 +94,7 @@ const SearchcraftAutoSearchForm = class {
     render() {
         const formClass = this.rightToLeftOrientation ? 'formRTL' : 'formLTR';
         const parsedCustomStyles = parseCustomStyles(this.customStylesForInput);
-        return (h("form", { key: 'dcee4154abf58ee9f2889b3508bd0d019e2ca269', class: `${formClass}`, onSubmit: this.handleFormSubmit }, h("searchcraft-input-label", { key: '9b8c9ce5715c45d6d5a54dff12176a5057d757e2', label: this.labelForInput }), h("div", { key: '7a5fcb646ffbbc8a707abe14bbb34f4cb167cd2f', class: 'searchContainer' }, h("searchcraft-input", { key: 'dc702bd52d0a65b5cc89f948df1303b545390726', customStyles: parsedCustomStyles, "input-caption-value": this.inputCaptionValue, "is-requesting": this.isRequesting, "input-icon-height": this.inputIconHeight, "input-icon-width": this.inputIconWidth, onClearInput: this.handleClearInput, onInputKeyUp: this.handleInputKeyUp, onSearchInputChange: this.handleInputChange, "placeholder-value": this.placeholderValue, query: this.query, "right-to-left-orientation": this.rightToLeftOrientation })), this.error && (h("searchcraft-error-message", { key: 'fe4e317fe561a23ebed409ee529c119efbd76f43', errorMessage: 'Please enter a search query.' }))));
+        return (h("form", { key: '0e1dd8601cf2b8d36c87c5f0da40611b6e227991', class: `${formClass}`, onSubmit: this.handleFormSubmit }, h("searchcraft-input-label", { key: 'b576e1a0dd09397ba7d2ab7ae2068f1d8c7c59d5', label: this.labelForInput }), h("div", { key: '304e69a89c88a20ffbe411fc124b47d0dba32bf8', class: 'searchContainer' }, h("searchcraft-input", { key: '08147588fa4ece18be2fcd08aee450b636924bab', customStyles: parsedCustomStyles, "input-caption-value": this.inputCaptionValue, "is-requesting": this.isRequesting, "input-icon-height": this.inputIconHeight, "input-icon-width": this.inputIconWidth, onClearInput: this.handleClearInput, onInputKeyUp: this.handleInputKeyUp, onSearchInputChange: this.handleInputChange, "placeholder-value": this.placeholderValue, query: this.query, "right-to-left-orientation": this.rightToLeftOrientation })), this.error && (h("searchcraft-error-message", { key: '3c784617b106b5cc6dba1aed3cbbfe922c7c9701', errorMessage: 'Please enter a search query.' }))));
     }
 };
 SearchcraftAutoSearchForm.style = searchcraftAutoSearchFormModuleCss;

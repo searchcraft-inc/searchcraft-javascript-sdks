@@ -18,14 +18,17 @@ export class SearchcraftFiltersList {
   @Prop() filters: Array<{ label: string; value: string }> = [];
   @Event() filtersUpdated: EventEmitter<string[]>;
 
-  @State() selectedFilters: Set<string> = new Set();
   @State() dynamicFilters: Array<{ label: string; value: string }> = [];
+  @State() isRequesting = false;
+  @State() selectedFilters: Set<string> = new Set();
+  @State() originalFilterCounts: Record<string, string> = {};
 
   private searchStore = useSearchcraftStore.getState();
   unsubscribe: () => void;
 
   connectedCallback() {
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {
+      this.isRequesting = state.isRequesting;
       const facets = state.searchResults?.data.facets;
       if (facets) {
         this.populateFiltersFromFacets(facets);
@@ -41,10 +44,14 @@ export class SearchcraftFiltersList {
 
   populateFiltersFromFacets(facets: Facets) {
     const newFilters = Object.entries(facets).flatMap(([facetKey, facetData]) =>
-      Object.entries(facetData.counts).map(([value, count]) => ({
-        label: `${facetKey}: ${value.replace(/^\//, '')} (${count})`,
-        value: `${facetKey}:${value}`,
-      })),
+      Object.entries(facetData.counts).map(([value, count]) => {
+        const filterValue = `${facetKey}:${value}`;
+        this.originalFilterCounts[filterValue] = `${count}`; // Store the original count
+        return {
+          label: `${facetKey}: ${value.replace(/^\//, '')} (${count})`,
+          value: filterValue,
+        };
+      }),
     );
     this.dynamicFilters = newFilters;
   }
@@ -57,70 +64,54 @@ export class SearchcraftFiltersList {
     }
 
     const selectedFiltersArray = Array.from(this.selectedFilters);
-
-    const filtersToRender =
-      this.dynamicFilters.length > 0 ? this.dynamicFilters : this.filters;
-
-    // Construct the original data dynamically from filtersToRender
-    const originalData = {
-      section: {
-        counts: filtersToRender.reduce(
-          (countsAcc, filter) => {
-            const [, facetValue] = filter.value.split(':');
-            countsAcc[`${facetValue}`] = Number.parseInt(
-              (filter.label.match(/\((\d+)\)$/) || [])[1] || '0',
-              10,
-            );
-            return countsAcc;
-          },
-          {} as Record<string, number>,
-        ),
-      },
-    };
-
-    const checkedCategories = selectedFiltersArray.map(
-      (filter) => filter.split(':')[1],
-    );
-    const filteredCounts = Object.keys(originalData.section.counts)
-      .filter((key) => checkedCategories.includes(key))
-      .reduce(
-        (acc, key) => {
-          acc[key] = originalData.section.counts[key];
-          return acc;
-        },
-        {} as Record<string, number>,
-      );
-    const filteredData = {
-      section: {
-        counts: filteredCounts,
-      },
-    };
-
-    // Transform the filtered data into the facets structure
-    const transformedFacets: Facets = {
-      section: {
-        counts: filteredData.section.counts,
-      },
-    };
-
-    // Emit the updated selected filters and update the search store
     this.filtersUpdated.emit(selectedFiltersArray);
-    this.searchStore.setFacets(transformedFacets);
+    this.searchStore.setSelectedFilters(selectedFiltersArray);
     this.searchStore.search();
   };
 
   render() {
-    const filtersToRender =
-      this.dynamicFilters.length > 0 ? this.dynamicFilters : this.filters;
+    const checkedFilters = Array.from(this.selectedFilters).map((value) => {
+      const count = this.originalFilterCounts[value] || '0';
+      return {
+        label: `${value.split(':')[1]} (${count})`,
+        value,
+      };
+    });
+
+    const remainingDynamicFilters = this.dynamicFilters.filter(
+      (filter) => !this.selectedFilters.has(filter.value),
+    );
+
+    if (this.isRequesting) {
+      return <div>Loading facets</div>;
+    }
 
     return (
       <div class='filtersList'>
-        {filtersToRender.map((filter) => {
+        {checkedFilters.map((filter) => (
+          <label class='checkboxLabel' key={filter.value}>
+            <input
+              class='filterListCheckbox'
+              checked
+              onChange={(event: Event) =>
+                this.handleFilterChange(
+                  filter.value,
+                  (event.target as HTMLInputElement).checked,
+                )
+              }
+              type='checkbox'
+              value={filter.value}
+            />
+            {filter.label}
+          </label>
+        ))}
+        {remainingDynamicFilters.map((filter) => {
           const filterLabel = filter.label.split(':')[1] || filter.label;
           return (
-            <label class='checkboxLabel' key={filter.label}>
+            <label class='checkboxLabel' key={filter.value}>
               <input
                 class='filterListCheckbox'
+                checked={this.selectedFilters.has(filter.value)}
                 onChange={(event: Event) =>
                   this.handleFilterChange(
                     filter.value,

@@ -16,9 +16,14 @@ export class SearchcraftSlider {
   private searchStore = useSearchcraftStore.getState();
 
   private updateYears = async () => {
+    const query = this.searchStore.query; // Get the query from the store
     this.searchStore.setYearsRange([this.startYear, this.endYear]);
 
     try {
+      if (!query || query.trim() === '') {
+        console.warn('No query value, search request skipped.');
+        return;
+      }
       await this.searchStore.search();
     } catch (error) {
       console.error('Search failed:', error);

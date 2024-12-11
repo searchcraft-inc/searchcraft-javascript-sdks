@@ -1,5 +1,5 @@
 import { r as registerInstance, a as createEvent, h } from './index-17269461.js';
-import { u as useSearchcraftStore, a as useThemeStore, p } from './store-81542f52.js';
+import { u as useSearchcraftStore, a as useThemeStore, p } from './store-881233b3.js';
 import './_commonjsHelpers-63cbe26c.js';
 
 const searchcraftBaseSearchFormModuleCss = ".formLTR{font-family:Helvetica, Arial, sans-serif;text-align:left}.formRTL{font-family:Helvetica, Arial, sans-serif;text-align:right}.searchContainer{align-items:center;display:flex}";
@@ -50,7 +50,7 @@ const SearchcraftBaseSearchForm = class {
         this.searchResults = null;
     }
     render() {
-        return (h("form", { key: '6460e91d9c4a48c40476c18762b8b4873c157653', class: this.rightToLeftOrientation ? 'formRTL' : 'formLTR', onSubmit: this.handleFormSubmit }, h("searchcraft-input-label", { key: '9d0a89868c4dafae20e7437101c5639466fc2ffa', label: this.labelForInput }), h("div", { key: '441c0923111995fc0b04b0acb799ade4b2018be0', class: 'searchContainer' }, this.rightToLeftOrientation && h("searchcraft-button", { key: '2a0dc24c906917cd1ec5bd605e25a0a67bffee21' }), h("searchcraft-input", { key: '6744a36c97e03fbd10cc354653e32f0f7eac1c00', onClearInput: this.handleClearInput, rightToLeftOrientation: this.rightToLeftOrientation, onSearchInputChange: this.handleSearchInputChange, query: this.query }), !this.rightToLeftOrientation && (h("searchcraft-button", { key: '50ea437efebe7a62d6122fb6a76942861003884a', onButtonClick: this.handleFormSubmit }))), this.error && (h("searchcraft-error-message", { key: 'ae4b2fa7d874771af0b88757244abe5d50679d55', errorMessage: this.errorMessage }))));
+        return (h("form", { key: '89651e0b9946b082b8b917eb0d123ebb81d35f95', class: this.rightToLeftOrientation ? 'formRTL' : 'formLTR', onSubmit: this.handleFormSubmit }, h("searchcraft-input-label", { key: 'a2fa60cd906175920f087c7dc70a72cce8cbd91d', label: this.labelForInput }), h("div", { key: '503f42fb4a8f8ea42ed515d00da01cd293e4e15c', class: 'searchContainer' }, this.rightToLeftOrientation && h("searchcraft-button", { key: '4083b0336ec6bcc494c264ba066742b44d19811d' }), h("searchcraft-input", { key: '0a1cd6937843aff9ea6b6ca5ae5e9b18f14ee95a', onClearInput: this.handleClearInput, rightToLeftOrientation: this.rightToLeftOrientation, onSearchInputChange: this.handleSearchInputChange, query: this.query }), !this.rightToLeftOrientation && (h("searchcraft-button", { key: '321790c97a4541c6579bde2741876b2b244d7f48', onButtonClick: this.handleFormSubmit }))), this.error && (h("searchcraft-error-message", { key: '8ffa880fe34100813ac57ac861afab7a4a946cdb', errorMessage: this.errorMessage }))));
     }
 };
 SearchcraftBaseSearchForm.style = searchcraftBaseSearchFormModuleCss;

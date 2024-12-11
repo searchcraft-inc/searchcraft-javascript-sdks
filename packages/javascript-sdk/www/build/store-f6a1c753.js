@@ -3001,13 +3001,15 @@ const useSearchcraftStore = zustand.create((set, get) => {
         isRequesting: false,
         searchResults: null,
         facets: null,
+        selectedFilters: [], // Initialize selected filters as an empty array
         searchParams: {
-            mode: 'fuzzy', // Default mode
-            sort: 'desc', // Default sort order
+            mode: 'fuzzy',
+            sort: 'desc',
         },
         setQuery: (query) => set({ query }),
         setSearchResults: (results) => set({ searchResults: results }),
         setFacets: (facets) => set({ facets }),
+        setSelectedFilters: (filters) => set({ selectedFilters: filters }), // Update the selected filters
         setIsRequesting: (isRequesting) => set({ isRequesting }),
         setSearchParams: (params) => set((state) => ({
             searchParams: Object.assign(Object.assign({}, state.searchParams), params),
@@ -3016,18 +3018,24 @@ const useSearchcraftStore = zustand.create((set, get) => {
             searchParams: Object.assign(Object.assign({}, state.searchParams), { yearsRange }),
         })),
         search: async () => {
-            const { query, facets, setIsRequesting, setSearchResults, setFacets, searchParams, } = get();
+            const { query, selectedFilters, setIsRequesting, setSearchResults, setFacets, searchParams, } = get();
             if (!searchcraft) {
                 throw new Error('Searchcraft instance is not initialized.');
             }
             setIsRequesting(true);
             log(c.INFO, `Starting search with query: "${query}"`);
             try {
+                // Convert selectedFilters (string[]) into a Record<string, number>
+                const counts = selectedFilters.reduce((acc, filter) => {
+                    acc[filter] = 1; // Assign a dummy count of 1 (or use actual values if available)
+                    return acc;
+                }, {});
+                console.log(counts);
                 const searchRequest = {
                     query,
                     mode: searchParams.mode,
                     sort: searchParams.sort,
-                    facets,
+                    facets: selectedFilters.length > 0 ? { section: { counts } } : null,
                     yearsRange: searchParams.yearsRange,
                 };
                 console.log('Search Request:', searchRequest);
@@ -3065,4 +3073,4 @@ const useThemeStore = zustand.create((set) => ({
 
 export { useThemeStore as a, p, useSearchcraftStore as u };
 
-//# sourceMappingURL=store-81542f52.js.map
+//# sourceMappingURL=store-f6a1c753.js.map
