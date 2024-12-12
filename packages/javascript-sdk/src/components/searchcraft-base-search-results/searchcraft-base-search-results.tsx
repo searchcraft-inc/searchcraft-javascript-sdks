@@ -91,11 +91,6 @@ export class SearchcraftBaseSearchResults {
       );
     }
 
-    if (!this.searchResults?.data) {
-      console.warn('No search results data available');
-      return <div class='emptyState'>No results to display.</div>;
-    }
-
     const parsedSearchKeys = parseSearchKeys(this.documentAttributesForDisplay);
     const serializedStyles =
       typeof this.customStylesForResults === 'string'
@@ -188,9 +183,11 @@ export class SearchcraftBaseSearchResults {
         {finalComponents}
         {this.query.length > 0 &&
           this.searchResults?.data?.hits?.length === 0 && (
-            <searchcraft-error-message
-              error-message={`No search results found for "${this.query}" query`}
-            />
+            <div class='errorMessageContainer'>
+              <searchcraft-error-message
+                error-message={`No search results found for "${this.query}" query`}
+              />
+            </div>
           )}
       </div>
     );

@@ -16,11 +16,13 @@ export class SearchcraftSlider {
   @State() hasSearched = false;
   unsubscribe: () => void;
   private searchStore = useSearchcraftStore.getState();
+  @State() resultsCount = 0; // Track the count of search results
 
   componentDidLoad() {
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {
       if (state.query.length > 0) {
         this.hasSearched = true;
+        this.resultsCount = state.searchResults?.data?.hits?.length || 0;
       }
       this.query = state.query;
     });
@@ -59,7 +61,7 @@ export class SearchcraftSlider {
   };
 
   render() {
-    if (!this.hasSearched) {
+    if (!this.query || this.resultsCount === 0) {
       return null;
     }
     return (
