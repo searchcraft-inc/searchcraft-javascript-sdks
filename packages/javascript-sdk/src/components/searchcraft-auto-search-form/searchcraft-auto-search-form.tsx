@@ -45,7 +45,7 @@ export class SearchcraftAutoSearchForm {
   @State() searchResults = '';
 
   private debounceTimeout: ReturnType<typeof setTimeout> | null = null;
-  private debounceDelay = 300; // 300ms debounce delay
+  private debounceDelay = 0;
   private searchStore = useSearchcraftStore.getState();
   unsubscribe: () => void;
 

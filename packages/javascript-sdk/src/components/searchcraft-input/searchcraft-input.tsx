@@ -93,6 +93,7 @@ export class SearchcraftInput {
         {this.rightToLeftOrientation ? (
           <Fragment>
             <input
+              autoComplete='off'
               class={classNames(inputClassName, 'searchcraft-input')}
               id='searchcraft-input-id'
               onChange={this.handleInputChange.bind(this)}
@@ -139,6 +140,7 @@ export class SearchcraftInput {
               width={this.inputIconWidth}
             />
             <input
+              autoComplete='off'
               class={classNames(inputClassName, 'searchcraft-input')}
               id='searchcraft-input-id'
               onChange={this.handleInputChange.bind(this)}

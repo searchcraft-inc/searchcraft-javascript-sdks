@@ -68,7 +68,7 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
     selectedFilters: [], // Initialize selected filters as an empty array
     searchParams: {
       mode: 'fuzzy',
-      sort: 'desc',
+      sort: 'asc',
     },
     setQuery: (query) => set({ query }),
     setSearchResults: (results) => set({ searchResults: results }),
