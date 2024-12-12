@@ -64,12 +64,7 @@
 }
 
 .imageContainer {
-  max-height: 540px;
   max-width: 100%;
-
-  @media (min-width: 600px) {
-    max-height: 175px;
-  }
 }
 
 .contentContainer {
@@ -79,6 +74,11 @@
   @media (min-width: 600px) {
     max-width: 50%;
   }
+}
+
+.secondaryContentContainer {
+  display: flex;
+
 }
 
 @mixin image-base {
@@ -159,6 +159,14 @@
 .secondaryContentLight {
   @include body-content-base;
   color: $light-search-result-body-content-color;
+}
+
+.secondaryContentLight::after {
+  content: "•";
+  color: $light-search-result-body-content-color;
+  font-size: 1em;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .secondaryContentDark {

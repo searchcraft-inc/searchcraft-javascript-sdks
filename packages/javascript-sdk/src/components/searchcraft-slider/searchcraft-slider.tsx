@@ -10,21 +10,39 @@ export class SearchcraftSlider {
   @Prop() minYear = 2000;
   @Prop() maxYear = new Date().getFullYear();
 
-  @State() startYear = this.minYear;
   @State() endYear = this.maxYear;
-
+  @State() query = '';
+  @State() startYear = this.minYear;
+  @State() hasSearched = false;
+  unsubscribe: () => void;
   private searchStore = useSearchcraftStore.getState();
+  @State() resultsCount = 0; // Track the count of search results
+
+  componentDidLoad() {
+    this.unsubscribe = useSearchcraftStore.subscribe((state) => {
+      if (state.query.length > 0) {
+        this.hasSearched = true;
+        this.resultsCount = state.searchResults?.data?.hits?.length || 0;
+      }
+      this.query = state.query;
+    });
+  }
+
+  disconnectedCallback() {
+    if (this.unsubscribe) {
+      this.unsubscribe();
+    }
+  }
 
   private updateYears = async () => {
-    const query = this.searchStore.query; // Get the query from the store
     this.searchStore.setYearsRange([this.startYear, this.endYear]);
 
     try {
-      if (!query || query.trim() === '') {
-        console.warn('No query value, search request skipped.');
-        return;
+      if (typeof this.query === 'string' && this.query.trim() !== '') {
+        await this.searchStore.search();
+      } else {
+        console.warn('Query is missing or empty, skipping search request.');
       }
-      await this.searchStore.search();
     } catch (error) {
       console.error('Search failed:', error);
     }
@@ -43,27 +61,30 @@ export class SearchcraftSlider {
   };
 
   render() {
+    if (!this.query || this.resultsCount === 0) {
+      return null;
+    }
     return (
       <div class='slider-container'>
         <label>Filter by Year</label>
         <div class='range-container'>
           <input
-            type='range'
-            min={this.minYear}
-            max={this.maxYear}
-            value={this.startYear}
-            step='1'
-            onInput={this.handleStartYearChange}
             class='range-slider'
+            max={this.maxYear}
+            min={this.minYear}
+            onInput={this.handleStartYearChange}
+            step='1'
+            type='range'
+            value={this.startYear}
           />
           <input
-            type='range'
-            min={this.minYear}
-            max={this.maxYear}
-            value={this.endYear}
-            step='1'
-            onInput={this.handleEndYearChange}
             class='range-slider'
+            max={this.maxYear}
+            min={this.minYear}
+            onInput={this.handleEndYearChange}
+            step='1'
+            type='range'
+            value={this.endYear}
           />
         </div>
         <div class='year-labels'>

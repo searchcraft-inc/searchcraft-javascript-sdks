@@ -45,7 +45,7 @@ export class SearchcraftAutoSearchForm {
   @State() searchResults = '';
 
   private debounceTimeout: ReturnType<typeof setTimeout> | null = null;
-  private debounceDelay = 300; // 300ms debounce delay
+  private debounceDelay = 0;
   private searchStore = useSearchcraftStore.getState();
   unsubscribe: () => void;
 
@@ -66,12 +66,14 @@ export class SearchcraftAutoSearchForm {
 
   handleInputChange = (event: ScInputCustomEvent<string>) => {
     this.query = event.detail;
+    this.searchStore.setQuery(this.query); // Update query in the store
     this.querySubmit.emit(this.query);
   };
 
   handleInputKeyUp = (event: ScInputCustomEvent<string>) => {
     const target = event.detail;
     this.query = target;
+    this.searchStore.setQuery(this.query); // Update query in the store
     this.querySubmit.emit(this.query);
 
     if (this.debounceTimeout) {
@@ -85,6 +87,7 @@ export class SearchcraftAutoSearchForm {
 
   handleClearInput = () => {
     this.query = '';
+    this.searchStore.setQuery(''); // Clear query in the store
 
     if (typeof this.clearInput === 'function') {
       this.clearInput();
@@ -126,21 +129,19 @@ export class SearchcraftAutoSearchForm {
     return (
       <form class={`${formClass}`} onSubmit={this.handleFormSubmit}>
         <searchcraft-input-label label={this.labelForInput} />
-        <div class='searchContainer'>
-          <searchcraft-input
-            customStyles={parsedCustomStyles}
-            input-caption-value={this.inputCaptionValue}
-            is-requesting={this.isRequesting}
-            input-icon-height={this.inputIconHeight}
-            input-icon-width={this.inputIconWidth}
-            onClearInput={this.handleClearInput}
-            onInputKeyUp={this.handleInputKeyUp}
-            onSearchInputChange={this.handleInputChange}
-            placeholder-value={this.placeholderValue}
-            query={this.query}
-            right-to-left-orientation={this.rightToLeftOrientation}
-          />
-        </div>
+        <searchcraft-input
+          customStyles={parsedCustomStyles}
+          input-caption-value={this.inputCaptionValue}
+          is-requesting={this.isRequesting}
+          input-icon-height={this.inputIconHeight}
+          input-icon-width={this.inputIconWidth}
+          onClearInput={this.handleClearInput}
+          onInputKeyUp={this.handleInputKeyUp}
+          onSearchInputChange={this.handleInputChange}
+          placeholder-value={this.placeholderValue}
+          query={this.query}
+          right-to-left-orientation={this.rightToLeftOrientation}
+        />
         {this.error && (
           <searchcraft-error-message errorMessage='Please enter a search query.' />
         )}

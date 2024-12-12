@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 100px 20px;
+  margin: 16px 20px;
 
   & > p {
     align-self: center;
@@ -23,7 +23,9 @@
 
 .adSection {
   align-items: center;
+  background-color: #F1F1F1;
   border: 1px solid #DCDDDE;
+  border-radius: 16px;
   display: flex;
   flex-direction: column;
   font-size: 16px;
@@ -39,5 +41,10 @@
 }
 
 .emptyState {
+  width: 100%;
+  text-align: center;
+}
+
+.errorMessageContainer {
   text-align: center;
 }

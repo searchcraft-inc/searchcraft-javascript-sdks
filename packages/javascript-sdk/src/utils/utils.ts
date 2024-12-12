@@ -12,10 +12,12 @@ export function parseCustomStyles(
   return styles || {};
 }
 
-export function parseSearchKeys(searchKeys: string): string[] {
+export function parseSearchKeys(
+  documentAttributesForDisplay: string,
+): string[] {
   try {
     // Attempt to parse the string as JSON
-    const parsedKeys = JSON.parse(searchKeys);
+    const parsedKeys = JSON.parse(documentAttributesForDisplay);
     if (
       Array.isArray(parsedKeys) &&
       parsedKeys.every((key) => typeof key === 'string')

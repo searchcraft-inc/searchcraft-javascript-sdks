@@ -15,9 +15,24 @@ export class SearchcraftToggleButton {
   @Prop() type: 'mode' | 'sort' = 'mode';
 
   @State() isActive = false;
+  @State() query = ''; // Track the query
+  @State() resultsCount = 0; // Track the count of search results
 
-  // Zustand store hook
+  private unsubscribe: () => void;
   private searchStore = useSearchcraftStore.getState();
+
+  componentDidLoad() {
+    this.unsubscribe = useSearchcraftStore.subscribe((state) => {
+      this.query = state.query || '';
+      this.resultsCount = state.searchResults?.data?.hits?.length || 0;
+    });
+  }
+
+  disconnectedCallback() {
+    if (this.unsubscribe) {
+      this.unsubscribe();
+    }
+  }
 
   private handleToggle = async () => {
     this.isActive = !this.isActive;
@@ -28,7 +43,7 @@ export class SearchcraftToggleButton {
         mode,
       });
     } else if (this.type === 'sort') {
-      const sort = this.isActive ? 'asc' : 'desc';
+      const sort = this.isActive ? 'desc' : 'asc';
       this.searchStore.setSearchParams({
         sort,
       });
@@ -42,11 +57,16 @@ export class SearchcraftToggleButton {
   };
 
   render() {
+    // Render only if there's a query and results exist
+    if (!this.query || this.resultsCount === 0) {
+      return null;
+    }
+
     const label =
       this.type === 'mode'
         ? 'Exact Match'
         : this.type === 'sort'
-          ? 'Sort Order'
+          ? 'Most Recent'
           : '';
 
     return (

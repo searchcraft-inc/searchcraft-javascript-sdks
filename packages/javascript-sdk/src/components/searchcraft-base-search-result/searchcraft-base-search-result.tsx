@@ -86,7 +86,7 @@ export class SearchcraftBaseSearchResult {
           >
             {this.primaryContent}
           </p>
-          <div>
+          <div class='secondaryContentContainer'>
             <p
               style={styles.secondaryContent || {}}
               class={

@@ -41,6 +41,8 @@ export type SearchError = {
   code?: number; // Error code (optional).
   hits?: []; // Always an empty array when an error occurs (optional).
   facets?: null;
+  count?: number;
+  time_taken?: number;
 };
 
 /**

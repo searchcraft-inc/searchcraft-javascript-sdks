@@ -19,9 +19,12 @@ export class SearchcraftFiltersList {
   @Event() filtersUpdated: EventEmitter<string[]>;
 
   @State() dynamicFilters: Array<{ label: string; value: string }> = [];
+  @State() initialFilters: Array<{ label: string; value: string }> = [];
   @State() isRequesting = false;
   @State() selectedFilters: Set<string> = new Set();
   @State() originalFilterCounts: Record<string, string> = {};
+  @State() query = '';
+  @State() resultsCount = 0;
 
   private searchStore = useSearchcraftStore.getState();
   unsubscribe: () => void;
@@ -29,6 +32,9 @@ export class SearchcraftFiltersList {
   connectedCallback() {
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {
       this.isRequesting = state.isRequesting;
+      this.query = state.query || '';
+      this.resultsCount = state.searchResults?.data?.hits?.length || 0;
+
       const facets = state.searchResults?.data.facets;
       if (facets) {
         this.populateFiltersFromFacets(facets);
@@ -43,17 +49,34 @@ export class SearchcraftFiltersList {
   }
 
   populateFiltersFromFacets(facets: Facets) {
-    const newFilters = Object.entries(facets).flatMap(([facetKey, facetData]) =>
-      Object.entries(facetData.counts).map(([value, count]) => {
-        const filterValue = `${facetKey}:${value}`;
-        this.originalFilterCounts[filterValue] = `${count}`; // Store the original count
+    const newFilters = Object.entries(facets.section?.counts || {}).map(
+      ([key, count]) => {
+        const filterValue = key;
+        this.originalFilterCounts[filterValue] = `${count}`;
         return {
-          label: `${facetKey}: ${value.replace(/^\//, '')} (${count})`,
+          label: `${key.replace(/^\//, '')} (${count})`,
           value: filterValue,
         };
-      }),
+      },
     );
-    this.dynamicFilters = newFilters;
+
+    // Update dynamic filters while preserving the initial filters
+    const updatedFilters = [
+      ...this.initialFilters,
+      ...newFilters.filter(
+        (filter) =>
+          !this.initialFilters.some(
+            (initial) => initial.value === filter.value,
+          ),
+      ),
+    ];
+
+    this.dynamicFilters = updatedFilters;
+
+    // Store the initial filters only once
+    if (this.initialFilters.length === 0) {
+      this.initialFilters = [...updatedFilters];
+    }
   }
 
   handleFilterChange = (value: string, checked: boolean) => {
@@ -64,54 +87,48 @@ export class SearchcraftFiltersList {
     }
 
     const selectedFiltersArray = Array.from(this.selectedFilters);
+
     this.filtersUpdated.emit(selectedFiltersArray);
     this.searchStore.setSelectedFilters(selectedFiltersArray);
     this.searchStore.search();
   };
 
+  formatLabel(label: string): string {
+    return label
+      .replace(/-/g, ' ') // Replace dashes with spaces
+      .split(' ') // Split words
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize the first letter
+      .join(' '); // Join words back into a single string
+  }
+
   render() {
-    const checkedFilters = Array.from(this.selectedFilters).map((value) => {
-      const count = this.originalFilterCounts[value] || '0';
+    if (!this.query || this.resultsCount === 0) {
+      return null;
+    }
+
+    const filtersToRender = this.initialFilters.map((initialFilter) => {
+      const isChecked = this.selectedFilters.has(initialFilter.value);
+      const dynamicChildren = this.dynamicFilters.filter(
+        (dynamicFilter) =>
+          dynamicFilter.value.startsWith(initialFilter.value) &&
+          dynamicFilter.value !== initialFilter.value, // Exclude parent itself
+      );
       return {
-        label: `${value.split(':')[1]} (${count})`,
-        value,
+        ...initialFilter,
+        isChecked,
+        children: dynamicChildren,
       };
     });
 
-    const remainingDynamicFilters = this.dynamicFilters.filter(
-      (filter) => !this.selectedFilters.has(filter.value),
-    );
-
-    if (this.isRequesting) {
-      return <div>Loading facets</div>;
-    }
-
     return (
       <div class='filtersList'>
-        {checkedFilters.map((filter) => (
-          <label class='checkboxLabel' key={filter.value}>
-            <input
-              class='filterListCheckbox'
-              checked
-              onChange={(event: Event) =>
-                this.handleFilterChange(
-                  filter.value,
-                  (event.target as HTMLInputElement).checked,
-                )
-              }
-              type='checkbox'
-              value={filter.value}
-            />
-            {filter.label}
-          </label>
-        ))}
-        {remainingDynamicFilters.map((filter) => {
-          const filterLabel = filter.label.split(':')[1] || filter.label;
-          return (
-            <label class='checkboxLabel' key={filter.value}>
+        {filtersToRender.map((filter) => (
+          <div key={filter.value}>
+            {/* Render the parent filter */}
+            <label class='checkboxLabel'>
               <input
-                class='filterListCheckbox'
-                checked={this.selectedFilters.has(filter.value)}
+                class='filterCheckbox'
+                checked={filter.isChecked}
                 onChange={(event: Event) =>
                   this.handleFilterChange(
                     filter.value,
@@ -121,10 +138,37 @@ export class SearchcraftFiltersList {
                 type='checkbox'
                 value={filter.value}
               />
-              {filterLabel}
+              {this.formatLabel(filter.label)}
             </label>
-          );
-        })}
+
+            {/* Render dynamic child filters underneath the checked parent */}
+            {filter.isChecked &&
+              filter.children.map((childFilter) => {
+                const childLabel = childFilter.label.split('/').pop(); // Get only the part after the last '/'
+                return (
+                  <label
+                    class='childCheckboxLabel'
+                    key={childFilter.value}
+                    style={{ marginLeft: '20px' }} // Add indentation for child filters
+                  >
+                    <input
+                      class='childFilterCheckbox'
+                      checked={this.selectedFilters.has(childFilter.value)}
+                      onChange={(event: Event) =>
+                        this.handleFilterChange(
+                          childFilter.value,
+                          (event.target as HTMLInputElement).checked,
+                        )
+                      }
+                      type='checkbox'
+                      value={childFilter.value}
+                    />
+                    {this.formatLabel(childLabel || '')}
+                  </label>
+                );
+              })}
+          </div>
+        ))}
       </div>
     );
   }
