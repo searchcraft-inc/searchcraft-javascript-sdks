@@ -59,9 +59,10 @@
   <div class="resultsContainer">
     <searchcraft-slider min-year="2010" max-year="2024"></searchcraft-slider>
   </div>
+  <searchcraft-results-info />
   <div class="resultsContainer">
     <searchcraft-base-search-results
-    search-keys='["headline", "sub_headline", "body", "date_published", "author_name", "medium_image"]'
+    document-attributes-for-display='["headline", "sub_headline", "body", "date_published", "author_name", "medium_image"]'
     custom-styles-for-results='{
       "container": {"padding": "16px", "border": "1px solid #ccc", "borderRadius": "8px", "marginBottom": "16px"},
       "heading": {"fontSize": "24px", "color": "#333", "marginBottom": "8px"},

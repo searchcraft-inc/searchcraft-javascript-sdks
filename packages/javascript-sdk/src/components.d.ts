@@ -44,10 +44,10 @@ export namespace Components {
         "adInterval": number;
         "customStylesForResults": | string
     | Record<string, Record<string, string>>;
+        "documentAttributesForDisplay": string;
         "formatTime": boolean;
         "placeAdAtEnd": boolean;
         "placeAdAtStart": boolean;
-        "searchKeys": string;
     }
     interface SearchcraftButton {
         "iconElement"?: Element;
@@ -115,6 +115,8 @@ export namespace Components {
     interface SearchcraftInputLabel {
         "inputLabelClassName"?: string;
         "label"?: string;
+    }
+    interface SearchcraftResultsInfo {
     }
     interface SearchcraftSearchIconSet {
         "height": number;
@@ -333,6 +335,12 @@ declare global {
         prototype: HTMLSearchcraftInputLabelElement;
         new (): HTMLSearchcraftInputLabelElement;
     };
+    interface HTMLSearchcraftResultsInfoElement extends Components.SearchcraftResultsInfo, HTMLStencilElement {
+    }
+    var HTMLSearchcraftResultsInfoElement: {
+        prototype: HTMLSearchcraftResultsInfoElement;
+        new (): HTMLSearchcraftResultsInfoElement;
+    };
     interface HTMLSearchcraftSearchIconSetElement extends Components.SearchcraftSearchIconSet, HTMLStencilElement {
     }
     var HTMLSearchcraftSearchIconSetElement: {
@@ -378,6 +386,7 @@ declare global {
         "searchcraft-input-caption": HTMLSearchcraftInputCaptionElement;
         "searchcraft-input-icon": HTMLSearchcraftInputIconElement;
         "searchcraft-input-label": HTMLSearchcraftInputLabelElement;
+        "searchcraft-results-info": HTMLSearchcraftResultsInfoElement;
         "searchcraft-search-icon-set": HTMLSearchcraftSearchIconSetElement;
         "searchcraft-slider": HTMLSearchcraftSliderElement;
         "searchcraft-spinner-dark": HTMLSearchcraftSpinnerDarkElement;
@@ -427,10 +436,10 @@ declare namespace LocalJSX {
         "adInterval"?: number;
         "customStylesForResults"?: | string
     | Record<string, Record<string, string>>;
+        "documentAttributesForDisplay"?: string;
         "formatTime"?: boolean;
         "placeAdAtEnd"?: boolean;
         "placeAdAtStart"?: boolean;
-        "searchKeys"?: string;
     }
     interface SearchcraftButton {
         "iconElement"?: Element;
@@ -505,6 +514,8 @@ declare namespace LocalJSX {
         "inputLabelClassName"?: string;
         "label"?: string;
     }
+    interface SearchcraftResultsInfo {
+    }
     interface SearchcraftSearchIconSet {
         "height"?: number;
         /**
@@ -542,6 +553,7 @@ declare namespace LocalJSX {
         "searchcraft-input-caption": SearchcraftInputCaption;
         "searchcraft-input-icon": SearchcraftInputIcon;
         "searchcraft-input-label": SearchcraftInputLabel;
+        "searchcraft-results-info": SearchcraftResultsInfo;
         "searchcraft-search-icon-set": SearchcraftSearchIconSet;
         "searchcraft-slider": SearchcraftSlider;
         "searchcraft-spinner-dark": SearchcraftSpinnerDark;
@@ -567,6 +579,7 @@ declare module "@stencil/core" {
             "searchcraft-input-caption": LocalJSX.SearchcraftInputCaption & JSXBase.HTMLAttributes<HTMLSearchcraftInputCaptionElement>;
             "searchcraft-input-icon": LocalJSX.SearchcraftInputIcon & JSXBase.HTMLAttributes<HTMLSearchcraftInputIconElement>;
             "searchcraft-input-label": LocalJSX.SearchcraftInputLabel & JSXBase.HTMLAttributes<HTMLSearchcraftInputLabelElement>;
+            "searchcraft-results-info": LocalJSX.SearchcraftResultsInfo & JSXBase.HTMLAttributes<HTMLSearchcraftResultsInfoElement>;
             "searchcraft-search-icon-set": LocalJSX.SearchcraftSearchIconSet & JSXBase.HTMLAttributes<HTMLSearchcraftSearchIconSetElement>;
             "searchcraft-slider": LocalJSX.SearchcraftSlider & JSXBase.HTMLAttributes<HTMLSearchcraftSliderElement>;
             "searchcraft-spinner-dark": LocalJSX.SearchcraftSpinnerDark & JSXBase.HTMLAttributes<HTMLSearchcraftSpinnerDarkElement>;

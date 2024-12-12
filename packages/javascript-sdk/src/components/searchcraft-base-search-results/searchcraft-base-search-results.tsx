@@ -17,7 +17,7 @@ export class SearchcraftBaseSearchResults {
   @State() query = '';
   @State() searchResults: SearchcraftResponse | null = null;
 
-  @Prop() searchKeys = '';
+  @Prop() documentAttributesForDisplay = '';
   @Prop() customStylesForResults:
     | string
     | Record<string, Record<string, string>> = {};
@@ -29,9 +29,12 @@ export class SearchcraftBaseSearchResults {
   private unsubscribe: () => void;
 
   componentDidLoad() {
-    if (!this.searchKeys || this.searchKeys.length === 0) {
+    if (
+      !this.documentAttributesForDisplay ||
+      this.documentAttributesForDisplay.length === 0
+    ) {
       console.warn('No searchKeys provided; using empty keys array.');
-      this.searchKeys = '';
+      this.documentAttributesForDisplay = '';
     }
 
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {
@@ -80,7 +83,7 @@ export class SearchcraftBaseSearchResults {
       return <div class='emptyState'>No results to display.</div>;
     }
 
-    const parsedSearchKeys = parseSearchKeys(this.searchKeys);
+    const parsedSearchKeys = parseSearchKeys(this.documentAttributesForDisplay);
     const serializedStyles =
       typeof this.customStylesForResults === 'string'
         ? this.customStylesForResults

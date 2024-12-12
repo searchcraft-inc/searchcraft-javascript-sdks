@@ -110,7 +110,7 @@ export class SearchcraftFiltersList {
           return (
             <label class='checkboxLabel' key={filter.value}>
               <input
-                class='filterListCheckbox'
+                class='remainingFilterListCheckbox'
                 checked={this.selectedFilters.has(filter.value)}
                 onChange={(event: Event) =>
                   this.handleFilterChange(

@@ -107,8 +107,8 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
       try {
         const counts: Record<string, number> = selectedFilters.reduce(
           (acc, filter) => {
-            const cleanedFilter = filter.replace(/^section:/, ''); // Remove 'section:' prefix
-            acc[cleanedFilter] = 1; // Assign a dummy count of 1 (or use actual values if available)
+            const cleanedFilter = filter.replace(/^section:/, '');
+            acc[cleanedFilter] = 1;
             return acc;
           },
           {} as Record<string, number>,
@@ -124,8 +124,6 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
 
         const results = await searchcraft.search(searchRequest);
         setSearchResults(results);
-
-        // Extract facets from the results and update the state
         const updatedFacets = results.data.facets || null;
         setFacets(updatedFacets);
 
