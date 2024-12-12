@@ -45,6 +45,7 @@ export namespace Components {
         "customStylesForResults": | string
     | Record<string, Record<string, string>>;
         "documentAttributesForDisplay": string;
+        "fallbackElement": HTMLElement | null;
         "formatTime": boolean;
         "placeAdAtEnd": boolean;
         "placeAdAtStart": boolean;
@@ -437,6 +438,7 @@ declare namespace LocalJSX {
         "customStylesForResults"?: | string
     | Record<string, Record<string, string>>;
         "documentAttributesForDisplay"?: string;
+        "fallbackElement"?: HTMLElement | null;
         "formatTime"?: boolean;
         "placeAdAtEnd"?: boolean;
         "placeAdAtStart"?: boolean;

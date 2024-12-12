@@ -16,6 +16,7 @@ import {
 export class SearchcraftBaseSearchResults {
   @State() query = '';
   @State() searchResults: SearchcraftResponse | null = null;
+  @State() hasSearched = false;
 
   @Prop() documentAttributesForDisplay = '';
   @Prop() customStylesForResults:
@@ -25,6 +26,7 @@ export class SearchcraftBaseSearchResults {
   @Prop() placeAdAtEnd = false;
   @Prop() adInterval = 4;
   @Prop() formatTime = true;
+  @Prop() fallbackElement: HTMLElement | null = null;
 
   private unsubscribe: () => void;
 
@@ -33,11 +35,14 @@ export class SearchcraftBaseSearchResults {
       !this.documentAttributesForDisplay ||
       this.documentAttributesForDisplay.length === 0
     ) {
-      console.warn('No searchKeys provided; using empty keys array.');
+      console.warn('No document attributes provided; using empty keys array.');
       this.documentAttributesForDisplay = '';
     }
 
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {
+      if (state.query.length > 0) {
+        this.hasSearched = true;
+      }
       this.searchResults = { ...state.searchResults };
       this.query = state.query;
     });
@@ -78,6 +83,14 @@ export class SearchcraftBaseSearchResults {
   }
 
   render() {
+    if (!this.hasSearched) {
+      return (
+        <div class='emptyState'>
+          <slot />
+        </div>
+      );
+    }
+
     if (!this.searchResults?.data) {
       console.warn('No search results data available');
       return <div class='emptyState'>No results to display.</div>;
