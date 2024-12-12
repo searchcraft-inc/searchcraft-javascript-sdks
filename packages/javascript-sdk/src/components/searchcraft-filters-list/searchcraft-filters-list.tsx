@@ -62,15 +62,30 @@ export class SearchcraftFiltersList {
   }
 
   handleFilterChange = (value: string, checked: boolean) => {
-    if (checked) {
-      this.selectedFilters.add(value);
+    const remainingDynamicFilters = this.dynamicFilters
+      .filter((filter) => !this.selectedFilters.has(filter.value))
+      .map((filter) => filter.value);
+
+    if (!remainingDynamicFilters.includes(value)) {
+      // Clear all selected filters and use only the toggled filter
+      this.selectedFilters.clear();
+      if (checked) {
+        this.selectedFilters.add(value);
+      }
     } else {
-      this.selectedFilters.delete(value);
+      // Regular toggle logic for remaining dynamic filters
+      if (checked) {
+        this.selectedFilters.add(value);
+      } else {
+        this.selectedFilters.delete(value);
+      }
     }
 
     const selectedFiltersArray = Array.from(this.selectedFilters);
+
+    // Emit and search with the current state of selected filters
     this.filtersUpdated.emit(selectedFiltersArray);
-    this.searchStore.setSelectedFilters(selectedFiltersArray);
+    this.searchStore.setSelectedFilters(checked ? [value] : []);
     this.searchStore.search();
   };
 
