@@ -86,7 +86,7 @@ export class SearchcraftBaseSearchResults {
     if (!this.hasSearched) {
       return (
         <div class='emptyState'>
-          <slot />
+          <slot name='empty-search' />
         </div>
       );
     }
