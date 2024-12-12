@@ -38,13 +38,9 @@ export class SearchcraftResultsInfo {
 
     return (
       <div class='container'>
-        {this.isRequesting ? (
-          <p>Loading...</p>
-        ) : (
-          <p class='resultsInfo'>
-            {this.resultsCount} results found in {this.responseTime}ms
-          </p>
-        )}
+        <p class='resultsInfo'>
+          {this.resultsCount} results found in {this.responseTime}ms
+        </p>
       </div>
     );
   }
