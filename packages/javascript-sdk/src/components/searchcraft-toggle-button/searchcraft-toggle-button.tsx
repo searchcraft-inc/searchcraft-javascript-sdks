@@ -62,24 +62,14 @@ export class SearchcraftToggleButton {
       return null;
     }
 
-    const label =
-      this.type === 'mode'
-        ? 'Exact Match'
-        : this.type === 'sort'
-          ? 'Most Recent'
-          : '';
-
     return (
-      <div class='toggle-container'>
-        <span>{label}</span>
-        <button
-          class={`toggle-wrapper ${this.isActive ? 'active' : ''}`}
-          onClick={this.handleToggle}
-          type='button'
-        >
-          <div class={`toggle-switch ${this.isActive ? 'active' : ''}`} />
-        </button>
-      </div>
+      <button
+        class={`toggle-wrapper ${this.isActive ? 'active' : ''}`}
+        onClick={this.handleToggle}
+        type='button'
+      >
+        <div class={`toggle-switch ${this.isActive ? 'active' : ''}`} />
+      </button>
     );
   }
 }
