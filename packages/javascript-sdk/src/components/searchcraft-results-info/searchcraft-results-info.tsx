@@ -1,4 +1,3 @@
-// src/components/search-results-info/search-results-info.tsx
 import { Component, h, State } from '@stencil/core';
 import { useSearchcraftStore } from '@provider/store';
 
@@ -11,18 +10,18 @@ export class SearchcraftResultsInfo {
   @State() isRequesting = false;
   @State() resultsCount = 0;
   @State() responseTime = '';
+  @State() query = ''; // Track the query
 
-  // private searchStore = useSearchcraftStore.getState();
   unsubscribe: () => void;
 
   connectedCallback() {
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {
       this.isRequesting = state.isRequesting;
-      this.resultsCount = state.searchResults?.data?.count;
+      this.resultsCount = state.searchResults?.data?.count || 0;
       this.responseTime = (
-        state.searchResults?.data?.time_taken * 1000
+        (state.searchResults?.data?.time_taken || 0) * 1000
       ).toFixed(2);
-      console.log(state.searchResults?.data);
+      this.query = state.query || ''; // Update query from store
     });
   }
 
@@ -33,6 +32,10 @@ export class SearchcraftResultsInfo {
   }
 
   render() {
+    if (!this.query || this.resultsCount === 0) {
+      return null;
+    }
+
     return (
       <div class='container'>
         {this.isRequesting ? (

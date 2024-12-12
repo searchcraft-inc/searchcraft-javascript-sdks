@@ -13,12 +13,15 @@ export class SearchcraftSlider {
   @State() endYear = this.maxYear;
   @State() query = '';
   @State() startYear = this.minYear;
+  @State() resultsCount = 0;
+
   unsubscribe: () => void;
   private searchStore = useSearchcraftStore.getState();
 
   componentDidLoad() {
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {
-      this.query = state.query;
+      this.query = state.query || '';
+      this.resultsCount = state.searchResults?.data?.hits?.length || 0;
     });
   }
 
@@ -55,6 +58,11 @@ export class SearchcraftSlider {
   };
 
   render() {
+    // Render only if there's a query and results exist
+    if (!this.query || this.resultsCount === 0) {
+      return null;
+    }
+
     return (
       <div class='slider-container'>
         <label>Filter by Year</label>

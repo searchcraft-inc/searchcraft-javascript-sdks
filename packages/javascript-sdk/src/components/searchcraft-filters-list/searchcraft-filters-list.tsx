@@ -22,6 +22,8 @@ export class SearchcraftFiltersList {
   @State() isRequesting = false;
   @State() selectedFilters: Set<string> = new Set();
   @State() originalFilterCounts: Record<string, string> = {};
+  @State() query = ''; // Track the query
+  @State() resultsCount = 0; // Track the count of search results
 
   private searchStore = useSearchcraftStore.getState();
   unsubscribe: () => void;
@@ -29,6 +31,9 @@ export class SearchcraftFiltersList {
   connectedCallback() {
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {
       this.isRequesting = state.isRequesting;
+      this.query = state.query || ''; // Update query
+      this.resultsCount = state.searchResults?.data?.hits?.length || 0; // Update results count
+
       const facets = state.searchResults?.data.facets;
       if (facets) {
         this.populateFiltersFromFacets(facets);
@@ -70,6 +75,11 @@ export class SearchcraftFiltersList {
   };
 
   render() {
+    // Render only if there's a query and results exist
+    if (!this.query || this.resultsCount === 0) {
+      return null;
+    }
+
     const checkedFilters = Array.from(this.selectedFilters).map((value) => {
       const count = this.originalFilterCounts[value] || '0';
       return {
