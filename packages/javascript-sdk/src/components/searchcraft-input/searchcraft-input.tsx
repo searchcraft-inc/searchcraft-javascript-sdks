@@ -131,7 +131,7 @@ export class SearchcraftInput {
             />
           </Fragment>
         ) : (
-          <div class='inputWrapper'>
+          <Fragment>
             <searchcraft-input-icon
               error={this.error}
               height={this.inputIconHeight}
@@ -169,7 +169,7 @@ export class SearchcraftInput {
                 rightToLeftOrientation={this.rightToLeftOrientation}
               />
             )}
-          </div>
+          </Fragment>
         )}
       </div>
     );

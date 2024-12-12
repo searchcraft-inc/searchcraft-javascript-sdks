@@ -129,21 +129,19 @@ export class SearchcraftAutoSearchForm {
     return (
       <form class={`${formClass}`} onSubmit={this.handleFormSubmit}>
         <searchcraft-input-label label={this.labelForInput} />
-        <div class='searchContainer'>
-          <searchcraft-input
-            customStyles={parsedCustomStyles}
-            input-caption-value={this.inputCaptionValue}
-            is-requesting={this.isRequesting}
-            input-icon-height={this.inputIconHeight}
-            input-icon-width={this.inputIconWidth}
-            onClearInput={this.handleClearInput}
-            onInputKeyUp={this.handleInputKeyUp}
-            onSearchInputChange={this.handleInputChange}
-            placeholder-value={this.placeholderValue}
-            query={this.query}
-            right-to-left-orientation={this.rightToLeftOrientation}
-          />
-        </div>
+        <searchcraft-input
+          customStyles={parsedCustomStyles}
+          input-caption-value={this.inputCaptionValue}
+          is-requesting={this.isRequesting}
+          input-icon-height={this.inputIconHeight}
+          input-icon-width={this.inputIconWidth}
+          onClearInput={this.handleClearInput}
+          onInputKeyUp={this.handleInputKeyUp}
+          onSearchInputChange={this.handleInputChange}
+          placeholder-value={this.placeholderValue}
+          query={this.query}
+          right-to-left-orientation={this.rightToLeftOrientation}
+        />
         {this.error && (
           <searchcraft-error-message errorMessage='Please enter a search query.' />
         )}
