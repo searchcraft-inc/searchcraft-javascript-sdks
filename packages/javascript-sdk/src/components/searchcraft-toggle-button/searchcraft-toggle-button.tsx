@@ -43,7 +43,7 @@ export class SearchcraftToggleButton {
         mode,
       });
     } else if (this.type === 'sort') {
-      const sort = this.isActive ? 'asc' : 'desc';
+      const sort = this.isActive ? 'desc' : 'asc';
       this.searchStore.setSearchParams({
         sort,
       });

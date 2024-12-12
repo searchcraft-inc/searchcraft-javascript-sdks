@@ -1,5 +1,5 @@
 import { r as registerInstance, a as createEvent, h } from './index-8211f330.js';
-import { u as useSearchcraftStore, a as useThemeStore, g } from './store-1c3420ae.js';
+import { u as useSearchcraftStore, a as useThemeStore, g } from './store-e533e567.js';
 import './_commonjsHelpers-63cbe26c.js';
 
 const searchcraftBaseSearchFormModuleCss = ".formLTR{font-family:Helvetica, Arial, sans-serif;text-align:left}.formRTL{font-family:Helvetica, Arial, sans-serif;text-align:right}.searchContainer{align-items:center;display:flex}";

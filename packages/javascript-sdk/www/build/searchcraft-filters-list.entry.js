@@ -1,8 +1,8 @@
 import { r as registerInstance, a as createEvent, h } from './index-8211f330.js';
-import { u as useSearchcraftStore } from './store-1c3420ae.js';
+import { u as useSearchcraftStore } from './store-e533e567.js';
 import './_commonjsHelpers-63cbe26c.js';
 
-const searchcraftFiltersListModuleCss = "@charset \"UTF-8\";.filtersList{padding:16px;width:100%}.checkboxLabel{align-items:center;color:#292929;display:flex;font-size:14px;font-weight:600;gap:12px}.checkboxLabel input[type=checkbox]{align-items:center;appearance:none;background-color:#EDEDED;border:1px solid #D9D9D9;cursor:pointer;display:flex;height:24px;justify-content:center;width:24px}.checkboxLabel input[type=checkbox]:checked{background-color:#000}.checkboxLabel input[type=checkbox]:checked::before{color:#fff;content:\"✔\";font-size:14px}.remainingFilterListCheckbox{margin-left:16px}";
+const searchcraftFiltersListModuleCss = "@charset \"UTF-8\";.filtersList{padding:16px;width:100%}.checkboxLabel{align-items:center;color:#292929;display:flex;font-size:14px;font-weight:600;gap:12px}.checkboxLabel input[type=checkbox]{align-items:center;appearance:none;background-color:#EDEDED;border:1px solid #D9D9D9;cursor:pointer;display:flex;height:24px;justify-content:center;width:24px}.checkboxLabel input[type=checkbox]:checked{background-color:#000}.checkboxLabel input[type=checkbox]:checked::before{color:#fff;content:\"✔\";font-size:14px}.remainingFilterListCheckbox{margin-left:16px}.childCheckboxLabel{align-items:center;color:#292929;display:flex;font-size:14px;font-weight:600;gap:12px}.childCheckboxLabel input[type=checkbox]{align-items:center;appearance:none;background-color:#EDEDED;border:1px solid #D9D9D9;cursor:pointer;display:flex;height:24px;justify-content:center;width:24px}.childCheckboxLabel input[type=checkbox]:checked{background-color:#000}.childCheckboxLabel input[type=checkbox]:checked::before{color:#fff;content:\"✔\";font-size:14px}";
 
 const SearchcraftFiltersList = class {
     constructor(hostRef) {

@@ -1,5 +1,5 @@
 import { r as registerInstance, h } from './index-8211f330.js';
-import { u as useSearchcraftStore } from './store-1c3420ae.js';
+import { u as useSearchcraftStore } from './store-e533e567.js';
 import './_commonjsHelpers-63cbe26c.js';
 
 const searchcraftToggleButtonModuleCss = ".toggle-container{display:flex;align-items:center;font-size:14px;color:#333}.toggle-wrapper{box-shadow:0px 0px 0px 1px rgba(0, 0, 0, 0.05);margin-left:10px;border:none;border-radius:16px;width:44px;height:26px;background:#ddd;position:relative;cursor:pointer}.toggle-wrapper.active{box-shadow:0px 0px 0px 1px rgba(0, 0, 0, 0.05);background:#007DB3}.toggle-wrapper .toggle-switch{width:18px;height:18px;background:#fff;border-radius:50%;position:absolute;top:calc(50% - 9px);left:4px;transition:transform 0.3s ease}.toggle-wrapper .toggle-switch.active{transform:translateX(16px)}";
@@ -17,7 +17,7 @@ const SearchcraftToggleButton = class {
                 });
             }
             else if (this.type === 'sort') {
-                const sort = this.isActive ? 'asc' : 'desc';
+                const sort = this.isActive ? 'desc' : 'asc';
                 this.searchStore.setSearchParams({
                     sort,
                 });

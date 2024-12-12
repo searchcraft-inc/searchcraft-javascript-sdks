@@ -1,5 +1,5 @@
 import { r as registerInstance, h } from './index-8211f330.js';
-import { u as useSearchcraftStore } from './store-1c3420ae.js';
+import { u as useSearchcraftStore } from './store-e533e567.js';
 import { a as parseSearchKeys, s as serializeStyles, e as extractDynamicProperties } from './utils-e2076797.js';
 import './_commonjsHelpers-63cbe26c.js';
 

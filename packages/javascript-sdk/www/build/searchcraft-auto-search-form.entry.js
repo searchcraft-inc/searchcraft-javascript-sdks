@@ -1,5 +1,5 @@
 import { r as registerInstance, a as createEvent, h } from './index-8211f330.js';
-import { u as useSearchcraftStore, g } from './store-1c3420ae.js';
+import { u as useSearchcraftStore, g } from './store-e533e567.js';
 import { p as parseCustomStyles } from './utils-e2076797.js';
 import './_commonjsHelpers-63cbe26c.js';
 

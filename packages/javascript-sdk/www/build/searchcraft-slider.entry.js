@@ -1,5 +1,5 @@
 import { r as registerInstance, h } from './index-8211f330.js';
-import { u as useSearchcraftStore } from './store-1c3420ae.js';
+import { u as useSearchcraftStore } from './store-e533e567.js';
 import './_commonjsHelpers-63cbe26c.js';
 
 const searchcraftSliderModuleCss = ".slider-container{display:flex;flex-direction:column;gap:10px;font-family:Arial, sans-serif;align-items:center}label{font-size:14px;font-weight:bold;margin-bottom:10px}.range-container{display:flex;width:100%;align-items:center}.range-slider{width:100%;height:4px;background:#ddd;border-radius:2px;outline:none;margin:0 -1px;position:relative}.range-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;background-color:#FFF;border-radius:50%;border:1px solid #E6E6E6;cursor:pointer;position:relative}.range-slider::-moz-range-thumb{width:20px;height:20px;background-color:#FFF;border-radius:50%;border:1px solid #E6E6E6;cursor:pointer}.range-slider:before{content:\"\";position:absolute;height:4px;background-color:#FFF;border-radius:2px;left:0;right:0;z-index:-1}.year-labels{display:flex;justify-content:space-between;width:100%;margin-top:10px;font-size:12px;color:#555}.year-label{min-width:30px;text-align:center}";

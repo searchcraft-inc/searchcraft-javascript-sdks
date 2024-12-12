@@ -47,20 +47,20 @@ var react_production_min = {};
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';var l=Symbol.for("react.element"),n=Symbol.for("react.portal"),p=Symbol.for("react.fragment"),q=Symbol.for("react.strict_mode"),r=Symbol.for("react.profiler"),t=Symbol.for("react.provider"),u$1=Symbol.for("react.context"),v=Symbol.for("react.forward_ref"),w=Symbol.for("react.suspense"),x=Symbol.for("react.memo"),y=Symbol.for("react.lazy"),z=Symbol.iterator;function A(a){if(null===a||"object"!==typeof a)return null;a=z&&a[z]||a["@@iterator"];return "function"===typeof a?a:null}
+'use strict';var l$1=Symbol.for("react.element"),n=Symbol.for("react.portal"),p=Symbol.for("react.fragment"),q=Symbol.for("react.strict_mode"),r=Symbol.for("react.profiler"),t=Symbol.for("react.provider"),u=Symbol.for("react.context"),v=Symbol.for("react.forward_ref"),w=Symbol.for("react.suspense"),x=Symbol.for("react.memo"),y=Symbol.for("react.lazy"),z=Symbol.iterator;function A(a){if(null===a||"object"!==typeof a)return null;a=z&&a[z]||a["@@iterator"];return "function"===typeof a?a:null}
 var B={isMounted:function(){return !1},enqueueForceUpdate:function(){},enqueueReplaceState:function(){},enqueueSetState:function(){}},C=Object.assign,D={};function E(a,b,e){this.props=a;this.context=b;this.refs=D;this.updater=e||B;}E.prototype.isReactComponent={};
 E.prototype.setState=function(a,b){if("object"!==typeof a&&"function"!==typeof a&&null!=a)throw Error("setState(...): takes an object of state variables to update or a function which returns an object of state variables.");this.updater.enqueueSetState(this,a,b,"setState");};E.prototype.forceUpdate=function(a){this.updater.enqueueForceUpdate(this,a,"forceUpdate");};function F(){}F.prototype=E.prototype;function G(a,b,e){this.props=a;this.context=b;this.refs=D;this.updater=e||B;}var H=G.prototype=new F;
 H.constructor=G;C(H,E.prototype);H.isPureReactComponent=!0;var I=Array.isArray,J=Object.prototype.hasOwnProperty,K={current:null},L={key:!0,ref:!0,__self:!0,__source:!0};
-function M(a,b,e){var d,c={},k=null,h=null;if(null!=b)for(d in void 0!==b.ref&&(h=b.ref),void 0!==b.key&&(k=""+b.key),b)J.call(b,d)&&!L.hasOwnProperty(d)&&(c[d]=b[d]);var g=arguments.length-2;if(1===g)c.children=e;else if(1<g){for(var f=Array(g),m=0;m<g;m++)f[m]=arguments[m+2];c.children=f;}if(a&&a.defaultProps)for(d in g=a.defaultProps,g)void 0===c[d]&&(c[d]=g[d]);return {$$typeof:l,type:a,key:k,ref:h,props:c,_owner:K.current}}
-function N(a,b){return {$$typeof:l,type:a.type,key:b,ref:a.ref,props:a.props,_owner:a._owner}}function O(a){return "object"===typeof a&&null!==a&&a.$$typeof===l}function escape(a){var b={"=":"=0",":":"=2"};return "$"+a.replace(/[=:]/g,function(a){return b[a]})}var P=/\/+/g;function Q(a,b){return "object"===typeof a&&null!==a&&null!=a.key?escape(""+a.key):b.toString(36)}
-function R(a,b,e,d,c){var k=typeof a;if("undefined"===k||"boolean"===k)a=null;var h=!1;if(null===a)h=!0;else switch(k){case "string":case "number":h=!0;break;case "object":switch(a.$$typeof){case l:case n:h=!0;}}if(h)return h=a,c=c(h),a=""===d?"."+Q(h,0):d,I(c)?(e="",null!=a&&(e=a.replace(P,"$&/")+"/"),R(c,b,e,"",function(a){return a})):null!=c&&(O(c)&&(c=N(c,e+(!c.key||h&&h.key===c.key?"":(""+c.key).replace(P,"$&/")+"/")+a)),b.push(c)),1;h=0;d=""===d?".":d+":";if(I(a))for(var g=0;g<a.length;g++){k=
+function M(a,b,e){var d,c={},k=null,h=null;if(null!=b)for(d in void 0!==b.ref&&(h=b.ref),void 0!==b.key&&(k=""+b.key),b)J.call(b,d)&&!L.hasOwnProperty(d)&&(c[d]=b[d]);var g=arguments.length-2;if(1===g)c.children=e;else if(1<g){for(var f=Array(g),m=0;m<g;m++)f[m]=arguments[m+2];c.children=f;}if(a&&a.defaultProps)for(d in g=a.defaultProps,g)void 0===c[d]&&(c[d]=g[d]);return {$$typeof:l$1,type:a,key:k,ref:h,props:c,_owner:K.current}}
+function N(a,b){return {$$typeof:l$1,type:a.type,key:b,ref:a.ref,props:a.props,_owner:a._owner}}function O(a){return "object"===typeof a&&null!==a&&a.$$typeof===l$1}function escape(a){var b={"=":"=0",":":"=2"};return "$"+a.replace(/[=:]/g,function(a){return b[a]})}var P=/\/+/g;function Q(a,b){return "object"===typeof a&&null!==a&&null!=a.key?escape(""+a.key):b.toString(36)}
+function R(a,b,e,d,c){var k=typeof a;if("undefined"===k||"boolean"===k)a=null;var h=!1;if(null===a)h=!0;else switch(k){case "string":case "number":h=!0;break;case "object":switch(a.$$typeof){case l$1:case n:h=!0;}}if(h)return h=a,c=c(h),a=""===d?"."+Q(h,0):d,I(c)?(e="",null!=a&&(e=a.replace(P,"$&/")+"/"),R(c,b,e,"",function(a){return a})):null!=c&&(O(c)&&(c=N(c,e+(!c.key||h&&h.key===c.key?"":(""+c.key).replace(P,"$&/")+"/")+a)),b.push(c)),1;h=0;d=""===d?".":d+":";if(I(a))for(var g=0;g<a.length;g++){k=
 a[g];var f=d+Q(k,g);h+=R(k,b,e,f,c);}else if(f=A(a),"function"===typeof f)for(a=f.call(a),g=0;!(k=a.next()).done;)k=k.value,f=d+Q(k,g++),h+=R(k,b,e,f,c);else if("object"===k)throw b=String(a),Error("Objects are not valid as a React child (found: "+("[object Object]"===b?"object with keys {"+Object.keys(a).join(", ")+"}":b)+"). If you meant to render a collection of children, use an array instead.");return h}
 function S(a,b,e){if(null==a)return a;var d=[],c=0;R(a,d,"","",function(a){return b.call(e,a,c++)});return d}function T(a){if(-1===a._status){var b=a._result;b=b();b.then(function(b){if(0===a._status||-1===a._status)a._status=1,a._result=b;},function(b){if(0===a._status||-1===a._status)a._status=2,a._result=b;});-1===a._status&&(a._status=0,a._result=b);}if(1===a._status)return a._result.default;throw a._result;}
 var U={current:null},V={transition:null},W={ReactCurrentDispatcher:U,ReactCurrentBatchConfig:V,ReactCurrentOwner:K};function X(){throw Error("act(...) is not supported in production builds of React.");}
 var Children = react_production_min.Children={map:S,forEach:function(a,b,e){S(a,function(){b.apply(this,arguments);},e);},count:function(a){var b=0;S(a,function(){b++;});return b},toArray:function(a){return S(a,function(a){return a})||[]},only:function(a){if(!O(a))throw Error("React.Children.only expected to receive a single React element child.");return a}};var Component = react_production_min.Component=E;var Fragment = react_production_min.Fragment=p;var Profiler = react_production_min.Profiler=r;var PureComponent = react_production_min.PureComponent=G;var StrictMode = react_production_min.StrictMode=q;var Suspense = react_production_min.Suspense=w;
 var __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = react_production_min.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED=W;var act = react_production_min.act=X;
 var cloneElement = react_production_min.cloneElement=function(a,b,e){if(null===a||void 0===a)throw Error("React.cloneElement(...): The argument must be a React element, but you passed "+a+".");var d=C({},a.props),c=a.key,k=a.ref,h=a._owner;if(null!=b){void 0!==b.ref&&(k=b.ref,h=K.current);void 0!==b.key&&(c=""+b.key);if(a.type&&a.type.defaultProps)var g=a.type.defaultProps;for(f in b)J.call(b,f)&&!L.hasOwnProperty(f)&&(d[f]=void 0===b[f]&&void 0!==g?g[f]:b[f]);}var f=arguments.length-2;if(1===f)d.children=e;else if(1<f){g=Array(f);
-for(var m=0;m<f;m++)g[m]=arguments[m+2];d.children=g;}return {$$typeof:l,type:a.type,key:c,ref:k,props:d,_owner:h}};var createContext = react_production_min.createContext=function(a){a={$$typeof:u$1,_currentValue:a,_currentValue2:a,_threadCount:0,Provider:null,Consumer:null,_defaultValue:null,_globalName:null};a.Provider={$$typeof:t,_context:a};return a.Consumer=a};var createElement = react_production_min.createElement=M;var createFactory = react_production_min.createFactory=function(a){var b=M.bind(null,a);b.type=a;return b};var createRef = react_production_min.createRef=function(){return {current:null}};
+for(var m=0;m<f;m++)g[m]=arguments[m+2];d.children=g;}return {$$typeof:l$1,type:a.type,key:c,ref:k,props:d,_owner:h}};var createContext = react_production_min.createContext=function(a){a={$$typeof:u,_currentValue:a,_currentValue2:a,_threadCount:0,Provider:null,Consumer:null,_defaultValue:null,_globalName:null};a.Provider={$$typeof:t,_context:a};return a.Consumer=a};var createElement = react_production_min.createElement=M;var createFactory = react_production_min.createFactory=function(a){var b=M.bind(null,a);b.type=a;return b};var createRef = react_production_min.createRef=function(){return {current:null}};
 var forwardRef = react_production_min.forwardRef=function(a){return {$$typeof:v,render:a}};var isValidElement = react_production_min.isValidElement=O;var lazy = react_production_min.lazy=function(a){return {$$typeof:y,_payload:{_status:-1,_result:a},_init:T}};var memo = react_production_min.memo=function(a,b){return {$$typeof:x,type:a,compare:void 0===b?null:b}};var startTransition = react_production_min.startTransition=function(a){var b=V.transition;V.transition={};try{a();}finally{V.transition=b;}};var unstable_act = react_production_min.unstable_act=X;var useCallback = react_production_min.useCallback=function(a,b){return U.current.useCallback(a,b)};var useContext = react_production_min.useContext=function(a){return U.current.useContext(a)};
 var useDebugValue = react_production_min.useDebugValue=function(){};var useDeferredValue = react_production_min.useDeferredValue=function(a){return U.current.useDeferredValue(a)};var useEffect = react_production_min.useEffect=function(a,b){return U.current.useEffect(a,b)};var useId = react_production_min.useId=function(){return U.current.useId()};var useImperativeHandle = react_production_min.useImperativeHandle=function(a,b,e){return U.current.useImperativeHandle(a,b,e)};var useInsertionEffect = react_production_min.useInsertionEffect=function(a,b){return U.current.useInsertionEffect(a,b)};var useLayoutEffect = react_production_min.useLayoutEffect=function(a,b){return U.current.useLayoutEffect(a,b)};
 var useMemo = react_production_min.useMemo=function(a,b){return U.current.useMemo(a,b)};var useReducer = react_production_min.useReducer=function(a,b,e){return U.current.useReducer(a,b,e)};var useRef = react_production_min.useRef=function(a){return U.current.useRef(a)};var useState = react_production_min.useState=function(a){return U.current.useState(a)};var useSyncExternalStore = react_production_min.useSyncExternalStore=function(a,b,e){return U.current.useSyncExternalStore(a,b,e)};var useTransition = react_production_min.useTransition=function(){return U.current.useTransition()};var version = react_production_min.version="18.3.1";
@@ -2870,18 +2870,18 @@ Object.keys(react).forEach(function (k) {
 });
 }(zustand));
 
-var d = Object.defineProperty;
-var f = (o, t, e) => t in o ? d(o, t, { enumerable: !0, configurable: !0, writable: !0, value: e }) : o[t] = e;
-var u = (o, t, e) => f(o, typeof t != "symbol" ? t + "" : t, e);
+var f = Object.defineProperty;
+var c = (o, t, e) => t in o ? f(o, t, { enumerable: !0, configurable: !0, writable: !0, value: e }) : o[t] = e;
+var l = (o, t, e) => c(o, typeof t != "symbol" ? t + "" : t, e);
 class g {
   constructor(t) {
-    u(this, "config");
+    l(this, "config");
     /**
      * Performs a search operation.
      * @param {SearchParams} searchParams - The parameters for the search.
      * @returns {Promise<SearchcraftResponse>} - Returns the search response or throws an error.
      */
-    u(this, "search", async (t) => {
+    l(this, "search", async (t) => {
       if ((t.query.match(/"/g) || []).length % 2 !== 0)
         throw new Error(
           "The search term contains an uneven number of quote characters."
@@ -2893,14 +2893,14 @@ class g {
           // Default to 20 if not provided
         };
         t.offset !== void 0 && (r.offset = t.offset), t.facets && (r.facets = t.facets), t.order_by && (r.order_by = t.order_by, r.sort = t.sort === "desc" || t.sort === "asc" ? t.sort : "asc");
-        const l = {
+        const u = {
           method: "POST",
           headers: {
             Authorization: this.config.apiKey,
             "Content-Type": "application/json"
           },
           body: JSON.stringify(r)
-        }, i = await fetch(s, l);
+        }, i = await fetch(s, u);
         if (!i.ok)
           throw new Error(
             `Error: ${i.statusText} (Status: ${i.status})`
@@ -2927,11 +2927,11 @@ class g {
     let n = "should";
     if (t.yearsRange) {
       n = "must";
-      const l = /* @__PURE__ */ new Date(`${t.yearsRange[0]}-01-01`), i = /* @__PURE__ */ new Date(`${t.yearsRange[1]}-12-31`);
+      const u = /* @__PURE__ */ new Date(`${t.yearsRange[0]}-01-01`), i = /* @__PURE__ */ new Date(`${t.yearsRange[1]}-12-31`);
       e.push({
         occur: n,
         normal: {
-          ctx: `date_published:[${l.toISOString()} TO ${i.toISOString()}]`
+          ctx: `date_published:[${u.toISOString()} TO ${i.toISOString()}]`
         }
       });
     }
@@ -2941,28 +2941,23 @@ class g {
       normal: {
         ctx: `section: IN [${s.join(" ")}]`
       }
-    })), e.push({
+    })), t.sort === "desc" ? t.order_by = "date_published" : t.order_by = "", e.push({
       occur: n,
       // Valid, as 'occur' is a required property in QueryItem
       [t.mode]: { ctx: t.query }
       // Ensure dynamic mode is inside queryType
-    }), t.order_by && e.push({
-      occur: "must",
-      normal: {
-        ctx: `sort_by:${t.order_by} order:${t.sort || "asc"}`
-      }
     }), e;
   }
 }
-var c = /* @__PURE__ */ ((o) => (o[o.DEBUG = 0] = "DEBUG", o[o.INFO = 1] = "INFO", o[o.WARN = 2] = "WARN", o[o.ERROR = 3] = "ERROR", o))(c || {});
+var d = /* @__PURE__ */ ((o) => (o[o.DEBUG = 0] = "DEBUG", o[o.INFO = 1] = "INFO", o[o.WARN = 2] = "WARN", o[o.ERROR = 3] = "ERROR", o))(d || {});
 class b {
   constructor(t) {
-    u(this, "logLevel");
-    u(this, "logFormatter");
+    l(this, "logLevel");
+    l(this, "logFormatter");
     this.logLevel = t.logLevel || 1, this.logFormatter = t.logFormatter || this.defaultFormatter;
   }
   defaultFormatter(t, e) {
-    return `[${c[t]}] ${( new Date()).toISOString()}: ${e}`;
+    return `[${d[t]}] ${( new Date()).toISOString()}: ${e}`;
   }
   debug(t) {
     this.logLevel <= 0 && console.log(this.logFormatter(0, t));
@@ -2985,16 +2980,16 @@ const useSearchcraftStore = zustand.create((set, get) => {
     const log = (level, message) => {
         if (debuggerInstance) {
             switch (level) {
-                case c.DEBUG:
+                case d.DEBUG:
                     debuggerInstance.debug(message);
                     break;
-                case c.INFO:
+                case d.INFO:
                     debuggerInstance.info(message);
                     break;
-                case c.WARN:
+                case d.WARN:
                     debuggerInstance.warn(message);
                     break;
-                case c.ERROR:
+                case d.ERROR:
                     debuggerInstance.error(message);
                     break;
             }
@@ -3027,7 +3022,7 @@ const useSearchcraftStore = zustand.create((set, get) => {
                 throw new Error('Searchcraft instance is not initialized.');
             }
             setIsRequesting(true);
-            log(c.INFO, `Starting search with query: "${query}"`);
+            log(d.INFO, `Starting search with query: "${query}"`);
             try {
                 const counts = selectedFilters.reduce((acc, filter) => {
                     const cleanedFilter = filter.replace(/^section:/, '');
@@ -3045,12 +3040,12 @@ const useSearchcraftStore = zustand.create((set, get) => {
                 setSearchResults(results);
                 const updatedFacets = results.data.facets || null;
                 setFacets(updatedFacets);
-                log(c.DEBUG, `Search results: ${JSON.stringify(results)}`);
-                log(c.DEBUG, `Updated facets: ${JSON.stringify(updatedFacets)}`);
+                log(d.DEBUG, `Search results: ${JSON.stringify(results)}`);
+                log(d.DEBUG, `Updated facets: ${JSON.stringify(updatedFacets)}`);
             }
             catch (error) {
                 console.error(`Search failed: ${error.message}`);
-                log(c.ERROR, `Search failed with error: ${error.message}`);
+                log(d.ERROR, `Search failed with error: ${error.message}`);
             }
             finally {
                 setIsRequesting(false);
@@ -3059,9 +3054,9 @@ const useSearchcraftStore = zustand.create((set, get) => {
         initialize: (searchcraftInstance, debug = false) => {
             searchcraft = searchcraftInstance;
             debuggerInstance = debug
-                ? new b({ logLevel: c.DEBUG })
+                ? new b({ logLevel: d.DEBUG })
                 : null;
-            log(c.INFO, 'Searchcraft store initialized.');
+            log(d.INFO, 'Searchcraft store initialized.');
         },
     };
 });
@@ -3073,4 +3068,4 @@ const useThemeStore = zustand.create((set) => ({
 
 export { useThemeStore as a, g, useSearchcraftStore as u };
 
-//# sourceMappingURL=store-1c3420ae.js.map
+//# sourceMappingURL=store-e533e567.js.map

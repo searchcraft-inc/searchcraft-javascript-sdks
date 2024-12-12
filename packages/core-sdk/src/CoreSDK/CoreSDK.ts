@@ -56,6 +56,12 @@ export class CoreSDK {
       });
     }
 
+    if (searchParams.sort === 'desc') {
+      searchParams.order_by = 'date_published';
+    } else {
+      searchParams.order_by = '';
+    }
+
     queryItems.push({
       occur, // Valid, as 'occur' is a required property in QueryItem
       [searchParams.mode]: { ctx: searchParams.query }, // Ensure dynamic mode is inside queryType
