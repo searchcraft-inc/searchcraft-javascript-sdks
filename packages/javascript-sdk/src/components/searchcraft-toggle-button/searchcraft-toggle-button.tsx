@@ -57,7 +57,6 @@ export class SearchcraftToggleButton {
   };
 
   render() {
-    // Render only if there's a query and results exist
     if (!this.query || this.resultsCount === 0) {
       return null;
     }
