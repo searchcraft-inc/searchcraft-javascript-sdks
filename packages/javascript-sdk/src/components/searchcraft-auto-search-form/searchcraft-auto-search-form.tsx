@@ -9,6 +9,7 @@ import {
 import {
   type CoreConfigSDK,
   CoreSDK as SearchcraftCore,
+  type SearchcraftResponse,
 } from '@searchcraft/core';
 
 import type { ScInputCustomEvent } from '@components/searchcraft-input/searchcraft-input';
@@ -43,7 +44,7 @@ export class SearchcraftAutoSearchForm {
   @State() error = false;
   @State() isRequesting = false;
   @State() query = '';
-  @State() searchResults = '';
+  @State() searchResults: SearchcraftResponse | null = null;
 
   private debounceTimeout: ReturnType<typeof setTimeout> | null = null;
   private debounceDelay = 0;
@@ -56,6 +57,7 @@ export class SearchcraftAutoSearchForm {
 
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {
       this.isRequesting = state.isRequesting;
+      this.searchResults = { ...state.searchResults };
     });
   }
 
@@ -99,14 +101,12 @@ export class SearchcraftAutoSearchForm {
     }
 
     this.error = false;
-    this.searchResults = '';
     this.inputClearedOrNoResults.emit();
   };
 
   private runSearch = async () => {
     if (this.query.trim() === '') {
       this.error = true;
-      this.searchResults = '';
       this.inputClearedOrNoResults.emit();
     } else {
       this.error = false;
@@ -129,11 +129,11 @@ export class SearchcraftAutoSearchForm {
   render() {
     const formClass = this.rightToLeftOrientation ? 'formRTL' : 'formLTR';
     const parsedCustomStyles = parseCustomStyles(this.customStylesForInput);
+    if (this.query.length > 0 && this.searchResults?.data?.hits?.length === 0) {
+      this.inputClearedOrNoResults.emit();
+    }
 
-    if (
-      this.query.length > 0 &&
-      this.searchStore.searchResults?.data?.hits?.length === 0
-    ) {
+    if (this.query.length === 0) {
       this.inputClearedOrNoResults.emit();
     }
 
