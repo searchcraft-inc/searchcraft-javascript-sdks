@@ -42,6 +42,8 @@ export class SearchcraftBaseSearchResults {
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {
       if (state.query.length > 0) {
         this.hasSearched = true;
+      } else {
+        this.hasSearched = false;
       }
       this.searchResults = { ...state.searchResults };
       this.query = state.query;
@@ -86,7 +88,7 @@ export class SearchcraftBaseSearchResults {
     if (!this.hasSearched) {
       return (
         <div class='emptyState'>
-          <slot />
+          <slot name='empty-search' />
         </div>
       );
     }

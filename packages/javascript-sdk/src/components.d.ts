@@ -173,6 +173,7 @@ export interface SearchcraftInputCustomEvent<T> extends CustomEvent<T> {
 declare global {
     interface HTMLSearchcraftAutoSearchFormElementEventMap {
         "querySubmit": string;
+        "inputClearedOrNoResults": void;
     }
     interface HTMLSearchcraftAutoSearchFormElement extends Components.SearchcraftAutoSearchForm, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSearchcraftAutoSearchFormElementEventMap>(type: K, listener: (this: HTMLSearchcraftAutoSearchFormElement, ev: SearchcraftAutoSearchFormCustomEvent<HTMLSearchcraftAutoSearchFormElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -405,6 +406,7 @@ declare namespace LocalJSX {
         "inputIconHeight"?: number;
         "inputIconWidth"?: number;
         "labelForInput"?: string;
+        "onInputClearedOrNoResults"?: (event: SearchcraftAutoSearchFormCustomEvent<void>) => void;
         "onQuerySubmit"?: (event: SearchcraftAutoSearchFormCustomEvent<string>) => void;
         "placeholderValue"?: string;
         "rightToLeftOrientation"?: boolean;

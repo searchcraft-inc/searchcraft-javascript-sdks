@@ -66,7 +66,6 @@ export class SearchcraftSlider {
     }
     return (
       <div class='slider-container'>
-        <label>Filter by Year</label>
         <div class='range-container'>
           <input
             class='range-slider'

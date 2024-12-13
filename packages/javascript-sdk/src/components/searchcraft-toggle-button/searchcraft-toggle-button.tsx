@@ -57,29 +57,18 @@ export class SearchcraftToggleButton {
   };
 
   render() {
-    // Render only if there's a query and results exist
     if (!this.query || this.resultsCount === 0) {
       return null;
     }
 
-    const label =
-      this.type === 'mode'
-        ? 'Exact Match'
-        : this.type === 'sort'
-          ? 'Most Recent'
-          : '';
-
     return (
-      <div class='toggle-container'>
-        <span>{label}</span>
-        <button
-          class={`toggle-wrapper ${this.isActive ? 'active' : ''}`}
-          onClick={this.handleToggle}
-          type='button'
-        >
-          <div class={`toggle-switch ${this.isActive ? 'active' : ''}`} />
-        </button>
-      </div>
+      <button
+        class={`toggle-wrapper ${this.isActive ? 'active' : ''}`}
+        onClick={this.handleToggle}
+        type='button'
+      >
+        <div class={`toggle-switch ${this.isActive ? 'active' : ''}`} />
+      </button>
     );
   }
 }

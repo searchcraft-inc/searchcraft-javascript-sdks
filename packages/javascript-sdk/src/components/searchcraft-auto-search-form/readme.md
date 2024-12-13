@@ -24,9 +24,10 @@
 
 ## Events
 
-| Event         | Description | Type                  |
-| ------------- | ----------- | --------------------- |
-| `querySubmit` |             | `CustomEvent<string>` |
+| Event                     | Description | Type                  |
+| ------------------------- | ----------- | --------------------- |
+| `inputClearedOrNoResults` |             | `CustomEvent<void>`   |
+| `querySubmit`             |             | `CustomEvent<string>` |
 
 
 ## Dependencies

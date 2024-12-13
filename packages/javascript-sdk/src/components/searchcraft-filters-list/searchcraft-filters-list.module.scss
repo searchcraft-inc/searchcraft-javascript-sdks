@@ -1,5 +1,4 @@
 .filtersList {
-  padding: 16px;
   width: 100%;
 }
 
@@ -7,9 +6,10 @@
   align-items: center;
   color: #292929;
   display: flex;
+  font-family: 'Source Sans Pro';
   font-size: 14px;
   font-weight: 600;
-  gap: 12px;
+  gap: 14px;
 }
 
 .checkboxLabel input[type="checkbox"] {
@@ -31,7 +31,6 @@
 .checkboxLabel input[type="checkbox"]:checked::before {
   color: #fff;
   content: '✔';
-  font-size: 14px;
 }
 
 .remainingFilterListCheckbox {
@@ -42,6 +41,7 @@
   align-items: center;
   color: #292929;
   display: flex;
+  font-family: 'Source Sans Pro';
   font-size: 14px;
   font-weight: 600;
   gap: 12px;
@@ -66,5 +66,4 @@
 .childCheckboxLabel input[type="checkbox"]:checked::before {
   color: #fff;
   content: '✔';
-  font-size: 14px;
 }
