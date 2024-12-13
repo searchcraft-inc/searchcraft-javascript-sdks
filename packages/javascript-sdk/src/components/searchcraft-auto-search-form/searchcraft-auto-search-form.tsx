@@ -38,6 +38,7 @@ export class SearchcraftAutoSearchForm {
   @Prop() searchContainerClass = '';
 
   @Event() querySubmit: EventEmitter<string>;
+  @Event() inputClearedOrNoResults: EventEmitter<void>;
 
   @State() error = false;
   @State() isRequesting = false;
@@ -66,14 +67,14 @@ export class SearchcraftAutoSearchForm {
 
   handleInputChange = (event: ScInputCustomEvent<string>) => {
     this.query = event.detail;
-    this.searchStore.setQuery(this.query); // Update query in the store
+    this.searchStore.setQuery(this.query);
     this.querySubmit.emit(this.query);
   };
 
   handleInputKeyUp = (event: ScInputCustomEvent<string>) => {
     const target = event.detail;
     this.query = target;
-    this.searchStore.setQuery(this.query); // Update query in the store
+    this.searchStore.setQuery(this.query);
     this.querySubmit.emit(this.query);
 
     if (this.debounceTimeout) {
@@ -87,7 +88,7 @@ export class SearchcraftAutoSearchForm {
 
   handleClearInput = () => {
     this.query = '';
-    this.searchStore.setQuery(''); // Clear query in the store
+    this.searchStore.setQuery('');
 
     if (typeof this.clearInput === 'function') {
       this.clearInput();
@@ -99,21 +100,23 @@ export class SearchcraftAutoSearchForm {
 
     this.error = false;
     this.searchResults = '';
+    this.inputClearedOrNoResults.emit();
   };
 
   private runSearch = async () => {
     if (this.query.trim() === '') {
       this.error = true;
       this.searchResults = '';
+      this.inputClearedOrNoResults.emit();
     } else {
       this.error = false;
       this.searchStore.setQuery(this.query);
 
       try {
         await this.searchStore.search();
-        this.searchResults = JSON.stringify(this.searchStore.searchResults);
       } catch (error) {
         this.error = true;
+        this.inputClearedOrNoResults.emit();
       }
     }
   };
@@ -126,6 +129,14 @@ export class SearchcraftAutoSearchForm {
   render() {
     const formClass = this.rightToLeftOrientation ? 'formRTL' : 'formLTR';
     const parsedCustomStyles = parseCustomStyles(this.customStylesForInput);
+
+    if (
+      this.query.length > 0 &&
+      this.searchStore.searchResults?.data?.hits?.length === 0
+    ) {
+      this.inputClearedOrNoResults.emit();
+    }
+
     return (
       <form class={`${formClass}`} onSubmit={this.handleFormSubmit}>
         <searchcraft-input-label label={this.labelForInput} />
