@@ -133,10 +133,6 @@ export class SearchcraftAutoSearchForm {
       this.inputClearedOrNoResults.emit();
     }
 
-    if (this.query.length === 0) {
-      this.inputClearedOrNoResults.emit();
-    }
-
     return (
       <form class={`${formClass}`} onSubmit={this.handleFormSubmit}>
         <searchcraft-input-label label={this.labelForInput} />
