@@ -16,17 +16,13 @@
       "import": "./dist/searchcraft-javascript-sdk/searchcraft-javascript-sdk.esm.js",
       "require": "./dist/searchcraft-javascript-sdk/searchcraft-javascript-sdk.cjs.js"
     },
-    "./loader": {
-      "import": "./loader/index.js",
-      "require": "./loader/index.cjs",
-      "types": "./loader/index.d.ts"
-    }
+    "./loader": "./dist/loader/index.js"
   },
   "repository": {
     "type": "git",
     "url": "https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/"
   },
-  "files": ["dist/", "loader/"],
+  "files": ["dist/"],
   "scripts": {
     "build": "stencil build",
     "start": "stencil build --dev --watch --serve",
