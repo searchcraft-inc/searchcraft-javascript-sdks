@@ -10,21 +10,20 @@ export const config: Config = {
   ],
   outputTargets: [
     {
+      // Generates the ESM and CommonJS builds
       type: 'dist',
-      esmLoaderPath: '../loader',
+      esmLoaderPath: './loader',
     },
     {
+      // Generates the `custom-elements` directory with .js components
       type: 'dist-custom-elements',
-      customElementsExportBehavior: 'auto-define-custom-elements',
-      generateTypeDeclarations: true,
+      dir: 'dist/components', // Ensures .js files are generated here
+      includeGlobalScripts: false,
+      customElementsExportBehavior: 'bundle',
       externalRuntime: false,
     },
     {
       type: 'docs-readme',
-    },
-    {
-      type: 'www',
-      serviceWorker: null, // disable service workers
     },
   ],
   testing: {
