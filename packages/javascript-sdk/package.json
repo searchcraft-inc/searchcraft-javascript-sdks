@@ -1,7 +1,7 @@
 {
   "name": "@searchcraft/javascript-sdk",
   "private": false,
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Searchcraft Javascript SDK",
   "author": "Searchcraft",
   "license": "Apache-2.0",
@@ -16,7 +16,8 @@
       "import": "./dist/searchcraft-javascript-sdk/searchcraft-javascript-sdk.esm.js",
       "require": "./dist/searchcraft-javascript-sdk/searchcraft-javascript-sdk.cjs.js"
     },
-    "./loader": "./dist/loader/index.js"
+    "./loader": "./dist/loader/index.js",
+    "./components": "./dist/components/index.js"
   },
   "repository": {
     "type": "git",
