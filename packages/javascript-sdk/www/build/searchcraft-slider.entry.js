@@ -1,5 +1,5 @@
 import { r as registerInstance, h } from './index-8211f330.js';
-import { u as useSearchcraftStore } from './store-18b7e3ea.js';
+import { u as useSearchcraftStore } from './store-0451a982.js';
 import './_commonjsHelpers-63cbe26c.js';
 
 const searchcraftSliderModuleCss = ".sliderContainer{display:flex;flex-direction:column;gap:10px;font-family:Arial, sans-serif;align-items:center;width:100%}.rangeContainer{display:flex;position:relative;width:100%;align-items:center}.rangeContainer .activeRange{position:absolute;top:50%;transform:translateY(-50%);height:4px;background:#007DB3;z-index:0;border-radius:2px}.rangeContainer .rangeSlider{width:100%;height:4px;background:transparent;border-radius:2px;outline:none;-webkit-appearance:none;appearance:none;position:absolute;margin:0}.rangeContainer .rangeSlider::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;background-color:#FFF;border-radius:50%;border:2px solid #e6e6e6;cursor:pointer}.rangeContainer .rangeSlider::-moz-range-thumb{width:20px;height:20px;background-color:#FFF;border-radius:50%;border:2px solid #e6e6e6;cursor:pointer}.yearLabels{display:flex;justify-content:space-between;width:100%;margin-top:10px;font-size:15px;font-weight:600;font-family:\"Source Sans Pro\", sans-serif;color:#666}.yearLabel{min-width:30px;text-align:center}";

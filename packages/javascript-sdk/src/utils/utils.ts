@@ -16,13 +16,12 @@ export function parseSearchKeys(
   documentAttributesForDisplay: string,
 ): string[] {
   try {
-    // Attempt to parse the string as JSON
     const parsedKeys = JSON.parse(documentAttributesForDisplay);
     if (
       Array.isArray(parsedKeys) &&
       parsedKeys.every((key) => typeof key === 'string')
     ) {
-      return parsedKeys; // Return the array if it's valid
+      return parsedKeys;
     }
     console.warn(
       'searchKeys must be a JSON array of strings. Defaulting to an empty array.',
@@ -30,7 +29,7 @@ export function parseSearchKeys(
     return [];
   } catch (error) {
     console.error('Failed to parse searchKeys:', error);
-    return []; // Return an empty array in case of a parsing error
+    return [];
   }
 }
 

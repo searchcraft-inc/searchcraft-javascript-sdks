@@ -1,6 +1,6 @@
 import { r as registerInstance, h } from './index-8211f330.js';
-import { u as useSearchcraftStore } from './store-18b7e3ea.js';
-import { a as parseSearchKeys, s as serializeStyles, e as extractDynamicProperties, g as getFormattedTimeFromNow } from './utils-6d98c145.js';
+import { u as useSearchcraftStore } from './store-0451a982.js';
+import { a as parseSearchKeys, s as serializeStyles, e as extractDynamicProperties, g as getFormattedTimeFromNow } from './utils-dbb6302b.js';
 import './_commonjsHelpers-63cbe26c.js';
 
 const searchcraftBaseSearchResultsModuleCss = ":root{--font-stack:Helvetica, Arial, sans-serif}.resultsContainer{display:flex;flex-direction:column;justify-content:center;margin:16px 0}.resultsContainer>p{align-self:center}.resultsContainer>div{margin-bottom:20px}.resultsContainer>div img{height:300px;width:200px}.adSection{align-items:center;background-color:#F1F1F1;border:1px solid #DCDDDE;border-radius:16px;display:flex;flex-direction:column;font-size:16px;justify-content:center;margin:auto;min-height:150px;text-align:center;width:100%}.adSection p{margin-top:5px}.emptyState{text-align:center;width:100%}.errorMessageContainer{text-align:center}";
