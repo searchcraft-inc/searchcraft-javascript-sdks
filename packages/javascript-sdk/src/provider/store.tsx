@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+
 import {
   type CoreSDK as SearchcraftCore,
   SDKDebugger,
@@ -19,21 +20,21 @@ interface SearchParams {
 }
 
 interface SearchcraftState {
-  query: string;
-  isRequesting: boolean;
-  searchResults: SearchcraftResponse | null;
   facets: Facets | null;
-  selectedFilters: string[]; // Add this to store selected filters
-  searchParams: SearchParams;
-  setQuery: (query: string) => void;
-  setSearchResults: (results: SearchcraftResponse | null) => void;
-  setFacets: (facets: Facets) => void;
-  setSelectedFilters: (filters: string[]) => void; // Update selected filters
-  setIsRequesting: (isRequesting: boolean) => void;
-  setSearchParams: (params: Partial<SearchParams>) => void;
-  setYearsRange: (yearsRange: [number, number]) => void;
-  search: () => Promise<void>;
   initialize: (searchcraft: SearchcraftCore, debug?: boolean) => void;
+  isRequesting: boolean;
+  query: string;
+  search: () => Promise<void>;
+  searchParams: SearchParams;
+  searchResults: SearchcraftResponse | null;
+  selectedFilters: string[]; // Add this to store selected filters
+  setFacets: (facets: Facets) => void;
+  setIsRequesting: (isRequesting: boolean) => void;
+  setQuery: (query: string) => void;
+  setSearchParams: (params: Partial<SearchParams>) => void;
+  setSearchResults: (results: SearchcraftResponse | null) => void;
+  setSelectedFilters: (filters: string[]) => void; // Update selected filters
+  setYearsRange: (yearsRange: [number, number]) => void;
 }
 
 // Zustand store for Searchcraft state
@@ -65,7 +66,7 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
     isRequesting: false,
     searchResults: null,
     facets: null,
-    selectedFilters: [], // Initialize selected filters as an empty array
+    selectedFilters: [],
     searchParams: {
       mode: 'fuzzy',
       sort: 'asc',
@@ -73,7 +74,7 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
     setQuery: (query) => set({ query }),
     setSearchResults: (results) => set({ searchResults: results }),
     setFacets: (facets) => set({ facets }),
-    setSelectedFilters: (filters) => set({ selectedFilters: filters }), // Update the selected filters
+    setSelectedFilters: (filters) => set({ selectedFilters: filters }),
     setIsRequesting: (isRequesting) => set({ isRequesting }),
     setSearchParams: (params) =>
       set((state) => ({
@@ -150,12 +151,10 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
   };
 });
 
-// Zustand store for Theme state
 const useThemeStore = create<ThemeState>((set) => ({
   theme: 'light',
   toggleTheme: () =>
     set((state) => ({ theme: state.theme === 'light' ? 'dark' : 'light' })),
 }));
 
-// Export the Zustand stores for use in Stencil components
 export { useSearchcraftStore, useThemeStore };

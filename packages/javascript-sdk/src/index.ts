@@ -10,7 +10,6 @@
 
 export type * from './components';
 
-// Export utility functions
 export {
   extractDynamicProperties,
   parseCustomStyles,
@@ -18,7 +17,6 @@ export {
   serializeStyles,
 } from './utils/utils';
 
-// Export Zustand store and useTheme hook
 export { useSearchcraftStore, useThemeStore } from './provider/store';
 
 export { Components } from './components';

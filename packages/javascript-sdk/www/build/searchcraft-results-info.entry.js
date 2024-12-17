@@ -1,8 +1,8 @@
 import { r as registerInstance, h } from './index-8211f330.js';
-import { u as useSearchcraftStore } from './store-18b7e3ea.js';
+import { u as useSearchcraftStore } from './store-0451a982.js';
 import './_commonjsHelpers-63cbe26c.js';
 
-const searchcraftResultsInfoModuleCss = ".container{border-bottom:1px solid #D9D9D9;display:flex;justify-content:flex-start;width:100%}.resultsInfo{color:#292929;font-family:\"Brygada 1918\";font-size:18px;font-weight:600;line-height:20px;margin:0;margin-bottom:8px}";
+const searchcraftResultsInfoModuleCss = ".container{border-bottom:1px solid #D9D9D9;display:flex;justify-content:flex-start;width:100%}.resultsInfo{color:#292929;font-size:18px;font-weight:600;line-height:20px;margin:0;margin-bottom:8px}";
 
 const SearchcraftResultsInfo = class {
     constructor(hostRef) {

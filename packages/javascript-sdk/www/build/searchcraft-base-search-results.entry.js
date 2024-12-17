@@ -1,23 +1,23 @@
 import { r as registerInstance, h } from './index-8211f330.js';
-import { u as useSearchcraftStore } from './store-18b7e3ea.js';
-import { a as parseSearchKeys, s as serializeStyles, e as extractDynamicProperties } from './utils-e2076797.js';
+import { u as useSearchcraftStore } from './store-0451a982.js';
+import { a as parseSearchKeys, s as serializeStyles, e as extractDynamicProperties, g as getFormattedTimeFromNow } from './utils-dbb6302b.js';
 import './_commonjsHelpers-63cbe26c.js';
 
-const searchcraftBaseSearchResultsModuleCss = ":root{--font-stack:Helvetica, Arial, sans-serif}.resultsContainer{display:flex;flex-direction:column;justify-content:center;margin:16px 0}.resultsContainer>p{align-self:center}.resultsContainer>div{margin-bottom:20px}.resultsContainer>div img{height:300px;width:200px}.adSection{align-items:center;background-color:#F1F1F1;border:1px solid #DCDDDE;border-radius:16px;display:flex;flex-direction:column;font-size:16px;justify-content:center;margin:auto;min-height:150px;text-align:center;width:100%}.adSection p{margin-top:5px}.emptyState{width:100%;text-align:center}.errorMessageContainer{text-align:center}";
+const searchcraftBaseSearchResultsModuleCss = ":root{--font-stack:Helvetica, Arial, sans-serif}.resultsContainer{display:flex;flex-direction:column;justify-content:center;margin:16px 0}.resultsContainer>p{align-self:center}.resultsContainer>div{margin-bottom:20px}.resultsContainer>div img{height:300px;width:200px}.adSection{align-items:center;background-color:#F1F1F1;border:1px solid #DCDDDE;border-radius:16px;display:flex;flex-direction:column;font-size:16px;justify-content:center;margin:auto;min-height:150px;text-align:center;width:100%}.adSection p{margin-top:5px}.emptyState{text-align:center;width:100%}.errorMessageContainer{text-align:center}";
 
 const SearchcraftBaseSearchResults = class {
     constructor(hostRef) {
         registerInstance(this, hostRef);
+        this.adInterval = 4;
+        this.customStylesForResults = {};
+        this.documentAttributesForDisplay = '';
+        this.fallbackElement = null;
+        this.formatTime = true;
+        this.placeAdAtEnd = false;
+        this.placeAdAtStart = true;
+        this.hasSearched = false;
         this.query = '';
         this.searchResults = null;
-        this.hasSearched = false;
-        this.documentAttributesForDisplay = '';
-        this.customStylesForResults = {};
-        this.placeAdAtStart = true;
-        this.placeAdAtEnd = false;
-        this.adInterval = 4;
-        this.formatTime = true;
-        this.fallbackElement = null;
     }
     componentDidLoad() {
         if (!this.documentAttributesForDisplay ||
@@ -44,25 +44,6 @@ const SearchcraftBaseSearchResults = class {
             this.unsubscribe();
         }
     }
-    timeAgo(timestamp) {
-        const now = new Date();
-        const inputTime = new Date(timestamp);
-        const diffInSeconds = Math.floor((now.getTime() - inputTime.getTime()) / 1000);
-        const minutes = Math.floor(diffInSeconds / 60);
-        const hours = Math.floor(minutes / 60);
-        const days = Math.floor(hours / 24);
-        const years = Math.floor(days / 365);
-        if (minutes < 60) {
-            return `${minutes}m ago`;
-        }
-        if (hours < 24) {
-            return `${hours}h ago`;
-        }
-        if (days < 365) {
-            return `${days}d ago`;
-        }
-        return `${years}y ago`;
-    }
     render() {
         var _a, _b, _c, _d, _e, _f, _g;
         if (!this.hasSearched) {
@@ -79,7 +60,6 @@ const SearchcraftBaseSearchResults = class {
         const resultsComponents = (_d = (_c = (_b = this.searchResults) === null || _b === void 0 ? void 0 : _b.data) === null || _c === void 0 ? void 0 : _c.hits) === null || _d === void 0 ? void 0 : _d.map((document, index) => {
             const { doc: result } = document;
             const dynamicProperties = extractDynamicProperties(result, parsedSearchKeys);
-            // Apply timeAgo formatting if formatTime is true
             if (this.formatTime) {
                 for (const key of parsedSearchKeys) {
                     if (dynamicProperties[key]) {
@@ -87,12 +67,12 @@ const SearchcraftBaseSearchResults = class {
                         // Check if the value is a valid ISO timestamp
                         if (typeof value === 'string' &&
                             !Number.isNaN(Date.parse(value))) {
-                            dynamicProperties[key] = this.timeAgo(value);
+                            dynamicProperties[key] = getFormattedTimeFromNow(value);
                         }
                     }
                 }
             }
-            return (h("searchcraft-base-search-result", { key: `${document.document_id}-${index}`, "button-callback": () => console.log('button callback'), "result-callback": () => console.log('interactive element'), "keydown-callback": () => console.log('keydown'), "is-interactive": true, "heading-text": dynamicProperties[parsedSearchKeys[0]], "subheading-text": dynamicProperties[parsedSearchKeys[1]], "primary-content": dynamicProperties[parsedSearchKeys[2]], "secondary-content": dynamicProperties[parsedSearchKeys[3]], "tertiary-content": dynamicProperties[parsedSearchKeys[4]], "image-source": dynamicProperties[parsedSearchKeys[parsedSearchKeys.length - 1]], "custom-styles": serializedStyles }));
+            return (h("searchcraft-base-search-result", { "button-callback": () => console.log('button callback'), "custom-styles": serializedStyles, "image-source": dynamicProperties[parsedSearchKeys[parsedSearchKeys.length - 1]], "is-interactive": true, key: `${document.document_id}-${index}`, "keydown-callback": () => console.log('keydown'), "heading-text": dynamicProperties[parsedSearchKeys[0]], "primary-content": dynamicProperties[parsedSearchKeys[2]], "result-callback": () => console.log('interactive element'), "secondary-content": dynamicProperties[parsedSearchKeys[3]], "subheading-text": dynamicProperties[parsedSearchKeys[1]], "tertiary-content": dynamicProperties[parsedSearchKeys[4]] }));
         });
         const finalComponents = [];
         if (this.placeAdAtStart) {

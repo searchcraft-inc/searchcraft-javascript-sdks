@@ -6,16 +6,9 @@ import { Component, Prop, h, State } from '@stencil/core';
   shadow: true,
 })
 export class SearchcraftInputIcon {
-  /**
-   * Determines if an error icon should be displayed.
-   */
   @Prop() error?: boolean;
-
-  /**
-   * Determines if the layout should be right-to-left.
-   */
-  @Prop() rightToLeftOrientation = false;
   @Prop() height = 20;
+  @Prop() rightToLeftOrientation = false;
   @Prop() width = 20;
 
   @State() theme = 'light';

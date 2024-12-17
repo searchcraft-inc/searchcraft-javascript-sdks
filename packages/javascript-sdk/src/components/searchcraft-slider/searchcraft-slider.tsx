@@ -7,16 +7,18 @@ import { useSearchcraftStore } from '@provider/store';
   shadow: true,
 })
 export class SearchcraftSlider {
-  @Prop() minYear = 2000;
   @Prop() maxYear = new Date().getFullYear();
+  @Prop() minYear = 2014;
 
   @State() endYear = this.maxYear;
-  @State() query = '';
-  @State() startYear = this.minYear;
   @State() hasSearched = false;
-  unsubscribe: () => void;
+  @State() query = '';
+  @State() resultsCount = 0;
+  @State() startYear = this.minYear;
+
   private searchStore = useSearchcraftStore.getState();
-  @State() resultsCount = 0; // Track the count of search results
+
+  unsubscribe: () => void;
 
   componentDidLoad() {
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {
@@ -64,11 +66,26 @@ export class SearchcraftSlider {
     if (!this.query || this.resultsCount === 0) {
       return null;
     }
+
+    const rangeMin = this.minYear;
+    const rangeMax = this.maxYear;
+    const startPercent =
+      ((this.startYear - rangeMin) / (rangeMax - rangeMin)) * 100;
+    const endPercent =
+      ((this.endYear - rangeMin) / (rangeMax - rangeMin)) * 100;
+
     return (
-      <div class='slider-container'>
-        <div class='range-container'>
+      <div class='sliderContainer'>
+        <div class='rangeContainer'>
+          <div
+            class='activeRange'
+            style={{
+              left: `${startPercent}%`,
+              width: `${endPercent - startPercent}%`,
+            }}
+          />
           <input
-            class='range-slider'
+            class='rangeSlider'
             max={this.maxYear}
             min={this.minYear}
             onInput={this.handleStartYearChange}
@@ -77,7 +94,7 @@ export class SearchcraftSlider {
             value={this.startYear}
           />
           <input
-            class='range-slider'
+            class='rangeSlider'
             max={this.maxYear}
             min={this.minYear}
             onInput={this.handleEndYearChange}
@@ -86,9 +103,9 @@ export class SearchcraftSlider {
             value={this.endYear}
           />
         </div>
-        <div class='year-labels'>
-          <span class='year-label'>{this.startYear}</span>
-          <span class='year-label'>{this.endYear}</span>
+        <div class='yearLabels'>
+          <span class='yearLabel'>{this.startYear}</span>
+          <span class='yearLabel'>{this.endYear}</span>
         </div>
       </div>
     );

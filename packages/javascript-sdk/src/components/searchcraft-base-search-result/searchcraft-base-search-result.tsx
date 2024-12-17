@@ -7,16 +7,16 @@ import { Component, Event, h, Prop } from '@stencil/core';
 })
 export class SearchcraftBaseSearchResult {
   @Prop() buttonText = ''; // Label for the button
+  @Prop() customStyles = '{}'; // New string prop for serialized styles.
+  @Prop() headingText = ''; // Text for the heading
   @Prop() imageDescription = ''; // Alternative text for the image
   @Prop() imageSource = ''; // Source URL for the image
   @Prop() isInteractive = false; // Determines if the result is interactive
   @Prop() primaryContent = ''; // Primary body content
   @Prop() secondaryContent = ''; // Secondary body content
-  @Prop() tertiaryContent = ''; // Tertiary body content
-  @Prop() headingText = ''; // Text for the heading
   @Prop() subheadingText = ''; // Text for the subheading
+  @Prop() tertiaryContent = ''; // Tertiary body content
   @Prop() themeMode: 'light' | 'dark' = 'light'; // Light or dark theme context
-  @Prop() customStyles = '{}'; // New string prop for serialized styles.
 
   @Event() buttonCallback: () => void = () => {}; // Callback for button click
   @Event() keyDownCallback: () => void = () => {}; // Callback for key down event
@@ -54,52 +54,52 @@ export class SearchcraftBaseSearchResult {
               : 'interactiveResultContainerDark'
             : 'resultContainer'
         }
+        onKeyDown={this.keyDownCallback}
+        onClick={this.handleContainerClick}
         style={styles.container || {}}
         tabindex='0'
-        onClick={this.handleContainerClick}
-        onKeyDown={this.keyDownCallback}
       >
         <div class='imageContainer'>
           <img
             alt={this.imageDescription}
+            class={isLightTheme ? 'imageLight' : 'imageDark'}
             src={this.imageSource}
             style={styles.image || {}}
-            class={isLightTheme ? 'imageLight' : 'imageDark'}
           />
         </div>
         <div class='contentContainer'>
           <h2
-            style={styles.heading || {}}
             class={isLightTheme ? 'headingLight' : 'headingDark'}
+            style={styles.heading || {}}
           >
             {this.headingText}
           </h2>
           <h3
-            style={styles.subheading || {}}
             class={isLightTheme ? 'subheadingLight' : 'subheadingDark'}
+            style={styles.subheading || {}}
           >
             {this.subheadingText}
           </h3>
           <p
-            style={styles.primaryContent || {}}
             class={isLightTheme ? 'primaryContentLight' : 'primaryContentDark'}
+            style={styles.primaryContent || {}}
           >
             {this.primaryContent}
           </p>
           <div class='secondaryContentContainer'>
             <p
-              style={styles.secondaryContent || {}}
               class={
                 isLightTheme ? 'secondaryContentLight' : 'secondaryContentDark'
               }
+              style={styles.secondaryContent || {}}
             >
               {this.secondaryContent}
             </p>
             <p
-              style={styles.tertiaryContent || {}}
               class={
                 isLightTheme ? 'tertiaryContentLight' : 'tertiaryContentDark'
               }
+              style={styles.tertiaryContent || {}}
             >
               {this.tertiaryContent}
             </p>

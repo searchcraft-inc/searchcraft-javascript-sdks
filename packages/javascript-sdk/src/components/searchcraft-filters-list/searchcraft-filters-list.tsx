@@ -6,8 +6,10 @@ import {
   Event,
   type EventEmitter,
 } from '@stencil/core';
-import { useSearchcraftStore } from '@provider/store';
+
 import type { Facets } from '@searchcraft/core';
+
+import { useSearchcraftStore } from '@provider/store';
 
 @Component({
   tag: 'searchcraft-filters-list',
@@ -16,15 +18,16 @@ import type { Facets } from '@searchcraft/core';
 })
 export class SearchcraftFiltersList {
   @Prop() filters: Array<{ label: string; value: string }> = [];
+
   @Event() filtersUpdated: EventEmitter<string[]>;
 
   @State() dynamicFilters: Array<{ label: string; value: string }> = [];
   @State() initialFilters: Array<{ label: string; value: string }> = [];
   @State() isRequesting = false;
-  @State() selectedFilters: Set<string> = new Set();
   @State() originalFilterCounts: Record<string, string> = {};
   @State() query = '';
   @State() resultsCount = 0;
+  @State() selectedFilters: Set<string> = new Set();
 
   private searchStore = useSearchcraftStore.getState();
   unsubscribe: () => void;
@@ -95,10 +98,10 @@ export class SearchcraftFiltersList {
 
   formatLabel(label: string): string {
     return label
-      .replace(/-/g, ' ') // Replace dashes with spaces
-      .split(' ') // Split words
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize the first letter
-      .join(' '); // Join words back into a single string
+      .replace(/-/g, ' ')
+      .split(' ')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
   }
 
   render() {
@@ -140,16 +143,14 @@ export class SearchcraftFiltersList {
               />
               {this.formatLabel(filter.label)}
             </label>
-
-            {/* Render dynamic child filters underneath the checked parent */}
             {filter.isChecked &&
               filter.children.map((childFilter) => {
-                const childLabel = childFilter.label.split('/').pop(); // Get only the part after the last '/'
+                const childLabel = childFilter.label.split('/').pop();
                 return (
                   <label
                     class='childCheckboxLabel'
                     key={childFilter.value}
-                    style={{ marginLeft: '20px' }} // Add indentation for child filters
+                    style={{ marginLeft: '20px' }}
                   >
                     <input
                       class='childFilterCheckbox'

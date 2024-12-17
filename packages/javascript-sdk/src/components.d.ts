@@ -102,14 +102,8 @@ export namespace Components {
         "rightToLeftOrientation": boolean;
     }
     interface SearchcraftInputIcon {
-        /**
-          * Determines if an error icon should be displayed.
-         */
         "error"?: boolean;
         "height": number;
-        /**
-          * Determines if the layout should be right-to-left.
-         */
         "rightToLeftOrientation": boolean;
         "width": number;
     }
@@ -172,8 +166,8 @@ export interface SearchcraftInputCustomEvent<T> extends CustomEvent<T> {
 }
 declare global {
     interface HTMLSearchcraftAutoSearchFormElementEventMap {
-        "querySubmit": string;
         "inputClearedOrNoResults": void;
+        "querySubmit": string;
     }
     interface HTMLSearchcraftAutoSearchFormElement extends Components.SearchcraftAutoSearchForm, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSearchcraftAutoSearchFormElementEventMap>(type: K, listener: (this: HTMLSearchcraftAutoSearchFormElement, ev: SearchcraftAutoSearchFormCustomEvent<HTMLSearchcraftAutoSearchFormElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -503,14 +497,8 @@ declare namespace LocalJSX {
         "rightToLeftOrientation"?: boolean;
     }
     interface SearchcraftInputIcon {
-        /**
-          * Determines if an error icon should be displayed.
-         */
         "error"?: boolean;
         "height"?: number;
-        /**
-          * Determines if the layout should be right-to-left.
-         */
         "rightToLeftOrientation"?: boolean;
         "width"?: number;
     }

@@ -1,8 +1,8 @@
 import { r as registerInstance, h } from './index-8211f330.js';
-import { u as useSearchcraftStore } from './store-18b7e3ea.js';
+import { u as useSearchcraftStore } from './store-0451a982.js';
 import './_commonjsHelpers-63cbe26c.js';
 
-const searchcraftToggleButtonModuleCss = ".toggle-wrapper{box-shadow:0px 0px 0px 1px rgba(0, 0, 0, 0.05);margin-left:10px;border:none;border-radius:16px;width:44px;height:26px;background:#ddd;position:relative;cursor:pointer}.toggle-wrapper.active{box-shadow:0px 0px 0px 1px rgba(0, 0, 0, 0.05);background:#007DB3}.toggle-wrapper .toggle-switch{width:18px;height:18px;background:#fff;border-radius:50%;position:absolute;top:calc(50% - 9px);left:4px;transition:transform 0.3s ease}.toggle-wrapper .toggle-switch.active{transform:translateX(16px)}";
+const searchcraftToggleButtonModuleCss = ".toggle-wrapper{background:#ddd;border:none;border-radius:16px;box-shadow:0px 0px 0px 1px rgba(0, 0, 0, 0.05);cursor:pointer;height:26px;margin-left:10px;position:relative;width:44px}.toggle-wrapper.active{background:#007DB3;box-shadow:0px 0px 0px 1px rgba(0, 0, 0, 0.05)}.toggle-wrapper .toggle-switch{background:#fff;border-radius:50%;height:18px;left:4px;position:absolute;top:calc(50% - 9px);transition:transform 0.3s ease;width:18px}.toggle-wrapper .toggle-switch.active{transform:translateX(16px)}";
 
 const SearchcraftToggleButton = class {
     constructor(hostRef) {

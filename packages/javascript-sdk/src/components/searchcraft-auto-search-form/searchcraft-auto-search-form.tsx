@@ -6,15 +6,18 @@ import {
   type EventEmitter,
   h,
 } from '@stencil/core';
+
 import {
   type CoreConfigSDK,
   CoreSDK as SearchcraftCore,
   type SearchcraftResponse,
 } from '@searchcraft/core';
 
-import type { ScInputCustomEvent } from '@components/searchcraft-input/searchcraft-input';
-import { parseCustomStyles } from '@utils/utils';
 import { useSearchcraftStore } from '@provider/store';
+
+import { parseCustomStyles } from '@utils/utils';
+
+import type { ScInputCustomEvent } from '@components/searchcraft-input/searchcraft-input';
 
 @Component({
   tag: 'searchcraft-auto-search-form',
@@ -38,8 +41,8 @@ export class SearchcraftAutoSearchForm {
   @Prop() rightToLeftOrientation = false;
   @Prop() searchContainerClass = '';
 
-  @Event() querySubmit: EventEmitter<string>;
   @Event() inputClearedOrNoResults: EventEmitter<void>;
+  @Event() querySubmit: EventEmitter<string>;
 
   @State() error = false;
   @State() isRequesting = false;
@@ -139,9 +142,9 @@ export class SearchcraftAutoSearchForm {
         <searchcraft-input
           customStyles={parsedCustomStyles}
           input-caption-value={this.inputCaptionValue}
-          is-requesting={this.isRequesting}
           input-icon-height={this.inputIconHeight}
           input-icon-width={this.inputIconWidth}
+          is-requesting={this.isRequesting}
           onClearInput={this.handleClearInput}
           onInputKeyUp={this.handleInputKeyUp}
           onSearchInputChange={this.handleInputChange}

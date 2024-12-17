@@ -1,15 +1,15 @@
 import { r as registerInstance, a as createEvent, h } from './index-8211f330.js';
-import { u as useSearchcraftStore, g } from './store-18b7e3ea.js';
-import { p as parseCustomStyles } from './utils-e2076797.js';
+import { u as useSearchcraftStore, g } from './store-0451a982.js';
+import { p as parseCustomStyles } from './utils-dbb6302b.js';
 import './_commonjsHelpers-63cbe26c.js';
 
-const searchcraftAutoSearchFormModuleCss = ":root{--font-stack:Helvetica, Arial, sans-serif}.formLTR{text-align:left;width:100%}.formRTL{text-align:right;width:100%}";
+const searchcraftAutoSearchFormModuleCss = ":root{--font-stack:Helvetica, Arial, sans-serif}.formLTR{font-family:var(--font-stack);text-align:left;width:100%}.formRTL{font-family:var(--font-stack);text-align:right;width:100%}";
 
 const SearchcraftAutoSearchForm = class {
     constructor(hostRef) {
         registerInstance(this, hostRef);
-        this.querySubmit = createEvent(this, "querySubmit", 7);
         this.inputClearedOrNoResults = createEvent(this, "inputClearedOrNoResults", 7);
+        this.querySubmit = createEvent(this, "querySubmit", 7);
         this.debounceTimeout = null;
         this.debounceDelay = 0;
         this.searchStore = useSearchcraftStore.getState();
@@ -103,7 +103,7 @@ const SearchcraftAutoSearchForm = class {
         if (this.query.length > 0 && ((_c = (_b = (_a = this.searchResults) === null || _a === void 0 ? void 0 : _a.data) === null || _b === void 0 ? void 0 : _b.hits) === null || _c === void 0 ? void 0 : _c.length) === 0) {
             this.inputClearedOrNoResults.emit();
         }
-        return (h("form", { key: '49950058e612dc1017fb56235affd3b8077b6926', class: `${formClass}`, onSubmit: this.handleFormSubmit }, h("searchcraft-input-label", { key: 'ce2cb4d74c139fc4f010d1ca51739c49a8e9f6c2', label: this.labelForInput }), h("searchcraft-input", { key: '8fb1eee5dca952ba472f03e768b57663528f5c84', customStyles: parsedCustomStyles, "input-caption-value": this.inputCaptionValue, "is-requesting": this.isRequesting, "input-icon-height": this.inputIconHeight, "input-icon-width": this.inputIconWidth, onClearInput: this.handleClearInput, onInputKeyUp: this.handleInputKeyUp, onSearchInputChange: this.handleInputChange, "placeholder-value": this.placeholderValue, query: this.query, "right-to-left-orientation": this.rightToLeftOrientation }), this.error && (h("searchcraft-error-message", { key: 'd1c893186af4cdb927f31b086aa7d027947c1d2c', errorMessage: 'Please enter a search query.' }))));
+        return (h("form", { key: '0a9035c4278b8cc449ed004d68c925abf468daa8', class: `${formClass}`, onSubmit: this.handleFormSubmit }, h("searchcraft-input-label", { key: 'a2e9eb5406e242fc8fde2c6c058a7e2ab9369543', label: this.labelForInput }), h("searchcraft-input", { key: 'ce2dca05919fd86f443d8c4ea9d50069aba0d9fd', customStyles: parsedCustomStyles, "input-caption-value": this.inputCaptionValue, "input-icon-height": this.inputIconHeight, "input-icon-width": this.inputIconWidth, "is-requesting": this.isRequesting, onClearInput: this.handleClearInput, onInputKeyUp: this.handleInputKeyUp, onSearchInputChange: this.handleInputChange, "placeholder-value": this.placeholderValue, query: this.query, "right-to-left-orientation": this.rightToLeftOrientation }), this.error && (h("searchcraft-error-message", { key: 'a09bfd91b7d1d3c983130ce6fb427dd85a91df9f', errorMessage: 'Please enter a search query.' }))));
     }
 };
 SearchcraftAutoSearchForm.style = searchcraftAutoSearchFormModuleCss;

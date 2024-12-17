@@ -12,18 +12,17 @@ function parseCustomStyles(styles) {
 }
 function parseSearchKeys(documentAttributesForDisplay) {
     try {
-        // Attempt to parse the string as JSON
         const parsedKeys = JSON.parse(documentAttributesForDisplay);
         if (Array.isArray(parsedKeys) &&
             parsedKeys.every((key) => typeof key === 'string')) {
-            return parsedKeys; // Return the array if it's valid
+            return parsedKeys;
         }
         console.warn('searchKeys must be a JSON array of strings. Defaulting to an empty array.');
         return [];
     }
     catch (error) {
         console.error('Failed to parse searchKeys:', error);
-        return []; // Return an empty array in case of a parsing error
+        return [];
     }
 }
 function extractDynamicProperties(document, keys) {
@@ -42,7 +41,26 @@ function serializeStyles(styles) {
         return '{}';
     }
 }
+function getFormattedTimeFromNow(timestamp) {
+    const now = new Date();
+    const inputTime = new Date(timestamp);
+    const diffInSeconds = Math.floor((now.getTime() - inputTime.getTime()) / 1000);
+    const minutes = Math.floor(diffInSeconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+    const years = Math.floor(days / 365);
+    if (minutes < 60) {
+        return `${minutes}m ago`;
+    }
+    if (hours < 24) {
+        return `${hours}h ago`;
+    }
+    if (days < 365) {
+        return `${days}d ago`;
+    }
+    return `${years}y ago`;
+}
 
-export { parseSearchKeys as a, extractDynamicProperties as e, parseCustomStyles as p, serializeStyles as s };
+export { parseSearchKeys as a, extractDynamicProperties as e, getFormattedTimeFromNow as g, parseCustomStyles as p, serializeStyles as s };
 
-//# sourceMappingURL=utils-e2076797.js.map
+//# sourceMappingURL=utils-dbb6302b.js.map

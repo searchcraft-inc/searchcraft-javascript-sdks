@@ -15,7 +15,6 @@ const SearchcraftInputLabel = class {
         return this.theme === 'light';
     }
     render() {
-        // Render nothing if no label prop is provided
         if (!this.label) {
             return null;
         }

@@ -1,9 +1,12 @@
 import { Component, h, Prop, State } from '@stencil/core';
+
 import type { SearchcraftResponse } from '@searchcraft/core';
 
 import { useSearchcraftStore } from '@provider/store';
+
 import {
   extractDynamicProperties,
+  getFormattedTimeFromNow,
   parseSearchKeys,
   serializeStyles,
 } from '@utils/utils';
@@ -14,19 +17,19 @@ import {
   shadow: true,
 })
 export class SearchcraftBaseSearchResults {
-  @State() query = '';
-  @State() searchResults: SearchcraftResponse | null = null;
-  @State() hasSearched = false;
-
-  @Prop() documentAttributesForDisplay = '';
+  @Prop() adInterval = 4;
   @Prop() customStylesForResults:
     | string
     | Record<string, Record<string, string>> = {};
-  @Prop() placeAdAtStart = true;
-  @Prop() placeAdAtEnd = false;
-  @Prop() adInterval = 4;
-  @Prop() formatTime = true;
+  @Prop() documentAttributesForDisplay = '';
   @Prop() fallbackElement: HTMLElement | null = null;
+  @Prop() formatTime = true;
+  @Prop() placeAdAtEnd = false;
+  @Prop() placeAdAtStart = true;
+
+  @State() hasSearched = false;
+  @State() query = '';
+  @State() searchResults: SearchcraftResponse | null = null;
 
   private unsubscribe: () => void;
 
@@ -60,30 +63,6 @@ export class SearchcraftBaseSearchResults {
     }
   }
 
-  timeAgo(timestamp: string): string {
-    const now = new Date();
-    const inputTime = new Date(timestamp);
-    const diffInSeconds = Math.floor(
-      (now.getTime() - inputTime.getTime()) / 1000,
-    );
-
-    const minutes = Math.floor(diffInSeconds / 60);
-    const hours = Math.floor(minutes / 60);
-    const days = Math.floor(hours / 24);
-    const years = Math.floor(days / 365);
-
-    if (minutes < 60) {
-      return `${minutes}m ago`;
-    }
-    if (hours < 24) {
-      return `${hours}h ago`;
-    }
-    if (days < 365) {
-      return `${days}d ago`;
-    }
-    return `${years}y ago`;
-  }
-
   render() {
     if (!this.hasSearched) {
       return (
@@ -112,7 +91,6 @@ export class SearchcraftBaseSearchResults {
           parsedSearchKeys,
         );
 
-        // Apply timeAgo formatting if formatTime is true
         if (this.formatTime) {
           for (const key of parsedSearchKeys) {
             if (dynamicProperties[key]) {
@@ -122,7 +100,7 @@ export class SearchcraftBaseSearchResults {
                 typeof value === 'string' &&
                 !Number.isNaN(Date.parse(value))
               ) {
-                dynamicProperties[key] = this.timeAgo(value);
+                dynamicProperties[key] = getFormattedTimeFromNow(value);
               }
             }
           }
@@ -130,20 +108,20 @@ export class SearchcraftBaseSearchResults {
 
         return (
           <searchcraft-base-search-result
-            key={`${document.document_id}-${index}`}
             button-callback={() => console.log('button callback')}
-            result-callback={() => console.log('interactive element')}
-            keydown-callback={() => console.log('keydown')}
-            is-interactive={true}
-            heading-text={dynamicProperties[parsedSearchKeys[0]]}
-            subheading-text={dynamicProperties[parsedSearchKeys[1]]}
-            primary-content={dynamicProperties[parsedSearchKeys[2]]}
-            secondary-content={dynamicProperties[parsedSearchKeys[3]]}
-            tertiary-content={dynamicProperties[parsedSearchKeys[4]]}
+            custom-styles={serializedStyles}
             image-source={
               dynamicProperties[parsedSearchKeys[parsedSearchKeys.length - 1]]
             }
-            custom-styles={serializedStyles}
+            is-interactive={true}
+            key={`${document.document_id}-${index}`}
+            keydown-callback={() => console.log('keydown')}
+            heading-text={dynamicProperties[parsedSearchKeys[0]]}
+            primary-content={dynamicProperties[parsedSearchKeys[2]]}
+            result-callback={() => console.log('interactive element')}
+            secondary-content={dynamicProperties[parsedSearchKeys[3]]}
+            subheading-text={dynamicProperties[parsedSearchKeys[1]]}
+            tertiary-content={dynamicProperties[parsedSearchKeys[4]]}
           />
         );
       },

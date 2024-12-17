@@ -3,11 +3,13 @@
 }
 
 .formLTR {
+  font-family: var(--font-stack);
   text-align: left;
   width: 100%;
 }
 
 .formRTL {
+  font-family: var(--font-stack);
   text-align: right;
   width: 100%;
 }

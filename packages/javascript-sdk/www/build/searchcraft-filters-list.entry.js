@@ -1,5 +1,5 @@
 import { r as registerInstance, a as createEvent, h } from './index-8211f330.js';
-import { u as useSearchcraftStore } from './store-18b7e3ea.js';
+import { u as useSearchcraftStore } from './store-0451a982.js';
 import './_commonjsHelpers-63cbe26c.js';
 
 const searchcraftFiltersListModuleCss = "@charset \"UTF-8\";.filtersList{width:100%}.checkboxLabel{align-items:center;color:#292929;display:flex;font-family:\"Source Sans Pro\";font-size:14px;font-weight:600;gap:14px}.checkboxLabel input[type=checkbox]{align-items:center;appearance:none;background-color:#EDEDED;border:1px solid #D9D9D9;cursor:pointer;display:flex;height:24px;justify-content:center;width:24px}.checkboxLabel input[type=checkbox]:checked{background-color:#000}.checkboxLabel input[type=checkbox]:checked::before{color:#fff;content:\"✔\"}.remainingFilterListCheckbox{margin-left:16px}.childCheckboxLabel{align-items:center;color:#292929;display:flex;font-family:\"Source Sans Pro\";font-size:14px;font-weight:600;gap:12px}.childCheckboxLabel input[type=checkbox]{align-items:center;appearance:none;background-color:#EDEDED;border:1px solid #D9D9D9;cursor:pointer;display:flex;height:24px;justify-content:center;width:24px}.childCheckboxLabel input[type=checkbox]:checked{background-color:#000}.childCheckboxLabel input[type=checkbox]:checked::before{color:#fff;content:\"✔\"}";
@@ -25,10 +25,10 @@ const SearchcraftFiltersList = class {
         this.dynamicFilters = [];
         this.initialFilters = [];
         this.isRequesting = false;
-        this.selectedFilters = new Set();
         this.originalFilterCounts = {};
         this.query = '';
         this.resultsCount = 0;
+        this.selectedFilters = new Set();
     }
     connectedCallback() {
         this.unsubscribe = useSearchcraftStore.subscribe((state) => {
@@ -70,10 +70,10 @@ const SearchcraftFiltersList = class {
     }
     formatLabel(label) {
         return label
-            .replace(/-/g, ' ') // Replace dashes with spaces
-            .split(' ') // Split words
-            .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize the first letter
-            .join(' '); // Join words back into a single string
+            .replace(/-/g, ' ')
+            .split(' ')
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ');
     }
     render() {
         if (!this.query || this.resultsCount === 0) {
@@ -87,7 +87,7 @@ const SearchcraftFiltersList = class {
         });
         return (h("div", { class: 'filtersList' }, filtersToRender.map((filter) => (h("div", { key: filter.value }, h("label", { class: 'checkboxLabel' }, h("input", { class: 'filterCheckbox', checked: filter.isChecked, onChange: (event) => this.handleFilterChange(filter.value, event.target.checked), type: 'checkbox', value: filter.value }), this.formatLabel(filter.label)), filter.isChecked &&
             filter.children.map((childFilter) => {
-                const childLabel = childFilter.label.split('/').pop(); // Get only the part after the last '/'
+                const childLabel = childFilter.label.split('/').pop();
                 return (h("label", { class: 'childCheckboxLabel', key: childFilter.value, style: { marginLeft: '20px' } }, h("input", { class: 'childFilterCheckbox', checked: this.selectedFilters.has(childFilter.value), onChange: (event) => this.handleFilterChange(childFilter.value, event.target.checked), type: 'checkbox', value: childFilter.value }), this.formatLabel(childLabel || '')));
             }))))));
     }
