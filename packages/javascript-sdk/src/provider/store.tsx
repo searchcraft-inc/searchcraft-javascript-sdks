@@ -106,20 +106,20 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
       log(LogLevel.INFO, `Starting search with query: "${query}"`);
 
       try {
-        const counts: Record<string, number> = selectedFilters.reduce(
-          (acc, filter) => {
-            const cleanedFilter = filter.replace(/^section:/, '');
-            acc[cleanedFilter] = 1;
-            return acc;
-          },
-          {} as Record<string, number>,
-        );
-
         const searchRequest = {
           query,
           mode: searchParams.mode,
           sort: searchParams.sort,
-          facets: selectedFilters.length > 0 ? { section: { counts } } : null,
+          facets:
+            selectedFilters.length > 0
+              ? {
+                  section: {
+                    counts: Object.fromEntries(
+                      selectedFilters.map((path) => [path, 1]),
+                    ),
+                  },
+                }
+              : null,
           yearsRange: searchParams.yearsRange,
         };
 

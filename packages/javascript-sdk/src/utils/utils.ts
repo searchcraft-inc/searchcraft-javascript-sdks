@@ -78,3 +78,32 @@ export function getFormattedTimeFromNow(timestamp: string): string {
   }
   return `${years}y ago`;
 }
+
+type Section = {
+  count: number;
+  path: string;
+  children: Section[];
+};
+
+type FacetCheckbox = {
+  label: string;
+  value: string;
+};
+
+export function flattenFacets(
+  sections: Section[],
+  parentPath = '',
+): FacetCheckbox[] {
+  return sections.flatMap((section) => {
+    const fullPath = parentPath + section.path;
+    const filter = {
+      label: `${fullPath.replace(/^\//, '')} (${section.count})`,
+      value: fullPath,
+    };
+
+    const children = section.children
+      ? flattenFacets(section.children, fullPath)
+      : [];
+    return [filter, ...children];
+  });
+}
