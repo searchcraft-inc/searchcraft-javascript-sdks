@@ -1,4 +1,5 @@
 import { Component, h, Event, Prop, State } from '@stencil/core';
+
 import {
   type CoreConfigSDK,
   CoreSDK as SearchcraftCore,
@@ -73,9 +74,9 @@ export class SearchcraftBaseSearchForm {
           {this.rightToLeftOrientation && <searchcraft-button />}
           <searchcraft-input
             onClearInput={this.handleClearInput}
-            rightToLeftOrientation={this.rightToLeftOrientation}
             onSearchInputChange={this.handleSearchInputChange}
             query={this.query}
+            rightToLeftOrientation={this.rightToLeftOrientation}
           />
           {!this.rightToLeftOrientation && (
             <searchcraft-button onButtonClick={this.handleFormSubmit} />

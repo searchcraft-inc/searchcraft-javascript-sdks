@@ -1,77 +1,72 @@
-.slider-container {
+.sliderContainer {
   display: flex;
   flex-direction: column;
   gap: 10px;
   font-family: Arial, sans-serif;
   align-items: center;
+  width: 100%;
 }
 
-label {
-  font-size: 14px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.range-container {
+.rangeContainer {
   display: flex;
+  position: relative;
   width: 100%;
   align-items: center;
+
+  .activeRange {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 4px;
+    background: #007DB3;
+    z-index: 0;
+    border-radius: 2px;
+  }
+
+  .rangeSlider {
+    width: 100%;
+    height: 4px;
+    background: transparent;
+    border-radius: 2px;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    position: absolute;
+    margin: 0;
+
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      background-color: #FFF;
+      border-radius: 50%;
+      border: 2px solid #e6e6e6;
+      cursor: pointer;
+    }
+
+    &::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      background-color: #FFF;
+      border-radius: 50%;
+      border: 2px solid #e6e6e6;
+      cursor: pointer;
+    }
+  }
 }
 
-.range-slider {
-  width: 100%;
-  height: 4px;
-  background: #ddd;
-  border-radius: 2px;
-  outline: none;
-  margin: 0 -1px;
-  position: relative;
-}
-
-.range-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  background-color: #FFF;
-  border-radius: 50%;
-  border: 1px solid #E6E6E6;
-  cursor: pointer;
-  position: relative;
-}
-
-.range-slider::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
-  background-color: #FFF;
-  border-radius: 50%;
-  border: 1px solid #E6E6E6;
-  cursor: pointer;
-}
-
-.range-slider:before {
-  content: '';
-  position: absolute;
-  height: 4px;
-  background-color: #FFF;
-  border-radius: 2px;
-  left: 0;
-  right: 0;
-  z-index: -1;
-}
-
-.year-labels {
+.yearLabels {
   display: flex;
   justify-content: space-between;
   width: 100%;
   margin-top: 10px;
   font-size: 15px;
   font-weight: 600;
-  font-family: 'Source Sans Pro';
+  font-family: 'Source Sans Pro', sans-serif;
   color: #666;
 }
 
-.year-label {
+.yearLabel {
   min-width: 30px;
   text-align: center;
 }

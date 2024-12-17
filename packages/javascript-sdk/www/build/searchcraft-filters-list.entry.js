@@ -25,10 +25,10 @@ const SearchcraftFiltersList = class {
         this.dynamicFilters = [];
         this.initialFilters = [];
         this.isRequesting = false;
-        this.selectedFilters = new Set();
         this.originalFilterCounts = {};
         this.query = '';
         this.resultsCount = 0;
+        this.selectedFilters = new Set();
     }
     connectedCallback() {
         this.unsubscribe = useSearchcraftStore.subscribe((state) => {
@@ -70,10 +70,10 @@ const SearchcraftFiltersList = class {
     }
     formatLabel(label) {
         return label
-            .replace(/-/g, ' ') // Replace dashes with spaces
-            .split(' ') // Split words
-            .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize the first letter
-            .join(' '); // Join words back into a single string
+            .replace(/-/g, ' ')
+            .split(' ')
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ');
     }
     render() {
         if (!this.query || this.resultsCount === 0) {
@@ -87,7 +87,7 @@ const SearchcraftFiltersList = class {
         });
         return (h("div", { class: 'filtersList' }, filtersToRender.map((filter) => (h("div", { key: filter.value }, h("label", { class: 'checkboxLabel' }, h("input", { class: 'filterCheckbox', checked: filter.isChecked, onChange: (event) => this.handleFilterChange(filter.value, event.target.checked), type: 'checkbox', value: filter.value }), this.formatLabel(filter.label)), filter.isChecked &&
             filter.children.map((childFilter) => {
-                const childLabel = childFilter.label.split('/').pop(); // Get only the part after the last '/'
+                const childLabel = childFilter.label.split('/').pop();
                 return (h("label", { class: 'childCheckboxLabel', key: childFilter.value, style: { marginLeft: '20px' } }, h("input", { class: 'childFilterCheckbox', checked: this.selectedFilters.has(childFilter.value), onChange: (event) => this.handleFilterChange(childFilter.value, event.target.checked), type: 'checkbox', value: childFilter.value }), this.formatLabel(childLabel || '')));
             }))))));
     }

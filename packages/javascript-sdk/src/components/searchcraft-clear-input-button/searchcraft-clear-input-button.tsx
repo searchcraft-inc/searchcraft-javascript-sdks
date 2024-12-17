@@ -17,7 +17,6 @@ export class SearchcraftClearInputButton {
   @Prop() isRequesting? = false;
   @Prop() rightToLeftOrientation = false;
 
-  // Updated `clearInput` to an EventEmitter
   @Event() clearInput: EventEmitter<void>;
 
   @State() theme = 'light';
@@ -26,10 +25,9 @@ export class SearchcraftClearInputButton {
     return this.theme === 'light';
   }
 
-  // Added a click handler to emit the event
   private handleClearClick = (event: MouseEvent) => {
-    event.preventDefault(); // Prevent default if necessary
-    this.clearInput.emit(); // Emit the event
+    event.preventDefault();
+    this.clearInput.emit();
   };
 
   render() {

@@ -55,3 +55,27 @@ export function serializeStyles(
     return '{}';
   }
 }
+
+export function getFormattedTimeFromNow(timestamp: string): string {
+  const now = new Date();
+  const inputTime = new Date(timestamp);
+  const diffInSeconds = Math.floor(
+    (now.getTime() - inputTime.getTime()) / 1000,
+  );
+
+  const minutes = Math.floor(diffInSeconds / 60);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+  const years = Math.floor(days / 365);
+
+  if (minutes < 60) {
+    return `${minutes}m ago`;
+  }
+  if (hours < 24) {
+    return `${hours}h ago`;
+  }
+  if (days < 365) {
+    return `${days}d ago`;
+  }
+  return `${years}y ago`;
+}

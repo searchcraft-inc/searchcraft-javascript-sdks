@@ -8,10 +8,10 @@
   align-items: flex-start;
   border-radius: 16px;
   display: flex;
-  position: relative;
   flex-direction: column;
   gap: 16px;
   padding: 8px;
+  position: relative;
 
   @media (min-width: 600px) {
     flex-direction: row;
@@ -19,13 +19,13 @@
 }
 
 .interactiveResultContainerLight {
-  background-color: $light-search-result-container-background;
   @include interactive-result-container-base;
+  background-color: $light-search-result-container-background;
 }
 
 .interactiveResultContainerDark {
-  background-color: $dark-search-result-container-background;
   @include interactive-result-container-base;
+  background-color: $dark-search-result-container-background;
 }
 
 .resultContainer {
@@ -47,15 +47,15 @@
 
 
   @media (max-width: 600px) {
-   display: none;
+    display: none;
   }
 }
 
 .interactiveIconSmall {
+  display: inline-block;
   position: absolute;
   right: 5px;
   top: -2px;
-  display: inline-block;
 
 
   @media (min-width: 600px) {
@@ -104,7 +104,7 @@
   font-weight: 700;
   line-height: 20px;
   margin-bottom: 4px;
-  margin-top: 0px;
+  margin-top: 0;
   position: relative;
 }
 

@@ -8,7 +8,7 @@ import classNames from 'classnames';
 })
 export class SearchcraftInputLabel {
   @Prop() inputLabelClassName? = '';
-  @Prop() label?: string; // Make label optional
+  @Prop() label?: string;
   @State() theme = 'light';
 
   private isLightTheme() {
@@ -16,13 +16,10 @@ export class SearchcraftInputLabel {
   }
 
   render() {
-    // Render nothing if no label prop is provided
     if (!this.label) {
       return null;
     }
-
     const labelStyle = this.isLightTheme() ? 'labelLight' : 'labelDark';
-
     return (
       <label
         class={classNames(labelStyle, this.inputLabelClassName)}

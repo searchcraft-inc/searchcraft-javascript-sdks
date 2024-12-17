@@ -6,8 +6,8 @@ const SearchcraftInputIcon = class {
     constructor(hostRef) {
         registerInstance(this, hostRef);
         this.error = undefined;
-        this.rightToLeftOrientation = false;
         this.height = 20;
+        this.rightToLeftOrientation = false;
         this.width = 20;
         this.theme = 'light';
     }

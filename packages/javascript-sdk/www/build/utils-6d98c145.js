@@ -42,7 +42,26 @@ function serializeStyles(styles) {
         return '{}';
     }
 }
+function getFormattedTimeFromNow(timestamp) {
+    const now = new Date();
+    const inputTime = new Date(timestamp);
+    const diffInSeconds = Math.floor((now.getTime() - inputTime.getTime()) / 1000);
+    const minutes = Math.floor(diffInSeconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+    const years = Math.floor(days / 365);
+    if (minutes < 60) {
+        return `${minutes}m ago`;
+    }
+    if (hours < 24) {
+        return `${hours}h ago`;
+    }
+    if (days < 365) {
+        return `${days}d ago`;
+    }
+    return `${years}y ago`;
+}
 
-export { parseSearchKeys as a, extractDynamicProperties as e, parseCustomStyles as p, serializeStyles as s };
+export { parseSearchKeys as a, extractDynamicProperties as e, getFormattedTimeFromNow as g, parseCustomStyles as p, serializeStyles as s };
 
-//# sourceMappingURL=utils-e2076797.js.map
+//# sourceMappingURL=utils-6d98c145.js.map

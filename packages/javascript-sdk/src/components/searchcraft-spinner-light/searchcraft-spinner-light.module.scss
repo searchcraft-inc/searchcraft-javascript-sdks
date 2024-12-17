@@ -7,12 +7,12 @@ $spinner-size: 20px;
 }
 
 .spinnerLight {
-  height: 100%;
-  width: 100%;
+  animation: spinning 1s linear infinite;
   background: conic-gradient(#737373 50%, #FFFFFF);
   clip-path: circle(50%);
+  height: 100%;
   mask-image: radial-gradient(circle at center, rgba(0,0,0,0) calc($spinner-size/3), rgba(0,0,0,1) calc($spinner-size/3));
-  animation: spinning 1s linear infinite;
+  width: 100%;
 }
 
 @keyframes spinning {

@@ -8,10 +8,9 @@ const SearchcraftClearInputButton = class {
     constructor(hostRef) {
         registerInstance(this, hostRef);
         this.clearInput = createEvent(this, "clearInput", 7);
-        // Added a click handler to emit the event
         this.handleClearClick = (event) => {
-            event.preventDefault(); // Prevent default if necessary
-            this.clearInput.emit(); // Emit the event
+            event.preventDefault();
+            this.clearInput.emit();
         };
         this.isRequesting = false;
         this.rightToLeftOrientation = false;
