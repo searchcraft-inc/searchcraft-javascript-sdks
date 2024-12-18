@@ -26,6 +26,7 @@ export class SearchcraftBaseSearchResults {
   @Prop() formatTime = true;
   @Prop() placeAdAtEnd = false;
   @Prop() placeAdAtStart = true;
+  @Prop() placeResultImageRight = false;
 
   @State() hasSearched = false;
   @State() query = '';
@@ -117,6 +118,7 @@ export class SearchcraftBaseSearchResults {
             key={`${document.document_id}-${index}`}
             keydown-callback={() => console.log('keydown')}
             heading-text={dynamicProperties[parsedSearchKeys[0]]}
+            place-image-right={this.placeResultImageRight}
             primary-content={dynamicProperties[parsedSearchKeys[2]]}
             result-callback={() => console.log('interactive element')}
             secondary-content={dynamicProperties[parsedSearchKeys[3]]}

@@ -15,6 +15,7 @@ const SearchcraftBaseSearchResults = class {
         this.formatTime = true;
         this.placeAdAtEnd = false;
         this.placeAdAtStart = true;
+        this.placeResultImageRight = false;
         this.hasSearched = false;
         this.query = '';
         this.searchResults = null;
@@ -72,7 +73,7 @@ const SearchcraftBaseSearchResults = class {
                     }
                 }
             }
-            return (h("searchcraft-base-search-result", { "button-callback": () => console.log('button callback'), "custom-styles": serializedStyles, "image-source": dynamicProperties[parsedSearchKeys[parsedSearchKeys.length - 1]], "is-interactive": true, key: `${document.document_id}-${index}`, "keydown-callback": () => console.log('keydown'), "heading-text": dynamicProperties[parsedSearchKeys[0]], "primary-content": dynamicProperties[parsedSearchKeys[2]], "result-callback": () => console.log('interactive element'), "secondary-content": dynamicProperties[parsedSearchKeys[3]], "subheading-text": dynamicProperties[parsedSearchKeys[1]], "tertiary-content": dynamicProperties[parsedSearchKeys[4]] }));
+            return (h("searchcraft-base-search-result", { "button-callback": () => console.log('button callback'), "custom-styles": serializedStyles, "image-source": dynamicProperties[parsedSearchKeys[parsedSearchKeys.length - 1]], "is-interactive": true, key: `${document.document_id}-${index}`, "keydown-callback": () => console.log('keydown'), "heading-text": dynamicProperties[parsedSearchKeys[0]], "place-image-right": this.placeResultImageRight, "primary-content": dynamicProperties[parsedSearchKeys[2]], "result-callback": () => console.log('interactive element'), "secondary-content": dynamicProperties[parsedSearchKeys[3]], "subheading-text": dynamicProperties[parsedSearchKeys[1]], "tertiary-content": dynamicProperties[parsedSearchKeys[4]] }));
         });
         const finalComponents = [];
         if (this.placeAdAtStart) {
