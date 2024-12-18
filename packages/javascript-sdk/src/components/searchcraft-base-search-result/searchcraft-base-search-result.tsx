@@ -46,7 +46,7 @@ export class SearchcraftBaseSearchResult {
     const isLightTheme = this.themeMode === 'light';
     const styles = this.parseStyles();
 
-    const imageContainer = (
+    const imageContainer = this.imageSource && (
       <div class='imageContainer'>
         <img
           alt={this.imageDescription}
