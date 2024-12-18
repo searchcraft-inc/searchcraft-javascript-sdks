@@ -33,9 +33,8 @@ export class SearchcraftFiltersList {
   unsubscribe: () => void;
 
   connectedCallback() {
-    const state = this.searchStore; // Fetch the initial state
+    const state = this.searchStore;
 
-    // Initial population of facets if available
     if (state.searchResults?.data.facets) {
       this.populateFiltersFromFacets(state.searchResults.data.facets);
     }
@@ -54,7 +53,6 @@ export class SearchcraftFiltersList {
       this.isRequesting = state.isRequesting;
       this.resultsCount = state.searchResults?.data?.hits?.length || 0;
 
-      // Populate filters when facets are updated
       if (state.searchResults?.data.facets) {
         this.populateFiltersFromFacets(state.searchResults.data.facets);
       }
@@ -71,9 +69,15 @@ export class SearchcraftFiltersList {
     const newFilters = flattenFacets(facets[0]?.section || []);
     const filtersMap = new Map<string, { label: string; value: string }>();
 
+    this.dynamicFilters.forEach((filter) => {
+      const key = filter.value.split('/').pop() || '';
+      filtersMap.set(key, filter);
+    });
+
     newFilters.forEach((filter) => {
       const key = filter.value.split('/').pop() || '';
       const existingFilter = filtersMap.get(key);
+
       if (
         !existingFilter ||
         filter.value.length < existingFilter.value.length
@@ -156,6 +160,9 @@ export class SearchcraftFiltersList {
                   }
                   type='checkbox'
                 />
+                <div class='checkContainer'>
+                  <searchcraft-check-icon />
+                </div>
                 {this.formatLabel(filter.label)}
               </label>
               {children.map((child) => {
@@ -177,6 +184,9 @@ export class SearchcraftFiltersList {
                       }
                       type='checkbox'
                     />
+                    <div class='checkContainer'>
+                      <searchcraft-check-icon />
+                    </div>
                     {this.formatLabel(child.label.split('/').pop() || '')}
                   </label>
                 );
