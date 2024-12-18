@@ -33,14 +33,30 @@ export class SearchcraftFiltersList {
   unsubscribe: () => void;
 
   connectedCallback() {
+    const state = this.searchStore; // Fetch the initial state
+
+    // Initial population of facets if available
+    if (state.searchResults?.data.facets) {
+      this.populateFiltersFromFacets(state.searchResults.data.facets);
+    }
+
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {
-      this.isRequesting = state.isRequesting;
+      if (!state.query || state.query.trim().length === 0) {
+        if (this.selectedFilters.size > 0) {
+          this.selectedFilters.clear();
+          this.filtersUpdated.emit([]);
+          if (this.searchStore.selectedFilters.length > 0) {
+            this.searchStore.setSelectedFilters([]);
+          }
+        }
+      }
       this.query = state.query || '';
+      this.isRequesting = state.isRequesting;
       this.resultsCount = state.searchResults?.data?.hits?.length || 0;
 
-      const facets = state.searchResults?.data.facets;
-      if (facets) {
-        this.populateFiltersFromFacets(facets);
+      // Populate filters when facets are updated
+      if (state.searchResults?.data.facets) {
+        this.populateFiltersFromFacets(state.searchResults.data.facets);
       }
     });
   }
@@ -53,7 +69,20 @@ export class SearchcraftFiltersList {
 
   populateFiltersFromFacets(facets: Facets) {
     const newFilters = flattenFacets(facets[0]?.section || []);
-    this.dynamicFilters = newFilters;
+    const filtersMap = new Map<string, { label: string; value: string }>();
+
+    newFilters.forEach((filter) => {
+      const key = filter.value.split('/').pop() || '';
+      const existingFilter = filtersMap.get(key);
+      if (
+        !existingFilter ||
+        filter.value.length < existingFilter.value.length
+      ) {
+        filtersMap.set(key, filter);
+      }
+    });
+
+    this.dynamicFilters = Array.from(filtersMap.values());
   }
 
   handleFilterChange = (value: string, checked: boolean) => {
@@ -62,12 +91,29 @@ export class SearchcraftFiltersList {
     } else {
       this.selectedFilters.delete(value);
     }
+    const deduplicatedFilters = this.deduplicatePaths(
+      Array.from(this.selectedFilters),
+    );
 
-    const selectedFiltersArray = Array.from(this.selectedFilters);
-    this.filtersUpdated.emit(selectedFiltersArray);
-    this.searchStore.setSelectedFilters(selectedFiltersArray);
+    this.filtersUpdated.emit(deduplicatedFilters);
+    this.searchStore.setSelectedFilters(deduplicatedFilters);
     this.searchStore.search();
   };
+
+  deduplicatePaths(filters: string[]): string[] {
+    const pathMap = new Map<string, string>();
+
+    filters.forEach((path) => {
+      const key = path.split('/').pop() || '';
+      const existingPath = pathMap.get(key);
+
+      if (!existingPath || path.length < existingPath.length) {
+        pathMap.set(key, path);
+      }
+    });
+
+    return Array.from(pathMap.values());
+  }
 
   formatLabel(label: string): string {
     return label
@@ -112,9 +158,9 @@ export class SearchcraftFiltersList {
                 />
                 {this.formatLabel(filter.label)}
               </label>
-
-              {isChecked &&
-                children.map((child) => (
+              {children.map((child) => {
+                const isChildChecked = this.selectedFilters.has(child.value);
+                return (
                   <label
                     class='childCheckboxLabel'
                     key={child.value}
@@ -122,7 +168,7 @@ export class SearchcraftFiltersList {
                   >
                     <input
                       class='childFilterCheckbox'
-                      checked={this.selectedFilters.has(child.value)}
+                      checked={isChildChecked}
                       onChange={(event: Event) =>
                         this.handleFilterChange(
                           child.value,
@@ -133,7 +179,8 @@ export class SearchcraftFiltersList {
                     />
                     {this.formatLabel(child.label.split('/').pop() || '')}
                   </label>
-                ))}
+                );
+              })}
             </div>
           );
         })}

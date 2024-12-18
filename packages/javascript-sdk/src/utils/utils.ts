@@ -90,20 +90,15 @@ type FacetCheckbox = {
   value: string;
 };
 
-export function flattenFacets(
-  sections: Section[],
-  parentPath = '',
-): FacetCheckbox[] {
+export function flattenFacets(sections: Section[]): FacetCheckbox[] {
   return sections.flatMap((section) => {
-    const fullPath = parentPath + section.path;
+    const fullPath = section.path;
     const filter = {
       label: `${fullPath.replace(/^\//, '')} (${section.count})`,
       value: fullPath,
     };
 
-    const children = section.children
-      ? flattenFacets(section.children, fullPath)
-      : [];
+    const children = section.children ? flattenFacets(section.children) : [];
     return [filter, ...children];
   });
 }
