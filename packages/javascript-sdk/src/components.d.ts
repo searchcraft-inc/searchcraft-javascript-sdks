@@ -60,6 +60,8 @@ export namespace Components {
     }
     interface SearchcraftButtonIcon {
     }
+    interface SearchcraftCheckIcon {
+    }
     interface SearchcraftClearIconSet {
         /**
           * Type of the icon to display. Options: 'clear-light', 'clear-dark', 'arrow-light', 'arrow-dark'
@@ -250,6 +252,12 @@ declare global {
         prototype: HTMLSearchcraftButtonIconElement;
         new (): HTMLSearchcraftButtonIconElement;
     };
+    interface HTMLSearchcraftCheckIconElement extends Components.SearchcraftCheckIcon, HTMLStencilElement {
+    }
+    var HTMLSearchcraftCheckIconElement: {
+        prototype: HTMLSearchcraftCheckIconElement;
+        new (): HTMLSearchcraftCheckIconElement;
+    };
     interface HTMLSearchcraftClearIconSetElement extends Components.SearchcraftClearIconSet, HTMLStencilElement {
     }
     var HTMLSearchcraftClearIconSetElement: {
@@ -376,6 +384,7 @@ declare global {
         "searchcraft-base-search-results": HTMLSearchcraftBaseSearchResultsElement;
         "searchcraft-button": HTMLSearchcraftButtonElement;
         "searchcraft-button-icon": HTMLSearchcraftButtonIconElement;
+        "searchcraft-check-icon": HTMLSearchcraftCheckIconElement;
         "searchcraft-clear-icon-set": HTMLSearchcraftClearIconSetElement;
         "searchcraft-clear-input-button": HTMLSearchcraftClearInputButtonElement;
         "searchcraft-error-message": HTMLSearchcraftErrorMessageElement;
@@ -451,6 +460,8 @@ declare namespace LocalJSX {
         "onButtonClick"?: (event: SearchcraftButtonCustomEvent<void>) => void;
     }
     interface SearchcraftButtonIcon {
+    }
+    interface SearchcraftCheckIcon {
     }
     interface SearchcraftClearIconSet {
         /**
@@ -541,6 +552,7 @@ declare namespace LocalJSX {
         "searchcraft-base-search-results": SearchcraftBaseSearchResults;
         "searchcraft-button": SearchcraftButton;
         "searchcraft-button-icon": SearchcraftButtonIcon;
+        "searchcraft-check-icon": SearchcraftCheckIcon;
         "searchcraft-clear-icon-set": SearchcraftClearIconSet;
         "searchcraft-clear-input-button": SearchcraftClearInputButton;
         "searchcraft-error-message": SearchcraftErrorMessage;
@@ -567,6 +579,7 @@ declare module "@stencil/core" {
             "searchcraft-base-search-results": LocalJSX.SearchcraftBaseSearchResults & JSXBase.HTMLAttributes<HTMLSearchcraftBaseSearchResultsElement>;
             "searchcraft-button": LocalJSX.SearchcraftButton & JSXBase.HTMLAttributes<HTMLSearchcraftButtonElement>;
             "searchcraft-button-icon": LocalJSX.SearchcraftButtonIcon & JSXBase.HTMLAttributes<HTMLSearchcraftButtonIconElement>;
+            "searchcraft-check-icon": LocalJSX.SearchcraftCheckIcon & JSXBase.HTMLAttributes<HTMLSearchcraftCheckIconElement>;
             "searchcraft-clear-icon-set": LocalJSX.SearchcraftClearIconSet & JSXBase.HTMLAttributes<HTMLSearchcraftClearIconSetElement>;
             "searchcraft-clear-input-button": LocalJSX.SearchcraftClearInputButton & JSXBase.HTMLAttributes<HTMLSearchcraftClearInputButtonElement>;
             "searchcraft-error-message": LocalJSX.SearchcraftErrorMessage & JSXBase.HTMLAttributes<HTMLSearchcraftErrorMessageElement>;

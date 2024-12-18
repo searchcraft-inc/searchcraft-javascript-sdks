@@ -105,6 +105,7 @@
   margin-bottom: 4px;
   margin-top: 0;
   position: relative;
+  -webkit-font-smoothing: antialiased;
 }
 
 .headingLight {
@@ -124,6 +125,7 @@
   line-height: 16px;
   margin-bottom: 4px;
   margin-top: 0px;
+  -webkit-font-smoothing: antialiased;
 }
 
 .subheadingLight {
@@ -143,6 +145,7 @@
   line-height: 20px;
   margin-bottom: 4px;
   margin-top: 0px;
+  -webkit-font-smoothing: antialiased;
 }
 
 .primaryContentLight {

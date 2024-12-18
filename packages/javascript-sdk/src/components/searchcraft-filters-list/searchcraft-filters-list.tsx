@@ -156,6 +156,9 @@ export class SearchcraftFiltersList {
                   }
                   type='checkbox'
                 />
+                <div class='checkContainer'>
+                  <searchcraft-check-icon />
+                </div>
                 {this.formatLabel(filter.label)}
               </label>
               {children.map((child) => {
@@ -177,6 +180,9 @@ export class SearchcraftFiltersList {
                       }
                       type='checkbox'
                     />
+                    <div class='checkContainer'>
+                      <searchcraft-check-icon />
+                    </div>
                     {this.formatLabel(child.label.split('/').pop() || '')}
                   </label>
                 );
