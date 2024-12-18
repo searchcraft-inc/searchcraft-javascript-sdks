@@ -1,4 +1,4 @@
-import { Component, Event, h, Prop } from '@stencil/core';
+import { Component, Event, Fragment, h, Prop } from '@stencil/core';
 
 @Component({
   tag: 'searchcraft-base-search-result',
@@ -17,6 +17,7 @@ export class SearchcraftBaseSearchResult {
   @Prop() subheadingText = ''; // Text for the subheading
   @Prop() tertiaryContent = ''; // Tertiary body content
   @Prop() themeMode: 'light' | 'dark' = 'light'; // Light or dark theme context
+  @Prop() placeImageRight = false; // Determines the placement of the image container
 
   @Event() buttonCallback: () => void = () => {}; // Callback for button click
   @Event() keyDownCallback: () => void = () => {}; // Callback for key down event
@@ -45,6 +46,67 @@ export class SearchcraftBaseSearchResult {
     const isLightTheme = this.themeMode === 'light';
     const styles = this.parseStyles();
 
+    const imageContainer = (
+      <div class='imageContainer'>
+        <img
+          alt={this.imageDescription}
+          class={isLightTheme ? 'imageLight' : 'imageDark'}
+          src={this.imageSource}
+          style={styles.image || {}}
+        />
+      </div>
+    );
+
+    const contentContainer = (
+      <div class='contentContainer'>
+        <h2
+          class={isLightTheme ? 'headingLight' : 'headingDark'}
+          style={styles.heading || {}}
+        >
+          {this.headingText}
+        </h2>
+        <h3
+          class={isLightTheme ? 'subheadingLight' : 'subheadingDark'}
+          style={styles.subheading || {}}
+        >
+          {this.subheadingText}
+        </h3>
+        <p
+          class={isLightTheme ? 'primaryContentLight' : 'primaryContentDark'}
+          style={styles.primaryContent || {}}
+        >
+          {this.primaryContent}
+        </p>
+        <div class='secondaryContentContainer'>
+          <p
+            class={
+              isLightTheme ? 'secondaryContentLight' : 'secondaryContentDark'
+            }
+            style={styles.secondaryContent || {}}
+          >
+            {this.secondaryContent}
+          </p>
+          <p
+            class={
+              isLightTheme ? 'tertiaryContentLight' : 'tertiaryContentDark'
+            }
+            style={styles.tertiaryContent || {}}
+          >
+            {this.tertiaryContent}
+          </p>
+        </div>
+        {this.buttonText && (
+          <button
+            onClick={this.handleButtonClick}
+            style={styles.button || {}}
+            type='button'
+          >
+            {this.buttonText}
+          </button>
+        )}
+      </div>
+    );
+
     return (
       <div
         class={
@@ -59,61 +121,17 @@ export class SearchcraftBaseSearchResult {
         style={styles.container || {}}
         tabindex='0'
       >
-        <div class='imageContainer'>
-          <img
-            alt={this.imageDescription}
-            class={isLightTheme ? 'imageLight' : 'imageDark'}
-            src={this.imageSource}
-            style={styles.image || {}}
-          />
-        </div>
-        <div class='contentContainer'>
-          <h2
-            class={isLightTheme ? 'headingLight' : 'headingDark'}
-            style={styles.heading || {}}
-          >
-            {this.headingText}
-          </h2>
-          <h3
-            class={isLightTheme ? 'subheadingLight' : 'subheadingDark'}
-            style={styles.subheading || {}}
-          >
-            {this.subheadingText}
-          </h3>
-          <p
-            class={isLightTheme ? 'primaryContentLight' : 'primaryContentDark'}
-            style={styles.primaryContent || {}}
-          >
-            {this.primaryContent}
-          </p>
-          <div class='secondaryContentContainer'>
-            <p
-              class={
-                isLightTheme ? 'secondaryContentLight' : 'secondaryContentDark'
-              }
-              style={styles.secondaryContent || {}}
-            >
-              {this.secondaryContent}
-            </p>
-            <p
-              class={
-                isLightTheme ? 'tertiaryContentLight' : 'tertiaryContentDark'
-              }
-              style={styles.tertiaryContent || {}}
-            >
-              {this.tertiaryContent}
-            </p>
-          </div>
-          {this.buttonText && (
-            <button
-              onClick={this.handleButtonClick}
-              style={styles.button || {}}
-              type='button'
-            >
-              {this.buttonText}
-            </button>
-          )}
-        </div>
+        {this.placeImageRight ? (
+          <Fragment>
+            {contentContainer}
+            {imageContainer}
+          </Fragment>
+        ) : (
+          <Fragment>
+            {imageContainer}
+            {contentContainer}
+          </Fragment>
+        )}
       </div>
     );
   }

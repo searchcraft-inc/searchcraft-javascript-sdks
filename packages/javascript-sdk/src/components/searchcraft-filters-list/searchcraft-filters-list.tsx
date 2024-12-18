@@ -11,6 +11,8 @@ import type { Facets } from '@searchcraft/core';
 
 import { useSearchcraftStore } from '@provider/store';
 
+import { flattenFacets } from '@utils/utils';
+
 @Component({
   tag: 'searchcraft-filters-list',
   styleUrl: 'searchcraft-filters-list.module.scss',
@@ -22,9 +24,7 @@ export class SearchcraftFiltersList {
   @Event() filtersUpdated: EventEmitter<string[]>;
 
   @State() dynamicFilters: Array<{ label: string; value: string }> = [];
-  @State() initialFilters: Array<{ label: string; value: string }> = [];
   @State() isRequesting = false;
-  @State() originalFilterCounts: Record<string, string> = {};
   @State() query = '';
   @State() resultsCount = 0;
   @State() selectedFilters: Set<string> = new Set();
@@ -33,14 +33,30 @@ export class SearchcraftFiltersList {
   unsubscribe: () => void;
 
   connectedCallback() {
+    const state = this.searchStore; // Fetch the initial state
+
+    // Initial population of facets if available
+    if (state.searchResults?.data.facets) {
+      this.populateFiltersFromFacets(state.searchResults.data.facets);
+    }
+
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {
-      this.isRequesting = state.isRequesting;
+      if (!state.query || state.query.trim().length === 0) {
+        if (this.selectedFilters.size > 0) {
+          this.selectedFilters.clear();
+          this.filtersUpdated.emit([]);
+          if (this.searchStore.selectedFilters.length > 0) {
+            this.searchStore.setSelectedFilters([]);
+          }
+        }
+      }
       this.query = state.query || '';
+      this.isRequesting = state.isRequesting;
       this.resultsCount = state.searchResults?.data?.hits?.length || 0;
 
-      const facets = state.searchResults?.data.facets;
-      if (facets) {
-        this.populateFiltersFromFacets(facets);
+      // Populate filters when facets are updated
+      if (state.searchResults?.data.facets) {
+        this.populateFiltersFromFacets(state.searchResults.data.facets);
       }
     });
   }
@@ -52,34 +68,21 @@ export class SearchcraftFiltersList {
   }
 
   populateFiltersFromFacets(facets: Facets) {
-    const newFilters = Object.entries(facets.section?.counts || {}).map(
-      ([key, count]) => {
-        const filterValue = key;
-        this.originalFilterCounts[filterValue] = `${count}`;
-        return {
-          label: `${key.replace(/^\//, '')} (${count})`,
-          value: filterValue,
-        };
-      },
-    );
+    const newFilters = flattenFacets(facets[0]?.section || []);
+    const filtersMap = new Map<string, { label: string; value: string }>();
 
-    // Update dynamic filters while preserving the initial filters
-    const updatedFilters = [
-      ...this.initialFilters,
-      ...newFilters.filter(
-        (filter) =>
-          !this.initialFilters.some(
-            (initial) => initial.value === filter.value,
-          ),
-      ),
-    ];
+    newFilters.forEach((filter) => {
+      const key = filter.value.split('/').pop() || '';
+      const existingFilter = filtersMap.get(key);
+      if (
+        !existingFilter ||
+        filter.value.length < existingFilter.value.length
+      ) {
+        filtersMap.set(key, filter);
+      }
+    });
 
-    this.dynamicFilters = updatedFilters;
-
-    // Store the initial filters only once
-    if (this.initialFilters.length === 0) {
-      this.initialFilters = [...updatedFilters];
-    }
+    this.dynamicFilters = Array.from(filtersMap.values());
   }
 
   handleFilterChange = (value: string, checked: boolean) => {
@@ -88,13 +91,29 @@ export class SearchcraftFiltersList {
     } else {
       this.selectedFilters.delete(value);
     }
+    const deduplicatedFilters = this.deduplicatePaths(
+      Array.from(this.selectedFilters),
+    );
 
-    const selectedFiltersArray = Array.from(this.selectedFilters);
-
-    this.filtersUpdated.emit(selectedFiltersArray);
-    this.searchStore.setSelectedFilters(selectedFiltersArray);
+    this.filtersUpdated.emit(deduplicatedFilters);
+    this.searchStore.setSelectedFilters(deduplicatedFilters);
     this.searchStore.search();
   };
+
+  deduplicatePaths(filters: string[]): string[] {
+    const pathMap = new Map<string, string>();
+
+    filters.forEach((path) => {
+      const key = path.split('/').pop() || '';
+      const existingPath = pathMap.get(key);
+
+      if (!existingPath || path.length < existingPath.length) {
+        pathMap.set(key, path);
+      }
+    });
+
+    return Array.from(pathMap.values());
+  }
 
   formatLabel(label: string): string {
     return label
@@ -109,67 +128,62 @@ export class SearchcraftFiltersList {
       return null;
     }
 
-    const filtersToRender = this.initialFilters.map((initialFilter) => {
-      const isChecked = this.selectedFilters.has(initialFilter.value);
-      const dynamicChildren = this.dynamicFilters.filter(
-        (dynamicFilter) =>
-          dynamicFilter.value.startsWith(initialFilter.value) &&
-          dynamicFilter.value !== initialFilter.value, // Exclude parent itself
-      );
-      return {
-        ...initialFilter,
-        isChecked,
-        children: dynamicChildren,
-      };
-    });
+    const filtersToRender = this.dynamicFilters.filter(
+      (filter) => !filter.value.includes('/', filter.value.indexOf('/') + 1),
+    );
 
     return (
       <div class='filtersList'>
-        {filtersToRender.map((filter) => (
-          <div key={filter.value}>
-            {/* Render the parent filter */}
-            <label class='checkboxLabel'>
-              <input
-                class='filterCheckbox'
-                checked={filter.isChecked}
-                onChange={(event: Event) =>
-                  this.handleFilterChange(
-                    filter.value,
-                    (event.target as HTMLInputElement).checked,
-                  )
-                }
-                type='checkbox'
-                value={filter.value}
-              />
-              {this.formatLabel(filter.label)}
-            </label>
-            {filter.isChecked &&
-              filter.children.map((childFilter) => {
-                const childLabel = childFilter.label.split('/').pop();
+        {filtersToRender.map((filter) => {
+          const isChecked = this.selectedFilters.has(filter.value);
+          const children = this.dynamicFilters.filter(
+            (child) =>
+              child.value.startsWith(`${filter.value}/`) &&
+              child.value !== filter.value,
+          );
+
+          return (
+            <div key={filter.value}>
+              <label class='checkboxLabel'>
+                <input
+                  class='filterCheckbox'
+                  checked={isChecked}
+                  onChange={(event: Event) =>
+                    this.handleFilterChange(
+                      filter.value,
+                      (event.target as HTMLInputElement).checked,
+                    )
+                  }
+                  type='checkbox'
+                />
+                {this.formatLabel(filter.label)}
+              </label>
+              {children.map((child) => {
+                const isChildChecked = this.selectedFilters.has(child.value);
                 return (
                   <label
                     class='childCheckboxLabel'
-                    key={childFilter.value}
+                    key={child.value}
                     style={{ marginLeft: '20px' }}
                   >
                     <input
                       class='childFilterCheckbox'
-                      checked={this.selectedFilters.has(childFilter.value)}
+                      checked={isChildChecked}
                       onChange={(event: Event) =>
                         this.handleFilterChange(
-                          childFilter.value,
+                          child.value,
                           (event.target as HTMLInputElement).checked,
                         )
                       }
                       type='checkbox'
-                      value={childFilter.value}
                     />
-                    {this.formatLabel(childLabel || '')}
+                    {this.formatLabel(child.label.split('/').pop() || '')}
                   </label>
                 );
               })}
-          </div>
-        ))}
+            </div>
+          );
+        })}
       </div>
     );
   }

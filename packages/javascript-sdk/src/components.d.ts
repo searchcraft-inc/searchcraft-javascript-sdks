@@ -34,6 +34,7 @@ export namespace Components {
         "imageDescription": string;
         "imageSource": string;
         "isInteractive": boolean;
+        "placeImageRight": boolean;
         "primaryContent": string;
         "secondaryContent": string;
         "subheadingText": string;
@@ -49,6 +50,7 @@ export namespace Components {
         "formatTime": boolean;
         "placeAdAtEnd": boolean;
         "placeAdAtStart": boolean;
+        "placeResultImageRight": boolean;
     }
     interface SearchcraftButton {
         "iconElement"?: Element;
@@ -423,6 +425,7 @@ declare namespace LocalJSX {
         "onButtonCallback"?: (event: SearchcraftBaseSearchResultCustomEvent<any>) => void;
         "onKeyDownCallback"?: (event: SearchcraftBaseSearchResultCustomEvent<any>) => void;
         "onResultCallback"?: (event: SearchcraftBaseSearchResultCustomEvent<any>) => void;
+        "placeImageRight"?: boolean;
         "primaryContent"?: string;
         "secondaryContent"?: string;
         "subheadingText"?: string;
@@ -438,6 +441,7 @@ declare namespace LocalJSX {
         "formatTime"?: boolean;
         "placeAdAtEnd"?: boolean;
         "placeAdAtStart"?: boolean;
+        "placeResultImageRight"?: boolean;
     }
     interface SearchcraftButton {
         "iconElement"?: Element;
