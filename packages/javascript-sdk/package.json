@@ -1,7 +1,7 @@
 {
   "name": "@searchcraft/javascript-sdk",
   "private": false,
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Searchcraft Javascript SDK",
   "author": "Searchcraft",
   "license": "Apache-2.0",

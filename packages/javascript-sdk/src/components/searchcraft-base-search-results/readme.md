@@ -16,6 +16,7 @@
 | `formatTime`                   | `format-time`                     |             | `boolean`                                            | `true`  |
 | `placeAdAtEnd`                 | `place-ad-at-end`                 |             | `boolean`                                            | `false` |
 | `placeAdAtStart`               | `place-ad-at-start`               |             | `boolean`                                            | `true`  |
+| `placeResultImageRight`        | `place-result-image-right`        |             | `boolean`                                            | `false` |
 
 
 ## Dependencies
