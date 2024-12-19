@@ -192,32 +192,33 @@ export class SearchcraftFiltersList {
                 )}
                 {this.formatLabel(filter.label)}
               </label>
-              {children.map((child) => {
-                const isChildChecked = this.selectedFilters.has(child.value);
-                return (
-                  <label
-                    class='childCheckboxLabel'
-                    key={child.value}
-                    style={{ marginLeft: '20px' }}
-                  >
-                    <input
-                      class='childFilterCheckbox'
-                      checked={isChildChecked}
-                      onChange={(event: Event) =>
-                        this.handleFilterChange(
-                          child.value,
-                          (event.target as HTMLInputElement).checked,
-                        )
-                      }
-                      type='checkbox'
-                    />
-                    <div class='checkContainer'>
-                      <searchcraft-check-icon />
-                    </div>
-                    {this.formatLabel(child.label.split('/').pop() || '')}
-                  </label>
-                );
-              })}
+              {isChecked &&
+                children.map((child) => {
+                  const isChildChecked = this.selectedFilters.has(child.value);
+                  return (
+                    <label
+                      class='childCheckboxLabel'
+                      key={child.value}
+                      style={{ marginLeft: '20px' }}
+                    >
+                      <input
+                        class='childFilterCheckbox'
+                        checked={isChildChecked}
+                        onChange={(event: Event) =>
+                          this.handleFilterChange(
+                            child.value,
+                            (event.target as HTMLInputElement).checked,
+                          )
+                        }
+                        type='checkbox'
+                      />
+                      <div class='checkContainer'>
+                        <searchcraft-check-icon />
+                      </div>
+                      {this.formatLabel(child.label.split('/').pop() || '')}
+                    </label>
+                  );
+                })}
             </div>
           );
         })}
