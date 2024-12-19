@@ -73,27 +73,43 @@ export class SearchcraftAutoSearchForm {
   handleInputChange = (event: ScInputCustomEvent<string>) => {
     this.query = event.detail;
     this.searchStore.setQuery(this.query);
-    this.querySubmit.emit(this.query);
+
+    if (this.query.trim() === '') {
+      this.searchResults = null;
+      this.searchStore.setSearchResults(null);
+    } else {
+      this.querySubmit.emit(this.query);
+    }
   };
 
   handleInputKeyUp = (event: ScInputCustomEvent<string>) => {
     const target = event.detail;
+    if (target === this.query) {
+      return;
+    }
     this.query = target;
-    this.searchStore.setQuery(this.query);
-    this.querySubmit.emit(this.query);
 
     if (this.debounceTimeout) {
       clearTimeout(this.debounceTimeout);
     }
 
     this.debounceTimeout = setTimeout(() => {
-      this.query.trim() !== '' && this.runSearch();
+      if (this.query.trim() === '') {
+        this.searchResults = null;
+        this.searchStore.setSearchResults(null);
+      } else {
+        this.searchStore.setQuery(this.query);
+        this.querySubmit.emit(this.query);
+        this.runSearch();
+      }
     }, this.debounceDelay);
   };
 
   handleClearInput = () => {
     this.query = '';
+    this.searchResults = null;
     this.searchStore.setQuery('');
+    this.searchStore.setSearchResults(null);
 
     if (typeof this.clearInput === 'function') {
       this.clearInput();
@@ -114,6 +130,7 @@ export class SearchcraftAutoSearchForm {
     } else {
       this.error = false;
       this.searchStore.setQuery(this.query);
+      this.searchStore.setSelectedFilters([]);
 
       try {
         await this.searchStore.search();
@@ -132,9 +149,6 @@ export class SearchcraftAutoSearchForm {
   render() {
     const formClass = this.rightToLeftOrientation ? 'formRTL' : 'formLTR';
     const parsedCustomStyles = parseCustomStyles(this.customStylesForInput);
-    if (this.query.length > 0 && this.searchResults?.data?.hits?.length === 0) {
-      this.inputClearedOrNoResults.emit();
-    }
 
     return (
       <form class={`${formClass}`} onSubmit={this.handleFormSubmit}>

@@ -35,6 +35,10 @@
   display: block;
 }
 
+.checkboxLabel input[type="checkbox"]:checked + .dashContainer {
+  display: block;
+}
+
 .remainingFilterListCheckbox {
   margin-left: 16px;
 }
@@ -73,6 +77,10 @@
   display: block;
 }
 
+.childCheckboxLabel input[type="checkbox"]:checked + .dashContainer {
+  display: block;
+}
+
 .checkContainer {
   display: none;
   height: 16px;
@@ -80,4 +88,20 @@
   position: absolute;
   top: 10px;
   left: 7px;
+}
+
+.dashContainer {
+  display: none;
+  height: 3px;
+  width: 14px;
+  position: absolute;
+  top: 5px;
+  left: 9px;
+}
+
+.loading {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin: 100px;
 }

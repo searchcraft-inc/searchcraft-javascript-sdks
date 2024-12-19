@@ -74,8 +74,7 @@ export class SearchcraftBaseSearchResults {
     }
 
     if (!this.searchResults?.data) {
-      console.warn('No search results data available');
-      return <div class='emptyState'>No results to display.</div>;
+      return;
     }
 
     const parsedSearchKeys = parseSearchKeys(this.documentAttributesForDisplay);
@@ -96,7 +95,6 @@ export class SearchcraftBaseSearchResults {
           for (const key of parsedSearchKeys) {
             if (dynamicProperties[key]) {
               const value = dynamicProperties[key];
-              // Check if the value is a valid ISO timestamp
               if (
                 typeof value === 'string' &&
                 !Number.isNaN(Date.parse(value))
