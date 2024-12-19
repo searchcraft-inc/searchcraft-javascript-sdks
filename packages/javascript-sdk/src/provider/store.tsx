@@ -7,6 +7,7 @@ import {
   type SearchcraftResponse,
   type Facets,
 } from '@searchcraft/core';
+
 import { filterPaths } from '@utils/utils';
 
 interface ThemeState {

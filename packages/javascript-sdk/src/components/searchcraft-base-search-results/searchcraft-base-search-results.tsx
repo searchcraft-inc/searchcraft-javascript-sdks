@@ -96,7 +96,6 @@ export class SearchcraftBaseSearchResults {
           for (const key of parsedSearchKeys) {
             if (dynamicProperties[key]) {
               const value = dynamicProperties[key];
-              // Check if the value is a valid ISO timestamp
               if (
                 typeof value === 'string' &&
                 !Number.isNaN(Date.parse(value))

@@ -106,17 +106,12 @@ export class SearchcraftFiltersList {
     isParent = false,
     parentValue?: string,
   ) {
-    // If it's a parent checkbox, check for child selection logic
     if (isParent && isChecked && parentValue) {
       const hasChildSelected = this.dynamicFilters
         .find((filter) => filter.value === parentValue)
         ?.children?.some((child) => this.selectedFilters.includes(child.value));
-
-      // If any child is selected, do not add the parent to the selectedFilters
       if (hasChildSelected) return;
     }
-
-    // Update the selectedFilters state
     this.selectedFilters = isChecked
       ? [...this.selectedFilters, value]
       : this.selectedFilters.filter((filter) => filter !== value);
@@ -125,7 +120,6 @@ export class SearchcraftFiltersList {
   }
 
   emitFiltersUpdate() {
-    console.log(this.selectedFilters);
     this.filtersUpdated.emit(this.selectedFilters);
     this.searchStore.setSelectedFilters(this.selectedFilters);
     this.searchStore.search();
@@ -143,7 +137,6 @@ export class SearchcraftFiltersList {
     return (
       <div class='filtersList'>
         {this.dynamicFilters.map((filter) => {
-          // Check if any child checkbox is selected
           const isChildSelected = filter.children
             ? filter.children.some((child) =>
                 this.selectedFilters.includes(child.value),
@@ -160,8 +153,8 @@ export class SearchcraftFiltersList {
                     this.handleCheckboxChange(
                       filter.value,
                       (event.target as HTMLInputElement).checked,
-                      true, // Indicate this is a parent checkbox
-                      filter.value, // Pass parent value
+                      true,
+                      filter.value,
                     )
                   }
                 />
