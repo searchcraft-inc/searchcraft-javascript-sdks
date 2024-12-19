@@ -74,8 +74,7 @@ export class SearchcraftBaseSearchResults {
     }
 
     if (!this.searchResults?.data) {
-      console.warn('No search results data available');
-      return <div class='emptyState'>No results to display.</div>;
+      return;
     }
 
     const parsedSearchKeys = parseSearchKeys(this.documentAttributesForDisplay);

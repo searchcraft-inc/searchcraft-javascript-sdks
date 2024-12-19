@@ -73,7 +73,13 @@ export class SearchcraftAutoSearchForm {
   handleInputChange = (event: ScInputCustomEvent<string>) => {
     this.query = event.detail;
     this.searchStore.setQuery(this.query);
-    this.querySubmit.emit(this.query);
+
+    if (this.query.trim() === '') {
+      this.searchResults = null;
+      this.searchStore.setSearchResults(null);
+    } else {
+      this.querySubmit.emit(this.query);
+    }
   };
 
   handleInputKeyUp = (event: ScInputCustomEvent<string>) => {
@@ -88,7 +94,10 @@ export class SearchcraftAutoSearchForm {
     }
 
     this.debounceTimeout = setTimeout(() => {
-      if (this.query.trim() !== '') {
+      if (this.query.trim() === '') {
+        this.searchResults = null;
+        this.searchStore.setSearchResults(null);
+      } else {
         this.searchStore.setQuery(this.query);
         this.querySubmit.emit(this.query);
         this.runSearch();
@@ -98,7 +107,9 @@ export class SearchcraftAutoSearchForm {
 
   handleClearInput = () => {
     this.query = '';
+    this.searchResults = null;
     this.searchStore.setQuery('');
+    this.searchStore.setSearchResults(null);
 
     if (typeof this.clearInput === 'function') {
       this.clearInput();
@@ -138,9 +149,6 @@ export class SearchcraftAutoSearchForm {
   render() {
     const formClass = this.rightToLeftOrientation ? 'formRTL' : 'formLTR';
     const parsedCustomStyles = parseCustomStyles(this.customStylesForInput);
-    if (this.query.length > 0 && this.searchResults?.data?.hits?.length === 0) {
-      this.inputClearedOrNoResults.emit();
-    }
 
     return (
       <form class={`${formClass}`} onSubmit={this.handleFormSubmit}>

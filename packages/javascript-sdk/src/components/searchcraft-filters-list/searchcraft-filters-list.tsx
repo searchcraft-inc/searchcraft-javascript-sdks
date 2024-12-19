@@ -35,6 +35,7 @@ export class SearchcraftFiltersList {
   }> = [];
   @State() selectedFilters: string[] = [];
   @State() query = '';
+  @State() isRequesting = false;
   @State() resultsCount = 0;
 
   private searchStore = useSearchcraftStore.getState();
@@ -53,6 +54,7 @@ export class SearchcraftFiltersList {
       const query = state.query?.trim();
       const facets = state.searchResults?.data.facets;
       this.query = query || '';
+      this.isRequesting = state.isRequesting;
       this.resultsCount = state.searchResults?.data?.hits?.length || 0;
 
       if (facets && this.selectedFilters.length === 0) {
