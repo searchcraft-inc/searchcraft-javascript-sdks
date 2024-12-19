@@ -24,6 +24,7 @@ export class SearchcraftFiltersList {
   @Event() filtersUpdated: EventEmitter<string[]>;
 
   @State() dynamicFilters: Array<{ label: string; value: string }> = [];
+  @State() hasCheckedChild: Set<string> = new Set();
   @State() isRequesting = false;
   @State() query = '';
   @State() resultsCount = 0;
@@ -95,6 +96,25 @@ export class SearchcraftFiltersList {
     } else {
       this.selectedFilters.delete(value);
     }
+
+    const parentPath = value.substring(0, value.lastIndexOf('/'));
+    if (parentPath) {
+      const siblings = this.dynamicFilters.filter(
+        (child) =>
+          child.value.startsWith(`${parentPath}/`) &&
+          child.value !== parentPath,
+      );
+      const hasAnyCheckedSibling = siblings.some((sibling) =>
+        this.selectedFilters.has(sibling.value),
+      );
+
+      if (hasAnyCheckedSibling || checked) {
+        this.hasCheckedChild.add(parentPath);
+      } else {
+        this.hasCheckedChild.delete(parentPath);
+      }
+    }
+
     const deduplicatedFilters = this.deduplicatePaths(
       Array.from(this.selectedFilters),
     );
@@ -140,6 +160,7 @@ export class SearchcraftFiltersList {
       <div class='filtersList'>
         {filtersToRender.map((filter) => {
           const isChecked = this.selectedFilters.has(filter.value);
+          const hasCheckedChild = this.hasCheckedChild.has(filter.value);
           const children = this.dynamicFilters.filter(
             (child) =>
               child.value.startsWith(`${filter.value}/`) &&
@@ -160,9 +181,15 @@ export class SearchcraftFiltersList {
                   }
                   type='checkbox'
                 />
-                <div class='checkContainer'>
-                  <searchcraft-check-icon />
-                </div>
+                {hasCheckedChild ? (
+                  <div class='dashContainer'>
+                    <searchcraft-dash-icon />
+                  </div>
+                ) : (
+                  <div class='checkContainer'>
+                    <searchcraft-check-icon />
+                  </div>
+                )}
                 {this.formatLabel(filter.label)}
               </label>
               {children.map((child) => {
