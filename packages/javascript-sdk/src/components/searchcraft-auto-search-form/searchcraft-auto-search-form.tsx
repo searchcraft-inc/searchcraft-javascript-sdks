@@ -78,16 +78,21 @@ export class SearchcraftAutoSearchForm {
 
   handleInputKeyUp = (event: ScInputCustomEvent<string>) => {
     const target = event.detail;
+    if (target === this.query) {
+      return;
+    }
     this.query = target;
-    this.searchStore.setQuery(this.query);
-    this.querySubmit.emit(this.query);
 
     if (this.debounceTimeout) {
       clearTimeout(this.debounceTimeout);
     }
 
     this.debounceTimeout = setTimeout(() => {
-      this.query.trim() !== '' && this.runSearch();
+      if (this.query.trim() !== '') {
+        this.searchStore.setQuery(this.query);
+        this.querySubmit.emit(this.query);
+        this.runSearch();
+      }
     }, this.debounceDelay);
   };
 
