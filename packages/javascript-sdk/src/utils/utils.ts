@@ -108,3 +108,17 @@ export function flattenFacets(sections: Section[]): FacetCheckbox[] {
     return facetCheckbox;
   });
 }
+
+export function filterPaths(paths) {
+  return paths.filter((path) => {
+    const parts = path.split('/').filter(Boolean);
+
+    if (parts.length > 1) {
+      return true;
+    }
+
+    return !paths.some(
+      (otherPath) => otherPath.startsWith(`${path}/`) && otherPath !== path,
+    );
+  });
+}

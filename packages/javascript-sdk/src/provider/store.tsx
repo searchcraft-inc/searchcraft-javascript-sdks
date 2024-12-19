@@ -7,6 +7,7 @@ import {
   type SearchcraftResponse,
   type Facets,
 } from '@searchcraft/core';
+import { filterPaths } from '@utils/utils';
 
 interface ThemeState {
   theme: 'light' | 'dark';
@@ -104,7 +105,7 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
       }
       setIsRequesting(true);
       log(LogLevel.INFO, `Starting search with query: "${query}"`);
-
+      const filters = filterPaths(selectedFilters);
       try {
         const searchRequest = {
           query,
@@ -115,7 +116,7 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
               ? {
                   section: {
                     counts: Object.fromEntries(
-                      selectedFilters.map((path) => [path, 1]),
+                      filters.map((path) => [path, 1]),
                     ),
                   },
                 }

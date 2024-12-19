@@ -100,7 +100,23 @@ export class SearchcraftFiltersList {
     }));
   }
 
-  handleCheckboxChange(value: string, isChecked: boolean) {
+  handleCheckboxChange(
+    value: string,
+    isChecked: boolean,
+    isParent = false,
+    parentValue?: string,
+  ) {
+    // If it's a parent checkbox, check for child selection logic
+    if (isParent && isChecked && parentValue) {
+      const hasChildSelected = this.dynamicFilters
+        .find((filter) => filter.value === parentValue)
+        ?.children?.some((child) => this.selectedFilters.includes(child.value));
+
+      // If any child is selected, do not add the parent to the selectedFilters
+      if (hasChildSelected) return;
+    }
+
+    // Update the selectedFilters state
     this.selectedFilters = isChecked
       ? [...this.selectedFilters, value]
       : this.selectedFilters.filter((filter) => filter !== value);
@@ -109,6 +125,7 @@ export class SearchcraftFiltersList {
   }
 
   emitFiltersUpdate() {
+    console.log(this.selectedFilters);
     this.filtersUpdated.emit(this.selectedFilters);
     this.searchStore.setSelectedFilters(this.selectedFilters);
     this.searchStore.search();
@@ -125,60 +142,79 @@ export class SearchcraftFiltersList {
 
     return (
       <div class='filtersList'>
-        {this.dynamicFilters.map((filter) => (
-          <div key={filter.value} class='filterItem'>
-            <label class='checkboxLabel'>
-              <input
-                type='checkbox'
-                checked={this.selectedFilters.includes(filter.value)}
-                onChange={(event: Event) =>
-                  this.handleCheckboxChange(
-                    filter.value,
-                    (event.target as HTMLInputElement).checked,
-                  )
-                }
-              />
-              <div class='checkContainer'>
-                {this.selectedFilters.includes(filter.value) ? (
-                  <searchcraft-dash-icon />
+        {this.dynamicFilters.map((filter) => {
+          // Check if any child checkbox is selected
+          const isChildSelected = filter.children
+            ? filter.children.some((child) =>
+                this.selectedFilters.includes(child.value),
+              )
+            : false;
+
+          return (
+            <div key={filter.value} class='filterItem'>
+              <label class='checkboxLabel'>
+                <input
+                  type='checkbox'
+                  checked={this.selectedFilters.includes(filter.value)}
+                  onChange={(event: Event) =>
+                    this.handleCheckboxChange(
+                      filter.value,
+                      (event.target as HTMLInputElement).checked,
+                      true, // Indicate this is a parent checkbox
+                      filter.value, // Pass parent value
+                    )
+                  }
+                />
+                {isChildSelected ? (
+                  <div class='dashContainer'>
+                    <searchcraft-dash-icon />
+                  </div>
                 ) : (
-                  <searchcraft-check-icon />
+                  <div class='checkContainer'>
+                    <searchcraft-check-icon />
+                  </div>
                 )}
-              </div>
-              {this.formatLabel(filter.label, filter.count)}
-            </label>
-            {filter.children && filter.children.length > 0 && (
-              <div class='childrenContainer'>
-                {filter.children.map((child) => (
-                  <label
-                    key={child.value}
-                    class='childCheckboxLabel'
-                    style={{ marginLeft: '20px' }}
-                  >
-                    <input
-                      type='checkbox'
-                      checked={this.selectedFilters.includes(child.value)}
-                      onChange={(event: Event) =>
-                        this.handleCheckboxChange(
-                          child.value,
-                          (event.target as HTMLInputElement).checked,
-                        )
-                      }
-                    />
-                    <div class='checkContainer'>
-                      {this.selectedFilters.includes(child.value) ? (
-                        <searchcraft-dash-icon />
-                      ) : (
+                {this.formatLabel(filter.label, filter.count)}
+              </label>
+              {filter.children && filter.children.length > 0 && (
+                <div class='childrenContainer'>
+                  {filter.children.map((child) => (
+                    <label
+                      key={child.value}
+                      class='childCheckboxLabel'
+                      style={{
+                        marginLeft: '20px',
+                        display: this.selectedFilters.includes(filter.value)
+                          ? 'flex'
+                          : 'none',
+                      }}
+                    >
+                      <input
+                        type='checkbox'
+                        checked={this.selectedFilters.includes(child.value)}
+                        onChange={(event: Event) =>
+                          this.handleCheckboxChange(
+                            child.value,
+                            (event.target as HTMLInputElement).checked,
+                          )
+                        }
+                      />
+                      <div class='checkContainer'>
                         <searchcraft-check-icon />
+                      </div>
+                      {this.formatLabel(
+                        child.label.includes('/')
+                          ? child.label.split('/').pop() || child.label
+                          : child.label,
+                        child.count,
                       )}
-                    </div>
-                    {this.formatLabel(child.label, child.count)}
-                  </label>
-                ))}
-              </div>
-            )}
-          </div>
-        ))}
+                    </label>
+                  ))}
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
     );
   }
