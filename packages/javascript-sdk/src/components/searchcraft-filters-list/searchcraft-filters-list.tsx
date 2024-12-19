@@ -102,22 +102,29 @@ export class SearchcraftFiltersList {
     }));
   }
 
-  handleCheckboxChange(
-    value: string,
-    isChecked: boolean,
-    isParent = false,
-    parentValue?: string,
-  ) {
-    if (isParent && isChecked && parentValue) {
-      const hasChildSelected = this.dynamicFilters
-        .find((filter) => filter.value === parentValue)
-        ?.children?.some((child) => this.selectedFilters.includes(child.value));
-      if (hasChildSelected) return;
-    }
-    this.selectedFilters = isChecked
-      ? [...this.selectedFilters, value]
-      : this.selectedFilters.filter((filter) => filter !== value);
+  handleCheckboxChange(value: string, isChecked: boolean, isParent = false) {
+    if (isParent) {
+      const parentFilter = this.dynamicFilters.find(
+        (filter) => filter.value === value,
+      );
+      const childValues =
+        parentFilter?.children?.map((child) => child.value) || [];
 
+      if (!isChecked) {
+        // Remove children from selectedFilters when parent is unchecked
+        this.selectedFilters = this.selectedFilters.filter(
+          (filter) => filter !== value && !childValues.includes(filter),
+        );
+      } else {
+        // Add parent filter to selectedFilters
+        this.selectedFilters = [...this.selectedFilters, value];
+      }
+    } else {
+      // Update selectedFilters for child filters
+      this.selectedFilters = isChecked
+        ? [...this.selectedFilters, value]
+        : this.selectedFilters.filter((filter) => filter !== value);
+    }
     this.emitFiltersUpdate();
   }
 
@@ -135,7 +142,6 @@ export class SearchcraftFiltersList {
     if (!this.query || this.resultsCount === 0) {
       return null;
     }
-
     return (
       <div class='filtersList'>
         {this.dynamicFilters.map((filter) => {
@@ -156,7 +162,6 @@ export class SearchcraftFiltersList {
                       filter.value,
                       (event.target as HTMLInputElement).checked,
                       true,
-                      filter.value,
                     )
                   }
                 />
