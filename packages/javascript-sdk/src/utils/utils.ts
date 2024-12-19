@@ -86,19 +86,25 @@ type Section = {
 };
 
 type FacetCheckbox = {
+  count: number;
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  children: any[];
   label: string;
   value: string;
 };
 
 export function flattenFacets(sections: Section[]): FacetCheckbox[] {
-  return sections.flatMap((section) => {
+  return sections.map((section) => {
     const fullPath = section.path;
-    const filter = {
-      label: `${fullPath.replace(/^\//, '')} (${section.count})`,
-      value: fullPath,
+
+    // Create the FacetCheckbox object
+    const facetCheckbox: FacetCheckbox = {
+      label: fullPath.replace(/^\//, ''), // Format the label without leading slash
+      value: fullPath, // The full path as the value
+      count: section.count, // Count from the Section
+      children: flattenFacets(section.children || []), // Recursively flatten children
     };
 
-    const children = section.children ? flattenFacets(section.children) : [];
-    return [filter, ...children];
+    return facetCheckbox;
   });
 }

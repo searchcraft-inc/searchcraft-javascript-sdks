@@ -23,128 +23,99 @@ export class SearchcraftFiltersList {
 
   @Event() filtersUpdated: EventEmitter<string[]>;
 
-  @State() dynamicFilters: Array<{ label: string; value: string }> = [];
-  @State() hasCheckedChild: Set<string> = new Set();
-  @State() isRequesting = false;
+  @State() dynamicFilters: Array<{
+    label: string;
+    value: string;
+    count: number;
+    children?: Array<{
+      label: string;
+      value: string;
+      count: number;
+    }>;
+  }> = [];
+  @State() selectedFilters: string[] = [];
   @State() query = '';
   @State() resultsCount = 0;
-  @State() selectedFilters: Set<string> = new Set();
 
   private searchStore = useSearchcraftStore.getState();
+  private autoSearchFormElement: HTMLElement | null = null;
   unsubscribe: () => void;
 
   connectedCallback() {
     const state = this.searchStore;
+    const facets = state.searchResults?.data.facets;
 
-    if (state.searchResults?.data.facets) {
-      this.populateFiltersFromFacets(state.searchResults.data.facets);
+    if (facets) {
+      this.populateFiltersFromFacets(facets);
     }
 
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {
-      if (!state.query || state.query.trim().length === 0) {
-        if (this.selectedFilters.size > 0) {
-          this.selectedFilters.clear();
-          this.filtersUpdated.emit([]);
-          if (this.searchStore.selectedFilters.length > 0) {
-            this.searchStore.setSelectedFilters([]);
-          }
-        }
-      }
-      this.query = state.query || '';
-      this.isRequesting = state.isRequesting;
+      const query = state.query?.trim();
+      const facets = state.searchResults?.data.facets;
+      this.query = query || '';
       this.resultsCount = state.searchResults?.data?.hits?.length || 0;
 
-      if (state.searchResults?.data.facets) {
-        this.populateFiltersFromFacets(state.searchResults.data.facets);
+      if (facets && this.selectedFilters.length === 0) {
+        this.populateFiltersFromFacets(facets);
       }
     });
+
+    this.autoSearchFormElement = document.querySelector(
+      'searchcraft-auto-search-form',
+    );
+    if (this.autoSearchFormElement) {
+      this.autoSearchFormElement.addEventListener(
+        'querySubmit',
+        this.handleSearchRequest,
+      );
+    }
   }
 
   disconnectedCallback() {
     if (this.unsubscribe) {
       this.unsubscribe();
     }
+
+    if (this.autoSearchFormElement) {
+      this.autoSearchFormElement.removeEventListener(
+        'querySubmit',
+        this.handleSearchRequest,
+      );
+    }
   }
 
-  populateFiltersFromFacets(facets: Facets) {
-    const newFilters = flattenFacets(facets[0]?.section || []);
-    const filtersMap = new Map<string, { label: string; value: string }>();
-
-    this.dynamicFilters.forEach((filter) => {
-      const key = filter.value.split('/').pop() || '';
-      filtersMap.set(key, filter);
-    });
-
-    newFilters.forEach((filter) => {
-      const key = filter.value.split('/').pop() || '';
-      const existingFilter = filtersMap.get(key);
-
-      if (
-        !existingFilter ||
-        filter.value.length < existingFilter.value.length
-      ) {
-        filtersMap.set(key, filter);
-      }
-    });
-
-    this.dynamicFilters = Array.from(filtersMap.values());
-  }
-
-  handleFilterChange = (value: string, checked: boolean) => {
-    if (checked) {
-      this.selectedFilters.add(value);
-    } else {
-      this.selectedFilters.delete(value);
-    }
-
-    const parentPath = value.substring(0, value.lastIndexOf('/'));
-    if (parentPath) {
-      const siblings = this.dynamicFilters.filter(
-        (child) =>
-          child.value.startsWith(`${parentPath}/`) &&
-          child.value !== parentPath,
-      );
-      const hasAnyCheckedSibling = siblings.some((sibling) =>
-        this.selectedFilters.has(sibling.value),
-      );
-
-      if (hasAnyCheckedSibling || checked) {
-        this.hasCheckedChild.add(parentPath);
-      } else {
-        this.hasCheckedChild.delete(parentPath);
-      }
-    }
-
-    const deduplicatedFilters = this.deduplicatePaths(
-      Array.from(this.selectedFilters),
-    );
-
-    this.filtersUpdated.emit(deduplicatedFilters);
-    this.searchStore.setSelectedFilters(deduplicatedFilters);
-    this.searchStore.search();
+  handleSearchRequest = () => {
+    this.selectedFilters = [];
+    this.searchStore.setSelectedFilters([]);
+    this.emitFiltersUpdate();
   };
 
-  deduplicatePaths(filters: string[]): string[] {
-    const pathMap = new Map<string, string>();
-
-    filters.forEach((path) => {
-      const key = path.split('/').pop() || '';
-      const existingPath = pathMap.get(key);
-
-      if (!existingPath || path.length < existingPath.length) {
-        pathMap.set(key, path);
-      }
-    });
-
-    return Array.from(pathMap.values());
+  populateFiltersFromFacets(facets: Facets) {
+    const flattened = flattenFacets(facets[0]?.section || []);
+    this.dynamicFilters = flattened.map((filter) => ({
+      label: filter.label,
+      value: filter.value,
+      count: filter.count,
+      children: filter.children || [],
+    }));
   }
 
-  formatLabel(label: string): string {
-    return label
-      .replace(/-/g, ' ')
-      .split(' ')
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ');
+  handleCheckboxChange(value: string, isChecked: boolean) {
+    this.selectedFilters = isChecked
+      ? [...this.selectedFilters, value]
+      : this.selectedFilters.filter((filter) => filter !== value);
+
+    this.emitFiltersUpdate();
+  }
+
+  emitFiltersUpdate() {
+    this.filtersUpdated.emit(this.selectedFilters);
+    this.searchStore.setSelectedFilters(this.selectedFilters);
+    this.searchStore.search();
+  }
+
+  formatLabel(label: string, count: number): string {
+    return `${label.replace(/-/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase())} (${count})`;
   }
 
   render() {
@@ -152,76 +123,62 @@ export class SearchcraftFiltersList {
       return null;
     }
 
-    const filtersToRender = this.dynamicFilters.filter(
-      (filter) => !filter.value.includes('/', filter.value.indexOf('/') + 1),
-    );
-
     return (
       <div class='filtersList'>
-        {filtersToRender.map((filter) => {
-          const isChecked = this.selectedFilters.has(filter.value);
-          const hasCheckedChild = this.hasCheckedChild.has(filter.value);
-          const children = this.dynamicFilters.filter(
-            (child) =>
-              child.value.startsWith(`${filter.value}/`) &&
-              child.value !== filter.value,
-          );
-
-          return (
-            <div key={filter.value}>
-              <label class='checkboxLabel'>
-                <input
-                  class='filterCheckbox'
-                  checked={isChecked}
-                  onChange={(event: Event) =>
-                    this.handleFilterChange(
-                      filter.value,
-                      (event.target as HTMLInputElement).checked,
-                    )
-                  }
-                  type='checkbox'
-                />
-                {hasCheckedChild ? (
-                  <div class='dashContainer'>
-                    <searchcraft-dash-icon />
-                  </div>
+        {this.dynamicFilters.map((filter) => (
+          <div key={filter.value} class='filterItem'>
+            <label class='checkboxLabel'>
+              <input
+                type='checkbox'
+                checked={this.selectedFilters.includes(filter.value)}
+                onChange={(event: Event) =>
+                  this.handleCheckboxChange(
+                    filter.value,
+                    (event.target as HTMLInputElement).checked,
+                  )
+                }
+              />
+              <div class='checkContainer'>
+                {this.selectedFilters.includes(filter.value) ? (
+                  <searchcraft-dash-icon />
                 ) : (
-                  <div class='checkContainer'>
-                    <searchcraft-check-icon />
-                  </div>
+                  <searchcraft-check-icon />
                 )}
-                {this.formatLabel(filter.label)}
-              </label>
-              {isChecked &&
-                children.map((child) => {
-                  const isChildChecked = this.selectedFilters.has(child.value);
-                  return (
-                    <label
-                      class='childCheckboxLabel'
-                      key={child.value}
-                      style={{ marginLeft: '20px' }}
-                    >
-                      <input
-                        class='childFilterCheckbox'
-                        checked={isChildChecked}
-                        onChange={(event: Event) =>
-                          this.handleFilterChange(
-                            child.value,
-                            (event.target as HTMLInputElement).checked,
-                          )
-                        }
-                        type='checkbox'
-                      />
-                      <div class='checkContainer'>
+              </div>
+              {this.formatLabel(filter.label, filter.count)}
+            </label>
+            {filter.children && filter.children.length > 0 && (
+              <div class='childrenContainer'>
+                {filter.children.map((child) => (
+                  <label
+                    key={child.value}
+                    class='childCheckboxLabel'
+                    style={{ marginLeft: '20px' }}
+                  >
+                    <input
+                      type='checkbox'
+                      checked={this.selectedFilters.includes(child.value)}
+                      onChange={(event: Event) =>
+                        this.handleCheckboxChange(
+                          child.value,
+                          (event.target as HTMLInputElement).checked,
+                        )
+                      }
+                    />
+                    <div class='checkContainer'>
+                      {this.selectedFilters.includes(child.value) ? (
+                        <searchcraft-dash-icon />
+                      ) : (
                         <searchcraft-check-icon />
-                      </div>
-                      {this.formatLabel(child.label.split('/').pop() || '')}
-                    </label>
-                  );
-                })}
-            </div>
-          );
-        })}
+                      )}
+                    </div>
+                    {this.formatLabel(child.label, child.count)}
+                  </label>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
       </div>
     );
   }

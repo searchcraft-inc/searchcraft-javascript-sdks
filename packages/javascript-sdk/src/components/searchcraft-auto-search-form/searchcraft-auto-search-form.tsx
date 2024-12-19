@@ -119,6 +119,7 @@ export class SearchcraftAutoSearchForm {
     } else {
       this.error = false;
       this.searchStore.setQuery(this.query);
+      this.searchStore.setSelectedFilters([]);
 
       try {
         await this.searchStore.search();
