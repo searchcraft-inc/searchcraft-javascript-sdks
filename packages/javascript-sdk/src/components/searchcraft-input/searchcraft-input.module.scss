@@ -12,15 +12,16 @@
 @mixin input-base {
   border: none;
   border-radius: 8px;
-  font-family: var(--font-stack);
+  font-family: 'Brygada 1918';
   outline: none;
   padding-bottom: 15px;
   padding-top: 15px;
   width: 100%;
 
   &::placeholder {
-    font-family: var(--font-stack);
+    font-family: 'Brygada 1918';
     font-size: 16px;
+    font-weight: 600;
   }
 }
 

@@ -73,12 +73,9 @@ export class SearchcraftAutoSearchForm {
   handleInputChange = (event: ScInputCustomEvent<string>) => {
     this.query = event.detail;
     this.searchStore.setQuery(this.query);
-
     if (this.query.trim() === '') {
       this.searchResults = null;
       this.searchStore.setSearchResults(null);
-    } else {
-      this.querySubmit.emit(this.query);
     }
   };
 
@@ -106,6 +103,9 @@ export class SearchcraftAutoSearchForm {
   };
 
   handleClearInput = () => {
+    if (this.query === '' && !this.searchResults) {
+      return;
+    }
     this.query = '';
     this.searchResults = null;
     this.searchStore.setQuery('');

@@ -116,11 +116,9 @@ export class SearchcraftFiltersList {
           (filter) => filter !== value && !childValues.includes(filter),
         );
       } else {
-        // Add parent filter to selectedFilters
         this.selectedFilters = [...this.selectedFilters, value];
       }
     } else {
-      // Update selectedFilters for child filters
       this.selectedFilters = isChecked
         ? [...this.selectedFilters, value]
         : this.selectedFilters.filter((filter) => filter !== value);
@@ -155,7 +153,6 @@ export class SearchcraftFiltersList {
             <div key={filter.value} class='filterItem'>
               <label class='checkboxLabel'>
                 <input
-                  type='checkbox'
                   checked={this.selectedFilters.includes(filter.value)}
                   onChange={(event: Event) =>
                     this.handleCheckboxChange(
@@ -164,6 +161,7 @@ export class SearchcraftFiltersList {
                       true,
                     )
                   }
+                  type='checkbox'
                 />
                 {isChildSelected ? (
                   <div class='dashContainer'>
