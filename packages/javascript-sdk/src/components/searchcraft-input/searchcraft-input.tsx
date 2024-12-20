@@ -56,6 +56,10 @@ export class SearchcraftInput {
   }
 
   handleClearInput() {
+    if (this.query === '') {
+      return;
+    }
+    this.query = '';
     if (this.clearInput) {
       this.clearInput.emit();
     }
