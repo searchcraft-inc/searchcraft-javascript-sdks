@@ -18,21 +18,46 @@ export class SearchcraftToggleButton {
   @State() query = ''; // Track the query
   @State() resultsCount = 0; // Track the count of search results
 
-  private unsubscribe: () => void;
+  private autoSearchFormElement: HTMLElement | null = null;
   private searchStore = useSearchcraftStore.getState();
+  private unsubscribe: () => void;
 
   componentDidLoad() {
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {
       this.query = state.query || '';
       this.resultsCount = state.searchResults?.data?.hits?.length || 0;
     });
+
+    this.autoSearchFormElement = document.querySelector(
+      'searchcraft-auto-search-form',
+    );
+    if (this.autoSearchFormElement) {
+      this.autoSearchFormElement.addEventListener(
+        'querySubmit',
+        this.handleSearchRequest,
+      );
+    }
   }
 
   disconnectedCallback() {
     if (this.unsubscribe) {
       this.unsubscribe();
     }
+    if (this.autoSearchFormElement) {
+      this.autoSearchFormElement.addEventListener(
+        'querySubmit',
+        this.handleSearchRequest,
+      );
+    }
   }
+
+  handleSearchRequest = () => {
+    this.isActive = false;
+    this.searchStore.setSearchParams({
+      mode: 'fuzzy',
+      sort: 'asc',
+    });
+  };
 
   private handleToggle = async () => {
     this.isActive = !this.isActive;
