@@ -1,9 +1,10 @@
 import { Component, Prop, h, State } from '@stencil/core';
+import classNames from 'classnames';
 
 @Component({
   tag: 'searchcraft-input-icon',
   styleUrl: 'searchcraft-input-icon.module.scss',
-  shadow: true,
+  shadow: false,
 })
 export class SearchcraftInputIcon {
   @Prop() error?: boolean;
@@ -20,7 +21,10 @@ export class SearchcraftInputIcon {
   render() {
     return this.error ? (
       <div
-        class={this.rightToLeftOrientation ? 'inputIconRTL' : 'inputIconLTR'}
+        class={classNames(
+          this.rightToLeftOrientation ? 'inputIconRTL' : 'inputIconLTR',
+          'searchcraft-input-icon-container',
+        )}
       >
         {this.isLightTheme() ? (
           <searchcraft-search-icon-set
@@ -38,7 +42,10 @@ export class SearchcraftInputIcon {
       </div>
     ) : (
       <div
-        class={this.rightToLeftOrientation ? 'inputIconRTL' : 'inputIconLTR'}
+        class={classNames(
+          this.rightToLeftOrientation ? 'inputIconRTL' : 'inputIconLTR',
+          'searchcraft-input-icon-container',
+        )}
       >
         {this.isLightTheme() ? (
           <searchcraft-search-icon-set

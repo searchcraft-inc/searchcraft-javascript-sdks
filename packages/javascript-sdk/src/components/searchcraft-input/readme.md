@@ -51,8 +51,6 @@ graph TD;
   searchcraft-input --> searchcraft-input-caption
   searchcraft-input --> searchcraft-clear-input-button
   searchcraft-input --> searchcraft-input-icon
-  searchcraft-clear-input-button --> searchcraft-spinner-light
-  searchcraft-clear-input-button --> searchcraft-spinner-dark
   searchcraft-clear-input-button --> searchcraft-clear-icon-set
   searchcraft-input-icon --> searchcraft-search-icon-set
   searchcraft-auto-search-form --> searchcraft-input

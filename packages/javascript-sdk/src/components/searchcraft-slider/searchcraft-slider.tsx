@@ -1,10 +1,12 @@
 import { Component, h, State, Prop } from '@stencil/core';
+import classNames from 'classnames';
+
 import { useSearchcraftStore } from '@provider/store';
 
 @Component({
   tag: 'searchcraft-slider',
   styleUrl: 'searchcraft-slider.module.scss',
-  shadow: true,
+  shadow: false,
 })
 export class SearchcraftSlider {
   @Prop() maxYear = new Date().getFullYear();
@@ -20,7 +22,7 @@ export class SearchcraftSlider {
 
   unsubscribe: () => void;
 
-  componentDidLoad() {
+  componentDidLoad = () => {
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {
       if (state.query.length > 0) {
         this.hasSearched = true;
@@ -28,13 +30,13 @@ export class SearchcraftSlider {
       }
       this.query = state.query;
     });
-  }
+  };
 
-  disconnectedCallback() {
+  disconnectedCallback = () => {
     if (this.unsubscribe) {
       this.unsubscribe();
     }
-  }
+  };
 
   private updateYears = async () => {
     this.searchStore.setYearsRange([this.startYear, this.endYear]);
@@ -42,8 +44,6 @@ export class SearchcraftSlider {
     try {
       if (typeof this.query === 'string' && this.query.trim() !== '') {
         await this.searchStore.search();
-      } else {
-        console.warn('Query is missing or empty, skipping search request.');
       }
     } catch (error) {
       console.error('Search failed:', error);
@@ -75,17 +75,22 @@ export class SearchcraftSlider {
       ((this.endYear - rangeMin) / (rangeMax - rangeMin)) * 100;
 
     return (
-      <div class='sliderContainer'>
-        <div class='rangeContainer'>
+      <div class={classNames('slider', 'searchcraft-slider-container')}>
+        <div
+          class={classNames(
+            'sliderRangeContainer',
+            'searchcraft-slider-range-container',
+          )}
+        >
           <div
-            class='activeRange'
+            class={classNames('activeRange', 'searchcraft-slider-active-range')}
             style={{
               left: `${startPercent}%`,
               width: `${endPercent - startPercent}%`,
             }}
           />
           <input
-            class='rangeSlider'
+            class={classNames('rangeSlider', 'searchcraft-slider-range-slider')}
             max={this.maxYear}
             min={this.minYear}
             onInput={this.handleStartYearChange}
@@ -94,7 +99,7 @@ export class SearchcraftSlider {
             value={this.startYear}
           />
           <input
-            class='rangeSlider'
+            class={classNames('rangeSlider', 'searchcraft-slider-range-slider')}
             max={this.maxYear}
             min={this.minYear}
             onInput={this.handleEndYearChange}
@@ -103,9 +108,22 @@ export class SearchcraftSlider {
             value={this.endYear}
           />
         </div>
-        <div class='yearLabels'>
-          <span class='yearLabel'>{this.startYear}</span>
-          <span class='yearLabel'>{this.endYear}</span>
+        <div
+          class={classNames(
+            'yearLabelContainer',
+            'searchcraft-slider-year-label-container',
+          )}
+        >
+          <span
+            class={classNames('yearLabel', 'searchcraft-slider-year-label')}
+          >
+            {this.startYear}
+          </span>
+          <span
+            class={classNames('yearLabel', 'searchcraft-slider-year-label')}
+          >
+            {this.endYear}
+          </span>
         </div>
       </div>
     );

@@ -13,8 +13,9 @@
   padding: 8px;
   position: relative;
 
-  @media (min-width: 600px) {
+  @media (min-width: 900px) {
     flex-direction: row;
+    justify-content: space-between;
   }
 }
 
@@ -34,7 +35,7 @@
   flex-direction: column;
   gap: 16px;
 
-  @media (min-width: 600px) {
+  @media (min-width: 900px) {
     flex-direction: row;
   }
 }
@@ -46,7 +47,7 @@
   top: 8px;
 
 
-  @media (max-width: 600px) {
+  @media (max-width: 900px) {
     display: none;
   }
 }
@@ -58,20 +59,24 @@
   top: -2px;
 
 
-  @media (min-width: 600px) {
+  @media (min-width: 900px) {
    display: none;
   }
 }
 
 .imageContainer {
   max-width: 100%;
+
+  @media (min-width: 900px) {
+    max-width: 400px;
+   }
 }
 
 .contentContainer {
   max-height: 100%;
   max-width: 100%;
 
-  @media (min-width: 600px) {
+  @media (min-width: 900px) {
     max-width: 50%;
   }
 }
@@ -89,15 +94,14 @@
 
 .imageLight {
   @include image-base;
-  border: 1px solid $light-search-result-image-border;
 }
 
 .imageDark {
   @include image-base;
-  border: 1px solid $dark-search-result-image-border;
+
 }
 
-@mixin heading-base {
+@mixin title-base {
   font-family: var(--font-stack);
   font-size: 16px;
   font-weight: 700;
@@ -108,17 +112,17 @@
   -webkit-font-smoothing: antialiased;
 }
 
-.headingLight {
-  @include heading-base;
+.titleLight {
+  @include title-base;
   color: $light-search-result-heading-color;
 }
 
-.headingDark {
-  @include heading-base;
+.titleDark {
+  @include title-base;
   color: $dark-search-result-heading-color;
 }
 
-@mixin subheading-base {
+@mixin subtitle-base {
   font-family: var(--font-stack);
   font-size: 12px;
   font-weight: 400;
@@ -128,13 +132,13 @@
   -webkit-font-smoothing: antialiased;
 }
 
-.subheadingLight {
-  @include subheading-base;
+.subtitleContentLight {
+  @include subtitle-base;
   color: $light-search-result-subheading-color;
 }
 
-.subheadingDark {
-  @include subheading-base;
+.subtitleContentDark {
+  @include subtitle-base;
   color: $dark-search-result-subheading-color
 }
 
@@ -163,14 +167,6 @@
   color: $light-search-result-body-content-color;
 }
 
-.secondaryContentLight::after {
-  content: "•";
-  color: $light-search-result-body-content-color;
-  font-size: 1em;
-  margin-left: 5px;
-  margin-right: 5px;
-}
-
 .secondaryContentDark {
   @include body-content-base;
   color: $dark-search-result-body-content-color;
@@ -179,6 +175,14 @@
 .tertiaryContentLight {
   @include body-content-base;
   color: $light-search-result-body-content-color;
+}
+
+.tertiaryContentDark.hasContent::before {
+  color: $light-search-result-body-content-color;
+  content: "•";
+  font-size: 1em;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .tertiaryContentDark {

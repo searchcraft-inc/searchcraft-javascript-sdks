@@ -1,4 +1,6 @@
 import { Component, h, Prop, State } from '@stencil/core';
+import classNames from 'classnames';
+
 import { useSearchcraftStore } from '@provider/store';
 
 @Component({
@@ -85,14 +87,21 @@ export class SearchcraftToggleButton {
     if (!this.query || this.resultsCount === 0) {
       return null;
     }
+    const toggleContainerStyle = `toggle-wrapper ${this.isActive ? 'active' : ''}`;
+    const toggleSwitchStyle = `toggle-switch ${this.isActive ? 'active' : ''}`;
 
     return (
       <button
-        class={`toggle-wrapper ${this.isActive ? 'active' : ''}`}
+        class={classNames(
+          toggleContainerStyle,
+          'searchcraft-toggle-button-container',
+        )}
         onClick={this.handleToggle}
         type='button'
       >
-        <div class={`toggle-switch ${this.isActive ? 'active' : ''}`} />
+        <div
+          class={classNames(toggleSwitchStyle, 'searchcraft-toggle-switch')}
+        />
       </button>
     );
   }

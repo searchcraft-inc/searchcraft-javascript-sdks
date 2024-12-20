@@ -14,6 +14,7 @@
 | `documentAttributesForDisplay` | `document-attributes-for-display` |             | `string`                                             | `''`    |
 | `fallbackElement`              | --                                |             | `HTMLElement`                                        | `null`  |
 | `formatTime`                   | `format-time`                     |             | `boolean`                                            | `true`  |
+| `isInteractive`                | `is-interactive`                  |             | `boolean`                                            | `false` |
 | `placeAdAtEnd`                 | `place-ad-at-end`                 |             | `boolean`                                            | `false` |
 | `placeAdAtStart`               | `place-ad-at-start`               |             | `boolean`                                            | `true`  |
 | `placeResultImageRight`        | `place-result-image-right`        |             | `boolean`                                            | `false` |

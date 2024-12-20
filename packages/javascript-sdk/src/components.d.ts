@@ -30,16 +30,16 @@ export namespace Components {
     interface SearchcraftBaseSearchResult {
         "buttonText": string;
         "customStyles": string;
-        "headingText": string;
         "imageDescription": string;
         "imageSource": string;
         "isInteractive": boolean;
         "placeImageRight": boolean;
         "primaryContent": string;
         "secondaryContent": string;
-        "subheadingText": string;
+        "subtitleContent": string;
         "tertiaryContent": string;
         "themeMode": 'light' | 'dark';
+        "titleContent": string;
     }
     interface SearchcraftBaseSearchResults {
         "adInterval": number;
@@ -48,6 +48,7 @@ export namespace Components {
         "documentAttributesForDisplay": string;
         "fallbackElement": HTMLElement | null;
         "formatTime": boolean;
+        "isInteractive": boolean;
         "placeAdAtEnd": boolean;
         "placeAdAtStart": boolean;
         "placeResultImageRight": boolean;
@@ -75,13 +76,7 @@ export namespace Components {
     interface SearchcraftDashIcon {
     }
     interface SearchcraftErrorMessage {
-        /**
-          * The error message to display. Defaults to a standard message if not provided.
-         */
         "errorMessage"?: string;
-        /**
-          * The theme, which determines the style (light or dark).
-         */
         "theme": 'light' | 'dark';
     }
     interface SearchcraftFiltersList {
@@ -436,7 +431,6 @@ declare namespace LocalJSX {
     interface SearchcraftBaseSearchResult {
         "buttonText"?: string;
         "customStyles"?: string;
-        "headingText"?: string;
         "imageDescription"?: string;
         "imageSource"?: string;
         "isInteractive"?: boolean;
@@ -446,9 +440,10 @@ declare namespace LocalJSX {
         "placeImageRight"?: boolean;
         "primaryContent"?: string;
         "secondaryContent"?: string;
-        "subheadingText"?: string;
+        "subtitleContent"?: string;
         "tertiaryContent"?: string;
         "themeMode"?: 'light' | 'dark';
+        "titleContent"?: string;
     }
     interface SearchcraftBaseSearchResults {
         "adInterval"?: number;
@@ -457,6 +452,7 @@ declare namespace LocalJSX {
         "documentAttributesForDisplay"?: string;
         "fallbackElement"?: HTMLElement | null;
         "formatTime"?: boolean;
+        "isInteractive"?: boolean;
         "placeAdAtEnd"?: boolean;
         "placeAdAtStart"?: boolean;
         "placeResultImageRight"?: boolean;
@@ -486,13 +482,7 @@ declare namespace LocalJSX {
     interface SearchcraftDashIcon {
     }
     interface SearchcraftErrorMessage {
-        /**
-          * The error message to display. Defaults to a standard message if not provided.
-         */
         "errorMessage"?: string;
-        /**
-          * The theme, which determines the style (light or dark).
-         */
         "theme"?: 'light' | 'dark';
     }
     interface SearchcraftFiltersList {

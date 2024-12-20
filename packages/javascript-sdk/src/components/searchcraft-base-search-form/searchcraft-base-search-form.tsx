@@ -1,6 +1,7 @@
 import { Component, h, Event, Prop, State } from '@stencil/core';
+import classNames from 'classnames';
 
-import { type SearchcraftConfig, SearchcraftCore } from '@searchcraft/core';
+import * as core from '@searchcraft/core';
 
 import { useSearchcraftStore, useThemeStore } from '@provider/store';
 
@@ -11,10 +12,10 @@ import packageJson from '../../../package.json';
 @Component({
   tag: 'searchcraft-base-search-form',
   styleUrl: 'searchcraft-base-search-form.module.scss',
-  shadow: true,
+  shadow: false,
 })
 export class SearchcraftBaseSearchForm {
-  @Prop() config: SearchcraftConfig = {
+  @Prop() config: core.SearchcraftConfig = {
     readKey: '',
     endpointURL: '',
     index: [],
@@ -34,7 +35,7 @@ export class SearchcraftBaseSearchForm {
   private themeStore = useThemeStore.getState();
 
   componentDidLoad = () => {
-    const searchcraft = new SearchcraftCore(this.config, {
+    const searchcraft = new core.SearchcraftCore(this.config, {
       sdkName: packageJson.name,
       sdkVersion: packageJson.version,
     });
@@ -67,13 +68,19 @@ export class SearchcraftBaseSearchForm {
   };
 
   render() {
+    const formClass = this.rightToLeftOrientation ? 'formRTL' : 'formLTR';
     return (
       <form
-        class={this.rightToLeftOrientation ? 'formRTL' : 'formLTR'}
+        class={classNames(`${formClass}`, 'searchcraft-base-search-form')}
         onSubmit={this.handleFormSubmit}
       >
         <searchcraft-input-label label={this.labelForInput} />
-        <div class='searchContainer'>
+        <div
+          class={classNames(
+            'searchContainer',
+            'searchcraft-base-search-form-input-container',
+          )}
+        >
           {this.rightToLeftOrientation && <searchcraft-button />}
           <searchcraft-input
             onClearInput={this.handleClearInput}

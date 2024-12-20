@@ -6,6 +6,7 @@ import {
   type EventEmitter,
   h,
 } from '@stencil/core';
+import classNames from 'classnames';
 
 import {
   type SearchcraftConfig,
@@ -14,9 +15,7 @@ import {
 } from '@searchcraft/core';
 
 import { useSearchcraftStore } from '@provider/store';
-
 import { parseCustomStyles } from '@utils/utils';
-
 import type { ScInputCustomEvent } from '@components/searchcraft-input/searchcraft-input';
 
 import packageJson from '../../../package.json';
@@ -24,7 +23,7 @@ import packageJson from '../../../package.json';
 @Component({
   tag: 'searchcraft-auto-search-form',
   styleUrl: 'searchcraft-auto-search-form.module.scss',
-  shadow: true,
+  shadow: false,
 })
 export class SearchcraftAutoSearchForm {
   @Prop() autoSearchFormClass = '';
@@ -155,9 +154,11 @@ export class SearchcraftAutoSearchForm {
   render() {
     const formClass = this.rightToLeftOrientation ? 'formRTL' : 'formLTR';
     const parsedCustomStyles = parseCustomStyles(this.customStylesForInput);
-
     return (
-      <form class={`${formClass}`} onSubmit={this.handleFormSubmit}>
+      <form
+        class={classNames(`${formClass}`, 'searchcraft-auto-search-form')}
+        onSubmit={this.handleFormSubmit}
+      >
         <searchcraft-input-label label={this.labelForInput} />
         <searchcraft-input
           customStyles={parsedCustomStyles}

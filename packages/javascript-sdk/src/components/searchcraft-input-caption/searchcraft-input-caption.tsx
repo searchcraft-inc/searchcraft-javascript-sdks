@@ -4,13 +4,14 @@ import classNames from 'classnames';
 @Component({
   tag: 'searchcraft-input-caption',
   styleUrl: 'searchcraft-input-caption.module.scss',
-  shadow: true,
+  shadow: false,
 })
 export class SearchcraftInputCaption {
   @Prop() error?: boolean;
   @Prop() inputCaptionClassName? = '';
   @Prop() inputCaptionValue = 'Enter Search';
   @Prop() rightToLeftOrientation = false;
+
   @State() theme = 'light';
 
   private isLightTheme() {
@@ -29,7 +30,7 @@ export class SearchcraftInputCaption {
               ? 'inputCaptionLightRTL'
               : 'inputCaptionDarkRTL',
           this.inputCaptionClassName,
-          '.searchcraft-input-caption',
+          'searchcraft-input-caption',
         )}
       >
         {this.inputCaptionValue}
@@ -45,7 +46,7 @@ export class SearchcraftInputCaption {
               ? 'inputCaptionLightLTR'
               : 'inputCaptionDarkLTR',
           this.inputCaptionClassName,
-          '.searchcraft-input-caption',
+          'searchcraft-input-caption',
         )}
       >
         {this.inputCaptionValue}

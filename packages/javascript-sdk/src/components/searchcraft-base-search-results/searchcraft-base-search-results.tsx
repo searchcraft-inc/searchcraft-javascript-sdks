@@ -1,4 +1,5 @@
 import { Component, h, Prop, State } from '@stencil/core';
+import classNames from 'classnames';
 
 import type { SearchcraftResponse } from '@searchcraft/core';
 
@@ -14,7 +15,7 @@ import {
 @Component({
   tag: 'searchcraft-base-search-results',
   styleUrl: 'searchcraft-base-search-results.module.scss',
-  shadow: true,
+  shadow: false,
 })
 export class SearchcraftBaseSearchResults {
   @Prop() adInterval = 4;
@@ -27,6 +28,7 @@ export class SearchcraftBaseSearchResults {
   @Prop() placeAdAtEnd = false;
   @Prop() placeAdAtStart = true;
   @Prop() placeResultImageRight = false;
+  @Prop() isInteractive = false;
 
   @State() hasSearched = false;
   @State() query = '';
@@ -67,7 +69,12 @@ export class SearchcraftBaseSearchResults {
   render() {
     if (!this.hasSearched) {
       return (
-        <div class='emptyState'>
+        <div
+          class={classNames(
+            'emptyState',
+            'searchcraft-search-results-empty-state-container',
+          )}
+        >
           <slot name='empty-search' />
         </div>
       );
@@ -109,19 +116,17 @@ export class SearchcraftBaseSearchResults {
           <searchcraft-base-search-result
             button-callback={() => console.log('button callback')}
             custom-styles={serializedStyles}
-            image-source={
-              dynamicProperties[parsedSearchKeys[parsedSearchKeys.length - 1]]
-            }
-            is-interactive={true}
+            image-source={dynamicProperties[parsedSearchKeys[5]]}
+            is-interactive={this.isInteractive}
             key={`${document.document_id}-${index}`}
             keydown-callback={() => console.log('keydown')}
-            heading-text={dynamicProperties[parsedSearchKeys[0]]}
             place-image-right={this.placeResultImageRight}
             primary-content={dynamicProperties[parsedSearchKeys[2]]}
             result-callback={() => console.log('interactive element')}
             secondary-content={dynamicProperties[parsedSearchKeys[3]]}
-            subheading-text={dynamicProperties[parsedSearchKeys[1]]}
+            subtitle-content={dynamicProperties[parsedSearchKeys[1]]}
             tertiary-content={dynamicProperties[parsedSearchKeys[4]]}
+            title-content={dynamicProperties[parsedSearchKeys[0]]}
           />
         );
       },
@@ -131,7 +136,13 @@ export class SearchcraftBaseSearchResults {
 
     if (this.placeAdAtStart) {
       finalComponents.push(
-        <div key='ad-section-start' class='adSection'>
+        <div
+          key='ad-section-start'
+          class={classNames(
+            'adSection',
+            'searchcraft-beginning-injected-ad-section',
+          )}
+        >
           <span>##</span>
           <p> Ad Impressions</p>
         </div>,
@@ -143,7 +154,13 @@ export class SearchcraftBaseSearchResults {
         finalComponents.push(component);
         if ((index + 1) % this.adInterval === 0) {
           finalComponents.push(
-            <div key={`ad-section-${index + 1}`} class='adSection'>
+            <div
+              key={`ad-section-${index + 1}`}
+              class={classNames(
+                'adSection',
+                'searchcraft-dynamic-injected-ad-section',
+              )}
+            >
               <span>##</span>
               <p> Ad Impressions</p>
             </div>,
@@ -156,7 +173,10 @@ export class SearchcraftBaseSearchResults {
 
     if (this.placeAdAtEnd) {
       finalComponents.push(
-        <div key='ad-section-end' class='adSection'>
+        <div
+          key='ad-section-end'
+          class={classNames('adSection', 'searchcraft-end-injected-ad-section')}
+        >
           <span>##</span>
           <p> Ad Impressions</p>
         </div>,
@@ -164,11 +184,21 @@ export class SearchcraftBaseSearchResults {
     }
 
     return (
-      <div class='resultsContainer'>
+      <div
+        class={classNames(
+          'resultsContainer',
+          'searchcraft-search-results-container',
+        )}
+      >
         {finalComponents}
         {this.query.length > 0 &&
           this.searchResults?.data?.hits?.length === 0 && (
-            <div class='errorMessageContainer'>
+            <div
+              class={classNames(
+                'errorMessageContainer',
+                'searchcraft-search-results-error-message-container',
+              )}
+            >
               <searchcraft-error-message
                 error-message={`No search results found for "${this.query}" query`}
               />

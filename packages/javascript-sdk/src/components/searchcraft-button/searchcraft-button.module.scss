@@ -49,27 +49,6 @@
   }
 }
 
-.spinnerMarginRight {
-  left: 4px;
-  margin-right: 4px;
-  position: absolute;
-}
-
-.spinnerMarginLeft {
-  left: 4px;
-  margin-left: 4px;
-  position: absolute;
-}
-
 .buttonLabel {
-  animation: right-and-back .2s;
-  margin-left: 4px;
   position: relative;
-}
-
-@keyframes right-and-back {
-  0% { right: -6px; }
-  50% { right: -12px; }
-  75% { right: -6px; }
-  100% {right: 0px; }
 }

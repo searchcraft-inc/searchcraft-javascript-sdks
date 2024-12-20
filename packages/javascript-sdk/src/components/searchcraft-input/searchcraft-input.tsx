@@ -19,7 +19,7 @@ export interface ScInputCustomEvent<T> extends CustomEvent<T> {
 @Component({
   tag: 'searchcraft-input',
   styleUrl: 'searchcraft-input.module.scss',
-  shadow: true,
+  shadow: false,
 })
 export class SearchcraftInput {
   @Prop() customStyles: string | Record<string, string> = {};
@@ -45,17 +45,17 @@ export class SearchcraftInput {
     return this.theme === 'light';
   }
 
-  handleInputChange(event: Event) {
+  handleInputChange = (event: Event) => {
     const input = event.target as HTMLInputElement;
     this.searchInputChange.emit(input.value);
-  }
+  };
 
-  handleInputKeyUp(event: KeyboardEvent) {
+  handleInputKeyUp = (event: KeyboardEvent) => {
     const input = event.target as HTMLInputElement;
     this.inputKeyUp.emit(input.value);
-  }
+  };
 
-  handleClearInput() {
+  handleClearInput = () => {
     if (this.query === '') {
       return;
     }
@@ -63,23 +63,20 @@ export class SearchcraftInput {
     if (this.clearInput) {
       this.clearInput.emit();
     }
-  }
+  };
 
   render() {
     const containerClassName = this.rightToLeftOrientation
       ? 'inputContainerRTL'
       : 'inputContainerLTR';
 
-    const inputClassName = classNames(
-      this.error
-        ? this.isLightTheme
-          ? 'inputErrorLightRTL'
-          : 'inputErrorDarkRTL'
-        : this.isLightTheme
-          ? 'inputLightLTR'
-          : 'inputDarkLTR',
-      'searchcraft-input',
-    );
+    const inputClassName = this.error
+      ? this.isLightTheme
+        ? 'inputErrorLightRTL'
+        : 'inputErrorDarkRTL'
+      : this.isLightTheme
+        ? 'inputLightLTR'
+        : 'inputDarkLTR';
 
     const validatedCustomStyles = parseCustomStyles(this.customStyles);
 
@@ -103,9 +100,9 @@ export class SearchcraftInput {
               onChange={this.handleInputChange.bind(this)}
               onKeyUp={this.handleInputKeyUp.bind(this)}
               placeholder={this.placeholderValue}
+              style={validatedCustomStyles}
               type='text'
               value={this.query}
-              style={validatedCustomStyles}
             />
             <style>
               {`
