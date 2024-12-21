@@ -21,12 +21,12 @@
 
 .interactiveResultContainerLight {
   @include interactive-result-container-base;
-  background-color: $light-search-result-container-background;
+  background-color: $surface-primary-active;
 }
 
 .interactiveResultContainerDark {
   @include interactive-result-container-base;
-  background-color: $dark-search-result-container-background;
+  background-color: $surface-brand-primary-hover;
 }
 
 .resultContainer {
@@ -114,12 +114,12 @@
 
 .titleLight {
   @include title-base;
-  color: $light-search-result-heading-color;
+  color: $content-primary;
 }
 
 .titleDark {
   @include title-base;
-  color: $dark-search-result-heading-color;
+  color: $content-on-brand-primary;
 }
 
 @mixin subtitle-base {
@@ -134,12 +134,12 @@
 
 .subtitleContentLight {
   @include subtitle-base;
-  color: $light-search-result-subheading-color;
+  color: $content-disabled;
 }
 
 .subtitleContentDark {
   @include subtitle-base;
-  color: $dark-search-result-subheading-color
+  color: $content-disabled-secondary;
 }
 
 @mixin body-content-base {
@@ -154,31 +154,31 @@
 
 .primaryContentLight {
   @include body-content-base;
-  color: $light-search-result-body-content-color;
+  color: $surface-success-secondary;
 }
 
 .primaryContentDark {
   @include body-content-base;
-  color: $dark-search-result-body-content-color;
+  color: $border-primary;
 }
 
 .secondaryContentLight {
   @include body-content-base;
-  color: $light-search-result-body-content-color;
+  color: $surface-success-secondary;
 }
 
 .secondaryContentDark {
   @include body-content-base;
-  color: $dark-search-result-body-content-color;
+  color: $border-primary;
 }
 
 .tertiaryContentLight {
   @include body-content-base;
-  color: $light-search-result-body-content-color;
+  color: $surface-success-secondary;
 }
 
 .tertiaryContentDark.hasContent::before {
-  color: $light-search-result-body-content-color;
+  color: $surface-success-secondary;
   content: "•";
   font-size: 1em;
   margin-left: 5px;
@@ -187,5 +187,5 @@
 
 .tertiaryContentDark {
   @include body-content-base;
-  color: $dark-search-result-body-content-color;
+  color: $border-primary;
 }

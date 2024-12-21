@@ -21,31 +21,31 @@
 
 .buttonLight {
   @include button-base;
-  background-color: $light-background;
-  border: 1px solid $light-button-border;
-  color: $light-button-color;
+  background-color: $surface-brand-primary;
+  border: 1px solid $border-primary;
+  color: $content-on-brand-primary;
 
   &:hover {
-    background-color: $light-button-hover;
+    background-color: $surface-brand-primary-hover;
   }
 
   &:focus {
-    outline: 2px solid $light-button-outline-focus;
+    outline: 2px solid $surface-brand-primary;
   }
 }
 
 .buttonDark {
   @include button-base;
-  background-color: $dark-background;
-  border: 1px solid $dark-button-border;
-  color: $dark-button-color;
+  background-color: $content-on-brand-primary;
+  border: 1px solid $content-secondary;
+  color: $content-primary;
 
   &:hover {
-    background-color: $dark-button-hover;
+    background-color: $surface-primary-active;
   }
 
   &:focus {
-    outline: 2px solid $dark-button-outline-focus;
+    outline: 2px solid $content-secondary;
   }
 }
 

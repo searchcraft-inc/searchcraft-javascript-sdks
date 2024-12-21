@@ -5,14 +5,14 @@
 }
 
 .resultsInfoContainer {
-  border-bottom: 1px solid $light-search-result-image-border;
+  border-bottom: 1px solid $surface-disabled;
   display: flex;
   justify-content: flex-start;
   width: 100%;
 }
 
 .resultsInfoContent {
-  color: $light-input-label-color;
+  color: $content-primary;
   font-family: var(--font-stack);
   font-size: 18px;
   font-weight: 600;
