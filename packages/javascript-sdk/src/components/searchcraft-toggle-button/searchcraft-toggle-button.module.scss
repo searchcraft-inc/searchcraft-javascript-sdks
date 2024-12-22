@@ -1,5 +1,5 @@
 .toggle-wrapper {
-  background: #ddd;
+  background: $surface-disabled;
   border: none;
   border-radius: 16px;
   box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.05);
@@ -11,7 +11,7 @@
 }
 
 .toggle-wrapper.active {
-  background: #007DB3;
+  background: $surface-brand-primary;
   box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.05);
 }
 
