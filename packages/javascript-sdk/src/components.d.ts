@@ -165,6 +165,10 @@ export interface SearchcraftInputCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSearchcraftInputElement;
 }
+export interface SearchcraftSliderCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSearchcraftSliderElement;
+}
 declare global {
     interface HTMLSearchcraftAutoSearchFormElementEventMap {
         "inputClearedOrNoResults": void;
@@ -356,7 +360,18 @@ declare global {
         prototype: HTMLSearchcraftSearchIconSetElement;
         new (): HTMLSearchcraftSearchIconSetElement;
     };
+    interface HTMLSearchcraftSliderElementEventMap {
+        "rangeChanged": { startYear: number; endYear: number };
+    }
     interface HTMLSearchcraftSliderElement extends Components.SearchcraftSlider, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSearchcraftSliderElementEventMap>(type: K, listener: (this: HTMLSearchcraftSliderElement, ev: SearchcraftSliderCustomEvent<HTMLSearchcraftSliderElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSearchcraftSliderElementEventMap>(type: K, listener: (this: HTMLSearchcraftSliderElement, ev: SearchcraftSliderCustomEvent<HTMLSearchcraftSliderElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSearchcraftSliderElement: {
         prototype: HTMLSearchcraftSliderElement;
@@ -535,6 +550,7 @@ declare namespace LocalJSX {
     interface SearchcraftSlider {
         "maxYear"?: number;
         "minYear"?: number;
+        "onRangeChanged"?: (event: SearchcraftSliderCustomEvent<{ startYear: number; endYear: number }>) => void;
     }
     interface SearchcraftSpinnerDark {
     }

@@ -1,4 +1,11 @@
-import { Component, h, State, Prop } from '@stencil/core';
+import {
+  Component,
+  h,
+  State,
+  Prop,
+  Event,
+  type EventEmitter,
+} from '@stencil/core';
 import classNames from 'classnames';
 
 import { useSearchcraftStore } from '@provider/store';
@@ -8,7 +15,7 @@ import { useSearchcraftStore } from '@provider/store';
   styleUrl: 'searchcraft-slider.module.scss',
   shadow: false,
 })
-export class SearchcraftSlider {
+export class YearRangeSlider {
   @Prop() maxYear = new Date().getFullYear();
   @Prop() minYear = 2014;
 
@@ -17,6 +24,8 @@ export class SearchcraftSlider {
   @State() query = '';
   @State() resultsCount = 0;
   @State() startYear = this.minYear;
+
+  @Event() rangeChanged: EventEmitter<{ startYear: number; endYear: number }>;
 
   private searchStore = useSearchcraftStore.getState();
 
@@ -50,17 +59,21 @@ export class SearchcraftSlider {
     }
   };
 
-  private handleStartYearChange = (event: InputEvent) => {
-    const value = Number.parseInt((event.target as HTMLInputElement).value, 10);
-    this.startYear = Math.min(value, this.endYear);
+  handleStartChange(event: InputEvent) {
+    this.startYear = Number.parseInt(
+      (event.target as HTMLInputElement).value,
+      10,
+    );
     this.updateYears();
-  };
+  }
 
-  private handleEndYearChange = (event: InputEvent) => {
-    const value = Number.parseInt((event.target as HTMLInputElement).value, 10);
-    this.endYear = Math.max(value, this.startYear);
+  handleEndChange(event: InputEvent) {
+    this.endYear = Number.parseInt(
+      (event.target as HTMLInputElement).value,
+      10,
+    );
     this.updateYears();
-  };
+  }
 
   render() {
     if (!this.query || this.resultsCount === 0) {
@@ -75,35 +88,35 @@ export class SearchcraftSlider {
       ((this.endYear - rangeMin) / (rangeMax - rangeMin)) * 100;
 
     return (
-      <div class={classNames('slider', 'searchcraft-slider-container')}>
-        <div
-          class={classNames(
-            'sliderRangeContainer',
-            'searchcraft-slider-range-container',
-          )}
-        >
+      <div class='sliderContainer'>
+        <label>Year Range</label>
+        <div class='sliders'>
           <div
             class={classNames('activeRange', 'searchcraft-slider-active-range')}
             style={{
-              left: `${startPercent}%`,
+              left: `${startPercent}.65%`,
               width: `${endPercent - startPercent}%`,
             }}
           />
           <input
-            class={classNames('rangeSlider', 'searchcraft-slider-range-slider')}
-            max={this.maxYear}
+            class={classNames(
+              'sliderPrimary startSlider',
+              'searchcraft-slider-range-slider-start',
+            )}
+            max={this.minYear + 5}
             min={this.minYear}
-            onInput={this.handleStartYearChange}
-            step='1'
+            onInput={(event) => this.handleStartChange(event)}
             type='range'
             value={this.startYear}
           />
           <input
-            class={classNames('rangeSlider', 'searchcraft-slider-range-slider')}
+            class={classNames(
+              'sliderSecondary endSlider',
+              'searchcraft-slider-range-slider-end',
+            )}
             max={this.maxYear}
-            min={this.minYear}
-            onInput={this.handleEndYearChange}
-            step='1'
+            min={this.minYear + 5}
+            onInput={(event) => this.handleEndChange(event)}
             type='range'
             value={this.endYear}
           />
@@ -115,12 +128,15 @@ export class SearchcraftSlider {
           )}
         >
           <span
-            class={classNames('yearLabel', 'searchcraft-slider-year-label')}
+            class={classNames(
+              'yearLabel',
+              'searchcraft-slider-start-year-label',
+            )}
           >
             {this.startYear}
           </span>
           <span
-            class={classNames('yearLabel', 'searchcraft-slider-year-label')}
+            class={classNames('yearLabel', 'searchcraft-slider-end-year-label')}
           >
             {this.endYear}
           </span>

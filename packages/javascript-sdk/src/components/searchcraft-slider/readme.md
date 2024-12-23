@@ -13,6 +13,13 @@
 | `minYear` | `min-year` |             | `number` | `2014`                     |
 
 
+## Events
+
+| Event          | Description | Type                                                   |
+| -------------- | ----------- | ------------------------------------------------------ |
+| `rangeChanged` |             | `CustomEvent<{ startYear: number; endYear: number; }>` |
+
+
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*
