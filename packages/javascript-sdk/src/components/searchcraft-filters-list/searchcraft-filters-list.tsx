@@ -88,11 +88,11 @@ export class SearchcraftFiltersList {
     }
   }
 
-  handleSearchRequest() {
+  handleSearchRequest = () => {
     this.selectedFilters = [];
     this.searchStore.setSelectedFilters([]);
     this.emitFiltersUpdate();
-  }
+  };
 
   populateFiltersFromFacets(facets: Facets) {
     const flattened = flattenFacets(facets[0]?.section || []);
