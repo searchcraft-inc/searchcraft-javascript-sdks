@@ -89,7 +89,6 @@ export class YearRangeSlider {
 
     return (
       <div class='sliderContainer'>
-        <label>Year Range</label>
         <div class='sliders'>
           <div
             class={classNames('activeRange', 'searchcraft-slider-active-range')}
