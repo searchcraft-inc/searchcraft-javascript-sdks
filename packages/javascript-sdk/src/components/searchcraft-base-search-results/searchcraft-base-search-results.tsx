@@ -90,7 +90,6 @@ export class SearchcraftBaseSearchResults {
     }
 
     if (!this.searchResults?.data) {
-      this.noResults.emit();
       return;
     }
 
@@ -192,6 +191,10 @@ export class SearchcraftBaseSearchResults {
           <p> Ad Impressions</p>
         </div>,
       );
+    }
+
+    if (this.query.length > 0 && this.searchResults?.data?.hits?.length === 0) {
+      this.noResults.emit();
     }
 
     return (

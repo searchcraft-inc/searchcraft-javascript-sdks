@@ -8,7 +8,7 @@ import { formatNumberWithCommas } from '@utils/utils';
 @Component({
   tag: 'searchcraft-results-info',
   styleUrl: 'searchcraft-results-info.module.scss',
-  shadow: true,
+  shadow: false,
 })
 export class SearchcraftResultsInfo {
   @State() isRequesting = false;
