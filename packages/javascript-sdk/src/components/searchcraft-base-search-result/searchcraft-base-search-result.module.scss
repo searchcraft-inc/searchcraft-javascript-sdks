@@ -177,10 +177,10 @@
   color: $surface-success-secondary;
 }
 
-.tertiaryContentDark.hasContent::before {
+.tertiaryContentLight.hasContent::before {
   color: $surface-success-secondary;
   content: "•";
-  font-size: 1em;
+  font-size: 10px;
   margin-left: 5px;
   margin-right: 5px;
 }
@@ -188,4 +188,12 @@
 .tertiaryContentDark {
   @include body-content-base;
   color: $border-primary;
+}
+
+.tertiaryContentDark.hasContent::before {
+  color: $surface-success-secondary;
+  content: "•";
+  font-size: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
