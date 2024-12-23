@@ -80,6 +80,7 @@ export class SearchcraftAutoSearchForm {
     this.searchStore.setQuery(this.query);
     if (this.query.trim() === '') {
       this.searchResults = null;
+      this.inputClearedOrNoResults.emit();
       this.searchStore.setSearchResults(null);
     }
   };
@@ -99,6 +100,7 @@ export class SearchcraftAutoSearchForm {
       if (this.query.trim() === '') {
         this.searchResults = null;
         this.searchStore.setSearchResults(null);
+        this.inputClearedOrNoResults.emit();
       } else {
         this.searchStore.setQuery(this.query);
         this.querySubmit.emit(this.query);
