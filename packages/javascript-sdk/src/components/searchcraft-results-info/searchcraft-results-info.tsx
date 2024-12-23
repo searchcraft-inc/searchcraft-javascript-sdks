@@ -1,5 +1,6 @@
 import { Component, h, State } from '@stencil/core';
 import classNames from 'classnames';
+
 import { useSearchcraftStore } from '@provider/store';
 
 import { formatNumberWithCommas } from '@utils/utils';
@@ -7,7 +8,7 @@ import { formatNumberWithCommas } from '@utils/utils';
 @Component({
   tag: 'searchcraft-results-info',
   styleUrl: 'searchcraft-results-info.module.scss',
-  shadow: false,
+  shadow: true,
 })
 export class SearchcraftResultsInfo {
   @State() isRequesting = false;

@@ -13,6 +13,7 @@ export class SearchcraftBaseSearchResult {
   @Prop() imageDescription = '';
   @Prop() imageSource = '';
   @Prop() isInteractive = false;
+  @Prop() linkHref = '';
   @Prop() primaryContent = '';
   @Prop() secondaryContent = '';
   @Prop() subtitleContent = '';
@@ -26,12 +27,6 @@ export class SearchcraftBaseSearchResult {
 
   private handleButtonClick = () => {
     this.buttonCallback();
-  };
-
-  private handleContainerClick = () => {
-    if (this.isInteractive) {
-      this.resultCallback();
-    }
   };
 
   private parseStyles = (): Record<string, { [key: string]: string }> => {
@@ -135,7 +130,7 @@ export class SearchcraftBaseSearchResult {
     );
 
     return (
-      <div
+      <a
         class={classNames(
           this.isInteractive
             ? isLightTheme
@@ -145,9 +140,11 @@ export class SearchcraftBaseSearchResult {
           'searchcraft-search-result-container',
         )}
         onKeyDown={this.keyDownCallback}
-        onClick={this.handleContainerClick}
+        href={this.linkHref}
+        rel='noreferrer'
         style={styles.container || {}}
         tabindex='0'
+        target='_blank'
       >
         {this.placeImageRight ? (
           <Fragment>
@@ -160,7 +157,7 @@ export class SearchcraftBaseSearchResult {
             {contentContainer}
           </Fragment>
         )}
-      </div>
+      </a>
     );
   }
 }

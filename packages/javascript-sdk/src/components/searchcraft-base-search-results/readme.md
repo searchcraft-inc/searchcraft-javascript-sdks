@@ -20,6 +20,13 @@
 | `placeResultImageRight`        | `place-result-image-right`        |             | `boolean`                                            | `false` |
 
 
+## Events
+
+| Event       | Description | Type                |
+| ----------- | ----------- | ------------------- |
+| `noResults` |             | `CustomEvent<void>` |
+
+
 ## Dependencies
 
 ### Depends on

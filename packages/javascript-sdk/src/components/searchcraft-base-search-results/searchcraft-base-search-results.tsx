@@ -1,4 +1,11 @@
-import { Component, h, Prop, State } from '@stencil/core';
+import {
+  Component,
+  h,
+  Event,
+  Prop,
+  State,
+  type EventEmitter,
+} from '@stencil/core';
 import classNames from 'classnames';
 
 import type { SearchcraftResponse } from '@searchcraft/core';
@@ -29,6 +36,8 @@ export class SearchcraftBaseSearchResults {
   @Prop() placeAdAtStart = true;
   @Prop() placeResultImageRight = false;
   @Prop() isInteractive = false;
+
+  @Event() noResults: EventEmitter<void>;
 
   @State() hasSearched = false;
   @State() query = '';
@@ -81,6 +90,7 @@ export class SearchcraftBaseSearchResults {
     }
 
     if (!this.searchResults?.data) {
+      this.noResults.emit();
       return;
     }
 
@@ -120,6 +130,7 @@ export class SearchcraftBaseSearchResults {
             is-interactive={this.isInteractive}
             key={`${document.document_id}-${index}`}
             keydown-callback={() => console.log('keydown')}
+            linkHref={dynamicProperties[parsedSearchKeys[6]] as string}
             place-image-right={this.placeResultImageRight}
             primary-content={dynamicProperties[parsedSearchKeys[2]]}
             result-callback={() => console.log('interactive element')}

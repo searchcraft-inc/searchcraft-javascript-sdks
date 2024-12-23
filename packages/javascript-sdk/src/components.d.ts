@@ -33,6 +33,7 @@ export namespace Components {
         "imageDescription": string;
         "imageSource": string;
         "isInteractive": boolean;
+        "linkHref": string;
         "placeImageRight": boolean;
         "primaryContent": string;
         "secondaryContent": string;
@@ -149,6 +150,10 @@ export interface SearchcraftBaseSearchResultCustomEvent<T> extends CustomEvent<T
     detail: T;
     target: HTMLSearchcraftBaseSearchResultElement;
 }
+export interface SearchcraftBaseSearchResultsCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSearchcraftBaseSearchResultsElement;
+}
 export interface SearchcraftButtonCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSearchcraftButtonElement;
@@ -224,7 +229,18 @@ declare global {
         prototype: HTMLSearchcraftBaseSearchResultElement;
         new (): HTMLSearchcraftBaseSearchResultElement;
     };
+    interface HTMLSearchcraftBaseSearchResultsElementEventMap {
+        "noResults": void;
+    }
     interface HTMLSearchcraftBaseSearchResultsElement extends Components.SearchcraftBaseSearchResults, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSearchcraftBaseSearchResultsElementEventMap>(type: K, listener: (this: HTMLSearchcraftBaseSearchResultsElement, ev: SearchcraftBaseSearchResultsCustomEvent<HTMLSearchcraftBaseSearchResultsElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSearchcraftBaseSearchResultsElementEventMap>(type: K, listener: (this: HTMLSearchcraftBaseSearchResultsElement, ev: SearchcraftBaseSearchResultsCustomEvent<HTMLSearchcraftBaseSearchResultsElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSearchcraftBaseSearchResultsElement: {
         prototype: HTMLSearchcraftBaseSearchResultsElement;
@@ -449,6 +465,7 @@ declare namespace LocalJSX {
         "imageDescription"?: string;
         "imageSource"?: string;
         "isInteractive"?: boolean;
+        "linkHref"?: string;
         "onButtonCallback"?: (event: SearchcraftBaseSearchResultCustomEvent<any>) => void;
         "onKeyDownCallback"?: (event: SearchcraftBaseSearchResultCustomEvent<any>) => void;
         "onResultCallback"?: (event: SearchcraftBaseSearchResultCustomEvent<any>) => void;
@@ -468,6 +485,7 @@ declare namespace LocalJSX {
         "fallbackElement"?: HTMLElement | null;
         "formatTime"?: boolean;
         "isInteractive"?: boolean;
+        "onNoResults"?: (event: SearchcraftBaseSearchResultsCustomEvent<void>) => void;
         "placeAdAtEnd"?: boolean;
         "placeAdAtStart"?: boolean;
         "placeResultImageRight"?: boolean;

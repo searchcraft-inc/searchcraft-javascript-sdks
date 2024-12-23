@@ -14,6 +14,7 @@
 | `imageDescription` | `image-description` |             | `string`            | `''`      |
 | `imageSource`      | `image-source`      |             | `string`            | `''`      |
 | `isInteractive`    | `is-interactive`    |             | `boolean`           | `false`   |
+| `linkHref`         | `link-href`         |             | `string`            | `''`      |
 | `placeImageRight`  | `place-image-right` |             | `boolean`           | `false`   |
 | `primaryContent`   | `primary-content`   |             | `string`            | `''`      |
 | `secondaryContent` | `secondary-content` |             | `string`            | `''`      |
