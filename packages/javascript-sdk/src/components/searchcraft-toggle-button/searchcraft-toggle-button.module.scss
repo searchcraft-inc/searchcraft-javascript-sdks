@@ -1,4 +1,4 @@
-.toggle-wrapper {
+.toggleWrapper {
   background: $surface-disabled;
   border: none;
   border-radius: 16px;
@@ -10,12 +10,12 @@
   width: 44px;
 }
 
-.toggle-wrapper.active {
+.toggleWrapper.active {
   background: $surface-brand-primary;
   box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.05);
 }
 
-.toggle-wrapper .toggle-switch {
+.toggleWrapper .toggleSwitch {
   background: $content-on-brand-primary;
   border-radius: 50%;
   height: 18px;
@@ -26,6 +26,6 @@
   width: 18px;
 }
 
-.toggle-wrapper .toggle-switch.active {
+.toggleWrapper .toggleSwitch.active {
   transform: translateX(16px);
 }

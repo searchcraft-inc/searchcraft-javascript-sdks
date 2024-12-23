@@ -6,7 +6,7 @@ import { useSearchcraftStore } from '@provider/store';
 @Component({
   tag: 'searchcraft-toggle-button',
   styleUrl: 'searchcraft-toggle-button.module.scss',
-  shadow: true,
+  shadow: false,
 })
 export class SearchcraftToggleButton {
   /**
@@ -87,8 +87,8 @@ export class SearchcraftToggleButton {
     if (!this.query || this.resultsCount === 0) {
       return null;
     }
-    const toggleContainerStyle = `toggle-wrapper ${this.isActive ? 'active' : ''}`;
-    const toggleSwitchStyle = `toggle-switch ${this.isActive ? 'active' : ''}`;
+    const toggleContainerStyle = `toggleWrapper ${this.isActive ? 'active' : ''}`;
+    const toggleSwitchStyle = `toggleSwitch ${this.isActive ? 'active' : ''}`;
 
     return (
       <button
