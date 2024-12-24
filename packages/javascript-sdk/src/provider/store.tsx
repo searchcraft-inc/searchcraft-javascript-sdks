@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 
 import {
-  type CoreSDK as SearchcraftCore,
+  type SearchcraftCore,
   SDKDebugger,
   LogLevel,
   type SearchcraftResponse,
