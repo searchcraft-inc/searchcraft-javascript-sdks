@@ -8,8 +8,8 @@ import {
 } from '@stencil/core';
 
 import {
-  type CoreConfigSDK,
-  CoreSDK as SearchcraftCore,
+  type SearchcraftConfig,
+  SearchcraftCore,
   type SearchcraftResponse,
 } from '@searchcraft/core';
 
@@ -19,6 +19,8 @@ import { parseCustomStyles } from '@utils/utils';
 
 import type { ScInputCustomEvent } from '@components/searchcraft-input/searchcraft-input';
 
+import packageJson from '../../../package.json';
+
 @Component({
   tag: 'searchcraft-auto-search-form',
   styleUrl: 'searchcraft-auto-search-form.module.scss',
@@ -27,10 +29,11 @@ import type { ScInputCustomEvent } from '@components/searchcraft-input/searchcra
 export class SearchcraftAutoSearchForm {
   @Prop() autoSearchFormClass = '';
   @Prop() clearInput: () => void = () => {};
-  @Prop() config: CoreConfigSDK = {
-    apiKey: '',
+  @Prop() config: SearchcraftConfig = {
+    readKey: '',
     endpointURL: '',
     index: [],
+    organizationId: '',
   };
   @Prop() customStylesForInput: string | Record<string, string> = {};
   @Prop() inputCaptionValue = '';
@@ -55,7 +58,10 @@ export class SearchcraftAutoSearchForm {
   unsubscribe: () => void;
 
   componentDidLoad() {
-    const searchcraft = new SearchcraftCore(this.config);
+    const searchcraft = new SearchcraftCore(this.config, {
+      sdkName: packageJson.name,
+      sdkVersion: packageJson.version,
+    });
     this.searchStore.initialize(searchcraft, true);
 
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {

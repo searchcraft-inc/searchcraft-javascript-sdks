@@ -1,25 +1,89 @@
+import { nanoid } from 'nanoid';
+import { getFingerprint } from '@thumbmarkjs/thumbmarkjs';
+
 import type {
-  CoreConfigSDK,
+  SearchcraftConfig,
   Facets,
   QueryObject,
   SearchcraftResponse,
   SearchParams,
   QueryItem,
+  MeasureRequest,
+  MeasureRequestUser,
+  MeasureNetworkRequestType,
+  MeasureEventName,
+  MeasureRequestProperties,
+  SearchcraftSDKInfo,
 } from '../CoreSDKTypes';
 
 /**
  * Javascript Class providing the functionality to interact with the Searchcraft BE
  */
-export class CoreSDK {
-  config: CoreConfigSDK;
+export class SearchcraftCore {
+  config: SearchcraftConfig;
+  sdkInfo: SearchcraftSDKInfo;
+  userId: string;
+  sessionId: string;
 
-  constructor(config: CoreConfigSDK) {
-    if (!config.endpointURL || !config.index || !config.apiKey) {
+  constructor(config: SearchcraftConfig, sdkInfo: SearchcraftSDKInfo) {
+    if (!config.endpointURL || !config.index || !config.readKey) {
       throw new Error(
         'Endpoint URL, Index value(s), and API Key must be provided',
       );
     }
     this.config = config;
+    this.sdkInfo = sdkInfo;
+    this.userId = config.userId || '';
+    this.sessionId = nanoid();
+
+    this.initMeasure();
+  }
+
+  /**
+   * Initializes this.userId based on config & sends the `sdk_innitialized` event.
+   */
+  async initMeasure() {
+    if (!this.config.userId) {
+      const fingerprint = await getFingerprint();
+      this.userId = fingerprint;
+    }
+
+    this.sendMeasureEvent('sdk_initialized');
+  }
+
+  /**
+   * Getter for the base url used by the /search endpoint.
+   */
+  private get baseSearchUrl(): string {
+    return `${this.config.endpointURL}/index/${this.config.index.join(',')}/search`;
+  }
+
+  /**
+   * Getter for the base url used by the /measure endpoints.
+   */
+  private get baseMeasureUrl(): string {
+    return `${this.config.endpointURL}/measure`;
+  }
+
+  /**
+   * Getter for the measure request user. Uses config values + navigator values.
+   */
+  private get measureRequestUser(): MeasureRequestUser {
+    return {
+      user_id: this.userId,
+      locale: navigator.language || 'en-US',
+      os: navigator.userAgent.includes('Windows')
+        ? 'Windows'
+        : navigator.userAgent.includes('Mac')
+          ? 'Mac'
+          : navigator.userAgent.includes('Linux')
+            ? 'Linux'
+            : 'Unknown',
+      platform: navigator.platform || 'Unknown',
+      sdk_name: this.sdkInfo.sdkName,
+      sdk_version: this.sdkInfo.sdkVersion,
+      user_agent: navigator.userAgent || 'Unknown',
+    };
   }
 
   /**
@@ -76,6 +140,10 @@ export class CoreSDK {
    * @returns {Promise<SearchcraftResponse>} - Returns the search response or throws an error.
    */
   search = async (searchParams: SearchParams): Promise<SearchcraftResponse> => {
+    this.sendMeasureEvent('search_requested', {
+      search_term: searchParams.query,
+    });
+
     const quoteCount = (searchParams.query.match(/"/g) || []).length;
     if (quoteCount % 2 !== 0) {
       throw new Error(
@@ -84,9 +152,6 @@ export class CoreSDK {
     }
 
     try {
-      const formattedIndexes = this.config.index.join(',');
-      const baseUrl = `${this.config.endpointURL}/index/${formattedIndexes}/search`;
-
       // Build the request body
       const requestBody: {
         query: QueryObject;
@@ -124,23 +189,103 @@ export class CoreSDK {
       const requestOptions = {
         method: 'POST',
         headers: {
-          Authorization: this.config.apiKey,
+          Authorization: this.config.readKey,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(requestBody),
       };
 
-      const response = await fetch(baseUrl, requestOptions);
-
+      const response = await fetch(this.baseSearchUrl, requestOptions);
       if (!response.ok) {
         throw new Error(
           `Error: ${response.statusText} (Status: ${response.status})`,
         );
       }
-      return await response.json();
+
+      // TODO: Add schema validation here rather than optimistically cast to SearchcraftResponse.
+      const searchcraftResponse =
+        (await response.json()) as SearchcraftResponse;
+
+      this.sendMeasureEvent('search_response_received', {
+        search_term: searchParams.query,
+        number_of_documents: searchcraftResponse.data.count,
+      });
+
+      return searchcraftResponse;
     } catch (error) {
       console.error('Error parsing response:', error);
       throw error;
+    }
+  };
+
+  /**
+   * Sends a measure event to the `/measure/event` endpoint for analytics purposes.
+   *
+   * @param {MeasureEventName} eventName - Name of the event.
+   * @param {Partial<MeasureRequestProperties>} properties - Additional properties to send with the event.
+   * @param {Partial<MeasureRequestUser>} user - Additional user properites to send with the event.
+   * @param {MeasureNetworkRequestType} type - Type of network request to use.
+   */
+  sendMeasureEvent = async (
+    eventName: MeasureEventName,
+    properties: Partial<MeasureRequestProperties> = {},
+    user: Partial<MeasureRequestUser> = {},
+    type: MeasureNetworkRequestType = 'fetch',
+  ) => {
+    /**
+     * Builds the request object based on config values + provided arguments.
+     */
+    const request: MeasureRequest = {
+      event_name: eventName,
+      properties: {
+        searchcraft_organization_id: this.config.organizationId,
+        searchcraft_index_names: this.config.index,
+        ...properties,
+      },
+      user: {
+        ...this.measureRequestUser,
+        ...user,
+      },
+    };
+
+    const payload = JSON.stringify(request);
+    const url = `${this.baseMeasureUrl}/event`;
+
+    if (type === 'fetch') {
+      try {
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: this.config.readKey,
+            'X-Sc-User-Id': this.userId,
+          },
+          body: payload,
+        });
+
+        if (!response.ok) {
+          throw new Error(
+            `Failed to send request: ${response.status} ${response.statusText}`,
+          );
+        }
+
+        return;
+      } catch (error) {
+        console.error('Error sending MeasureRequest:', error);
+        throw error;
+      }
+    } else {
+      /**
+       * type === "beacon" - Sends the payload as a beacon.
+       * Useful for sending events during page load transitions.
+       */
+      const blob = new Blob([payload], { type: 'application/json' });
+      const success = navigator.sendBeacon(url, blob);
+
+      if (!success) {
+        throw new Error('Failed to send /measure request.');
+      }
+      return;
     }
   };
 }

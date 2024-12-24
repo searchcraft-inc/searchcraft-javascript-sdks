@@ -1,6 +1,5 @@
 import type { FC } from 'react';
-import type { CoreSDK } from '@searchcraft/core';
-import { CoreSDK as SearchcraftCore } from '@searchcraft/core';
+import { SearchcraftCore } from '@searchcraft/core';
 
 import {
   Provider,
@@ -41,7 +40,7 @@ const Searchcraft: FC & {
   InputCaption: FC<InputCaptionProps>;
   InputIcon: FC;
   InputLabel: FC<InputLabelProps>;
-  Provider: FC<{ searchcraft: CoreSDK; debug?: boolean }>;
+  Provider: FC<{ searchcraft: SearchcraftCore; debug?: boolean }>;
 } = () => null;
 
 Searchcraft.AutoSearchForm = AutoSearchForm;

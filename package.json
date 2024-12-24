@@ -37,7 +37,7 @@
     "watch:sdk-react": "nodemon --exec \"yarn build:sdk-reactt\"",
     "watch:sdk-javascript": "nodemon --exec \"yarn build:sdk-javascript\"",
     "yalc:all": "yarn yalc:core && yarn yalc:sdk-react && yarn yalc:sdk-javascript",
-    "yalc:core": "cd packages/core-sdk && yalc publish --private && yalc push",
+    "yalc:core": "cd packages/core-sdk && yalc publish --private && yalc push --private",
     "yalc:sdk-react": "cd packages/react-sdk && yalc publish && yalc push",
     "yalc:sdk-javascript": "cd packages/javascript-sdk && yalc publish && yalc push"
   },

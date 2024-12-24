@@ -5,13 +5,13 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { CoreConfigSDK } from "@searchcraft/core";
-export { CoreConfigSDK } from "@searchcraft/core";
+import { SearchcraftConfig } from "@searchcraft/core";
+export { SearchcraftConfig } from "@searchcraft/core";
 export namespace Components {
     interface SearchcraftAutoSearchForm {
         "autoSearchFormClass": string;
         "clearInput": () => void;
-        "config": CoreConfigSDK;
+        "config": SearchcraftConfig;
         "customStylesForInput": string | Record<string, string>;
         "inputCaptionValue": string;
         "inputIconHeight": number;
@@ -22,7 +22,7 @@ export namespace Components {
         "searchContainerClass": string;
     }
     interface SearchcraftBaseSearchForm {
-        "config": CoreConfigSDK;
+        "config": SearchcraftConfig;
         "errorMessage": string;
         "labelForInput": string;
         "rightToLeftOrientation": boolean;
@@ -414,7 +414,7 @@ declare namespace LocalJSX {
     interface SearchcraftAutoSearchForm {
         "autoSearchFormClass"?: string;
         "clearInput"?: () => void;
-        "config"?: CoreConfigSDK;
+        "config"?: SearchcraftConfig;
         "customStylesForInput"?: string | Record<string, string>;
         "inputCaptionValue"?: string;
         "inputIconHeight"?: number;
@@ -427,7 +427,7 @@ declare namespace LocalJSX {
         "searchContainerClass"?: string;
     }
     interface SearchcraftBaseSearchForm {
-        "config"?: CoreConfigSDK;
+        "config"?: SearchcraftConfig;
         "errorMessage"?: string;
         "labelForInput"?: string;
         "onClearInput"?: (event: SearchcraftBaseSearchFormCustomEvent<any>) => void;
