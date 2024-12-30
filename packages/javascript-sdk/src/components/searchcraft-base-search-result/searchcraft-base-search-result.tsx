@@ -1,56 +1,57 @@
 import { Component, Event, Fragment, h, Prop } from '@stencil/core';
+import classNames from 'classnames';
 
 @Component({
   tag: 'searchcraft-base-search-result',
   styleUrl: 'searchcraft-base-search-result.module.scss',
-  shadow: true,
+  shadow: false,
 })
 export class SearchcraftBaseSearchResult {
-  @Prop() buttonText = ''; // Label for the button
-  @Prop() customStyles = '{}'; // New string prop for serialized styles.
-  @Prop() headingText = ''; // Text for the heading
-  @Prop() imageDescription = ''; // Alternative text for the image
-  @Prop() imageSource = ''; // Source URL for the image
-  @Prop() isInteractive = false; // Determines if the result is interactive
-  @Prop() primaryContent = ''; // Primary body content
-  @Prop() secondaryContent = ''; // Secondary body content
-  @Prop() subheadingText = ''; // Text for the subheading
-  @Prop() tertiaryContent = ''; // Tertiary body content
-  @Prop() themeMode: 'light' | 'dark' = 'light'; // Light or dark theme context
-  @Prop() placeImageRight = false; // Determines the placement of the image container
+  @Prop() buttonText = '';
+  @Prop() customStyles = '{}';
+  @Prop() titleContent = '';
+  @Prop() imageDescription = '';
+  @Prop() imageSource = '';
+  @Prop() isInteractive = false;
+  @Prop() linkHref = '';
+  @Prop() primaryContent = '';
+  @Prop() secondaryContent = '';
+  @Prop() subtitleContent = '';
+  @Prop() tertiaryContent = '';
+  @Prop() themeMode: 'light' | 'dark' = 'light';
+  @Prop() placeImageRight = false;
 
-  @Event() buttonCallback: () => void = () => {}; // Callback for button click
-  @Event() keyDownCallback: () => void = () => {}; // Callback for key down event
-  @Event() resultCallback: () => void = () => {}; // Callback for result container click
+  @Event() buttonCallback: () => void = () => {};
+  @Event() keyDownCallback: () => void = () => {};
+  @Event() resultCallback: () => void = () => {};
 
   private handleButtonClick = () => {
     this.buttonCallback();
   };
 
-  private handleContainerClick = () => {
-    if (this.isInteractive) {
-      this.resultCallback();
-    }
-  };
-
-  private parseStyles(): Record<string, { [key: string]: string }> {
+  private parseStyles = (): Record<string, { [key: string]: string }> => {
     try {
       return JSON.parse(this.customStyles);
     } catch (error) {
       console.error('Error parsing custom styles:', error);
       return {};
     }
-  }
+  };
 
   render() {
     const isLightTheme = this.themeMode === 'light';
     const styles = this.parseStyles();
-
+    const imageStyle = isLightTheme ? 'imageLight' : 'imageDark';
     const imageContainer = this.imageSource && (
-      <div class='imageContainer'>
+      <div
+        class={classNames(
+          'imageContainer',
+          'searchcraft-base-search-result-image-container',
+        )}
+      >
         <img
           alt={this.imageDescription}
-          class={isLightTheme ? 'imageLight' : 'imageDark'}
+          class={classNames(imageStyle, 'searchcraft-search-result-image')}
           src={this.imageSource}
           style={styles.image || {}}
         />
@@ -58,38 +59,59 @@ export class SearchcraftBaseSearchResult {
     );
 
     const contentContainer = (
-      <div class='contentContainer'>
+      <div
+        class={classNames(
+          'contentContainer',
+          'searchcraft-base-search-result-content-container',
+        )}
+      >
         <h2
-          class={isLightTheme ? 'headingLight' : 'headingDark'}
-          style={styles.heading || {}}
+          class={classNames(
+            isLightTheme ? 'titleLight' : 'titleDark',
+            'searchcraft-base-search-result-title',
+          )}
+          style={styles.title || {}}
         >
-          {this.headingText}
+          {this.titleContent}
         </h2>
         <h3
-          class={isLightTheme ? 'subheadingLight' : 'subheadingDark'}
-          style={styles.subheading || {}}
+          class={classNames(
+            isLightTheme ? 'subtitleContentLight' : 'subtitleContentDark',
+            'searchcraft-base-search-result-subtitle',
+          )}
+          style={styles.subtitle || {}}
         >
-          {this.subheadingText}
+          {this.subtitleContent}
         </h3>
         <p
-          class={isLightTheme ? 'primaryContentLight' : 'primaryContentDark'}
+          class={classNames(
+            isLightTheme ? 'primaryContentLight' : 'primaryContentDark',
+            'searchcraft-base-search-result-primary-content',
+          )}
           style={styles.primaryContent || {}}
         >
           {this.primaryContent}
         </p>
-        <div class='secondaryContentContainer'>
+        <div
+          class={classNames(
+            'secondaryContentContainer',
+            'searchcraft-base-search-result-secondary-content-container',
+          )}
+        >
           <p
-            class={
-              isLightTheme ? 'secondaryContentLight' : 'secondaryContentDark'
-            }
+            class={classNames(
+              isLightTheme ? 'secondaryContentLight' : 'secondaryContentDark',
+              'searchcraft-base-search-result-secondary-content',
+            )}
             style={styles.secondaryContent || {}}
           >
             {this.secondaryContent}
           </p>
           <p
-            class={
-              isLightTheme ? 'tertiaryContentLight' : 'tertiaryContentDark'
-            }
+            class={classNames(
+              `${isLightTheme ? 'tertiaryContentLight' : 'tertiaryContentDark'}${this.tertiaryContent ? ' hasContent' : ''}`,
+              'searchcraft-base-search-result-tertiary-content',
+            )}
             style={styles.tertiaryContent || {}}
           >
             {this.tertiaryContent}
@@ -108,18 +130,21 @@ export class SearchcraftBaseSearchResult {
     );
 
     return (
-      <div
-        class={
+      <a
+        class={classNames(
           this.isInteractive
             ? isLightTheme
               ? 'interactiveResultContainerLight'
               : 'interactiveResultContainerDark'
-            : 'resultContainer'
-        }
+            : 'resultContainer',
+          'searchcraft-search-result-container',
+        )}
         onKeyDown={this.keyDownCallback}
-        onClick={this.handleContainerClick}
+        href={this.linkHref}
+        rel='noreferrer'
         style={styles.container || {}}
         tabindex='0'
+        target='_blank'
       >
         {this.placeImageRight ? (
           <Fragment>
@@ -132,7 +157,7 @@ export class SearchcraftBaseSearchResult {
             {contentContainer}
           </Fragment>
         )}
-      </div>
+      </a>
     );
   }
 }

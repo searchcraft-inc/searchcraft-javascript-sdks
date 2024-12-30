@@ -14,10 +14,10 @@
 
 .errorMessageLight {
   @include error-message-base;
-  color: $light-input-caption-color-error;
+  color: $content-danger;
 }
 
 .errorMessageDark {
   @include error-message-base;
-  color: $dark-input-caption-color-error;
+  color: $surface-danger-secondary-active;
 }

@@ -13,19 +13,20 @@
   padding: 8px;
   position: relative;
 
-  @media (min-width: 600px) {
+  @media (min-width: 900px) {
     flex-direction: row;
+    justify-content: space-between;
   }
 }
 
 .interactiveResultContainerLight {
   @include interactive-result-container-base;
-  background-color: $light-search-result-container-background;
+  background-color: $surface-primary-active;
 }
 
 .interactiveResultContainerDark {
   @include interactive-result-container-base;
-  background-color: $dark-search-result-container-background;
+  background-color: $surface-brand-primary-hover;
 }
 
 .resultContainer {
@@ -33,8 +34,16 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  all: unset;
+  display: inline;
+  color: inherit;
+  text-decoration: none;
 
-  @media (min-width: 600px) {
+  &:hover {
+    cursor: pointer;
+  }
+
+  @media (min-width: 900px) {
     flex-direction: row;
   }
 }
@@ -46,7 +55,7 @@
   top: 8px;
 
 
-  @media (max-width: 600px) {
+  @media (max-width: 900px) {
     display: none;
   }
 }
@@ -58,20 +67,24 @@
   top: -2px;
 
 
-  @media (min-width: 600px) {
+  @media (min-width: 900px) {
    display: none;
   }
 }
 
 .imageContainer {
   max-width: 100%;
+
+  @media (min-width: 900px) {
+    max-width: 400px;
+   }
 }
 
 .contentContainer {
   max-height: 100%;
   max-width: 100%;
 
-  @media (min-width: 600px) {
+  @media (min-width: 900px) {
     max-width: 50%;
   }
 }
@@ -89,15 +102,14 @@
 
 .imageLight {
   @include image-base;
-  border: 1px solid $light-search-result-image-border;
 }
 
 .imageDark {
   @include image-base;
-  border: 1px solid $dark-search-result-image-border;
+
 }
 
-@mixin heading-base {
+@mixin title-base {
   font-family: var(--font-stack);
   font-size: 16px;
   font-weight: 700;
@@ -108,17 +120,17 @@
   -webkit-font-smoothing: antialiased;
 }
 
-.headingLight {
-  @include heading-base;
-  color: $light-search-result-heading-color;
+.titleLight {
+  @include title-base;
+  color: $content-primary;
 }
 
-.headingDark {
-  @include heading-base;
-  color: $dark-search-result-heading-color;
+.titleDark {
+  @include title-base;
+  color: $content-on-brand-primary;
 }
 
-@mixin subheading-base {
+@mixin subtitle-base {
   font-family: var(--font-stack);
   font-size: 12px;
   font-weight: 400;
@@ -128,14 +140,14 @@
   -webkit-font-smoothing: antialiased;
 }
 
-.subheadingLight {
-  @include subheading-base;
-  color: $light-search-result-subheading-color;
+.subtitleContentLight {
+  @include subtitle-base;
+  color: $content-disabled;
 }
 
-.subheadingDark {
-  @include subheading-base;
-  color: $dark-search-result-subheading-color
+.subtitleContentDark {
+  @include subtitle-base;
+  color: $content-disabled-secondary;
 }
 
 @mixin body-content-base {
@@ -150,38 +162,46 @@
 
 .primaryContentLight {
   @include body-content-base;
-  color: $light-search-result-body-content-color;
+  color: $surface-success-secondary;
 }
 
 .primaryContentDark {
   @include body-content-base;
-  color: $dark-search-result-body-content-color;
+  color: $border-primary;
 }
 
 .secondaryContentLight {
   @include body-content-base;
-  color: $light-search-result-body-content-color;
-}
-
-.secondaryContentLight::after {
-  content: "•";
-  color: $light-search-result-body-content-color;
-  font-size: 1em;
-  margin-left: 5px;
-  margin-right: 5px;
+  color: $surface-success-secondary;
 }
 
 .secondaryContentDark {
   @include body-content-base;
-  color: $dark-search-result-body-content-color;
+  color: $border-primary;
 }
 
 .tertiaryContentLight {
   @include body-content-base;
-  color: $light-search-result-body-content-color;
+  color: $surface-success-secondary;
+}
+
+.tertiaryContentLight.hasContent::before {
+  color: $surface-success-secondary;
+  content: "•";
+  font-size: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .tertiaryContentDark {
   @include body-content-base;
-  color: $dark-search-result-body-content-color;
+  color: $border-primary;
+}
+
+.tertiaryContentDark.hasContent::before {
+  color: $surface-success-secondary;
+  content: "•";
+  font-size: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
 }

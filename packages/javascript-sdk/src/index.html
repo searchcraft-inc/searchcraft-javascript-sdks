@@ -47,10 +47,7 @@
 </head>
 <body>
   <div class="container">
-    <searchcraft-auto-search-form
-      input-icon-height="27"
-      input-icon-width="27"
-    />
+    <searchcraft-auto-search-form />
   </div>
   <main>
   <div class="filters">
@@ -72,17 +69,8 @@
       <searchcraft-results-info />
     </div>
     <searchcraft-base-search-results
-    document-attributes-for-display='["section_name", "headline", "sub_headline", "author_name", "date_published", "medium_image"]'
+    document-attributes-for-display='["section_name", "headline", "sub_headline", "author_name", "date_published", "medium_image", "canonical_link"]'
     place-result-image-right="true"
-    custom-styles-for-results='{
-      "container": {"padding": "16px", "border": "1px solid #ccc", "borderRadius": "8px", "marginBottom": "16px"},
-      "heading": {"fontSize": "24px", "color": "#333", "marginBottom": "8px"},
-      "subheading": {"fontSize": "20px", "color": "green", "marginBottom": "8px"},
-      "primaryContent": {"fontSize": "16px", "color": "#666"},
-      "secondaryContent": {"fontSize": "14px", "color": "#999", "marginTop": "4px"},
-      "tertiaryContent": {"fontSize": "12px", "color": "#bbb", "marginTop": "4px"},
-      "button": {"backgroundColor": "#007BFF", "color": "#fff", "padding": "8px 16px", "border": "none", "borderRadius": "4px"}
-    }'
   >
   </searchcraft-base-search-results>
   </div>

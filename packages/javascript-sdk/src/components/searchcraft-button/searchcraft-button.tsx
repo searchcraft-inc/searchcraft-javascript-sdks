@@ -12,7 +12,7 @@ import classNames from 'classnames';
 @Component({
   tag: 'searchcraft-button',
   styleUrl: 'searchcraft-button.module.scss',
-  shadow: true,
+  shadow: false,
 })
 export class SearchcraftButton {
   @Prop() iconElement?: Element;
@@ -30,7 +30,7 @@ export class SearchcraftButton {
   }
 
   private handleClick = () => {
-    this.buttonClick.emit(); // Emit the event instead of calling a function
+    this.buttonClick.emit();
   };
 
   render() {
@@ -56,19 +56,8 @@ export class SearchcraftButton {
             onClick={this.handleClick}
             type='submit'
           >
-            {this.iconPosition === 'left' && this.isRequesting ? (
-              <div class='spinner-margin-right'>
-                <searchcraft-spinner-dark />
-              </div>
-            ) : (
-              this.iconElement
-            )}
-            <span
-              class={classNames(
-                this.isRequesting && 'button-label',
-                'searchcraft-button-label',
-              )}
-            >
+            {this.iconPosition === 'left' && this.iconElement}
+            <span class={classNames('buttonLabel', 'searchcraft-button-label')}>
               {this.label}
             </span>
           </button>

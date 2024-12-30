@@ -4,7 +4,7 @@ import classNames from 'classnames';
 @Component({
   tag: 'searchcraft-input-label',
   styleUrl: 'searchcraft-input-label.module.scss',
-  shadow: true,
+  shadow: false,
 })
 export class SearchcraftInputLabel {
   @Prop() inputLabelClassName? = '';
@@ -22,7 +22,11 @@ export class SearchcraftInputLabel {
     const labelStyle = this.isLightTheme() ? 'labelLight' : 'labelDark';
     return (
       <label
-        class={classNames(labelStyle, this.inputLabelClassName)}
+        class={classNames(
+          labelStyle,
+          this.inputLabelClassName,
+          'searchcraft-input-label',
+        )}
         htmlFor='searchcraft-input-id'
       >
         {this.label}

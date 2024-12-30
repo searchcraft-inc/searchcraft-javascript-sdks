@@ -14,12 +14,12 @@
 
 @mixin input-caption-base-light {
   @include input-caption-base;
-  color: $light-input-caption-color;
+  color: $content-secondary;
 }
 
 @mixin input-caption-base-dark {
   @include input-caption-base;
-  color: $dark-input-caption-color;
+  color: $border-primary;
 }
 
 .inputCaptionLightLTR {
@@ -32,12 +32,12 @@
 
 .inputCaptionErrorLightLTR {
   @include input-caption-base;
-  color: $light-input-caption-color-error;
+  color: $content-danger;
 }
 
 .inputCaptionErrorDarkLTR {
   @include input-caption-base;
-  color: $dark-input-caption-color-error;
+  color: $surface-danger-secondary-active;
 }
 
 .inputCaptionLightRTL {
@@ -52,12 +52,12 @@
 
 .inputCaptionErrorLightRTL {
   @include input-caption-base;
-  color: $light-input-caption-color-error;
+  color: $content-danger;
   text-align: right;
 }
 
 .inputCaptionErrorDarkRTL {
   @include input-caption-base;
-  color: $dark-input-caption-color-error;
+  color: $surface-danger-secondary-active;
   text-align: right;
 }

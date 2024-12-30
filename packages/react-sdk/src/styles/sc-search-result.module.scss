@@ -19,12 +19,12 @@
 }
 
 .interactiveResultContainerLight {
-  background-color: $light-search-result-container-background;
+  background-color: $surface-primary-active;
   @include interactive-result-container-base;
 }
 
 .interactiveResultContainerDark {
-  background-color: $dark-search-result-container-background;
+  background-color: $surface-brand-primary-hover;
   @include interactive-result-container-base;
 }
 
@@ -91,12 +91,12 @@
 
 .imageLight {
   @include image-base;
-  border: 1px solid $light-search-result-image-border;
+  border: 1px solid $surface-disabled;
 }
 
 .imageDark {
   @include image-base;
-  border: 1px solid $dark-search-result-image-border;
+  border: 1px solid $border-secondary;
 }
 
 @mixin heading-base {
@@ -111,12 +111,12 @@
 
 .headingLight {
   @include heading-base;
-  color: $light-search-result-heading-color;
+  color: $content-primary;
 }
 
 .headingDark {
   @include heading-base;
-  color: $dark-search-result-heading-color;
+  color: $content-on-brand-primary;
 }
 
 @mixin subheading-base {
@@ -130,12 +130,12 @@
 
 .subheadingLight {
   @include subheading-base;
-  color: $light-search-result-subheading-color;
+  color: $content-disabled;
 }
 
 .subheadingDark {
   @include subheading-base;
-  color: $dark-search-result-subheading-color
+  color: $content-disabled-secondary;
 }
 
 @mixin body-content-base {
@@ -149,10 +149,10 @@
 
 .bodyContentLight {
   @include body-content-base;
-  color: $light-search-result-body-content-color;
+  color: $surface-success-secondary;
 }
 
 .bodyContentDark {
   @include body-content-base;
-  color: $dark-search-result-body-content-color;
+  color: $border-primary;
 }

@@ -7,10 +7,10 @@
 
 ## Properties
 
-| Property       | Attribute       | Description                                                                   | Type                | Default     |
-| -------------- | --------------- | ----------------------------------------------------------------------------- | ------------------- | ----------- |
-| `errorMessage` | `error-message` | The error message to display. Defaults to a standard message if not provided. | `string`            | `undefined` |
-| `theme`        | `theme`         | The theme, which determines the style (light or dark).                        | `"dark" \| "light"` | `'light'`   |
+| Property       | Attribute       | Description | Type                | Default     |
+| -------------- | --------------- | ----------- | ------------------- | ----------- |
+| `errorMessage` | `error-message` |             | `string`            | `undefined` |
+| `theme`        | `theme`         |             | `"dark" \| "light"` | `'light'`   |
 
 
 ## Dependencies
