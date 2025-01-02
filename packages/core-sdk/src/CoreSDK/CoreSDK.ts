@@ -10,7 +10,6 @@ import type {
   QueryItem,
   MeasureRequest,
   MeasureRequestUser,
-  MeasureNetworkRequestType,
   MeasureEventName,
   MeasureRequestProperties,
   SearchcraftSDKInfo,
@@ -28,9 +27,10 @@ export class SearchcraftCore {
   constructor(config: SearchcraftConfig, sdkInfo: SearchcraftSDKInfo) {
     if (!config.endpointURL || !config.index || !config.readKey) {
       throw new Error(
-        'Endpoint URL, Index value(s), and API Key must be provided',
+        'Endpoint URL, Index value(s), and Read Key must be provided',
       );
     }
+
     this.config = config;
     this.sdkInfo = sdkInfo;
     this.userId = config.userId || '';
@@ -191,6 +191,7 @@ export class SearchcraftCore {
         headers: {
           Authorization: this.config.readKey,
           'Content-Type': 'application/json',
+          'X-Sc-User-Id': this.userId,
         },
         body: JSON.stringify(requestBody),
       };
@@ -224,13 +225,11 @@ export class SearchcraftCore {
    * @param {MeasureEventName} eventName - Name of the event.
    * @param {Partial<MeasureRequestProperties>} properties - Additional properties to send with the event.
    * @param {Partial<MeasureRequestUser>} user - Additional user properites to send with the event.
-   * @param {MeasureNetworkRequestType} type - Type of network request to use.
    */
   sendMeasureEvent = async (
     eventName: MeasureEventName,
     properties: Partial<MeasureRequestProperties> = {},
     user: Partial<MeasureRequestUser> = {},
-    type: MeasureNetworkRequestType = 'fetch',
   ) => {
     /**
      * Builds the request object based on config values + provided arguments.
@@ -239,6 +238,7 @@ export class SearchcraftCore {
       event_name: eventName,
       properties: {
         searchcraft_organization_id: this.config.organizationId,
+        searchcraft_application_id: this.config.applicationId,
         searchcraft_index_names: this.config.index,
         ...properties,
       },
@@ -251,41 +251,28 @@ export class SearchcraftCore {
     const payload = JSON.stringify(request);
     const url = `${this.baseMeasureUrl}/event`;
 
-    if (type === 'fetch') {
-      try {
-        const response = await fetch(url, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: this.config.readKey,
-            'X-Sc-User-Id': this.userId,
-          },
-          body: payload,
-        });
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: this.config.readKey,
+          'X-Sc-User-Id': this.userId,
+        },
+        body: payload,
+        keepalive: true,
+      });
 
-        if (!response.ok) {
-          throw new Error(
-            `Failed to send request: ${response.status} ${response.statusText}`,
-          );
-        }
-
-        return;
-      } catch (error) {
-        console.error('Error sending MeasureRequest:', error);
-        throw error;
+      if (!response.ok) {
+        throw new Error(
+          `Failed to send request: ${response.status} ${response.statusText}`,
+        );
       }
-    } else {
-      /**
-       * type === "beacon" - Sends the payload as a beacon.
-       * Useful for sending events during page load transitions.
-       */
-      const blob = new Blob([payload], { type: 'application/json' });
-      const success = navigator.sendBeacon(url, blob);
 
-      if (!success) {
-        throw new Error('Failed to send /measure request.');
-      }
       return;
+    } catch (error) {
+      console.error('Error sending MeasureRequest:', error);
+      throw error;
     }
   };
 }

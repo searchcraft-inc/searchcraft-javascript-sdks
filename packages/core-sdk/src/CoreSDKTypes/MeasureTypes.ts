@@ -8,14 +8,6 @@ export type MeasureEventName =
   | 'document_clicked';
 
 /**
- * The type of network request to use when sending a measure request.
- * "fetch" - A standard fetch() request.
- * "beacon" - Uses navigator.sendBeacon. Useful for requests that need to work
- *  across page transition boundaries.
- */
-export type MeasureNetworkRequestType = 'fetch' | 'beacon';
-
-/**
  * The type used for sending multiple measure events in a single network request.
  * Uses /measure/batch request.
  */
@@ -37,7 +29,7 @@ export interface MeasureRequest {
  */
 export interface MeasureRequestProperties {
   searchcraft_organization_id: string;
-  searchcraft_application_id?: string;
+  searchcraft_application_id: string;
   searchcraft_index_names: string[];
   search_term?: string;
   number_of_documents?: number;

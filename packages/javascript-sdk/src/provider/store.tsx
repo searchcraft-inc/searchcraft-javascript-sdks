@@ -23,6 +23,7 @@ interface SearchParams {
 
 interface SearchcraftState {
   facets: Facets | null;
+  getSearchcraftInstance: () => SearchcraftCore | null;
   initialize: (searchcraft: SearchcraftCore, debug?: boolean) => void;
   isRequesting: boolean;
   query: string;
@@ -68,6 +69,7 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
     isRequesting: false,
     searchResults: null,
     facets: null,
+    getSearchcraftInstance: () => searchcraft,
     selectedFilters: [],
     searchParams: {
       mode: 'fuzzy',

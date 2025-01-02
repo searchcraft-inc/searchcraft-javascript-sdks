@@ -1,3 +1,4 @@
+import { useSearchcraftStore } from '@provider/store';
 import { Component, Event, Fragment, h, Prop } from '@stencil/core';
 import classNames from 'classnames';
 
@@ -20,13 +21,33 @@ export class SearchcraftBaseSearchResult {
   @Prop() tertiaryContent = '';
   @Prop() themeMode: 'light' | 'dark' = 'light';
   @Prop() placeImageRight = false;
+  @Prop() documentPosition = 0;
 
   @Event() buttonCallback: () => void = () => {};
   @Event() keyDownCallback: () => void = () => {};
   @Event() resultCallback: () => void = () => {};
 
+  private searchcraftStore = useSearchcraftStore.getState();
+
   private handleButtonClick = () => {
     this.buttonCallback();
+  };
+
+  private handleClick = () => {
+    const searchcraft = this.searchcraftStore.getSearchcraftInstance();
+
+    if (searchcraft) {
+      const document_position = this.documentPosition;
+      const search_term = this.searchcraftStore.query;
+      const number_of_documents =
+        this.searchcraftStore.searchResults?.data?.hits?.length || 0;
+
+      searchcraft.sendMeasureEvent('document_clicked', {
+        document_position,
+        number_of_documents,
+        search_term,
+      });
+    }
   };
 
   private parseStyles = (): Record<string, { [key: string]: string }> => {
@@ -140,6 +161,7 @@ export class SearchcraftBaseSearchResult {
           'searchcraft-search-result-container',
         )}
         onKeyDown={this.keyDownCallback}
+        onClick={this.handleClick}
         href={this.linkHref}
         rel='noreferrer'
         style={styles.container || {}}
