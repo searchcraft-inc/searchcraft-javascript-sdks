@@ -1,7 +1,7 @@
 import { Component, h, Event, Prop, State } from '@stencil/core';
 import classNames from 'classnames';
 
-import * as core from '@searchcraft/core';
+import { type SearchcraftConfig, SearchcraftCore } from '@searchcraft/core';
 
 import { useSearchcraftStore, useThemeStore } from '@provider/store';
 
@@ -15,7 +15,7 @@ import packageJson from '../../../package.json';
   shadow: false,
 })
 export class SearchcraftBaseSearchForm {
-  @Prop() config: core.SearchcraftConfig = {
+  @Prop() config: SearchcraftConfig = {
     readKey: '',
     endpointURL: '',
     index: [],
@@ -35,7 +35,7 @@ export class SearchcraftBaseSearchForm {
   private themeStore = useThemeStore.getState();
 
   componentDidLoad = () => {
-    const searchcraft = new core.SearchcraftCore(this.config, {
+    const searchcraft = new SearchcraftCore(this.config, {
       sdkName: packageJson.name,
       sdkVersion: packageJson.version,
     });
