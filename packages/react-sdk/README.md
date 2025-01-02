@@ -29,8 +29,6 @@ const searchcraftConfig = {
   index: ['test_data'],
   apiKey: '1234.909.jmk',
   endpointURL: 'http://127.0.0.1:8000',
-  organizationId: '1',
-  applicationId: '1'
 }
 
 const Main = () => {
