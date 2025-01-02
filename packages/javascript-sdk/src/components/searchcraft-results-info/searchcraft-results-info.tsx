@@ -18,7 +18,7 @@ export class SearchcraftResultsInfo {
 
   unsubscribe: () => void;
 
-  connectedCallback = () => {
+  connectedCallback() {
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {
       this.isRequesting = state.isRequesting;
       this.resultsCount = state.searchResults?.data?.count || 0;
@@ -27,13 +27,13 @@ export class SearchcraftResultsInfo {
       ).toFixed(2);
       this.query = state.query || '';
     });
-  };
+  }
 
-  disconnectedCallback = () => {
+  disconnectedCallback() {
     if (this.unsubscribe) {
       this.unsubscribe();
     }
-  };
+  }
 
   render() {
     if (!this.query || this.resultsCount === 0) {
