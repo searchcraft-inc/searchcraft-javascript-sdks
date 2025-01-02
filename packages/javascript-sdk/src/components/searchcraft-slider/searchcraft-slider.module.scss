@@ -6,85 +6,76 @@
   width: 100%;
 }
 
-.sliders {
-  height: 40px;
+.rangeContainer {
+  align-items: center;
+  background-color: $surface-disabled;
+  border-radius: 999px;
+  display: flex;
   position: relative;
+  height: 4px;
   width: 100%;
 
+  &::-webkit-slider-runnable-track {
+    pointer-events: none;
+   }
+
   .activeRange {
-    background: $surface-brand-primary;
+    background-color: $surface-brand-primary;
     border-radius: 2px;
     height: 4px;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     z-index: 0;
+
+    &::-webkit-slider-runnable-track {
+      pointer-events: none;
+     }
+
+     &::-moz-range-track {
+      pointer-events: none;
+     }
+  }
+
+  .rangeSlider {
+    appearance: none;
+    background: transparent;
+    border-radius: 2px;
+    height: 4px;
+    margin: 0;
+    outline: none;
+    pointer-events: none;
+    position: absolute;
+    width: 100%;
+    -webkit-appearance: none;
+
+    &::-webkit-slider-thumb {
+      background-color: $content-on-brand-primary;
+      border-radius: 50%;
+      border: 2px solid $border-primary;
+      cursor: pointer;
+      height: 20px;
+      pointer-events: all;
+      width: 20px;
+      -webkit-appearance: none;
+    }
+
+    &::-moz-range-thumb {
+      background-color: $content-on-brand-primary;
+      border-radius: 50%;
+      border: 2px solid $border-primary;
+      cursor: pointer;
+      height: 20px;
+      pointer-events: all;
+      width: 20px;
+    }
   }
 }
 
-.sliderPrimary {
-  appearance: none;
-  background: none;
-  pointer-events: none;
-  position: absolute;
-  top: 10px;
-  width: 50%;
-  -webkit-appearance: none;
-}
-
-.sliderSecondary {
-  appearance: none;
-  background: none;
-  position: absolute;
-  left: 50%;
-  pointer-events: none;
-  top: 10px;
-  width: 50%;
-  -webkit-appearance: none;
-}
-
-.startSlider {
-  background: transparent;
-  pointer-events: auto;
-}
-
-.endSlider {
-  background: transparent;
-  pointer-events: auto;
-}
-
-input[type="range"]::-webkit-slider-thumb {
-  appearance: none;
-  background-color: $content-on-brand-primary;
-  border: 2px solid $border-primary;
-  border-radius: 50%;
-  cursor: pointer;
-  height: 16px;
-  pointer-events: auto;
-  width: 16px;
-  -webkit-appearance: none;
-}
-
-input[type="range"]::-moz-range-thumb {
-  background-color: $content-on-brand-primary;
-  border: 2px solid $border-primary;
-  border-radius: 50%;
-  cursor: pointer;
-  height: 16px;
-  width: 16px;
-}
-
-.slider-labels {
-  display: flex;
-  font-size: 12px;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.yearLabelContainer {
+.yearLabels {
   color: $content-primary;
   display: flex;
-  font-family: var(--font-stack);
+  font-family: 'Source Sans Pro', sans-serif;
   font-size: 15px;
   font-weight: 600;
   justify-content: space-between;

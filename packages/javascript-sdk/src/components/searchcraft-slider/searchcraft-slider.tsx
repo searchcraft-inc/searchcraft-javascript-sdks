@@ -1,10 +1,10 @@
 import {
   Component,
+  Event,
+  type EventEmitter,
   h,
   State,
   Prop,
-  Event,
-  type EventEmitter,
 } from '@stencil/core';
 import classNames from 'classnames';
 
@@ -15,7 +15,7 @@ import { useSearchcraftStore } from '@provider/store';
   styleUrl: 'searchcraft-slider.module.scss',
   shadow: false,
 })
-export class YearRangeSlider {
+export class SearchcraftSlider {
   @Prop() maxYear = new Date().getFullYear();
   @Prop() minYear = 2014;
 
@@ -31,7 +31,7 @@ export class YearRangeSlider {
 
   unsubscribe: () => void;
 
-  componentDidLoad = () => {
+  componentDidLoad() {
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {
       if (state.query.length > 0) {
         this.hasSearched = true;
@@ -39,41 +39,47 @@ export class YearRangeSlider {
       }
       this.query = state.query;
     });
-  };
+  }
 
-  disconnectedCallback = () => {
+  disconnectedCallback() {
     if (this.unsubscribe) {
       this.unsubscribe();
     }
-  };
+  }
 
   private updateYears = async () => {
     this.searchStore.setYearsRange([this.startYear, this.endYear]);
+    this.rangeChanged.emit({
+      startYear: this.startYear,
+      endYear: this.endYear,
+    });
 
     try {
       if (typeof this.query === 'string' && this.query.trim() !== '') {
         await this.searchStore.search();
+      } else {
+        console.warn('Query is missing or empty, skipping search request.');
       }
     } catch (error) {
       console.error('Search failed:', error);
     }
   };
 
-  handleStartChange(event: InputEvent) {
-    this.startYear = Number.parseInt(
-      (event.target as HTMLInputElement).value,
-      10,
-    );
-    this.updateYears();
-  }
+  private handleStartYearChange = (event: InputEvent) => {
+    const value = Number.parseInt((event.target as HTMLInputElement).value, 10);
+    if (value <= this.endYear) {
+      this.startYear = value;
+      this.updateYears();
+    }
+  };
 
-  handleEndChange(event: InputEvent) {
-    this.endYear = Number.parseInt(
-      (event.target as HTMLInputElement).value,
-      10,
-    );
-    this.updateYears();
-  }
+  private handleEndYearChange = (event: InputEvent) => {
+    const value = Number.parseInt((event.target as HTMLInputElement).value, 10);
+    if (value >= this.startYear) {
+      this.endYear = value;
+      this.updateYears();
+    }
+  };
 
   render() {
     if (!this.query || this.resultsCount === 0) {
@@ -88,41 +94,50 @@ export class YearRangeSlider {
       ((this.endYear - rangeMin) / (rangeMax - rangeMin)) * 100;
 
     return (
-      <div class='sliderContainer'>
-        <div class='sliders'>
+      <div
+        class={classNames('sliderContainer', 'searchcraft-slider-container')}
+      >
+        <div
+          class={classNames(
+            'rangeContainer',
+            'searchcraft-slider-range-container',
+          )}
+        >
           <div
             class={classNames('activeRange', 'searchcraft-slider-active-range')}
             style={{
-              left: `${startPercent}.65%`,
+              left: `${startPercent}%`,
               width: `${endPercent - startPercent}%`,
             }}
           />
           <input
             class={classNames(
-              'sliderPrimary startSlider',
-              'searchcraft-slider-range-slider-start',
+              'rangeSlider',
+              'searchcraft-slider-range-slider-start-thumb',
             )}
-            max={this.minYear + 5}
+            max={this.maxYear}
             min={this.minYear}
-            onInput={(event) => this.handleStartChange(event)}
+            onInput={this.handleStartYearChange}
+            step='1'
             type='range'
             value={this.startYear}
           />
           <input
             class={classNames(
-              'sliderSecondary endSlider',
-              'searchcraft-slider-range-slider-end',
+              'rangeSlider',
+              'searchcraft-slider-range-slider-end-thumb',
             )}
             max={this.maxYear}
-            min={this.minYear + 5}
-            onInput={(event) => this.handleEndChange(event)}
+            min={this.minYear}
+            onInput={this.handleEndYearChange}
+            step='1'
             type='range'
             value={this.endYear}
           />
         </div>
         <div
           class={classNames(
-            'yearLabelContainer',
+            'yearLabels',
             'searchcraft-slider-year-label-container',
           )}
         >
