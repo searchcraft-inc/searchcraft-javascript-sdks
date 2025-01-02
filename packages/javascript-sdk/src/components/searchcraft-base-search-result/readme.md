@@ -11,6 +11,7 @@
 | ------------------ | ------------------- | ----------- | ------------------- | --------- |
 | `buttonText`       | `button-text`       |             | `string`            | `''`      |
 | `customStyles`     | `custom-styles`     |             | `string`            | `'{}'`    |
+| `documentPosition` | `document-position` |             | `number`            | `0`       |
 | `imageDescription` | `image-description` |             | `string`            | `''`      |
 | `imageSource`      | `image-source`      |             | `string`            | `''`      |
 | `isInteractive`    | `is-interactive`    |             | `boolean`           | `false`   |

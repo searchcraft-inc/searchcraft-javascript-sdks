@@ -137,6 +137,7 @@ export class SearchcraftBaseSearchResults {
             subtitle-content={dynamicProperties[parsedSearchKeys[1]]}
             tertiary-content={dynamicProperties[parsedSearchKeys[4]]}
             title-content={dynamicProperties[parsedSearchKeys[0]]}
+            document-position={index}
           />
         );
       },

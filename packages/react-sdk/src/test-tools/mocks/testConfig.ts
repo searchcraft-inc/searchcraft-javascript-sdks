@@ -5,4 +5,5 @@ export const TEST_REACT_SDK_CONFIGURATION: SearchcraftConfig = {
   readKey: '1234searchcraft',
   endpointURL: '/test_url',
   organizationId: '',
+  applicationId: '',
 };

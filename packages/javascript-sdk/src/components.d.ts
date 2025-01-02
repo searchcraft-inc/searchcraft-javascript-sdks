@@ -30,6 +30,7 @@ export namespace Components {
     interface SearchcraftBaseSearchResult {
         "buttonText": string;
         "customStyles": string;
+        "documentPosition": number;
         "imageDescription": string;
         "imageSource": string;
         "isInteractive": boolean;
@@ -462,6 +463,7 @@ declare namespace LocalJSX {
     interface SearchcraftBaseSearchResult {
         "buttonText"?: string;
         "customStyles"?: string;
+        "documentPosition"?: number;
         "imageDescription"?: string;
         "imageSource"?: string;
         "isInteractive"?: boolean;

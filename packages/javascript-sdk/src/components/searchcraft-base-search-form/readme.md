@@ -7,12 +7,12 @@
 
 ## Properties
 
-| Property                 | Attribute                   | Description | Type                | Default                                                                              |
-| ------------------------ | --------------------------- | ----------- | ------------------- | ------------------------------------------------------------------------------------ |
-| `config`                 | --                          |             | `SearchcraftConfig` | `{     readKey: '',     endpointURL: '',     index: [],     organizationId: '',   }` |
-| `errorMessage`           | `error-message`             |             | `string`            | `'Search was unsuccessful'`                                                          |
-| `labelForInput`          | `label-for-input`           |             | `string`            | `'Search'`                                                                           |
-| `rightToLeftOrientation` | `right-to-left-orientation` |             | `boolean`           | `false`                                                                              |
+| Property                 | Attribute                   | Description | Type                | Default                                                                                                     |
+| ------------------------ | --------------------------- | ----------- | ------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `config`                 | --                          |             | `SearchcraftConfig` | `{     readKey: '',     endpointURL: '',     index: [],     organizationId: '',     applicationId: '',   }` |
+| `errorMessage`           | `error-message`             |             | `string`            | `'Search was unsuccessful'`                                                                                 |
+| `labelForInput`          | `label-for-input`           |             | `string`            | `'Search'`                                                                                                  |
+| `rightToLeftOrientation` | `right-to-left-orientation` |             | `boolean`           | `false`                                                                                                     |
 
 
 ## Events

@@ -33,6 +33,7 @@ export class SearchcraftAutoSearchForm {
     endpointURL: '',
     index: [],
     organizationId: '',
+    applicationId: '',
   };
   @Prop() customStylesForInput: string | Record<string, string> = {};
   @Prop() inputCaptionValue = '';
