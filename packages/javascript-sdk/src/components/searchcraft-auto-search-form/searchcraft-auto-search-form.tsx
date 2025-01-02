@@ -6,31 +6,34 @@ import {
   type EventEmitter,
   h,
 } from '@stencil/core';
+import classNames from 'classnames';
 
 import {
-  type CoreConfigSDK,
-  CoreSDK as SearchcraftCore,
+  type SearchcraftConfig,
+  SearchcraftCore,
   type SearchcraftResponse,
 } from '@searchcraft/core';
 
 import { useSearchcraftStore } from '@provider/store';
-
 import { parseCustomStyles } from '@utils/utils';
-
 import type { ScInputCustomEvent } from '@components/searchcraft-input/searchcraft-input';
+
+import packageJson from '../../../package.json';
 
 @Component({
   tag: 'searchcraft-auto-search-form',
   styleUrl: 'searchcraft-auto-search-form.module.scss',
-  shadow: true,
+  shadow: false,
 })
 export class SearchcraftAutoSearchForm {
   @Prop() autoSearchFormClass = '';
   @Prop() clearInput: () => void = () => {};
-  @Prop() config: CoreConfigSDK = {
-    apiKey: '',
+  @Prop() config: SearchcraftConfig = {
+    readKey: '',
     endpointURL: '',
     index: [],
+    organizationId: '',
+    applicationId: '',
   };
   @Prop() customStylesForInput: string | Record<string, string> = {};
   @Prop() inputCaptionValue = '';
@@ -55,7 +58,10 @@ export class SearchcraftAutoSearchForm {
   unsubscribe: () => void;
 
   componentDidLoad() {
-    const searchcraft = new SearchcraftCore(this.config);
+    const searchcraft = new SearchcraftCore(this.config, {
+      sdkName: packageJson.name,
+      sdkVersion: packageJson.version,
+    });
     this.searchStore.initialize(searchcraft, true);
 
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {
@@ -75,6 +81,7 @@ export class SearchcraftAutoSearchForm {
     this.searchStore.setQuery(this.query);
     if (this.query.trim() === '') {
       this.searchResults = null;
+      this.inputClearedOrNoResults.emit();
       this.searchStore.setSearchResults(null);
     }
   };
@@ -94,6 +101,7 @@ export class SearchcraftAutoSearchForm {
       if (this.query.trim() === '') {
         this.searchResults = null;
         this.searchStore.setSearchResults(null);
+        this.inputClearedOrNoResults.emit();
       } else {
         this.searchStore.setQuery(this.query);
         this.querySubmit.emit(this.query);
@@ -149,9 +157,11 @@ export class SearchcraftAutoSearchForm {
   render() {
     const formClass = this.rightToLeftOrientation ? 'formRTL' : 'formLTR';
     const parsedCustomStyles = parseCustomStyles(this.customStylesForInput);
-
     return (
-      <form class={`${formClass}`} onSubmit={this.handleFormSubmit}>
+      <form
+        class={classNames(`${formClass}`, 'searchcraft-auto-search-form')}
+        onSubmit={this.handleFormSubmit}
+      >
         <searchcraft-input-label label={this.labelForInput} />
         <searchcraft-input
           customStyles={parsedCustomStyles}

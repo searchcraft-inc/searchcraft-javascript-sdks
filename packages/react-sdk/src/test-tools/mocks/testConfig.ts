@@ -1,7 +1,9 @@
-import type { CoreConfigSDK } from '@searchcraft/core';
+import type { SearchcraftConfig } from '@searchcraft/core';
 
-export const TEST_REACT_SDK_CONFIGURATION: CoreConfigSDK = {
+export const TEST_REACT_SDK_CONFIGURATION: SearchcraftConfig = {
   index: ['classic_movies_index'],
-  apiKey: '1234searchcraft',
+  readKey: '1234searchcraft',
   endpointURL: '/test_url',
+  organizationId: '',
+  applicationId: '',
 };

@@ -11,16 +11,18 @@
 | ------------------ | ------------------- | ----------- | ------------------- | --------- |
 | `buttonText`       | `button-text`       |             | `string`            | `''`      |
 | `customStyles`     | `custom-styles`     |             | `string`            | `'{}'`    |
-| `headingText`      | `heading-text`      |             | `string`            | `''`      |
+| `documentPosition` | `document-position` |             | `number`            | `0`       |
 | `imageDescription` | `image-description` |             | `string`            | `''`      |
 | `imageSource`      | `image-source`      |             | `string`            | `''`      |
 | `isInteractive`    | `is-interactive`    |             | `boolean`           | `false`   |
+| `linkHref`         | `link-href`         |             | `string`            | `''`      |
 | `placeImageRight`  | `place-image-right` |             | `boolean`           | `false`   |
 | `primaryContent`   | `primary-content`   |             | `string`            | `''`      |
 | `secondaryContent` | `secondary-content` |             | `string`            | `''`      |
-| `subheadingText`   | `subheading-text`   |             | `string`            | `''`      |
+| `subtitleContent`  | `subtitle-content`  |             | `string`            | `''`      |
 | `tertiaryContent`  | `tertiary-content`  |             | `string`            | `''`      |
 | `themeMode`        | `theme-mode`        |             | `"dark" \| "light"` | `'light'` |
+| `titleContent`     | `title-content`     |             | `string`            | `''`      |
 
 
 ## Events

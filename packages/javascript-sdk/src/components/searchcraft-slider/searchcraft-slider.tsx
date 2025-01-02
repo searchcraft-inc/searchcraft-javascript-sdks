@@ -1,10 +1,19 @@
-import { Component, h, State, Prop } from '@stencil/core';
+import {
+  Component,
+  Event,
+  type EventEmitter,
+  h,
+  State,
+  Prop,
+} from '@stencil/core';
+import classNames from 'classnames';
+
 import { useSearchcraftStore } from '@provider/store';
 
 @Component({
   tag: 'searchcraft-slider',
   styleUrl: 'searchcraft-slider.module.scss',
-  shadow: true,
+  shadow: false,
 })
 export class SearchcraftSlider {
   @Prop() maxYear = new Date().getFullYear();
@@ -15,6 +24,8 @@ export class SearchcraftSlider {
   @State() query = '';
   @State() resultsCount = 0;
   @State() startYear = this.minYear;
+
+  @Event() rangeChanged: EventEmitter<{ startYear: number; endYear: number }>;
 
   private searchStore = useSearchcraftStore.getState();
 
@@ -38,6 +49,10 @@ export class SearchcraftSlider {
 
   private updateYears = async () => {
     this.searchStore.setYearsRange([this.startYear, this.endYear]);
+    this.rangeChanged.emit({
+      startYear: this.startYear,
+      endYear: this.endYear,
+    });
 
     try {
       if (typeof this.query === 'string' && this.query.trim() !== '') {
@@ -52,14 +67,18 @@ export class SearchcraftSlider {
 
   private handleStartYearChange = (event: InputEvent) => {
     const value = Number.parseInt((event.target as HTMLInputElement).value, 10);
-    this.startYear = Math.min(value, this.endYear);
-    this.updateYears();
+    if (value <= this.endYear) {
+      this.startYear = value;
+      this.updateYears();
+    }
   };
 
   private handleEndYearChange = (event: InputEvent) => {
     const value = Number.parseInt((event.target as HTMLInputElement).value, 10);
-    this.endYear = Math.max(value, this.startYear);
-    this.updateYears();
+    if (value >= this.startYear) {
+      this.endYear = value;
+      this.updateYears();
+    }
   };
 
   render() {
@@ -75,17 +94,27 @@ export class SearchcraftSlider {
       ((this.endYear - rangeMin) / (rangeMax - rangeMin)) * 100;
 
     return (
-      <div class='sliderContainer'>
-        <div class='rangeContainer'>
+      <div
+        class={classNames('sliderContainer', 'searchcraft-slider-container')}
+      >
+        <div
+          class={classNames(
+            'rangeContainer',
+            'searchcraft-slider-range-container',
+          )}
+        >
           <div
-            class='activeRange'
+            class={classNames('activeRange', 'searchcraft-slider-active-range')}
             style={{
               left: `${startPercent}%`,
               width: `${endPercent - startPercent}%`,
             }}
           />
           <input
-            class='rangeSlider'
+            class={classNames(
+              'rangeSlider',
+              'searchcraft-slider-range-slider-start-thumb',
+            )}
             max={this.maxYear}
             min={this.minYear}
             onInput={this.handleStartYearChange}
@@ -94,7 +123,10 @@ export class SearchcraftSlider {
             value={this.startYear}
           />
           <input
-            class='rangeSlider'
+            class={classNames(
+              'rangeSlider',
+              'searchcraft-slider-range-slider-end-thumb',
+            )}
             max={this.maxYear}
             min={this.minYear}
             onInput={this.handleEndYearChange}
@@ -103,9 +135,25 @@ export class SearchcraftSlider {
             value={this.endYear}
           />
         </div>
-        <div class='yearLabels'>
-          <span class='yearLabel'>{this.startYear}</span>
-          <span class='yearLabel'>{this.endYear}</span>
+        <div
+          class={classNames(
+            'yearLabels',
+            'searchcraft-slider-year-label-container',
+          )}
+        >
+          <span
+            class={classNames(
+              'yearLabel',
+              'searchcraft-slider-start-year-label',
+            )}
+          >
+            {this.startYear}
+          </span>
+          <span
+            class={classNames('yearLabel', 'searchcraft-slider-end-year-label')}
+          >
+            {this.endYear}
+          </span>
         </div>
       </div>
     );

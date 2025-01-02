@@ -14,10 +14,10 @@
 
 .labelLight {
   @include input-label-base;
-  color: $light-input-label-color;
+  color: $content-primary;
 }
 
 .labelDark {
   @include input-label-base;
-  color: $dark-input-label-color;
+  color: $content-on-brand-primary;
 }

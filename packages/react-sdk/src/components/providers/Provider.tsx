@@ -8,11 +8,7 @@ import {
 } from 'react';
 
 import type { SearchError, SearchResult } from '@searchcraft/core';
-import {
-  CoreSDK as SearchcraftCore,
-  SDKDebugger,
-  LogLevel,
-} from '@searchcraft/core';
+import { SearchcraftCore, SDKDebugger, LogLevel } from '@searchcraft/core';
 
 import {
   SearchcraftContext,

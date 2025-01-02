@@ -1,27 +1,45 @@
-import type { CoreSDK } from '../CoreSDK';
+import type { SearchcraftCore } from '../CoreSDK';
 
 /**
- * * All fields must be provided to the SDKs to use Searchcraft
+ * All fields must be provided to the SDKs to use Searchcraft
  */
-export interface CoreConfigSDK {
+export interface SearchcraftConfig {
   /**
-   * * Customer identifier for the consuming application
-   */
-  apiKey: string;
-  /**
-   * * Host IP Address and port number configured and created using Vektron
+   * Host IP Address and port number configured and created using Vektron
    */
   endpointURL: string;
   /**
-   * * Name of search database(s) configured using Vektron. Given as an array of strings
+   * Name or names of search indices configured using Vektron. Given as an array of strings
    */
   index: string[];
+  /**
+   * The Vektron Organization ID.
+   */
+  organizationId: string;
+  /**
+   * The Vektron Application ID.
+   */
+  applicationId: string;
+  /**
+   * A unique user identifier for the end user.
+   */
+  userId?: string;
+  /**
+   * The Index read key provided by Vektron.
+   */
+  readKey: string;
 }
+
+export interface SearchcraftSDKInfo {
+  sdkName: string;
+  sdkVersion: string;
+}
+
 /**
  * * Represents an instance of Searchcraft containing the core SDK.
  */
 export interface SearchcraftInstance {
-  searchcraft: CoreSDK; // The core SDK instance used for search operations
+  searchcraft: SearchcraftCore; // The core SDK instance used for search operations
 }
 
 /**

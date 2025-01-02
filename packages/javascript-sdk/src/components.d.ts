@@ -5,13 +5,13 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { CoreConfigSDK } from "@searchcraft/core";
-export { CoreConfigSDK } from "@searchcraft/core";
+import { SearchcraftConfig } from "@searchcraft/core";
+export { SearchcraftConfig } from "@searchcraft/core";
 export namespace Components {
     interface SearchcraftAutoSearchForm {
         "autoSearchFormClass": string;
         "clearInput": () => void;
-        "config": CoreConfigSDK;
+        "config": SearchcraftConfig;
         "customStylesForInput": string | Record<string, string>;
         "inputCaptionValue": string;
         "inputIconHeight": number;
@@ -22,7 +22,7 @@ export namespace Components {
         "searchContainerClass": string;
     }
     interface SearchcraftBaseSearchForm {
-        "config": CoreConfigSDK;
+        "config": SearchcraftConfig;
         "errorMessage": string;
         "labelForInput": string;
         "rightToLeftOrientation": boolean;
@@ -30,16 +30,18 @@ export namespace Components {
     interface SearchcraftBaseSearchResult {
         "buttonText": string;
         "customStyles": string;
-        "headingText": string;
+        "documentPosition": number;
         "imageDescription": string;
         "imageSource": string;
         "isInteractive": boolean;
+        "linkHref": string;
         "placeImageRight": boolean;
         "primaryContent": string;
         "secondaryContent": string;
-        "subheadingText": string;
+        "subtitleContent": string;
         "tertiaryContent": string;
         "themeMode": 'light' | 'dark';
+        "titleContent": string;
     }
     interface SearchcraftBaseSearchResults {
         "adInterval": number;
@@ -48,6 +50,7 @@ export namespace Components {
         "documentAttributesForDisplay": string;
         "fallbackElement": HTMLElement | null;
         "formatTime": boolean;
+        "isInteractive": boolean;
         "placeAdAtEnd": boolean;
         "placeAdAtStart": boolean;
         "placeResultImageRight": boolean;
@@ -75,13 +78,7 @@ export namespace Components {
     interface SearchcraftDashIcon {
     }
     interface SearchcraftErrorMessage {
-        /**
-          * The error message to display. Defaults to a standard message if not provided.
-         */
         "errorMessage"?: string;
-        /**
-          * The theme, which determines the style (light or dark).
-         */
         "theme": 'light' | 'dark';
     }
     interface SearchcraftFiltersList {
@@ -154,6 +151,10 @@ export interface SearchcraftBaseSearchResultCustomEvent<T> extends CustomEvent<T
     detail: T;
     target: HTMLSearchcraftBaseSearchResultElement;
 }
+export interface SearchcraftBaseSearchResultsCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSearchcraftBaseSearchResultsElement;
+}
 export interface SearchcraftButtonCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSearchcraftButtonElement;
@@ -169,6 +170,10 @@ export interface SearchcraftFiltersListCustomEvent<T> extends CustomEvent<T> {
 export interface SearchcraftInputCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSearchcraftInputElement;
+}
+export interface SearchcraftSliderCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSearchcraftSliderElement;
 }
 declare global {
     interface HTMLSearchcraftAutoSearchFormElementEventMap {
@@ -225,7 +230,18 @@ declare global {
         prototype: HTMLSearchcraftBaseSearchResultElement;
         new (): HTMLSearchcraftBaseSearchResultElement;
     };
+    interface HTMLSearchcraftBaseSearchResultsElementEventMap {
+        "noResults": void;
+    }
     interface HTMLSearchcraftBaseSearchResultsElement extends Components.SearchcraftBaseSearchResults, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSearchcraftBaseSearchResultsElementEventMap>(type: K, listener: (this: HTMLSearchcraftBaseSearchResultsElement, ev: SearchcraftBaseSearchResultsCustomEvent<HTMLSearchcraftBaseSearchResultsElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSearchcraftBaseSearchResultsElementEventMap>(type: K, listener: (this: HTMLSearchcraftBaseSearchResultsElement, ev: SearchcraftBaseSearchResultsCustomEvent<HTMLSearchcraftBaseSearchResultsElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSearchcraftBaseSearchResultsElement: {
         prototype: HTMLSearchcraftBaseSearchResultsElement;
@@ -361,7 +377,18 @@ declare global {
         prototype: HTMLSearchcraftSearchIconSetElement;
         new (): HTMLSearchcraftSearchIconSetElement;
     };
+    interface HTMLSearchcraftSliderElementEventMap {
+        "rangeChanged": { startYear: number; endYear: number };
+    }
     interface HTMLSearchcraftSliderElement extends Components.SearchcraftSlider, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSearchcraftSliderElementEventMap>(type: K, listener: (this: HTMLSearchcraftSliderElement, ev: SearchcraftSliderCustomEvent<HTMLSearchcraftSliderElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSearchcraftSliderElementEventMap>(type: K, listener: (this: HTMLSearchcraftSliderElement, ev: SearchcraftSliderCustomEvent<HTMLSearchcraftSliderElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSearchcraftSliderElement: {
         prototype: HTMLSearchcraftSliderElement;
@@ -414,7 +441,7 @@ declare namespace LocalJSX {
     interface SearchcraftAutoSearchForm {
         "autoSearchFormClass"?: string;
         "clearInput"?: () => void;
-        "config"?: CoreConfigSDK;
+        "config"?: SearchcraftConfig;
         "customStylesForInput"?: string | Record<string, string>;
         "inputCaptionValue"?: string;
         "inputIconHeight"?: number;
@@ -427,7 +454,7 @@ declare namespace LocalJSX {
         "searchContainerClass"?: string;
     }
     interface SearchcraftBaseSearchForm {
-        "config"?: CoreConfigSDK;
+        "config"?: SearchcraftConfig;
         "errorMessage"?: string;
         "labelForInput"?: string;
         "onClearInput"?: (event: SearchcraftBaseSearchFormCustomEvent<any>) => void;
@@ -436,19 +463,21 @@ declare namespace LocalJSX {
     interface SearchcraftBaseSearchResult {
         "buttonText"?: string;
         "customStyles"?: string;
-        "headingText"?: string;
+        "documentPosition"?: number;
         "imageDescription"?: string;
         "imageSource"?: string;
         "isInteractive"?: boolean;
+        "linkHref"?: string;
         "onButtonCallback"?: (event: SearchcraftBaseSearchResultCustomEvent<any>) => void;
         "onKeyDownCallback"?: (event: SearchcraftBaseSearchResultCustomEvent<any>) => void;
         "onResultCallback"?: (event: SearchcraftBaseSearchResultCustomEvent<any>) => void;
         "placeImageRight"?: boolean;
         "primaryContent"?: string;
         "secondaryContent"?: string;
-        "subheadingText"?: string;
+        "subtitleContent"?: string;
         "tertiaryContent"?: string;
         "themeMode"?: 'light' | 'dark';
+        "titleContent"?: string;
     }
     interface SearchcraftBaseSearchResults {
         "adInterval"?: number;
@@ -457,6 +486,8 @@ declare namespace LocalJSX {
         "documentAttributesForDisplay"?: string;
         "fallbackElement"?: HTMLElement | null;
         "formatTime"?: boolean;
+        "isInteractive"?: boolean;
+        "onNoResults"?: (event: SearchcraftBaseSearchResultsCustomEvent<void>) => void;
         "placeAdAtEnd"?: boolean;
         "placeAdAtStart"?: boolean;
         "placeResultImageRight"?: boolean;
@@ -486,13 +517,7 @@ declare namespace LocalJSX {
     interface SearchcraftDashIcon {
     }
     interface SearchcraftErrorMessage {
-        /**
-          * The error message to display. Defaults to a standard message if not provided.
-         */
         "errorMessage"?: string;
-        /**
-          * The theme, which determines the style (light or dark).
-         */
         "theme"?: 'light' | 'dark';
     }
     interface SearchcraftFiltersList {
@@ -545,6 +570,7 @@ declare namespace LocalJSX {
     interface SearchcraftSlider {
         "maxYear"?: number;
         "minYear"?: number;
+        "onRangeChanged"?: (event: SearchcraftSliderCustomEvent<{ startYear: number; endYear: number }>) => void;
     }
     interface SearchcraftSpinnerDark {
     }

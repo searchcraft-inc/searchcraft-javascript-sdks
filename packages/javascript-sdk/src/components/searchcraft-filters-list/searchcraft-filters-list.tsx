@@ -5,7 +5,9 @@ import {
   Prop,
   Event,
   type EventEmitter,
+  Fragment,
 } from '@stencil/core';
+import classNames from 'classnames';
 
 import type { Facets } from '@searchcraft/core';
 
@@ -16,7 +18,7 @@ import { flattenFacets } from '@utils/utils';
 @Component({
   tag: 'searchcraft-filters-list',
   styleUrl: 'searchcraft-filters-list.module.scss',
-  shadow: true,
+  shadow: false,
 })
 export class SearchcraftFiltersList {
   @Prop() filters: Array<{ label: string; value: string }> = [];
@@ -111,7 +113,6 @@ export class SearchcraftFiltersList {
         parentFilter?.children?.map((child) => child.value) || [];
 
       if (!isChecked) {
-        // Remove children from selectedFilters when parent is unchecked
         this.selectedFilters = this.selectedFilters.filter(
           (filter) => filter !== value && !childValues.includes(filter),
         );
@@ -132,16 +133,20 @@ export class SearchcraftFiltersList {
     this.searchStore.search();
   }
 
-  formatLabel(label: string, count: number): string {
-    return `${label.replace(/-/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase())} (${count})`;
-  }
+  formatLabel = (label: string, count: number): string =>
+    `${label.replace(/-/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase())} (${count})`;
 
   render() {
     if (!this.query || this.resultsCount === 0) {
       return null;
     }
     return (
-      <div class='filtersList'>
+      <div
+        class={classNames(
+          'filtersListContainer',
+          'searchcraft-filters-list-container',
+        )}
+      >
         {this.dynamicFilters.map((filter) => {
           const isChildSelected = filter.children
             ? filter.children.some((child) =>
@@ -150,8 +155,16 @@ export class SearchcraftFiltersList {
             : false;
 
           return (
-            <div key={filter.value} class='filterItem'>
-              <label class='checkboxLabel'>
+            <div
+              key={filter.value}
+              class={classNames('searchcraft-filters-list-item')}
+            >
+              <label
+                class={classNames(
+                  'filterCheckboxLabel',
+                  'searchcraft-filters-list-checkbox-label',
+                )}
+              >
                 <input
                   checked={this.selectedFilters.includes(filter.value)}
                   onChange={(event: Event) =>
@@ -164,31 +177,42 @@ export class SearchcraftFiltersList {
                   type='checkbox'
                 />
                 {isChildSelected ? (
-                  <div class='dashContainer'>
+                  <div
+                    class={classNames(
+                      'dashContainer',
+                      'searchcraft-filter-list-dash-container',
+                    )}
+                  >
                     <searchcraft-dash-icon />
                   </div>
                 ) : (
-                  <div class='checkContainer'>
+                  <div
+                    class={classNames(
+                      'checkContainer',
+                      'searchcraft-filter-list-check-container',
+                    )}
+                  >
                     <searchcraft-check-icon />
                   </div>
                 )}
                 {this.formatLabel(filter.label, filter.count)}
               </label>
               {filter.children && filter.children.length > 0 && (
-                <div class='childrenContainer'>
+                <Fragment>
                   {filter.children.map((child) => (
                     <label
                       key={child.value}
-                      class='childCheckboxLabel'
+                      class={classNames(
+                        'childFilterCheckboxLabel',
+                        'searchcraft-child-filter-checkbox-label',
+                      )}
                       style={{
-                        marginLeft: '20px',
                         display: this.selectedFilters.includes(filter.value)
                           ? 'flex'
                           : 'none',
                       }}
                     >
                       <input
-                        type='checkbox'
                         checked={this.selectedFilters.includes(child.value)}
                         onChange={(event: Event) =>
                           this.handleCheckboxChange(
@@ -196,8 +220,14 @@ export class SearchcraftFiltersList {
                             (event.target as HTMLInputElement).checked,
                           )
                         }
+                        type='checkbox'
                       />
-                      <div class='checkContainer'>
+                      <div
+                        class={classNames(
+                          'checkContainer',
+                          'searchcraft-filter-list-check-container',
+                        )}
+                      >
                         <searchcraft-check-icon />
                       </div>
                       {this.formatLabel(
@@ -208,7 +238,7 @@ export class SearchcraftFiltersList {
                       )}
                     </label>
                   ))}
-                </div>
+                </Fragment>
               )}
             </div>
           );

@@ -1,15 +1,26 @@
-.container {
-  border-bottom: 1px solid #D9D9D9;
+@import '../../utils/theme';
+
+:root {
+  --font-stack: Helvetica, Arial, sans-serif;
+}
+
+.resultsInfoContainer {
+  border-bottom: 1px solid $surface-disabled;
   display: flex;
   justify-content: flex-start;
   width: 100%;
 }
 
-.resultsInfo {
-  color: #292929;
+.resultsInfoContent {
+  color: $content-primary;
+  font-family: var(--font-stack);
   font-size: 18px;
   font-weight: 600;
   line-height: 20px;
-  margin: 0;
-  margin-bottom: 8px;
+  margin: 24px 0 8px;
+
+  @media (max-width: 900px) {
+    margin: 0;
+    margin-bottom: 8px;
+  }
 }

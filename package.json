@@ -18,18 +18,28 @@
   "devDependencies": {
     "@biomejs/biome": "^1.8.1",
     "@vitejs/plugin-react-swc": "^3.5.0",
+    "nodemon": "^3.1.9",
     "vite": "^5.4.1",
     "vite-plugin-dts": "^3.7.3",
     "vitest": "^1.3.1"
   },
   "scripts": {
-    "build:core": "yarn workspace @searchcraft/core build",
-    "build:sdk-react": "yarn build:core && yarn workspace @searchcraft/react-sdk build",
-    "build:sdk-javascript": "yarn build:core && yarn workspace @searchcraft/javascript-sdk build",
-    "test": "yarn test:core && yarn test:react-sdk && yarn test:javascript-sdk",
+    "build:all": "yarn build:core && yarn build:sdk-react && yarn build:sdk-javascript && yarn yalc:all",
+    "build:core": "yarn workspace @searchcraft/core build && yarn yalc:core",
+    "build:sdk-react": "yarn build:core && yarn workspace @searchcraft/react-sdk build && yarn yalc:sdk-react",
+    "build:sdk-javascript": "yarn build:core && yarn workspace @searchcraft/javascript-sdk build && yarn yalc:sdk-javascript",
+    "test:all": "yarn test:core && yarn test:react-sdk && yarn test:javascript-sdk",
     "test:core": "yarn workspace @searchcraft/core test",
     "test:sdk-react": "yarn workspace @searchcraft/react-sdk test",
-    "test:sdk-javascript": "yarn workspace @searchcraft/javascript-sdk test"
+    "test:sdk-javascript": "yarn workspace @searchcraft/javascript-sdk test",
+    "watch:all": "nodemon --exec \"yarn build:all\"",
+    "watch:core": "nodemon --exec \"yarn build:core\"",
+    "watch:sdk-react": "nodemon --exec \"yarn build:sdk-reactt\"",
+    "watch:sdk-javascript": "nodemon --exec \"yarn build:sdk-javascript\"",
+    "yalc:all": "yarn yalc:core && yarn yalc:sdk-react && yarn yalc:sdk-javascript",
+    "yalc:core": "cd packages/core-sdk && yalc publish --private && yalc push --private",
+    "yalc:sdk-react": "cd packages/react-sdk && yalc publish && yalc push",
+    "yalc:sdk-javascript": "cd packages/javascript-sdk && yalc publish && yalc push"
   },
   "bugs": {
     "url": "https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/issues"

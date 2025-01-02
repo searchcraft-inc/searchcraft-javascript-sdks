@@ -1,0 +1,15 @@
+{
+  "watch": [
+    "./packages/core-sdk",
+    "./packages/javascript-sdk",
+    "./packages/react-sdk"
+  ],
+  "ignore": [
+    "./packages/core-sdk/dist",
+    "./packages/javascript-sdk/dist",
+    "./packages/javascript-sdk/.stencil",
+    "./packages/javascript-sdk/www",
+    "./packages/react-sdk/dist"
+  ],
+  "ext": "js,jsx,ts,tsx,json"
+}
