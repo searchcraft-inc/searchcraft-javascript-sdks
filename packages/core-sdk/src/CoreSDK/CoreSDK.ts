@@ -237,8 +237,6 @@ export class SearchcraftCore {
     const request: MeasureRequest = {
       event_name: eventName,
       properties: {
-        searchcraft_organization_id: this.config.organizationId,
-        searchcraft_application_id: this.config.applicationId,
         searchcraft_index_names: this.config.index,
         ...properties,
       },

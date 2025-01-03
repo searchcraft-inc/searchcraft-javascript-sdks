@@ -28,8 +28,8 @@ export interface MeasureRequest {
  * Properties attached to a measure request.
  */
 export interface MeasureRequestProperties {
-  searchcraft_organization_id: string;
-  searchcraft_application_id: string;
+  searchcraft_organization_id?: string;
+  searchcraft_application_id?: string;
   searchcraft_index_names: string[];
   search_term?: string;
   number_of_documents?: number;

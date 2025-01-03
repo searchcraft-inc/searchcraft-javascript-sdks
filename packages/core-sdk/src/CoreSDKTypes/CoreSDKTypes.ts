@@ -13,14 +13,6 @@ export interface SearchcraftConfig {
    */
   index: string[];
   /**
-   * The Vektron Organization ID.
-   */
-  organizationId: string;
-  /**
-   * The Vektron Application ID.
-   */
-  applicationId: string;
-  /**
    * A unique user identifier for the end user.
    */
   userId?: string;
