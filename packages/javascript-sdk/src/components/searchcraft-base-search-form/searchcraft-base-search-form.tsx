@@ -19,8 +19,6 @@ export class SearchcraftBaseSearchForm {
     readKey: '',
     endpointURL: '',
     index: [],
-    organizationId: '',
-    applicationId: '',
   };
   @Prop() errorMessage = 'Search was unsuccessful';
   @Prop() labelForInput = 'Search';
