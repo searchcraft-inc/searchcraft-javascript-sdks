@@ -11,6 +11,7 @@
   "license": "Apache-2.0",
   "private": true,
   "workspaces": [
+    "packages/compendium",
     "packages/core-sdk",
     "packages/react-sdk",
     "packages/javascript-sdk"
@@ -28,13 +29,14 @@
     "build:core": "yarn workspace @searchcraft/core build && yarn yalc:core",
     "build:sdk-react": "yarn build:core && yarn workspace @searchcraft/react-sdk build && yarn yalc:sdk-react",
     "build:sdk-javascript": "yarn build:core && yarn workspace @searchcraft/javascript-sdk build && yarn yalc:sdk-javascript",
+    "storybook": "yarn workspace compendium storybook",
     "test:all": "yarn test:core && yarn test:react-sdk && yarn test:javascript-sdk",
     "test:core": "yarn workspace @searchcraft/core test",
     "test:sdk-react": "yarn workspace @searchcraft/react-sdk test",
     "test:sdk-javascript": "yarn workspace @searchcraft/javascript-sdk test",
     "watch:all": "nodemon --exec \"yarn build:all\"",
     "watch:core": "nodemon --exec \"yarn build:core\"",
-    "watch:sdk-react": "nodemon --exec \"yarn build:sdk-reactt\"",
+    "watch:sdk-react": "nodemon --exec \"yarn build:sdk-react\"",
     "watch:sdk-javascript": "nodemon --exec \"yarn build:sdk-javascript\"",
     "yalc:all": "yarn yalc:core && yarn yalc:sdk-react && yarn yalc:sdk-javascript",
     "yalc:core": "cd packages/core-sdk && yalc publish --private && yalc push --private",
