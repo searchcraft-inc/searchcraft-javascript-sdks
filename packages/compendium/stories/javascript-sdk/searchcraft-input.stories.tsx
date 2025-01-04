@@ -4,7 +4,7 @@ import WebComponentWrapper from './_WebComponentWrapper';
 const componentName = 'searchcraft-input';
 
 const componentMeta: Meta = {
-  title: 'Javascript SDK/searchcraft-input',
+  title: 'Javascript SDK/searchcraft-input/searchcraft-input',
   argTypes: {
     customStyles: { control: 'object' },
     error: { control: 'boolean' },
