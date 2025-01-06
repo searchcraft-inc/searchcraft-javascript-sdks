@@ -34,7 +34,7 @@ export class SearchcraftToggleButton {
     );
     if (this.autoSearchFormElement) {
       this.autoSearchFormElement.addEventListener(
-        'querySubmit',
+        'inputClearedOrNoResults',
         this.handleSearchRequest,
       );
     }
@@ -46,7 +46,7 @@ export class SearchcraftToggleButton {
     }
     if (this.autoSearchFormElement) {
       this.autoSearchFormElement.addEventListener(
-        'querySubmit',
+        'inputClearedOrNoResults',
         this.handleSearchRequest,
       );
     }
