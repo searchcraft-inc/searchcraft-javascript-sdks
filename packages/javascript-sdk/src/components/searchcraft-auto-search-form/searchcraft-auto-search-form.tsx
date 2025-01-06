@@ -78,6 +78,7 @@ export class SearchcraftAutoSearchForm {
     this.query = event.detail;
     this.searchStore.setQuery(this.query);
     if (this.query.trim() === '') {
+      this.searchStore.setQuery('');
       this.searchResults = null;
       this.inputClearedOrNoResults.emit();
       this.searchStore.setSearchResults(null);
@@ -97,6 +98,7 @@ export class SearchcraftAutoSearchForm {
 
     this.debounceTimeout = setTimeout(() => {
       if (this.query.trim() === '') {
+        this.searchStore.setQuery('');
         this.searchResults = null;
         this.searchStore.setSearchResults(null);
         this.inputClearedOrNoResults.emit();

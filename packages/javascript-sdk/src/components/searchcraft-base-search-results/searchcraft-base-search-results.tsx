@@ -76,7 +76,7 @@ export class SearchcraftBaseSearchResults {
   }
 
   render() {
-    if (!this.hasSearched) {
+    if (this.query.trim() === '') {
       return (
         <div
           class={classNames(
@@ -154,8 +154,7 @@ export class SearchcraftBaseSearchResults {
             'searchcraft-beginning-injected-ad-section',
           )}
         >
-          <span>##</span>
-          <p> Ad Impressions</p>
+          <p>Ad</p>
         </div>,
       );
     }
@@ -172,8 +171,7 @@ export class SearchcraftBaseSearchResults {
                 'searchcraft-dynamic-injected-ad-section',
               )}
             >
-              <span>##</span>
-              <p> Ad Impressions</p>
+              <p>Ad</p>
             </div>,
           );
         }
@@ -188,13 +186,13 @@ export class SearchcraftBaseSearchResults {
           key='ad-section-end'
           class={classNames('adSection', 'searchcraft-end-injected-ad-section')}
         >
-          <span>##</span>
-          <p> Ad Impressions</p>
+          <p>Ad</p>
         </div>,
       );
     }
 
     if (this.query.length > 0 && this.searchResults?.data?.hits?.length === 0) {
+      console.log();
       this.noResults.emit();
     }
 
