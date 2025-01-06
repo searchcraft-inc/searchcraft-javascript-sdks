@@ -17,9 +17,8 @@ export class SearchcraftToggleButton {
   @Prop() type: 'mode' | 'sort' = 'mode';
 
   @State() isActive = false;
-  @State() query = ''; // Track the query
-  @State() resultsCount = 0; // Track the count of search results
-
+  @State() query = '';
+  @State() resultsCount = 0;
   private autoSearchFormElement: HTMLElement | null = null;
   private searchStore = useSearchcraftStore.getState();
   private unsubscribe: () => void;
