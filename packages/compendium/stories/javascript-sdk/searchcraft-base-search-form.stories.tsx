@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import WebComponentWrapper from './_WebComponentWrapper';
+import WebComponentWrapper from '../../utils/WebComponentWrapper';
 import type { SearchcraftConfig } from '@searchcraft/javascript-sdk';
+import { config } from '../../utils/DefaultSearchcraftConfig';
 
 const componentName = 'searchcraft-base-search-form';
 
@@ -39,11 +40,7 @@ type ComponentProps = {
 };
 
 const defaultProps: ComponentProps = {
-  config: {
-    readKey: '',
-    endpointURL: '',
-    index: [],
-  },
+  config: config,
   errorMessage: 'Search was unsuccessful',
   labelForInput: 'Search',
   rightToLeftOrientation: false,

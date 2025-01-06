@@ -1,5 +1,5 @@
 import type { StoryObj } from '@storybook/react';
-import WebComponentWrapper from './_WebComponentWrapper';
+import WebComponentWrapper from '../../utils/WebComponentWrapper';
 
 export default {
   title: 'Javascript SDK/searchcraft-spinner',

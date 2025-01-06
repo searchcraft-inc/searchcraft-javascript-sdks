@@ -64,3 +64,4 @@ styled-system-studio
 packages/javascript-sdk/www
 
 *storybook.log
+.env
