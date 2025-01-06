@@ -15,6 +15,11 @@
     font-family: var(--sc-font-family);
     font-size: 16px;
     font-weight: 400;
+    transition: opacity 0.2s ease;
+  }
+
+  &:focus::placeholder {
+    opacity: 0;
   }
 }
 
