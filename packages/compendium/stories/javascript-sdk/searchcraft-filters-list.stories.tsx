@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import WebComponentWrapper from './_WebComponentWrapper';
+import WebComponentWrapper from '../../utils/WebComponentWrapper';
 
 const componentName = 'searchcraft-filters-list';
 
 const componentMeta: Meta = {
-  title: 'Javascript SDK/SearchcraftFiltersList',
+  title: 'Javascript SDK/searchcraft-filters-list',
   argTypes: {
     filters: {
       control: 'object',

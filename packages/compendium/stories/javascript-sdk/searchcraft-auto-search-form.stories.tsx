@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import type { SearchcraftConfig } from '@searchcraft/javascript-sdk';
-import WebComponentWrapper from './_WebComponentWrapper';
+import WebComponentWrapper from '../../utils/WebComponentWrapper';
+import { config } from '../../utils/DefaultSearchcraftConfig';
 
 const componentName = 'searchcraft-auto-search-form';
 
@@ -79,11 +80,7 @@ type ComponentProps = {
 
 const defaultProps: ComponentProps = {
   autoSearchFormClass: '',
-  config: {
-    readKey: '',
-    endpointURL: '',
-    index: [],
-  },
+  config: config,
   customStylesForInput: '{}',
   inputCaptionValue: 'Search',
   inputIconHeight: 20,
