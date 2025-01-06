@@ -6,7 +6,7 @@ defineCustomElements();
 const preview: Preview = {
   parameters: {
     backgrounds: {
-      default: 'dark',
+      default: 'light',
     },
     controls: {
       matchers: {

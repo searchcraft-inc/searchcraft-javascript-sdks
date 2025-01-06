@@ -1,11 +1,5 @@
-@import '../../utils/theme';
-
-:root {
-  --font-stack: Helvetica, Arial, sans-serif;
-}
-
 @mixin input-caption-base {
-  font-family: var(--font-stack);
+  font-family: var(--sc-font-family);
   font-size: 12px;
   font-weight: 400;
   line-height: 16px;
@@ -14,12 +8,12 @@
 
 @mixin input-caption-base-light {
   @include input-caption-base;
-  color: $content-secondary;
+  color: var(--sc-content-secondary);
 }
 
 @mixin input-caption-base-dark {
   @include input-caption-base;
-  color: $border-primary;
+  color: var(--sc-border-primary);
 }
 
 .inputCaptionLightLTR {
@@ -32,12 +26,12 @@
 
 .inputCaptionErrorLightLTR {
   @include input-caption-base;
-  color: $content-danger;
+  color: var(--sc-content-danger);
 }
 
 .inputCaptionErrorDarkLTR {
   @include input-caption-base;
-  color: $surface-danger-secondary-active;
+  color: var(--sc-surface-danger-secondary-active);
 }
 
 .inputCaptionLightRTL {
@@ -52,12 +46,12 @@
 
 .inputCaptionErrorLightRTL {
   @include input-caption-base;
-  color: $content-danger;
+  color: var(--sc-content-danger);
   text-align: right;
 }
 
 .inputCaptionErrorDarkRTL {
   @include input-caption-base;
-  color: $surface-danger-secondary-active;
+  color: var(--sc-surface-danger-secondary-active);
   text-align: right;
 }

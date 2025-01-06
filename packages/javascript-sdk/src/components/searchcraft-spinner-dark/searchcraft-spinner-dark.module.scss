@@ -1,9 +1,7 @@
-$spinner-size: 20px;
-
 .spinnerContainer {
   background-color: transparent;
-  height: $spinner-size;
-  width: $spinner-size;
+  height: var(--sc-spinner-size);
+  width: var(--sc-spinner-size);
 }
 
 .spinnerDark {
@@ -11,7 +9,7 @@ $spinner-size: 20px;
   background: conic-gradient(#000 50%, #FFFFFF);
   clip-path: circle(50%);
   height: 100%;
-  mask-image: radial-gradient(circle at center, rgba(0,0,0,0) calc($spinner-size/3), rgba(0,0,0,1) calc($spinner-size/3));
+  mask-image: radial-gradient(circle at center, rgba(0,0,0,0) calc(var(--sc-spinner-size)/3), rgba(0,0,0,1) calc(var(--sc-spinner-size)/3));
   width: 100%;
 }
 
@@ -20,7 +18,7 @@ $spinner-size: 20px;
   background: conic-gradient(#737373 50%, #FFFFFF);
   clip-path: circle(50%);
   height: 100%;
-  mask-image: radial-gradient(circle at center, rgba(0,0,0,0) calc($spinner-size/3), rgba(0,0,0,1) calc($spinner-size/3));
+  mask-image: radial-gradient(circle at center, rgba(0,0,0,0) calc(var(--sc-spinner-size)/3), rgba(0,0,0,1) calc(var(--sc-spinner-size)/3));
   width: 100%;
 }
 

@@ -11,5 +11,5 @@
     "./packages/javascript-sdk/www",
     "./packages/react-sdk/dist"
   ],
-  "ext": "js,jsx,ts,tsx,json"
+  "ext": "js,jsx,ts,tsx,json,css,scss"
 }

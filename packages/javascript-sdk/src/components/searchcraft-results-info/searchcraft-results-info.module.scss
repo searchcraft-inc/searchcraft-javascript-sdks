@@ -1,19 +1,13 @@
-@import '../../utils/theme';
-
-:root {
-  --font-stack: Helvetica, Arial, sans-serif;
-}
-
 .resultsInfoContainer {
-  border-bottom: 1px solid $surface-disabled;
+  border-bottom: 1px solid var(--sc-surface-disabled);
   display: flex;
   justify-content: flex-start;
   width: 100%;
 }
 
 .resultsInfoContent {
-  color: $content-primary;
-  font-family: var(--font-stack);
+  color: var(--sc-content-primary);
+  font-family: var(--sc-font-family);
   font-size: 18px;
   font-weight: 600;
   line-height: 20px;

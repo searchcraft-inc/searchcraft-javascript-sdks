@@ -1,15 +1,11 @@
-:root {
-  --font-stack: Helvetica, Arial, sans-serif;
-}
-
 .formLTR {
-  font-family: var(--font-stack);
+  font-family: var(--sc-font-family);
   text-align: left;
   width: 100%;
 }
 
 .formRTL {
-  font-family: var(--font-stack);
+  font-family: var(--sc-font-family);
   text-align: right;
   width: 100%;
 }

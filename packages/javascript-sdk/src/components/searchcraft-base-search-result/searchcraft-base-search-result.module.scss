@@ -1,9 +1,3 @@
-@import '../../utils/theme';
-
-:root {
-  --font-stack: Helvetica, Arial, sans-serif;
-}
-
 @mixin interactive-result-container-base {
   align-items: flex-start;
   border-radius: 16px;
@@ -21,12 +15,12 @@
 
 .interactiveResultContainerLight {
   @include interactive-result-container-base;
-  background-color: $surface-primary-active;
+  background-color: var(--sc-surface-primary-active);
 }
 
 .interactiveResultContainerDark {
   @include interactive-result-container-base;
-  background-color: $surface-brand-primary-hover;
+  background-color: var(--sc-surface-brand-primary-hover);
 }
 
 .resultContainer {
@@ -110,7 +104,7 @@
 }
 
 @mixin title-base {
-  font-family: var(--font-stack);
+  font-family: var(--sc-font-family);
   font-size: 16px;
   font-weight: 700;
   line-height: 20px;
@@ -122,16 +116,16 @@
 
 .titleLight {
   @include title-base;
-  color: $content-primary;
+  color: var(--sc-content-primary);
 }
 
 .titleDark {
   @include title-base;
-  color: $content-on-brand-primary;
+  color: var(--sc-content-on-brand-primary);
 }
 
 @mixin subtitle-base {
-  font-family: var(--font-stack);
+  font-family: var(--sc-font-family);
   font-size: 12px;
   font-weight: 400;
   line-height: 16px;
@@ -142,16 +136,16 @@
 
 .subtitleContentLight {
   @include subtitle-base;
-  color: $content-disabled;
+  color: var(--sc-content-disabled);
 }
 
 .subtitleContentDark {
   @include subtitle-base;
-  color: $content-disabled-secondary;
+  color: var(--sc-content-disabled-secondary);
 }
 
 @mixin body-content-base {
-  font-family: var(--font-stack);
+  font-family: var(--sc-font-family);
   font-size: 16px;
   font-weight: 400;
   line-height: 20px;
@@ -162,31 +156,31 @@
 
 .primaryContentLight {
   @include body-content-base;
-  color: $surface-success-secondary;
+  color: var(--sc-surface-success-secondary);
 }
 
 .primaryContentDark {
   @include body-content-base;
-  color: $border-primary;
+  color: var(--sc-border-primary);
 }
 
 .secondaryContentLight {
   @include body-content-base;
-  color: $surface-success-secondary;
+  color: var(--sc-surface-success-secondary);
 }
 
 .secondaryContentDark {
   @include body-content-base;
-  color: $border-primary;
+  color: var(--sc-border-primary);
 }
 
 .tertiaryContentLight {
   @include body-content-base;
-  color: $surface-success-secondary;
+  color: var(--sc-surface-success-secondary);
 }
 
 .tertiaryContentLight.hasContent::before {
-  color: $surface-success-secondary;
+  color: var(--sc-surface-success-secondary);
   content: "•";
   font-size: 10px;
   margin-left: 5px;
@@ -195,11 +189,11 @@
 
 .tertiaryContentDark {
   @include body-content-base;
-  color: $border-primary;
+  color: var(--sc-border-primary);
 }
 
 .tertiaryContentDark.hasContent::before {
-  color: $surface-success-secondary;
+  color: var(--sc-surface-success-secondary);
   content: "•";
   font-size: 10px;
   margin-left: 5px;

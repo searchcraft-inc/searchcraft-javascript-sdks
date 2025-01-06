@@ -5,7 +5,7 @@ export const config: Config = {
   namespace: 'searchcraft-javascript-sdk',
   plugins: [
     sass({
-      injectGlobalPaths: ['src/utils/_theme.scss'],
+      injectGlobalPaths: ['src/theme/main.scss'],
     }),
   ],
   outputTargets: [
