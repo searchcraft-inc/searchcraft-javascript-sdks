@@ -1,16 +1,12 @@
-:root {
-  --font-stack: Helvetica, Arial, sans-serif;
-}
-
 .filtersListContainer {
   width: 100%;
 }
 
 .filterCheckboxLabel {
   align-items: center;
-  color: $content-primary;
+  color: var(--sc-content-primary);
   display: flex;
-  font-family: var(--font-stack);
+  font-family: var(--sc-font-family);
   font-size: 14px;
   font-weight: 600;
   gap: 14px;
@@ -21,8 +17,8 @@
 .filterCheckboxLabel input[type="checkbox"] {
   align-items: center;
   appearance: none;
-  background-color: $surface-brand-secondary-hover;
-  border: 1px solid $surface-disabled;
+  background-color: var(--sc-surface-brand-secondary-hover);
+  border: 1px solid var(--sc-surface-disabled);
   border-radius: 8px;
   cursor: pointer;
   display: flex;
@@ -32,11 +28,11 @@
 }
 
 .filterCheckboxLabel input[type="checkbox"]:focus {
-  outline: 2px solid $surface-brand-primary;
+  outline: 2px solid var(--sc-surface-brand-primary);
 }
 
 .filterCheckboxLabel input[type="checkbox"]:checked {
-  background-color: $surface-brand-primary;
+  background-color: var(--sc-surface-brand-primary);
   position: relative;
 }
 
@@ -50,9 +46,9 @@
 
 .childFilterCheckboxLabel {
   align-items: center;
-  color: $content-primary;
+  color: var(--sc-content-primary);
   display: flex;
-  font-family: var(--font-stack);
+  font-family: var(--sc-font-family);
   font-size: 14px;
   font-weight: 600;
   gap: 12px;
@@ -63,8 +59,8 @@
 .childFilterCheckboxLabel input[type="checkbox"] {
   align-items: center;
   appearance: none;
-  background-color: $surface-brand-secondary-hover;
-  border: 1px solid $surface-disabled;
+  background-color: var(--sc-surface-brand-secondary-hover);
+  border: 1px solid var(--sc-surface-disabled);
   border-radius: 8px;
   cursor: pointer;
   display: flex;
@@ -76,11 +72,11 @@
 }
 
 .childFilterCheckboxLabel input[type="checkbox"]:focus {
-  outline: 2px solid $surface-brand-primary;
+  outline: 2px solid var(--sc-surface-brand-primary);
 }
 
 .childFilterCheckboxLabel input[type="checkbox"]:checked {
-  background-color: $surface-brand-primary;
+  background-color: var(--sc-surface-brand-primary);
   position: relative;
 }
 
