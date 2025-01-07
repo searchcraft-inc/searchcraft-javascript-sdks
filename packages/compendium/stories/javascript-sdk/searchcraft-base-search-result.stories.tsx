@@ -6,7 +6,7 @@ const componentName = 'searchcraft-base-search-result';
 const componentMeta: Meta = {
   title: 'Javascript SDK/searchcraft-base-search-result',
   argTypes: {
-    buttonText: {
+    buttonLabel: {
       control: 'text',
       description: 'Text for the button inside the search result.',
     },
@@ -26,19 +26,15 @@ const componentMeta: Meta = {
       control: 'text',
       description: 'Source URL for the search result image.',
     },
-    isInteractive: {
-      control: 'boolean',
-      description: 'Whether the search result is interactive.',
-    },
     linkHref: {
       control: 'text',
       description: 'URL for the search result link.',
     },
-    primaryContent: {
+    bodyContent: {
       control: 'text',
       description: 'Primary content displayed in the search result.',
     },
-    secondaryContent: {
+    footerContent: {
       control: 'text',
       description: 'Secondary content displayed in the search result.',
     },
@@ -46,17 +42,9 @@ const componentMeta: Meta = {
       control: 'text',
       description: 'Subtitle content displayed in the search result.',
     },
-    tertiaryContent: {
-      control: 'text',
-      description: 'Tertiary content displayed in the search result.',
-    },
-    themeMode: {
+    imagePlacement: {
       control: 'select',
-      options: ['light', 'dark'],
-      description: 'Theme mode for the search result.',
-    },
-    placeImageRight: {
-      control: 'boolean',
+      options: ['left', 'right'],
       description: 'Whether the image is placed to the right.',
     },
     documentPosition: {
@@ -67,36 +55,30 @@ const componentMeta: Meta = {
 };
 
 type ComponentProps = {
-  buttonText?: string;
+  buttonLabel?: string;
   customStyles?: string | Record<string, string>;
   titleContent?: string;
+  subtitleContent?: string;
+  bodyContent?: string;
+  footerContent?: string;
   imageDescription?: string;
   imageSource?: string;
-  isInteractive?: boolean;
   linkHref?: string;
-  primaryContent?: string;
-  secondaryContent?: string;
-  subtitleContent?: string;
-  tertiaryContent?: string;
-  themeMode?: 'light' | 'dark';
-  placeImageRight?: boolean;
+  imagePlacement?: 'left' | 'right';
   documentPosition?: number;
 };
 
 const defaultProps: ComponentProps = {
-  buttonText: 'Learn More',
+  buttonLabel: 'Learn More',
   customStyles: '{}',
   titleContent: 'Example Title',
   imageDescription: 'An example image',
   imageSource: 'https://via.placeholder.com/150',
-  isInteractive: true,
   linkHref: 'https://example.com',
-  primaryContent: 'This is the primary content.',
-  secondaryContent: 'This is the secondary content.',
+  bodyContent: 'This is the primary content.',
+  footerContent: 'This is the secondary content.',
   subtitleContent: 'Example Subtitle',
-  tertiaryContent: 'Additional tertiary content.',
-  themeMode: 'light',
-  placeImageRight: false,
+  imagePlacement: 'right',
   documentPosition: 1,
 };
 

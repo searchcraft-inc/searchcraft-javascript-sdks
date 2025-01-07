@@ -28,19 +28,16 @@ export namespace Components {
         "inputLabel": string;
     }
     interface SearchcraftBaseSearchResult {
-        "buttonText": string;
+        "bodyContent": string;
+        "buttonLabel": string;
         "customStyles": string;
         "documentPosition": number;
+        "footerContent": string;
         "imageDescription": string;
+        "imagePlacement": 'left' | 'right';
         "imageSource": string;
-        "isInteractive": boolean;
-        "linkHref": string;
-        "placeImageRight": boolean;
-        "primaryContent": string;
-        "secondaryContent": string;
+        "linkHref": string | undefined;
         "subtitleContent": string;
-        "tertiaryContent": string;
-        "themeMode": 'light' | 'dark';
         "titleContent": string;
     }
     interface SearchcraftBaseSearchResults {
@@ -50,10 +47,9 @@ export namespace Components {
         "documentAttributesForDisplay": string;
         "fallbackElement": HTMLElement | null;
         "formatTime": boolean;
-        "isInteractive": boolean;
         "placeAdAtEnd": boolean;
         "placeAdAtStart": boolean;
-        "placeResultImageRight": boolean;
+        "resultImagePlacement": 'left' | 'right';
     }
     interface SearchcraftButton {
         "iconElement"?: Element;
@@ -405,22 +401,19 @@ declare namespace LocalJSX {
         "onClearInput"?: (event: SearchcraftBaseSearchFormCustomEvent<any>) => void;
     }
     interface SearchcraftBaseSearchResult {
-        "buttonText"?: string;
+        "bodyContent"?: string;
+        "buttonLabel"?: string;
         "customStyles"?: string;
         "documentPosition"?: number;
+        "footerContent"?: string;
         "imageDescription"?: string;
+        "imagePlacement"?: 'left' | 'right';
         "imageSource"?: string;
-        "isInteractive"?: boolean;
-        "linkHref"?: string;
+        "linkHref"?: string | undefined;
         "onButtonCallback"?: (event: SearchcraftBaseSearchResultCustomEvent<any>) => void;
         "onKeyDownCallback"?: (event: SearchcraftBaseSearchResultCustomEvent<any>) => void;
         "onResultCallback"?: (event: SearchcraftBaseSearchResultCustomEvent<any>) => void;
-        "placeImageRight"?: boolean;
-        "primaryContent"?: string;
-        "secondaryContent"?: string;
         "subtitleContent"?: string;
-        "tertiaryContent"?: string;
-        "themeMode"?: 'light' | 'dark';
         "titleContent"?: string;
     }
     interface SearchcraftBaseSearchResults {
@@ -430,11 +423,10 @@ declare namespace LocalJSX {
         "documentAttributesForDisplay"?: string;
         "fallbackElement"?: HTMLElement | null;
         "formatTime"?: boolean;
-        "isInteractive"?: boolean;
         "onNoResults"?: (event: SearchcraftBaseSearchResultsCustomEvent<void>) => void;
         "placeAdAtEnd"?: boolean;
         "placeAdAtStart"?: boolean;
-        "placeResultImageRight"?: boolean;
+        "resultImagePlacement"?: 'left' | 'right';
     }
     interface SearchcraftButton {
         "iconElement"?: Element;
