@@ -15,6 +15,7 @@ const componentMeta: Meta = {
     isRequesting: { control: 'boolean' },
     placeholderValue: { control: 'text' },
     query: { control: 'text' },
+    flex: { control: 'boolean' },
   },
 };
 
@@ -28,6 +29,7 @@ type ComponentProps = {
   isRequesting?: boolean;
   placeholderValue?: string;
   query?: string;
+  flex?: boolean;
 };
 
 const defaultProps: ComponentProps = {
@@ -40,11 +42,14 @@ const defaultProps: ComponentProps = {
   isRequesting: false,
   placeholderValue: 'Enter Search',
   query: '',
+  flex: false,
 };
 
 export const Default: StoryObj<ComponentProps> = {
   render: (args) => (
-    <WebComponentWrapper args={args} componentName={componentName} />
+    <div style={{ display: 'flex' }}>
+      <WebComponentWrapper args={args} componentName={componentName} />
+    </div>
   ),
   args: defaultProps,
 };

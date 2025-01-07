@@ -11,6 +11,7 @@
 | ----------------------- | -------------------------- | ----------- | ------------------------------------ | ---------------- |
 | `customStyles`          | `custom-styles`            |             | `string \| { [x: string]: string; }` | `{}`             |
 | `error`                 | `error`                    |             | `boolean`                            | `false`          |
+| `flex`                  | `flex`                     |             | `boolean`                            | `true`           |
 | `inputCaptionClassName` | `input-caption-class-name` |             | `string`                             | `''`             |
 | `inputCaptionValue`     | `input-caption-value`      |             | `string`                             | `''`             |
 | `inputClassName`        | `input-class-name`         |             | `string`                             | `''`             |

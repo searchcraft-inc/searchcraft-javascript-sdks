@@ -30,6 +30,7 @@ export class SearchcraftInput {
   @Prop() isRequesting = false;
   @Prop() placeholderValue = 'Enter Search';
   @Prop() query = '';
+  @Prop() flex = true;
 
   @Event() clearInput: EventEmitter<void>;
   @Event() searchInputChange: EventEmitter<string>;
@@ -62,17 +63,22 @@ export class SearchcraftInput {
   render() {
     const validatedCustomStyles = parseCustomStyles(this.customStyles);
 
-    const inputClassName = classNames('searchcraft-input', {
+    const inputWrapperClassNames = classNames('searchcraft-input-wrapper', {
+      'searchcraft-input-wrapper-flex': this.flex,
+    });
+
+    const inputClassNames = classNames('searchcraft-input', {
+      'searchcraft-input-flex': this.flex,
       error: this.error,
     });
 
     const isShowingClearButton = this.inputValue.length > 0;
 
     return (
-      <div class='searchcraft-input-wrapper'>
+      <div class={inputWrapperClassNames}>
         <input
           autoComplete='off'
-          class={inputClassName}
+          class={inputClassNames}
           onChange={this.handleInputChange.bind(this)}
           onKeyUp={this.handleInputKeyUp.bind(this)}
           placeholder={this.placeholderValue}
