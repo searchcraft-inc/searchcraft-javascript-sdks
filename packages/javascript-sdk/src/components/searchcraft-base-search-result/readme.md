@@ -7,22 +7,19 @@
 
 ## Properties
 
-| Property           | Attribute           | Description | Type                | Default   |
-| ------------------ | ------------------- | ----------- | ------------------- | --------- |
-| `buttonText`       | `button-text`       |             | `string`            | `''`      |
-| `customStyles`     | `custom-styles`     |             | `string`            | `'{}'`    |
-| `documentPosition` | `document-position` |             | `number`            | `0`       |
-| `imageDescription` | `image-description` |             | `string`            | `''`      |
-| `imageSource`      | `image-source`      |             | `string`            | `''`      |
-| `isInteractive`    | `is-interactive`    |             | `boolean`           | `false`   |
-| `linkHref`         | `link-href`         |             | `string`            | `''`      |
-| `placeImageRight`  | `place-image-right` |             | `boolean`           | `false`   |
-| `primaryContent`   | `primary-content`   |             | `string`            | `''`      |
-| `secondaryContent` | `secondary-content` |             | `string`            | `''`      |
-| `subtitleContent`  | `subtitle-content`  |             | `string`            | `''`      |
-| `tertiaryContent`  | `tertiary-content`  |             | `string`            | `''`      |
-| `themeMode`        | `theme-mode`        |             | `"dark" \| "light"` | `'light'` |
-| `titleContent`     | `title-content`     |             | `string`            | `''`      |
+| Property           | Attribute           | Description | Type                | Default     |
+| ------------------ | ------------------- | ----------- | ------------------- | ----------- |
+| `bodyContent`      | `body-content`      |             | `string`            | `''`        |
+| `buttonLabel`      | `button-label`      |             | `string`            | `''`        |
+| `customStyles`     | `custom-styles`     |             | `string`            | `'{}'`      |
+| `documentPosition` | `document-position` |             | `number`            | `0`         |
+| `footerContent`    | `footer-content`    |             | `string`            | `''`        |
+| `imageDescription` | `image-description` |             | `string`            | `''`        |
+| `imagePlacement`   | `image-placement`   |             | `"left" \| "right"` | `undefined` |
+| `imageSource`      | `image-source`      |             | `string`            | `''`        |
+| `linkHref`         | `link-href`         |             | `string`            | `''`        |
+| `subtitleContent`  | `subtitle-content`  |             | `string`            | `''`        |
+| `titleContent`     | `title-content`     |             | `string`            | `''`        |
 
 
 ## Events

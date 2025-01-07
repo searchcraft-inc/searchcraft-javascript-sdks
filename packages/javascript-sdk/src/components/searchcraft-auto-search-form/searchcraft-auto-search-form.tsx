@@ -6,7 +6,6 @@ import {
   type EventEmitter,
   h,
 } from '@stencil/core';
-import classNames from 'classnames';
 
 import {
   type SearchcraftConfig,
@@ -35,8 +34,7 @@ export class SearchcraftAutoSearchForm {
   };
   @Prop() customStylesForInput: string | Record<string, string> = {};
   @Prop() inputCaptionValue = '';
-  @Prop() inputIconHeight = 20;
-  @Prop() inputIconWidth = 20;
+  @Prop() inputIconSize = 20;
   @Prop() labelForInput = '';
   @Prop() placeholderValue = 'Search here';
   @Prop() rightToLeftOrientation = false;
@@ -155,19 +153,17 @@ export class SearchcraftAutoSearchForm {
   };
 
   render() {
-    const formClass = this.rightToLeftOrientation ? 'formRTL' : 'formLTR';
     const parsedCustomStyles = parseCustomStyles(this.customStylesForInput);
     return (
       <form
-        class={classNames(`${formClass}`, 'searchcraft-auto-search-form')}
+        class='searchcraft-auto-search-form'
         onSubmit={this.handleFormSubmit}
       >
         <searchcraft-input-label label={this.labelForInput} />
         <searchcraft-input
           customStyles={parsedCustomStyles}
           input-caption-value={this.inputCaptionValue}
-          input-icon-height={this.inputIconHeight}
-          input-icon-width={this.inputIconWidth}
+          input-icon-size={this.inputIconSize}
           is-requesting={this.isRequesting}
           onClearInput={this.handleClearInput}
           onInputKeyUp={this.handleInputKeyUp}

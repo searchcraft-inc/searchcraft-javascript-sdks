@@ -23,24 +23,17 @@ export class SearchcraftButton {
   @Event() buttonClick!: EventEmitter<void>;
 
   @State() isRequesting = false;
-  @State() theme = 'light';
-
-  private getButtonStyle() {
-    return this.theme === 'light' ? 'buttonLight' : 'buttonDark';
-  }
 
   private handleClick = () => {
     this.buttonClick.emit();
   };
 
   render() {
-    const buttonStyle = this.getButtonStyle();
-
     return (
       <Fragment>
         {this.iconOnly ? (
           <button
-            class={classNames(buttonStyle, 'searchcraft-button')}
+            class={classNames('searchcraft-button')}
             onClick={this.handleClick}
             type='submit'
           >
@@ -52,7 +45,7 @@ export class SearchcraftButton {
           </button>
         ) : (
           <button
-            class={classNames(buttonStyle, 'searchcraft-button')}
+            class={classNames('searchcraft-button')}
             onClick={this.handleClick}
             type='submit'
           >

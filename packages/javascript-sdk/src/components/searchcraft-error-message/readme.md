@@ -7,10 +7,9 @@
 
 ## Properties
 
-| Property       | Attribute       | Description | Type                | Default     |
-| -------------- | --------------- | ----------- | ------------------- | ----------- |
-| `errorMessage` | `error-message` |             | `string`            | `undefined` |
-| `theme`        | `theme`         |             | `"dark" \| "light"` | `'light'`   |
+| Property       | Attribute       | Description | Type     | Default     |
+| -------------- | --------------- | ----------- | -------- | ----------- |
+| `errorMessage` | `error-message` |             | `string` | `undefined` |
 
 
 ## Dependencies

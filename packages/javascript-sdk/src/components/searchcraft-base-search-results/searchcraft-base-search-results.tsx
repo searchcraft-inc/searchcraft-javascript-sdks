@@ -34,8 +34,7 @@ export class SearchcraftBaseSearchResults {
   @Prop() formatTime = true;
   @Prop() placeAdAtEnd = false;
   @Prop() placeAdAtStart = true;
-  @Prop() placeResultImageRight = false;
-  @Prop() isInteractive = false;
+  @Prop() resultImagePlacement: 'left' | 'right' = 'right';
 
   @Event() noResults: EventEmitter<void>;
 
@@ -121,22 +120,34 @@ export class SearchcraftBaseSearchResults {
           }
         }
 
+        /**
+         * Index field values -> Result container props mappings.
+         * TODO: Add support for user-specified mappings.
+         */
+        const titleContent = dynamicProperties[parsedSearchKeys[0]];
+        const subtitleContent = dynamicProperties[parsedSearchKeys[1]];
+        const bodyContent = dynamicProperties[parsedSearchKeys[2]];
+        const linkHref = dynamicProperties[parsedSearchKeys[6]] as string;
+        const imageSource = dynamicProperties[parsedSearchKeys[5]];
+
+        const footerContent = dynamicProperties[parsedSearchKeys[4]]
+          ? `${dynamicProperties[parsedSearchKeys[3]]} • ${dynamicProperties[parsedSearchKeys[4]]}`
+          : dynamicProperties[parsedSearchKeys[3]];
+
         return (
           <searchcraft-base-search-result
             button-callback={() => console.log('button callback')}
             custom-styles={serializedStyles}
-            image-source={dynamicProperties[parsedSearchKeys[5]]}
-            is-interactive={this.isInteractive}
+            image-source={imageSource}
             key={`${document.document_id}-${index}`}
             keydown-callback={() => console.log('keydown')}
-            linkHref={dynamicProperties[parsedSearchKeys[6]] as string}
-            place-image-right={this.placeResultImageRight}
-            primary-content={dynamicProperties[parsedSearchKeys[2]]}
+            linkHref={linkHref}
+            imagePlacement={this.resultImagePlacement}
             result-callback={() => console.log('interactive element')}
-            secondary-content={dynamicProperties[parsedSearchKeys[3]]}
-            subtitle-content={dynamicProperties[parsedSearchKeys[1]]}
-            tertiary-content={dynamicProperties[parsedSearchKeys[4]]}
-            title-content={dynamicProperties[parsedSearchKeys[0]]}
+            title-content={titleContent}
+            subtitle-content={subtitleContent}
+            body-content={bodyContent}
+            footer-content={footerContent}
             document-position={index}
           />
         );

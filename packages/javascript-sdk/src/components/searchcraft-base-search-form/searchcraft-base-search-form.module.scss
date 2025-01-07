@@ -1,14 +1,9 @@
-.formLTR {
-  font-family: var(--sc-font-family);
-  text-align: left;
+.searchcraft-base-search-form {
+
 }
 
-.formRTL {
-  font-family: var(--sc-font-family);
-  text-align: right;
-}
-
-.searchContainer {
+.searchcraft-base-search-form-input-container {
   align-items: center;
   display: flex;
+  gap: 8px;
 }
