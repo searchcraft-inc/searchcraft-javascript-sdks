@@ -19,6 +19,7 @@
   "devDependencies": {
     "@biomejs/biome": "^1.8.1",
     "@vitejs/plugin-react-swc": "^3.5.0",
+    "lerna": "^8.1.9",
     "nodemon": "^3.1.9",
     "vite": "^5.4.1",
     "vite-plugin-dts": "^3.7.3",
@@ -29,6 +30,7 @@
     "build:core": "yarn workspace @searchcraft/core build && yarn yalc:core",
     "build:sdk-react": "yarn build:core && yarn workspace @searchcraft/react-sdk build && yarn yalc:sdk-react",
     "build:sdk-javascript": "yarn build:core && yarn workspace @searchcraft/javascript-sdk build && yarn yalc:sdk-javascript",
+    "publish:packages": "npx lerna publish from-package",
     "storybook": "yarn workspace compendium storybook",
     "test:all": "yarn test:core && yarn test:react-sdk && yarn test:javascript-sdk",
     "test:core": "yarn workspace @searchcraft/core test",
@@ -46,5 +48,6 @@
   "bugs": {
     "url": "https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/issues"
   },
-  "homepage": "https://bitbucket.org/madebychalk/searchcraft-javascript-sdks#readme"
+  "homepage": "https://bitbucket.org/madebychalk/searchcraft-javascript-sdks#readme",
+  "dependencies": {}
 }
