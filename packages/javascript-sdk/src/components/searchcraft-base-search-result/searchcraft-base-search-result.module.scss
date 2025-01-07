@@ -30,9 +30,11 @@ a.searchcraft-search-result-container {
 
 .searchcraft-search-result-image {
   border-radius: var(--sc-image-border-radius);
-  width: 200px;
-  height: auto;
-  max-height: 400px;
+  width: 100%;
+
+  @media (min-width: 900px) {
+    width: 200px;
+  }
 }
 
 .searchcraft-base-search-result-title {
