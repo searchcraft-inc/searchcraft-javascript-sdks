@@ -6,7 +6,6 @@ import {
   State,
   type EventEmitter,
 } from '@stencil/core';
-import classNames from 'classnames';
 
 import type { SearchcraftResponse } from '@searchcraft/core';
 
@@ -77,12 +76,7 @@ export class SearchcraftBaseSearchResults {
   render() {
     if (this.query.trim() === '') {
       return (
-        <div
-          class={classNames(
-            'emptyState',
-            'searchcraft-search-results-empty-state-container',
-          )}
-        >
+        <div class='searchcraft-search-results-empty-state-container'>
           <slot name='empty-search' />
         </div>
       );
@@ -158,14 +152,8 @@ export class SearchcraftBaseSearchResults {
 
     if (this.placeAdAtStart) {
       finalComponents.push(
-        <div
-          key='ad-section-start'
-          class={classNames(
-            'adSection',
-            'searchcraft-beginning-injected-ad-section',
-          )}
-        >
-          <p>Ad</p>
+        <div key='ad-section-start' class='searchcraft-ad-section'>
+          <p>Ad Section</p>
         </div>,
       );
     }
@@ -177,12 +165,9 @@ export class SearchcraftBaseSearchResults {
           finalComponents.push(
             <div
               key={`ad-section-${index + 1}`}
-              class={classNames(
-                'adSection',
-                'searchcraft-dynamic-injected-ad-section',
-              )}
+              class='searchcraft-ad-section '
             >
-              <p>Ad</p>
+              <p>Ad Section</p>
             </div>,
           );
         }
@@ -193,11 +178,8 @@ export class SearchcraftBaseSearchResults {
 
     if (this.placeAdAtEnd) {
       finalComponents.push(
-        <div
-          key='ad-section-end'
-          class={classNames('adSection', 'searchcraft-end-injected-ad-section')}
-        >
-          <p>Ad</p>
+        <div key='ad-section-end' class='searchcraft-ad-section'>
+          <p>Ad Section</p>
         </div>,
       );
     }
@@ -208,21 +190,11 @@ export class SearchcraftBaseSearchResults {
     }
 
     return (
-      <div
-        class={classNames(
-          'resultsContainer',
-          'searchcraft-search-results-container',
-        )}
-      >
+      <div class='searchcraft-search-results-container'>
         {finalComponents}
         {this.query.length > 0 &&
           this.searchResults?.data?.hits?.length === 0 && (
-            <div
-              class={classNames(
-                'errorMessageContainer',
-                'searchcraft-search-results-error-message-container',
-              )}
-            >
+            <div class='searchcraft-search-results-error-message-container'>
               <searchcraft-error-message
                 error-message={`No search results found for "${this.query}" query`}
               />

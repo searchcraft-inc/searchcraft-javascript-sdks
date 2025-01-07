@@ -86,20 +86,19 @@ export class SearchcraftToggleButton {
     if (!this.query || this.resultsCount === 0) {
       return null;
     }
-    const toggleContainerStyle = `toggleWrapper ${this.isActive ? 'active' : ''}`;
-    const toggleSwitchStyle = `toggleSwitch ${this.isActive ? 'active' : ''}`;
 
     return (
       <button
-        class={classNames(
-          toggleContainerStyle,
-          'searchcraft-toggle-button-container',
-        )}
+        class={classNames('searchcraft-toggle-button-container', {
+          active: this.isActive,
+        })}
         onClick={this.handleToggle}
         type='button'
       >
         <div
-          class={classNames(toggleSwitchStyle, 'searchcraft-toggle-switch')}
+          class={classNames('searchcraft-toggle-button-handle', {
+            active: this.isActive,
+          })}
         />
       </button>
     );

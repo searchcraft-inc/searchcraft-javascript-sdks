@@ -50,9 +50,9 @@
     -webkit-appearance: none;
 
     &::-webkit-slider-thumb {
-      background-color: var(--sc-content-on-brand-primary);
+      background-color: var(--sc-surface-neutral-light);
       border-radius: 50%;
-      border: 2px solid var(--sc-border-primary);
+      border: 2px solid var(--sc-border-neutral);
       cursor: pointer;
       height: 20px;
       pointer-events: all;
@@ -61,9 +61,9 @@
     }
 
     &::-moz-range-thumb {
-      background-color: var(--sc-content-on-brand-primary);
+      background-color: var(--sc-surface-neutral-light);
       border-radius: 50%;
-      border: 2px solid var(--sc-border-primary);
+      border: 2px solid var(--sc-border-neutral);
       cursor: pointer;
       height: 20px;
       pointer-events: all;
