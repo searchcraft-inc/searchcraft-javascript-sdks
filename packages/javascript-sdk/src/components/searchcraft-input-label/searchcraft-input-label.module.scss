@@ -1,17 +1,6 @@
-@mixin input-label-base {
-  font-family: var(--sc-font-family);
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 16px;
+.searchcraft-input-label {
+  @include body-small-bold();
+  color: var(--sc-content-neutral-primary);
   margin-top: 4px;
-}
-
-.labelLight {
-  @include input-label-base;
-  color: var(--sc-content-primary);
-}
-
-.labelDark {
-  @include input-label-base;
-  color: var(--sc-content-on-brand-primary);
+  margin-bottom: 4px;
 }

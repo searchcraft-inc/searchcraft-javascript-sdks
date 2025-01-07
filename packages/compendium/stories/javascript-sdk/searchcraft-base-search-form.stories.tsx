@@ -16,14 +16,18 @@ const componentMeta: Meta = {
       control: 'text',
       description: 'Error message displayed when the search fails.',
     },
-    labelForInput: {
+    inputLabel: {
       control: 'text',
-      description: 'Label for the input field.',
+      description: 'Label rendered above the input field',
     },
-    rightToLeftOrientation: {
-      control: 'boolean',
-      description:
-        'If true, sets the form layout to right-to-left orientation.',
+    buttonLabel: {
+      control: 'text',
+      description: 'Button Label',
+    },
+    buttonPlacement: {
+      control: 'select',
+      options: ['left', 'right'],
+      description: 'The placement of the search button',
     },
     clearInput: {
       action: 'clearInput',
@@ -35,15 +39,17 @@ const componentMeta: Meta = {
 type ComponentProps = {
   config?: SearchcraftConfig;
   errorMessage?: string;
-  labelForInput?: string;
-  rightToLeftOrientation?: boolean;
+  inputLabel?: string;
+  buttonLabel?: string;
+  buttonPlacement?: 'left' | 'right';
 };
 
 const defaultProps: ComponentProps = {
   config: config,
   errorMessage: 'Search was unsuccessful',
-  labelForInput: 'Search',
-  rightToLeftOrientation: false,
+  inputLabel: 'Search',
+  buttonLabel: 'Search',
+  buttonPlacement: 'right',
 };
 
 export const Default: StoryObj<ComponentProps> = {

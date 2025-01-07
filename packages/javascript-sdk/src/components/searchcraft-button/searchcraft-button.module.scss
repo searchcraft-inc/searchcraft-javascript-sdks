@@ -1,45 +1,22 @@
-@mixin button-base {
+.searchcraft-button {
+  @include body-bold;
+
   border-radius: 8px;
   display: flex;
-  font-family: var(--sc-font-family);
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 20px;
-  padding: 11px 20px;
+  padding: 12px 20px;
   position: relative;
+
+  background-color: var(--sc-surface-brand-primary);
+  border: 1px solid var(--sc-border-primary);
+  color: var(--sc-content-brand-on-primary);
 
   &:hover {
     cursor: pointer;
-  }
-}
-
-.buttonLight {
-  @include button-base;
-  background-color: var(--sc-surface-brand-primary);
-  border: 1px solid var(--sc-border-primary);
-  color: var(--sc-content-on-brand-primary);
-
-  &:hover {
     background-color: var(--sc-surface-brand-primary-hover);
   }
 
   &:focus {
     outline: 2px solid var(--sc-surface-brand-primary);
-  }
-}
-
-.buttonDark {
-  @include button-base;
-  background-color: var(--sc-content-on-brand-primary);
-  border: 1px solid var(--sc-content-secondary);
-  color: var(--sc-content-primary);
-
-  &:hover {
-    background-color: var(--sc-surface-primary-active);
-  }
-
-  &:focus {
-    outline: 2px solid var(--sc-content-secondary);
   }
 }
 

@@ -14,18 +14,18 @@ export namespace Components {
         "config": SearchcraftConfig;
         "customStylesForInput": string | Record<string, string>;
         "inputCaptionValue": string;
-        "inputIconHeight": number;
-        "inputIconWidth": number;
+        "inputIconSize": number;
         "labelForInput": string;
         "placeholderValue": string;
         "rightToLeftOrientation": boolean;
         "searchContainerClass": string;
     }
     interface SearchcraftBaseSearchForm {
+        "buttonLabel": string;
+        "buttonPlacement": 'right' | 'left';
         "config": SearchcraftConfig;
         "errorMessage": string;
-        "labelForInput": string;
-        "rightToLeftOrientation": boolean;
+        "inputLabel": string;
     }
     interface SearchcraftBaseSearchResult {
         "buttonText": string;
@@ -71,15 +71,10 @@ export namespace Components {
          */
         "type": 'clear-light' | 'clear-dark' | 'arrow-light' | 'arrow-dark';
     }
-    interface SearchcraftClearInputButton {
-        "isRequesting"?: boolean;
-        "rightToLeftOrientation": boolean;
-    }
     interface SearchcraftDashIcon {
     }
     interface SearchcraftErrorMessage {
         "errorMessage"?: string;
-        "theme": 'light' | 'dark';
     }
     interface SearchcraftFiltersList {
         "filters": Array<{ label: string; value: string }>;
@@ -87,28 +82,13 @@ export namespace Components {
     interface SearchcraftInput {
         "customStyles": string | Record<string, string>;
         "error": boolean;
-        "formClassName": string;
         "inputCaptionClassName": string;
         "inputCaptionValue": string;
         "inputClassName": string;
-        "inputIconHeight": number;
-        "inputIconWidth": number;
+        "inputIconSize": number;
         "isRequesting": boolean;
         "placeholderValue": string;
         "query": string;
-        "rightToLeftOrientation": boolean;
-    }
-    interface SearchcraftInputCaption {
-        "error"?: boolean;
-        "inputCaptionClassName"?: string;
-        "inputCaptionValue": string;
-        "rightToLeftOrientation": boolean;
-    }
-    interface SearchcraftInputIcon {
-        "error"?: boolean;
-        "height": number;
-        "rightToLeftOrientation": boolean;
-        "width": number;
     }
     interface SearchcraftInputLabel {
         "inputLabelClassName"?: string;
@@ -158,10 +138,6 @@ export interface SearchcraftBaseSearchResultsCustomEvent<T> extends CustomEvent<
 export interface SearchcraftButtonCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSearchcraftButtonElement;
-}
-export interface SearchcraftClearInputButtonCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLSearchcraftClearInputButtonElement;
 }
 export interface SearchcraftFiltersListCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -282,23 +258,6 @@ declare global {
         prototype: HTMLSearchcraftClearIconSetElement;
         new (): HTMLSearchcraftClearIconSetElement;
     };
-    interface HTMLSearchcraftClearInputButtonElementEventMap {
-        "clearInput": void;
-    }
-    interface HTMLSearchcraftClearInputButtonElement extends Components.SearchcraftClearInputButton, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLSearchcraftClearInputButtonElementEventMap>(type: K, listener: (this: HTMLSearchcraftClearInputButtonElement, ev: SearchcraftClearInputButtonCustomEvent<HTMLSearchcraftClearInputButtonElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLSearchcraftClearInputButtonElementEventMap>(type: K, listener: (this: HTMLSearchcraftClearInputButtonElement, ev: SearchcraftClearInputButtonCustomEvent<HTMLSearchcraftClearInputButtonElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
-    }
-    var HTMLSearchcraftClearInputButtonElement: {
-        prototype: HTMLSearchcraftClearInputButtonElement;
-        new (): HTMLSearchcraftClearInputButtonElement;
-    };
     interface HTMLSearchcraftDashIconElement extends Components.SearchcraftDashIcon, HTMLStencilElement {
     }
     var HTMLSearchcraftDashIconElement: {
@@ -346,18 +305,6 @@ declare global {
     var HTMLSearchcraftInputElement: {
         prototype: HTMLSearchcraftInputElement;
         new (): HTMLSearchcraftInputElement;
-    };
-    interface HTMLSearchcraftInputCaptionElement extends Components.SearchcraftInputCaption, HTMLStencilElement {
-    }
-    var HTMLSearchcraftInputCaptionElement: {
-        prototype: HTMLSearchcraftInputCaptionElement;
-        new (): HTMLSearchcraftInputCaptionElement;
-    };
-    interface HTMLSearchcraftInputIconElement extends Components.SearchcraftInputIcon, HTMLStencilElement {
-    }
-    var HTMLSearchcraftInputIconElement: {
-        prototype: HTMLSearchcraftInputIconElement;
-        new (): HTMLSearchcraftInputIconElement;
     };
     interface HTMLSearchcraftInputLabelElement extends Components.SearchcraftInputLabel, HTMLStencilElement {
     }
@@ -421,13 +368,10 @@ declare global {
         "searchcraft-button-icon": HTMLSearchcraftButtonIconElement;
         "searchcraft-check-icon": HTMLSearchcraftCheckIconElement;
         "searchcraft-clear-icon-set": HTMLSearchcraftClearIconSetElement;
-        "searchcraft-clear-input-button": HTMLSearchcraftClearInputButtonElement;
         "searchcraft-dash-icon": HTMLSearchcraftDashIconElement;
         "searchcraft-error-message": HTMLSearchcraftErrorMessageElement;
         "searchcraft-filters-list": HTMLSearchcraftFiltersListElement;
         "searchcraft-input": HTMLSearchcraftInputElement;
-        "searchcraft-input-caption": HTMLSearchcraftInputCaptionElement;
-        "searchcraft-input-icon": HTMLSearchcraftInputIconElement;
         "searchcraft-input-label": HTMLSearchcraftInputLabelElement;
         "searchcraft-results-info": HTMLSearchcraftResultsInfoElement;
         "searchcraft-search-icon-set": HTMLSearchcraftSearchIconSetElement;
@@ -444,8 +388,7 @@ declare namespace LocalJSX {
         "config"?: SearchcraftConfig;
         "customStylesForInput"?: string | Record<string, string>;
         "inputCaptionValue"?: string;
-        "inputIconHeight"?: number;
-        "inputIconWidth"?: number;
+        "inputIconSize"?: number;
         "labelForInput"?: string;
         "onInputClearedOrNoResults"?: (event: SearchcraftAutoSearchFormCustomEvent<void>) => void;
         "onQuerySubmit"?: (event: SearchcraftAutoSearchFormCustomEvent<string>) => void;
@@ -454,11 +397,12 @@ declare namespace LocalJSX {
         "searchContainerClass"?: string;
     }
     interface SearchcraftBaseSearchForm {
+        "buttonLabel"?: string;
+        "buttonPlacement"?: 'right' | 'left';
         "config"?: SearchcraftConfig;
         "errorMessage"?: string;
-        "labelForInput"?: string;
+        "inputLabel"?: string;
         "onClearInput"?: (event: SearchcraftBaseSearchFormCustomEvent<any>) => void;
-        "rightToLeftOrientation"?: boolean;
     }
     interface SearchcraftBaseSearchResult {
         "buttonText"?: string;
@@ -509,16 +453,10 @@ declare namespace LocalJSX {
          */
         "type"?: 'clear-light' | 'clear-dark' | 'arrow-light' | 'arrow-dark';
     }
-    interface SearchcraftClearInputButton {
-        "isRequesting"?: boolean;
-        "onClearInput"?: (event: SearchcraftClearInputButtonCustomEvent<void>) => void;
-        "rightToLeftOrientation"?: boolean;
-    }
     interface SearchcraftDashIcon {
     }
     interface SearchcraftErrorMessage {
         "errorMessage"?: string;
-        "theme"?: 'light' | 'dark';
     }
     interface SearchcraftFiltersList {
         "filters"?: Array<{ label: string; value: string }>;
@@ -527,31 +465,16 @@ declare namespace LocalJSX {
     interface SearchcraftInput {
         "customStyles"?: string | Record<string, string>;
         "error"?: boolean;
-        "formClassName"?: string;
         "inputCaptionClassName"?: string;
         "inputCaptionValue"?: string;
         "inputClassName"?: string;
-        "inputIconHeight"?: number;
-        "inputIconWidth"?: number;
+        "inputIconSize"?: number;
         "isRequesting"?: boolean;
         "onClearInput"?: (event: SearchcraftInputCustomEvent<void>) => void;
         "onInputKeyUp"?: (event: SearchcraftInputCustomEvent<string>) => void;
         "onSearchInputChange"?: (event: SearchcraftInputCustomEvent<string>) => void;
         "placeholderValue"?: string;
         "query"?: string;
-        "rightToLeftOrientation"?: boolean;
-    }
-    interface SearchcraftInputCaption {
-        "error"?: boolean;
-        "inputCaptionClassName"?: string;
-        "inputCaptionValue"?: string;
-        "rightToLeftOrientation"?: boolean;
-    }
-    interface SearchcraftInputIcon {
-        "error"?: boolean;
-        "height"?: number;
-        "rightToLeftOrientation"?: boolean;
-        "width"?: number;
     }
     interface SearchcraftInputLabel {
         "inputLabelClassName"?: string;
@@ -591,13 +514,10 @@ declare namespace LocalJSX {
         "searchcraft-button-icon": SearchcraftButtonIcon;
         "searchcraft-check-icon": SearchcraftCheckIcon;
         "searchcraft-clear-icon-set": SearchcraftClearIconSet;
-        "searchcraft-clear-input-button": SearchcraftClearInputButton;
         "searchcraft-dash-icon": SearchcraftDashIcon;
         "searchcraft-error-message": SearchcraftErrorMessage;
         "searchcraft-filters-list": SearchcraftFiltersList;
         "searchcraft-input": SearchcraftInput;
-        "searchcraft-input-caption": SearchcraftInputCaption;
-        "searchcraft-input-icon": SearchcraftInputIcon;
         "searchcraft-input-label": SearchcraftInputLabel;
         "searchcraft-results-info": SearchcraftResultsInfo;
         "searchcraft-search-icon-set": SearchcraftSearchIconSet;
@@ -619,13 +539,10 @@ declare module "@stencil/core" {
             "searchcraft-button-icon": LocalJSX.SearchcraftButtonIcon & JSXBase.HTMLAttributes<HTMLSearchcraftButtonIconElement>;
             "searchcraft-check-icon": LocalJSX.SearchcraftCheckIcon & JSXBase.HTMLAttributes<HTMLSearchcraftCheckIconElement>;
             "searchcraft-clear-icon-set": LocalJSX.SearchcraftClearIconSet & JSXBase.HTMLAttributes<HTMLSearchcraftClearIconSetElement>;
-            "searchcraft-clear-input-button": LocalJSX.SearchcraftClearInputButton & JSXBase.HTMLAttributes<HTMLSearchcraftClearInputButtonElement>;
             "searchcraft-dash-icon": LocalJSX.SearchcraftDashIcon & JSXBase.HTMLAttributes<HTMLSearchcraftDashIconElement>;
             "searchcraft-error-message": LocalJSX.SearchcraftErrorMessage & JSXBase.HTMLAttributes<HTMLSearchcraftErrorMessageElement>;
             "searchcraft-filters-list": LocalJSX.SearchcraftFiltersList & JSXBase.HTMLAttributes<HTMLSearchcraftFiltersListElement>;
             "searchcraft-input": LocalJSX.SearchcraftInput & JSXBase.HTMLAttributes<HTMLSearchcraftInputElement>;
-            "searchcraft-input-caption": LocalJSX.SearchcraftInputCaption & JSXBase.HTMLAttributes<HTMLSearchcraftInputCaptionElement>;
-            "searchcraft-input-icon": LocalJSX.SearchcraftInputIcon & JSXBase.HTMLAttributes<HTMLSearchcraftInputIconElement>;
             "searchcraft-input-label": LocalJSX.SearchcraftInputLabel & JSXBase.HTMLAttributes<HTMLSearchcraftInputLabelElement>;
             "searchcraft-results-info": LocalJSX.SearchcraftResultsInfo & JSXBase.HTMLAttributes<HTMLSearchcraftResultsInfoElement>;
             "searchcraft-search-icon-set": LocalJSX.SearchcraftSearchIconSet & JSXBase.HTMLAttributes<HTMLSearchcraftSearchIconSetElement>;

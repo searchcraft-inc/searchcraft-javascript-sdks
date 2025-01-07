@@ -4,7 +4,7 @@ import WebComponentWrapper from '../../utils/WebComponentWrapper';
 const componentName = 'searchcraft-input-label';
 
 const componentMeta: Meta = {
-  title: 'Javascript SDK/searchcraft-input/searchcraft-input-label',
+  title: 'Javascript SDK/searchcraft-input-label',
   argTypes: {
     inputLabelClassName: {
       control: 'text',

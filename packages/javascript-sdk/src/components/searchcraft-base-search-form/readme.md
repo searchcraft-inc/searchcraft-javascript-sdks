@@ -7,12 +7,13 @@
 
 ## Properties
 
-| Property                 | Attribute                   | Description | Type                | Default                                                      |
-| ------------------------ | --------------------------- | ----------- | ------------------- | ------------------------------------------------------------ |
-| `config`                 | --                          |             | `SearchcraftConfig` | `{     readKey: '',     endpointURL: '',     index: [],   }` |
-| `errorMessage`           | `error-message`             |             | `string`            | `'Search was unsuccessful'`                                  |
-| `labelForInput`          | `label-for-input`           |             | `string`            | `'Search'`                                                   |
-| `rightToLeftOrientation` | `right-to-left-orientation` |             | `boolean`           | `false`                                                      |
+| Property          | Attribute          | Description | Type                | Default                                                      |
+| ----------------- | ------------------ | ----------- | ------------------- | ------------------------------------------------------------ |
+| `buttonLabel`     | `button-label`     |             | `string`            | `'Find'`                                                     |
+| `buttonPlacement` | `button-placement` |             | `"left" \| "right"` | `'right'`                                                    |
+| `config`          | --                 |             | `SearchcraftConfig` | `{     readKey: '',     endpointURL: '',     index: [],   }` |
+| `errorMessage`    | `error-message`    |             | `string`            | `'Search was unsuccessful'`                                  |
+| `inputLabel`      | `input-label`      |             | `string`            | `'Search'`                                                   |
 
 
 ## Events
@@ -39,11 +40,6 @@ graph TD;
   searchcraft-base-search-form --> searchcraft-input
   searchcraft-base-search-form --> searchcraft-error-message
   searchcraft-button --> searchcraft-spinner-dark
-  searchcraft-input --> searchcraft-input-caption
-  searchcraft-input --> searchcraft-clear-input-button
-  searchcraft-input --> searchcraft-input-icon
-  searchcraft-clear-input-button --> searchcraft-clear-icon-set
-  searchcraft-input-icon --> searchcraft-search-icon-set
   style searchcraft-base-search-form fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
