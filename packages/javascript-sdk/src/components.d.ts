@@ -78,6 +78,7 @@ export namespace Components {
     interface SearchcraftInput {
         "customStyles": string | Record<string, string>;
         "error": boolean;
+        "flex": boolean;
         "inputCaptionClassName": string;
         "inputCaptionValue": string;
         "inputClassName": string;
@@ -457,6 +458,7 @@ declare namespace LocalJSX {
     interface SearchcraftInput {
         "customStyles"?: string | Record<string, string>;
         "error"?: boolean;
+        "flex"?: boolean;
         "inputCaptionClassName"?: string;
         "inputCaptionValue"?: string;
         "inputClassName"?: string;
