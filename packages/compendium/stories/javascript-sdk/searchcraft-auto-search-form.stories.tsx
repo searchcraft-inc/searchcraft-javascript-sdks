@@ -70,11 +70,8 @@ type ComponentProps = {
   config?: SearchcraftConfig;
   customStylesForInput?: string | Record<string, string>;
   inputCaptionValue?: string;
-  inputIconHeight?: number;
-  inputIconWidth?: number;
   labelForInput?: string;
   placeholderValue?: string;
-  rightToLeftOrientation?: boolean;
   searchContainerClass?: string;
 };
 
@@ -83,11 +80,8 @@ const defaultProps: ComponentProps = {
   config: config,
   customStylesForInput: '{}',
   inputCaptionValue: 'Search',
-  inputIconHeight: 20,
-  inputIconWidth: 20,
   labelForInput: 'Search for something:',
   placeholderValue: 'Search here...',
-  rightToLeftOrientation: false,
   searchContainerClass: '',
 };
 

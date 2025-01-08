@@ -34,10 +34,8 @@ export class SearchcraftAutoSearchForm {
   };
   @Prop() customStylesForInput: string | Record<string, string> = {};
   @Prop() inputCaptionValue = '';
-  @Prop() inputIconSize = 20;
   @Prop() labelForInput = '';
   @Prop() placeholderValue = 'Search here';
-  @Prop() rightToLeftOrientation = false;
   @Prop() searchContainerClass = '';
 
   @Event() inputClearedOrNoResults: EventEmitter<void>;
@@ -163,14 +161,12 @@ export class SearchcraftAutoSearchForm {
         <searchcraft-input
           customStyles={parsedCustomStyles}
           input-caption-value={this.inputCaptionValue}
-          input-icon-size={this.inputIconSize}
           is-requesting={this.isRequesting}
           onClearInput={this.handleClearInput}
           onInputKeyUp={this.handleInputKeyUp}
           onSearchInputChange={this.handleInputChange}
           placeholder-value={this.placeholderValue}
           query={this.query}
-          right-to-left-orientation={this.rightToLeftOrientation}
         />
         {this.error && (
           <searchcraft-error-message errorMessage='Please enter a search query.' />

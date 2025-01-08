@@ -1,5 +1,4 @@
 import { Component, h, State } from '@stencil/core';
-import classNames from 'classnames';
 
 import { useSearchcraftStore } from '@provider/store';
 
@@ -41,18 +40,8 @@ export class SearchcraftResultsInfo {
     }
     const formattedResults = formatNumberWithCommas(this.resultsCount);
     return (
-      <div
-        class={classNames(
-          'resultsInfoContainer',
-          'searchcraft-results-info-container',
-        )}
-      >
-        <p
-          class={classNames(
-            'resultsInfoContent',
-            'searchcraft-results-info-content',
-          )}
-        >
+      <div class='searchcraft-results-info-container'>
+        <p class='searchcraft-results-info-content'>
           {formattedResults} results found in {this.responseTime}ms
         </p>
       </div>
