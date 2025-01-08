@@ -14,10 +14,8 @@ export namespace Components {
         "config": SearchcraftConfig;
         "customStylesForInput": string | Record<string, string>;
         "inputCaptionValue": string;
-        "inputIconSize": number;
         "labelForInput": string;
         "placeholderValue": string;
-        "rightToLeftOrientation": boolean;
         "searchContainerClass": string;
     }
     interface SearchcraftBaseSearchForm {
@@ -82,7 +80,6 @@ export namespace Components {
         "inputCaptionClassName": string;
         "inputCaptionValue": string;
         "inputClassName": string;
-        "inputIconSize": number;
         "isRequesting": boolean;
         "placeholderValue": string;
         "query": string;
@@ -385,12 +382,10 @@ declare namespace LocalJSX {
         "config"?: SearchcraftConfig;
         "customStylesForInput"?: string | Record<string, string>;
         "inputCaptionValue"?: string;
-        "inputIconSize"?: number;
         "labelForInput"?: string;
         "onInputClearedOrNoResults"?: (event: SearchcraftAutoSearchFormCustomEvent<void>) => void;
         "onQuerySubmit"?: (event: SearchcraftAutoSearchFormCustomEvent<string>) => void;
         "placeholderValue"?: string;
-        "rightToLeftOrientation"?: boolean;
         "searchContainerClass"?: string;
     }
     interface SearchcraftBaseSearchForm {
@@ -462,7 +457,6 @@ declare namespace LocalJSX {
         "inputCaptionClassName"?: string;
         "inputCaptionValue"?: string;
         "inputClassName"?: string;
-        "inputIconSize"?: number;
         "isRequesting"?: boolean;
         "onClearInput"?: (event: SearchcraftInputCustomEvent<void>) => void;
         "onInputKeyUp"?: (event: SearchcraftInputCustomEvent<string>) => void;

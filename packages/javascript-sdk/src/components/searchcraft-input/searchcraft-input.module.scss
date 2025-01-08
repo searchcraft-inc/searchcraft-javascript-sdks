@@ -25,8 +25,8 @@ searchcraft-input {
   border-radius: var(--sc-input-border-radius);
   color: var(--sc-content-neutral-primary);
   outline: none;
-  padding-left: 44px;
-  padding-right: 44px;
+  padding-left: var(--sc-input-padding-horizontal);
+  padding-right: var(--sc-input-padding-horizontal);
   padding-top: 12px;
   padding-bottom: 12px;
 
@@ -52,35 +52,38 @@ searchcraft-input {
   }
 }
 
-.searchcraft-input-icon-wrapper {
+.searchcraft-input-search-icon-wrapper {
   align-items: center;
-  display: flex;
   justify-content: center;
-  padding-left: 16px;
-  padding-right: 16px;
+  display: flex;
   position: absolute;
   pointer-events: none;
   bottom: 0;
   left: 0;
   top: 0;
+  width: var(--sc-input-padding-horizontal);
 }
 
-.searchcraft-input-icon {
+.searchcraft-input-search-icon {
   pointer-events: none;
+}
+
+.searchcraft-input-clear-icon, .searchcraft-input-search-icon {
+  width: var(--sc-input-icon-size);
+  height: var(--sc-input-icon-size);
 }
 
 .searchcraft-input-clear-button {
   all: unset;
   align-items: center;
+  justify-content: center;
   cursor: pointer;
   display: flex;
-  justify-content: center;
-  padding-left: 16px;
-  padding-right: 16px;
   position: absolute;
   border: none;
   outline: none;
   bottom: 0;
   right: 0;
   top: 0;
+  width: var(--sc-input-padding-horizontal);
 }

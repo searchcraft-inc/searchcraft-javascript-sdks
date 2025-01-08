@@ -7,18 +7,16 @@
 
 ## Properties
 
-| Property                 | Attribute                   | Description | Type                                 | Default                                                      |
-| ------------------------ | --------------------------- | ----------- | ------------------------------------ | ------------------------------------------------------------ |
-| `autoSearchFormClass`    | `auto-search-form-class`    |             | `string`                             | `''`                                                         |
-| `clearInput`             | --                          |             | `() => void`                         | `() => {}`                                                   |
-| `config`                 | --                          |             | `SearchcraftConfig`                  | `{     readKey: '',     endpointURL: '',     index: [],   }` |
-| `customStylesForInput`   | `custom-styles-for-input`   |             | `string \| { [x: string]: string; }` | `{}`                                                         |
-| `inputCaptionValue`      | `input-caption-value`       |             | `string`                             | `''`                                                         |
-| `inputIconSize`          | `input-icon-size`           |             | `number`                             | `20`                                                         |
-| `labelForInput`          | `label-for-input`           |             | `string`                             | `''`                                                         |
-| `placeholderValue`       | `placeholder-value`         |             | `string`                             | `'Search here'`                                              |
-| `rightToLeftOrientation` | `right-to-left-orientation` |             | `boolean`                            | `false`                                                      |
-| `searchContainerClass`   | `search-container-class`    |             | `string`                             | `''`                                                         |
+| Property               | Attribute                 | Description | Type                                 | Default                                                      |
+| ---------------------- | ------------------------- | ----------- | ------------------------------------ | ------------------------------------------------------------ |
+| `autoSearchFormClass`  | `auto-search-form-class`  |             | `string`                             | `''`                                                         |
+| `clearInput`           | --                        |             | `() => void`                         | `() => {}`                                                   |
+| `config`               | --                        |             | `SearchcraftConfig`                  | `{     readKey: '',     endpointURL: '',     index: [],   }` |
+| `customStylesForInput` | `custom-styles-for-input` |             | `string \| { [x: string]: string; }` | `{}`                                                         |
+| `inputCaptionValue`    | `input-caption-value`     |             | `string`                             | `''`                                                         |
+| `labelForInput`        | `label-for-input`         |             | `string`                             | `''`                                                         |
+| `placeholderValue`     | `placeholder-value`       |             | `string`                             | `'Search here'`                                              |
+| `searchContainerClass` | `search-container-class`  |             | `string`                             | `''`                                                         |
 
 
 ## Events

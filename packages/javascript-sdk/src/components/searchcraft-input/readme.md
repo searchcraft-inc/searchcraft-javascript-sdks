@@ -15,7 +15,6 @@
 | `inputCaptionClassName` | `input-caption-class-name` |             | `string`                             | `''`             |
 | `inputCaptionValue`     | `input-caption-value`      |             | `string`                             | `''`             |
 | `inputClassName`        | `input-class-name`         |             | `string`                             | `''`             |
-| `inputIconSize`         | `input-icon-size`          |             | `number`                             | `20`             |
 | `isRequesting`          | `is-requesting`            |             | `boolean`                            | `false`          |
 | `placeholderValue`      | `placeholder-value`        |             | `string`                             | `'Enter Search'` |
 | `query`                 | `query`                    |             | `string`                             | `''`             |
