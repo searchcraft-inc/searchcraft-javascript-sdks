@@ -159,7 +159,6 @@ export class SearchcraftCore {
         offset?: number;
         order_by?: string;
         sort?: 'asc' | 'desc';
-        facets?: Facets;
       } = {
         query: this.buildQueryObject(searchParams),
         limit: searchParams.limit ?? 20, // Default to 20 if not provided
@@ -168,11 +167,6 @@ export class SearchcraftCore {
       // Add offset if provided
       if (searchParams.offset !== undefined) {
         requestBody.offset = searchParams.offset;
-      }
-
-      // Add facets if they exist
-      if (searchParams.facets) {
-        requestBody.facets = searchParams.facets;
       }
 
       // Handles dynamic sorting and order_by logic
