@@ -82,7 +82,7 @@ export class SearchcraftBaseSearchForm {
           )}
           <searchcraft-input
             onClearInput={this.handleClearInput}
-            onSearchInputChange={this.handleSearchInputChange}
+            onInputChange={this.handleSearchInputChange}
             query={this.query}
           />
           {this.buttonPlacement === 'right' && (

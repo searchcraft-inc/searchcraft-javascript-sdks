@@ -41,7 +41,7 @@ export class SearchcraftFiltersList {
   @State() resultsCount = 0;
 
   private searchStore = useSearchcraftStore.getState();
-  private autoSearchFormElement: HTMLElement | null = null;
+  // private autoSearchFormElement: HTMLElement | null = null;
   unsubscribe: () => void;
 
   connectedCallback() {
@@ -64,15 +64,16 @@ export class SearchcraftFiltersList {
       }
     });
 
-    this.autoSearchFormElement = document.querySelector(
-      'searchcraft-auto-search-form',
-    );
-    if (this.autoSearchFormElement) {
-      this.autoSearchFormElement.addEventListener(
-        'querySubmit',
-        this.handleSearchRequest,
-      );
-    }
+    // TODO: Find out why this listener was hooked up like this, it's causing duplicate requests.
+    // this.autoSearchFormElement = document.querySelector(
+    //   'searchcraft-auto-search-form',
+    // );
+    // if (this.autoSearchFormElement) {
+    //   this.autoSearchFormElement.addEventListener(
+    //     'querySubmit',
+    //     this.handleSearchRequest,
+    //   );
+    // }
   }
 
   disconnectedCallback() {
@@ -80,12 +81,12 @@ export class SearchcraftFiltersList {
       this.unsubscribe();
     }
 
-    if (this.autoSearchFormElement) {
-      this.autoSearchFormElement.removeEventListener(
-        'querySubmit',
-        this.handleSearchRequest,
-      );
-    }
+    // if (this.autoSearchFormElement) {
+    //   this.autoSearchFormElement.removeEventListener(
+    //     'querySubmit',
+    //     this.handleSearchRequest,
+    //   );
+    // }
   }
 
   handleSearchRequest = () => {
