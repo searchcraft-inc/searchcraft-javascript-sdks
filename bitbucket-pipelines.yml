@@ -1,0 +1,48 @@
+image: node:20
+pipelines:
+  branches:
+    main:
+      - step:
+          name: "Install Dependencies"
+          caches:
+            - node
+          script:
+            - yarn install
+            - yarn global add lerna
+      - step:
+          name: "Build and Check for Changes"
+          caches:
+            - node
+          script:
+            - git fetch --all
+            - git checkout main
+            - git pull origin main
+            # Run the build process
+            - yarn build
+            # Check for changes between the current state and the last commit on 'main'
+            - CHANGED_FILES=$(git diff --name-only origin/main...HEAD)
+            - echo "Changed files $CHANGED_FILES"
+            # If there are changes, continue with Lerna to check changed packages
+            - |
+              if [ -n "$CHANGED_FILES" ]; then
+                echo "Changes detected. Proceeding with publish simulation..."
+
+                # Get the list of changed packages for output
+                CHANGED_PKGS=$(lerna changed --json | jq -r '.[].name')
+                echo "Changed packages: $CHANGED_PKGS"
+
+                # If there are changed packages, proceed with publish simulation
+                if [ -n "$CHANGED_PKGS" ]; then
+                  for pkg in $CHANGED_PKGS; do
+                    echo "Simulating publish for package: $pkg"
+                  done
+                  
+                  # Simulate publishing based on version comparison with npm without actually publishing to npm
+                  lerna publish from-package --dry-run
+                else
+                  echo "No relevant package changes. Skipping publish."
+                fi
+              else
+                echo "No changes detected. Skipping publish simulation."
+              fi
+            - echo "Publishing simulation complete!"
