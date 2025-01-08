@@ -127,7 +127,6 @@ export class SearchcraftAutoSearchForm {
   };
 
   private runSearch = async () => {
-    console.log('running search');
     if (this.query.trim() === '') {
       this.error = true;
       this.inputClearedOrNoResults.emit();
