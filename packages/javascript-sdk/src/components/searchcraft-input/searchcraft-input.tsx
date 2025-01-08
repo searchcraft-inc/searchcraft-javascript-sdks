@@ -32,21 +32,14 @@ export class SearchcraftInput {
   @Prop() flex = true;
 
   @Event() clearInput: EventEmitter<void>;
-  @Event() searchInputChange: EventEmitter<string>;
-  @Event() inputKeyUp: EventEmitter<string>;
+  @Event() inputChange: EventEmitter<string>;
 
   @State() inputValue = this.query;
 
-  handleInputChange = (event: Event) => {
+  handleOnInput = (event: Event) => {
     const input = event.target as HTMLInputElement;
     this.inputValue = input.value;
-    this.searchInputChange.emit(input.value);
-  };
-
-  handleInputKeyUp = (event: KeyboardEvent) => {
-    const input = event.target as HTMLInputElement;
-    this.inputValue = input.value;
-    this.inputKeyUp.emit(input.value);
+    this.inputChange.emit(input.value);
   };
 
   handleClearInput = () => {
@@ -78,8 +71,9 @@ export class SearchcraftInput {
         <input
           autoComplete='off'
           class={inputClassNames}
-          onChange={this.handleInputChange.bind(this)}
-          onKeyUp={this.handleInputKeyUp.bind(this)}
+          onInput={(event) => {
+            this.handleOnInput(event);
+          }}
           placeholder={this.placeholderValue}
           style={validatedCustomStyles}
           type='text'

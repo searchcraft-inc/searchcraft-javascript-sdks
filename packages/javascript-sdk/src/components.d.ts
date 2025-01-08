@@ -283,8 +283,7 @@ declare global {
     };
     interface HTMLSearchcraftInputElementEventMap {
         "clearInput": void;
-        "searchInputChange": string;
-        "inputKeyUp": string;
+        "inputChange": string;
     }
     interface HTMLSearchcraftInputElement extends Components.SearchcraftInput, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSearchcraftInputElementEventMap>(type: K, listener: (this: HTMLSearchcraftInputElement, ev: SearchcraftInputCustomEvent<HTMLSearchcraftInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -459,8 +458,7 @@ declare namespace LocalJSX {
         "inputClassName"?: string;
         "isRequesting"?: boolean;
         "onClearInput"?: (event: SearchcraftInputCustomEvent<void>) => void;
-        "onInputKeyUp"?: (event: SearchcraftInputCustomEvent<string>) => void;
-        "onSearchInputChange"?: (event: SearchcraftInputCustomEvent<string>) => void;
+        "onInputChange"?: (event: SearchcraftInputCustomEvent<string>) => void;
         "placeholderValue"?: string;
         "query"?: string;
     }

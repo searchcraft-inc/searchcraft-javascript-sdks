@@ -22,11 +22,10 @@
 
 ## Events
 
-| Event               | Description | Type                  |
-| ------------------- | ----------- | --------------------- |
-| `clearInput`        |             | `CustomEvent<void>`   |
-| `inputKeyUp`        |             | `CustomEvent<string>` |
-| `searchInputChange` |             | `CustomEvent<string>` |
+| Event         | Description | Type                  |
+| ------------- | ----------- | --------------------- |
+| `clearInput`  |             | `CustomEvent<void>`   |
+| `inputChange` |             | `CustomEvent<string>` |
 
 
 ## Dependencies

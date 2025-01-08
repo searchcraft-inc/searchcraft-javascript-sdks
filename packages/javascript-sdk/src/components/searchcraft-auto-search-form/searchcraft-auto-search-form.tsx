@@ -71,28 +71,13 @@ export class SearchcraftAutoSearchForm {
   }
 
   handleInputChange = (event: ScInputCustomEvent<string>) => {
-    this.query = event.detail;
-    this.searchStore.setQuery(this.query);
-    if (this.query.trim() === '') {
-      this.searchStore.setQuery('');
-      this.searchResults = null;
-      this.inputClearedOrNoResults.emit();
-      this.searchStore.setSearchResults(null);
-    }
-  };
-
-  handleInputKeyUp = (event: ScInputCustomEvent<string>) => {
     const target = event.detail;
     if (target === this.query) {
       return;
     }
     this.query = target;
 
-    if (this.debounceTimeout) {
-      clearTimeout(this.debounceTimeout);
-    }
-
-    this.debounceTimeout = setTimeout(() => {
+    const performSearchActions = () => {
       if (this.query.trim() === '') {
         this.searchStore.setQuery('');
         this.searchResults = null;
@@ -100,10 +85,24 @@ export class SearchcraftAutoSearchForm {
         this.inputClearedOrNoResults.emit();
       } else {
         this.searchStore.setQuery(this.query);
-        this.querySubmit.emit(this.query);
+        this.querySubmit.emit();
         this.runSearch();
       }
-    }, this.debounceDelay);
+    };
+
+    // Only set a timeout if debounceDelay > 0
+    if (this.debounceDelay > 0) {
+      if (this.debounceTimeout) {
+        clearTimeout(this.debounceTimeout);
+      }
+      this.debounceTimeout = setTimeout(
+        performSearchActions,
+        this.debounceDelay,
+      );
+    } else {
+      // Otherwise just call search actions directly
+      performSearchActions();
+    }
   };
 
   handleClearInput = () => {
@@ -163,8 +162,7 @@ export class SearchcraftAutoSearchForm {
           input-caption-value={this.inputCaptionValue}
           is-requesting={this.isRequesting}
           onClearInput={this.handleClearInput}
-          onInputKeyUp={this.handleInputKeyUp}
-          onSearchInputChange={this.handleInputChange}
+          onInputChange={this.handleInputChange.bind(this)}
           placeholder-value={this.placeholderValue}
           query={this.query}
         />
