@@ -12,6 +12,7 @@ import classNames from 'classnames';
 import type { FacetChild, FacetRoot } from '@searchcraft/core';
 
 import { useSearchcraftStore, type SearchcraftState } from '@provider/store';
+import { removeSubstringMatches } from '@utils/utils';
 
 @Component({
   tag: 'searchcraft-facet-list',
@@ -30,8 +31,6 @@ export class SearchcraftFiltersList {
   private searchStore = useSearchcraftStore.getState();
 
   initFacetRootFromState(state: SearchcraftState) {
-    console.log('Init facet list from state');
-    console.log(state.searchResults?.data.facets);
     const facetPrime = state.searchResults?.data.facets;
 
     if (facetPrime) {
@@ -44,7 +43,6 @@ export class SearchcraftFiltersList {
   }
 
   connectedCallback() {
-    console.log('Connected callback');
     this.initFacetRootFromState(this.searchStore);
 
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {
@@ -63,7 +61,9 @@ export class SearchcraftFiltersList {
       (path) => this.selectedPaths[path],
     );
 
-    this.facetSelectionUpdated.emit({ paths });
+    const pathsWithParentPathsRemoved = removeSubstringMatches(paths);
+
+    this.facetSelectionUpdated.emit({ paths: pathsWithParentPathsRemoved });
   }
 
   formatLabel = (facetChild: FacetChild): string => {
@@ -73,6 +73,8 @@ export class SearchcraftFiltersList {
   };
 
   render() {
+    const firstFacet = this.facetRoot?.[this.fieldName];
+
     return (
       <div
         class={classNames(
@@ -80,7 +82,12 @@ export class SearchcraftFiltersList {
           'searchcraft-filters-list-container',
         )}
       >
-        {this.facetRoot?.[this.fieldName]?.map((facetChild: FacetChild) => {
+        {!firstFacet && (
+          <p class='searchcraft-facet-message'>
+            Enter a search to view facets.
+          </p>
+        )}
+        {firstFacet?.map((facetChild: FacetChild) => {
           const isChildSelected = facetChild.children
             ? facetChild.children?.some(
                 (child) => this.selectedPaths[child.path],
@@ -143,9 +150,9 @@ export class SearchcraftFiltersList {
                     >
                       <input
                         checked={this.selectedPaths[grandchild.path]}
-                        onChange={(_event: Event) =>
-                          this.handleCheckboxChange(grandchild.path)
-                        }
+                        onChange={(_event: Event) => {
+                          this.handleCheckboxChange(grandchild.path);
+                        }}
                         type='checkbox'
                       />
                       <div

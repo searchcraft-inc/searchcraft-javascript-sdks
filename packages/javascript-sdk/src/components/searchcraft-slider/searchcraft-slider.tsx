@@ -18,6 +18,7 @@ export class SearchcraftSlider {
   @Prop() max = 100;
   @Prop() min = 0;
   @Prop() granularity: number = getMillis('month');
+  @Prop() dataType: 'number' | 'date' = 'number';
 
   @State() endValue = this.max;
   @State() startValue = this.min;
@@ -62,6 +63,16 @@ export class SearchcraftSlider {
       ((this.startValue - rangeMin) / (rangeMax - rangeMin)) * 100;
     const endPercent =
       ((this.endValue - rangeMin) / (rangeMax - rangeMin)) * 100;
+
+    const startLabel =
+      this.dataType === 'number'
+        ? this.startValue
+        : new Date(this.startValue).getFullYear();
+
+    const endLabel =
+      this.dataType === 'number'
+        ? this.endValue
+        : new Date(this.endValue).getFullYear();
 
     return (
       <div
@@ -117,12 +128,12 @@ export class SearchcraftSlider {
               'searchcraft-slider-start-year-label',
             )}
           >
-            {this.startValue}
+            {startLabel}
           </span>
           <span
             class={classNames('yearLabel', 'searchcraft-slider-end-year-label')}
           >
-            {this.endValue}
+            {endLabel}
           </span>
         </div>
       </div>

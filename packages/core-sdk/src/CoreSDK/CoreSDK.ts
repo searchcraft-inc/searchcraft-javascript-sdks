@@ -94,30 +94,38 @@ export class SearchcraftCore {
     const queryItems: QueryItem[] = [];
     let occur: 'must' | 'should' = 'should';
 
-    // Handle yearsRange if provided
-    if (searchParams.yearsRange) {
-      occur = 'must';
-      const startDate = new Date(`${searchParams.yearsRange[0]}-01-01`);
-      const endDate = new Date(`${searchParams.yearsRange[1]}-12-31`);
-      queryItems.push({
-        occur,
-        normal: {
-          ctx: `date_published:[${startDate.toISOString()} TO ${endDate.toISOString()}]`,
+    if (searchParams.facetPathsForIndexFields) {
+      Object.keys(searchParams.facetPathsForIndexFields).forEach(
+        (fieldName) => {
+          const item = searchParams.facetPathsForIndexFields?.[fieldName];
+          if (item) {
+            occur = 'must';
+            queryItems.push({
+              occur,
+              normal: {
+                ctx: item.value,
+              },
+            });
+          }
         },
-      });
+      );
     }
 
-    // TODO: update for dynamic facets
-    const facetKeys: string[] = []; // Object.keys(searchParams?.facets?.section.counts || {});
-    // Handle facets if provided
-    if (facetKeys && facetKeys.length > 0) {
-      occur = 'must';
-      queryItems.push({
-        occur,
-        normal: {
-          ctx: `section: IN [${facetKeys.join(' ')}]`,
+    if (searchParams.rangeValueForIndexFields) {
+      Object.keys(searchParams.rangeValueForIndexFields).forEach(
+        (fieldName) => {
+          const item = searchParams.rangeValueForIndexFields?.[fieldName];
+          if (item) {
+            occur = 'must';
+            queryItems.push({
+              occur,
+              normal: {
+                ctx: item.value,
+              },
+            });
+          }
         },
-      });
+      );
     }
 
     if (searchParams.sort === 'desc') {

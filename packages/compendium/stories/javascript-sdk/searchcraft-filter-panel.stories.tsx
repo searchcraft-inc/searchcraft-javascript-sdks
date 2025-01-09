@@ -1,22 +1,20 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import WebComponentWrapper from '../../utils/WebComponentWrapper';
-import type { FilterItem } from '@searchcraft/javascript-sdk';
+import type {
+  DateRangeFilterItem,
+  ExactMatchToggleFilterItem,
+  FacetsFilterItem,
+  FilterItem,
+  MostRecentToggleFilterItem,
+  NumericFilterItem,
+} from '@searchcraft/javascript-sdk';
 import { config } from '../../utils/DefaultSearchcraftConfig';
 
 const componentName = 'searchcraft-filter-panel';
 
 const componentMeta: Meta = {
   title: 'Javascript SDK/searchcraft-filter-panel',
-  argTypes: {
-    // filterItems: {
-    //   control: 'number',
-    //   description: 'The maximum year that the slider can select.',
-    // },
-    // minYear: {
-    //   control: 'number',
-    //   description: 'The minimum year that the slider can select.',
-    // },
-  },
+  argTypes: {},
 };
 
 type ComponentProps = {
@@ -27,7 +25,23 @@ const today = new Date();
 const pastDate = new Date(today);
 pastDate.setFullYear(today.getFullYear() - 10);
 
-const dateRangeItem: FilterItem = {
+const exactMatchItem: ExactMatchToggleFilterItem = {
+  type: 'exactMatchToggle',
+  label: 'Exact Match',
+  options: {
+    subLabel: 'Specify to use exact matching or fuzzy matching',
+  },
+};
+
+const mostRecentItem: MostRecentToggleFilterItem = {
+  type: 'mostRecentToggle',
+  label: 'Most Recent',
+  options: {
+    subLabel: 'Choose whether to sort by most recent.',
+  },
+};
+
+const dateRangeItem: DateRangeFilterItem = {
   type: 'dateRange',
   fieldName: 'date_published',
   label: 'Date range example',
@@ -38,7 +52,7 @@ const dateRangeItem: FilterItem = {
   },
 };
 
-const numericItem: FilterItem = {
+const numericItem: NumericFilterItem = {
   type: 'numericRange',
   fieldName: 'number_field',
   label: 'Numeric range example',
@@ -49,7 +63,7 @@ const numericItem: FilterItem = {
   },
 };
 
-const facetItem: FilterItem = {
+const facetItem: FacetsFilterItem = {
   type: 'facets',
   fieldName: 'section',
   label: 'Filters',
@@ -59,7 +73,13 @@ const facetItem: FilterItem = {
 };
 
 const defaultProps: ComponentProps = {
-  filterItems: [dateRangeItem, numericItem, facetItem],
+  filterItems: [
+    exactMatchItem,
+    mostRecentItem,
+    dateRangeItem,
+    numericItem,
+    facetItem,
+  ],
 };
 
 export const Default: StoryObj<ComponentProps> = {

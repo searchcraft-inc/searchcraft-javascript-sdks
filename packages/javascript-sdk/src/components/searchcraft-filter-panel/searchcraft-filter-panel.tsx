@@ -1,16 +1,11 @@
-import {
-  Component,
-  h,
-  Prop,
-  // State,
-  Event,
-  type EventEmitter,
-} from '@stencil/core';
+import { Component, h, Prop, State } from '@stencil/core';
 import type {
   FilterItem,
-  FilterItemDateRangeOptions,
-  NumericItemOptions,
-} from './searchcraft-filter-panel.types';
+  DateRangeFilterItem,
+  NumericFilterItem,
+  ExactMatchToggleFilterItem,
+  FacetsFilterItem,
+} from '../../types/searchcraft-filter-panel.types';
 import { useSearchcraftStore } from '@provider/store';
 import { getMillis } from '@utils/utils';
 
@@ -27,18 +22,28 @@ export interface ScInputCustomEvent<T> extends CustomEvent<T> {
 export class SearchcraftFilterPanel {
   @Prop() filterItems: FilterItem[] = [];
 
-  /**
-   * Emits an event with an array of query ctx values
-   */
-  @Event() update: EventEmitter<string[]>;
+  @State() unsubscribe: (() => void) | undefined;
+  @State() lastQuery: string | undefined;
 
   private searchStore = useSearchcraftStore.getState();
 
+  connectedCallback() {
+    this.unsubscribe = useSearchcraftStore.subscribe((state) => {
+      if (this.lastQuery !== state.query) {
+        // A place to put actions to do when the query changes
+      }
+      this.lastQuery = state.query || '';
+    });
+  }
+
+  disconnectedCallback() {
+    this.unsubscribe?.();
+  }
+
   handleDateRangeChanged(fieldName: string, min: number, max: number) {
-    console.log(fieldName, min, max);
     const start = new Date(min);
     const end = new Date(max);
-    this.searchStore.addActiveFilter({
+    this.searchStore.addRangeValueForIndexField({
       fieldName,
       value: `${fieldName}:[${start.toISOString()} TO ${end.toISOString()}]`,
     });
@@ -47,18 +52,35 @@ export class SearchcraftFilterPanel {
   }
 
   handleNumericRangeChanged(fieldName: string, min: number, max: number) {
-    this.searchStore.addActiveFilter({
+    this.searchStore.addRangeValueForIndexField({
       fieldName,
       value: `${fieldName}:[${min} TO ${max}]`,
     });
-
     this.searchStore.search();
   }
 
   handleFacetSelectionUpdated(fieldName: string, paths: string[]) {
-    this.searchStore.addActiveFilter({
-      fieldName,
-      value: `${fieldName}: IN [${paths.join(' ')}]`,
+    if (paths.length > 0) {
+      this.searchStore.addFacetPathsForIndexField({
+        fieldName,
+        value: `${fieldName}: IN [${paths.join(' ')}]`,
+      });
+    } else {
+      this.searchStore.removeFacetPathsForIndexField(fieldName);
+    }
+    this.searchStore.search();
+  }
+
+  handleExactMatchToggleUpdated(isActive: boolean) {
+    this.searchStore.setSearchParams({
+      mode: isActive ? 'normal' : 'fuzzy',
+    });
+    this.searchStore.search();
+  }
+
+  handleMostRecentToggleUpdated(isActive: boolean) {
+    this.searchStore.setSearchParams({
+      sort: isActive ? 'desc' : 'asc',
     });
     this.searchStore.search();
   }
@@ -72,10 +94,10 @@ export class SearchcraftFilterPanel {
         {this.filterItems.map((filterItem) => {
           switch (filterItem.type) {
             case 'dateRange': {
-              const options = filterItem.options as FilterItemDateRangeOptions;
-              const min = new Date(options.minDate).getTime();
-              const max = new Date(options.maxDate).getTime();
-              const granularityValue = getMillis(options.granularity);
+              const item = filterItem as DateRangeFilterItem;
+              const min = new Date(item.options.minDate).getTime();
+              const max = new Date(item.options.maxDate).getTime();
+              const granularityValue = getMillis(item.options.granularity);
               // return date range slider
               return (
                 <div class='searchcraft-filter-panel-section'>
@@ -86,9 +108,10 @@ export class SearchcraftFilterPanel {
                     min={min}
                     max={max}
                     granularity={granularityValue}
+                    dataType='date'
                     onRangeChanged={(event) => {
                       this.handleDateRangeChanged(
-                        filterItem.fieldName,
+                        item.fieldName,
                         event.detail.startValue,
                         event.detail.endValue,
                       );
@@ -98,7 +121,7 @@ export class SearchcraftFilterPanel {
               );
             }
             case 'numericRange': {
-              const options = filterItem.options as NumericItemOptions;
+              const item = filterItem as NumericFilterItem;
               // return date range slider
               return (
                 <div class='searchcraft-filter-panel-section'>
@@ -106,12 +129,12 @@ export class SearchcraftFilterPanel {
                     {filterItem.label}
                   </p>
                   <searchcraft-slider
-                    min={options.min}
-                    max={options.max}
-                    granularity={options.granularity}
+                    min={item.options.min}
+                    max={item.options.max}
+                    granularity={item.options.granularity}
                     onRangeChanged={(event) => {
                       this.handleNumericRangeChanged(
-                        filterItem.fieldName,
+                        item.fieldName,
                         event.detail.startValue,
                         event.detail.endValue,
                       );
@@ -120,7 +143,8 @@ export class SearchcraftFilterPanel {
                 </div>
               );
             }
-            case 'facets':
+            case 'facets': {
+              const item = filterItem as FacetsFilterItem;
               // return "filters-list"
               return (
                 <div class='searchcraft-filter-panel-section'>
@@ -128,16 +152,41 @@ export class SearchcraftFilterPanel {
                     {filterItem.label}
                   </p>
                   <searchcraft-facet-list
-                    fieldName={filterItem.fieldName}
+                    fieldName={item.fieldName}
                     onFacetSelectionUpdated={(event) => {
                       this.handleFacetSelectionUpdated(
-                        filterItem.fieldName,
+                        item.fieldName,
                         event.detail.paths,
                       );
                     }}
                   />
                 </div>
               );
+            }
+            case 'exactMatchToggle': {
+              const item = filterItem as ExactMatchToggleFilterItem;
+              return (
+                <searchcraft-toggle-button
+                  label={item.label}
+                  subLabel={item.options.subLabel}
+                  onToggleUpdated={(event) => {
+                    this.handleExactMatchToggleUpdated(event.detail);
+                  }}
+                />
+              );
+            }
+            case 'mostRecentToggle': {
+              const item = filterItem as ExactMatchToggleFilterItem;
+              return (
+                <searchcraft-toggle-button
+                  label={item.label}
+                  subLabel={item.options.subLabel}
+                  onToggleUpdated={(event) => {
+                    this.handleMostRecentToggleUpdated(event.detail);
+                  }}
+                />
+              );
+            }
           }
         })}
       </div>

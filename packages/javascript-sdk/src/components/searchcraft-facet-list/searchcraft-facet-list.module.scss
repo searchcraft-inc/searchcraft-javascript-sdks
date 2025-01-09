@@ -105,3 +105,9 @@
   top: 3px;
   left: 9px;
 }
+
+.searchcraft-facet-message {
+  @include body-small();
+  color: var(--sc-content-disabled);
+  text-align: center;
+}

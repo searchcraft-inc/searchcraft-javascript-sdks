@@ -6,9 +6,9 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { SearchcraftConfig } from "@searchcraft/core";
-import { FilterItem } from "./components/searchcraft-filter-panel/searchcraft-filter-panel.types";
+import { FilterItem } from "./types/searchcraft-filter-panel.types";
 export { SearchcraftConfig } from "@searchcraft/core";
-export { FilterItem } from "./components/searchcraft-filter-panel/searchcraft-filter-panel.types";
+export { FilterItem } from "./types/searchcraft-filter-panel.types";
 export namespace Components {
     interface SearchcraftAutoSearchForm {
         "autoSearchFormClass": string;
@@ -104,6 +104,7 @@ export namespace Components {
         "width": number;
     }
     interface SearchcraftSlider {
+        "dataType": 'number' | 'date';
         "granularity": number;
         "max": number;
         "min": number;
@@ -116,7 +117,8 @@ export namespace Components {
         /**
           * Type of the toggle - determines what it controls 'mode': toggles between 'fuzzy' and 'normal' 'sort': toggles between 'asc' and 'desc'
          */
-        "type": 'mode' | 'sort';
+        "label": string;
+        "subLabel": string | undefined;
     }
 }
 export interface SearchcraftAutoSearchFormCustomEvent<T> extends CustomEvent<T> {
@@ -143,10 +145,6 @@ export interface SearchcraftFacetListCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSearchcraftFacetListElement;
 }
-export interface SearchcraftFilterPanelCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLSearchcraftFilterPanelElement;
-}
 export interface SearchcraftInputCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSearchcraftInputElement;
@@ -154,6 +152,10 @@ export interface SearchcraftInputCustomEvent<T> extends CustomEvent<T> {
 export interface SearchcraftSliderCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSearchcraftSliderElement;
+}
+export interface SearchcraftToggleButtonCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSearchcraftToggleButtonElement;
 }
 declare global {
     interface HTMLSearchcraftAutoSearchFormElementEventMap {
@@ -291,18 +293,7 @@ declare global {
         prototype: HTMLSearchcraftFacetListElement;
         new (): HTMLSearchcraftFacetListElement;
     };
-    interface HTMLSearchcraftFilterPanelElementEventMap {
-        "update": string[];
-    }
     interface HTMLSearchcraftFilterPanelElement extends Components.SearchcraftFilterPanel, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLSearchcraftFilterPanelElementEventMap>(type: K, listener: (this: HTMLSearchcraftFilterPanelElement, ev: SearchcraftFilterPanelCustomEvent<HTMLSearchcraftFilterPanelElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLSearchcraftFilterPanelElementEventMap>(type: K, listener: (this: HTMLSearchcraftFilterPanelElement, ev: SearchcraftFilterPanelCustomEvent<HTMLSearchcraftFilterPanelElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSearchcraftFilterPanelElement: {
         prototype: HTMLSearchcraftFilterPanelElement;
@@ -373,7 +364,18 @@ declare global {
         prototype: HTMLSearchcraftSpinnerLightElement;
         new (): HTMLSearchcraftSpinnerLightElement;
     };
+    interface HTMLSearchcraftToggleButtonElementEventMap {
+        "toggleUpdated": boolean;
+    }
     interface HTMLSearchcraftToggleButtonElement extends Components.SearchcraftToggleButton, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSearchcraftToggleButtonElementEventMap>(type: K, listener: (this: HTMLSearchcraftToggleButtonElement, ev: SearchcraftToggleButtonCustomEvent<HTMLSearchcraftToggleButtonElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSearchcraftToggleButtonElementEventMap>(type: K, listener: (this: HTMLSearchcraftToggleButtonElement, ev: SearchcraftToggleButtonCustomEvent<HTMLSearchcraftToggleButtonElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSearchcraftToggleButtonElement: {
         prototype: HTMLSearchcraftToggleButtonElement;
@@ -479,10 +481,6 @@ declare namespace LocalJSX {
     }
     interface SearchcraftFilterPanel {
         "filterItems"?: FilterItem[];
-        /**
-          * Emits an event with an array of query ctx values
-         */
-        "onUpdate"?: (event: SearchcraftFilterPanelCustomEvent<string[]>) => void;
     }
     interface SearchcraftInput {
         "customStyles"?: string | Record<string, string>;
@@ -512,6 +510,7 @@ declare namespace LocalJSX {
         "width"?: number;
     }
     interface SearchcraftSlider {
+        "dataType"?: 'number' | 'date';
         "granularity"?: number;
         "max"?: number;
         "min"?: number;
@@ -525,7 +524,9 @@ declare namespace LocalJSX {
         /**
           * Type of the toggle - determines what it controls 'mode': toggles between 'fuzzy' and 'normal' 'sort': toggles between 'asc' and 'desc'
          */
-        "type"?: 'mode' | 'sort';
+        "label"?: string;
+        "onToggleUpdated"?: (event: SearchcraftToggleButtonCustomEvent<boolean>) => void;
+        "subLabel"?: string | undefined;
     }
     interface IntrinsicElements {
         "searchcraft-auto-search-form": SearchcraftAutoSearchForm;

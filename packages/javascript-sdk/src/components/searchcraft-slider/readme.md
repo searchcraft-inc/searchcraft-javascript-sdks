@@ -7,11 +7,12 @@
 
 ## Properties
 
-| Property      | Attribute     | Description | Type     | Default              |
-| ------------- | ------------- | ----------- | -------- | -------------------- |
-| `granularity` | `granularity` |             | `number` | `getMillis('month')` |
-| `max`         | `max`         |             | `number` | `100`                |
-| `min`         | `min`         |             | `number` | `0`                  |
+| Property      | Attribute     | Description | Type                 | Default              |
+| ------------- | ------------- | ----------- | -------------------- | -------------------- |
+| `dataType`    | `data-type`   |             | `"date" \| "number"` | `'number'`           |
+| `granularity` | `granularity` |             | `number`             | `getMillis('month')` |
+| `max`         | `max`         |             | `number`             | `100`                |
+| `min`         | `min`         |             | `number`             | `0`                  |
 
 
 ## Events

@@ -20,3 +20,5 @@ export {
 export { useSearchcraftStore, useThemeStore } from './provider/store';
 
 export { Components } from './components';
+
+export * from './types';

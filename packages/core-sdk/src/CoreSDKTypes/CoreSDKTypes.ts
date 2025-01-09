@@ -104,7 +104,12 @@ export interface SearchDocument<
   [key: string]: string | number | T[keyof T]; // Supports dynamic properties with string or number values
 }
 
-export type SearchFilter = {
+export type FacetPathsForIndexField = {
+  fieldName: string;
+  value: string;
+};
+
+export type RangeValueForIndexField = {
   fieldName: string;
   value: string;
 };
@@ -147,19 +152,8 @@ export type SearchParams = {
    */
   sort?: 'asc' | 'desc';
 
-  /**
-   * * Range of years to filter results by.
-   * Optional parameter.
-   */
-  yearsRange?: [number, number];
-
-  /**
-   * * Array of sections to filter results by.
-   * Optional parameter.
-   */
-  sections?: string[];
-
-  filters?: SearchFilter[];
+  facetPathsForIndexFields?: Record<string, FacetPathsForIndexField>;
+  rangeValueForIndexFields?: Record<string, RangeValueForIndexField>;
 };
 
 /**

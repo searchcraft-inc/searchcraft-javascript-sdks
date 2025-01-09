@@ -116,3 +116,15 @@ export function getMillis(unit: 'year' | 'month' | 'day' | 'hour'): number {
       return 3600000;
   }
 }
+/**
+ * Given an array of facet paths, removes parent facet paths.
+ */
+export function removeSubstringMatches(arr: string[]): string[] {
+  return arr.filter(
+    (entry, index, array) =>
+      !array.some(
+        (otherEntry, otherIndex) =>
+          otherIndex !== index && otherEntry.includes(entry),
+      ),
+  );
+}
