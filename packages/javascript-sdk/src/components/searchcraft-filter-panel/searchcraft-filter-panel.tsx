@@ -1,4 +1,4 @@
-import { Component, h, Prop, State } from '@stencil/core';
+import { Component, h, Prop, State, Watch } from '@stencil/core';
 import type {
   FilterItem,
   DateRangeFilterItem,
@@ -20,14 +20,34 @@ export interface ScInputCustomEvent<T> extends CustomEvent<T> {
   shadow: false,
 })
 export class SearchcraftFilterPanel {
-  @Prop() filterItems: FilterItem[] = [];
+  @Prop() items: string | undefined;
 
   @State() unsubscribe: (() => void) | undefined;
   @State() lastQuery: string | undefined;
+  @State() filterItems: FilterItem[] = [];
 
   private searchStore = useSearchcraftStore.getState();
+  private setFilterItemsFromString = (itemsString: string) => {
+    if (itemsString) {
+      try {
+        const parsedItems = JSON.parse(this.items) as FilterItem[];
+        this.filterItems = parsedItems;
+      } catch {
+        console.error(
+          'Error: Invalid items passed to searchcraft-filter-panel.',
+        );
+      }
+    }
+  };
+
+  @Watch('items')
+  onItemsChange(itemsString: string) {
+    this.setFilterItemsFromString(itemsString);
+  }
 
   connectedCallback() {
+    this.setFilterItemsFromString(this.items);
+
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {
       if (this.lastQuery !== state.query) {
         // A place to put actions to do when the query changes
@@ -72,16 +92,12 @@ export class SearchcraftFilterPanel {
   }
 
   handleExactMatchToggleUpdated(isActive: boolean) {
-    this.searchStore.setSearchParams({
-      mode: isActive ? 'normal' : 'fuzzy',
-    });
+    this.searchStore.setSearchMode(isActive ? 'normal' : 'fuzzy');
     this.searchStore.search();
   }
 
   handleMostRecentToggleUpdated(isActive: boolean) {
-    this.searchStore.setSearchParams({
-      sort: isActive ? 'desc' : 'asc',
-    });
+    this.searchStore.setSortType(isActive ? 'desc' : 'asc');
     this.searchStore.search();
   }
 
