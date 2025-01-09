@@ -1,5 +1,5 @@
 import { useSearchcraftStore } from '@provider/store';
-import { Component, Event, Fragment, h, Prop } from '@stencil/core';
+import { Component, Fragment, h, Prop } from '@stencil/core';
 
 @Component({
   tag: 'searchcraft-base-search-result',
@@ -7,30 +7,26 @@ import { Component, Event, Fragment, h, Prop } from '@stencil/core';
   shadow: false,
 })
 export class SearchcraftBaseSearchResult {
-  @Prop() titleContent = '';
-  @Prop() subtitleContent = '';
-  @Prop() bodyContent = '';
-  @Prop() footerContent = '';
-  @Prop() buttonLabel = '';
-  @Prop() linkHref: string | undefined = '';
-  @Prop() customStyles = '{}';
-  @Prop() imageDescription = '';
-  @Prop() imageSource = '';
+  @Prop() titleContent: string | undefined;
+  @Prop() subtitleContent: string | undefined;
+  @Prop() bodyContent: string | undefined;
+  @Prop() footerContent: string | undefined;
+  @Prop() buttonLabel: string | undefined;
+  @Prop() buttonHref: string | undefined;
+  @Prop() buttonTarget: '_blank' | '_self' | '_top' | '_parent' = '_blank';
+  @Prop() buttonRel: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
+  @Prop() containerHref: string | undefined;
+  @Prop() containerTarget: '_blank' | '_self' | '_top' | '_parent' = '_blank';
+  @Prop() containerRel: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
+  @Prop() imageSrc: string | undefined;
+  @Prop() imageAlt: string | undefined;
   @Prop() imagePlacement: 'left' | 'right';
+  @Prop() customStyles: string | undefined;
   @Prop() documentPosition = 0;
-
-  @Event() buttonCallback: () => void = () => {};
-  @Event() keyDownCallback: () => void = () => {};
-  @Event() resultCallback: () => void = () => {};
 
   private searchcraftStore = useSearchcraftStore.getState();
 
-  // TODO: Add button support to this component
-  // private handleButtonClick = () => {
-  //   this.buttonCallback();
-  // };
-
-  private handleClick = () => {
+  private recordMeasureEvent = () => {
     const searchcraft = this.searchcraftStore.getSearchcraftInstance();
 
     if (searchcraft) {
@@ -48,80 +44,91 @@ export class SearchcraftBaseSearchResult {
   };
 
   private parseStyles = (): Record<string, { [key: string]: string }> => {
-    try {
-      return JSON.parse(this.customStyles);
-    } catch (error) {
-      console.error('Error parsing custom styles:', error);
-      return {};
+    if (this.customStyles) {
+      try {
+        return JSON.parse(this.customStyles);
+      } catch (error) {
+        console.error('Error parsing custom styles:', error);
+        return {};
+      }
     }
   };
 
   render() {
     const styles = this.parseStyles();
-    const imageContainer = this.imageSource && (
+    const imageContainer = this.imageSrc && (
       <img
-        alt={this.imageDescription}
+        alt={this.imageAlt}
         class='searchcraft-search-result-image'
-        src={this.imageSource}
+        src={this.imageSrc}
         style={styles.image || {}}
       />
     );
 
     const contentContainer = (
       <Fragment>
-        {this.imagePlacement === 'left' && imageContainer}
+        {this.imageSrc && this.imagePlacement === 'left' && imageContainer}
         <div class='searchcraft-base-search-result-content-container'>
-          <h2
-            class='searchcraft-base-search-result-title'
-            style={styles.title || {}}
-          >
-            {this.titleContent}
-          </h2>
-          <h3
-            class='searchcraft-base-search-result-subtitle'
-            style={styles.subtitle || {}}
-          >
-            {this.subtitleContent}
-          </h3>
-          <p
-            class='searchcraft-base-search-result-body-content'
-            style={styles.primaryContent || {}}
-          >
-            {this.bodyContent}
-          </p>
-          <p
-            class='searchcraft-base-search-result-footer-content'
-            style={styles.secondaryContent || {}}
-          >
-            {this.footerContent}
-          </p>
-          {/* TODO: Add button & button styles here
-          {this.buttonLabel && (
-            <button
-              onClick={this.handleButtonClick}
+          {this.titleContent && (
+            <h2
+              class='searchcraft-base-search-result-title'
+              style={styles.title || {}}
+            >
+              {this.titleContent}
+            </h2>
+          )}
+          {this.subtitleContent && (
+            <h3
+              class='searchcraft-base-search-result-subtitle'
+              style={styles.subtitle || {}}
+            >
+              {this.subtitleContent}
+            </h3>
+          )}
+          {this.bodyContent && (
+            <p
+              class='searchcraft-base-search-result-body-content'
+              style={styles.primaryContent || {}}
+            >
+              {this.bodyContent}
+            </p>
+          )}
+
+          {this.footerContent && (
+            <p
+              class='searchcraft-base-search-result-footer-content'
+              style={styles.secondaryContent || {}}
+            >
+              {this.footerContent}
+            </p>
+          )}
+          {this.buttonHref && !this.containerHref && this.buttonLabel && (
+            <a
+              class='searchcraft-search-result-button'
+              href={this.buttonHref}
               style={styles.button || {}}
-              type='button'
+              target={this.buttonTarget}
+              rel={this.buttonRel}
             >
               {this.buttonLabel}
-            </button>
-          )} */}
+            </a>
+          )}
         </div>
-        {this.imagePlacement === 'right' && imageContainer}
+        {this.imageSrc && this.imagePlacement === 'right' && imageContainer}
       </Fragment>
     );
 
-    /** Render as an anchor tag if an href prop is present. */
-    if (this.linkHref) {
+    /** Render as an anchor tag if the containerHref prop is present. */
+    if (this.containerHref) {
       return (
         <a
           class='searchcraft-search-result-container'
-          onKeyDown={this.keyDownCallback}
-          onClick={this.handleClick}
-          href={this.linkHref}
-          rel='noreferrer'
+          onClick={this.recordMeasureEvent}
+          href={this.containerHref}
+          rel={this.containerRel}
           style={styles.container || {}}
           tabindex='0'
-          target='_blank'
+          target={this.containerTarget}
         >
           {contentContainer}
         </a>
@@ -132,8 +139,6 @@ export class SearchcraftBaseSearchResult {
     return (
       <div
         class='searchcraft-search-result-container'
-        onKeyDown={this.keyDownCallback}
-        onClick={this.handleClick}
         style={styles.container || {}}
       >
         {contentContainer}

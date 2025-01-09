@@ -1,83 +1,107 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import WebComponentWrapper from '../../utils/WebComponentWrapper';
-
-const componentName = 'searchcraft-base-search-results';
+import type { SearchResultMappings } from '@searchcraft/javascript-sdk';
+import { config } from '../../utils/DefaultSearchcraftConfig';
 
 const componentMeta: Meta = {
   title: 'Javascript SDK/searchcraft-base-search-results',
-  argTypes: {
-    adInterval: {
-      control: 'number',
-      description: 'Number of results between injected ad sections.',
-    },
-    customStylesForResults: {
-      control: 'object',
-      description: 'Custom styles applied to the results.',
-    },
-    documentAttributesForDisplay: {
-      control: 'text',
-      description: 'Comma-separated list of document attributes to display.',
-    },
-    fallbackElement: {
-      control: 'object',
-      description: 'Element to display when no results are found.',
-    },
-    formatTime: {
-      control: 'boolean',
-      description: 'If true, formats timestamps into human-readable format.',
-    },
-    placeAdAtEnd: {
-      control: 'boolean',
-      description: 'If true, places an ad section at the end of the results.',
-    },
-    placeAdAtStart: {
-      control: 'boolean',
-      description:
-        'If true, places an ad section at the beginning of the results.',
-    },
-    placeResultImageRight: {
-      control: 'boolean',
-      description: 'If true, places the result image on the right.',
-    },
-    isInteractive: {
-      control: 'boolean',
-      description: 'If true, makes the results interactive.',
-    },
-    noResults: {
-      action: 'noResults',
-      description: 'Event emitted when no results are found.',
-    },
-  },
+  argTypes: {},
 };
 
 type ComponentProps = {
-  adInterval?: number;
-  customStylesForResults?: string | Record<string, Record<string, string>>;
-  documentAttributesForDisplay?: string;
-  fallbackElement?: HTMLElement | null;
-  formatTime?: boolean;
-  placeAdAtEnd?: boolean;
-  placeAdAtStart?: boolean;
-  placeResultImageRight?: boolean;
-  isInteractive?: boolean;
+  adInterval: number;
+  customStylesForResults: string | Record<string, Record<string, string>>;
+  searchResultMappings: string | undefined;
+  placeAdAtEnd: boolean;
+  placeAdAtStart: boolean;
+  resultImagePlacement: 'left' | 'right';
+  buttonLabel: string | undefined;
+  buttonTarget: '_blank' | '_self' | '_top' | '_parent';
+  buttonRel: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
+  containerHref: string | undefined;
+  containerTarget: '_blank' | '_self' | '_top' | '_parent';
+  containerRel: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
+};
+
+const mappings: SearchResultMappings = {
+  containerHref: {
+    fieldNames: [
+      {
+        fieldName: 'canonical_link',
+        dataType: 'text',
+      },
+    ],
+  },
+  footer: {
+    fieldNames: [
+      {
+        fieldName: 'date_published',
+        dataType: 'date',
+      },
+      {
+        fieldName: 'author_name',
+        dataType: 'text',
+      },
+    ],
+    delimeter: ' • ',
+  },
+  imageSource: {
+    fieldNames: [
+      {
+        fieldName: 'medium_image',
+        dataType: 'text',
+      },
+    ],
+  },
+  body: {
+    fieldNames: [{ fieldName: 'sub_headline', dataType: 'text' }],
+  },
+  title: {
+    fieldNames: [{ fieldName: 'headline', dataType: 'text' }],
+  },
 };
 
 const defaultProps: ComponentProps = {
   adInterval: 4,
   customStylesForResults: {},
-  documentAttributesForDisplay: 'title,subtitle,primary,secondary,tertiary',
-  fallbackElement: null,
-  formatTime: true,
+  searchResultMappings: JSON.stringify(mappings),
   placeAdAtEnd: true,
   placeAdAtStart: true,
-  placeResultImageRight: false,
-  isInteractive: false,
+  resultImagePlacement: 'right',
+  buttonLabel: undefined,
+  buttonTarget: '_blank',
+  buttonRel: 'noreferrer',
+  containerHref: 'https://example.com',
+  containerTarget: '_blank',
+  containerRel: 'noreferrer',
 };
 
 export const Default: StoryObj<ComponentProps> = {
-  render: (args) => (
-    <WebComponentWrapper args={args} componentName={componentName} />
-  ),
+  render: (args) => {
+    console.log(config);
+    return (
+      <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
+        <WebComponentWrapper
+          componentName='searchcraft-auto-search-form'
+          args={{
+            autoSearchFormClass: '',
+            config: config,
+            customStylesForInput: '{}',
+            inputCaptionValue: 'Search',
+            labelForInput: 'Search for something:',
+            placeholderValue: 'Search here...',
+            searchContainerClass: '',
+          }}
+        />
+        <div style={{ paddingTop: 20 }}>
+          <WebComponentWrapper
+            componentName='searchcraft-base-search-results'
+            args={args}
+          />
+        </div>
+      </div>
+    );
+  },
   args: defaultProps,
 };
 

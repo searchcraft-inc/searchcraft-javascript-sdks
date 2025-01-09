@@ -1,3 +1,5 @@
+import type { SearchResultMapping } from 'types';
+
 export function parseCustomStyles(
   styles: string | Record<string, string>,
 ): Record<string, string> {
@@ -12,38 +14,6 @@ export function parseCustomStyles(
   return styles || {};
 }
 
-export function parseSearchKeys(
-  documentAttributesForDisplay: string,
-): string[] {
-  try {
-    const parsedKeys = JSON.parse(documentAttributesForDisplay);
-    if (
-      Array.isArray(parsedKeys) &&
-      parsedKeys.every((key) => typeof key === 'string')
-    ) {
-      return parsedKeys;
-    }
-    console.warn(
-      'searchKeys must be a JSON array of strings. Defaulting to an empty array.',
-    );
-    return [];
-  } catch (error) {
-    console.error('Failed to parse searchKeys:', error);
-    return [];
-  }
-}
-
-export function extractDynamicProperties(
-  document: Record<string, string | number>,
-  keys: string[],
-) {
-  const extractedProperties: Record<string, string | number> = {};
-  keys.forEach((key) => {
-    extractedProperties[key] = document[key] || '';
-  });
-  return extractedProperties;
-}
-
 export function serializeStyles(
   styles: Record<string, Record<string, string>>,
 ): string {
@@ -55,6 +25,13 @@ export function serializeStyles(
   }
 }
 
+/**
+ * Given a timestamp value, returns a formatted time string for the time
+ * since now.
+ *
+ * @param timestamp
+ * @returns {string} Formatted string value
+ */
 export function getFormattedTimeFromNow(timestamp: string): string {
   const now = new Date();
   const inputTime = new Date(timestamp);
@@ -127,4 +104,31 @@ export function removeSubstringMatches(arr: string[]): string[] {
           otherIndex !== index && otherEntry.includes(entry),
       ),
   );
+}
+
+/**
+ * Given a document and a SearchResultMapping, return a mapped value from the document.
+ *
+ * @param document
+ * @param {SearchResultMapping} mapping
+ * @returns {string | undefined}
+ */
+export function getDocumentValueFromSearchResultMapping(
+  document: Record<string, unknown> | undefined,
+  mapping: SearchResultMapping | undefined,
+): string | undefined {
+  if (document && mapping) {
+    return mapping.fieldNames
+      .map((fieldNameDetails) => {
+        let valueFound = document[fieldNameDetails.fieldName];
+
+        if (valueFound && fieldNameDetails.dataType === 'date') {
+          valueFound = getFormattedTimeFromNow(valueFound as string);
+        }
+
+        return valueFound;
+      })
+      .filter((value) => !!value)
+      .join(mapping.delimeter || ' ');
+  }
 }

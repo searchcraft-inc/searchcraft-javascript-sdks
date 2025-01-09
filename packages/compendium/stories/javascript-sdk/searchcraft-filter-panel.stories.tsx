@@ -10,8 +10,6 @@ import type {
 } from '@searchcraft/javascript-sdk';
 import { config } from '../../utils/DefaultSearchcraftConfig';
 
-const componentName = 'searchcraft-filter-panel';
-
 const componentMeta: Meta = {
   title: 'Javascript SDK/searchcraft-filter-panel',
   argTypes: {},
@@ -84,7 +82,6 @@ const defaultProps: ComponentProps = {
 
 export const Default: StoryObj<ComponentProps> = {
   render: (args) => {
-    console.log(JSON.stringify(args.items));
     return (
       <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
         <WebComponentWrapper

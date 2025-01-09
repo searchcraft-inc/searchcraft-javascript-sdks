@@ -44,11 +44,12 @@ export class SearchcraftInput {
 
   handleClearInput = () => {
     this.inputValue = '';
-    if (this.inputValue === '') {
-      return;
-    }
+
     if (this.clearInput) {
       this.clearInput.emit();
+    }
+    if (this.inputValue === '') {
+      return;
     }
   };
 

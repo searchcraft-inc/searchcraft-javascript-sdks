@@ -7,28 +7,24 @@
 
 ## Properties
 
-| Property           | Attribute           | Description | Type                | Default     |
-| ------------------ | ------------------- | ----------- | ------------------- | ----------- |
-| `bodyContent`      | `body-content`      |             | `string`            | `''`        |
-| `buttonLabel`      | `button-label`      |             | `string`            | `''`        |
-| `customStyles`     | `custom-styles`     |             | `string`            | `'{}'`      |
-| `documentPosition` | `document-position` |             | `number`            | `0`         |
-| `footerContent`    | `footer-content`    |             | `string`            | `''`        |
-| `imageDescription` | `image-description` |             | `string`            | `''`        |
-| `imagePlacement`   | `image-placement`   |             | `"left" \| "right"` | `undefined` |
-| `imageSource`      | `image-source`      |             | `string`            | `''`        |
-| `linkHref`         | `link-href`         |             | `string`            | `''`        |
-| `subtitleContent`  | `subtitle-content`  |             | `string`            | `''`        |
-| `titleContent`     | `title-content`     |             | `string`            | `''`        |
-
-
-## Events
-
-| Event             | Description | Type               |
-| ----------------- | ----------- | ------------------ |
-| `buttonCallback`  |             | `CustomEvent<any>` |
-| `keyDownCallback` |             | `CustomEvent<any>` |
-| `resultCallback`  |             | `CustomEvent<any>` |
+| Property           | Attribute           | Description | Type                                         | Default     |
+| ------------------ | ------------------- | ----------- | -------------------------------------------- | ----------- |
+| `bodyContent`      | `body-content`      |             | `string`                                     | `undefined` |
+| `buttonHref`       | `button-href`       |             | `string`                                     | `undefined` |
+| `buttonLabel`      | `button-label`      |             | `string`                                     | `undefined` |
+| `buttonRel`        | `button-rel`        |             | `"nofollow" \| "noopener" \| "noreferrer"`   | `undefined` |
+| `buttonTarget`     | `button-target`     |             | `"_blank" \| "_parent" \| "_self" \| "_top"` | `'_blank'`  |
+| `containerHref`    | `container-href`    |             | `string`                                     | `undefined` |
+| `containerRel`     | `container-rel`     |             | `"nofollow" \| "noopener" \| "noreferrer"`   | `undefined` |
+| `containerTarget`  | `container-target`  |             | `"_blank" \| "_parent" \| "_self" \| "_top"` | `'_blank'`  |
+| `customStyles`     | `custom-styles`     |             | `string`                                     | `undefined` |
+| `documentPosition` | `document-position` |             | `number`                                     | `0`         |
+| `footerContent`    | `footer-content`    |             | `string`                                     | `undefined` |
+| `imageAlt`         | `image-alt`         |             | `string`                                     | `undefined` |
+| `imagePlacement`   | `image-placement`   |             | `"left" \| "right"`                          | `undefined` |
+| `imageSrc`         | `image-src`         |             | `string`                                     | `undefined` |
+| `subtitleContent`  | `subtitle-content`  |             | `string`                                     | `undefined` |
+| `titleContent`     | `title-content`     |             | `string`                                     | `undefined` |
 
 
 ## Dependencies

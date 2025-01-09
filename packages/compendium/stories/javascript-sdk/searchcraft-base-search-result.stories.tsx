@@ -55,29 +55,39 @@ const componentMeta: Meta = {
 };
 
 type ComponentProps = {
-  buttonLabel?: string;
-  customStyles?: string | Record<string, string>;
-  titleContent?: string;
-  subtitleContent?: string;
-  bodyContent?: string;
-  footerContent?: string;
-  imageDescription?: string;
-  imageSource?: string;
-  linkHref?: string;
+  titleContent: string | undefined;
+  subtitleContent: string | undefined;
+  bodyContent: string | undefined;
+  footerContent: string | undefined;
+  buttonLabel: string | undefined;
+  buttonHref: string | undefined;
+  buttonTarget: '_blank' | '_self' | '_top' | '_parent';
+  buttonRel: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
+  containerHref: string | undefined;
+  containerTarget: '_blank' | '_self' | '_top' | '_parent';
+  containerRel: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
+  customStyles: string | undefined;
+  imageAlt: string | undefined;
+  imageSrc: string | undefined;
   imagePlacement?: 'left' | 'right';
   documentPosition?: number;
 };
 
 const defaultProps: ComponentProps = {
-  buttonLabel: 'Learn More',
-  customStyles: '{}',
   titleContent: 'Example Title',
-  imageDescription: 'An example image',
-  imageSource: 'https://via.placeholder.com/150',
-  linkHref: 'https://example.com',
-  bodyContent: 'This is the primary content.',
-  footerContent: 'This is the secondary content.',
   subtitleContent: 'Example Subtitle',
+  bodyContent: 'This is the primary content.',
+  buttonLabel: 'Learn More',
+  buttonTarget: '_blank',
+  buttonHref: 'https://example.com',
+  buttonRel: undefined,
+  containerHref: undefined,
+  containerTarget: '_blank',
+  containerRel: undefined,
+  customStyles: undefined,
+  imageAlt: 'An example image',
+  imageSrc: 'https://via.placeholder.com/150',
+  footerContent: 'This is the secondary content.',
   imagePlacement: 'right',
   documentPosition: 1,
 };
