@@ -5,6 +5,7 @@ import {
   Event,
   type EventEmitter,
   h,
+  Watch,
 } from '@stencil/core';
 
 import {
@@ -51,8 +52,8 @@ export class SearchcraftAutoSearchForm {
   private searchStore = useSearchcraftStore.getState();
   unsubscribe: () => void;
 
-  componentDidLoad() {
-    const searchcraft = new SearchcraftCore(this.config, {
+  init(config: SearchcraftConfig) {
+    const searchcraft = new SearchcraftCore(config, {
       sdkName: packageJson.name,
       sdkVersion: packageJson.version,
     });
@@ -62,6 +63,23 @@ export class SearchcraftAutoSearchForm {
       this.isRequesting = state.isRequesting;
       this.searchResults = { ...state.searchResults };
     });
+  }
+
+  connectedCallback() {
+    if (
+      this.config.endpointURL &&
+      this.config.index.length > 0 &&
+      this.config.readKey
+    ) {
+      this.init(this.config);
+    }
+  }
+
+  @Watch('config')
+  onConfigChange(config: SearchcraftConfig) {
+    if (config.endpointURL && config.index.length > 0 && config.readKey) {
+      this.init(config);
+    }
   }
 
   disconnectedCallback() {

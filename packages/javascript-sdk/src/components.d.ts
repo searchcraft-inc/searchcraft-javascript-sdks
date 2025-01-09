@@ -26,28 +26,38 @@ export namespace Components {
         "inputLabel": string;
     }
     interface SearchcraftBaseSearchResult {
-        "bodyContent": string;
-        "buttonLabel": string;
-        "customStyles": string;
+        "bodyContent": string | undefined;
+        "buttonHref": string | undefined;
+        "buttonLabel": string | undefined;
+        "buttonRel": 'noreferrer' | 'noopener' | 'nofollow' | undefined;
+        "buttonTarget": '_blank' | '_self' | '_top' | '_parent';
+        "containerHref": string | undefined;
+        "containerRel": 'noreferrer' | 'noopener' | 'nofollow' | undefined;
+        "containerTarget": '_blank' | '_self' | '_top' | '_parent';
+        "customStyles": string | undefined;
         "documentPosition": number;
-        "footerContent": string;
-        "imageDescription": string;
+        "footerContent": string | undefined;
+        "imageAlt": string | undefined;
         "imagePlacement": 'left' | 'right';
-        "imageSource": string;
-        "linkHref": string | undefined;
-        "subtitleContent": string;
-        "titleContent": string;
+        "imageSrc": string | undefined;
+        "subtitleContent": string | undefined;
+        "titleContent": string | undefined;
     }
     interface SearchcraftBaseSearchResults {
         "adInterval": number;
+        "buttonLabel": string | undefined;
+        "buttonRel": 'noreferrer' | 'noopener' | 'nofollow' | undefined;
+        "buttonTarget": '_blank' | '_self' | '_top' | '_parent';
+        "containerHref": string | undefined;
+        "containerRel": 'noreferrer' | 'noopener' | 'nofollow' | undefined;
+        "containerTarget": '_blank' | '_self' | '_top' | '_parent';
         "customStylesForResults": | string
-    | Record<string, Record<string, string>>;
-        "documentAttributesForDisplay": string;
-        "fallbackElement": HTMLElement | null;
-        "formatTime": boolean;
+    | Record<string, Record<string, string>>
+    | undefined;
         "placeAdAtEnd": boolean;
         "placeAdAtStart": boolean;
         "resultImagePlacement": 'left' | 'right';
+        "searchResultMappings": string | undefined;
     }
     interface SearchcraftButton {
         "iconElement"?: Element;
@@ -127,10 +137,6 @@ export interface SearchcraftBaseSearchFormCustomEvent<T> extends CustomEvent<T> 
     detail: T;
     target: HTMLSearchcraftBaseSearchFormElement;
 }
-export interface SearchcraftBaseSearchResultCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLSearchcraftBaseSearchResultElement;
-}
 export interface SearchcraftBaseSearchResultsCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSearchcraftBaseSearchResultsElement;
@@ -191,20 +197,7 @@ declare global {
         prototype: HTMLSearchcraftBaseSearchFormElement;
         new (): HTMLSearchcraftBaseSearchFormElement;
     };
-    interface HTMLSearchcraftBaseSearchResultElementEventMap {
-        "buttonCallback": any;
-        "keyDownCallback": any;
-        "resultCallback": any;
-    }
     interface HTMLSearchcraftBaseSearchResultElement extends Components.SearchcraftBaseSearchResult, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLSearchcraftBaseSearchResultElementEventMap>(type: K, listener: (this: HTMLSearchcraftBaseSearchResultElement, ev: SearchcraftBaseSearchResultCustomEvent<HTMLSearchcraftBaseSearchResultElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLSearchcraftBaseSearchResultElementEventMap>(type: K, listener: (this: HTMLSearchcraftBaseSearchResultElement, ev: SearchcraftBaseSearchResultCustomEvent<HTMLSearchcraftBaseSearchResultElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSearchcraftBaseSearchResultElement: {
         prototype: HTMLSearchcraftBaseSearchResultElement;
@@ -424,32 +417,39 @@ declare namespace LocalJSX {
         "onClearInput"?: (event: SearchcraftBaseSearchFormCustomEvent<any>) => void;
     }
     interface SearchcraftBaseSearchResult {
-        "bodyContent"?: string;
-        "buttonLabel"?: string;
-        "customStyles"?: string;
+        "bodyContent"?: string | undefined;
+        "buttonHref"?: string | undefined;
+        "buttonLabel"?: string | undefined;
+        "buttonRel"?: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
+        "buttonTarget"?: '_blank' | '_self' | '_top' | '_parent';
+        "containerHref"?: string | undefined;
+        "containerRel"?: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
+        "containerTarget"?: '_blank' | '_self' | '_top' | '_parent';
+        "customStyles"?: string | undefined;
         "documentPosition"?: number;
-        "footerContent"?: string;
-        "imageDescription"?: string;
+        "footerContent"?: string | undefined;
+        "imageAlt"?: string | undefined;
         "imagePlacement"?: 'left' | 'right';
-        "imageSource"?: string;
-        "linkHref"?: string | undefined;
-        "onButtonCallback"?: (event: SearchcraftBaseSearchResultCustomEvent<any>) => void;
-        "onKeyDownCallback"?: (event: SearchcraftBaseSearchResultCustomEvent<any>) => void;
-        "onResultCallback"?: (event: SearchcraftBaseSearchResultCustomEvent<any>) => void;
-        "subtitleContent"?: string;
-        "titleContent"?: string;
+        "imageSrc"?: string | undefined;
+        "subtitleContent"?: string | undefined;
+        "titleContent"?: string | undefined;
     }
     interface SearchcraftBaseSearchResults {
         "adInterval"?: number;
+        "buttonLabel"?: string | undefined;
+        "buttonRel"?: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
+        "buttonTarget"?: '_blank' | '_self' | '_top' | '_parent';
+        "containerHref"?: string | undefined;
+        "containerRel"?: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
+        "containerTarget"?: '_blank' | '_self' | '_top' | '_parent';
         "customStylesForResults"?: | string
-    | Record<string, Record<string, string>>;
-        "documentAttributesForDisplay"?: string;
-        "fallbackElement"?: HTMLElement | null;
-        "formatTime"?: boolean;
+    | Record<string, Record<string, string>>
+    | undefined;
         "onNoResults"?: (event: SearchcraftBaseSearchResultsCustomEvent<void>) => void;
         "placeAdAtEnd"?: boolean;
         "placeAdAtStart"?: boolean;
         "resultImagePlacement"?: 'left' | 'right';
+        "searchResultMappings"?: string | undefined;
     }
     interface SearchcraftButton {
         "iconElement"?: Element;

@@ -11,9 +11,7 @@
 export type * from './components';
 
 export {
-  extractDynamicProperties,
   parseCustomStyles,
-  parseSearchKeys,
   serializeStyles,
 } from './utils/utils';
 
