@@ -6,25 +6,28 @@ const componentName = 'searchcraft-slider';
 const componentMeta: Meta = {
   title: 'Javascript SDK/searchcraft-slider',
   argTypes: {
-    maxYear: {
+    min: {
       control: 'number',
-      description: 'The maximum year that the slider can select.',
     },
-    minYear: {
+    max: {
       control: 'number',
-      description: 'The minimum year that the slider can select.',
+    },
+    granularity: {
+      control: 'number',
     },
   },
 };
 
 type ComponentProps = {
-  maxYear?: number;
-  minYear?: number;
+  min: number;
+  max: number;
+  granularity: number;
 };
 
 const defaultProps: ComponentProps = {
-  maxYear: new Date().getFullYear(),
-  minYear: 2014,
+  min: 0,
+  max: 100,
+  granularity: 4,
 };
 
 export const Default: StoryObj<ComponentProps> = {

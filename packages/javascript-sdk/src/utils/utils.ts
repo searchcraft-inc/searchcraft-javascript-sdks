@@ -79,36 +79,6 @@ export function getFormattedTimeFromNow(timestamp: string): string {
   return `${years}y ago`;
 }
 
-type Section = {
-  count: number;
-  path: string;
-  children: Section[];
-};
-
-type FacetCheckbox = {
-  count: number;
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  children: any[];
-  label: string;
-  value: string;
-};
-
-export function flattenFacets(sections: Section[]): FacetCheckbox[] {
-  return sections.map((section) => {
-    const fullPath = section.path;
-
-    // Create the FacetCheckbox object
-    const facetCheckbox: FacetCheckbox = {
-      label: fullPath.replace(/^\//, ''), // Format the label without leading slash
-      value: fullPath, // The full path as the value
-      count: section.count, // Count from the Section
-      children: flattenFacets(section.children || []), // Recursively flatten children
-    };
-
-    return facetCheckbox;
-  });
-}
-
 export function filterPaths(paths) {
   return paths.filter((path) => {
     const parts = path.split('/').filter(Boolean);
@@ -125,4 +95,36 @@ export function filterPaths(paths) {
 
 export function formatNumberWithCommas(number) {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+export function getMillis(unit: 'year' | 'month' | 'day' | 'hour'): number {
+  const millisInHour = 60 * 60 * 1000;
+  const millisInDay = 24 * millisInHour;
+  const millisInMonth = 30 * millisInDay;
+  const millisInYear = 365 * millisInDay;
+
+  switch (unit) {
+    case 'hour':
+      return millisInHour;
+    case 'day':
+      return millisInDay;
+    case 'month':
+      return millisInMonth;
+    case 'year':
+      return millisInYear;
+    default:
+      return 3600000;
+  }
+}
+/**
+ * Given an array of facet paths, removes parent facet paths.
+ */
+export function removeSubstringMatches(arr: string[]): string[] {
+  return arr.filter(
+    (entry, index, array) =>
+      !array.some(
+        (otherEntry, otherIndex) =>
+          otherIndex !== index && otherEntry.includes(entry),
+      ),
+  );
 }
