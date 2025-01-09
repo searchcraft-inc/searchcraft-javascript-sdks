@@ -5,7 +5,8 @@ import {
   SDKDebugger,
   LogLevel,
   type SearchcraftResponse,
-  type Facets,
+  type SearchFilter,
+  type FacetPrime,
 } from '@searchcraft/core';
 
 import { filterPaths } from '@utils/utils';
@@ -21,8 +22,11 @@ interface SearchParams {
   yearsRange?: [number, number];
 }
 
-interface SearchcraftState {
-  facets: Facets | null;
+export interface SearchcraftState {
+  addActiveFilter: (filter: SearchFilter) => void;
+  removeActiveFilter: (filter: SearchFilter) => void;
+  activeFilters: Record<string, SearchFilter>;
+  facets: FacetPrime | null;
   getSearchcraftInstance: () => SearchcraftCore | null;
   initialize: (searchcraft: SearchcraftCore, debug?: boolean) => void;
   isRequesting: boolean;
@@ -31,7 +35,7 @@ interface SearchcraftState {
   searchParams: SearchParams;
   searchResults: SearchcraftResponse | null;
   selectedFilters: string[]; // Add this to store selected filters
-  setFacets: (facets: Facets) => void;
+  setFacets: (facets: FacetPrime) => void;
   setIsRequesting: (isRequesting: boolean) => void;
   setQuery: (query: string) => void;
   setSearchParams: (params: Partial<SearchParams>) => void;
@@ -65,6 +69,9 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
   };
 
   return {
+    activeFilters: {},
+    addActiveFilter: (_filter: SearchFilter) => {},
+    removeActiveFilter: (_filter: SearchFilter) => {},
     query: '',
     isRequesting: false,
     searchResults: null,

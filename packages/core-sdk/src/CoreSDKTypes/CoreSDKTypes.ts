@@ -60,18 +60,27 @@ export type SearchError = {
  */
 export interface SearchResult {
   count?: number; // Total number of results found (optional)
-  facets?: Facets; // Facet data, useful for filtering results (optional)
+  facets?: FacetPrime; // The prime array of Facet root objects.
   hits?: SearchIndexEntry[]; // Array of individual search entries (optional)
   time_taken?: number; // Time taken to execute the search in milliseconds (optional)
 }
 
+export type FacetPrime = FacetRoot[];
+
+/**
+ * A Facet object returned in a search response.
+ */
+export type FacetRoot = {
+  [key: string]: FacetChild[];
+};
+
 /**
  * * Represents the structure of facets, which group search results into categories.
  */
-export interface Facets {
-  section: {
-    counts: Record<string, number>; // Dynamic keys with counts of matching documents
-  };
+export interface FacetChild {
+  count: Record<string, number>; // Dynamic keys with counts of matching documents
+  path: string;
+  children?: FacetChild[];
 }
 
 /**
@@ -94,16 +103,16 @@ export interface SearchDocument<
   id: number; // Unique identifier for the document
   [key: string]: string | number | T[keyof T]; // Supports dynamic properties with string or number values
 }
+
+export type SearchFilter = {
+  fieldName: string;
+  value: string;
+};
+
 /**
  * * Parameters required to make a successful Search request.
  */
 export type SearchParams = {
-  /**
-   * * Facet data, useful for filtering results.
-   * Optional parameter.
-   */
-  facets?: Facets;
-
   /**
    * * The maximum number of results to return per page.
    * Optional parameter. Defaults to 20 if not provided.
@@ -149,6 +158,8 @@ export type SearchParams = {
    * Optional parameter.
    */
   sections?: string[];
+
+  filters?: SearchFilter[];
 };
 
 /**

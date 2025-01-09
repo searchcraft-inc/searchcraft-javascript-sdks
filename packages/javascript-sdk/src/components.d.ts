@@ -6,7 +6,9 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { SearchcraftConfig } from "@searchcraft/core";
+import { FilterItem } from "./components/searchcraft-filter-panel/searchcraft-filter-panel.types";
 export { SearchcraftConfig } from "@searchcraft/core";
+export { FilterItem } from "./components/searchcraft-filter-panel/searchcraft-filter-panel.types";
 export namespace Components {
     interface SearchcraftAutoSearchForm {
         "autoSearchFormClass": string;
@@ -70,8 +72,11 @@ export namespace Components {
     interface SearchcraftErrorMessage {
         "errorMessage"?: string;
     }
-    interface SearchcraftFiltersList {
-        "filters": Array<{ label: string; value: string }>;
+    interface SearchcraftFacetList {
+        "fieldName": string;
+    }
+    interface SearchcraftFilterPanel {
+        "filterItems": FilterItem[];
     }
     interface SearchcraftInput {
         "customStyles": string | Record<string, string>;
@@ -99,8 +104,9 @@ export namespace Components {
         "width": number;
     }
     interface SearchcraftSlider {
-        "maxYear": number;
-        "minYear": number;
+        "granularity": number;
+        "max": number;
+        "min": number;
     }
     interface SearchcraftSpinnerDark {
     }
@@ -133,9 +139,13 @@ export interface SearchcraftButtonCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSearchcraftButtonElement;
 }
-export interface SearchcraftFiltersListCustomEvent<T> extends CustomEvent<T> {
+export interface SearchcraftFacetListCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLSearchcraftFiltersListElement;
+    target: HTMLSearchcraftFacetListElement;
+}
+export interface SearchcraftFilterPanelCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSearchcraftFilterPanelElement;
 }
 export interface SearchcraftInputCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -264,22 +274,39 @@ declare global {
         prototype: HTMLSearchcraftErrorMessageElement;
         new (): HTMLSearchcraftErrorMessageElement;
     };
-    interface HTMLSearchcraftFiltersListElementEventMap {
-        "filtersUpdated": string[];
+    interface HTMLSearchcraftFacetListElementEventMap {
+        "facetSelectionUpdated": { paths: string[] };
     }
-    interface HTMLSearchcraftFiltersListElement extends Components.SearchcraftFiltersList, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLSearchcraftFiltersListElementEventMap>(type: K, listener: (this: HTMLSearchcraftFiltersListElement, ev: SearchcraftFiltersListCustomEvent<HTMLSearchcraftFiltersListElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+    interface HTMLSearchcraftFacetListElement extends Components.SearchcraftFacetList, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSearchcraftFacetListElementEventMap>(type: K, listener: (this: HTMLSearchcraftFacetListElement, ev: SearchcraftFacetListCustomEvent<HTMLSearchcraftFacetListElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLSearchcraftFiltersListElementEventMap>(type: K, listener: (this: HTMLSearchcraftFiltersListElement, ev: SearchcraftFiltersListCustomEvent<HTMLSearchcraftFiltersListElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSearchcraftFacetListElementEventMap>(type: K, listener: (this: HTMLSearchcraftFacetListElement, ev: SearchcraftFacetListCustomEvent<HTMLSearchcraftFacetListElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
         removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
         removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
         removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
-    var HTMLSearchcraftFiltersListElement: {
-        prototype: HTMLSearchcraftFiltersListElement;
-        new (): HTMLSearchcraftFiltersListElement;
+    var HTMLSearchcraftFacetListElement: {
+        prototype: HTMLSearchcraftFacetListElement;
+        new (): HTMLSearchcraftFacetListElement;
+    };
+    interface HTMLSearchcraftFilterPanelElementEventMap {
+        "update": string[];
+    }
+    interface HTMLSearchcraftFilterPanelElement extends Components.SearchcraftFilterPanel, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSearchcraftFilterPanelElementEventMap>(type: K, listener: (this: HTMLSearchcraftFilterPanelElement, ev: SearchcraftFilterPanelCustomEvent<HTMLSearchcraftFilterPanelElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSearchcraftFilterPanelElementEventMap>(type: K, listener: (this: HTMLSearchcraftFilterPanelElement, ev: SearchcraftFilterPanelCustomEvent<HTMLSearchcraftFilterPanelElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLSearchcraftFilterPanelElement: {
+        prototype: HTMLSearchcraftFilterPanelElement;
+        new (): HTMLSearchcraftFilterPanelElement;
     };
     interface HTMLSearchcraftInputElementEventMap {
         "clearInput": void;
@@ -318,7 +345,7 @@ declare global {
         new (): HTMLSearchcraftSearchIconSetElement;
     };
     interface HTMLSearchcraftSliderElementEventMap {
-        "rangeChanged": { startYear: number; endYear: number };
+        "rangeChanged": { startValue: number; endValue: number };
     }
     interface HTMLSearchcraftSliderElement extends Components.SearchcraftSlider, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSearchcraftSliderElementEventMap>(type: K, listener: (this: HTMLSearchcraftSliderElement, ev: SearchcraftSliderCustomEvent<HTMLSearchcraftSliderElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -363,7 +390,8 @@ declare global {
         "searchcraft-clear-icon-set": HTMLSearchcraftClearIconSetElement;
         "searchcraft-dash-icon": HTMLSearchcraftDashIconElement;
         "searchcraft-error-message": HTMLSearchcraftErrorMessageElement;
-        "searchcraft-filters-list": HTMLSearchcraftFiltersListElement;
+        "searchcraft-facet-list": HTMLSearchcraftFacetListElement;
+        "searchcraft-filter-panel": HTMLSearchcraftFilterPanelElement;
         "searchcraft-input": HTMLSearchcraftInputElement;
         "searchcraft-input-label": HTMLSearchcraftInputLabelElement;
         "searchcraft-results-info": HTMLSearchcraftResultsInfoElement;
@@ -445,9 +473,16 @@ declare namespace LocalJSX {
     interface SearchcraftErrorMessage {
         "errorMessage"?: string;
     }
-    interface SearchcraftFiltersList {
-        "filters"?: Array<{ label: string; value: string }>;
-        "onFiltersUpdated"?: (event: SearchcraftFiltersListCustomEvent<string[]>) => void;
+    interface SearchcraftFacetList {
+        "fieldName"?: string;
+        "onFacetSelectionUpdated"?: (event: SearchcraftFacetListCustomEvent<{ paths: string[] }>) => void;
+    }
+    interface SearchcraftFilterPanel {
+        "filterItems"?: FilterItem[];
+        /**
+          * Emits an event with an array of query ctx values
+         */
+        "onUpdate"?: (event: SearchcraftFilterPanelCustomEvent<string[]>) => void;
     }
     interface SearchcraftInput {
         "customStyles"?: string | Record<string, string>;
@@ -477,9 +512,10 @@ declare namespace LocalJSX {
         "width"?: number;
     }
     interface SearchcraftSlider {
-        "maxYear"?: number;
-        "minYear"?: number;
-        "onRangeChanged"?: (event: SearchcraftSliderCustomEvent<{ startYear: number; endYear: number }>) => void;
+        "granularity"?: number;
+        "max"?: number;
+        "min"?: number;
+        "onRangeChanged"?: (event: SearchcraftSliderCustomEvent<{ startValue: number; endValue: number }>) => void;
     }
     interface SearchcraftSpinnerDark {
     }
@@ -502,7 +538,8 @@ declare namespace LocalJSX {
         "searchcraft-clear-icon-set": SearchcraftClearIconSet;
         "searchcraft-dash-icon": SearchcraftDashIcon;
         "searchcraft-error-message": SearchcraftErrorMessage;
-        "searchcraft-filters-list": SearchcraftFiltersList;
+        "searchcraft-facet-list": SearchcraftFacetList;
+        "searchcraft-filter-panel": SearchcraftFilterPanel;
         "searchcraft-input": SearchcraftInput;
         "searchcraft-input-label": SearchcraftInputLabel;
         "searchcraft-results-info": SearchcraftResultsInfo;
@@ -527,7 +564,8 @@ declare module "@stencil/core" {
             "searchcraft-clear-icon-set": LocalJSX.SearchcraftClearIconSet & JSXBase.HTMLAttributes<HTMLSearchcraftClearIconSetElement>;
             "searchcraft-dash-icon": LocalJSX.SearchcraftDashIcon & JSXBase.HTMLAttributes<HTMLSearchcraftDashIconElement>;
             "searchcraft-error-message": LocalJSX.SearchcraftErrorMessage & JSXBase.HTMLAttributes<HTMLSearchcraftErrorMessageElement>;
-            "searchcraft-filters-list": LocalJSX.SearchcraftFiltersList & JSXBase.HTMLAttributes<HTMLSearchcraftFiltersListElement>;
+            "searchcraft-facet-list": LocalJSX.SearchcraftFacetList & JSXBase.HTMLAttributes<HTMLSearchcraftFacetListElement>;
+            "searchcraft-filter-panel": LocalJSX.SearchcraftFilterPanel & JSXBase.HTMLAttributes<HTMLSearchcraftFilterPanelElement>;
             "searchcraft-input": LocalJSX.SearchcraftInput & JSXBase.HTMLAttributes<HTMLSearchcraftInputElement>;
             "searchcraft-input-label": LocalJSX.SearchcraftInputLabel & JSXBase.HTMLAttributes<HTMLSearchcraftInputLabelElement>;
             "searchcraft-results-info": LocalJSX.SearchcraftResultsInfo & JSXBase.HTMLAttributes<HTMLSearchcraftResultsInfoElement>;

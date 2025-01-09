@@ -3,7 +3,6 @@ import { getFingerprint } from '@thumbmarkjs/thumbmarkjs';
 
 import type {
   SearchcraftConfig,
-  Facets,
   QueryObject,
   SearchcraftResponse,
   SearchParams,
@@ -108,7 +107,8 @@ export class SearchcraftCore {
       });
     }
 
-    const facetKeys = Object.keys(searchParams?.facets?.section.counts || {});
+    // TODO: update for dynamic facets
+    const facetKeys: string[] = []; // Object.keys(searchParams?.facets?.section.counts || {});
     // Handle facets if provided
     if (facetKeys && facetKeys.length > 0) {
       occur = 'must';

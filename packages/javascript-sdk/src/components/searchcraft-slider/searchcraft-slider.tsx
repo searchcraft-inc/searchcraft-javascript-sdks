@@ -6,9 +6,8 @@ import {
   State,
   Prop,
 } from '@stencil/core';
+import { getMillis } from '@utils/utils';
 import classNames from 'classnames';
-
-import { useSearchcraftStore } from '@provider/store';
 
 @Component({
   tag: 'searchcraft-slider',
@@ -16,82 +15,53 @@ import { useSearchcraftStore } from '@provider/store';
   shadow: false,
 })
 export class SearchcraftSlider {
-  @Prop() maxYear = new Date().getFullYear();
-  @Prop() minYear = 2014;
+  @Prop() max = 100;
+  @Prop() min = 0;
+  @Prop() granularity: number = getMillis('month');
 
-  @State() endYear = this.maxYear;
+  @State() endValue = this.max;
+  @State() startValue = this.min;
   @State() hasSearched = false;
   @State() query = '';
   @State() resultsCount = 0;
-  @State() startYear = this.minYear;
 
-  @Event() rangeChanged: EventEmitter<{ startYear: number; endYear: number }>;
-
-  private searchStore = useSearchcraftStore.getState();
-
-  unsubscribe: () => void;
+  @Event() rangeChanged: EventEmitter<{ startValue: number; endValue: number }>;
 
   componentDidLoad() {
-    this.unsubscribe = useSearchcraftStore.subscribe((state) => {
-      if (state.query.length > 0) {
-        this.hasSearched = true;
-        this.resultsCount = state.searchResults?.data?.hits?.length || 0;
-      }
-      this.query = state.query;
-    });
+    this.startValue = this.min;
+    this.endValue = this.max;
   }
 
-  disconnectedCallback() {
-    if (this.unsubscribe) {
-      this.unsubscribe();
-    }
-  }
-
-  private updateYears = async () => {
-    this.searchStore.setYearsRange([this.startYear, this.endYear]);
+  private updateValues = async () => {
     this.rangeChanged.emit({
-      startYear: this.startYear,
-      endYear: this.endYear,
+      startValue: this.startValue,
+      endValue: this.endValue,
     });
+  };
 
-    try {
-      if (typeof this.query === 'string' && this.query.trim() !== '') {
-        await this.searchStore.search();
-      } else {
-        console.warn('Query is missing or empty, skipping search request.');
-      }
-    } catch (error) {
-      console.error('Search failed:', error);
+  private handlestartValueChange = (event: InputEvent) => {
+    const value = Number.parseInt((event.target as HTMLInputElement).value, 10);
+    if (value <= this.endValue) {
+      this.startValue = value;
+      this.updateValues();
     }
   };
 
-  private handleStartYearChange = (event: InputEvent) => {
+  private handleendValueChange = (event: InputEvent) => {
     const value = Number.parseInt((event.target as HTMLInputElement).value, 10);
-    if (value <= this.endYear) {
-      this.startYear = value;
-      this.updateYears();
-    }
-  };
-
-  private handleEndYearChange = (event: InputEvent) => {
-    const value = Number.parseInt((event.target as HTMLInputElement).value, 10);
-    if (value >= this.startYear) {
-      this.endYear = value;
-      this.updateYears();
+    if (value >= this.startValue) {
+      this.endValue = value;
+      this.updateValues();
     }
   };
 
   render() {
-    if (!this.query || this.resultsCount === 0) {
-      return null;
-    }
-
-    const rangeMin = this.minYear;
-    const rangeMax = this.maxYear;
+    const rangeMin = this.min;
+    const rangeMax = this.max;
     const startPercent =
-      ((this.startYear - rangeMin) / (rangeMax - rangeMin)) * 100;
+      ((this.startValue - rangeMin) / (rangeMax - rangeMin)) * 100;
     const endPercent =
-      ((this.endYear - rangeMin) / (rangeMax - rangeMin)) * 100;
+      ((this.endValue - rangeMin) / (rangeMax - rangeMin)) * 100;
 
     return (
       <div
@@ -115,24 +85,24 @@ export class SearchcraftSlider {
               'rangeSlider',
               'searchcraft-slider-range-slider-start-thumb',
             )}
-            max={this.maxYear}
-            min={this.minYear}
-            onInput={this.handleStartYearChange}
-            step='1'
+            max={this.max}
+            min={this.min}
+            onInput={this.handlestartValueChange}
+            step={this.granularity}
             type='range'
-            value={this.startYear}
+            value={this.startValue}
           />
           <input
             class={classNames(
               'rangeSlider',
               'searchcraft-slider-range-slider-end-thumb',
             )}
-            max={this.maxYear}
-            min={this.minYear}
-            onInput={this.handleEndYearChange}
-            step='1'
+            max={this.max}
+            min={this.min}
+            onInput={this.handleendValueChange}
+            step={this.granularity}
             type='range'
-            value={this.endYear}
+            value={this.endValue}
           />
         </div>
         <div
@@ -147,12 +117,12 @@ export class SearchcraftSlider {
               'searchcraft-slider-start-year-label',
             )}
           >
-            {this.startYear}
+            {this.startValue}
           </span>
           <span
             class={classNames('yearLabel', 'searchcraft-slider-end-year-label')}
           >
-            {this.endYear}
+            {this.endValue}
           </span>
         </div>
       </div>
