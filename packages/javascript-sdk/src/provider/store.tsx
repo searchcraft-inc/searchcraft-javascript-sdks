@@ -42,7 +42,6 @@ export interface SearchcraftState {
   setFacets: (facets: FacetPrime) => void;
   setIsRequesting: (isRequesting: boolean) => void;
   setQuery: (query: string) => void;
-  setSearchParams: (params: Partial<SearchParams>) => void;
   setSearchResults: (results: SearchcraftResponse | null) => void;
 }
 
@@ -124,13 +123,6 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
     setSearchResults: (results) => set({ searchResults: results }),
     setFacets: (facets) => set({ facets }),
     setIsRequesting: (isRequesting) => set({ isRequesting }),
-    setSearchParams: (params) =>
-      set((state) => ({
-        searchParams: {
-          ...state.searchParams,
-          ...params,
-        },
-      })),
     search: async () => {
       const state = get();
       if (!searchcraft) {

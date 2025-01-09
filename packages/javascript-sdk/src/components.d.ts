@@ -6,9 +6,7 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { SearchcraftConfig } from "@searchcraft/core";
-import { FilterItem } from "./types/searchcraft-filter-panel.types";
 export { SearchcraftConfig } from "@searchcraft/core";
-export { FilterItem } from "./types/searchcraft-filter-panel.types";
 export namespace Components {
     interface SearchcraftAutoSearchForm {
         "autoSearchFormClass": string;
@@ -76,7 +74,7 @@ export namespace Components {
         "fieldName": string;
     }
     interface SearchcraftFilterPanel {
-        "filterItems": FilterItem[];
+        "items": string | undefined;
     }
     interface SearchcraftInput {
         "customStyles": string | Record<string, string>;
@@ -480,7 +478,7 @@ declare namespace LocalJSX {
         "onFacetSelectionUpdated"?: (event: SearchcraftFacetListCustomEvent<{ paths: string[] }>) => void;
     }
     interface SearchcraftFilterPanel {
-        "filterItems"?: FilterItem[];
+        "items"?: string | undefined;
     }
     interface SearchcraftInput {
         "customStyles"?: string | Record<string, string>;

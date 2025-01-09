@@ -18,7 +18,7 @@ const componentMeta: Meta = {
 };
 
 type ComponentProps = {
-  filterItems: FilterItem[];
+  items: FilterItem[];
 };
 
 const today = new Date();
@@ -73,7 +73,7 @@ const facetItem: FacetsFilterItem = {
 };
 
 const defaultProps: ComponentProps = {
-  filterItems: [
+  items: [
     exactMatchItem,
     mostRecentItem,
     dateRangeItem,
@@ -83,25 +83,28 @@ const defaultProps: ComponentProps = {
 };
 
 export const Default: StoryObj<ComponentProps> = {
-  render: (args) => (
-    <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
-      <WebComponentWrapper
-        componentName='searchcraft-auto-search-form'
-        args={{
-          autoSearchFormClass: '',
-          config: config,
-          customStylesForInput: '{}',
-          inputCaptionValue: 'Search',
-          labelForInput: 'Search for something:',
-          placeholderValue: 'Search here...',
-          searchContainerClass: '',
-        }}
-      />
-      <div style={{ paddingTop: 20 }}>
-        <WebComponentWrapper args={args} componentName={componentName} />
+  render: (args) => {
+    console.log(JSON.stringify(args.items));
+    return (
+      <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
+        <WebComponentWrapper
+          componentName='searchcraft-auto-search-form'
+          args={{
+            autoSearchFormClass: '',
+            config: config,
+            customStylesForInput: '{}',
+            inputCaptionValue: 'Search',
+            labelForInput: 'Search for something:',
+            placeholderValue: 'Search here...',
+            searchContainerClass: '',
+          }}
+        />
+        <div style={{ paddingTop: 20 }}>
+          <searchcraft-filter-panel items={JSON.stringify(args.items)} />
+        </div>
       </div>
-    </div>
-  ),
+    );
+  },
   args: defaultProps,
 };
 
