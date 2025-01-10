@@ -1,3 +1,8 @@
+import type {
+  FacetChild,
+  FacetChildObject,
+  FacetRoot,
+} from '@searchcraft/core';
 import type { SearchResultMapping } from 'types';
 
 export function parseCustomStyles(
@@ -131,4 +136,90 @@ export function getDocumentValueFromSearchResultMapping(
       .filter((value) => !!value)
       .join(mapping.delimeter || ' ');
   }
+}
+
+function deepMergeWithSpread(obj1, obj2) {
+  const result = { ...obj1 };
+
+  for (const key in obj2) {
+    // biome-ignore lint/suspicious/noPrototypeBuiltins: <explanation>
+    if (obj2.hasOwnProperty(key)) {
+      if (obj2[key] instanceof Object && obj1[key] instanceof Object) {
+        result[key] = deepMergeWithSpread(obj1[key], obj2[key]);
+      } else {
+        result[key] = obj2[key];
+      }
+    }
+  }
+
+  return result;
+}
+
+function facetToObject(child: FacetChild): FacetChildObject {
+  const transformed: FacetChildObject = {
+    count: child.count,
+    path: child.path,
+    children: {},
+  };
+
+  if (child.children) {
+    child.children.forEach((subChild) => {
+      transformed.children[subChild.path] = facetToObject(subChild);
+    });
+  }
+
+  return transformed;
+}
+
+function objectToFacet(childObject: FacetChildObject): FacetChild {
+  const transformed: FacetChild = {
+    count: childObject.count,
+    path: childObject.path,
+    children: [],
+  };
+
+  if (Object.keys(childObject.children).length > 0) {
+    transformed.children = Object.values(childObject.children).map(
+      (subChildObject) => objectToFacet(subChildObject),
+    );
+  }
+
+  return transformed;
+}
+
+export function mergeFacetRoots(
+  fieldName: string,
+  root1: FacetRoot,
+  root2: FacetRoot,
+): FacetRoot {
+  const array1 = root1[fieldName];
+  const array2 = root2[fieldName];
+
+  const rootFacetChild1: FacetChild = {
+    count: 0,
+    path: '/',
+    children: array1,
+  };
+
+  const rootFacetChild2: FacetChild = {
+    count: 0,
+    path: '/',
+    children: array2,
+  };
+
+  // Transform into objects
+  const facetObject1 = facetToObject(rootFacetChild1);
+  const facetObject2 = facetToObject(rootFacetChild2);
+
+  // Deep merge the objects
+  const mergedFacetObject: FacetChildObject = deepMergeWithSpread(
+    facetObject1,
+    facetObject2,
+  );
+
+  const mergedFacetChild = objectToFacet(mergedFacetObject);
+
+  return {
+    [fieldName]: mergedFacetChild.children,
+  };
 }

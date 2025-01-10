@@ -21,7 +21,7 @@ interface SearchParams {
 }
 
 export interface SearchcraftState {
-  resetAllFilters: () => void;
+  resetFacetPaths: () => void;
   addFacetPathsForIndexField: (data: FacetPathsForIndexField) => void;
   removeFacetPathsForIndexField: (fieldName: string) => void;
   addRangeValueForIndexField: (data: RangeValueForIndexField) => void;
@@ -71,12 +71,9 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
   };
 
   return {
-    resetAllFilters: () => {
+    resetFacetPaths: () => {
       set({
         facetPathsForIndexFields: {},
-        rangeValueForIndexFields: {},
-        searchMode: 'fuzzy',
-        sortType: 'asc',
       });
     },
     addFacetPathsForIndexField: (data: FacetPathsForIndexField) =>
@@ -128,7 +125,7 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
       mode: 'fuzzy',
       sort: 'asc',
     },
-    setQuery: (query) => set({ query }),
+    setQuery: (query) => set({ query, facetPathsForIndexFields: {} }),
     setSearchResults: (results) => set({ searchResults: results }),
     setFacets: (facets) => set({ facets }),
     setIsRequesting: (isRequesting) => set({ isRequesting }),

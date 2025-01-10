@@ -12,7 +12,7 @@ import classNames from 'classnames';
 import type { FacetChild, FacetRoot } from '@searchcraft/core';
 
 import { useSearchcraftStore, type SearchcraftState } from '@provider/store';
-import { removeSubstringMatches } from '@utils/utils';
+import { mergeFacetRoots, removeSubstringMatches } from '@utils/utils';
 
 @Component({
   tag: 'searchcraft-facet-list',
@@ -26,6 +26,8 @@ export class SearchcraftFiltersList {
 
   @State() facetRoot: FacetRoot | undefined;
   @State() selectedPaths: Record<string, boolean> = {};
+  @State() lastQuery: string | undefined;
+
   @State() unsubscribe: (() => void) | undefined;
 
   private searchStore = useSearchcraftStore.getState();
@@ -38,8 +40,29 @@ export class SearchcraftFiltersList {
         (facet) => this.fieldName === Object.keys(facet)[0],
       );
 
-      this.facetRoot = facetRoot;
+      // Remove
+      if (this.facetRoot) {
+        this.facetRoot = mergeFacetRoots(
+          this.fieldName,
+          this.facetRoot,
+          facetRoot,
+        );
+      } else {
+        this.facetRoot = facetRoot;
+      }
+
+      // Clear the selected paths if the query changed
+      if (state.query !== this.lastQuery) {
+        this.selectedPaths = {};
+
+        // Remove the facet root if the query is empty
+        if (state.query.trim().length === 0) {
+          this.facetRoot = undefined;
+        }
+      }
     }
+
+    this.lastQuery = state.query;
   }
 
   connectedCallback() {
@@ -68,6 +91,18 @@ export class SearchcraftFiltersList {
 
   formatLabel = (facetChild: FacetChild): string => {
     const label = facetChild.path.replace(/^\//, '');
+    const count = facetChild.count;
+    return `${label.replace(/-/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase())} (${count})`;
+  };
+
+  formatSubLabel = (
+    facetChild: FacetChild,
+    facetChildAncestor: FacetChild,
+  ): string => {
+    const facetChildPath = facetChild.path.substring(
+      facetChildAncestor.path.length,
+    );
+    const label = facetChildPath.replace(/^\//, '');
     const count = facetChild.count;
     return `${label.replace(/-/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase())} (${count})`;
   };
@@ -163,7 +198,7 @@ export class SearchcraftFiltersList {
                       >
                         <searchcraft-check-icon />
                       </div>
-                      {this.formatLabel(grandchild)}
+                      {this.formatSubLabel(grandchild, facetChild)}
                     </label>
                   ))}
                 </Fragment>
