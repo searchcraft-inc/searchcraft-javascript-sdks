@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import type { SearchcraftConfig } from '@searchcraft/javascript-sdk';
-import WebComponentWrapper from '../../utils/WebComponentWrapper';
 import { config } from '../../utils/DefaultSearchcraftConfig';
 
 const componentName = 'searchcraft-auto-search-form';
@@ -87,7 +86,11 @@ const defaultProps: ComponentProps = {
 
 export const Default: StoryObj<ComponentProps> = {
   render: (args) => (
-    <WebComponentWrapper args={args} componentName={componentName} />
+    <searchcraft-auto-search-form
+      config-string={JSON.stringify(config)}
+      placeholder-value={args.placeholderValue}
+      label-for-input={args.labelForInput}
+    />
   ),
   args: defaultProps,
 };

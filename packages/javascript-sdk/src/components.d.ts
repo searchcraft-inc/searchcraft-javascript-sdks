@@ -11,7 +11,7 @@ export namespace Components {
     interface SearchcraftAutoSearchForm {
         "autoSearchFormClass": string;
         "clearInput": () => void;
-        "config": SearchcraftConfig;
+        "configString": string;
         "customStylesForInput": string | Record<string, string>;
         "inputCaptionValue": string;
         "labelForInput": string;
@@ -398,7 +398,7 @@ declare namespace LocalJSX {
     interface SearchcraftAutoSearchForm {
         "autoSearchFormClass"?: string;
         "clearInput"?: () => void;
-        "config"?: SearchcraftConfig;
+        "configString"?: string;
         "customStylesForInput"?: string | Record<string, string>;
         "inputCaptionValue"?: string;
         "labelForInput"?: string;
