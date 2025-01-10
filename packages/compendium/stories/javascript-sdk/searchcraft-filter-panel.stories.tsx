@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import WebComponentWrapper from '../../utils/WebComponentWrapper';
 import type {
   DateRangeFilterItem,
   ExactMatchToggleFilterItem,
@@ -84,18 +83,7 @@ export const Default: StoryObj<ComponentProps> = {
   render: (args) => {
     return (
       <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
-        <WebComponentWrapper
-          componentName='searchcraft-auto-search-form'
-          args={{
-            autoSearchFormClass: '',
-            config: config,
-            customStylesForInput: '{}',
-            inputCaptionValue: 'Search',
-            labelForInput: 'Search for something:',
-            placeholderValue: 'Search here...',
-            searchContainerClass: '',
-          }}
-        />
+        <searchcraft-auto-search-form config-string={JSON.stringify(config)} />
         <div style={{ paddingTop: 20 }}>
           <searchcraft-filter-panel items={JSON.stringify(args.items)} />
         </div>

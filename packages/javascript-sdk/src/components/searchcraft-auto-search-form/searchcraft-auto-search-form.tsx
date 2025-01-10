@@ -28,11 +28,7 @@ import packageJson from '../../../package.json';
 export class SearchcraftAutoSearchForm {
   @Prop() autoSearchFormClass = '';
   @Prop() clearInput: () => void = () => {};
-  @Prop() config: SearchcraftConfig = {
-    readKey: '',
-    endpointURL: '',
-    index: [],
-  };
+  @Prop() configString = '';
   @Prop() customStylesForInput: string | Record<string, string> = {};
   @Prop() inputCaptionValue = '';
   @Prop() labelForInput = '';
@@ -42,6 +38,11 @@ export class SearchcraftAutoSearchForm {
   @Event() inputClearedOrNoResults: EventEmitter<void>;
   @Event() querySubmit: EventEmitter<string>;
 
+  @State() config: SearchcraftConfig = {
+    readKey: '',
+    endpointURL: '',
+    index: [],
+  };
   @State() error = false;
   @State() isRequesting = false;
   @State() query = '';
@@ -52,8 +53,22 @@ export class SearchcraftAutoSearchForm {
   private searchStore = useSearchcraftStore.getState();
   unsubscribe: () => void;
 
-  init(config: SearchcraftConfig) {
-    const searchcraft = new SearchcraftCore(config, {
+  private setConfigFromString = (configString: string) => {
+    if (configString) {
+      try {
+        const parsedConfig = JSON.parse(configString) as SearchcraftConfig;
+        this.config = parsedConfig;
+      } catch {
+        console.error(
+          'Error: Invalid config passed to searchcraft-auto-search-form.',
+        );
+      }
+    }
+  };
+
+  init(configString: string) {
+    this.setConfigFromString(configString);
+    const searchcraft = new SearchcraftCore(this.config, {
       sdkName: packageJson.name,
       sdkVersion: packageJson.version,
     });
@@ -66,19 +81,15 @@ export class SearchcraftAutoSearchForm {
   }
 
   connectedCallback() {
-    if (
-      this.config.endpointURL &&
-      this.config.index.length > 0 &&
-      this.config.readKey
-    ) {
-      this.init(this.config);
+    if (this.configString) {
+      this.init(this.configString);
     }
   }
 
-  @Watch('config')
-  onConfigChange(config: SearchcraftConfig) {
-    if (config.endpointURL && config.index.length > 0 && config.readKey) {
-      this.init(config);
+  @Watch('configString')
+  onConfigChange(configString: string) {
+    if (configString) {
+      this.init(configString);
     }
   }
 

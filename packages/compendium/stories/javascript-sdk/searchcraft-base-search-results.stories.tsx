@@ -76,7 +76,6 @@ const defaultProps: ComponentProps = {
 
 export const Default: StoryObj<ComponentProps> = {
   render: (args) => {
-    console.log(config);
     return (
       <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
         <WebComponentWrapper

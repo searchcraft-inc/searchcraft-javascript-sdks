@@ -7,16 +7,16 @@
 
 ## Properties
 
-| Property               | Attribute                 | Description | Type                                 | Default                                                      |
-| ---------------------- | ------------------------- | ----------- | ------------------------------------ | ------------------------------------------------------------ |
-| `autoSearchFormClass`  | `auto-search-form-class`  |             | `string`                             | `''`                                                         |
-| `clearInput`           | --                        |             | `() => void`                         | `() => {}`                                                   |
-| `config`               | --                        |             | `SearchcraftConfig`                  | `{     readKey: '',     endpointURL: '',     index: [],   }` |
-| `customStylesForInput` | `custom-styles-for-input` |             | `string \| { [x: string]: string; }` | `{}`                                                         |
-| `inputCaptionValue`    | `input-caption-value`     |             | `string`                             | `''`                                                         |
-| `labelForInput`        | `label-for-input`         |             | `string`                             | `''`                                                         |
-| `placeholderValue`     | `placeholder-value`       |             | `string`                             | `'Search here'`                                              |
-| `searchContainerClass` | `search-container-class`  |             | `string`                             | `''`                                                         |
+| Property               | Attribute                 | Description | Type                                 | Default         |
+| ---------------------- | ------------------------- | ----------- | ------------------------------------ | --------------- |
+| `autoSearchFormClass`  | `auto-search-form-class`  |             | `string`                             | `''`            |
+| `clearInput`           | --                        |             | `() => void`                         | `() => {}`      |
+| `configString`         | `config-string`           |             | `string`                             | `''`            |
+| `customStylesForInput` | `custom-styles-for-input` |             | `string \| { [x: string]: string; }` | `{}`            |
+| `inputCaptionValue`    | `input-caption-value`     |             | `string`                             | `''`            |
+| `labelForInput`        | `label-for-input`         |             | `string`                             | `''`            |
+| `placeholderValue`     | `placeholder-value`       |             | `string`                             | `'Search here'` |
+| `searchContainerClass` | `search-container-class`  |             | `string`                             | `''`            |
 
 
 ## Events
