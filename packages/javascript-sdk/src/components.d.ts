@@ -48,7 +48,6 @@ export namespace Components {
         "buttonLabel": string | undefined;
         "buttonRel": 'noreferrer' | 'noopener' | 'nofollow' | undefined;
         "buttonTarget": '_blank' | '_self' | '_top' | '_parent';
-        "containerHref": string | undefined;
         "containerRel": 'noreferrer' | 'noopener' | 'nofollow' | undefined;
         "containerTarget": '_blank' | '_self' | '_top' | '_parent';
         "customStylesForResults": | string
@@ -439,7 +438,6 @@ declare namespace LocalJSX {
         "buttonLabel"?: string | undefined;
         "buttonRel"?: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
         "buttonTarget"?: '_blank' | '_self' | '_top' | '_parent';
-        "containerHref"?: string | undefined;
         "containerRel"?: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
         "containerTarget"?: '_blank' | '_self' | '_top' | '_parent';
         "customStylesForResults"?: | string

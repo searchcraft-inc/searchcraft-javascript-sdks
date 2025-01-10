@@ -52,6 +52,7 @@ export class SearchcraftBaseSearchResult {
         return {};
       }
     }
+    return {};
   };
 
   render() {

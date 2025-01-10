@@ -21,6 +21,7 @@ interface SearchParams {
 }
 
 export interface SearchcraftState {
+  resetAllFilters: () => void;
   addFacetPathsForIndexField: (data: FacetPathsForIndexField) => void;
   removeFacetPathsForIndexField: (fieldName: string) => void;
   addRangeValueForIndexField: (data: RangeValueForIndexField) => void;
@@ -70,6 +71,14 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
   };
 
   return {
+    resetAllFilters: () => {
+      set({
+        facetPathsForIndexFields: {},
+        rangeValueForIndexFields: {},
+        searchMode: 'fuzzy',
+        sortType: 'asc',
+      });
+    },
     addFacetPathsForIndexField: (data: FacetPathsForIndexField) =>
       set((state) => ({
         facetPathsForIndexFields: {
