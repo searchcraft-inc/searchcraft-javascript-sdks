@@ -73,9 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 
 ```
-## Extensions
 
-### Custom Filters
+### Filter Configuration
 Update filterPanelItems in configs.js to add or modify filters.
 
 ```jsx
@@ -113,15 +112,12 @@ export const filterPanelItems = [
     type: 'facets',
     fieldName: 'section',
     label: 'Filter by Section',
-    options: {
-      showSublevel: true,
-    },
   },
 ];
 ```
 
 ### Result Mappings
-Modify searchResultsMappings in configs.js to customize the appearance and behavior of search results.
+Modify searchResultsMappings in configs.js to customize the appearance and behavior of search results. The `fieldNames` from your index can be mapped to the content of the results using this config.
 
 ```jsx
 export const searchResultsMappings = {
@@ -167,7 +163,7 @@ export const searchResultsMappings = {
 ```
 
 ### Event Handling
-Add or update event listeners in Main.js to handle additional interactions.
+Add or update event listeners in Main.js to handle additional interactions. The purpose of these events is to allow for updating your consuming applications layout based on events coming from Searchcraft.
 
 ```jsx
   const searchContent = document.querySelector('#search-content');
