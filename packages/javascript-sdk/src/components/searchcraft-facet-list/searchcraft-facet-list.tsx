@@ -40,7 +40,6 @@ export class SearchcraftFiltersList {
         (facet) => this.fieldName === Object.keys(facet)[0],
       );
 
-      // Remove
       if (this.facetRoot) {
         this.facetRoot = mergeFacetRoots(
           this.fieldName,
@@ -78,7 +77,10 @@ export class SearchcraftFiltersList {
   }
 
   handleCheckboxChange(path: string) {
-    this.selectedPaths[path] = !this.selectedPaths[path];
+    this.selectedPaths = {
+      ...this.selectedPaths,
+      [path]: !this.selectedPaths[path],
+    };
 
     const paths = Object.keys(this.selectedPaths).filter(
       (path) => this.selectedPaths[path],
