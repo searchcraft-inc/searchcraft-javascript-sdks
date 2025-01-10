@@ -78,9 +78,15 @@ export type FacetRoot = {
  * * Represents the structure of facets, which group search results into categories.
  */
 export interface FacetChild {
-  count: Record<string, number>; // Dynamic keys with counts of matching documents
+  count: number;
   path: string;
   children?: FacetChild[];
+}
+
+export interface FacetChildObject {
+  count: number;
+  path: string;
+  children: Record<string, FacetChildObject>;
 }
 
 /**
