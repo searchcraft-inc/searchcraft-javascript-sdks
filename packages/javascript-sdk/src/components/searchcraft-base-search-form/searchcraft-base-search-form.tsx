@@ -1,5 +1,4 @@
 import { Component, h, Event, Prop, State } from '@stencil/core';
-import classNames from 'classnames';
 
 import { type SearchcraftConfig, SearchcraftCore } from '@searchcraft/core';
 
@@ -21,8 +20,9 @@ export class SearchcraftBaseSearchForm {
     index: [],
   };
   @Prop() errorMessage = 'Search was unsuccessful';
-  @Prop() labelForInput = 'Search';
-  @Prop() rightToLeftOrientation = false;
+  @Prop() inputLabel = 'Search';
+  @Prop() buttonLabel = 'Find';
+  @Prop() buttonPlacement: 'right' | 'left' = 'right';
 
   @Event() clearInput = () => {};
 
@@ -67,28 +67,29 @@ export class SearchcraftBaseSearchForm {
   };
 
   render() {
-    const formClass = this.rightToLeftOrientation ? 'formRTL' : 'formLTR';
     return (
       <form
-        class={classNames(`${formClass}`, 'searchcraft-base-search-form')}
+        class='searchcraft-base-search-form'
         onSubmit={this.handleFormSubmit}
       >
-        <searchcraft-input-label label={this.labelForInput} />
-        <div
-          class={classNames(
-            'searchContainer',
-            'searchcraft-base-search-form-input-container',
+        <searchcraft-input-label label={this.inputLabel} />
+        <div class='searchcraft-base-search-form-input-container'>
+          {this.buttonPlacement === 'left' && (
+            <searchcraft-button
+              onButtonClick={this.handleFormSubmit}
+              label={this.buttonLabel}
+            />
           )}
-        >
-          {this.rightToLeftOrientation && <searchcraft-button />}
           <searchcraft-input
             onClearInput={this.handleClearInput}
-            onSearchInputChange={this.handleSearchInputChange}
+            onInputChange={this.handleSearchInputChange}
             query={this.query}
-            rightToLeftOrientation={this.rightToLeftOrientation}
           />
-          {!this.rightToLeftOrientation && (
-            <searchcraft-button onButtonClick={this.handleFormSubmit} />
+          {this.buttonPlacement === 'right' && (
+            <searchcraft-button
+              onButtonClick={this.handleFormSubmit}
+              label={this.buttonLabel}
+            />
           )}
         </div>
         {this.error && (

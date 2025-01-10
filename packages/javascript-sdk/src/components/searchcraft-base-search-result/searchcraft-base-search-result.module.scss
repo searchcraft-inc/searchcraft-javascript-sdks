@@ -1,207 +1,62 @@
-@import '../../utils/theme';
 
-:root {
-  --font-stack: Helvetica, Arial, sans-serif;
-}
-
-@mixin interactive-result-container-base {
+.searchcraft-search-result-container {
+  all: unset;
   align-items: flex-start;
   border-radius: 16px;
   display: flex;
   flex-direction: column;
   gap: 16px;
   padding: 8px;
-  position: relative;
+  color: inherit;
+
+  background-color: var(--sc-surface-neutral-primary);
 
   @media (min-width: 900px) {
     flex-direction: row;
-    justify-content: space-between;
   }
 }
 
-.interactiveResultContainerLight {
-  @include interactive-result-container-base;
-  background-color: $surface-primary-active;
+a.searchcraft-search-result-container {
+  cursor: pointer;
+  transition: background-color 100ms;
 }
 
-.interactiveResultContainerDark {
-  @include interactive-result-container-base;
-  background-color: $surface-brand-primary-hover;
-}
-
-.resultContainer {
-  align-items: flex-start;
+.searchcraft-base-search-result-content-container {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  all: unset;
-  display: inline;
-  color: inherit;
-  text-decoration: none;
+  gap: 8px;
+}
 
-  &:hover {
-    cursor: pointer;
-  }
+.searchcraft-search-result-image {
+  border-radius: var(--sc-image-border-radius);
+  width: 100%;
 
   @media (min-width: 900px) {
-    flex-direction: row;
+    width: 200px;
   }
 }
 
-.interactiveIconLarge {
-  display: inline-block;
-  position: absolute;
-  right: 5px;
-  top: 8px;
-
-
-  @media (max-width: 900px) {
-    display: none;
-  }
+.searchcraft-base-search-result-title {
+  @include body-bold();
+  margin: 0;
+  color: var(--sc-content-neutral-primary);
 }
 
-.interactiveIconSmall {
-  display: inline-block;
-  position: absolute;
-  right: 5px;
-  top: -2px;
-
-
-  @media (min-width: 900px) {
-   display: none;
-  }
+.searchcraft-base-search-result-subtitle {
+  @include body-small();
+  margin: 0;
+  color: var(--sc-content-disabled);
 }
 
-.imageContainer {
-  max-width: 100%;
-
-  @media (min-width: 900px) {
-    max-width: 400px;
-   }
+.searchcraft-base-search-result-body-content {
+  @include body();
+  margin: 0;
+  color: var(--sc-content-neutral-secondary);
 }
 
-.contentContainer {
-  max-height: 100%;
-  max-width: 100%;
-
-  @media (min-width: 900px) {
-    max-width: 50%;
-  }
-}
-
-.secondaryContentContainer {
-  display: flex;
-
-}
-
-@mixin image-base {
-  border-radius: 8px;
-  max-height: 100%;
-  max-width: 100%;
-}
-
-.imageLight {
-  @include image-base;
-}
-
-.imageDark {
-  @include image-base;
-
-}
-
-@mixin title-base {
-  font-family: var(--font-stack);
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 20px;
-  margin-bottom: 4px;
-  margin-top: 0;
-  position: relative;
-  -webkit-font-smoothing: antialiased;
-}
-
-.titleLight {
-  @include title-base;
-  color: $content-primary;
-}
-
-.titleDark {
-  @include title-base;
-  color: $content-on-brand-primary;
-}
-
-@mixin subtitle-base {
-  font-family: var(--font-stack);
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 16px;
-  margin-bottom: 4px;
-  margin-top: 0px;
-  -webkit-font-smoothing: antialiased;
-}
-
-.subtitleContentLight {
-  @include subtitle-base;
-  color: $content-disabled;
-}
-
-.subtitleContentDark {
-  @include subtitle-base;
-  color: $content-disabled-secondary;
-}
-
-@mixin body-content-base {
-  font-family: var(--font-stack);
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 20px;
-  margin-bottom: 4px;
-  margin-top: 0px;
-  -webkit-font-smoothing: antialiased;
-}
-
-.primaryContentLight {
-  @include body-content-base;
-  color: $surface-success-secondary;
-}
-
-.primaryContentDark {
-  @include body-content-base;
-  color: $border-primary;
-}
-
-.secondaryContentLight {
-  @include body-content-base;
-  color: $surface-success-secondary;
-}
-
-.secondaryContentDark {
-  @include body-content-base;
-  color: $border-primary;
-}
-
-.tertiaryContentLight {
-  @include body-content-base;
-  color: $surface-success-secondary;
-}
-
-.tertiaryContentLight.hasContent::before {
-  color: $surface-success-secondary;
-  content: "•";
-  font-size: 10px;
-  margin-left: 5px;
-  margin-right: 5px;
-}
-
-.tertiaryContentDark {
-  @include body-content-base;
-  color: $border-primary;
-}
-
-.tertiaryContentDark.hasContent::before {
-  color: $surface-success-secondary;
-  content: "•";
-  font-size: 10px;
-  margin-left: 5px;
-  margin-right: 5px;
+.searchcraft-base-search-result-footer-content {
+  @include body();
+  margin: 0;
+  color: var(--sc-content-disabled);
 }

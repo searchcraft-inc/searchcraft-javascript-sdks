@@ -1,3 +1,10 @@
+import type {
+  FacetChild,
+  FacetChildObject,
+  FacetRoot,
+} from '@searchcraft/core';
+import type { SearchResultMapping } from 'types';
+
 export function parseCustomStyles(
   styles: string | Record<string, string>,
 ): Record<string, string> {
@@ -12,38 +19,6 @@ export function parseCustomStyles(
   return styles || {};
 }
 
-export function parseSearchKeys(
-  documentAttributesForDisplay: string,
-): string[] {
-  try {
-    const parsedKeys = JSON.parse(documentAttributesForDisplay);
-    if (
-      Array.isArray(parsedKeys) &&
-      parsedKeys.every((key) => typeof key === 'string')
-    ) {
-      return parsedKeys;
-    }
-    console.warn(
-      'searchKeys must be a JSON array of strings. Defaulting to an empty array.',
-    );
-    return [];
-  } catch (error) {
-    console.error('Failed to parse searchKeys:', error);
-    return [];
-  }
-}
-
-export function extractDynamicProperties(
-  document: Record<string, string | number>,
-  keys: string[],
-) {
-  const extractedProperties: Record<string, string | number> = {};
-  keys.forEach((key) => {
-    extractedProperties[key] = document[key] || '';
-  });
-  return extractedProperties;
-}
-
 export function serializeStyles(
   styles: Record<string, Record<string, string>>,
 ): string {
@@ -55,6 +30,13 @@ export function serializeStyles(
   }
 }
 
+/**
+ * Given a timestamp value, returns a formatted time string for the time
+ * since now.
+ *
+ * @param timestamp
+ * @returns {string} Formatted string value
+ */
 export function getFormattedTimeFromNow(timestamp: string): string {
   const now = new Date();
   const inputTime = new Date(timestamp);
@@ -79,36 +61,6 @@ export function getFormattedTimeFromNow(timestamp: string): string {
   return `${years}y ago`;
 }
 
-type Section = {
-  count: number;
-  path: string;
-  children: Section[];
-};
-
-type FacetCheckbox = {
-  count: number;
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  children: any[];
-  label: string;
-  value: string;
-};
-
-export function flattenFacets(sections: Section[]): FacetCheckbox[] {
-  return sections.map((section) => {
-    const fullPath = section.path;
-
-    // Create the FacetCheckbox object
-    const facetCheckbox: FacetCheckbox = {
-      label: fullPath.replace(/^\//, ''), // Format the label without leading slash
-      value: fullPath, // The full path as the value
-      count: section.count, // Count from the Section
-      children: flattenFacets(section.children || []), // Recursively flatten children
-    };
-
-    return facetCheckbox;
-  });
-}
-
 export function filterPaths(paths) {
   return paths.filter((path) => {
     const parts = path.split('/').filter(Boolean);
@@ -125,4 +77,149 @@ export function filterPaths(paths) {
 
 export function formatNumberWithCommas(number) {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+export function getMillis(unit: 'year' | 'month' | 'day' | 'hour'): number {
+  const millisInHour = 60 * 60 * 1000;
+  const millisInDay = 24 * millisInHour;
+  const millisInMonth = 30 * millisInDay;
+  const millisInYear = 365 * millisInDay;
+
+  switch (unit) {
+    case 'hour':
+      return millisInHour;
+    case 'day':
+      return millisInDay;
+    case 'month':
+      return millisInMonth;
+    case 'year':
+      return millisInYear;
+    default:
+      return 3600000;
+  }
+}
+/**
+ * Given an array of facet paths, removes parent facet paths.
+ */
+export function removeSubstringMatches(arr: string[]): string[] {
+  return arr.filter(
+    (entry, index, array) =>
+      !array.some(
+        (otherEntry, otherIndex) =>
+          otherIndex !== index && otherEntry.includes(entry),
+      ),
+  );
+}
+
+/**
+ * Given a document and a SearchResultMapping, return a mapped value from the document.
+ *
+ * @param document
+ * @param {SearchResultMapping} mapping
+ * @returns {string | undefined}
+ */
+export function getDocumentValueFromSearchResultMapping(
+  document: Record<string, unknown> | undefined,
+  mapping: SearchResultMapping | undefined,
+): string | undefined {
+  if (document && mapping) {
+    return mapping.fieldNames
+      .map((fieldNameDetails) => {
+        let valueFound = document[fieldNameDetails.fieldName];
+
+        if (valueFound && fieldNameDetails.dataType === 'date') {
+          valueFound = getFormattedTimeFromNow(valueFound as string);
+        }
+
+        return valueFound;
+      })
+      .filter((value) => !!value)
+      .join(mapping.delimeter || ' ');
+  }
+}
+
+function deepMergeWithSpread(obj1, obj2) {
+  const result = { ...obj1 };
+
+  for (const key in obj2) {
+    // biome-ignore lint/suspicious/noPrototypeBuiltins: <explanation>
+    if (obj2.hasOwnProperty(key)) {
+      if (obj2[key] instanceof Object && obj1[key] instanceof Object) {
+        result[key] = deepMergeWithSpread(obj1[key], obj2[key]);
+      } else {
+        result[key] = obj2[key];
+      }
+    }
+  }
+
+  return result;
+}
+
+function facetToObject(child: FacetChild): FacetChildObject {
+  const transformed: FacetChildObject = {
+    count: child.count,
+    path: child.path,
+    children: {},
+  };
+
+  if (child.children) {
+    child.children.forEach((subChild) => {
+      transformed.children[subChild.path] = facetToObject(subChild);
+    });
+  }
+
+  return transformed;
+}
+
+function objectToFacet(childObject: FacetChildObject): FacetChild {
+  const transformed: FacetChild = {
+    count: childObject.count,
+    path: childObject.path,
+    children: [],
+  };
+
+  if (Object.keys(childObject.children).length > 0) {
+    transformed.children = Object.values(childObject.children).map(
+      (subChildObject) => objectToFacet(subChildObject),
+    );
+  }
+
+  return transformed;
+}
+
+export function mergeFacetRoots(
+  fieldName: string,
+  root1: FacetRoot,
+  root2: FacetRoot,
+): FacetRoot {
+  const array1 = root1[fieldName];
+  const array2 = root2[fieldName];
+
+  const rootFacetChild1: FacetChild = {
+    count: 0,
+    path: '/',
+    children: array1,
+  };
+
+  const rootFacetChild2: FacetChild = {
+    count: 0,
+    path: '/',
+    children: array2,
+  };
+
+  // Transform into objects
+  const facetObject1 = facetToObject(rootFacetChild1);
+  const facetObject2 = facetToObject(rootFacetChild2);
+
+  // Deep merge the objects
+  const mergedFacetObject: FacetChildObject = deepMergeWithSpread(
+    facetObject1,
+    facetObject2,
+  );
+
+  const mergedFacetChild = objectToFacet(mergedFacetObject);
+
+  return {
+    [fieldName]: mergedFacetChild.children,
+  };
 }

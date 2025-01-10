@@ -1,8 +1,12 @@
-import { Component, h, Prop, State } from '@stencil/core';
+import {
+  Component,
+  Event,
+  h,
+  Prop,
+  State,
+  type EventEmitter,
+} from '@stencil/core';
 import classNames from 'classnames';
-
-import { useSearchcraftStore } from '@provider/store';
-
 @Component({
   tag: 'searchcraft-toggle-button',
   styleUrl: 'searchcraft-toggle-button.module.scss',
@@ -14,95 +18,41 @@ export class SearchcraftToggleButton {
    * 'mode': toggles between 'fuzzy' and 'normal'
    * 'sort': toggles between 'asc' and 'desc'
    */
-  @Prop() type: 'mode' | 'sort' = 'mode';
+  @Prop() label = 'Toggle';
+  @Prop() subLabel: string | undefined;
+
+  @Event() toggleUpdated: EventEmitter<boolean>;
 
   @State() isActive = false;
-  @State() query = ''; // Track the query
-  @State() resultsCount = 0; // Track the count of search results
-
-  private autoSearchFormElement: HTMLElement | null = null;
-  private searchStore = useSearchcraftStore.getState();
-  private unsubscribe: () => void;
-
-  componentDidLoad() {
-    this.unsubscribe = useSearchcraftStore.subscribe((state) => {
-      this.query = state.query || '';
-      this.resultsCount = state.searchResults?.data?.hits?.length || 0;
-    });
-
-    this.autoSearchFormElement = document.querySelector(
-      'searchcraft-auto-search-form',
-    );
-    if (this.autoSearchFormElement) {
-      this.autoSearchFormElement.addEventListener(
-        'querySubmit',
-        this.handleSearchRequest,
-      );
-    }
-  }
-
-  disconnectedCallback() {
-    if (this.unsubscribe) {
-      this.unsubscribe();
-    }
-    if (this.autoSearchFormElement) {
-      this.autoSearchFormElement.addEventListener(
-        'querySubmit',
-        this.handleSearchRequest,
-      );
-    }
-  }
-
-  handleSearchRequest = () => {
-    this.isActive = false;
-    this.searchStore.setSearchParams({
-      mode: 'fuzzy',
-      sort: 'asc',
-    });
-  };
 
   private handleToggle = async () => {
     this.isActive = !this.isActive;
-
-    if (this.type === 'mode') {
-      const mode = this.isActive ? 'normal' : 'fuzzy';
-      this.searchStore.setSearchParams({
-        mode,
-      });
-    } else if (this.type === 'sort') {
-      const sort = this.isActive ? 'desc' : 'asc';
-      this.searchStore.setSearchParams({
-        sort,
-      });
-    }
-
-    try {
-      await this.searchStore.search();
-    } catch (error) {
-      console.error('Search failed:', error);
-    }
+    this.toggleUpdated.emit(this.isActive);
   };
 
   render() {
-    if (!this.query || this.resultsCount === 0) {
-      return null;
-    }
-    const toggleContainerStyle = `toggleWrapper ${this.isActive ? 'active' : ''}`;
-    const toggleSwitchStyle = `toggleSwitch ${this.isActive ? 'active' : ''}`;
-
     return (
-      <button
-        class={classNames(
-          toggleContainerStyle,
-          'searchcraft-toggle-button-container',
-        )}
-        onClick={this.handleToggle}
-        type='button'
-      >
-        <div
-          class={classNames(toggleSwitchStyle, 'searchcraft-toggle-switch')}
-        />
-      </button>
+      <div class='searchcraft-toggle-button-container'>
+        <div>
+          <p class='searchcraft-toggle-button-label'>{this.label}</p>
+          {this.subLabel && (
+            <p class='searchcraft-toggle-button-sub-label'>{this.subLabel}</p>
+          )}
+        </div>
+        <button
+          class={classNames('searchcraft-toggle-button-background', {
+            active: this.isActive,
+          })}
+          onClick={this.handleToggle}
+          type='button'
+        >
+          <div
+            class={classNames('searchcraft-toggle-button-handle', {
+              active: this.isActive,
+            })}
+          />
+        </button>
+      </div>
     );
   }
 }

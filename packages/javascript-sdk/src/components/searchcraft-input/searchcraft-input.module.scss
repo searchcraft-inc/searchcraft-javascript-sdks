@@ -1,140 +1,91 @@
-@import '../../utils/theme';
-
-:root {
-  --font-stack: Helvetica, Arial, sans-serif;
-}
-
-@mixin input-container-base {
-  position: relative;
-  width: 100%;
-}
-
-@mixin input-base {
-  border: none;
-  border-radius: 8px;
-  font-family: var(--font-stack);
-  outline: none;
-  padding-bottom: 15px;
-  padding-top: 15px;
-
-  &::placeholder {
-    font-family: var(--font-stack);
-    font-size: 16px;
-    font-weight: 400;
-  }
-}
-
-@mixin input-base-light {
-  @include input-base;
-  background-color: $surface-secondary;
-  color: $content-primary;
-
-  &::placeholder {
-    color: $content-disabled;
-  }
-
-  &:focus {
-    outline: 2px solid $surface-brand-primary;
-  }
-}
-
-@mixin input-base-dark {
-  @include input-base;
-  background-color: $surface-middle-active;
-  color: $content-on-brand-primary;
-
-  &::placeholder {
-    color: $content-disabled-secondary;
-  }
-
-  &:focus {
-    outline: 2px solid $content-on-brand-primary;
-  }
-}
-
-@mixin input-error-base-light {
-  @include input-base-light;
-  outline: 2px solid $border-danger;
-
-  &:focus-visible {
-    outline: 2px solid $border-danger;
-  }
-}
-
-@mixin input-error-base-dark {
-  @include input-base-dark;
-  outline: 2px solid $surface-danger-secondary-active;
-
-  &:focus-visible {
-    outline: 2px solid $surface-danger-secondary-active;
-  }
-}
-
-.inputContainerLTR {
-  @include input-container-base;
-}
-
-.inputContainerRTL {
-  @include input-container-base;
-  margin-left: 8px;
-}
-
-@mixin align-LTR {
-  margin-right: 8px;
-  padding-left: 36px;
-  padding-right: 16px;
-}
-
-.inputLightLTR {
-  @include input-base-light;
-  @include align-LTR;
-}
-
-.inputDarkLTR {
-  @include input-base-dark;
-  @include align-LTR;
-}
-
-.inputErrorLightLTR {
-  @include input-error-base-light;
-  @include align-LTR;
-}
-
-.inputErrorDarkLTR {
-  @include input-error-base-dark;
-  @include align-LTR;
-}
-
-@mixin align-RTL {
-  margin-left: 8px;
-  padding-left: 16px;
-  padding-right: 36px;
-  text-align: right;
-}
-
-.inputLightRTL {
-  @include input-base-light;
-  @include align-RTL;
-}
-
-.inputDarkRTL {
-  @include input-base-dark;
-  @include align-RTL;
-}
-
-.inputErrorLightRTL {
-  @include input-error-base-light;
-  @include align-RTL;
-}
-
-.inputErrorDarkRTL {
-  @include input-error-base-dark;
-  @include align-RTL;
-}
-
-.inputWrapper {
-  align-items: center;
+searchcraft-input {
   display: flex;
+  flex: 1;
+}
+
+.searchcraft-input-wrapper {
+  display: inline-block;
   position: relative;
-  width: 100%;
+  cursor: text;
+}
+
+.searchcraft-input-wrapper-flex {
+  display: flex;
+  flex: 1;
+}
+
+.searchcraft-input-flex {
+  flex: 1;
+}
+
+.searchcraft-input {
+  @include body();
+  background-color: var(--sc-surface-neutral-secondary);
+  border: none;
+  border-radius: var(--sc-input-border-radius);
+  color: var(--sc-content-neutral-primary);
+  outline: none;
+  padding-left: var(--sc-input-padding-left);
+  padding-right: var(--sc-input-padding-right);
+  padding-top: 12px;
+  padding-bottom: 12px;
+
+  &::placeholder {
+    color: var(--sc-content-disabled);
+  }
+
+  &:focus {
+    outline: var(--sc-border-brand) solid 2px;
+  }
+
+  &:focus::placeholder {
+    opacity: 0;
+  }
+}
+
+.searchcraft-input.error {
+  color: var(--sc-content-danger);
+  outline: var(--sc-border-danger) solid 2px;
+
+  &:focus {
+    outline: var(--sc-border-danger) solid 2px;
+  }
+}
+
+.searchcraft-input-search-icon-wrapper {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  position: absolute;
+  pointer-events: none;
+  bottom: 0;
+  left: 0;
+  top: 0;
+  width: var(--sc-input-padding-left);
+}
+
+.searchcraft-input-search-icon {
+  pointer-events: none;
+  width: var(--sc-input-search-icon-size);
+  height: var(--sc-input-search-icon-size);
+}
+
+.searchcraft-input-clear-button {
+  all: unset;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  display: flex;
+  position: absolute;
+  border: none;
+  outline: none;
+  bottom: 0;
+  right: 0;
+  top: 0;
+  width: var(--sc-input-padding-right);
+}
+
+.searchcraft-input-clear-icon {
+  width: var(--sc-input-clear-icon-size);
+  height: var(--sc-input-clear-icon-size);
 }

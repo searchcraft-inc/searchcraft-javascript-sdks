@@ -60,18 +60,33 @@ export type SearchError = {
  */
 export interface SearchResult {
   count?: number; // Total number of results found (optional)
-  facets?: Facets; // Facet data, useful for filtering results (optional)
+  facets?: FacetPrime; // The prime array of Facet root objects.
   hits?: SearchIndexEntry[]; // Array of individual search entries (optional)
   time_taken?: number; // Time taken to execute the search in milliseconds (optional)
 }
 
+export type FacetPrime = FacetRoot[];
+
+/**
+ * A Facet object returned in a search response.
+ */
+export type FacetRoot = {
+  [key: string]: FacetChild[];
+};
+
 /**
  * * Represents the structure of facets, which group search results into categories.
  */
-export interface Facets {
-  section: {
-    counts: Record<string, number>; // Dynamic keys with counts of matching documents
-  };
+export interface FacetChild {
+  count: number;
+  path: string;
+  children?: FacetChild[];
+}
+
+export interface FacetChildObject {
+  count: number;
+  path: string;
+  children: Record<string, FacetChildObject>;
 }
 
 /**
@@ -94,16 +109,21 @@ export interface SearchDocument<
   id: number; // Unique identifier for the document
   [key: string]: string | number | T[keyof T]; // Supports dynamic properties with string or number values
 }
+
+export type FacetPathsForIndexField = {
+  fieldName: string;
+  value: string;
+};
+
+export type RangeValueForIndexField = {
+  fieldName: string;
+  value: string;
+};
+
 /**
  * * Parameters required to make a successful Search request.
  */
 export type SearchParams = {
-  /**
-   * * Facet data, useful for filtering results.
-   * Optional parameter.
-   */
-  facets?: Facets;
-
   /**
    * * The maximum number of results to return per page.
    * Optional parameter. Defaults to 20 if not provided.
@@ -138,17 +158,8 @@ export type SearchParams = {
    */
   sort?: 'asc' | 'desc';
 
-  /**
-   * * Range of years to filter results by.
-   * Optional parameter.
-   */
-  yearsRange?: [number, number];
-
-  /**
-   * * Array of sections to filter results by.
-   * Optional parameter.
-   */
-  sections?: string[];
+  facetPathsForIndexFields?: Record<string, FacetPathsForIndexField>;
+  rangeValueForIndexFields?: Record<string, RangeValueForIndexField>;
 };
 
 /**

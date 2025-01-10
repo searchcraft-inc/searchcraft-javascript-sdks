@@ -1,23 +1,4 @@
-@import '../../utils/theme';
-
-:root {
-  --font-stack: Helvetica, Arial, sans-serif;
-}
-
-@mixin error-message-base {
-  font-family: var(--font-stack);
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 16px;
-  margin-top: 4px;
-}
-
-.errorMessageLight {
-  @include error-message-base;
-  color: $content-danger;
-}
-
-.errorMessageDark {
-  @include error-message-base;
-  color: $surface-danger-secondary-active;
+.searchcraft-error-message {
+  @include body-small();
+  color: var(--sc-content-danger);
 }

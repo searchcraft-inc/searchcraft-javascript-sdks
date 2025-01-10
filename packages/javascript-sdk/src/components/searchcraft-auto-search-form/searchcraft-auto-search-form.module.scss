@@ -1,15 +1,5 @@
-:root {
-  --font-stack: Helvetica, Arial, sans-serif;
-}
-
-.formLTR {
-  font-family: var(--font-stack);
-  text-align: left;
-  width: 100%;
-}
-
-.formRTL {
-  font-family: var(--font-stack);
-  text-align: right;
-  width: 100%;
+.searchcraft-auto-search-form {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }

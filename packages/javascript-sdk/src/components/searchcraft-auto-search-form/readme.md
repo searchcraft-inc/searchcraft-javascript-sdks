@@ -7,19 +7,16 @@
 
 ## Properties
 
-| Property                 | Attribute                   | Description | Type                                 | Default                                                      |
-| ------------------------ | --------------------------- | ----------- | ------------------------------------ | ------------------------------------------------------------ |
-| `autoSearchFormClass`    | `auto-search-form-class`    |             | `string`                             | `''`                                                         |
-| `clearInput`             | --                          |             | `() => void`                         | `() => {}`                                                   |
-| `config`                 | --                          |             | `SearchcraftConfig`                  | `{     readKey: '',     endpointURL: '',     index: [],   }` |
-| `customStylesForInput`   | `custom-styles-for-input`   |             | `string \| { [x: string]: string; }` | `{}`                                                         |
-| `inputCaptionValue`      | `input-caption-value`       |             | `string`                             | `''`                                                         |
-| `inputIconHeight`        | `input-icon-height`         |             | `number`                             | `20`                                                         |
-| `inputIconWidth`         | `input-icon-width`          |             | `number`                             | `20`                                                         |
-| `labelForInput`          | `label-for-input`           |             | `string`                             | `''`                                                         |
-| `placeholderValue`       | `placeholder-value`         |             | `string`                             | `'Search here'`                                              |
-| `rightToLeftOrientation` | `right-to-left-orientation` |             | `boolean`                            | `false`                                                      |
-| `searchContainerClass`   | `search-container-class`    |             | `string`                             | `''`                                                         |
+| Property               | Attribute                 | Description | Type                                 | Default         |
+| ---------------------- | ------------------------- | ----------- | ------------------------------------ | --------------- |
+| `autoSearchFormClass`  | `auto-search-form-class`  |             | `string`                             | `''`            |
+| `clearInput`           | --                        |             | `() => void`                         | `() => {}`      |
+| `configString`         | `config-string`           |             | `string`                             | `''`            |
+| `customStylesForInput` | `custom-styles-for-input` |             | `string \| { [x: string]: string; }` | `{}`            |
+| `inputCaptionValue`    | `input-caption-value`     |             | `string`                             | `''`            |
+| `labelForInput`        | `label-for-input`         |             | `string`                             | `''`            |
+| `placeholderValue`     | `placeholder-value`       |             | `string`                             | `'Search here'` |
+| `searchContainerClass` | `search-container-class`  |             | `string`                             | `''`            |
 
 
 ## Events
@@ -44,11 +41,6 @@ graph TD;
   searchcraft-auto-search-form --> searchcraft-input-label
   searchcraft-auto-search-form --> searchcraft-input
   searchcraft-auto-search-form --> searchcraft-error-message
-  searchcraft-input --> searchcraft-input-caption
-  searchcraft-input --> searchcraft-clear-input-button
-  searchcraft-input --> searchcraft-input-icon
-  searchcraft-clear-input-button --> searchcraft-clear-icon-set
-  searchcraft-input-icon --> searchcraft-search-icon-set
   style searchcraft-auto-search-form fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

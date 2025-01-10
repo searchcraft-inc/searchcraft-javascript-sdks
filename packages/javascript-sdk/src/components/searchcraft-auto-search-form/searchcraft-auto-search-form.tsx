@@ -5,8 +5,8 @@ import {
   Event,
   type EventEmitter,
   h,
+  Watch,
 } from '@stencil/core';
-import classNames from 'classnames';
 
 import {
   type SearchcraftConfig,
@@ -28,23 +28,21 @@ import packageJson from '../../../package.json';
 export class SearchcraftAutoSearchForm {
   @Prop() autoSearchFormClass = '';
   @Prop() clearInput: () => void = () => {};
-  @Prop() config: SearchcraftConfig = {
-    readKey: '',
-    endpointURL: '',
-    index: [],
-  };
+  @Prop() configString = '';
   @Prop() customStylesForInput: string | Record<string, string> = {};
   @Prop() inputCaptionValue = '';
-  @Prop() inputIconHeight = 20;
-  @Prop() inputIconWidth = 20;
   @Prop() labelForInput = '';
   @Prop() placeholderValue = 'Search here';
-  @Prop() rightToLeftOrientation = false;
   @Prop() searchContainerClass = '';
 
   @Event() inputClearedOrNoResults: EventEmitter<void>;
   @Event() querySubmit: EventEmitter<string>;
 
+  @State() config: SearchcraftConfig = {
+    readKey: '',
+    endpointURL: '',
+    index: [],
+  };
   @State() error = false;
   @State() isRequesting = false;
   @State() query = '';
@@ -55,7 +53,21 @@ export class SearchcraftAutoSearchForm {
   private searchStore = useSearchcraftStore.getState();
   unsubscribe: () => void;
 
-  componentDidLoad() {
+  private setConfigFromString = (configString: string) => {
+    if (configString) {
+      try {
+        const parsedConfig = JSON.parse(configString) as SearchcraftConfig;
+        this.config = parsedConfig;
+      } catch {
+        console.error(
+          'Error: Invalid config passed to searchcraft-auto-search-form.',
+        );
+      }
+    }
+  };
+
+  init(configString: string) {
+    this.setConfigFromString(configString);
     const searchcraft = new SearchcraftCore(this.config, {
       sdkName: packageJson.name,
       sdkVersion: packageJson.version,
@@ -68,6 +80,19 @@ export class SearchcraftAutoSearchForm {
     });
   }
 
+  connectedCallback() {
+    if (this.configString) {
+      this.init(this.configString);
+    }
+  }
+
+  @Watch('configString')
+  onConfigChange(configString: string) {
+    if (configString) {
+      this.init(configString);
+    }
+  }
+
   disconnectedCallback() {
     if (this.unsubscribe) {
       this.unsubscribe();
@@ -75,37 +100,40 @@ export class SearchcraftAutoSearchForm {
   }
 
   handleInputChange = (event: ScInputCustomEvent<string>) => {
-    this.query = event.detail;
-    this.searchStore.setQuery(this.query);
-    if (this.query.trim() === '') {
-      this.searchResults = null;
-      this.inputClearedOrNoResults.emit();
-      this.searchStore.setSearchResults(null);
-    }
-  };
-
-  handleInputKeyUp = (event: ScInputCustomEvent<string>) => {
     const target = event.detail;
     if (target === this.query) {
       return;
     }
     this.query = target;
+    // TODO: When input changes, reset any active filters
+    // this.searchStore.resetAllFilters();
 
-    if (this.debounceTimeout) {
-      clearTimeout(this.debounceTimeout);
-    }
-
-    this.debounceTimeout = setTimeout(() => {
+    const performSearchActions = () => {
       if (this.query.trim() === '') {
+        this.searchStore.setQuery('');
         this.searchResults = null;
         this.searchStore.setSearchResults(null);
         this.inputClearedOrNoResults.emit();
       } else {
         this.searchStore.setQuery(this.query);
-        this.querySubmit.emit(this.query);
+        this.querySubmit.emit();
         this.runSearch();
       }
-    }, this.debounceDelay);
+    };
+
+    // Only set a timeout if debounceDelay > 0
+    if (this.debounceDelay > 0) {
+      if (this.debounceTimeout) {
+        clearTimeout(this.debounceTimeout);
+      }
+      this.debounceTimeout = setTimeout(
+        performSearchActions,
+        this.debounceDelay,
+      );
+    } else {
+      // Otherwise just call search actions directly
+      performSearchActions();
+    }
   };
 
   handleClearInput = () => {
@@ -136,7 +164,6 @@ export class SearchcraftAutoSearchForm {
     } else {
       this.error = false;
       this.searchStore.setQuery(this.query);
-      this.searchStore.setSelectedFilters([]);
 
       try {
         await this.searchStore.search();
@@ -153,26 +180,21 @@ export class SearchcraftAutoSearchForm {
   };
 
   render() {
-    const formClass = this.rightToLeftOrientation ? 'formRTL' : 'formLTR';
     const parsedCustomStyles = parseCustomStyles(this.customStylesForInput);
     return (
       <form
-        class={classNames(`${formClass}`, 'searchcraft-auto-search-form')}
+        class='searchcraft-auto-search-form'
         onSubmit={this.handleFormSubmit}
       >
         <searchcraft-input-label label={this.labelForInput} />
         <searchcraft-input
           customStyles={parsedCustomStyles}
           input-caption-value={this.inputCaptionValue}
-          input-icon-height={this.inputIconHeight}
-          input-icon-width={this.inputIconWidth}
           is-requesting={this.isRequesting}
           onClearInput={this.handleClearInput}
-          onInputKeyUp={this.handleInputKeyUp}
-          onSearchInputChange={this.handleInputChange}
+          onInputChange={this.handleInputChange.bind(this)}
           placeholder-value={this.placeholderValue}
           query={this.query}
-          right-to-left-orientation={this.rightToLeftOrientation}
         />
         {this.error && (
           <searchcraft-error-message errorMessage='Please enter a search query.' />

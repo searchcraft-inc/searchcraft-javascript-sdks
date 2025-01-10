@@ -1,18 +1,9 @@
-:root {
-  --font-stack: Helvetica, Arial, sans-serif;
+.searchcraft-base-search-form {
+
 }
 
-.formLTR {
-  font-family: var(--font-stack);
-  text-align: left;
-}
-
-.formRTL {
-  font-family: var(--font-stack);
-  text-align: right;
-}
-
-.searchContainer {
+.searchcraft-base-search-form-input-container {
   align-items: center;
   display: flex;
+  gap: 8px;
 }

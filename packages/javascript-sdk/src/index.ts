@@ -11,12 +11,12 @@
 export type * from './components';
 
 export {
-  extractDynamicProperties,
   parseCustomStyles,
-  parseSearchKeys,
   serializeStyles,
 } from './utils/utils';
 
 export { useSearchcraftStore, useThemeStore } from './provider/store';
 
 export { Components } from './components';
+
+export * from './types';
