@@ -170,13 +170,7 @@ export const searchResultsMappings = {
 Add or update event listeners in Main.js to handle additional interactions.
 
 ```jsx
-  const filterPanel = document.querySelector('searchcraft-filter-panel');
   const searchContent = document.querySelector('#search-content');
-  const filterPanelContainer = document.querySelector(
-    '#filter-panel-container',
-  );
-  const filtersToggleButton = document.querySelector('#filters-toggle-button');
-
   function setSearchContentVisibility(isVisible) {
     if (searchContent) {
       searchContent.style.display = isVisible ? 'flex' : 'none';
@@ -184,13 +178,6 @@ Add or update event listeners in Main.js to handle additional interactions.
     if (pageContentPlaceholder) {
       pageContentPlaceholder.style.display = isVisible ? 'none' : 'block';
     }
-  }
-
-  function toggleFilterVisibility() {
-    const chevronIcon = document.querySelector('#filters-toggle-button img');
-    const lastHiddenValue = filterPanelContainer.classList.contains('hidden');
-    filterPanelContainer.classList.toggle('hidden', !lastHiddenValue);
-    chevronIcon.classList.toggle('rotated', lastHiddenValue);
   }
 
   setSearchContentVisibility(false);
@@ -212,6 +199,4 @@ Add or update event listeners in Main.js to handle additional interactions.
 
     setSearchContentVisibility(true);
   });
-
-  filtersToggleButton.addEventListener('click', toggleFilterVisibility);
   ```
