@@ -36,7 +36,6 @@ export class SearchcraftBaseSearchResults {
   @Prop() buttonLabel: string | undefined;
   @Prop() buttonTarget: '_blank' | '_self' | '_top' | '_parent' = '_blank';
   @Prop() buttonRel: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
-  @Prop() containerHref: string | undefined;
   @Prop() containerTarget: '_blank' | '_self' | '_top' | '_parent' = '_blank';
   @Prop() containerRel: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
 

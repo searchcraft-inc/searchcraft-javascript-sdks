@@ -18,7 +18,6 @@ type ComponentProps = {
   buttonLabel: string | undefined;
   buttonTarget: '_blank' | '_self' | '_top' | '_parent';
   buttonRel: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
-  containerHref: string | undefined;
   containerTarget: '_blank' | '_self' | '_top' | '_parent';
   containerRel: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
 };
@@ -71,7 +70,6 @@ const defaultProps: ComponentProps = {
   buttonLabel: undefined,
   buttonTarget: '_blank',
   buttonRel: 'noreferrer',
-  containerHref: 'https://example.com',
   containerTarget: '_blank',
   containerRel: 'noreferrer',
 };

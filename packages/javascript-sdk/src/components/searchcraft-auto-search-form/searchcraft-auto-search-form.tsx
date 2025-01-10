@@ -94,6 +94,8 @@ export class SearchcraftAutoSearchForm {
       return;
     }
     this.query = target;
+    // TODO: When input changes, reset any active filters
+    // this.searchStore.resetAllFilters();
 
     const performSearchActions = () => {
       if (this.query.trim() === '') {
