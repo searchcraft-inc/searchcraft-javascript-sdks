@@ -15,11 +15,6 @@ interface ThemeState {
   toggleTheme: () => void;
 }
 
-interface SearchParams {
-  mode: 'fuzzy' | 'normal';
-  sort: 'asc' | 'desc';
-}
-
 export interface SearchcraftState {
   resetFacetPaths: () => void;
   addFacetPathsForIndexField: (data: FacetPathsForIndexField) => void;
@@ -38,7 +33,6 @@ export interface SearchcraftState {
   isRequesting: boolean;
   query: string;
   search: () => Promise<void>;
-  searchParams: SearchParams;
   searchResults: SearchcraftResponse | null;
   setFacets: (facets: FacetPrime) => void;
   setIsRequesting: (isRequesting: boolean) => void;
@@ -121,11 +115,17 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
     searchResults: null,
     facets: null,
     getSearchcraftInstance: () => searchcraft,
-    searchParams: {
-      mode: 'fuzzy',
-      sort: 'asc',
+    setQuery: (query) => {
+      /**
+       * When a new query is set, also reset the sort type, search mode, and facet paths.
+       */
+      set({
+        query,
+        facetPathsForIndexFields: {},
+        searchMode: 'fuzzy',
+        sortType: 'asc',
+      });
     },
-    setQuery: (query) => set({ query, facetPathsForIndexFields: {} }),
     setSearchResults: (results) => set({ searchResults: results }),
     setFacets: (facets) => set({ facets }),
     setIsRequesting: (isRequesting) => set({ isRequesting }),
