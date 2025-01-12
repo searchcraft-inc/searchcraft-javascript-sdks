@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import WebComponentWrapper from '../../utils/WebComponentWrapper';
 import type { SearchResultMappings } from '@searchcraft/javascript-sdk';
 import { config } from '../../utils/DefaultSearchcraftConfig';
+import { useEffect } from 'react';
 
 const componentMeta: Meta = {
   title: 'Javascript SDK/searchcraft-base-search-results',
@@ -60,46 +61,48 @@ const mappings: SearchResultMappings = {
   },
 };
 
-const defaultProps: ComponentProps = {
-  adInterval: 4,
-  customStylesForResults: {},
-  searchResultMappings: JSON.stringify(mappings),
-  placeAdAtEnd: true,
-  placeAdAtStart: true,
-  resultImagePlacement: 'right',
-  buttonLabel: undefined,
-  buttonTarget: '_blank',
-  buttonRel: 'noreferrer',
-  containerTarget: '_blank',
-  containerRel: 'noreferrer',
-};
-
 export const Default: StoryObj<ComponentProps> = {
+  decorators: [
+    (Story) => {
+      useEffect(() => {
+        const searchForm = document.querySelector(
+          'searchcraft-auto-search-form',
+        );
+        const searchResults = document.querySelector(
+          'searchcraft-base-search-results',
+        );
+
+        if (searchForm) {
+          searchForm.config = config;
+        }
+        if (searchResults) {
+          searchResults.searchResultMappings = mappings;
+        }
+      }, []);
+
+      return <Story />;
+    },
+  ],
   render: (args) => {
     return (
       <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
-        <WebComponentWrapper
-          componentName='searchcraft-auto-search-form'
-          args={{
-            autoSearchFormClass: '',
-            config: config,
-            customStylesForInput: '{}',
-            inputCaptionValue: 'Search',
-            labelForInput: 'Search for something:',
-            placeholderValue: 'Search here...',
-            searchContainerClass: '',
-          }}
-        />
+        <searchcraft-auto-search-form />
         <div style={{ paddingTop: 20 }}>
-          <WebComponentWrapper
-            componentName='searchcraft-base-search-results'
-            args={args}
+          <searchcraft-base-search-results
+            ad-interval='4'
+            place-ad-at-end
+            place-ad-at-start
+            result-image-placement='right'
+            button-target='_blank'
+            button-rel='noreferrer'
+            container-target='_blank'
+            container-rel='noreferrer'
           />
         </div>
       </div>
     );
   },
-  args: defaultProps,
+  args: {},
 };
 
 export default componentMeta;

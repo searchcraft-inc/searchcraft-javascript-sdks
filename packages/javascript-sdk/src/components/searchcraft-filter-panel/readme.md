@@ -7,9 +7,9 @@
 
 ## Properties
 
-| Property | Attribute | Description | Type     | Default     |
-| -------- | --------- | ----------- | -------- | ----------- |
-| `items`  | `items`   |             | `string` | `undefined` |
+| Property | Attribute | Description | Type           | Default |
+| -------- | --------- | ----------- | -------------- | ------- |
+| `items`  | --        |             | `FilterItem[]` | `[]`    |
 
 
 ## Dependencies

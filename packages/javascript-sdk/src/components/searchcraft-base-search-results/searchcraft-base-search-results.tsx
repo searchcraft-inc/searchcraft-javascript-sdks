@@ -5,7 +5,6 @@ import {
   Prop,
   State,
   type EventEmitter,
-  Watch,
 } from '@stencil/core';
 
 import type { SearchcraftResponse } from '@searchcraft/core';
@@ -29,7 +28,7 @@ export class SearchcraftBaseSearchResults {
     | string
     | Record<string, Record<string, string>>
     | undefined;
-  @Prop() searchResultMappings: string | undefined;
+  @Prop() searchResultMappings: SearchResultMappings | undefined;
   @Prop() placeAdAtEnd = false;
   @Prop() placeAdAtStart = true;
   @Prop() resultImagePlacement: 'left' | 'right' = 'right';
@@ -44,33 +43,8 @@ export class SearchcraftBaseSearchResults {
   @State() hasSearched = false;
   @State() query = '';
   @State() searchResults: SearchcraftResponse | null = null;
-  /** The parsed `searchResultMappings` prop.  */
-  @State() parsedMappings: SearchResultMappings | undefined;
 
   private unsubscribe: () => void;
-
-  private parseSearchResultMappings = (mappingString: string | undefined) => {
-    if (mappingString) {
-      try {
-        this.parsedMappings = JSON.parse(
-          this.searchResultMappings,
-        ) as SearchResultMappings;
-      } catch {
-        console.error(
-          'Error: Invalid searchResultsMappings passed to searchcraft-base-search-results.',
-        );
-      }
-    }
-  };
-
-  @Watch('searchResultMappings')
-  onItemsChange(searchResultMappings: string) {
-    this.parseSearchResultMappings(searchResultMappings);
-  }
-
-  connectedCallback() {
-    this.parseSearchResultMappings(this.searchResultMappings);
-  }
 
   componentDidLoad() {
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {
@@ -100,31 +74,31 @@ export class SearchcraftBaseSearchResults {
      */
     const titleContent = getDocumentValueFromSearchResultMapping(
       document,
-      this.parsedMappings.title,
+      this.searchResultMappings.title,
     );
     const subtitleContent = getDocumentValueFromSearchResultMapping(
       document,
-      this.parsedMappings.subtitle,
+      this.searchResultMappings.subtitle,
     );
     const bodyContent = getDocumentValueFromSearchResultMapping(
       document,
-      this.parsedMappings.body,
+      this.searchResultMappings.body,
     );
     const containerHref = getDocumentValueFromSearchResultMapping(
       document,
-      this.parsedMappings.containerHref,
+      this.searchResultMappings.containerHref,
     );
     const buttonHref = getDocumentValueFromSearchResultMapping(
       document,
-      this.parsedMappings.buttonHref,
+      this.searchResultMappings.buttonHref,
     );
     const imageSource = getDocumentValueFromSearchResultMapping(
       document,
-      this.parsedMappings.imageSource,
+      this.searchResultMappings.imageSource,
     );
     const footerContent = getDocumentValueFromSearchResultMapping(
       document,
-      this.parsedMappings.footer,
+      this.searchResultMappings.footer,
     );
 
     const serializedStyles =

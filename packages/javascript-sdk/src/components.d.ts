@@ -6,12 +6,16 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { SearchcraftConfig } from "@searchcraft/core";
+import { SearchResultMappings } from "./types/index";
+import { FilterItem } from "./types/searchcraft-filter-panel.types";
 export { SearchcraftConfig } from "@searchcraft/core";
+export { SearchResultMappings } from "./types/index";
+export { FilterItem } from "./types/searchcraft-filter-panel.types";
 export namespace Components {
     interface SearchcraftAutoSearchForm {
         "autoSearchFormClass": string;
         "clearInput": () => void;
-        "configString": string;
+        "config": SearchcraftConfig | undefined;
         "customStylesForInput": string | Record<string, string>;
         "inputCaptionValue": string;
         "labelForInput": string;
@@ -56,7 +60,7 @@ export namespace Components {
         "placeAdAtEnd": boolean;
         "placeAdAtStart": boolean;
         "resultImagePlacement": 'left' | 'right';
-        "searchResultMappings": string | undefined;
+        "searchResultMappings": SearchResultMappings | undefined;
     }
     interface SearchcraftButton {
         "iconElement"?: Element;
@@ -83,7 +87,7 @@ export namespace Components {
         "fieldName": string;
     }
     interface SearchcraftFilterPanel {
-        "items": string | undefined;
+        "items": FilterItem[];
     }
     interface SearchcraftInput {
         "customStyles": string | Record<string, string>;
@@ -398,7 +402,7 @@ declare namespace LocalJSX {
     interface SearchcraftAutoSearchForm {
         "autoSearchFormClass"?: string;
         "clearInput"?: () => void;
-        "configString"?: string;
+        "config"?: SearchcraftConfig | undefined;
         "customStylesForInput"?: string | Record<string, string>;
         "inputCaptionValue"?: string;
         "labelForInput"?: string;
@@ -447,7 +451,7 @@ declare namespace LocalJSX {
         "placeAdAtEnd"?: boolean;
         "placeAdAtStart"?: boolean;
         "resultImagePlacement"?: 'left' | 'right';
-        "searchResultMappings"?: string | undefined;
+        "searchResultMappings"?: SearchResultMappings | undefined;
     }
     interface SearchcraftButton {
         "iconElement"?: Element;
@@ -476,7 +480,7 @@ declare namespace LocalJSX {
         "onFacetSelectionUpdated"?: (event: SearchcraftFacetListCustomEvent<{ paths: string[] }>) => void;
     }
     interface SearchcraftFilterPanel {
-        "items"?: string | undefined;
+        "items"?: FilterItem[];
     }
     interface SearchcraftInput {
         "customStyles"?: string | Record<string, string>;
