@@ -8,6 +8,7 @@ import type {
   NumericFilterItem,
 } from '@searchcraft/javascript-sdk';
 import { config } from '../../utils/DefaultSearchcraftConfig';
+import { useEffect } from 'react';
 
 const componentMeta: Meta = {
   title: 'Javascript SDK/searchcraft-filter-panel',
@@ -80,12 +81,31 @@ const defaultProps: ComponentProps = {
 };
 
 export const Default: StoryObj<ComponentProps> = {
+  decorators: [
+    (Story) => {
+      useEffect(() => {
+        const searchForm = document.querySelector(
+          'searchcraft-auto-search-form',
+        );
+        const filterPanel = document.querySelector('searchcraft-filter-panel');
+
+        if (searchForm) {
+          searchForm.config = config;
+        }
+        if (filterPanel) {
+          filterPanel.items = defaultProps.items;
+        }
+      }, []);
+
+      return <Story />;
+    },
+  ],
   render: (args) => {
     return (
       <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
-        <searchcraft-auto-search-form config-string={JSON.stringify(config)} />
+        <searchcraft-auto-search-form />
         <div style={{ paddingTop: 20 }}>
-          <searchcraft-filter-panel items={JSON.stringify(args.items)} />
+          <searchcraft-filter-panel />
         </div>
       </div>
     );

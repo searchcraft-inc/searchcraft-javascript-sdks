@@ -5,6 +5,7 @@ import {
   Event,
   type EventEmitter,
   h,
+  Element,
   Watch,
 } from '@stencil/core';
 
@@ -28,7 +29,7 @@ import packageJson from '../../../package.json';
 export class SearchcraftAutoSearchForm {
   @Prop() autoSearchFormClass = '';
   @Prop() clearInput: () => void = () => {};
-  @Prop() configString = '';
+  @Prop() config: SearchcraftConfig | undefined;
   @Prop() customStylesForInput: string | Record<string, string> = {};
   @Prop() inputCaptionValue = '';
   @Prop() labelForInput = '';
@@ -38,60 +39,44 @@ export class SearchcraftAutoSearchForm {
   @Event() inputClearedOrNoResults: EventEmitter<void>;
   @Event() querySubmit: EventEmitter<string>;
 
-  @State() config: SearchcraftConfig = {
-    readKey: '',
-    endpointURL: '',
-    index: [],
-  };
   @State() error = false;
   @State() isRequesting = false;
   @State() query = '';
   @State() searchResults: SearchcraftResponse | null = null;
+
+  @Element() element: HTMLElement;
 
   private debounceTimeout: ReturnType<typeof setTimeout> | null = null;
   private debounceDelay = 0;
   private searchStore = useSearchcraftStore.getState();
   unsubscribe: () => void;
 
-  private setConfigFromString = (configString: string) => {
-    if (configString) {
-      try {
-        const parsedConfig = JSON.parse(configString) as SearchcraftConfig;
-        this.config = parsedConfig;
-      } catch {
-        console.error(
-          'Error: Invalid config passed to searchcraft-auto-search-form.',
-        );
-      }
-    }
-  };
+  init() {
+    if (this.config) {
+      const searchcraft = new SearchcraftCore(this.config, {
+        sdkName: packageJson.name,
+        sdkVersion: packageJson.version,
+      });
+      this.searchStore.initialize(searchcraft, true);
 
-  init(configString: string) {
-    this.setConfigFromString(configString);
-    const searchcraft = new SearchcraftCore(this.config, {
-      sdkName: packageJson.name,
-      sdkVersion: packageJson.version,
-    });
-    this.searchStore.initialize(searchcraft, true);
-
-    this.unsubscribe = useSearchcraftStore.subscribe((state) => {
-      this.isRequesting = state.isRequesting;
-      this.searchResults = { ...state.searchResults };
-    });
-  }
-
-  connectedCallback() {
-    if (this.configString) {
-      this.init(this.configString);
+      this.unsubscribe?.();
+      this.unsubscribe = useSearchcraftStore.subscribe((state) => {
+        this.isRequesting = state.isRequesting;
+        this.searchResults = { ...state.searchResults };
+      });
     }
   }
 
-  @Watch('configString')
-  onConfigChange(configString: string) {
-    if (configString) {
-      this.init(configString);
-    }
+  componentDidLoad() {
+    this.init();
   }
+
+  @Watch('config')
+  onConfigChange() {
+    this.init();
+  }
+
+  connectedCallback() {}
 
   disconnectedCallback() {
     if (this.unsubscribe) {
@@ -105,8 +90,6 @@ export class SearchcraftAutoSearchForm {
       return;
     }
     this.query = target;
-    // TODO: When input changes, reset any active filters
-    // this.searchStore.resetAllFilters();
 
     const performSearchActions = () => {
       if (this.query.trim() === '') {

@@ -1,4 +1,4 @@
-import { Component, h, Prop, State, Watch } from '@stencil/core';
+import { Component, h, Prop, State } from '@stencil/core';
 import type {
   FilterItem,
   DateRangeFilterItem,
@@ -20,34 +20,14 @@ export interface ScInputCustomEvent<T> extends CustomEvent<T> {
   shadow: false,
 })
 export class SearchcraftFilterPanel {
-  @Prop() items: string | undefined;
+  @Prop() items: FilterItem[] = [];
 
   @State() unsubscribe: (() => void) | undefined;
   @State() lastQuery: string | undefined;
-  @State() filterItems: FilterItem[] = [];
 
   private searchStore = useSearchcraftStore.getState();
-  private setFilterItemsFromString = (itemsString: string) => {
-    if (itemsString) {
-      try {
-        const parsedItems = JSON.parse(this.items) as FilterItem[];
-        this.filterItems = parsedItems;
-      } catch {
-        console.error(
-          'Error: Invalid items passed to searchcraft-filter-panel.',
-        );
-      }
-    }
-  };
 
-  @Watch('items')
-  onItemsChange(itemsString: string) {
-    this.setFilterItemsFromString(itemsString);
-  }
-
-  connectedCallback() {
-    this.setFilterItemsFromString(this.items);
-
+  componentDidLoad() {
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {
       if (this.lastQuery !== state.query) {
         // A place to put actions to do when the query changes
@@ -102,12 +82,12 @@ export class SearchcraftFilterPanel {
   }
 
   /**
-   * Iterate through filterItems and render them based on `type`
+   * Iterate through `items` and render them based on `type`
    */
   render() {
     return (
       <div class='searchcraft-filter-panel'>
-        {this.filterItems.map((filterItem) => {
+        {this.items.map((filterItem) => {
           switch (filterItem.type) {
             case 'dateRange': {
               const item = filterItem as DateRangeFilterItem;
