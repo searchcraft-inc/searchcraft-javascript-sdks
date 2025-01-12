@@ -24,47 +24,58 @@ export class SearchcraftFiltersList {
 
   @Event() facetSelectionUpdated: EventEmitter<{ paths: string[] }>;
 
+  @State() baseFacetRoot: FacetRoot | undefined;
   @State() facetRoot: FacetRoot | undefined;
   @State() selectedPaths: Record<string, boolean> = {};
   @State() lastQuery: string | undefined;
+  @State() lastTimeTaken: number | undefined;
+  @State() hasNewSearchTerm = false;
 
   @State() unsubscribe: (() => void) | undefined;
 
   private searchStore = useSearchcraftStore.getState();
 
-  initFacetRootFromState(state: SearchcraftState) {
+  handleStateUpdate(state: SearchcraftState) {
     const facetPrime = state.searchResults?.data.facets;
+    const timeTaken = state.searchResults?.data.time_taken;
 
-    // Clear the selected paths if the query changed
+    /** Things to do when the state's search term has changed, but before the response received */
     if (state.query !== this.lastQuery) {
       this.selectedPaths = {};
-      this.facetRoot = undefined;
+      this.hasNewSearchTerm = true;
     }
 
-    if (facetPrime) {
-      const facetRoot: FacetRoot = facetPrime.find(
+    /** Things to do when a new response with a new facet prime has been received */
+    if (timeTaken !== this.lastTimeTaken && facetPrime) {
+      this.facetRoot = undefined;
+      const incomingFacetRoot: FacetRoot = facetPrime.find(
         (facet) => this.fieldName === Object.keys(facet)[0],
       );
 
-      if (this.facetRoot) {
+      /** Data is from a new search term: completely override our facets */
+      if (this.hasNewSearchTerm) {
+        this.baseFacetRoot = incomingFacetRoot;
+        this.facetRoot = incomingFacetRoot;
+        this.hasNewSearchTerm = false;
+      } else if (this.baseFacetRoot) {
+        /** Data is from an existing search term, merge the facets together */
         this.facetRoot = mergeFacetRoots(
           this.fieldName,
-          this.facetRoot,
-          facetRoot,
+          this.baseFacetRoot,
+          incomingFacetRoot,
         );
-      } else {
-        this.facetRoot = facetRoot;
       }
     }
 
     this.lastQuery = state.query;
+    this.lastTimeTaken = timeTaken;
   }
 
   connectedCallback() {
-    this.initFacetRootFromState(this.searchStore);
+    this.handleStateUpdate(this.searchStore);
 
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {
-      this.initFacetRootFromState(state);
+      this.handleStateUpdate(state);
     });
   }
 
