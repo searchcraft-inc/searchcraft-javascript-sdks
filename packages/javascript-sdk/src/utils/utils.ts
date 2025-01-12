@@ -155,20 +155,68 @@ function deepMergeWithSpread(obj1, obj2) {
   return result;
 }
 
-function facetToObject(child: FacetChild): FacetChildObject {
-  const transformed: FacetChildObject = {
-    count: child.count,
-    path: child.path,
+type FacetChildFragment = {
+  count: number;
+  path: string;
+};
+
+function facetToRecord(facet: FacetChild): Record<string, FacetChildFragment> {
+  const records: Record<string, FacetChildFragment> = {};
+
+  const traverseAndAddToFragments = (facetChild: FacetChild) => {
+    records[facetChild.path] = {
+      count: facetChild.count,
+      path: facetChild.path,
+    };
+
+    facetChild.children?.forEach((child) => {
+      traverseAndAddToFragments(child);
+    });
+  };
+
+  traverseAndAddToFragments(facet);
+
+  return records;
+}
+
+function recordToObject(
+  record: Record<string, FacetChildFragment>,
+): FacetChildObject {
+  const root: FacetChildObject = {
+    count: 0,
+    path: '/',
     children: {},
   };
 
-  if (child.children) {
-    child.children.forEach((subChild) => {
-      transformed.children[subChild.path] = facetToObject(subChild);
-    });
-  }
+  Object.keys(record).forEach((key) => {
+    const fragment = record[key];
+    if (fragment.path === '/') {
+      return;
+    }
+    const pathParts = fragment.path.substring(1).split('/');
+    let currentRoot = root;
+    let currentPath = '';
 
-  return transformed;
+    pathParts.forEach((part, index) => {
+      const nextPath = `${currentPath}/${part}`;
+      if (!currentRoot.children[nextPath]) {
+        currentRoot.children[nextPath] = {
+          count: 0,
+          path: nextPath,
+          children: {},
+        };
+      }
+
+      if (index === pathParts.length - 1) {
+        currentRoot.children[nextPath].count = fragment.count;
+      }
+
+      currentPath = nextPath;
+      currentRoot = currentRoot.children[nextPath];
+    });
+  });
+
+  return root;
 }
 
 function objectToFacet(childObject: FacetChildObject): FacetChild {
@@ -187,37 +235,83 @@ function objectToFacet(childObject: FacetChildObject): FacetChild {
   return transformed;
 }
 
-export function mergeFacetRoots(
-  fieldName: string,
-  root1: FacetRoot,
-  root2: FacetRoot,
-): FacetRoot {
-  const array1 = root1[fieldName];
-  const array2 = root2[fieldName];
+/**
+ * Filters records with the parent paths from record2 OUT of record1
+ */
+function filterRecordByParentPaths(
+  record1: Record<string, FacetChild>,
+  record2: Record<string, FacetChild>,
+): Record<string, FacetChild> {
+  // Extract all paths (keys) both records
+  const paths1 = Object.keys(record1);
+  const paths2 = Object.keys(record2);
 
-  const rootFacetChild1: FacetChild = {
-    count: 0,
-    path: '/',
-    children: array1,
-  };
-
-  const rootFacetChild2: FacetChild = {
-    count: 0,
-    path: '/',
-    children: array2,
-  };
-
-  // Transform into objects
-  const facetObject1 = facetToObject(rootFacetChild1);
-  const facetObject2 = facetToObject(rootFacetChild2);
-
-  // Deep merge the objects
-  const mergedFacetObject: FacetChildObject = deepMergeWithSpread(
-    facetObject1,
-    facetObject2,
+  // Find all parent paths in record2
+  const parentPaths = new Set(
+    paths2
+      .filter((path) => path.split('/').length > 2) // Only consider paths with more than one level
+      .map((path) => path.substring(0, path.lastIndexOf('/'))),
   );
 
-  const mergedFacetChild = objectToFacet(mergedFacetObject);
+  // Filter out keys in record1 that share a parent path with any of the identified parent paths
+  const filteredRecord = Object.fromEntries(
+    paths1
+      .filter(
+        (path) => !parentPaths.has(path.substring(0, path.lastIndexOf('/'))),
+      )
+      .map((path) => [path, record1[path]]), // Reconstruct the key-value pairs
+  );
+
+  return filteredRecord;
+}
+
+export function mergeFacetRoots(
+  fieldName: string,
+  currentRoot: FacetRoot,
+  incomingRoot: FacetRoot,
+): FacetRoot {
+  const currentArray = currentRoot[fieldName];
+  const incomingArray = incomingRoot[fieldName];
+
+  const currentRootFacetChild: FacetChild = {
+    count: 0,
+    path: '/',
+    children: currentArray,
+  };
+
+  const incomingRootFacetChild: FacetChild = {
+    count: 0,
+    path: '/',
+    children: incomingArray,
+  };
+
+  // Flatten them into records
+  const currentRecord: Record<string, FacetChildFragment> = facetToRecord(
+    currentRootFacetChild,
+  );
+
+  const incomingRecord: Record<string, FacetChildFragment> = facetToRecord(
+    incomingRootFacetChild,
+  );
+
+  // Filter out the records from record1 (the current set of records)
+  // that share a parent path with record2 (the incoming records)
+  const filteredCurrentRecord = filterRecordByParentPaths(
+    currentRecord,
+    incomingRecord,
+  );
+
+  // Deep merge the records together
+  const mergedRecord: Record<string, FacetChildFragment> = deepMergeWithSpread(
+    filteredCurrentRecord,
+    incomingRecord,
+  );
+
+  // Convert into a heirarchical object
+  const mergedObject: FacetChildObject = recordToObject(mergedRecord);
+
+  // Convert the heirarchical object back to the Facet child structure
+  const mergedFacetChild = objectToFacet(mergedObject);
 
   return {
     [fieldName]: mergedFacetChild.children,

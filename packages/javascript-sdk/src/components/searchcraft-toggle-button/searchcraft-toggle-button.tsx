@@ -1,3 +1,4 @@
+import { useSearchcraftStore } from '@provider/store';
 import {
   Component,
   Event,
@@ -24,11 +25,27 @@ export class SearchcraftToggleButton {
   @Event() toggleUpdated: EventEmitter<boolean>;
 
   @State() isActive = false;
+  @State() unsubscribe: (() => void) | undefined;
+  @State() lastQuery: string | undefined;
 
   private handleToggle = async () => {
     this.isActive = !this.isActive;
     this.toggleUpdated.emit(this.isActive);
   };
+
+  connectedCallback() {
+    /** When the query changes, sets toggle button state back to inactive. */
+    this.unsubscribe = useSearchcraftStore.subscribe((state) => {
+      if (state.query !== this.lastQuery) {
+        this.isActive = false;
+        this.lastQuery = state.query;
+      }
+    });
+  }
+
+  disconnectedCallback() {
+    this.unsubscribe?.();
+  }
 
   render() {
     return (

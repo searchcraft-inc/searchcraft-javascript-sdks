@@ -22,9 +22,7 @@ export class SearchcraftSlider {
 
   @State() endValue = this.max;
   @State() startValue = this.min;
-  @State() hasSearched = false;
-  @State() query = '';
-  @State() resultsCount = 0;
+  @State() lastFocusedHandle: 'min' | 'max' = 'max';
 
   @Event() rangeChanged: EventEmitter<{ startValue: number; endValue: number }>;
 
@@ -33,26 +31,36 @@ export class SearchcraftSlider {
     this.endValue = this.max;
   }
 
-  private updateValues = async () => {
+  private emitUpdate = async () => {
     this.rangeChanged.emit({
       startValue: this.startValue,
       endValue: this.endValue,
     });
   };
 
-  private handlestartValueChange = (event: InputEvent) => {
-    const value = Number.parseInt((event.target as HTMLInputElement).value, 10);
+  private handleStartValueChange = (event: InputEvent) => {
+    const inputElement = event.target as HTMLInputElement;
+    const value = Number.parseInt(inputElement.value, 10);
+    this.lastFocusedHandle = 'min';
     if (value <= this.endValue) {
       this.startValue = value;
-      this.updateValues();
+      this.emitUpdate();
+    } else {
+      this.startValue = this.endValue;
+      inputElement.value = `${this.endValue}`;
     }
   };
 
-  private handleendValueChange = (event: InputEvent) => {
-    const value = Number.parseInt((event.target as HTMLInputElement).value, 10);
+  private handleEndValueChange = (event: InputEvent) => {
+    const inputElement = event.target as HTMLInputElement;
+    const value = Number.parseInt(inputElement.value, 10);
+    this.lastFocusedHandle = 'max';
     if (value >= this.startValue) {
       this.endValue = value;
-      this.updateValues();
+      this.emitUpdate();
+    } else {
+      this.endValue = this.startValue;
+      inputElement.value = `${this.startValue}`;
     }
   };
 
@@ -75,17 +83,10 @@ export class SearchcraftSlider {
         : new Date(this.endValue).getFullYear();
 
     return (
-      <div
-        class={classNames('sliderContainer', 'searchcraft-slider-container')}
-      >
-        <div
-          class={classNames(
-            'rangeContainer',
-            'searchcraft-slider-range-container',
-          )}
-        >
+      <div class='searchcraft-slider-container'>
+        <div class='searchcraft-slider-range-container'>
           <div
-            class={classNames('activeRange', 'searchcraft-slider-active-range')}
+            class='searchcraft-slider-active-range'
             style={{
               left: `${startPercent}%`,
               width: `${endPercent - startPercent}%`,
@@ -93,48 +94,34 @@ export class SearchcraftSlider {
           />
           <input
             class={classNames(
-              'rangeSlider',
-              'searchcraft-slider-range-slider-start-thumb',
+              'searchcraft-slider-input',
+              'searchcraft-slider-input-min-handle',
             )}
             max={this.max}
             min={this.min}
-            onInput={this.handlestartValueChange}
+            onInput={this.handleStartValueChange.bind(this)}
             step={this.granularity}
+            style={{ zIndex: this.lastFocusedHandle === 'min' ? '2' : '1' }}
             type='range'
             value={this.startValue}
           />
           <input
             class={classNames(
-              'rangeSlider',
-              'searchcraft-slider-range-slider-end-thumb',
+              'searchcraft-slider-input',
+              'searchcraft-slider-input-max-handle',
             )}
             max={this.max}
             min={this.min}
-            onInput={this.handleendValueChange}
+            onInput={this.handleEndValueChange.bind(this)}
             step={this.granularity}
+            style={{ zIndex: this.lastFocusedHandle === 'max' ? '2' : '1' }}
             type='range'
             value={this.endValue}
           />
         </div>
-        <div
-          class={classNames(
-            'yearLabels',
-            'searchcraft-slider-year-label-container',
-          )}
-        >
-          <span
-            class={classNames(
-              'yearLabel',
-              'searchcraft-slider-start-year-label',
-            )}
-          >
-            {startLabel}
-          </span>
-          <span
-            class={classNames('yearLabel', 'searchcraft-slider-end-year-label')}
-          >
-            {endLabel}
-          </span>
+        <div class='searchcraft-slider-label-container'>
+          <span class='searchcraft-slider-label'>{startLabel}</span>
+          <span class='searchcraft-slider-label'>{endLabel}</span>
         </div>
       </div>
     );

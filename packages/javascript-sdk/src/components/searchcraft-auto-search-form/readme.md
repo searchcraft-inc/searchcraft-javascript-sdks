@@ -11,7 +11,7 @@
 | ---------------------- | ------------------------- | ----------- | ------------------------------------ | --------------- |
 | `autoSearchFormClass`  | `auto-search-form-class`  |             | `string`                             | `''`            |
 | `clearInput`           | --                        |             | `() => void`                         | `() => {}`      |
-| `configString`         | `config-string`           |             | `string`                             | `''`            |
+| `config`               | --                        |             | `SearchcraftConfig`                  | `undefined`     |
 | `customStylesForInput` | `custom-styles-for-input` |             | `string \| { [x: string]: string; }` | `{}`            |
 | `inputCaptionValue`    | `input-caption-value`     |             | `string`                             | `''`            |
 | `labelForInput`        | `label-for-input`         |             | `string`                             | `''`            |

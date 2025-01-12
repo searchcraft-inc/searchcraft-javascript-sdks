@@ -46,9 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
   );
 
   searchForm.config = config;
-
-  filterPanel.setAttribute('items', JSON.stringify(filterPanelItems));
-
+  filterPanel.items = filterPanelItems;
+  searchResults.searchResultMappings = searchResultsMappings;
   searchResults.setAttribute(
     'search-result-mappings',
     JSON.stringify(searchResultsMappings),
