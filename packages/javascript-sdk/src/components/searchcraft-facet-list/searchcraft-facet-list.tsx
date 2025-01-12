@@ -35,6 +35,12 @@ export class SearchcraftFiltersList {
   initFacetRootFromState(state: SearchcraftState) {
     const facetPrime = state.searchResults?.data.facets;
 
+    // Clear the selected paths if the query changed
+    if (state.query !== this.lastQuery) {
+      this.selectedPaths = {};
+      this.facetRoot = undefined;
+    }
+
     if (facetPrime) {
       const facetRoot: FacetRoot = facetPrime.find(
         (facet) => this.fieldName === Object.keys(facet)[0],
@@ -48,16 +54,6 @@ export class SearchcraftFiltersList {
         );
       } else {
         this.facetRoot = facetRoot;
-      }
-
-      // Clear the selected paths if the query changed
-      if (state.query !== this.lastQuery) {
-        this.selectedPaths = {};
-
-        // Remove the facet root if the query is empty
-        if (state.query.trim().length === 0) {
-          this.facetRoot = undefined;
-        }
       }
     }
 
@@ -77,15 +73,40 @@ export class SearchcraftFiltersList {
   }
 
   handleCheckboxChange(path: string) {
-    this.selectedPaths = {
-      ...this.selectedPaths,
-      [path]: !this.selectedPaths[path],
-    };
+    const isCheckboxChecked = !this.selectedPaths[path];
 
+    if (isCheckboxChecked) {
+      /**
+       * Checkbox Checked: Add to the selectedPaths record
+       * Uses spread operator here so UI updates.
+       */
+      this.selectedPaths = {
+        ...this.selectedPaths,
+        [path]: true,
+      };
+    } else {
+      /**
+       * Checkbox Uncheck: Remove any paths and sub-paths
+       */
+      const updatedPaths = Object.keys(this.selectedPaths).filter(
+        (testPath) => !testPath.includes(path),
+      );
+
+      this.selectedPaths = updatedPaths.reduce(
+        (acc, str) => {
+          acc[str] = true;
+          return acc;
+        },
+        {} as Record<string, boolean>,
+      );
+    }
+
+    /**
+     * Emit the paths array, with parent paths removed.
+     */
     const paths = Object.keys(this.selectedPaths).filter(
       (path) => this.selectedPaths[path],
     );
-
     const pathsWithParentPathsRemoved = removeSubstringMatches(paths);
 
     this.facetSelectionUpdated.emit({ paths: pathsWithParentPathsRemoved });
