@@ -36,10 +36,10 @@ export class SearchcraftToggleButton {
   connectedCallback() {
     /** When the query changes, sets toggle button state back to inactive. */
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {
-      if (state.query !== this.lastQuery) {
+      if (state.query !== this.lastQuery && state.query.trim().length === 0) {
         this.isActive = false;
-        this.lastQuery = state.query;
       }
+      this.lastQuery = state.query;
     });
   }
 
