@@ -5,7 +5,7 @@ export type SearchResultFieldName = {
 
 export type SearchResultMapping = {
   fieldNames: SearchResultFieldName[];
-  delimeter?: string;
+  delimiter?: string;
 };
 
 export type SearchResultMappings = {
