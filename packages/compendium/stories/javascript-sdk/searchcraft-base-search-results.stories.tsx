@@ -43,7 +43,7 @@ const mappings: SearchResultMappings = {
         dataType: 'text',
       },
     ],
-    delimeter: ' • ',
+    delimiter: ' • ',
   },
   imageSource: {
     fieldNames: [

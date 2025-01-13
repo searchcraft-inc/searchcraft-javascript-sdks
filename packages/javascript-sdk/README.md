@@ -139,7 +139,7 @@ export const searchResultsMappings = {
         dataType: 'text',
       },
     ],
-    delimeter: ' • ',
+    delimiter: ' • ',
   },
   imageSource: {
     fieldNames: [

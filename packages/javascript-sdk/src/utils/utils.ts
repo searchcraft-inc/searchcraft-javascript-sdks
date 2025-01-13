@@ -134,7 +134,7 @@ export function getDocumentValueFromSearchResultMapping(
         return valueFound;
       })
       .filter((value) => !!value)
-      .join(mapping.delimeter || ' ');
+      .join(mapping.delimiter || ' ');
   }
 }
 
