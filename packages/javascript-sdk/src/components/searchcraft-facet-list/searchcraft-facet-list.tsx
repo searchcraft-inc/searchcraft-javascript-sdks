@@ -27,9 +27,12 @@ export class SearchcraftFiltersList {
   @State() baseFacetRoot: FacetRoot | undefined;
   @State() facetRoot: FacetRoot | undefined;
   @State() selectedPaths: Record<string, boolean> = {};
-  @State() lastQuery: string | undefined;
   @State() lastTimeTaken: number | undefined;
   @State() hasNewSearchTerm = false;
+
+  @State() lastQuery: string | undefined;
+  @State() lastSearchMode: string | undefined;
+  @State() lastSortType: string | undefined;
 
   @State() unsubscribe: (() => void) | undefined;
 
@@ -40,7 +43,11 @@ export class SearchcraftFiltersList {
     const timeTaken = state.searchResults?.data.time_taken;
 
     /** Things to do when the state's search term has changed, but before the response received */
-    if (state.query !== this.lastQuery) {
+    if (
+      state.query !== this.lastQuery ||
+      state.searchMode !== this.lastSearchMode ||
+      state.sortType !== this.lastSortType
+    ) {
       this.selectedPaths = {};
       this.hasNewSearchTerm = true;
     }
@@ -68,6 +75,8 @@ export class SearchcraftFiltersList {
     }
 
     this.lastQuery = state.query;
+    this.lastSearchMode = state.searchMode;
+    this.lastSortType = state.sortType;
     this.lastTimeTaken = timeTaken;
   }
 

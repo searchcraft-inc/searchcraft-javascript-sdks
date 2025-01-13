@@ -122,8 +122,10 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
       set({
         query,
         facetPathsForIndexFields: {},
-        searchMode: 'fuzzy',
-        sortType: 'asc',
+        ...(query.trim().length === 0 && {
+          searchMode: 'fuzzy',
+          sortType: 'asc',
+        }),
       });
     },
     setSearchResults: (results) => set({ searchResults: results }),
