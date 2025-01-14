@@ -16,8 +16,19 @@
       "import": "./dist/searchcraft-javascript-sdk/searchcraft-javascript-sdk.esm.js",
       "require": "./dist/searchcraft-javascript-sdk/searchcraft-javascript-sdk.cjs.js"
     },
-    "./loader": "./dist/loader/index.js",
-    "./components": "./dist/components/index.js"
+    "./dist/*": {
+      "import": "./dist/*",
+      "types": "./dist/*"
+    },
+    "./components": {
+      "import": "./dist/components/index.js",
+      "types": "./dist/components/index.d.ts"
+    },
+    "./loader": {
+      "import": "./dist/loader/index.js",
+      "require": "./dist/loader/index.cjs",
+      "types": "./dist/loader/index.d.ts"
+    }
   },
   "repository": {
     "type": "git",
@@ -37,6 +48,7 @@
   "devDependencies": {
     "@searchcraft/core": "*",
     "@stencil/core": "^4.7.0",
+    "@stencil/react-output-target": "^0.8.2",
     "@stencil/sass": "^3.0.12",
     "@types/node": "^16.18.11",
     "zustand": "^5.0.1"

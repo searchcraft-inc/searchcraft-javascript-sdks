@@ -7,17 +7,14 @@
 
 ## Properties
 
-| Property                | Attribute                  | Description | Type                                 | Default          |
-| ----------------------- | -------------------------- | ----------- | ------------------------------------ | ---------------- |
-| `customStyles`          | `custom-styles`            |             | `string \| { [x: string]: string; }` | `{}`             |
-| `error`                 | `error`                    |             | `boolean`                            | `false`          |
-| `flex`                  | `flex`                     |             | `boolean`                            | `true`           |
-| `inputCaptionClassName` | `input-caption-class-name` |             | `string`                             | `''`             |
-| `inputCaptionValue`     | `input-caption-value`      |             | `string`                             | `''`             |
-| `inputClassName`        | `input-class-name`         |             | `string`                             | `''`             |
-| `isRequesting`          | `is-requesting`            |             | `boolean`                            | `false`          |
-| `placeholderValue`      | `placeholder-value`        |             | `string`                             | `'Enter Search'` |
-| `query`                 | `query`                    |             | `string`                             | `''`             |
+| Property           | Attribute           | Description | Type                                 | Default          |
+| ------------------ | ------------------- | ----------- | ------------------------------------ | ---------------- |
+| `customStyles`     | `custom-styles`     |             | `string \| { [x: string]: string; }` | `{}`             |
+| `error`            | `error`             |             | `boolean`                            | `false`          |
+| `flex`             | `flex`              |             | `boolean`                            | `true`           |
+| `inputClassName`   | `input-class-name`  |             | `string`                             | `''`             |
+| `placeholderValue` | `placeholder-value` |             | `string`                             | `'Enter Search'` |
+| `query`            | `query`             |             | `string`                             | `''`             |
 
 
 ## Events

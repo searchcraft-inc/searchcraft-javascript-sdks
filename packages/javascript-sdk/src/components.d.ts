@@ -13,14 +13,12 @@ export { SearchResultMappings } from "./types/index";
 export { FilterItem } from "./types/searchcraft-filter-panel.types";
 export namespace Components {
     interface SearchcraftAutoSearchForm {
-        "autoSearchFormClass": string;
         "clearInput": () => void;
         "config": SearchcraftConfig | undefined;
         "customStylesForInput": string | Record<string, string>;
         "inputCaptionValue": string;
         "labelForInput": string;
         "placeholderValue": string;
-        "searchContainerClass": string;
     }
     interface SearchcraftBaseSearchForm {
         "buttonLabel": string;
@@ -93,10 +91,7 @@ export namespace Components {
         "customStyles": string | Record<string, string>;
         "error": boolean;
         "flex": boolean;
-        "inputCaptionClassName": string;
-        "inputCaptionValue": string;
         "inputClassName": string;
-        "isRequesting": boolean;
         "placeholderValue": string;
         "query": string;
     }
@@ -400,7 +395,6 @@ declare global {
 }
 declare namespace LocalJSX {
     interface SearchcraftAutoSearchForm {
-        "autoSearchFormClass"?: string;
         "clearInput"?: () => void;
         "config"?: SearchcraftConfig | undefined;
         "customStylesForInput"?: string | Record<string, string>;
@@ -409,7 +403,6 @@ declare namespace LocalJSX {
         "onInputClearedOrNoResults"?: (event: SearchcraftAutoSearchFormCustomEvent<void>) => void;
         "onQuerySubmit"?: (event: SearchcraftAutoSearchFormCustomEvent<string>) => void;
         "placeholderValue"?: string;
-        "searchContainerClass"?: string;
     }
     interface SearchcraftBaseSearchForm {
         "buttonLabel"?: string;
@@ -486,10 +479,7 @@ declare namespace LocalJSX {
         "customStyles"?: string | Record<string, string>;
         "error"?: boolean;
         "flex"?: boolean;
-        "inputCaptionClassName"?: string;
-        "inputCaptionValue"?: string;
         "inputClassName"?: string;
-        "isRequesting"?: boolean;
         "onClearInput"?: (event: SearchcraftInputCustomEvent<void>) => void;
         "onInputChange"?: (event: SearchcraftInputCustomEvent<string>) => void;
         "placeholderValue"?: string;

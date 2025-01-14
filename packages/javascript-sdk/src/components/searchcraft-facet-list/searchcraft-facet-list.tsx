@@ -19,7 +19,7 @@ import { mergeFacetRoots, removeSubstringMatches } from '@utils/utils';
   styleUrl: 'searchcraft-facet-list.module.scss',
   shadow: false,
 })
-export class SearchcraftFiltersList {
+export class SearchcraftFacetList {
   @Prop() fieldName: string;
 
   @Event() facetSelectionUpdated: EventEmitter<{ paths: string[] }>;

@@ -6,9 +6,7 @@
     "jsx": "react-jsx",
     "paths": {
       "@/*": ["./src/*"],
-      "@components/*": ["./src/components/*"],
-      "@testing/*": ["./src/test-tools/*"],
-      "@styled/*": ["./styled-system/*"]
+      "@components/*": ["./src/components/*"]
     },
     "outDir": "dist",
     "sourceMap": true
@@ -17,13 +15,21 @@
   "typedocOptions": {
     "plugin": ["typedoc-plugin-markdown"],
     "entryPoints": [
-      "src/components/providers/Provider.tsx",
-      "src/components/providers/ProviderConfigTypes.ts",
-      "src/components/providers/ProviderContextTypes.ts",
-      "src/components/ui/BaseSearchForm/index.tsx",
-      "src/components/ui/BaseSearchResult/index.tsx",
-      "src/components/ui/BaseSearchResults/index.tsx",
-      "src/components/ui/AutoSearchForm/index.tsx"
+      "src/components/SearchcraftAutoSearchForm/index.tsx",
+      "src/components/SearchcraftBaseSearchForm/index.tsx",
+      "src/components/SearchcraftBaseSearchResult/index.tsx",
+      "src/components/SearchcraftBaseSearchResults/index.tsx",
+      "src/components/SearchcraftButton/index.tsx",
+      "src/components/SearchcraftErrorMessage/index.tsx",
+      "src/components/SearchcraftFacetList/index.tsx",
+      "src/components/SearchcraftFilterPanel/index.tsx",
+      "src/components/SearchcraftInput/index.tsx",
+      "src/components/SearchcraftInputLabel/index.tsx",
+      "src/components/SearchcraftResultsInfo/index.tsx",
+      "src/components/SearchcraftSlider/index.tsx",
+      "src/components/SearchcraftSpinnerDark/index.tsx",
+      "src/components/SearchcraftSpinnerLight/index.tsx",
+      "src/components/SearchcraftToggleButton/index.tsx"
     ],
     "out": "docs"
   }
