@@ -17,12 +17,12 @@
 
 ### Used by
 
- - [searchcraft-input](../searchcraft-input)
+ - [searchcraft-input-form](../searchcraft-input-form)
 
 ### Graph
 ```mermaid
 graph TD;
-  searchcraft-input --> searchcraft-input-label
+  searchcraft-input-form --> searchcraft-input-label
   style searchcraft-input-label fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

@@ -17,13 +17,13 @@
 ### Used by
 
  - [searchcraft-base-search-results](../searchcraft-base-search-results)
- - [searchcraft-input](../searchcraft-input)
+ - [searchcraft-input-form](../searchcraft-input-form)
 
 ### Graph
 ```mermaid
 graph TD;
   searchcraft-base-search-results --> searchcraft-error-message
-  searchcraft-input --> searchcraft-error-message
+  searchcraft-input-form --> searchcraft-error-message
   style searchcraft-error-message fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

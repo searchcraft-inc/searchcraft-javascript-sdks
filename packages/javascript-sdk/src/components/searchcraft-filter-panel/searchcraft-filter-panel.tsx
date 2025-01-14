@@ -9,11 +9,6 @@ import type {
 import { useSearchcraftStore } from '@provider/store';
 import { getMillis } from '@utils/utils';
 
-export interface ScInputCustomEvent<T> extends CustomEvent<T> {
-  detail: T;
-  target: HTMLSearchcraftInputElement;
-}
-
 @Component({
   tag: 'searchcraft-filter-panel',
   styleUrl: 'searchcraft-filter-panel.module.scss',
