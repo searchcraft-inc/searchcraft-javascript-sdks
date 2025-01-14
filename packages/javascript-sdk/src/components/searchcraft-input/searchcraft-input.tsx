@@ -23,13 +23,10 @@ export interface ScInputCustomEvent<T> extends CustomEvent<T> {
 export class SearchcraftInput {
   @Prop() customStyles: string | Record<string, string> = {};
   @Prop() error = false;
-  @Prop() inputCaptionClassName = '';
-  @Prop() inputCaptionValue = '';
+  @Prop() flex = true;
   @Prop() inputClassName = '';
-  @Prop() isRequesting = false;
   @Prop() placeholderValue = 'Enter Search';
   @Prop() query = '';
-  @Prop() flex = true;
 
   @Event() clearInput: EventEmitter<void>;
   @Event() inputChange: EventEmitter<string>;

@@ -2,16 +2,20 @@ import type { Meta, StoryObj } from '@storybook/react';
 import type { SearchResultMappings } from '@searchcraft/javascript-sdk';
 import { config } from '../../utils/DefaultSearchcraftConfig';
 import { useEffect } from 'react';
+import {
+  SearchcraftAutoSearchForm,
+  SearchcraftBaseSearchResults,
+} from '@searchcraft/react-sdk';
 
 const componentMeta: Meta = {
-  title: 'Javascript SDK/searchcraft-base-search-results',
+  title: 'React SDK/searchcraft-base-search-results',
   argTypes: {},
 };
 
 type ComponentProps = {
   adInterval: number;
   customStylesForResults: string | Record<string, Record<string, string>>;
-  searchResultMappings: string | undefined;
+  searchResultMappings: SearchResultMappings;
   placeAdAtEnd: boolean;
   placeAdAtStart: boolean;
   resultImagePlacement: 'left' | 'right';
@@ -20,6 +24,12 @@ type ComponentProps = {
   buttonRel: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
   containerTarget: '_blank' | '_self' | '_top' | '_parent';
   containerRel: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
+  clearInput: () => void;
+  config: string;
+  customStylesForInput: string;
+  inputCaptionValue: string;
+  labelForInput: string;
+  placeholderValue: string;
 };
 
 const mappings: SearchResultMappings = {
@@ -60,6 +70,26 @@ const mappings: SearchResultMappings = {
   },
 };
 
+const defaultProps: ComponentProps = {
+  adInterval: 4,
+  buttonRel: 'noreferrer',
+  buttonTarget: '_blank',
+  buttonLabel: 'View More',
+  containerRel: 'noreferrer',
+  containerTarget: '_blank',
+  customStylesForResults: '',
+  placeAdAtEnd: false,
+  placeAdAtStart: false,
+  resultImagePlacement: 'right',
+  searchResultMappings: mappings,
+  clearInput: () => {},
+  config: JSON.stringify(config),
+  customStylesForInput: '{}',
+  inputCaptionValue: 'Search',
+  labelForInput: 'Search for something:',
+  placeholderValue: 'Search here...',
+};
+
 export const Default: StoryObj<ComponentProps> = {
   decorators: [
     (Story) => {
@@ -85,23 +115,33 @@ export const Default: StoryObj<ComponentProps> = {
   render: (args) => {
     return (
       <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
-        <searchcraft-auto-search-form />
+        <SearchcraftAutoSearchForm
+          clearInput={args.clearInput}
+          config={config}
+          customStylesForInput={args.customStylesForInput || ''}
+          inputCaptionValue={args.inputCaptionValue || ''}
+          labelForInput={args.labelForInput || ''}
+          placeholderValue={args.placeholderValue || ''}
+        />
         <div style={{ paddingTop: 20 }}>
-          <searchcraft-base-search-results
-            ad-interval='4'
-            place-ad-at-end
-            place-ad-at-start
-            result-image-placement='right'
-            button-target='_blank'
-            button-rel='noreferrer'
-            container-target='_blank'
-            container-rel='noreferrer'
+          <SearchcraftBaseSearchResults
+            adInterval={args.adInterval}
+            buttonRel={args.buttonRel}
+            buttonTarget={args.buttonTarget}
+            buttonLabel={args.buttonLabel}
+            containerRel={args.containerRel}
+            containerTarget={args.containerTarget}
+            customStylesForResults={args.customStylesForResults}
+            placeAdAtEnd={args.placeAdAtEnd}
+            placeAdAtStart={args.placeAdAtStart}
+            resultImagePlacement={args.resultImagePlacement}
+            searchResultMappings={mappings}
           />
         </div>
       </div>
     );
   },
-  args: {},
+  args: defaultProps,
 };
 
 export default componentMeta;

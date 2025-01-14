@@ -27,14 +27,12 @@ import packageJson from '../../../package.json';
   shadow: false,
 })
 export class SearchcraftAutoSearchForm {
-  @Prop() autoSearchFormClass = '';
   @Prop() clearInput: () => void = () => {};
   @Prop() config: SearchcraftConfig | undefined;
   @Prop() customStylesForInput: string | Record<string, string> = {};
   @Prop() inputCaptionValue = '';
   @Prop() labelForInput = '';
   @Prop() placeholderValue = 'Search here';
-  @Prop() searchContainerClass = '';
 
   @Event() inputClearedOrNoResults: EventEmitter<void>;
   @Event() querySubmit: EventEmitter<string>;
