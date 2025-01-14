@@ -1,21 +1,14 @@
-searchcraft-input {
+.searchcraft-input-wrapper,
+.searchcraft-input,
+.searchcraft-input-label-wrapper,
+.searchcraft-input-button-wrapper,
+.searchcraft-input-form {
   display: flex;
   flex: 1;
 }
 
 .searchcraft-input-wrapper {
-  display: inline-block;
   position: relative;
-  cursor: text;
-}
-
-.searchcraft-input-wrapper-flex {
-  display: flex;
-  flex: 1;
-}
-
-.searchcraft-input-flex {
-  flex: 1;
 }
 
 .searchcraft-input {

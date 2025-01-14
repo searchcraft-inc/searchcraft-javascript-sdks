@@ -26,7 +26,7 @@
 
 ### Used by
 
- - [searchcraft-base-search-form](../searchcraft-base-search-form)
+ - [searchcraft-input](../searchcraft-input)
 
 ### Depends on
 
@@ -36,7 +36,7 @@
 ```mermaid
 graph TD;
   searchcraft-button --> searchcraft-spinner-dark
-  searchcraft-base-search-form --> searchcraft-button
+  searchcraft-input --> searchcraft-button
   style searchcraft-button fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

@@ -16,16 +16,14 @@
 
 ### Used by
 
- - [searchcraft-auto-search-form](../searchcraft-auto-search-form)
- - [searchcraft-base-search-form](../searchcraft-base-search-form)
  - [searchcraft-base-search-results](../searchcraft-base-search-results)
+ - [searchcraft-input](../searchcraft-input)
 
 ### Graph
 ```mermaid
 graph TD;
-  searchcraft-auto-search-form --> searchcraft-error-message
-  searchcraft-base-search-form --> searchcraft-error-message
   searchcraft-base-search-results --> searchcraft-error-message
+  searchcraft-input --> searchcraft-error-message
   style searchcraft-error-message fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

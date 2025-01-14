@@ -7,38 +7,36 @@
 
 ## Properties
 
-| Property          | Attribute          | Description | Type                | Default                                                      |
-| ----------------- | ------------------ | ----------- | ------------------- | ------------------------------------------------------------ |
-| `buttonLabel`     | `button-label`     |             | `string`            | `'Find'`                                                     |
-| `buttonPlacement` | `button-placement` |             | `"left" \| "right"` | `'right'`                                                    |
-| `config`          | --                 |             | `SearchcraftConfig` | `{     readKey: '',     endpointURL: '',     index: [],   }` |
-| `errorMessage`    | `error-message`    |             | `string`            | `'Search was unsuccessful'`                                  |
-| `inputLabel`      | `input-label`      |             | `string`            | `'Search'`                                                   |
+| Property           | Attribute           | Description | Type                | Default                     |
+| ------------------ | ------------------- | ----------- | ------------------- | --------------------------- |
+| `buttonLabel`      | `button-label`      |             | `string`            | `'Find'`                    |
+| `buttonPlacement`  | `button-placement`  |             | `"left" \| "right"` | `'right'`                   |
+| `config`           | --                  |             | `SearchcraftConfig` | `undefined`                 |
+| `errorMessage`     | `error-message`     |             | `string`            | `'Search was unsuccessful'` |
+| `inputLabel`       | `input-label`       |             | `string`            | `'Search'`                  |
+| `placeholderValue` | `placeholder-value` |             | `string`            | `'Search here'`             |
 
 
 ## Events
 
-| Event        | Description | Type               |
-| ------------ | ----------- | ------------------ |
-| `clearInput` |             | `CustomEvent<any>` |
+| Event          | Description | Type                |
+| -------------- | ----------- | ------------------- |
+| `inputCleared` |             | `CustomEvent<void>` |
 
 
 ## Dependencies
 
 ### Depends on
 
-- [searchcraft-input-label](../searchcraft-input-label)
-- [searchcraft-button](../searchcraft-button)
 - [searchcraft-input](../searchcraft-input)
-- [searchcraft-error-message](../searchcraft-error-message)
 
 ### Graph
 ```mermaid
 graph TD;
-  searchcraft-base-search-form --> searchcraft-input-label
-  searchcraft-base-search-form --> searchcraft-button
   searchcraft-base-search-form --> searchcraft-input
-  searchcraft-base-search-form --> searchcraft-error-message
+  searchcraft-input --> searchcraft-button
+  searchcraft-input --> searchcraft-input-label
+  searchcraft-input --> searchcraft-error-message
   searchcraft-button --> searchcraft-spinner-dark
   style searchcraft-base-search-form fill:#f9f,stroke:#333,stroke-width:4px
 ```

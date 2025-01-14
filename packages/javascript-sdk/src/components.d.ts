@@ -6,28 +6,29 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { SearchcraftConfig } from "@searchcraft/core";
-import { SearchResultMappings } from "./types/index";
+import { SearchcraftConfig as SearchcraftConfig1 } from "./components.d";
+import { PopoverResultMappings, SearchResultMappings } from "./types/index";
 import { FilterItem } from "./types/searchcraft-filter-panel.types";
 export { SearchcraftConfig } from "@searchcraft/core";
-export { SearchResultMappings } from "./types/index";
+export { SearchcraftConfig as SearchcraftConfig1 } from "./components.d";
+export { PopoverResultMappings, SearchResultMappings } from "./types/index";
 export { FilterItem } from "./types/searchcraft-filter-panel.types";
 export namespace Components {
     interface SearchcraftAutoSearchForm {
         "autoSearchFormClass": string;
-        "clearInput": () => void;
         "config": SearchcraftConfig | undefined;
         "customStylesForInput": string | Record<string, string>;
         "inputCaptionValue": string;
-        "labelForInput": string;
+        "inputLabel": string;
         "placeholderValue": string;
-        "searchContainerClass": string;
     }
     interface SearchcraftBaseSearchForm {
         "buttonLabel": string;
         "buttonPlacement": 'right' | 'left';
-        "config": SearchcraftConfig;
+        "config": SearchcraftConfig | undefined;
         "errorMessage": string;
         "inputLabel": string;
+        "placeholderValue": string;
     }
     interface SearchcraftBaseSearchResult {
         "bodyContent": string | undefined;
@@ -90,19 +91,53 @@ export namespace Components {
         "items": FilterItem[];
     }
     interface SearchcraftInput {
+        /**
+          * Whether or not to automatically submit the search term when the input changes.
+         */
+        "autoSearch": boolean;
+        /**
+          * The label for the submit button.
+         */
+        "buttonLabel": string | undefined;
+        /**
+          * Where to place the search button.
+         */
+        "buttonPlacement": 'left' | 'right' | 'none';
+        "config": SearchcraftConfig | undefined;
+        /**
+          * A custom styles object to be applied to the input element.
+         */
         "customStyles": string | Record<string, string>;
-        "error": boolean;
-        "flex": boolean;
-        "inputCaptionClassName": string;
-        "inputCaptionValue": string;
-        "inputClassName": string;
-        "isRequesting": boolean;
+        /**
+          * The duration to debounce the input's `inputChange` event.
+         */
+        "debounceDelay": number;
+        /**
+          * The label rendered above the input.
+         */
+        "inputLabel": string | undefined;
+        /**
+          * The input element's placeholder value.
+         */
         "placeholderValue": string;
-        "query": string;
+        /**
+          * The starting value of the input element.
+         */
+        "searchTerm": string;
     }
     interface SearchcraftInputLabel {
         "inputLabelClassName"?: string;
         "label"?: string;
+    }
+    interface SearchcraftPopoverForm {
+        "config": SearchcraftConfig | undefined;
+        "popoverResultMappings": PopoverResultMappings | undefined;
+        "type": 'inline' | 'fullscreen' | 'modal';
+    }
+    interface SearchcraftPopoverListView {
+        "popoverResultMappings": PopoverResultMappings | undefined;
+    }
+    interface SearchcraftPopoverResult {
     }
     interface SearchcraftResultsInfo {
     }
@@ -166,7 +201,7 @@ export interface SearchcraftToggleButtonCustomEvent<T> extends CustomEvent<T> {
 }
 declare global {
     interface HTMLSearchcraftAutoSearchFormElementEventMap {
-        "inputClearedOrNoResults": void;
+        "inputCleared": void;
         "querySubmit": string;
     }
     interface HTMLSearchcraftAutoSearchFormElement extends Components.SearchcraftAutoSearchForm, HTMLStencilElement {
@@ -184,7 +219,7 @@ declare global {
         new (): HTMLSearchcraftAutoSearchFormElement;
     };
     interface HTMLSearchcraftBaseSearchFormElementEventMap {
-        "clearInput": any;
+        "inputCleared": void;
     }
     interface HTMLSearchcraftBaseSearchFormElement extends Components.SearchcraftBaseSearchForm, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSearchcraftBaseSearchFormElementEventMap>(type: K, listener: (this: HTMLSearchcraftBaseSearchFormElement, ev: SearchcraftBaseSearchFormCustomEvent<HTMLSearchcraftBaseSearchFormElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -294,8 +329,10 @@ declare global {
         new (): HTMLSearchcraftFilterPanelElement;
     };
     interface HTMLSearchcraftInputElementEventMap {
-        "clearInput": void;
-        "inputChange": string;
+        "inputCleared": void;
+        "noResultsReceived": void;
+        "inputFocus": void;
+        "inputBlur": void;
     }
     interface HTMLSearchcraftInputElement extends Components.SearchcraftInput, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSearchcraftInputElementEventMap>(type: K, listener: (this: HTMLSearchcraftInputElement, ev: SearchcraftInputCustomEvent<HTMLSearchcraftInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -316,6 +353,24 @@ declare global {
     var HTMLSearchcraftInputLabelElement: {
         prototype: HTMLSearchcraftInputLabelElement;
         new (): HTMLSearchcraftInputLabelElement;
+    };
+    interface HTMLSearchcraftPopoverFormElement extends Components.SearchcraftPopoverForm, HTMLStencilElement {
+    }
+    var HTMLSearchcraftPopoverFormElement: {
+        prototype: HTMLSearchcraftPopoverFormElement;
+        new (): HTMLSearchcraftPopoverFormElement;
+    };
+    interface HTMLSearchcraftPopoverListViewElement extends Components.SearchcraftPopoverListView, HTMLStencilElement {
+    }
+    var HTMLSearchcraftPopoverListViewElement: {
+        prototype: HTMLSearchcraftPopoverListViewElement;
+        new (): HTMLSearchcraftPopoverListViewElement;
+    };
+    interface HTMLSearchcraftPopoverResultElement extends Components.SearchcraftPopoverResult, HTMLStencilElement {
+    }
+    var HTMLSearchcraftPopoverResultElement: {
+        prototype: HTMLSearchcraftPopoverResultElement;
+        new (): HTMLSearchcraftPopoverResultElement;
     };
     interface HTMLSearchcraftResultsInfoElement extends Components.SearchcraftResultsInfo, HTMLStencilElement {
     }
@@ -390,6 +445,9 @@ declare global {
         "searchcraft-filter-panel": HTMLSearchcraftFilterPanelElement;
         "searchcraft-input": HTMLSearchcraftInputElement;
         "searchcraft-input-label": HTMLSearchcraftInputLabelElement;
+        "searchcraft-popover-form": HTMLSearchcraftPopoverFormElement;
+        "searchcraft-popover-list-view": HTMLSearchcraftPopoverListViewElement;
+        "searchcraft-popover-result": HTMLSearchcraftPopoverResultElement;
         "searchcraft-results-info": HTMLSearchcraftResultsInfoElement;
         "searchcraft-search-icon-set": HTMLSearchcraftSearchIconSetElement;
         "searchcraft-slider": HTMLSearchcraftSliderElement;
@@ -401,23 +459,22 @@ declare global {
 declare namespace LocalJSX {
     interface SearchcraftAutoSearchForm {
         "autoSearchFormClass"?: string;
-        "clearInput"?: () => void;
         "config"?: SearchcraftConfig | undefined;
         "customStylesForInput"?: string | Record<string, string>;
         "inputCaptionValue"?: string;
-        "labelForInput"?: string;
-        "onInputClearedOrNoResults"?: (event: SearchcraftAutoSearchFormCustomEvent<void>) => void;
+        "inputLabel"?: string;
+        "onInputCleared"?: (event: SearchcraftAutoSearchFormCustomEvent<void>) => void;
         "onQuerySubmit"?: (event: SearchcraftAutoSearchFormCustomEvent<string>) => void;
         "placeholderValue"?: string;
-        "searchContainerClass"?: string;
     }
     interface SearchcraftBaseSearchForm {
         "buttonLabel"?: string;
         "buttonPlacement"?: 'right' | 'left';
-        "config"?: SearchcraftConfig;
+        "config"?: SearchcraftConfig | undefined;
         "errorMessage"?: string;
         "inputLabel"?: string;
-        "onClearInput"?: (event: SearchcraftBaseSearchFormCustomEvent<any>) => void;
+        "onInputCleared"?: (event: SearchcraftBaseSearchFormCustomEvent<void>) => void;
+        "placeholderValue"?: string;
     }
     interface SearchcraftBaseSearchResult {
         "bodyContent"?: string | undefined;
@@ -483,21 +540,57 @@ declare namespace LocalJSX {
         "items"?: FilterItem[];
     }
     interface SearchcraftInput {
+        /**
+          * Whether or not to automatically submit the search term when the input changes.
+         */
+        "autoSearch"?: boolean;
+        /**
+          * The label for the submit button.
+         */
+        "buttonLabel"?: string | undefined;
+        /**
+          * Where to place the search button.
+         */
+        "buttonPlacement"?: 'left' | 'right' | 'none';
+        "config"?: SearchcraftConfig | undefined;
+        /**
+          * A custom styles object to be applied to the input element.
+         */
         "customStyles"?: string | Record<string, string>;
-        "error"?: boolean;
-        "flex"?: boolean;
-        "inputCaptionClassName"?: string;
-        "inputCaptionValue"?: string;
-        "inputClassName"?: string;
-        "isRequesting"?: boolean;
-        "onClearInput"?: (event: SearchcraftInputCustomEvent<void>) => void;
-        "onInputChange"?: (event: SearchcraftInputCustomEvent<string>) => void;
+        /**
+          * The duration to debounce the input's `inputChange` event.
+         */
+        "debounceDelay"?: number;
+        /**
+          * The label rendered above the input.
+         */
+        "inputLabel"?: string | undefined;
+        "onInputBlur"?: (event: SearchcraftInputCustomEvent<void>) => void;
+        "onInputCleared"?: (event: SearchcraftInputCustomEvent<void>) => void;
+        "onInputFocus"?: (event: SearchcraftInputCustomEvent<void>) => void;
+        "onNoResultsReceived"?: (event: SearchcraftInputCustomEvent<void>) => void;
+        /**
+          * The input element's placeholder value.
+         */
         "placeholderValue"?: string;
-        "query"?: string;
+        /**
+          * The starting value of the input element.
+         */
+        "searchTerm"?: string;
     }
     interface SearchcraftInputLabel {
         "inputLabelClassName"?: string;
         "label"?: string;
+    }
+    interface SearchcraftPopoverForm {
+        "config"?: SearchcraftConfig | undefined;
+        "popoverResultMappings"?: PopoverResultMappings | undefined;
+        "type"?: 'inline' | 'fullscreen' | 'modal';
+    }
+    interface SearchcraftPopoverListView {
+        "popoverResultMappings"?: PopoverResultMappings | undefined;
+    }
+    interface SearchcraftPopoverResult {
     }
     interface SearchcraftResultsInfo {
     }
@@ -543,6 +636,9 @@ declare namespace LocalJSX {
         "searchcraft-filter-panel": SearchcraftFilterPanel;
         "searchcraft-input": SearchcraftInput;
         "searchcraft-input-label": SearchcraftInputLabel;
+        "searchcraft-popover-form": SearchcraftPopoverForm;
+        "searchcraft-popover-list-view": SearchcraftPopoverListView;
+        "searchcraft-popover-result": SearchcraftPopoverResult;
         "searchcraft-results-info": SearchcraftResultsInfo;
         "searchcraft-search-icon-set": SearchcraftSearchIconSet;
         "searchcraft-slider": SearchcraftSlider;
@@ -569,6 +665,9 @@ declare module "@stencil/core" {
             "searchcraft-filter-panel": LocalJSX.SearchcraftFilterPanel & JSXBase.HTMLAttributes<HTMLSearchcraftFilterPanelElement>;
             "searchcraft-input": LocalJSX.SearchcraftInput & JSXBase.HTMLAttributes<HTMLSearchcraftInputElement>;
             "searchcraft-input-label": LocalJSX.SearchcraftInputLabel & JSXBase.HTMLAttributes<HTMLSearchcraftInputLabelElement>;
+            "searchcraft-popover-form": LocalJSX.SearchcraftPopoverForm & JSXBase.HTMLAttributes<HTMLSearchcraftPopoverFormElement>;
+            "searchcraft-popover-list-view": LocalJSX.SearchcraftPopoverListView & JSXBase.HTMLAttributes<HTMLSearchcraftPopoverListViewElement>;
+            "searchcraft-popover-result": LocalJSX.SearchcraftPopoverResult & JSXBase.HTMLAttributes<HTMLSearchcraftPopoverResultElement>;
             "searchcraft-results-info": LocalJSX.SearchcraftResultsInfo & JSXBase.HTMLAttributes<HTMLSearchcraftResultsInfoElement>;
             "searchcraft-search-icon-set": LocalJSX.SearchcraftSearchIconSet & JSXBase.HTMLAttributes<HTMLSearchcraftSearchIconSetElement>;
             "searchcraft-slider": LocalJSX.SearchcraftSlider & JSXBase.HTMLAttributes<HTMLSearchcraftSliderElement>;

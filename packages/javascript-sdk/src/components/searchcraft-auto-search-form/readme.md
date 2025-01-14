@@ -10,37 +10,35 @@
 | Property               | Attribute                 | Description | Type                                 | Default         |
 | ---------------------- | ------------------------- | ----------- | ------------------------------------ | --------------- |
 | `autoSearchFormClass`  | `auto-search-form-class`  |             | `string`                             | `''`            |
-| `clearInput`           | --                        |             | `() => void`                         | `() => {}`      |
 | `config`               | --                        |             | `SearchcraftConfig`                  | `undefined`     |
 | `customStylesForInput` | `custom-styles-for-input` |             | `string \| { [x: string]: string; }` | `{}`            |
 | `inputCaptionValue`    | `input-caption-value`     |             | `string`                             | `''`            |
-| `labelForInput`        | `label-for-input`         |             | `string`                             | `''`            |
+| `inputLabel`           | `input-label`             |             | `string`                             | `''`            |
 | `placeholderValue`     | `placeholder-value`       |             | `string`                             | `'Search here'` |
-| `searchContainerClass` | `search-container-class`  |             | `string`                             | `''`            |
 
 
 ## Events
 
-| Event                     | Description | Type                  |
-| ------------------------- | ----------- | --------------------- |
-| `inputClearedOrNoResults` |             | `CustomEvent<void>`   |
-| `querySubmit`             |             | `CustomEvent<string>` |
+| Event          | Description | Type                  |
+| -------------- | ----------- | --------------------- |
+| `inputCleared` |             | `CustomEvent<void>`   |
+| `querySubmit`  |             | `CustomEvent<string>` |
 
 
 ## Dependencies
 
 ### Depends on
 
-- [searchcraft-input-label](../searchcraft-input-label)
 - [searchcraft-input](../searchcraft-input)
-- [searchcraft-error-message](../searchcraft-error-message)
 
 ### Graph
 ```mermaid
 graph TD;
-  searchcraft-auto-search-form --> searchcraft-input-label
   searchcraft-auto-search-form --> searchcraft-input
-  searchcraft-auto-search-form --> searchcraft-error-message
+  searchcraft-input --> searchcraft-button
+  searchcraft-input --> searchcraft-input-label
+  searchcraft-input --> searchcraft-error-message
+  searchcraft-button --> searchcraft-spinner-dark
   style searchcraft-auto-search-form fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
