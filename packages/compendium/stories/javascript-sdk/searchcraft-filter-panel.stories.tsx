@@ -11,13 +11,11 @@ import type {
 import { config } from '../../utils/DefaultSearchcraftConfig';
 import { useEffect } from 'react';
 
+import type { Components } from '@searchcraft/javascript-sdk';
+
 const componentMeta: Meta = {
   title: 'Javascript SDK/searchcraft-filter-panel',
   argTypes: {},
-};
-
-type ComponentProps = {
-  items: FilterItem[];
 };
 
 const today = new Date();
@@ -71,7 +69,7 @@ const facetItem: FacetsFilterItem = {
   },
 };
 
-const defaultProps: ComponentProps = {
+const defaultProps: Components.SearchcraftFilterPanel = {
   items: [
     exactMatchItem,
     mostRecentItem,
@@ -81,7 +79,7 @@ const defaultProps: ComponentProps = {
   ],
 };
 
-export const Default: StoryObj<ComponentProps> = {
+export const Default: StoryObj<Components.SearchcraftFilterPanel> = {
   decorators: [
     (Story) => {
       useEffect(() => {

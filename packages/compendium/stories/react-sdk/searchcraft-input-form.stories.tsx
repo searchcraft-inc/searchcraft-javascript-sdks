@@ -1,13 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import WebComponentWrapper from '../../utils/WebComponentWrapper';
+import {
+  SearchcraftInputForm,
+  type SearchcraftInputFormProps,
+} from '@searchcraft/react-sdk';
 import { config } from '../../utils/DefaultSearchcraftConfig';
 
-import type { Components } from '@searchcraft/javascript-sdk';
-
-const componentName = 'searchcraft-input-form';
-
 const componentMeta: Meta = {
-  title: 'Javascript SDK/searchcraft-input-form',
+  title: 'React SDK/searchcraft-input-form',
   argTypes: {
     config: {
       control: 'object',
@@ -51,9 +50,7 @@ const componentMeta: Meta = {
   },
 };
 
-export default componentMeta;
-
-const defaultProps: Components.SearchcraftInputForm = {
+const defaultProps: SearchcraftInputFormProps = {
   config: config,
   autoSearch: false,
   buttonPlacement: 'left',
@@ -65,47 +62,13 @@ const defaultProps: Components.SearchcraftInputForm = {
   debounceDelay: 0,
 };
 
-const buttonRightProps: Components.SearchcraftInputForm = {
-  config: config,
-  autoSearch: false,
-  buttonPlacement: 'right',
-  buttonLabel: 'Search',
-  inputLabel: 'Search here',
-  customStyles: {},
-  placeholderValue: 'Enter Search',
-  searchTerm: '',
-  debounceDelay: 0,
-};
-
-const autoSearchProps: Components.SearchcraftInputForm = {
-  config: config,
-  autoSearch: true,
-  buttonPlacement: 'none',
-  buttonLabel: undefined,
-  inputLabel: 'Start typing to auto search',
-  customStyles: {},
-  placeholderValue: 'Enter Search',
-  searchTerm: '',
-  debounceDelay: 0,
-};
-
-export const Default: StoryObj<Components.SearchcraftInputForm> = {
+export const Default: StoryObj<SearchcraftInputFormProps> = {
   render: (args) => (
-    <WebComponentWrapper args={args} componentName={componentName} />
+    <div style={{ display: 'flex' }}>
+      <SearchcraftInputForm {...args} />
+    </div>
   ),
   args: defaultProps,
 };
 
-export const ButtonRight: StoryObj<Components.SearchcraftInputForm> = {
-  render: (args) => (
-    <WebComponentWrapper args={args} componentName={componentName} />
-  ),
-  args: buttonRightProps,
-};
-
-export const AutoSearch: StoryObj<Components.SearchcraftInputForm> = {
-  render: (args) => (
-    <WebComponentWrapper args={args} componentName={componentName} />
-  ),
-  args: autoSearchProps,
-};
+export default componentMeta;

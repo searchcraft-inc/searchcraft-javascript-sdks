@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import WebComponentWrapper from '../../utils/WebComponentWrapper';
 
+import type { Components } from '@searchcraft/javascript-sdk';
+
 const componentName = 'searchcraft-results-info';
 
 const componentMeta: Meta = {
@@ -26,21 +28,14 @@ const componentMeta: Meta = {
   },
 };
 
-type ComponentProps = {
-  isRequesting?: boolean;
-  resultsCount?: number;
-  responseTime?: string;
-  query?: string;
-};
-
-const defaultProps: ComponentProps = {
+const defaultProps: Components.SearchcraftResultsInfo = {
   isRequesting: false,
   resultsCount: 12345,
   responseTime: '200.35',
   query: 'example query',
 };
 
-export const Default: StoryObj<ComponentProps> = {
+export const Default: StoryObj<Components.SearchcraftResultsInfo> = {
   render: (args) => (
     <WebComponentWrapper args={args} componentName={componentName} />
   ),

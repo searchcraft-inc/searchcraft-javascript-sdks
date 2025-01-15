@@ -1,5 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { SearchcraftSlider } from '@searchcraft/react-sdk';
+import {
+  SearchcraftSlider,
+  type SearchcraftSliderProps,
+} from '@searchcraft/react-sdk';
 
 const componentMeta: Meta = {
   title: 'React SDK/searchcraft-slider',
@@ -15,21 +18,14 @@ const componentMeta: Meta = {
   },
 };
 
-type ComponentProps = {
-  dataType: 'number' | 'date';
-  granularity: number;
-  max: number;
-  min: number;
-};
-
-const defaultProps: ComponentProps = {
+const defaultProps: SearchcraftSliderProps = {
   dataType: 'number',
   granularity: 0,
   max: 100,
   min: 0,
 };
 
-export const Default: StoryObj<ComponentProps> = {
+export const Default: StoryObj<SearchcraftSliderProps> = {
   render: (args) => (
     <SearchcraftSlider
       dataType={args.dataType}

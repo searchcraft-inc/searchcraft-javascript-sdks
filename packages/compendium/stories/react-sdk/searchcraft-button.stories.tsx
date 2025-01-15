@@ -1,5 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { SearchcraftButton } from '@searchcraft/react-sdk';
+import {
+  SearchcraftButton,
+  type SearchcraftButtonProps,
+} from '@searchcraft/react-sdk';
 
 const componentMeta: Meta = {
   title: 'React SDK/searchcraft-button',
@@ -19,19 +22,13 @@ const componentMeta: Meta = {
   },
 };
 
-type ComponentProps = {
-  iconOnly: boolean;
-  iconPosition: 'left' | 'right';
-  label: string;
-};
-
-const defaultProps: ComponentProps = {
+const defaultProps: SearchcraftButtonProps = {
   iconOnly: false,
   iconPosition: 'left',
   label: 'View Results',
 };
 
-export const Default: StoryObj<ComponentProps> = {
+export const Default: StoryObj<SearchcraftButtonProps> = {
   render: (args) => (
     <SearchcraftButton
       iconOnly={args.iconOnly}

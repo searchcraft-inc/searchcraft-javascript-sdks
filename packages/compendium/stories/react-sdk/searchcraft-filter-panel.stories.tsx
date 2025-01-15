@@ -8,7 +8,7 @@ import type {
   NumericFilterItem,
 } from '@searchcraft/javascript-sdk';
 import {
-  SearchcraftAutoSearchForm,
+  SearchcraftInputForm,
   SearchcraftFilterPanel,
 } from '@searchcraft/react-sdk';
 
@@ -101,9 +101,7 @@ export const Default: StoryObj<ComponentProps> = {
   decorators: [
     (Story) => {
       useEffect(() => {
-        const searchForm = document.querySelector(
-          'searchcraft-auto-search-form',
-        );
+        const searchForm = document.querySelector('searchcraft-input-form');
         const filterPanel = document.querySelector('searchcraft-filter-panel');
 
         if (searchForm) {
@@ -120,12 +118,15 @@ export const Default: StoryObj<ComponentProps> = {
   render: (args) => {
     return (
       <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
-        <SearchcraftAutoSearchForm
-          clearInput={args.clearInput}
+        <SearchcraftInputForm
+          autoSearch={true}
+          buttonLabel=''
+          buttonPlacement='none'
+          customStyles={args.customStylesForInput}
+          debounceDelay={0}
+          searchTerm=''
+          inputLabel=''
           config={config}
-          customStylesForInput={args.customStylesForInput || ''}
-          inputCaptionValue={args.inputCaptionValue || ''}
-          labelForInput={args.labelForInput || ''}
           placeholderValue={args.placeholderValue || ''}
         />
         <div style={{ paddingTop: 20 }}>

@@ -1,5 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { SearchcraftResultsInfo } from '@searchcraft/react-sdk';
+import {
+  SearchcraftResultsInfo,
+  type SearchcraftResultsInfoProps,
+} from '@searchcraft/react-sdk';
 
 const componentMeta: Meta = {
   title: 'React SDK/searchcraft-results-info',
@@ -24,14 +27,7 @@ const componentMeta: Meta = {
   },
 };
 
-type ComponentProps = {
-  isRequesting?: boolean;
-  resultsCount?: number;
-  responseTime?: string;
-  query?: string;
-};
-
-const defaultProps: ComponentProps = {
+const defaultProps: SearchcraftResultsInfoProps = {
   isRequesting: false,
   resultsCount: 12345,
   responseTime: '200.35',

@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import WebComponentWrapper from '../../utils/WebComponentWrapper';
 
+import type { Components } from '@searchcraft/javascript-sdk';
+
 const componentName = 'searchcraft-toggle-button';
 
 const componentMeta: Meta = {
@@ -15,17 +17,12 @@ const componentMeta: Meta = {
   },
 };
 
-type ComponentProps = {
-  label: string;
-  subLabel?: string;
-};
-
-const defaultProps: ComponentProps = {
+const defaultProps: Components.SearchcraftToggleButton = {
   label: 'My Toggle Label',
   subLabel: 'This is a sublabel that goes underneath the label.',
 };
 
-export const Default: StoryObj<ComponentProps> = {
+export const Default: StoryObj<Components.SearchcraftToggleButton> = {
   render: (args) => (
     <div style={{ paddingLeft: 100, paddingRight: 100, paddingTop: 20 }}>
       <WebComponentWrapper args={args} componentName={componentName} />

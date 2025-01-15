@@ -8,8 +8,6 @@
  * to consume components of this package as outlined in the `README.md`.
  */
 
-export type * from './components';
-
 export {
   parseCustomStyles,
   serializeStyles,
@@ -17,6 +15,6 @@ export {
 
 export { useSearchcraftStore, useThemeStore } from './provider/store';
 
-export { Components } from './components';
+export * from './components';
 
 export * from './types';

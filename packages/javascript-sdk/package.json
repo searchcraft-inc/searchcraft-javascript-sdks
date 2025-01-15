@@ -14,7 +14,8 @@
   "exports": {
     ".": {
       "import": "./dist/searchcraft-javascript-sdk/searchcraft-javascript-sdk.esm.js",
-      "require": "./dist/searchcraft-javascript-sdk/searchcraft-javascript-sdk.cjs.js"
+      "require": "./dist/searchcraft-javascript-sdk/searchcraft-javascript-sdk.cjs.js",
+      "types": "./dist/types/index.d.ts"
     },
     "./dist/*": {
       "import": "./dist/*",
@@ -47,6 +48,7 @@
   },
   "devDependencies": {
     "@searchcraft/core": "*",
+    "@searchcraft/javascript-sdk": "*",
     "@stencil/core": "^4.7.0",
     "@stencil/react-output-target": "^0.8.2",
     "@stencil/sass": "^3.0.12",

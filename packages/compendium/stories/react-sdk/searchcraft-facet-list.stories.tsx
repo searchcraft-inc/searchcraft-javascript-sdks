@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { SearchcraftFacetList } from '@searchcraft/react-sdk';
+import {
+  SearchcraftFacetList,
+  type SearchcraftFacetListProps,
+} from '@searchcraft/react-sdk';
 
 const componentMeta: Meta = {
   title: 'React SDK/searchcraft-facet-list',
@@ -12,15 +15,11 @@ const componentMeta: Meta = {
   },
 };
 
-type ComponentProps = {
-  fieldName: string;
-};
-
-const defaultProps: ComponentProps = {
+const defaultProps: SearchcraftFacetListProps = {
   fieldName: 'section',
 };
 
-export const Default: StoryObj<ComponentProps> = {
+export const Default: StoryObj<SearchcraftFacetListProps> = {
   render: (args) => <SearchcraftFacetList fieldName={args.fieldName} />,
   args: defaultProps,
 };
