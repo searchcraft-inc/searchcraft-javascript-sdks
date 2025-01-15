@@ -6,18 +6,16 @@ import {
   State,
   type EventEmitter,
 } from '@stencil/core';
-import classNames from 'classnames';
 
 import type { SearchcraftResponse } from '@searchcraft/core';
 
 import { useSearchcraftStore } from '@provider/store';
 
 import {
-  extractDynamicProperties,
-  getFormattedTimeFromNow,
-  parseSearchKeys,
+  getDocumentValueFromSearchResultMapping,
   serializeStyles,
 } from '@utils/utils';
+import type { SearchResultMappings } from 'types';
 
 @Component({
   tag: 'searchcraft-base-search-results',
@@ -28,14 +26,17 @@ export class SearchcraftBaseSearchResults {
   @Prop() adInterval = 4;
   @Prop() customStylesForResults:
     | string
-    | Record<string, Record<string, string>> = {};
-  @Prop() documentAttributesForDisplay = '';
-  @Prop() fallbackElement: HTMLElement | null = null;
-  @Prop() formatTime = true;
+    | Record<string, Record<string, string>>
+    | undefined;
+  @Prop() searchResultMappings: SearchResultMappings | undefined;
   @Prop() placeAdAtEnd = false;
   @Prop() placeAdAtStart = true;
-  @Prop() placeResultImageRight = false;
-  @Prop() isInteractive = false;
+  @Prop() resultImagePlacement: 'left' | 'right' = 'right';
+  @Prop() buttonLabel: string | undefined;
+  @Prop() buttonTarget: '_blank' | '_self' | '_top' | '_parent' = '_blank';
+  @Prop() buttonRel: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
+  @Prop() containerTarget: '_blank' | '_self' | '_top' | '_parent' = '_blank';
+  @Prop() containerRel: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
 
   @Event() noResults: EventEmitter<void>;
 
@@ -46,14 +47,6 @@ export class SearchcraftBaseSearchResults {
   private unsubscribe: () => void;
 
   componentDidLoad() {
-    if (
-      !this.documentAttributesForDisplay ||
-      this.documentAttributesForDisplay.length === 0
-    ) {
-      console.warn('No document attributes provided; using empty keys array.');
-      this.documentAttributesForDisplay = '';
-    }
-
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {
       if (state.query.length > 0) {
         this.hasSearched = true;
@@ -75,15 +68,70 @@ export class SearchcraftBaseSearchResults {
     }
   }
 
+  renderDocument(document: Record<string, unknown>, index: number) {
+    /**
+     * Index field values -> Result container props mappings.
+     */
+    const titleContent = getDocumentValueFromSearchResultMapping(
+      document,
+      this.searchResultMappings.title,
+    );
+    const subtitleContent = getDocumentValueFromSearchResultMapping(
+      document,
+      this.searchResultMappings.subtitle,
+    );
+    const bodyContent = getDocumentValueFromSearchResultMapping(
+      document,
+      this.searchResultMappings.body,
+    );
+    const containerHref = getDocumentValueFromSearchResultMapping(
+      document,
+      this.searchResultMappings.containerHref,
+    );
+    const buttonHref = getDocumentValueFromSearchResultMapping(
+      document,
+      this.searchResultMappings.buttonHref,
+    );
+    const imageSource = getDocumentValueFromSearchResultMapping(
+      document,
+      this.searchResultMappings.imageSource,
+    );
+    const footerContent = getDocumentValueFromSearchResultMapping(
+      document,
+      this.searchResultMappings.footer,
+    );
+
+    const serializedStyles =
+      typeof this.customStylesForResults === 'string'
+        ? this.customStylesForResults
+        : serializeStyles(this.customStylesForResults);
+
+    return (
+      <searchcraft-base-search-result
+        key={`${document.document_id}-${index}`}
+        custom-styles={serializedStyles}
+        image-placement={this.resultImagePlacement}
+        container-rel={this.containerRel}
+        container-target={this.containerTarget}
+        button-label={this.buttonLabel || 'View more'}
+        button-rel={this.buttonRel}
+        button-target={this.buttonTarget}
+        document-position={index}
+        title-content={titleContent}
+        subtitle-content={subtitleContent}
+        body-content={bodyContent}
+        footer-content={footerContent}
+        container-href={containerHref}
+        button-href={buttonHref}
+        image-src={imageSource}
+      />
+    );
+  }
+
   render() {
     if (this.query.trim() === '') {
       return (
-        <div
-          class={classNames(
-            'emptyState',
-            'searchcraft-search-results-empty-state-container',
-          )}
-        >
+        <div class='searchcraft-search-results-empty-state-container'>
           <slot name='empty-search' />
         </div>
       );
@@ -93,125 +141,62 @@ export class SearchcraftBaseSearchResults {
       return;
     }
 
-    const parsedSearchKeys = parseSearchKeys(this.documentAttributesForDisplay);
-    const serializedStyles =
-      typeof this.customStylesForResults === 'string'
-        ? this.customStylesForResults
-        : serializeStyles(this.customStylesForResults);
-
-    const resultsComponents = this.searchResults?.data?.hits?.map(
-      (document, index) => {
-        const { doc: result } = document;
-        const dynamicProperties = extractDynamicProperties(
-          result,
-          parsedSearchKeys,
-        );
-
-        if (this.formatTime) {
-          for (const key of parsedSearchKeys) {
-            if (dynamicProperties[key]) {
-              const value = dynamicProperties[key];
-              if (
-                typeof value === 'string' &&
-                !Number.isNaN(Date.parse(value))
-              ) {
-                dynamicProperties[key] = getFormattedTimeFromNow(value);
-              }
-            }
-          }
-        }
-
-        return (
-          <searchcraft-base-search-result
-            button-callback={() => console.log('button callback')}
-            custom-styles={serializedStyles}
-            image-source={dynamicProperties[parsedSearchKeys[5]]}
-            is-interactive={this.isInteractive}
-            key={`${document.document_id}-${index}`}
-            keydown-callback={() => console.log('keydown')}
-            linkHref={dynamicProperties[parsedSearchKeys[6]] as string}
-            place-image-right={this.placeResultImageRight}
-            primary-content={dynamicProperties[parsedSearchKeys[2]]}
-            result-callback={() => console.log('interactive element')}
-            secondary-content={dynamicProperties[parsedSearchKeys[3]]}
-            subtitle-content={dynamicProperties[parsedSearchKeys[1]]}
-            tertiary-content={dynamicProperties[parsedSearchKeys[4]]}
-            title-content={dynamicProperties[parsedSearchKeys[0]]}
-            document-position={index}
-          />
-        );
-      },
-    );
+    const documents: Record<string, unknown>[] =
+      this.searchResults?.data?.hits?.map((data, _index) => {
+        const { doc: result } = data;
+        return result;
+      });
 
     const finalComponents: JSX.Element[] = [];
 
     if (this.placeAdAtStart) {
       finalComponents.push(
-        <div
-          key='ad-section-start'
-          class={classNames(
-            'adSection',
-            'searchcraft-beginning-injected-ad-section',
-          )}
-        >
-          <p>Ad</p>
+        <div key='ad-section-start' class='searchcraft-ad-section'>
+          <p>Ad Section</p>
         </div>,
       );
     }
 
     if (this.adInterval > 0) {
-      resultsComponents.forEach((component, index) => {
-        finalComponents.push(component);
+      documents.forEach((document, index) => {
+        finalComponents.push(this.renderDocument(document, index));
+
         if ((index + 1) % this.adInterval === 0) {
           finalComponents.push(
             <div
               key={`ad-section-${index + 1}`}
-              class={classNames(
-                'adSection',
-                'searchcraft-dynamic-injected-ad-section',
-              )}
+              class='searchcraft-ad-section '
             >
-              <p>Ad</p>
+              <p>Ad Section</p>
             </div>,
           );
         }
       });
     } else {
-      finalComponents.push(...resultsComponents);
+      const documentElements = documents.map((document, index) =>
+        this.renderDocument(document, index),
+      );
+      finalComponents.push(...documentElements);
     }
 
     if (this.placeAdAtEnd) {
       finalComponents.push(
-        <div
-          key='ad-section-end'
-          class={classNames('adSection', 'searchcraft-end-injected-ad-section')}
-        >
-          <p>Ad</p>
+        <div key='ad-section-end' class='searchcraft-ad-section'>
+          <p>Ad Section</p>
         </div>,
       );
     }
 
     if (this.query.length > 0 && this.searchResults?.data?.hits?.length === 0) {
-      console.log();
       this.noResults.emit();
     }
 
     return (
-      <div
-        class={classNames(
-          'resultsContainer',
-          'searchcraft-search-results-container',
-        )}
-      >
+      <div class='searchcraft-search-results-container'>
         {finalComponents}
         {this.query.length > 0 &&
           this.searchResults?.data?.hits?.length === 0 && (
-            <div
-              class={classNames(
-                'errorMessageContainer',
-                'searchcraft-search-results-error-message-container',
-              )}
-            >
+            <div class='searchcraft-search-results-error-message-container'>
               <searchcraft-error-message
                 error-message={`No search results found for "${this.query}" query`}
               />

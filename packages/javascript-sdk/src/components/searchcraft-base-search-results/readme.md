@@ -7,17 +7,19 @@
 
 ## Properties
 
-| Property                       | Attribute                         | Description | Type                                                 | Default |
-| ------------------------------ | --------------------------------- | ----------- | ---------------------------------------------------- | ------- |
-| `adInterval`                   | `ad-interval`                     |             | `number`                                             | `4`     |
-| `customStylesForResults`       | `custom-styles-for-results`       |             | `string \| { [x: string]: Record<string, string>; }` | `{}`    |
-| `documentAttributesForDisplay` | `document-attributes-for-display` |             | `string`                                             | `''`    |
-| `fallbackElement`              | --                                |             | `HTMLElement`                                        | `null`  |
-| `formatTime`                   | `format-time`                     |             | `boolean`                                            | `true`  |
-| `isInteractive`                | `is-interactive`                  |             | `boolean`                                            | `false` |
-| `placeAdAtEnd`                 | `place-ad-at-end`                 |             | `boolean`                                            | `false` |
-| `placeAdAtStart`               | `place-ad-at-start`               |             | `boolean`                                            | `true`  |
-| `placeResultImageRight`        | `place-result-image-right`        |             | `boolean`                                            | `false` |
+| Property                 | Attribute                   | Description | Type                                                                                                                                                                                                                                   | Default     |
+| ------------------------ | --------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| `adInterval`             | `ad-interval`               |             | `number`                                                                                                                                                                                                                               | `4`         |
+| `buttonLabel`            | `button-label`              |             | `string`                                                                                                                                                                                                                               | `undefined` |
+| `buttonRel`              | `button-rel`                |             | `"nofollow" \| "noopener" \| "noreferrer"`                                                                                                                                                                                             | `undefined` |
+| `buttonTarget`           | `button-target`             |             | `"_blank" \| "_parent" \| "_self" \| "_top"`                                                                                                                                                                                           | `'_blank'`  |
+| `containerRel`           | `container-rel`             |             | `"nofollow" \| "noopener" \| "noreferrer"`                                                                                                                                                                                             | `undefined` |
+| `containerTarget`        | `container-target`          |             | `"_blank" \| "_parent" \| "_self" \| "_top"`                                                                                                                                                                                           | `'_blank'`  |
+| `customStylesForResults` | `custom-styles-for-results` |             | `string \| { [x: string]: Record<string, string>; }`                                                                                                                                                                                   | `undefined` |
+| `placeAdAtEnd`           | `place-ad-at-end`           |             | `boolean`                                                                                                                                                                                                                              | `false`     |
+| `placeAdAtStart`         | `place-ad-at-start`         |             | `boolean`                                                                                                                                                                                                                              | `true`      |
+| `resultImagePlacement`   | `result-image-placement`    |             | `"left" \| "right"`                                                                                                                                                                                                                    | `'right'`   |
+| `searchResultMappings`   | --                          |             | `{ body?: SearchResultMapping; buttonHref?: SearchResultMapping; containerHref?: SearchResultMapping; footer?: SearchResultMapping; imageSource?: SearchResultMapping; subtitle?: SearchResultMapping; title?: SearchResultMapping; }` | `undefined` |
 
 
 ## Events

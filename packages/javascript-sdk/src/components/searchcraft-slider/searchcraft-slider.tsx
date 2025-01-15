@@ -6,9 +6,8 @@ import {
   State,
   Prop,
 } from '@stencil/core';
+import { getMillis } from '@utils/utils';
 import classNames from 'classnames';
-
-import { useSearchcraftStore } from '@provider/store';
 
 @Component({
   tag: 'searchcraft-slider',
@@ -16,95 +15,78 @@ import { useSearchcraftStore } from '@provider/store';
   shadow: false,
 })
 export class SearchcraftSlider {
-  @Prop() maxYear = new Date().getFullYear();
-  @Prop() minYear = 2014;
+  @Prop() max = 100;
+  @Prop() min = 0;
+  @Prop() granularity: number = getMillis('month');
+  @Prop() dataType: 'number' | 'date' = 'number';
 
-  @State() endYear = this.maxYear;
-  @State() hasSearched = false;
-  @State() query = '';
-  @State() resultsCount = 0;
-  @State() startYear = this.minYear;
+  @State() endValue = this.max;
+  @State() startValue = this.min;
+  @State() lastFocusedHandle: 'min' | 'max' = 'max';
 
-  @Event() rangeChanged: EventEmitter<{ startYear: number; endYear: number }>;
-
-  private searchStore = useSearchcraftStore.getState();
-
-  unsubscribe: () => void;
+  @Event() rangeChanged: EventEmitter<{ startValue: number; endValue: number }>;
 
   componentDidLoad() {
-    this.unsubscribe = useSearchcraftStore.subscribe((state) => {
-      if (state.query.length > 0) {
-        this.hasSearched = true;
-        this.resultsCount = state.searchResults?.data?.hits?.length || 0;
-      }
-      this.query = state.query;
-    });
+    this.startValue = this.min;
+    this.endValue = this.max;
   }
 
-  disconnectedCallback() {
-    if (this.unsubscribe) {
-      this.unsubscribe();
-    }
-  }
-
-  private updateYears = async () => {
-    this.searchStore.setYearsRange([this.startYear, this.endYear]);
+  private emitUpdate = async () => {
     this.rangeChanged.emit({
-      startYear: this.startYear,
-      endYear: this.endYear,
+      startValue: this.startValue,
+      endValue: this.endValue,
     });
+  };
 
-    try {
-      if (typeof this.query === 'string' && this.query.trim() !== '') {
-        await this.searchStore.search();
-      } else {
-        console.warn('Query is missing or empty, skipping search request.');
-      }
-    } catch (error) {
-      console.error('Search failed:', error);
+  private handleStartValueChange = (event: InputEvent) => {
+    const inputElement = event.target as HTMLInputElement;
+    const value = Number.parseInt(inputElement.value, 10);
+    this.lastFocusedHandle = 'min';
+    if (value <= this.endValue) {
+      this.startValue = value;
+      this.emitUpdate();
+    } else {
+      this.startValue = this.endValue;
+      inputElement.value = `${this.endValue}`;
     }
   };
 
-  private handleStartYearChange = (event: InputEvent) => {
-    const value = Number.parseInt((event.target as HTMLInputElement).value, 10);
-    if (value <= this.endYear) {
-      this.startYear = value;
-      this.updateYears();
-    }
-  };
-
-  private handleEndYearChange = (event: InputEvent) => {
-    const value = Number.parseInt((event.target as HTMLInputElement).value, 10);
-    if (value >= this.startYear) {
-      this.endYear = value;
-      this.updateYears();
+  private handleEndValueChange = (event: InputEvent) => {
+    const inputElement = event.target as HTMLInputElement;
+    const value = Number.parseInt(inputElement.value, 10);
+    this.lastFocusedHandle = 'max';
+    if (value >= this.startValue) {
+      this.endValue = value;
+      this.emitUpdate();
+    } else {
+      this.endValue = this.startValue;
+      inputElement.value = `${this.startValue}`;
     }
   };
 
   render() {
-    if (!this.query || this.resultsCount === 0) {
-      return null;
-    }
-
-    const rangeMin = this.minYear;
-    const rangeMax = this.maxYear;
+    const rangeMin = this.min;
+    const rangeMax = this.max;
     const startPercent =
-      ((this.startYear - rangeMin) / (rangeMax - rangeMin)) * 100;
+      ((this.startValue - rangeMin) / (rangeMax - rangeMin)) * 100;
     const endPercent =
-      ((this.endYear - rangeMin) / (rangeMax - rangeMin)) * 100;
+      ((this.endValue - rangeMin) / (rangeMax - rangeMin)) * 100;
+
+    const startLabel =
+      this.dataType === 'number'
+        ? this.startValue
+        : new Date(this.startValue).getFullYear();
+
+    const endLabel =
+      this.dataType === 'number'
+        ? this.endValue
+        : new Date(this.endValue).getFullYear();
 
     return (
-      <div
-        class={classNames('sliderContainer', 'searchcraft-slider-container')}
-      >
-        <div
-          class={classNames(
-            'rangeContainer',
-            'searchcraft-slider-range-container',
-          )}
-        >
+      <div class='searchcraft-slider-container'>
+        <div class='searchcraft-slider-range-container'>
           <div
-            class={classNames('activeRange', 'searchcraft-slider-active-range')}
+            class='searchcraft-slider-active-range'
             style={{
               left: `${startPercent}%`,
               width: `${endPercent - startPercent}%`,
@@ -112,48 +94,34 @@ export class SearchcraftSlider {
           />
           <input
             class={classNames(
-              'rangeSlider',
-              'searchcraft-slider-range-slider-start-thumb',
+              'searchcraft-slider-input',
+              'searchcraft-slider-input-min-handle',
             )}
-            max={this.maxYear}
-            min={this.minYear}
-            onInput={this.handleStartYearChange}
-            step='1'
+            max={this.max}
+            min={this.min}
+            onInput={this.handleStartValueChange.bind(this)}
+            step={this.granularity}
+            style={{ zIndex: this.lastFocusedHandle === 'min' ? '2' : '1' }}
             type='range'
-            value={this.startYear}
+            value={this.startValue}
           />
           <input
             class={classNames(
-              'rangeSlider',
-              'searchcraft-slider-range-slider-end-thumb',
+              'searchcraft-slider-input',
+              'searchcraft-slider-input-max-handle',
             )}
-            max={this.maxYear}
-            min={this.minYear}
-            onInput={this.handleEndYearChange}
-            step='1'
+            max={this.max}
+            min={this.min}
+            onInput={this.handleEndValueChange.bind(this)}
+            step={this.granularity}
+            style={{ zIndex: this.lastFocusedHandle === 'max' ? '2' : '1' }}
             type='range'
-            value={this.endYear}
+            value={this.endValue}
           />
         </div>
-        <div
-          class={classNames(
-            'yearLabels',
-            'searchcraft-slider-year-label-container',
-          )}
-        >
-          <span
-            class={classNames(
-              'yearLabel',
-              'searchcraft-slider-start-year-label',
-            )}
-          >
-            {this.startYear}
-          </span>
-          <span
-            class={classNames('yearLabel', 'searchcraft-slider-end-year-label')}
-          >
-            {this.endYear}
-          </span>
+        <div class='searchcraft-slider-label-container'>
+          <span class='searchcraft-slider-label'>{startLabel}</span>
+          <span class='searchcraft-slider-label'>{endLabel}</span>
         </div>
       </div>
     );

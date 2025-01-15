@@ -6,44 +6,30 @@ const componentName = 'searchcraft-toggle-button';
 const componentMeta: Meta = {
   title: 'Javascript SDK/searchcraft-toggle-button',
   argTypes: {
-    type: {
-      control: 'select',
-      options: ['mode', 'sort'],
-      description:
-        "Type of the toggle. 'mode' toggles between 'fuzzy' and 'normal', while 'sort' toggles between 'asc' and 'desc'.",
-    },
-    isActive: {
-      control: 'boolean',
-      description: 'Whether the toggle is active.',
-    },
-    query: {
+    label: {
       control: 'text',
-      description: 'The current search query.',
     },
-    resultsCount: {
-      control: 'number',
-      description: 'The number of search results.',
+    subLabel: {
+      control: 'text',
     },
   },
 };
 
 type ComponentProps = {
-  type?: 'mode' | 'sort';
-  isActive?: boolean;
-  query?: string;
-  resultsCount?: number;
+  label: string;
+  subLabel?: string;
 };
 
 const defaultProps: ComponentProps = {
-  type: 'mode',
-  isActive: false,
-  query: 'example query',
-  resultsCount: 123,
+  label: 'My Toggle Label',
+  subLabel: 'This is a sublabel that goes underneath the label.',
 };
 
 export const Default: StoryObj<ComponentProps> = {
   render: (args) => (
-    <WebComponentWrapper args={args} componentName={componentName} />
+    <div style={{ paddingLeft: 100, paddingRight: 100, paddingTop: 20 }}>
+      <WebComponentWrapper args={args} componentName={componentName} />
+    </div>
   ),
   args: defaultProps,
 };

@@ -20,7 +20,7 @@ const WebComponentWrapper: FC<WebComponentWrapperProps> = (props) => {
   const Component = props.componentName;
 
   useEffect(() => {
-    if (ref.current) {
+    if (ref.current && props.args) {
       Object.assign(ref.current, props.args);
     }
   }, [props.args]);

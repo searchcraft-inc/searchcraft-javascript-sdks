@@ -5,39 +5,39 @@ import {
   SDKDebugger,
   LogLevel,
   type SearchcraftResponse,
-  type Facets,
+  type FacetPrime,
+  type FacetPathsForIndexField,
+  type RangeValueForIndexField,
 } from '@searchcraft/core';
-
-import { filterPaths } from '@utils/utils';
 
 interface ThemeState {
   theme: 'light' | 'dark';
   toggleTheme: () => void;
 }
 
-interface SearchParams {
-  mode: 'fuzzy' | 'normal';
-  sort: 'asc' | 'desc';
-  yearsRange?: [number, number];
-}
-
-interface SearchcraftState {
-  facets: Facets | null;
+export interface SearchcraftState {
+  resetFacetPaths: () => void;
+  addFacetPathsForIndexField: (data: FacetPathsForIndexField) => void;
+  removeFacetPathsForIndexField: (fieldName: string) => void;
+  addRangeValueForIndexField: (data: RangeValueForIndexField) => void;
+  removeRangeValueForIndexField: (fieldName: string) => void;
+  setSearchMode: (mode: 'fuzzy' | 'normal') => void;
+  setSortType: (type: 'asc' | 'desc') => void;
+  facetPathsForIndexFields: Record<string, FacetPathsForIndexField>;
+  rangeValueForIndexFields: Record<string, RangeValueForIndexField>;
+  searchMode: 'fuzzy' | 'normal';
+  sortType: 'asc' | 'desc';
+  facets: FacetPrime | null;
   getSearchcraftInstance: () => SearchcraftCore | null;
   initialize: (searchcraft: SearchcraftCore, debug?: boolean) => void;
   isRequesting: boolean;
   query: string;
   search: () => Promise<void>;
-  searchParams: SearchParams;
   searchResults: SearchcraftResponse | null;
-  selectedFilters: string[]; // Add this to store selected filters
-  setFacets: (facets: Facets) => void;
+  setFacets: (facets: FacetPrime) => void;
   setIsRequesting: (isRequesting: boolean) => void;
   setQuery: (query: string) => void;
-  setSearchParams: (params: Partial<SearchParams>) => void;
   setSearchResults: (results: SearchcraftResponse | null) => void;
-  setSelectedFilters: (filters: string[]) => void; // Update selected filters
-  setYearsRange: (yearsRange: [number, number]) => void;
 }
 
 // Zustand store for Searchcraft state
@@ -65,72 +65,102 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
   };
 
   return {
+    resetFacetPaths: () => {
+      set({
+        facetPathsForIndexFields: {},
+      });
+    },
+    addFacetPathsForIndexField: (data: FacetPathsForIndexField) =>
+      set((state) => ({
+        facetPathsForIndexFields: {
+          ...state.facetPathsForIndexFields,
+          [data.fieldName]: data,
+        },
+      })),
+    removeFacetPathsForIndexField: (fieldName: string) =>
+      set((state) => {
+        const currentPaths = state.facetPathsForIndexFields;
+        delete currentPaths[fieldName];
+        return {
+          facetPathsForIndexFields: {
+            ...currentPaths,
+          },
+        };
+      }),
+    addRangeValueForIndexField: (data: RangeValueForIndexField) =>
+      set((state) => ({
+        rangeValueForIndexFields: {
+          ...state.rangeValueForIndexFields,
+          [data.fieldName]: data,
+        },
+      })),
+    removeRangeValueForIndexField: (fieldName: string) =>
+      set((state) => {
+        const currentValues = state.rangeValueForIndexFields;
+        delete currentValues[fieldName];
+        return {
+          rangeValueForIndexFields: {
+            ...currentValues,
+          },
+        };
+      }),
+    setSearchMode: (mode) => set({ searchMode: mode }),
+    setSortType: (type) => set({ sortType: type }),
+    searchMode: 'fuzzy',
+    sortType: 'asc',
+    facetPathsForIndexFields: {},
+    rangeValueForIndexFields: {},
     query: '',
     isRequesting: false,
     searchResults: null,
     facets: null,
     getSearchcraftInstance: () => searchcraft,
-    selectedFilters: [],
-    searchParams: {
-      mode: 'fuzzy',
-      sort: 'asc',
+    setQuery: (query) => {
+      /**
+       * When a new query is set, also reset the sort type, search mode, and facet paths.
+       */
+      set({
+        query,
+        facetPathsForIndexFields: {},
+        ...(query.trim().length === 0 && {
+          searchMode: 'fuzzy',
+          sortType: 'asc',
+        }),
+      });
     },
-    setQuery: (query) => set({ query }),
     setSearchResults: (results) => set({ searchResults: results }),
     setFacets: (facets) => set({ facets }),
-    setSelectedFilters: (filters) => set({ selectedFilters: filters }),
     setIsRequesting: (isRequesting) => set({ isRequesting }),
-    setSearchParams: (params) =>
-      set((state) => ({
-        searchParams: {
-          ...state.searchParams,
-          ...params,
-        },
-      })),
-    setYearsRange: (yearsRange) =>
-      set((state) => ({
-        searchParams: {
-          ...state.searchParams,
-          yearsRange,
-        },
-      })),
     search: async () => {
-      const {
-        query,
-        selectedFilters,
-        setIsRequesting,
-        setSearchResults,
-        setFacets,
-        searchParams,
-      } = get();
+      const state = get();
+      log(LogLevel.INFO, `Starting search with search term: "${state.query}"`);
+
       if (!searchcraft) {
         throw new Error('Searchcraft instance is not initialized.');
       }
-      setIsRequesting(true);
-      log(LogLevel.INFO, `Starting search with query: "${query}"`);
-      const filters = filterPaths(selectedFilters);
-      try {
-        const searchRequest = {
-          query,
-          mode: searchParams.mode,
-          sort: searchParams.sort,
-          facets:
-            selectedFilters.length > 0
-              ? {
-                  section: {
-                    counts: Object.fromEntries(
-                      filters.map((path) => [path, 1]),
-                    ),
-                  },
-                }
-              : null,
-          yearsRange: searchParams.yearsRange,
-        };
 
-        const results = await searchcraft.search(searchRequest);
-        setSearchResults(results);
+      if (!state.query.trim()) {
+        log(
+          LogLevel.INFO,
+          'No search request was made: search term was empty.',
+        );
+        state.setSearchResults(null);
+        return;
+      }
+
+      state.setIsRequesting(true);
+      try {
+        const results = await searchcraft.search({
+          query: state.query,
+          mode: state.searchMode,
+          sort: state.sortType,
+          facetPathsForIndexFields: state.facetPathsForIndexFields,
+          rangeValueForIndexFields: state.rangeValueForIndexFields,
+        });
         const updatedFacets = results.data.facets || null;
-        setFacets(updatedFacets);
+
+        state.setSearchResults(results);
+        state.setFacets(updatedFacets);
 
         log(LogLevel.DEBUG, `Search results: ${JSON.stringify(results)}`);
         log(LogLevel.DEBUG, `Updated facets: ${JSON.stringify(updatedFacets)}`);
@@ -141,7 +171,7 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
           `Search failed with error: ${(error as Error).message}`,
         );
       } finally {
-        setIsRequesting(false);
+        state.setIsRequesting(false);
       }
     },
     initialize: (searchcraftInstance, debug = false) => {

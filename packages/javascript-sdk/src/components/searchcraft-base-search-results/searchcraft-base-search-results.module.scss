@@ -1,46 +1,31 @@
-.resultsContainer {
+.searchcraft-search-results-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 16px 0;
-
-  & > p {
-    align-self: center;
-  }
-
-  & > div {
-    margin-bottom: 20px;
-    img {
-      height: 300px;
-      width: 200px;
-    }
-  }
+  gap: 16px;
 }
 
-.adSection {
+.searchcraft-ad-section {
   align-items: center;
   background-color: #F1F1F1;
-  border: 1px solid #DCDDDE;
   border-radius: 16px;
   display: flex;
   flex-direction: column;
   font-size: 16px;
   justify-content: center;
-  margin: auto;
-  min-height: 150px;
+  min-height: 176px;
   text-align: center;
-  width: 100%;
 
   p {
-    margin-top: 5px;
+    margin: 0;
+    color: var(--sc-content-disabled);
   }
 }
 
-.emptyState {
+.searchcraft-search-results-empty-state-container {
   text-align: center;
-  width: 100%;
 }
 
-.errorMessageContainer {
+.searchcraft-search-results-error-message-container {
   text-align: center;
 }

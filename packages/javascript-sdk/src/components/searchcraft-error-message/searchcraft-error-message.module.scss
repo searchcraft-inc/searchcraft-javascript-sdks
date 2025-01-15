@@ -1,17 +1,5 @@
-@mixin error-message-base {
-  font-family: var(--sc-font-family);
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 16px;
-  margin-top: 4px;
-}
-
-.errorMessageLight {
-  @include error-message-base;
+.searchcraft-error-message {
+  @include body-small();
   color: var(--sc-content-danger);
-}
-
-.errorMessageDark {
-  @include error-message-base;
-  color: var(--sc-surface-danger-secondary-active);
+  margin: 0;
 }
