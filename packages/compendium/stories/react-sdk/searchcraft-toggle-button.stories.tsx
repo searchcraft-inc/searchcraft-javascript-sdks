@@ -1,5 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { SearchcraftToggleButton } from '@searchcraft/react-sdk';
+import {
+  SearchcraftToggleButton,
+  type SearchcraftToggleButtonProps,
+} from '@searchcraft/react-sdk';
 
 const componentMeta: Meta = {
   title: 'React SDK/searchcraft-toggle-button',
@@ -15,17 +18,12 @@ const componentMeta: Meta = {
   },
 };
 
-type ComponentProps = {
-  label: string;
-  subLabel: string;
-};
-
-const defaultProps: ComponentProps = {
+const defaultProps: SearchcraftToggleButtonProps = {
   subLabel: '',
   label: 'Toggle Label',
 };
 
-export const Default: StoryObj<ComponentProps> = {
+export const Default: StoryObj<SearchcraftToggleButtonProps> = {
   render: (args) => (
     <SearchcraftToggleButton label={args.label} subLabel={args.subLabel} />
   ),

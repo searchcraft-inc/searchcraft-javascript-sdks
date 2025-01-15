@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import WebComponentWrapper from '../../utils/WebComponentWrapper';
+import type { Components } from '@searchcraft/javascript-sdk';
 
 const componentName = 'searchcraft-button';
 
@@ -32,25 +33,14 @@ const componentMeta: Meta = {
   },
 };
 
-type ComponentProps = {
-  iconElement?: Element;
-  iconOnly?: boolean;
-  iconPosition?: 'left' | 'right';
-  label?: string;
-  theme?: 'light' | 'dark';
-  isRequesting?: boolean;
-};
-
-const defaultProps: ComponentProps = {
+const defaultProps: Components.SearchcraftButton = {
   iconElement: undefined,
   iconOnly: false,
   iconPosition: 'left',
   label: 'Search',
-  theme: 'light',
-  isRequesting: false,
 };
 
-export const Default: StoryObj<ComponentProps> = {
+export const Default: StoryObj<Components.SearchcraftButton> = {
   render: (args) => (
     <WebComponentWrapper args={args} componentName={componentName} />
   ),

@@ -1,5 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { SearchcraftBaseSearchResult } from '@searchcraft/react-sdk';
+import {
+  SearchcraftBaseSearchResult,
+  type SearchcraftBaseSearchResultProps,
+} from '@searchcraft/react-sdk';
 
 const componentMeta: Meta = {
   title: 'React SDK/searchcraft-base-search-result',
@@ -52,26 +55,7 @@ const componentMeta: Meta = {
   },
 };
 
-type ComponentProps = {
-  titleContent: string | undefined;
-  subtitleContent: string | undefined;
-  bodyContent: string | undefined;
-  footerContent: string | undefined;
-  buttonLabel: string | undefined;
-  buttonHref: string | undefined;
-  buttonTarget: '_blank' | '_self' | '_top' | '_parent';
-  buttonRel: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
-  containerHref: string | undefined;
-  containerTarget: '_blank' | '_self' | '_top' | '_parent';
-  containerRel: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
-  customStyles: string | undefined;
-  imageAlt: string | undefined;
-  imageSrc: string | undefined;
-  imagePlacement?: 'left' | 'right';
-  documentPosition?: number;
-};
-
-const defaultProps: ComponentProps = {
+const defaultProps: SearchcraftBaseSearchResultProps = {
   titleContent: 'Example Title',
   subtitleContent: 'Example Subtitle',
   bodyContent: 'This is the primary content.',
@@ -90,7 +74,7 @@ const defaultProps: ComponentProps = {
   documentPosition: 1,
 };
 
-export const Default: StoryObj<ComponentProps> = {
+export const Default: StoryObj<SearchcraftBaseSearchResultProps> = {
   render: (args) => (
     <SearchcraftBaseSearchResult
       bodyContent={args.bodyContent}

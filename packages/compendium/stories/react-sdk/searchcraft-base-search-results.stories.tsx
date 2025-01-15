@@ -3,7 +3,7 @@ import type { SearchResultMappings } from '@searchcraft/javascript-sdk';
 import { config } from '../../utils/DefaultSearchcraftConfig';
 import { useEffect } from 'react';
 import {
-  SearchcraftAutoSearchForm,
+  SearchcraftInputForm,
   SearchcraftBaseSearchResults,
 } from '@searchcraft/react-sdk';
 
@@ -94,9 +94,7 @@ export const Default: StoryObj<ComponentProps> = {
   decorators: [
     (Story) => {
       useEffect(() => {
-        const searchForm = document.querySelector(
-          'searchcraft-auto-search-form',
-        );
+        const searchForm = document.querySelector('searchcraft-input-form');
         const searchResults = document.querySelector(
           'searchcraft-base-search-results',
         );
@@ -115,12 +113,15 @@ export const Default: StoryObj<ComponentProps> = {
   render: (args) => {
     return (
       <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
-        <SearchcraftAutoSearchForm
-          clearInput={args.clearInput}
+        <SearchcraftInputForm
+          autoSearch={true}
+          buttonLabel=''
+          buttonPlacement='none'
+          customStyles={args.customStylesForInput}
+          debounceDelay={0}
+          searchTerm=''
+          inputLabel=''
           config={config}
-          customStylesForInput={args.customStylesForInput || ''}
-          inputCaptionValue={args.inputCaptionValue || ''}
-          labelForInput={args.labelForInput || ''}
           placeholderValue={args.placeholderValue || ''}
         />
         <div style={{ paddingTop: 20 }}>
