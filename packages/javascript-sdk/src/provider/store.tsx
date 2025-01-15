@@ -122,8 +122,10 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
       set({
         query,
         facetPathsForIndexFields: {},
-        searchMode: 'fuzzy',
-        sortType: 'asc',
+        ...(query.trim().length === 0 && {
+          searchMode: 'fuzzy',
+          sortType: 'asc',
+        }),
       });
     },
     setSearchResults: (results) => set({ searchResults: results }),
@@ -131,11 +133,22 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
     setIsRequesting: (isRequesting) => set({ isRequesting }),
     search: async () => {
       const state = get();
+      log(LogLevel.INFO, `Starting search with search term: "${state.query}"`);
+
       if (!searchcraft) {
         throw new Error('Searchcraft instance is not initialized.');
       }
+
+      if (!state.query.trim()) {
+        log(
+          LogLevel.INFO,
+          'No search request was made: search term was empty.',
+        );
+        state.setSearchResults(null);
+        return;
+      }
+
       state.setIsRequesting(true);
-      log(LogLevel.INFO, `Starting search with query: "${state.query}"`);
       try {
         const results = await searchcraft.search({
           query: state.query,

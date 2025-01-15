@@ -6,9 +6,7 @@
     "jsx": "react-jsx",
     "paths": {
       "@/*": ["./src/*"],
-      "@components/*": ["./src/components/*"],
-      "@testing/*": ["./src/test-tools/*"],
-      "@styled/*": ["./styled-system/*"]
+      "@components/*": ["./src/components/*"]
     },
     "outDir": "dist",
     "sourceMap": true
@@ -16,15 +14,7 @@
   "include": ["src", "vite.config.ts"],
   "typedocOptions": {
     "plugin": ["typedoc-plugin-markdown"],
-    "entryPoints": [
-      "src/components/providers/Provider.tsx",
-      "src/components/providers/ProviderConfigTypes.ts",
-      "src/components/providers/ProviderContextTypes.ts",
-      "src/components/ui/BaseSearchForm/index.tsx",
-      "src/components/ui/BaseSearchResult/index.tsx",
-      "src/components/ui/BaseSearchResults/index.tsx",
-      "src/components/ui/AutoSearchForm/index.tsx"
-    ],
+    "entryPoints": ["src/index.tsx"],
     "out": "docs"
   }
 }

@@ -1,26 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import WebComponentWrapper from '../../utils/WebComponentWrapper';
 import type { SearchResultMappings } from '@searchcraft/javascript-sdk';
 import { config } from '../../utils/DefaultSearchcraftConfig';
 import { useEffect } from 'react';
+import type { Components } from '@searchcraft/javascript-sdk';
 
 const componentMeta: Meta = {
   title: 'Javascript SDK/searchcraft-base-search-results',
   argTypes: {},
-};
-
-type ComponentProps = {
-  adInterval: number;
-  customStylesForResults: string | Record<string, Record<string, string>>;
-  searchResultMappings: string | undefined;
-  placeAdAtEnd: boolean;
-  placeAdAtStart: boolean;
-  resultImagePlacement: 'left' | 'right';
-  buttonLabel: string | undefined;
-  buttonTarget: '_blank' | '_self' | '_top' | '_parent';
-  buttonRel: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
-  containerTarget: '_blank' | '_self' | '_top' | '_parent';
-  containerRel: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
 };
 
 const mappings: SearchResultMappings = {
@@ -61,13 +47,11 @@ const mappings: SearchResultMappings = {
   },
 };
 
-export const Default: StoryObj<ComponentProps> = {
+export const Default: StoryObj<Components.SearchcraftBaseSearchResults> = {
   decorators: [
     (Story) => {
       useEffect(() => {
-        const searchForm = document.querySelector(
-          'searchcraft-auto-search-form',
-        );
+        const searchForm = document.querySelector('searchcraft-input-form');
         const searchResults = document.querySelector(
           'searchcraft-base-search-results',
         );
@@ -86,17 +70,17 @@ export const Default: StoryObj<ComponentProps> = {
   render: (args) => {
     return (
       <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
-        <searchcraft-auto-search-form />
+        <searchcraft-input-form />
         <div style={{ paddingTop: 20 }}>
           <searchcraft-base-search-results
-            ad-interval='4'
+            ad-interval={args.adInterval}
             place-ad-at-end
             place-ad-at-start
-            result-image-placement='right'
-            button-target='_blank'
-            button-rel='noreferrer'
-            container-target='_blank'
-            container-rel='noreferrer'
+            result-image-placement={args.resultImagePlacement}
+            button-target={args.buttonTarget}
+            button-rel={args.buttonRel}
+            container-target={args.containerTarget}
+            container-rel={args.containerRel}
           />
         </div>
       </div>

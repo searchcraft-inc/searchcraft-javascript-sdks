@@ -9,7 +9,8 @@
     "./packages/javascript-sdk/dist",
     "./packages/javascript-sdk/.stencil",
     "./packages/javascript-sdk/www",
-    "./packages/react-sdk/dist"
+    "./packages/react-sdk/dist",
+    "./packages/react-sdk/src/stencil-web-components"
   ],
   "ext": "js,jsx,ts,tsx,json,css,scss"
 }

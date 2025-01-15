@@ -7,16 +7,15 @@ import type {
   MostRecentToggleFilterItem,
   NumericFilterItem,
 } from '@searchcraft/javascript-sdk';
+
 import { config } from '../../utils/DefaultSearchcraftConfig';
 import { useEffect } from 'react';
+
+import type { Components } from '@searchcraft/javascript-sdk';
 
 const componentMeta: Meta = {
   title: 'Javascript SDK/searchcraft-filter-panel',
   argTypes: {},
-};
-
-type ComponentProps = {
-  items: FilterItem[];
 };
 
 const today = new Date();
@@ -70,7 +69,7 @@ const facetItem: FacetsFilterItem = {
   },
 };
 
-const defaultProps: ComponentProps = {
+const defaultProps: Components.SearchcraftFilterPanel = {
   items: [
     exactMatchItem,
     mostRecentItem,
@@ -80,13 +79,11 @@ const defaultProps: ComponentProps = {
   ],
 };
 
-export const Default: StoryObj<ComponentProps> = {
+export const Default: StoryObj<Components.SearchcraftFilterPanel> = {
   decorators: [
     (Story) => {
       useEffect(() => {
-        const searchForm = document.querySelector(
-          'searchcraft-auto-search-form',
-        );
+        const searchForm = document.querySelector('searchcraft-input-form');
         const filterPanel = document.querySelector('searchcraft-filter-panel');
 
         if (searchForm) {
@@ -103,7 +100,7 @@ export const Default: StoryObj<ComponentProps> = {
   render: (args) => {
     return (
       <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
-        <searchcraft-auto-search-form />
+        <searchcraft-input-form />
         <div style={{ paddingTop: 20 }}>
           <searchcraft-filter-panel />
         </div>

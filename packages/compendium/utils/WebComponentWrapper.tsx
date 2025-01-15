@@ -4,7 +4,7 @@ interface WebComponentWrapperProps {
   /**
    * Args recieved from Storybook renderer.
    */
-  args?: Record<string, unknown>;
+  args?: unknown;
   /**
    * The name of the web component to render.
    */

@@ -1,5 +1,6 @@
 import type { Preview } from '@storybook/react';
 import { defineCustomElements } from '@searchcraft/javascript-sdk/components';
+import { testvalue } from '@searchcraft/javascript-sdk/components';
 
 defineCustomElements();
 

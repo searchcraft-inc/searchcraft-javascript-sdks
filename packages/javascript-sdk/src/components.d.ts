@@ -5,30 +5,13 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { SearchcraftConfig } from "@searchcraft/core";
-import { SearchResultMappings } from "./types/index";
+import { PopoverResultMappings, SearchResultMappings } from "./types/index";
 import { FilterItem } from "./types/searchcraft-filter-panel.types";
-export { SearchcraftConfig } from "@searchcraft/core";
-export { SearchResultMappings } from "./types/index";
+import { SearchcraftConfig } from "@searchcraft/core";
+export { PopoverResultMappings, SearchResultMappings } from "./types/index";
 export { FilterItem } from "./types/searchcraft-filter-panel.types";
+export { SearchcraftConfig } from "@searchcraft/core";
 export namespace Components {
-    interface SearchcraftAutoSearchForm {
-        "autoSearchFormClass": string;
-        "clearInput": () => void;
-        "config": SearchcraftConfig | undefined;
-        "customStylesForInput": string | Record<string, string>;
-        "inputCaptionValue": string;
-        "labelForInput": string;
-        "placeholderValue": string;
-        "searchContainerClass": string;
-    }
-    interface SearchcraftBaseSearchForm {
-        "buttonLabel": string;
-        "buttonPlacement": 'right' | 'left';
-        "config": SearchcraftConfig;
-        "errorMessage": string;
-        "inputLabel": string;
-    }
     interface SearchcraftBaseSearchResult {
         "bodyContent": string | undefined;
         "buttonHref": string | undefined;
@@ -68,18 +51,6 @@ export namespace Components {
         "iconPosition": string;
         "label": string;
     }
-    interface SearchcraftButtonIcon {
-    }
-    interface SearchcraftCheckIcon {
-    }
-    interface SearchcraftClearIconSet {
-        /**
-          * Type of the icon to display. Options: 'clear-light', 'clear-dark', 'arrow-light', 'arrow-dark'
-         */
-        "type": 'clear-light' | 'clear-dark' | 'arrow-light' | 'arrow-dark';
-    }
-    interface SearchcraftDashIcon {
-    }
     interface SearchcraftErrorMessage {
         "errorMessage"?: string;
     }
@@ -89,40 +60,65 @@ export namespace Components {
     interface SearchcraftFilterPanel {
         "items": FilterItem[];
     }
-    interface SearchcraftInput {
+    interface SearchcraftInputForm {
+        /**
+          * Whether or not to automatically submit the search term when the input changes.
+         */
+        "autoSearch": boolean;
+        /**
+          * The label for the submit button.
+         */
+        "buttonLabel": string | undefined;
+        /**
+          * Where to place the search button.
+         */
+        "buttonPlacement": 'left' | 'right' | 'none';
+        /**
+          * The Searchcraft config object.
+         */
+        "config": SearchcraftConfig | undefined;
+        /**
+          * A custom styles object to be applied to the input element.
+         */
         "customStyles": string | Record<string, string>;
-        "error": boolean;
-        "flex": boolean;
-        "inputCaptionClassName": string;
-        "inputCaptionValue": string;
-        "inputClassName": string;
-        "isRequesting": boolean;
+        /**
+          * The duration to debounce the input's `inputChange` event.
+         */
+        "debounceDelay": number;
+        /**
+          * The label rendered above the input.
+         */
+        "inputLabel": string | undefined;
+        /**
+          * The input element's placeholder value.
+         */
         "placeholderValue": string;
-        "query": string;
+        /**
+          * The starting value of the input element.
+         */
+        "searchTerm": string;
     }
     interface SearchcraftInputLabel {
         "inputLabelClassName"?: string;
         "label"?: string;
     }
-    interface SearchcraftResultsInfo {
+    interface SearchcraftPopoverForm {
+        "config": SearchcraftConfig | undefined;
+        "popoverResultMappings": PopoverResultMappings | undefined;
+        "type": 'inline' | 'fullscreen' | 'modal';
     }
-    interface SearchcraftSearchIconSet {
-        "height": number;
-        /**
-          * Type of the icon to display. Options: 'search-light', 'search-dark', 'error-light', 'error-dark'
-         */
-        "type": 'search-light' | 'search-dark' | 'error-light' | 'error-dark';
-        "width": number;
+    interface SearchcraftPopoverListView {
+        "popoverResultMappings": PopoverResultMappings | undefined;
+    }
+    interface SearchcraftPopoverResult {
+    }
+    interface SearchcraftResultsInfo {
     }
     interface SearchcraftSlider {
         "dataType": 'number' | 'date';
         "granularity": number;
         "max": number;
         "min": number;
-    }
-    interface SearchcraftSpinnerDark {
-    }
-    interface SearchcraftSpinnerLight {
     }
     interface SearchcraftToggleButton {
         /**
@@ -131,14 +127,6 @@ export namespace Components {
         "label": string;
         "subLabel": string | undefined;
     }
-}
-export interface SearchcraftAutoSearchFormCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLSearchcraftAutoSearchFormElement;
-}
-export interface SearchcraftBaseSearchFormCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLSearchcraftBaseSearchFormElement;
 }
 export interface SearchcraftBaseSearchResultsCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -152,9 +140,9 @@ export interface SearchcraftFacetListCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSearchcraftFacetListElement;
 }
-export interface SearchcraftInputCustomEvent<T> extends CustomEvent<T> {
+export interface SearchcraftInputFormCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLSearchcraftInputElement;
+    target: HTMLSearchcraftInputFormElement;
 }
 export interface SearchcraftSliderCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -165,41 +153,6 @@ export interface SearchcraftToggleButtonCustomEvent<T> extends CustomEvent<T> {
     target: HTMLSearchcraftToggleButtonElement;
 }
 declare global {
-    interface HTMLSearchcraftAutoSearchFormElementEventMap {
-        "inputClearedOrNoResults": void;
-        "querySubmit": string;
-    }
-    interface HTMLSearchcraftAutoSearchFormElement extends Components.SearchcraftAutoSearchForm, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLSearchcraftAutoSearchFormElementEventMap>(type: K, listener: (this: HTMLSearchcraftAutoSearchFormElement, ev: SearchcraftAutoSearchFormCustomEvent<HTMLSearchcraftAutoSearchFormElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLSearchcraftAutoSearchFormElementEventMap>(type: K, listener: (this: HTMLSearchcraftAutoSearchFormElement, ev: SearchcraftAutoSearchFormCustomEvent<HTMLSearchcraftAutoSearchFormElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
-    }
-    var HTMLSearchcraftAutoSearchFormElement: {
-        prototype: HTMLSearchcraftAutoSearchFormElement;
-        new (): HTMLSearchcraftAutoSearchFormElement;
-    };
-    interface HTMLSearchcraftBaseSearchFormElementEventMap {
-        "clearInput": any;
-    }
-    interface HTMLSearchcraftBaseSearchFormElement extends Components.SearchcraftBaseSearchForm, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLSearchcraftBaseSearchFormElementEventMap>(type: K, listener: (this: HTMLSearchcraftBaseSearchFormElement, ev: SearchcraftBaseSearchFormCustomEvent<HTMLSearchcraftBaseSearchFormElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLSearchcraftBaseSearchFormElementEventMap>(type: K, listener: (this: HTMLSearchcraftBaseSearchFormElement, ev: SearchcraftBaseSearchFormCustomEvent<HTMLSearchcraftBaseSearchFormElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
-    }
-    var HTMLSearchcraftBaseSearchFormElement: {
-        prototype: HTMLSearchcraftBaseSearchFormElement;
-        new (): HTMLSearchcraftBaseSearchFormElement;
-    };
     interface HTMLSearchcraftBaseSearchResultElement extends Components.SearchcraftBaseSearchResult, HTMLStencilElement {
     }
     var HTMLSearchcraftBaseSearchResultElement: {
@@ -240,30 +193,6 @@ declare global {
         prototype: HTMLSearchcraftButtonElement;
         new (): HTMLSearchcraftButtonElement;
     };
-    interface HTMLSearchcraftButtonIconElement extends Components.SearchcraftButtonIcon, HTMLStencilElement {
-    }
-    var HTMLSearchcraftButtonIconElement: {
-        prototype: HTMLSearchcraftButtonIconElement;
-        new (): HTMLSearchcraftButtonIconElement;
-    };
-    interface HTMLSearchcraftCheckIconElement extends Components.SearchcraftCheckIcon, HTMLStencilElement {
-    }
-    var HTMLSearchcraftCheckIconElement: {
-        prototype: HTMLSearchcraftCheckIconElement;
-        new (): HTMLSearchcraftCheckIconElement;
-    };
-    interface HTMLSearchcraftClearIconSetElement extends Components.SearchcraftClearIconSet, HTMLStencilElement {
-    }
-    var HTMLSearchcraftClearIconSetElement: {
-        prototype: HTMLSearchcraftClearIconSetElement;
-        new (): HTMLSearchcraftClearIconSetElement;
-    };
-    interface HTMLSearchcraftDashIconElement extends Components.SearchcraftDashIcon, HTMLStencilElement {
-    }
-    var HTMLSearchcraftDashIconElement: {
-        prototype: HTMLSearchcraftDashIconElement;
-        new (): HTMLSearchcraftDashIconElement;
-    };
     interface HTMLSearchcraftErrorMessageElement extends Components.SearchcraftErrorMessage, HTMLStencilElement {
     }
     var HTMLSearchcraftErrorMessageElement: {
@@ -293,23 +222,26 @@ declare global {
         prototype: HTMLSearchcraftFilterPanelElement;
         new (): HTMLSearchcraftFilterPanelElement;
     };
-    interface HTMLSearchcraftInputElementEventMap {
-        "clearInput": void;
-        "inputChange": string;
+    interface HTMLSearchcraftInputFormElementEventMap {
+        "inputCleared": void;
+        "noResultsReceived": void;
+        "querySubmit": string;
+        "inputFocus": void;
+        "inputBlur": void;
     }
-    interface HTMLSearchcraftInputElement extends Components.SearchcraftInput, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLSearchcraftInputElementEventMap>(type: K, listener: (this: HTMLSearchcraftInputElement, ev: SearchcraftInputCustomEvent<HTMLSearchcraftInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+    interface HTMLSearchcraftInputFormElement extends Components.SearchcraftInputForm, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSearchcraftInputFormElementEventMap>(type: K, listener: (this: HTMLSearchcraftInputFormElement, ev: SearchcraftInputFormCustomEvent<HTMLSearchcraftInputFormElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLSearchcraftInputElementEventMap>(type: K, listener: (this: HTMLSearchcraftInputElement, ev: SearchcraftInputCustomEvent<HTMLSearchcraftInputElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSearchcraftInputFormElementEventMap>(type: K, listener: (this: HTMLSearchcraftInputFormElement, ev: SearchcraftInputFormCustomEvent<HTMLSearchcraftInputFormElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
         removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
         removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
         removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
-    var HTMLSearchcraftInputElement: {
-        prototype: HTMLSearchcraftInputElement;
-        new (): HTMLSearchcraftInputElement;
+    var HTMLSearchcraftInputFormElement: {
+        prototype: HTMLSearchcraftInputFormElement;
+        new (): HTMLSearchcraftInputFormElement;
     };
     interface HTMLSearchcraftInputLabelElement extends Components.SearchcraftInputLabel, HTMLStencilElement {
     }
@@ -317,17 +249,29 @@ declare global {
         prototype: HTMLSearchcraftInputLabelElement;
         new (): HTMLSearchcraftInputLabelElement;
     };
+    interface HTMLSearchcraftPopoverFormElement extends Components.SearchcraftPopoverForm, HTMLStencilElement {
+    }
+    var HTMLSearchcraftPopoverFormElement: {
+        prototype: HTMLSearchcraftPopoverFormElement;
+        new (): HTMLSearchcraftPopoverFormElement;
+    };
+    interface HTMLSearchcraftPopoverListViewElement extends Components.SearchcraftPopoverListView, HTMLStencilElement {
+    }
+    var HTMLSearchcraftPopoverListViewElement: {
+        prototype: HTMLSearchcraftPopoverListViewElement;
+        new (): HTMLSearchcraftPopoverListViewElement;
+    };
+    interface HTMLSearchcraftPopoverResultElement extends Components.SearchcraftPopoverResult, HTMLStencilElement {
+    }
+    var HTMLSearchcraftPopoverResultElement: {
+        prototype: HTMLSearchcraftPopoverResultElement;
+        new (): HTMLSearchcraftPopoverResultElement;
+    };
     interface HTMLSearchcraftResultsInfoElement extends Components.SearchcraftResultsInfo, HTMLStencilElement {
     }
     var HTMLSearchcraftResultsInfoElement: {
         prototype: HTMLSearchcraftResultsInfoElement;
         new (): HTMLSearchcraftResultsInfoElement;
-    };
-    interface HTMLSearchcraftSearchIconSetElement extends Components.SearchcraftSearchIconSet, HTMLStencilElement {
-    }
-    var HTMLSearchcraftSearchIconSetElement: {
-        prototype: HTMLSearchcraftSearchIconSetElement;
-        new (): HTMLSearchcraftSearchIconSetElement;
     };
     interface HTMLSearchcraftSliderElementEventMap {
         "rangeChanged": { startValue: number; endValue: number };
@@ -345,18 +289,6 @@ declare global {
     var HTMLSearchcraftSliderElement: {
         prototype: HTMLSearchcraftSliderElement;
         new (): HTMLSearchcraftSliderElement;
-    };
-    interface HTMLSearchcraftSpinnerDarkElement extends Components.SearchcraftSpinnerDark, HTMLStencilElement {
-    }
-    var HTMLSearchcraftSpinnerDarkElement: {
-        prototype: HTMLSearchcraftSpinnerDarkElement;
-        new (): HTMLSearchcraftSpinnerDarkElement;
-    };
-    interface HTMLSearchcraftSpinnerLightElement extends Components.SearchcraftSpinnerLight, HTMLStencilElement {
-    }
-    var HTMLSearchcraftSpinnerLightElement: {
-        prototype: HTMLSearchcraftSpinnerLightElement;
-        new (): HTMLSearchcraftSpinnerLightElement;
     };
     interface HTMLSearchcraftToggleButtonElementEventMap {
         "toggleUpdated": boolean;
@@ -376,49 +308,23 @@ declare global {
         new (): HTMLSearchcraftToggleButtonElement;
     };
     interface HTMLElementTagNameMap {
-        "searchcraft-auto-search-form": HTMLSearchcraftAutoSearchFormElement;
-        "searchcraft-base-search-form": HTMLSearchcraftBaseSearchFormElement;
         "searchcraft-base-search-result": HTMLSearchcraftBaseSearchResultElement;
         "searchcraft-base-search-results": HTMLSearchcraftBaseSearchResultsElement;
         "searchcraft-button": HTMLSearchcraftButtonElement;
-        "searchcraft-button-icon": HTMLSearchcraftButtonIconElement;
-        "searchcraft-check-icon": HTMLSearchcraftCheckIconElement;
-        "searchcraft-clear-icon-set": HTMLSearchcraftClearIconSetElement;
-        "searchcraft-dash-icon": HTMLSearchcraftDashIconElement;
         "searchcraft-error-message": HTMLSearchcraftErrorMessageElement;
         "searchcraft-facet-list": HTMLSearchcraftFacetListElement;
         "searchcraft-filter-panel": HTMLSearchcraftFilterPanelElement;
-        "searchcraft-input": HTMLSearchcraftInputElement;
+        "searchcraft-input-form": HTMLSearchcraftInputFormElement;
         "searchcraft-input-label": HTMLSearchcraftInputLabelElement;
+        "searchcraft-popover-form": HTMLSearchcraftPopoverFormElement;
+        "searchcraft-popover-list-view": HTMLSearchcraftPopoverListViewElement;
+        "searchcraft-popover-result": HTMLSearchcraftPopoverResultElement;
         "searchcraft-results-info": HTMLSearchcraftResultsInfoElement;
-        "searchcraft-search-icon-set": HTMLSearchcraftSearchIconSetElement;
         "searchcraft-slider": HTMLSearchcraftSliderElement;
-        "searchcraft-spinner-dark": HTMLSearchcraftSpinnerDarkElement;
-        "searchcraft-spinner-light": HTMLSearchcraftSpinnerLightElement;
         "searchcraft-toggle-button": HTMLSearchcraftToggleButtonElement;
     }
 }
 declare namespace LocalJSX {
-    interface SearchcraftAutoSearchForm {
-        "autoSearchFormClass"?: string;
-        "clearInput"?: () => void;
-        "config"?: SearchcraftConfig | undefined;
-        "customStylesForInput"?: string | Record<string, string>;
-        "inputCaptionValue"?: string;
-        "labelForInput"?: string;
-        "onInputClearedOrNoResults"?: (event: SearchcraftAutoSearchFormCustomEvent<void>) => void;
-        "onQuerySubmit"?: (event: SearchcraftAutoSearchFormCustomEvent<string>) => void;
-        "placeholderValue"?: string;
-        "searchContainerClass"?: string;
-    }
-    interface SearchcraftBaseSearchForm {
-        "buttonLabel"?: string;
-        "buttonPlacement"?: 'right' | 'left';
-        "config"?: SearchcraftConfig;
-        "errorMessage"?: string;
-        "inputLabel"?: string;
-        "onClearInput"?: (event: SearchcraftBaseSearchFormCustomEvent<any>) => void;
-    }
     interface SearchcraftBaseSearchResult {
         "bodyContent"?: string | undefined;
         "buttonHref"?: string | undefined;
@@ -460,18 +366,6 @@ declare namespace LocalJSX {
         "label"?: string;
         "onButtonClick"?: (event: SearchcraftButtonCustomEvent<void>) => void;
     }
-    interface SearchcraftButtonIcon {
-    }
-    interface SearchcraftCheckIcon {
-    }
-    interface SearchcraftClearIconSet {
-        /**
-          * Type of the icon to display. Options: 'clear-light', 'clear-dark', 'arrow-light', 'arrow-dark'
-         */
-        "type"?: 'clear-light' | 'clear-dark' | 'arrow-light' | 'arrow-dark';
-    }
-    interface SearchcraftDashIcon {
-    }
     interface SearchcraftErrorMessage {
         "errorMessage"?: string;
     }
@@ -482,32 +376,79 @@ declare namespace LocalJSX {
     interface SearchcraftFilterPanel {
         "items"?: FilterItem[];
     }
-    interface SearchcraftInput {
+    interface SearchcraftInputForm {
+        /**
+          * Whether or not to automatically submit the search term when the input changes.
+         */
+        "autoSearch"?: boolean;
+        /**
+          * The label for the submit button.
+         */
+        "buttonLabel"?: string | undefined;
+        /**
+          * Where to place the search button.
+         */
+        "buttonPlacement"?: 'left' | 'right' | 'none';
+        /**
+          * The Searchcraft config object.
+         */
+        "config"?: SearchcraftConfig | undefined;
+        /**
+          * A custom styles object to be applied to the input element.
+         */
         "customStyles"?: string | Record<string, string>;
-        "error"?: boolean;
-        "flex"?: boolean;
-        "inputCaptionClassName"?: string;
-        "inputCaptionValue"?: string;
-        "inputClassName"?: string;
-        "isRequesting"?: boolean;
-        "onClearInput"?: (event: SearchcraftInputCustomEvent<void>) => void;
-        "onInputChange"?: (event: SearchcraftInputCustomEvent<string>) => void;
+        /**
+          * The duration to debounce the input's `inputChange` event.
+         */
+        "debounceDelay"?: number;
+        /**
+          * The label rendered above the input.
+         */
+        "inputLabel"?: string | undefined;
+        /**
+          * Event emitted when the input has lost focus.
+         */
+        "onInputBlur"?: (event: SearchcraftInputFormCustomEvent<void>) => void;
+        /**
+          * Event emitted when the input element has been cleared.
+         */
+        "onInputCleared"?: (event: SearchcraftInputFormCustomEvent<void>) => void;
+        /**
+          * Event emitted when the input has gained focus.
+         */
+        "onInputFocus"?: (event: SearchcraftInputFormCustomEvent<void>) => void;
+        /**
+          * Event emitted when a query returns with no results received.
+         */
+        "onNoResultsReceived"?: (event: SearchcraftInputFormCustomEvent<void>) => void;
+        /**
+          * Event emitted when a new search request has been submitted.
+         */
+        "onQuerySubmit"?: (event: SearchcraftInputFormCustomEvent<string>) => void;
+        /**
+          * The input element's placeholder value.
+         */
         "placeholderValue"?: string;
-        "query"?: string;
+        /**
+          * The starting value of the input element.
+         */
+        "searchTerm"?: string;
     }
     interface SearchcraftInputLabel {
         "inputLabelClassName"?: string;
         "label"?: string;
     }
-    interface SearchcraftResultsInfo {
+    interface SearchcraftPopoverForm {
+        "config"?: SearchcraftConfig | undefined;
+        "popoverResultMappings"?: PopoverResultMappings | undefined;
+        "type"?: 'inline' | 'fullscreen' | 'modal';
     }
-    interface SearchcraftSearchIconSet {
-        "height"?: number;
-        /**
-          * Type of the icon to display. Options: 'search-light', 'search-dark', 'error-light', 'error-dark'
-         */
-        "type"?: 'search-light' | 'search-dark' | 'error-light' | 'error-dark';
-        "width"?: number;
+    interface SearchcraftPopoverListView {
+        "popoverResultMappings"?: PopoverResultMappings | undefined;
+    }
+    interface SearchcraftPopoverResult {
+    }
+    interface SearchcraftResultsInfo {
     }
     interface SearchcraftSlider {
         "dataType"?: 'number' | 'date';
@@ -515,10 +456,6 @@ declare namespace LocalJSX {
         "max"?: number;
         "min"?: number;
         "onRangeChanged"?: (event: SearchcraftSliderCustomEvent<{ startValue: number; endValue: number }>) => void;
-    }
-    interface SearchcraftSpinnerDark {
-    }
-    interface SearchcraftSpinnerLight {
     }
     interface SearchcraftToggleButton {
         /**
@@ -529,25 +466,19 @@ declare namespace LocalJSX {
         "subLabel"?: string | undefined;
     }
     interface IntrinsicElements {
-        "searchcraft-auto-search-form": SearchcraftAutoSearchForm;
-        "searchcraft-base-search-form": SearchcraftBaseSearchForm;
         "searchcraft-base-search-result": SearchcraftBaseSearchResult;
         "searchcraft-base-search-results": SearchcraftBaseSearchResults;
         "searchcraft-button": SearchcraftButton;
-        "searchcraft-button-icon": SearchcraftButtonIcon;
-        "searchcraft-check-icon": SearchcraftCheckIcon;
-        "searchcraft-clear-icon-set": SearchcraftClearIconSet;
-        "searchcraft-dash-icon": SearchcraftDashIcon;
         "searchcraft-error-message": SearchcraftErrorMessage;
         "searchcraft-facet-list": SearchcraftFacetList;
         "searchcraft-filter-panel": SearchcraftFilterPanel;
-        "searchcraft-input": SearchcraftInput;
+        "searchcraft-input-form": SearchcraftInputForm;
         "searchcraft-input-label": SearchcraftInputLabel;
+        "searchcraft-popover-form": SearchcraftPopoverForm;
+        "searchcraft-popover-list-view": SearchcraftPopoverListView;
+        "searchcraft-popover-result": SearchcraftPopoverResult;
         "searchcraft-results-info": SearchcraftResultsInfo;
-        "searchcraft-search-icon-set": SearchcraftSearchIconSet;
         "searchcraft-slider": SearchcraftSlider;
-        "searchcraft-spinner-dark": SearchcraftSpinnerDark;
-        "searchcraft-spinner-light": SearchcraftSpinnerLight;
         "searchcraft-toggle-button": SearchcraftToggleButton;
     }
 }
@@ -555,25 +486,19 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "searchcraft-auto-search-form": LocalJSX.SearchcraftAutoSearchForm & JSXBase.HTMLAttributes<HTMLSearchcraftAutoSearchFormElement>;
-            "searchcraft-base-search-form": LocalJSX.SearchcraftBaseSearchForm & JSXBase.HTMLAttributes<HTMLSearchcraftBaseSearchFormElement>;
             "searchcraft-base-search-result": LocalJSX.SearchcraftBaseSearchResult & JSXBase.HTMLAttributes<HTMLSearchcraftBaseSearchResultElement>;
             "searchcraft-base-search-results": LocalJSX.SearchcraftBaseSearchResults & JSXBase.HTMLAttributes<HTMLSearchcraftBaseSearchResultsElement>;
             "searchcraft-button": LocalJSX.SearchcraftButton & JSXBase.HTMLAttributes<HTMLSearchcraftButtonElement>;
-            "searchcraft-button-icon": LocalJSX.SearchcraftButtonIcon & JSXBase.HTMLAttributes<HTMLSearchcraftButtonIconElement>;
-            "searchcraft-check-icon": LocalJSX.SearchcraftCheckIcon & JSXBase.HTMLAttributes<HTMLSearchcraftCheckIconElement>;
-            "searchcraft-clear-icon-set": LocalJSX.SearchcraftClearIconSet & JSXBase.HTMLAttributes<HTMLSearchcraftClearIconSetElement>;
-            "searchcraft-dash-icon": LocalJSX.SearchcraftDashIcon & JSXBase.HTMLAttributes<HTMLSearchcraftDashIconElement>;
             "searchcraft-error-message": LocalJSX.SearchcraftErrorMessage & JSXBase.HTMLAttributes<HTMLSearchcraftErrorMessageElement>;
             "searchcraft-facet-list": LocalJSX.SearchcraftFacetList & JSXBase.HTMLAttributes<HTMLSearchcraftFacetListElement>;
             "searchcraft-filter-panel": LocalJSX.SearchcraftFilterPanel & JSXBase.HTMLAttributes<HTMLSearchcraftFilterPanelElement>;
-            "searchcraft-input": LocalJSX.SearchcraftInput & JSXBase.HTMLAttributes<HTMLSearchcraftInputElement>;
+            "searchcraft-input-form": LocalJSX.SearchcraftInputForm & JSXBase.HTMLAttributes<HTMLSearchcraftInputFormElement>;
             "searchcraft-input-label": LocalJSX.SearchcraftInputLabel & JSXBase.HTMLAttributes<HTMLSearchcraftInputLabelElement>;
+            "searchcraft-popover-form": LocalJSX.SearchcraftPopoverForm & JSXBase.HTMLAttributes<HTMLSearchcraftPopoverFormElement>;
+            "searchcraft-popover-list-view": LocalJSX.SearchcraftPopoverListView & JSXBase.HTMLAttributes<HTMLSearchcraftPopoverListViewElement>;
+            "searchcraft-popover-result": LocalJSX.SearchcraftPopoverResult & JSXBase.HTMLAttributes<HTMLSearchcraftPopoverResultElement>;
             "searchcraft-results-info": LocalJSX.SearchcraftResultsInfo & JSXBase.HTMLAttributes<HTMLSearchcraftResultsInfoElement>;
-            "searchcraft-search-icon-set": LocalJSX.SearchcraftSearchIconSet & JSXBase.HTMLAttributes<HTMLSearchcraftSearchIconSetElement>;
             "searchcraft-slider": LocalJSX.SearchcraftSlider & JSXBase.HTMLAttributes<HTMLSearchcraftSliderElement>;
-            "searchcraft-spinner-dark": LocalJSX.SearchcraftSpinnerDark & JSXBase.HTMLAttributes<HTMLSearchcraftSpinnerDarkElement>;
-            "searchcraft-spinner-light": LocalJSX.SearchcraftSpinnerLight & JSXBase.HTMLAttributes<HTMLSearchcraftSpinnerLightElement>;
             "searchcraft-toggle-button": LocalJSX.SearchcraftToggleButton & JSXBase.HTMLAttributes<HTMLSearchcraftToggleButtonElement>;
         }
     }
