@@ -33,9 +33,13 @@ export class SearchcraftCore {
     this.config = config;
     this.sdkInfo = sdkInfo;
     this.userId = config.userId || '';
-    this.sessionId = nanoid();
+    this.sessionId = '';
 
-    this.initMeasure();
+    // Adds a timeout so that the resource-intensive `initMeasure` does not cause any render-blocking issues.
+    setTimeout(() => {
+      this.sessionId = nanoid();
+      this.initMeasure();
+    }, 300);
   }
 
   /**
