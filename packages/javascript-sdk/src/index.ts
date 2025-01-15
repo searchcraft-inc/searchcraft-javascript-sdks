@@ -7,6 +7,7 @@
  * DO NOT use this file to export your components. Instead, use the recommended approaches
  * to consume components of this package as outlined in the `README.md`.
  */
+export type * from './components';
 
 export {
   parseCustomStyles,
@@ -15,6 +16,6 @@ export {
 
 export { useSearchcraftStore, useThemeStore } from './provider/store';
 
-export * from './components';
+export { Components } from './components';
 
 export * from './types';
