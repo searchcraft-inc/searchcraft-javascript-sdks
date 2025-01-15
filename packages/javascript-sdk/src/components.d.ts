@@ -225,6 +225,7 @@ declare global {
     interface HTMLSearchcraftInputFormElementEventMap {
         "inputCleared": void;
         "noResultsReceived": void;
+        "querySubmit": string;
         "inputFocus": void;
         "inputBlur": void;
     }
@@ -404,10 +405,26 @@ declare namespace LocalJSX {
           * The label rendered above the input.
          */
         "inputLabel"?: string | undefined;
+        /**
+          * Event emitted when the input has lost focus.
+         */
         "onInputBlur"?: (event: SearchcraftInputFormCustomEvent<void>) => void;
+        /**
+          * Event emitted when the input element has been cleared.
+         */
         "onInputCleared"?: (event: SearchcraftInputFormCustomEvent<void>) => void;
+        /**
+          * Event emitted when the input has gained focus.
+         */
         "onInputFocus"?: (event: SearchcraftInputFormCustomEvent<void>) => void;
+        /**
+          * Event emitted when a query returns with no results received.
+         */
         "onNoResultsReceived"?: (event: SearchcraftInputFormCustomEvent<void>) => void;
+        /**
+          * Event emitted when a new search request has been submitted.
+         */
+        "onQuerySubmit"?: (event: SearchcraftInputFormCustomEvent<string>) => void;
         /**
           * The input element's placeholder value.
          */
