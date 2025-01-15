@@ -4,7 +4,7 @@ import { config } from '../../utils/DefaultSearchcraftConfig';
 import { useEffect } from 'react';
 
 const componentMeta: Meta = {
-  title: 'Javascript SDK/searchcraft-base-search-results',
+  title: 'Javascript SDK/searchcraft-popover-form',
   argTypes: {},
 };
 
@@ -64,16 +64,11 @@ export const Default: StoryObj<ComponentProps> = {
   decorators: [
     (Story) => {
       useEffect(() => {
-        const searchForm = document.querySelector('searchcraft-input-form');
-        const searchResults = document.querySelector(
-          'searchcraft-base-search-results',
-        );
+        const searchForm = document.querySelector('searchcraft-popover-form');
 
         if (searchForm) {
           searchForm.config = config;
-        }
-        if (searchResults) {
-          searchResults.searchResultMappings = mappings;
+          searchForm.searchResultMappings = mappings;
         }
       }, []);
 
@@ -83,19 +78,7 @@ export const Default: StoryObj<ComponentProps> = {
   render: (args) => {
     return (
       <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
-        <searchcraft-input-form />
-        <div style={{ paddingTop: 20 }}>
-          <searchcraft-base-search-results
-            ad-interval='4'
-            place-ad-at-end
-            place-ad-at-start
-            result-image-placement='right'
-            button-target='_blank'
-            button-rel='noreferrer'
-            container-target='_blank'
-            container-rel='noreferrer'
-          />
-        </div>
+        <searchcraft-popover-form />
       </div>
     );
   },

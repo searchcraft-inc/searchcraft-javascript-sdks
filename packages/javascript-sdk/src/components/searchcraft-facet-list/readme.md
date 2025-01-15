@@ -25,16 +25,9 @@
 
  - [searchcraft-filter-panel](../searchcraft-filter-panel)
 
-### Depends on
-
-- [searchcraft-dash-icon](../../assets)
-- [searchcraft-check-icon](../../assets)
-
 ### Graph
 ```mermaid
 graph TD;
-  searchcraft-facet-list --> searchcraft-dash-icon
-  searchcraft-facet-list --> searchcraft-check-icon
   searchcraft-filter-panel --> searchcraft-facet-list
   style searchcraft-facet-list fill:#f9f,stroke:#333,stroke-width:4px
 ```

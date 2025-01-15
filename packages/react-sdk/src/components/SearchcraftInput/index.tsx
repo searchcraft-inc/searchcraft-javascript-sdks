@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 
-import { SearchcraftInput } from '../../stencil-web-components/components';
+import { SearchcraftInputForm } from '../../stencil-web-components/components';
 
 export type InputProps = {
   customStyles: string | Record<string, string>;
@@ -12,17 +12,11 @@ export type InputProps = {
 
 const Input: FC<InputProps> = ({
   customStyles = {},
-  error = false,
-  flex = true,
   placeholderValue = 'Enter Search',
-  query = '',
 }) => (
-  <SearchcraftInput
+  <SearchcraftInputForm
     customStyles={customStyles}
-    error={error}
-    flex={flex}
     placeholderValue={placeholderValue}
-    query={query}
   />
 );
 
