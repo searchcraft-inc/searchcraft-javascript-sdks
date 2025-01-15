@@ -94,6 +94,7 @@ export const SearchcraftFilterPanel: StencilReactComponent<SearchcraftFilterPane
 type SearchcraftInputFormEvents = {
     onInputCleared: EventName<CustomEvent<void>>,
     onNoResultsReceived: EventName<CustomEvent<void>>,
+    onQuerySubmit: EventName<CustomEvent<string>>,
     onInputFocus: EventName<CustomEvent<void>>,
     onInputBlur: EventName<CustomEvent<void>>
 };
@@ -106,6 +107,7 @@ export const SearchcraftInputForm: StencilReactComponent<SearchcraftInputFormEle
     events: {
         onInputCleared: 'inputCleared',
         onNoResultsReceived: 'noResultsReceived',
+        onQuerySubmit: 'querySubmit',
         onInputFocus: 'inputFocus',
         onInputBlur: 'inputBlur'
     } as SearchcraftInputFormEvents,
