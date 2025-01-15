@@ -18,11 +18,6 @@ export default defineConfig({
     sourcemap: true,
   },
   plugins: [react(), dts({ rollupTypes: true, insertTypesEntry: true })],
-  test: {
-    environment: 'jsdom',
-    globals: true,
-    setupFiles: './src/test-tools/setup.ts',
-  },
   css: {
     preprocessorOptions: {
       scss: {
@@ -34,8 +29,6 @@ export default defineConfig({
     alias: {
       '@': resolve(__dirname, './src'),
       '@components': resolve(__dirname, './src/components'),
-      '@test-tools': resolve(__dirname, './src/test-tools'),
-      '@styles': resolve(__dirname, './src/styles'),
     },
   },
 });
