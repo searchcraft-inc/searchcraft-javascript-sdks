@@ -85,17 +85,19 @@ export class SearchcraftInput {
 
   @State() inputValue = this.searchTerm;
   @State() error = false;
+  @State() isSearchcraftInitialized = false;
 
   private debounceTimeout: ReturnType<typeof setTimeout> | null = null;
   private searchStore = useSearchcraftStore.getState();
 
   init() {
-    if (this.config) {
+    if (this.config && !this.isSearchcraftInitialized) {
       const searchcraft = new SearchcraftCore(this.config, {
         sdkName: packageJson.name,
         sdkVersion: packageJson.version,
       });
       this.searchStore.initialize(searchcraft, true);
+      this.isSearchcraftInitialized = true;
     }
   }
 
