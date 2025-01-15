@@ -51,18 +51,6 @@ export namespace Components {
         "iconPosition": string;
         "label": string;
     }
-    interface SearchcraftButtonIcon {
-    }
-    interface SearchcraftCheckIcon {
-    }
-    interface SearchcraftClearIconSet {
-        /**
-          * Type of the icon to display. Options: 'clear-light', 'clear-dark', 'arrow-light', 'arrow-dark'
-         */
-        "type": 'clear-light' | 'clear-dark' | 'arrow-light' | 'arrow-dark';
-    }
-    interface SearchcraftDashIcon {
-    }
     interface SearchcraftErrorMessage {
         "errorMessage"?: string;
     }
@@ -125,14 +113,6 @@ export namespace Components {
     interface SearchcraftPopoverResult {
     }
     interface SearchcraftResultsInfo {
-    }
-    interface SearchcraftSearchIconSet {
-        "height": number;
-        /**
-          * Type of the icon to display. Options: 'search-light', 'search-dark', 'error-light', 'error-dark'
-         */
-        "type": 'search-light' | 'search-dark' | 'error-light' | 'error-dark';
-        "width": number;
     }
     interface SearchcraftSlider {
         "dataType": 'number' | 'date';
@@ -213,30 +193,6 @@ declare global {
         prototype: HTMLSearchcraftButtonElement;
         new (): HTMLSearchcraftButtonElement;
     };
-    interface HTMLSearchcraftButtonIconElement extends Components.SearchcraftButtonIcon, HTMLStencilElement {
-    }
-    var HTMLSearchcraftButtonIconElement: {
-        prototype: HTMLSearchcraftButtonIconElement;
-        new (): HTMLSearchcraftButtonIconElement;
-    };
-    interface HTMLSearchcraftCheckIconElement extends Components.SearchcraftCheckIcon, HTMLStencilElement {
-    }
-    var HTMLSearchcraftCheckIconElement: {
-        prototype: HTMLSearchcraftCheckIconElement;
-        new (): HTMLSearchcraftCheckIconElement;
-    };
-    interface HTMLSearchcraftClearIconSetElement extends Components.SearchcraftClearIconSet, HTMLStencilElement {
-    }
-    var HTMLSearchcraftClearIconSetElement: {
-        prototype: HTMLSearchcraftClearIconSetElement;
-        new (): HTMLSearchcraftClearIconSetElement;
-    };
-    interface HTMLSearchcraftDashIconElement extends Components.SearchcraftDashIcon, HTMLStencilElement {
-    }
-    var HTMLSearchcraftDashIconElement: {
-        prototype: HTMLSearchcraftDashIconElement;
-        new (): HTMLSearchcraftDashIconElement;
-    };
     interface HTMLSearchcraftErrorMessageElement extends Components.SearchcraftErrorMessage, HTMLStencilElement {
     }
     var HTMLSearchcraftErrorMessageElement: {
@@ -316,12 +272,6 @@ declare global {
         prototype: HTMLSearchcraftResultsInfoElement;
         new (): HTMLSearchcraftResultsInfoElement;
     };
-    interface HTMLSearchcraftSearchIconSetElement extends Components.SearchcraftSearchIconSet, HTMLStencilElement {
-    }
-    var HTMLSearchcraftSearchIconSetElement: {
-        prototype: HTMLSearchcraftSearchIconSetElement;
-        new (): HTMLSearchcraftSearchIconSetElement;
-    };
     interface HTMLSearchcraftSliderElementEventMap {
         "rangeChanged": { startValue: number; endValue: number };
     }
@@ -360,10 +310,6 @@ declare global {
         "searchcraft-base-search-result": HTMLSearchcraftBaseSearchResultElement;
         "searchcraft-base-search-results": HTMLSearchcraftBaseSearchResultsElement;
         "searchcraft-button": HTMLSearchcraftButtonElement;
-        "searchcraft-button-icon": HTMLSearchcraftButtonIconElement;
-        "searchcraft-check-icon": HTMLSearchcraftCheckIconElement;
-        "searchcraft-clear-icon-set": HTMLSearchcraftClearIconSetElement;
-        "searchcraft-dash-icon": HTMLSearchcraftDashIconElement;
         "searchcraft-error-message": HTMLSearchcraftErrorMessageElement;
         "searchcraft-facet-list": HTMLSearchcraftFacetListElement;
         "searchcraft-filter-panel": HTMLSearchcraftFilterPanelElement;
@@ -373,7 +319,6 @@ declare global {
         "searchcraft-popover-list-view": HTMLSearchcraftPopoverListViewElement;
         "searchcraft-popover-result": HTMLSearchcraftPopoverResultElement;
         "searchcraft-results-info": HTMLSearchcraftResultsInfoElement;
-        "searchcraft-search-icon-set": HTMLSearchcraftSearchIconSetElement;
         "searchcraft-slider": HTMLSearchcraftSliderElement;
         "searchcraft-toggle-button": HTMLSearchcraftToggleButtonElement;
     }
@@ -419,18 +364,6 @@ declare namespace LocalJSX {
         "iconPosition"?: string;
         "label"?: string;
         "onButtonClick"?: (event: SearchcraftButtonCustomEvent<void>) => void;
-    }
-    interface SearchcraftButtonIcon {
-    }
-    interface SearchcraftCheckIcon {
-    }
-    interface SearchcraftClearIconSet {
-        /**
-          * Type of the icon to display. Options: 'clear-light', 'clear-dark', 'arrow-light', 'arrow-dark'
-         */
-        "type"?: 'clear-light' | 'clear-dark' | 'arrow-light' | 'arrow-dark';
-    }
-    interface SearchcraftDashIcon {
     }
     interface SearchcraftErrorMessage {
         "errorMessage"?: string;
@@ -500,14 +433,6 @@ declare namespace LocalJSX {
     }
     interface SearchcraftResultsInfo {
     }
-    interface SearchcraftSearchIconSet {
-        "height"?: number;
-        /**
-          * Type of the icon to display. Options: 'search-light', 'search-dark', 'error-light', 'error-dark'
-         */
-        "type"?: 'search-light' | 'search-dark' | 'error-light' | 'error-dark';
-        "width"?: number;
-    }
     interface SearchcraftSlider {
         "dataType"?: 'number' | 'date';
         "granularity"?: number;
@@ -527,10 +452,6 @@ declare namespace LocalJSX {
         "searchcraft-base-search-result": SearchcraftBaseSearchResult;
         "searchcraft-base-search-results": SearchcraftBaseSearchResults;
         "searchcraft-button": SearchcraftButton;
-        "searchcraft-button-icon": SearchcraftButtonIcon;
-        "searchcraft-check-icon": SearchcraftCheckIcon;
-        "searchcraft-clear-icon-set": SearchcraftClearIconSet;
-        "searchcraft-dash-icon": SearchcraftDashIcon;
         "searchcraft-error-message": SearchcraftErrorMessage;
         "searchcraft-facet-list": SearchcraftFacetList;
         "searchcraft-filter-panel": SearchcraftFilterPanel;
@@ -540,7 +461,6 @@ declare namespace LocalJSX {
         "searchcraft-popover-list-view": SearchcraftPopoverListView;
         "searchcraft-popover-result": SearchcraftPopoverResult;
         "searchcraft-results-info": SearchcraftResultsInfo;
-        "searchcraft-search-icon-set": SearchcraftSearchIconSet;
         "searchcraft-slider": SearchcraftSlider;
         "searchcraft-toggle-button": SearchcraftToggleButton;
     }
@@ -552,10 +472,6 @@ declare module "@stencil/core" {
             "searchcraft-base-search-result": LocalJSX.SearchcraftBaseSearchResult & JSXBase.HTMLAttributes<HTMLSearchcraftBaseSearchResultElement>;
             "searchcraft-base-search-results": LocalJSX.SearchcraftBaseSearchResults & JSXBase.HTMLAttributes<HTMLSearchcraftBaseSearchResultsElement>;
             "searchcraft-button": LocalJSX.SearchcraftButton & JSXBase.HTMLAttributes<HTMLSearchcraftButtonElement>;
-            "searchcraft-button-icon": LocalJSX.SearchcraftButtonIcon & JSXBase.HTMLAttributes<HTMLSearchcraftButtonIconElement>;
-            "searchcraft-check-icon": LocalJSX.SearchcraftCheckIcon & JSXBase.HTMLAttributes<HTMLSearchcraftCheckIconElement>;
-            "searchcraft-clear-icon-set": LocalJSX.SearchcraftClearIconSet & JSXBase.HTMLAttributes<HTMLSearchcraftClearIconSetElement>;
-            "searchcraft-dash-icon": LocalJSX.SearchcraftDashIcon & JSXBase.HTMLAttributes<HTMLSearchcraftDashIconElement>;
             "searchcraft-error-message": LocalJSX.SearchcraftErrorMessage & JSXBase.HTMLAttributes<HTMLSearchcraftErrorMessageElement>;
             "searchcraft-facet-list": LocalJSX.SearchcraftFacetList & JSXBase.HTMLAttributes<HTMLSearchcraftFacetListElement>;
             "searchcraft-filter-panel": LocalJSX.SearchcraftFilterPanel & JSXBase.HTMLAttributes<HTMLSearchcraftFilterPanelElement>;
@@ -565,7 +481,6 @@ declare module "@stencil/core" {
             "searchcraft-popover-list-view": LocalJSX.SearchcraftPopoverListView & JSXBase.HTMLAttributes<HTMLSearchcraftPopoverListViewElement>;
             "searchcraft-popover-result": LocalJSX.SearchcraftPopoverResult & JSXBase.HTMLAttributes<HTMLSearchcraftPopoverResultElement>;
             "searchcraft-results-info": LocalJSX.SearchcraftResultsInfo & JSXBase.HTMLAttributes<HTMLSearchcraftResultsInfoElement>;
-            "searchcraft-search-icon-set": LocalJSX.SearchcraftSearchIconSet & JSXBase.HTMLAttributes<HTMLSearchcraftSearchIconSetElement>;
             "searchcraft-slider": LocalJSX.SearchcraftSlider & JSXBase.HTMLAttributes<HTMLSearchcraftSliderElement>;
             "searchcraft-toggle-button": LocalJSX.SearchcraftToggleButton & JSXBase.HTMLAttributes<HTMLSearchcraftToggleButtonElement>;
         }

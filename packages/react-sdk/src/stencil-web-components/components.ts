@@ -9,11 +9,7 @@
 
 import { SearchcraftBaseSearchResult as SearchcraftBaseSearchResultElement, defineCustomElement as defineSearchcraftBaseSearchResult } from "@searchcraft/javascript-sdk/dist/components/searchcraft-base-search-result.js";
 import { SearchcraftBaseSearchResults as SearchcraftBaseSearchResultsElement, defineCustomElement as defineSearchcraftBaseSearchResults } from "@searchcraft/javascript-sdk/dist/components/searchcraft-base-search-results.js";
-import { SearchcraftButtonIcon as SearchcraftButtonIconElement, defineCustomElement as defineSearchcraftButtonIcon } from "@searchcraft/javascript-sdk/dist/components/searchcraft-button-icon.js";
 import { SearchcraftButton as SearchcraftButtonElement, defineCustomElement as defineSearchcraftButton } from "@searchcraft/javascript-sdk/dist/components/searchcraft-button.js";
-import { SearchcraftCheckIcon as SearchcraftCheckIconElement, defineCustomElement as defineSearchcraftCheckIcon } from "@searchcraft/javascript-sdk/dist/components/searchcraft-check-icon.js";
-import { SearchcraftClearIconSet as SearchcraftClearIconSetElement, defineCustomElement as defineSearchcraftClearIconSet } from "@searchcraft/javascript-sdk/dist/components/searchcraft-clear-icon-set.js";
-import { SearchcraftDashIcon as SearchcraftDashIconElement, defineCustomElement as defineSearchcraftDashIcon } from "@searchcraft/javascript-sdk/dist/components/searchcraft-dash-icon.js";
 import { SearchcraftErrorMessage as SearchcraftErrorMessageElement, defineCustomElement as defineSearchcraftErrorMessage } from "@searchcraft/javascript-sdk/dist/components/searchcraft-error-message.js";
 import { SearchcraftFacetList as SearchcraftFacetListElement, defineCustomElement as defineSearchcraftFacetList } from "@searchcraft/javascript-sdk/dist/components/searchcraft-facet-list.js";
 import { SearchcraftFilterPanel as SearchcraftFilterPanelElement, defineCustomElement as defineSearchcraftFilterPanel } from "@searchcraft/javascript-sdk/dist/components/searchcraft-filter-panel.js";
@@ -23,7 +19,6 @@ import { SearchcraftPopoverForm as SearchcraftPopoverFormElement, defineCustomEl
 import { SearchcraftPopoverListView as SearchcraftPopoverListViewElement, defineCustomElement as defineSearchcraftPopoverListView } from "@searchcraft/javascript-sdk/dist/components/searchcraft-popover-list-view.js";
 import { SearchcraftPopoverResult as SearchcraftPopoverResultElement, defineCustomElement as defineSearchcraftPopoverResult } from "@searchcraft/javascript-sdk/dist/components/searchcraft-popover-result.js";
 import { SearchcraftResultsInfo as SearchcraftResultsInfoElement, defineCustomElement as defineSearchcraftResultsInfo } from "@searchcraft/javascript-sdk/dist/components/searchcraft-results-info.js";
-import { SearchcraftSearchIconSet as SearchcraftSearchIconSetElement, defineCustomElement as defineSearchcraftSearchIconSet } from "@searchcraft/javascript-sdk/dist/components/searchcraft-search-icon-set.js";
 import { SearchcraftSlider as SearchcraftSliderElement, defineCustomElement as defineSearchcraftSlider } from "@searchcraft/javascript-sdk/dist/components/searchcraft-slider.js";
 import { SearchcraftToggleButton as SearchcraftToggleButtonElement, defineCustomElement as defineSearchcraftToggleButton } from "@searchcraft/javascript-sdk/dist/components/searchcraft-toggle-button.js";
 import type { EventName, StencilReactComponent } from '@stencil/react-output-target/runtime';
@@ -61,50 +56,6 @@ export const SearchcraftButton: StencilReactComponent<SearchcraftButtonElement, 
     react: React,
     events: { onButtonClick: 'buttonClick' } as SearchcraftButtonEvents,
     defineCustomElement: defineSearchcraftButton
-});
-
-type SearchcraftButtonIconEvents = NonNullable<unknown>;
-
-export const SearchcraftButtonIcon: StencilReactComponent<SearchcraftButtonIconElement, SearchcraftButtonIconEvents> = /*@__PURE__*/ createComponent<SearchcraftButtonIconElement, SearchcraftButtonIconEvents>({
-    tagName: 'searchcraft-button-icon',
-    elementClass: SearchcraftButtonIconElement,
-    // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
-    react: React,
-    events: {} as SearchcraftButtonIconEvents,
-    defineCustomElement: defineSearchcraftButtonIcon
-});
-
-type SearchcraftCheckIconEvents = NonNullable<unknown>;
-
-export const SearchcraftCheckIcon: StencilReactComponent<SearchcraftCheckIconElement, SearchcraftCheckIconEvents> = /*@__PURE__*/ createComponent<SearchcraftCheckIconElement, SearchcraftCheckIconEvents>({
-    tagName: 'searchcraft-check-icon',
-    elementClass: SearchcraftCheckIconElement,
-    // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
-    react: React,
-    events: {} as SearchcraftCheckIconEvents,
-    defineCustomElement: defineSearchcraftCheckIcon
-});
-
-type SearchcraftClearIconSetEvents = NonNullable<unknown>;
-
-export const SearchcraftClearIconSet: StencilReactComponent<SearchcraftClearIconSetElement, SearchcraftClearIconSetEvents> = /*@__PURE__*/ createComponent<SearchcraftClearIconSetElement, SearchcraftClearIconSetEvents>({
-    tagName: 'searchcraft-clear-icon-set',
-    elementClass: SearchcraftClearIconSetElement,
-    // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
-    react: React,
-    events: {} as SearchcraftClearIconSetEvents,
-    defineCustomElement: defineSearchcraftClearIconSet
-});
-
-type SearchcraftDashIconEvents = NonNullable<unknown>;
-
-export const SearchcraftDashIcon: StencilReactComponent<SearchcraftDashIconElement, SearchcraftDashIconEvents> = /*@__PURE__*/ createComponent<SearchcraftDashIconElement, SearchcraftDashIconEvents>({
-    tagName: 'searchcraft-dash-icon',
-    elementClass: SearchcraftDashIconElement,
-    // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
-    react: React,
-    events: {} as SearchcraftDashIconEvents,
-    defineCustomElement: defineSearchcraftDashIcon
 });
 
 type SearchcraftErrorMessageEvents = NonNullable<unknown>;
@@ -214,17 +165,6 @@ export const SearchcraftResultsInfo: StencilReactComponent<SearchcraftResultsInf
     react: React,
     events: {} as SearchcraftResultsInfoEvents,
     defineCustomElement: defineSearchcraftResultsInfo
-});
-
-type SearchcraftSearchIconSetEvents = NonNullable<unknown>;
-
-export const SearchcraftSearchIconSet: StencilReactComponent<SearchcraftSearchIconSetElement, SearchcraftSearchIconSetEvents> = /*@__PURE__*/ createComponent<SearchcraftSearchIconSetElement, SearchcraftSearchIconSetEvents>({
-    tagName: 'searchcraft-search-icon-set',
-    elementClass: SearchcraftSearchIconSetElement,
-    // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
-    react: React,
-    events: {} as SearchcraftSearchIconSetEvents,
-    defineCustomElement: defineSearchcraftSearchIconSet
 });
 
 type SearchcraftSliderEvents = { onRangeChanged: EventName<CustomEvent<{ startValue: number; endValue: number }>> };

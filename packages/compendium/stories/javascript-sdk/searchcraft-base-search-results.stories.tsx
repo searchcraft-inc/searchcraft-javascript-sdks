@@ -64,9 +64,7 @@ export const Default: StoryObj<ComponentProps> = {
   decorators: [
     (Story) => {
       useEffect(() => {
-        const searchForm = document.querySelector(
-          'searchcraft-auto-search-form',
-        );
+        const searchForm = document.querySelector('searchcraft-input-form');
         const searchResults = document.querySelector(
           'searchcraft-base-search-results',
         );
@@ -85,7 +83,7 @@ export const Default: StoryObj<ComponentProps> = {
   render: (args) => {
     return (
       <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
-        <searchcraft-auto-search-form />
+        <searchcraft-input-form />
         <div style={{ paddingTop: 20 }}>
           <searchcraft-base-search-results
             ad-interval='4'
