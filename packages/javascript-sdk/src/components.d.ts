@@ -304,10 +304,12 @@ export namespace Components {
           * The classname applied to the label element.
          */
         "inputLabelClassName"?: string;
-        /**
-          * The label.
-         */
-        "label"?: string;
+        "label": string;
+    }
+    /**
+     * Renders a button which, when clicked, turns on popover visibility.
+     */
+    interface SearchcraftPopoverButton {
     }
     /**
      * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field.
@@ -340,13 +342,50 @@ export namespace Components {
          */
         "config": SearchcraftConfig | undefined;
         /**
+          * The hotkey that activates the popover.
+         */
+        "hotkey": string;
+        /**
+          * The hotkey modifier that activates the popover. Used together with the `hotkey` prop.
+         */
+        "hotkeyModifier": 'ctrl' | 'meta' | 'alt' | 'option';
+        /**
           * Formats the content rendered for each result.
          */
         "popoverResultMappings": PopoverResultMappings | undefined;
         /**
-          * How the element is displayed.
+          * The type of popover form to render.  - `inline` - Renders inline with the rest of the content on the page. The search results pop over the page content. - `fullscreen` - Renders in fullscreen view. Used together with the `searchcraft-popover-button` component. - `modal` - Renders in a modal view. Used together with the `searchcraft-popover-button` component.
          */
         "type": 'inline' | 'fullscreen' | 'modal';
+    }
+    /**
+     * A single list item rendered in a searchcraft-popover-list-view.
+     */
+    interface SearchcraftPopoverListItem {
+        /**
+          * The document position relative to the search results (For Measure)
+         */
+        "documentPosition": number;
+        /**
+          * The link href
+         */
+        "href": string | undefined;
+        /**
+          * The image alt tag.
+         */
+        "imageAlt": string | undefined;
+        /**
+          * The source of the image. If not included, no item will be rendered.
+         */
+        "imageSrc": string | undefined;
+        /**
+          * The result subtitle
+         */
+        "subtitleContent": string | undefined;
+        /**
+          * The result title
+         */
+        "titleContent": string | undefined;
     }
     /**
      * This web component is designed to display a list of results within a popover interface.
@@ -359,20 +398,13 @@ export namespace Components {
      */
     interface SearchcraftPopoverListView {
         /**
-          * Formats the content rendered for each result.
+          * The documents to render in the list view.
+         */
+        "documents": Record<string, unknown>[] | undefined;
+        /**
+          * The mappings that define how the data in the documents are mapped to the list-view-item elements.
          */
         "popoverResultMappings": PopoverResultMappings | undefined;
-    }
-    /**
-     * This web component is designed to display the content for a single result within a popover list item.
-     * It is consumed within the `searchcraft-popover-list-view` component.
-     * ## Usage
-     * ```html
-     * <!-- index.html -->
-     * <searchcraft-popover-result />
-     * ```
-     */
-    interface SearchcraftPopoverResult {
     }
     /**
      * This web component is designed to display the number of results returned from a search query.
@@ -592,6 +624,7 @@ declare global {
         "noResultsReceived": void;
         "inputFocus": void;
         "inputBlur": void;
+        "inputInit": void;
     }
     /**
      * This web component provides a user-friendly interface for querying an indexed dataset, enabling users to easily search large collections of data.
@@ -643,6 +676,15 @@ declare global {
         new (): HTMLSearchcraftInputLabelElement;
     };
     /**
+     * Renders a button which, when clicked, turns on popover visibility.
+     */
+    interface HTMLSearchcraftPopoverButtonElement extends Components.SearchcraftPopoverButton, HTMLStencilElement {
+    }
+    var HTMLSearchcraftPopoverButtonElement: {
+        prototype: HTMLSearchcraftPopoverButtonElement;
+        new (): HTMLSearchcraftPopoverButtonElement;
+    };
+    /**
      * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field.
      * ## Usage
      * ```html
@@ -674,6 +716,15 @@ declare global {
         new (): HTMLSearchcraftPopoverFormElement;
     };
     /**
+     * A single list item rendered in a searchcraft-popover-list-view.
+     */
+    interface HTMLSearchcraftPopoverListItemElement extends Components.SearchcraftPopoverListItem, HTMLStencilElement {
+    }
+    var HTMLSearchcraftPopoverListItemElement: {
+        prototype: HTMLSearchcraftPopoverListItemElement;
+        new (): HTMLSearchcraftPopoverListItemElement;
+    };
+    /**
      * This web component is designed to display a list of results within a popover interface.
      * It is consumed within the `searchcraft-popover-form` component.
      * ## Usage
@@ -687,21 +738,6 @@ declare global {
     var HTMLSearchcraftPopoverListViewElement: {
         prototype: HTMLSearchcraftPopoverListViewElement;
         new (): HTMLSearchcraftPopoverListViewElement;
-    };
-    /**
-     * This web component is designed to display the content for a single result within a popover list item.
-     * It is consumed within the `searchcraft-popover-list-view` component.
-     * ## Usage
-     * ```html
-     * <!-- index.html -->
-     * <searchcraft-popover-result />
-     * ```
-     */
-    interface HTMLSearchcraftPopoverResultElement extends Components.SearchcraftPopoverResult, HTMLStencilElement {
-    }
-    var HTMLSearchcraftPopoverResultElement: {
-        prototype: HTMLSearchcraftPopoverResultElement;
-        new (): HTMLSearchcraftPopoverResultElement;
     };
     /**
      * This web component is designed to display the number of results returned from a search query.
@@ -770,9 +806,10 @@ declare global {
         "searchcraft-filter-panel": HTMLSearchcraftFilterPanelElement;
         "searchcraft-input-form": HTMLSearchcraftInputFormElement;
         "searchcraft-input-label": HTMLSearchcraftInputLabelElement;
+        "searchcraft-popover-button": HTMLSearchcraftPopoverButtonElement;
         "searchcraft-popover-form": HTMLSearchcraftPopoverFormElement;
+        "searchcraft-popover-list-item": HTMLSearchcraftPopoverListItemElement;
         "searchcraft-popover-list-view": HTMLSearchcraftPopoverListViewElement;
-        "searchcraft-popover-result": HTMLSearchcraftPopoverResultElement;
         "searchcraft-results-info": HTMLSearchcraftResultsInfoElement;
         "searchcraft-slider": HTMLSearchcraftSliderElement;
         "searchcraft-toggle-button": HTMLSearchcraftToggleButtonElement;
@@ -1074,6 +1111,10 @@ declare namespace LocalJSX {
          */
         "onInputFocus"?: (event: SearchcraftInputFormCustomEvent<void>) => void;
         /**
+          * Event emitted when input initializes
+         */
+        "onInputInit"?: (event: SearchcraftInputFormCustomEvent<void>) => void;
+        /**
           * When no results are returned.
          */
         "onNoResultsReceived"?: (event: SearchcraftInputFormCustomEvent<void>) => void;
@@ -1099,10 +1140,12 @@ declare namespace LocalJSX {
           * The classname applied to the label element.
          */
         "inputLabelClassName"?: string;
-        /**
-          * The label.
-         */
         "label"?: string;
+    }
+    /**
+     * Renders a button which, when clicked, turns on popover visibility.
+     */
+    interface SearchcraftPopoverButton {
     }
     /**
      * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field.
@@ -1135,13 +1178,50 @@ declare namespace LocalJSX {
          */
         "config"?: SearchcraftConfig | undefined;
         /**
+          * The hotkey that activates the popover.
+         */
+        "hotkey"?: string;
+        /**
+          * The hotkey modifier that activates the popover. Used together with the `hotkey` prop.
+         */
+        "hotkeyModifier"?: 'ctrl' | 'meta' | 'alt' | 'option';
+        /**
           * Formats the content rendered for each result.
          */
         "popoverResultMappings"?: PopoverResultMappings | undefined;
         /**
-          * How the element is displayed.
+          * The type of popover form to render.  - `inline` - Renders inline with the rest of the content on the page. The search results pop over the page content. - `fullscreen` - Renders in fullscreen view. Used together with the `searchcraft-popover-button` component. - `modal` - Renders in a modal view. Used together with the `searchcraft-popover-button` component.
          */
         "type"?: 'inline' | 'fullscreen' | 'modal';
+    }
+    /**
+     * A single list item rendered in a searchcraft-popover-list-view.
+     */
+    interface SearchcraftPopoverListItem {
+        /**
+          * The document position relative to the search results (For Measure)
+         */
+        "documentPosition"?: number;
+        /**
+          * The link href
+         */
+        "href"?: string | undefined;
+        /**
+          * The image alt tag.
+         */
+        "imageAlt"?: string | undefined;
+        /**
+          * The source of the image. If not included, no item will be rendered.
+         */
+        "imageSrc"?: string | undefined;
+        /**
+          * The result subtitle
+         */
+        "subtitleContent"?: string | undefined;
+        /**
+          * The result title
+         */
+        "titleContent"?: string | undefined;
     }
     /**
      * This web component is designed to display a list of results within a popover interface.
@@ -1154,20 +1234,13 @@ declare namespace LocalJSX {
      */
     interface SearchcraftPopoverListView {
         /**
-          * Formats the content rendered for each result.
+          * The documents to render in the list view.
+         */
+        "documents"?: Record<string, unknown>[] | undefined;
+        /**
+          * The mappings that define how the data in the documents are mapped to the list-view-item elements.
          */
         "popoverResultMappings"?: PopoverResultMappings | undefined;
-    }
-    /**
-     * This web component is designed to display the content for a single result within a popover list item.
-     * It is consumed within the `searchcraft-popover-list-view` component.
-     * ## Usage
-     * ```html
-     * <!-- index.html -->
-     * <searchcraft-popover-result />
-     * ```
-     */
-    interface SearchcraftPopoverResult {
     }
     /**
      * This web component is designed to display the number of results returned from a search query.
@@ -1234,9 +1307,10 @@ declare namespace LocalJSX {
         "searchcraft-filter-panel": SearchcraftFilterPanel;
         "searchcraft-input-form": SearchcraftInputForm;
         "searchcraft-input-label": SearchcraftInputLabel;
+        "searchcraft-popover-button": SearchcraftPopoverButton;
         "searchcraft-popover-form": SearchcraftPopoverForm;
+        "searchcraft-popover-list-item": SearchcraftPopoverListItem;
         "searchcraft-popover-list-view": SearchcraftPopoverListView;
-        "searchcraft-popover-result": SearchcraftPopoverResult;
         "searchcraft-results-info": SearchcraftResultsInfo;
         "searchcraft-slider": SearchcraftSlider;
         "searchcraft-toggle-button": SearchcraftToggleButton;
@@ -1354,6 +1428,10 @@ declare module "@stencil/core" {
              */
             "searchcraft-input-label": LocalJSX.SearchcraftInputLabel & JSXBase.HTMLAttributes<HTMLSearchcraftInputLabelElement>;
             /**
+             * Renders a button which, when clicked, turns on popover visibility.
+             */
+            "searchcraft-popover-button": LocalJSX.SearchcraftPopoverButton & JSXBase.HTMLAttributes<HTMLSearchcraftPopoverButtonElement>;
+            /**
              * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field.
              * ## Usage
              * ```html
@@ -1380,6 +1458,10 @@ declare module "@stencil/core" {
              */
             "searchcraft-popover-form": LocalJSX.SearchcraftPopoverForm & JSXBase.HTMLAttributes<HTMLSearchcraftPopoverFormElement>;
             /**
+             * A single list item rendered in a searchcraft-popover-list-view.
+             */
+            "searchcraft-popover-list-item": LocalJSX.SearchcraftPopoverListItem & JSXBase.HTMLAttributes<HTMLSearchcraftPopoverListItemElement>;
+            /**
              * This web component is designed to display a list of results within a popover interface.
              * It is consumed within the `searchcraft-popover-form` component.
              * ## Usage
@@ -1389,16 +1471,6 @@ declare module "@stencil/core" {
              * ```
              */
             "searchcraft-popover-list-view": LocalJSX.SearchcraftPopoverListView & JSXBase.HTMLAttributes<HTMLSearchcraftPopoverListViewElement>;
-            /**
-             * This web component is designed to display the content for a single result within a popover list item.
-             * It is consumed within the `searchcraft-popover-list-view` component.
-             * ## Usage
-             * ```html
-             * <!-- index.html -->
-             * <searchcraft-popover-result />
-             * ```
-             */
-            "searchcraft-popover-result": LocalJSX.SearchcraftPopoverResult & JSXBase.HTMLAttributes<HTMLSearchcraftPopoverResultElement>;
             /**
              * This web component is designed to display the number of results returned from a search query.
              * It provides users with real-time feedback on the scale of the results, such as the total number of items found.

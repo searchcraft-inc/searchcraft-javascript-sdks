@@ -20,7 +20,7 @@ This web component serves as the input label for the searchcraft-input-form comp
 | Property              | Attribute                | Description                                 | Type     | Default     |
 | --------------------- | ------------------------ | ------------------------------------------- | -------- | ----------- |
 | `inputLabelClassName` | `input-label-class-name` | The classname applied to the label element. | `string` | `''`        |
-| `label`               | `label`                  | The label.                                  | `string` | `undefined` |
+| `label`               | `label`                  |                                             | `string` | `undefined` |
 
 
 ## Dependencies

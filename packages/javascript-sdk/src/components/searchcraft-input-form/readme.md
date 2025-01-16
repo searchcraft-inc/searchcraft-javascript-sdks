@@ -48,15 +48,20 @@ searchForm.addEventListener('querySubmit', (event) => {
 
 ## Events
 
-| Event               | Description                       | Type                |
-| ------------------- | --------------------------------- | ------------------- |
-| `inputBlur`         | When the input becomes unfocused. | `CustomEvent<void>` |
-| `inputCleared`      | When the input is cleared.        | `CustomEvent<void>` |
-| `inputFocus`        | When the input becomes focused.   | `CustomEvent<void>` |
-| `noResultsReceived` | When no results are returned.     | `CustomEvent<void>` |
+| Event               | Description                          | Type                |
+| ------------------- | ------------------------------------ | ------------------- |
+| `inputBlur`         | When the input becomes unfocused.    | `CustomEvent<void>` |
+| `inputCleared`      | When the input is cleared.           | `CustomEvent<void>` |
+| `inputFocus`        | When the input becomes focused.      | `CustomEvent<void>` |
+| `inputInit`         | Event emitted when input initializes | `CustomEvent<void>` |
+| `noResultsReceived` | When no results are returned.        | `CustomEvent<void>` |
 
 
 ## Dependencies
+
+### Used by
+
+ - [searchcraft-popover-form](../searchcraft-popover-form)
 
 ### Depends on
 
@@ -70,6 +75,7 @@ graph TD;
   searchcraft-input-form --> searchcraft-button
   searchcraft-input-form --> searchcraft-input-label
   searchcraft-input-form --> searchcraft-error-message
+  searchcraft-popover-form --> searchcraft-input-form
   style searchcraft-input-form fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

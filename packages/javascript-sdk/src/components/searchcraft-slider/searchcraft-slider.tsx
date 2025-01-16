@@ -6,7 +6,7 @@ import {
   State,
   Prop,
 } from '@stencil/core';
-import { getMillis } from '@utils/utils';
+import { getMillis } from '@utils';
 import classNames from 'classnames';
 
 /**

@@ -38,6 +38,8 @@ export interface SearchcraftState {
   setIsRequesting: (isRequesting: boolean) => void;
   setQuery: (query: string) => void;
   setSearchResults: (results: SearchcraftResponse | null) => void;
+  setPopoverVisibility: (isVisible: boolean) => void;
+  isPopoverVisible: boolean;
 }
 
 // Zustand store for Searchcraft state
@@ -65,6 +67,12 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
   };
 
   return {
+    setPopoverVisibility: (isVisible: boolean) => {
+      set({
+        isPopoverVisible: isVisible,
+      });
+    },
+    isPopoverVisible: false,
     resetFacetPaths: () => {
       set({
         facetPathsForIndexFields: {},

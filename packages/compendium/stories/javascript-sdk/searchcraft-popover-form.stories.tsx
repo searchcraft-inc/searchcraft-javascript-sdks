@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import type { SearchResultMappings } from '@searchcraft/javascript-sdk';
+import type { PopoverResultMappings } from '@searchcraft/javascript-sdk';
 import { config } from '../../utils/DefaultSearchcraftConfig';
 import { useEffect } from 'react';
 import type { Components } from '@searchcraft/javascript-sdk';
@@ -9,45 +9,41 @@ const componentMeta: Meta = {
   argTypes: {},
 };
 
-const mappings: SearchResultMappings = {
-  containerHref: {
+const mappings: PopoverResultMappings = {
+  href: {
     fieldNames: [
       {
-        fieldName: 'canonical_link',
+        fieldName: 'link',
         dataType: 'text',
       },
     ],
-  },
-  footer: {
-    fieldNames: [
-      {
-        fieldName: 'date_published',
-        dataType: 'date',
-      },
-      {
-        fieldName: 'author_name',
-        dataType: 'text',
-      },
-    ],
-    delimiter: ' • ',
-  },
-  imageSource: {
-    fieldNames: [
-      {
-        fieldName: 'medium_image',
-        dataType: 'text',
-      },
-    ],
-  },
-  body: {
-    fieldNames: [{ fieldName: 'sub_headline', dataType: 'text' }],
   },
   title: {
-    fieldNames: [{ fieldName: 'headline', dataType: 'text' }],
+    fieldNames: [{ fieldName: 'title', dataType: 'text' }],
+  },
+  subtitle: {
+    fieldNames: [
+      {
+        fieldName: 'price',
+        dataType: 'number',
+        numberFormatLocale: 'en-US',
+        numberFormatOptions: {
+          style: 'currency',
+          currency: 'USD',
+        },
+        numberScale: 1.0,
+      },
+    ],
+  },
+  imageSource: {
+    fieldNames: [{ fieldName: 'image', dataType: 'text' }],
+  },
+  imageAlt: {
+    fieldNames: [{ fieldName: 'price', dataType: 'text' }],
   },
 };
 
-export const Default: StoryObj<Components.SearchcraftPopoverForm> = {
+export const Inline: StoryObj<Components.SearchcraftPopoverForm> = {
   decorators: [
     (Story) => {
       useEffect(() => {
@@ -55,7 +51,7 @@ export const Default: StoryObj<Components.SearchcraftPopoverForm> = {
 
         if (searchForm) {
           searchForm.config = config;
-          searchForm.searchResultMappings = mappings;
+          searchForm.popoverResultMappings = mappings;
         }
       }, []);
 
@@ -65,7 +61,85 @@ export const Default: StoryObj<Components.SearchcraftPopoverForm> = {
   render: (args) => {
     return (
       <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
-        <searchcraft-popover-form />
+        <p>Story Note: This story uses the Bazaario env vars</p>
+        <searchcraft-popover-form
+          type='inline'
+          hotkey='k'
+          hotkey-modifier='ctrl'
+        />
+        <p>
+          Here's some content that shows up underneath the popover. The popover
+          should render above this content when it is active.
+        </p>
+      </div>
+    );
+  },
+  args: {},
+};
+
+export const Modal: StoryObj<Components.SearchcraftPopoverForm> = {
+  decorators: [
+    (Story) => {
+      useEffect(() => {
+        const searchForm = document.querySelector('searchcraft-popover-form');
+
+        if (searchForm) {
+          searchForm.config = config;
+          searchForm.popoverResultMappings = mappings;
+        }
+      }, []);
+
+      return <Story />;
+    },
+  ],
+  render: (args) => {
+    return (
+      <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
+        <p>Story Note: This story uses the Bazaario env vars</p>
+        <searchcraft-popover-button>
+          <span>Click me</span>
+        </searchcraft-popover-button>
+
+        <searchcraft-popover-form
+          type='modal'
+          hotkey='k'
+          hotkey-modifier='ctrl'
+        />
+      </div>
+    );
+  },
+  args: {},
+};
+
+export const Fullscreen: StoryObj<Components.SearchcraftPopoverForm> = {
+  decorators: [
+    (Story) => {
+      useEffect(() => {
+        const searchForm = document.querySelector('searchcraft-popover-form');
+
+        if (searchForm) {
+          searchForm.config = config;
+          searchForm.popoverResultMappings = mappings;
+        }
+      }, []);
+
+      return <Story />;
+    },
+  ],
+  render: (args) => {
+    return (
+      <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
+        <p>Story Note: This story uses the Bazaario env vars</p>
+
+        <searchcraft-popover-button>
+          <span>Click me</span>
+        </searchcraft-popover-button>
+
+        <searchcraft-popover-form
+          type='fullscreen'
+          hotkey='k'
+          hotkey-modifier='ctrl'
+        />
       </div>
     );
   },
