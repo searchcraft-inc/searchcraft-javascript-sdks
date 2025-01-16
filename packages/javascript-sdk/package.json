@@ -1,7 +1,7 @@
 {
   "name": "@searchcraft/javascript-sdk",
   "private": false,
-  "version": "0.4.2",
+  "version": "0.5.3",
   "description": "Searchcraft Javascript SDK",
   "author": "Searchcraft",
   "license": "Apache-2.0",
@@ -14,11 +14,8 @@
   "exports": {
     ".": {
       "import": "./dist/searchcraft-javascript-sdk/searchcraft-javascript-sdk.esm.js",
-      "require": "./dist/searchcraft-javascript-sdk/searchcraft-javascript-sdk.cjs.js"
-    },
-    "./dist/*": {
-      "import": "./dist/*",
-      "types": "./dist/*"
+      "require": "./dist/searchcraft-javascript-sdk/searchcraft-javascript-sdk.cjs.js",
+      "types": "./dist/types/index.d.ts"
     },
     "./components": {
       "import": "./dist/components/index.js",
@@ -28,6 +25,10 @@
       "import": "./dist/loader/index.js",
       "require": "./dist/loader/index.cjs",
       "types": "./dist/loader/index.d.ts"
+    },
+    "./dist/components/*": {
+      "import": "./dist/components/*",
+      "types": "./dist/components/*"
     }
   },
   "repository": {
@@ -47,6 +48,7 @@
   },
   "devDependencies": {
     "@searchcraft/core": "*",
+    "@searchcraft/javascript-sdk": "*",
     "@stencil/core": "^4.7.0",
     "@stencil/react-output-target": "^0.8.2",
     "@stencil/sass": "^3.0.12",

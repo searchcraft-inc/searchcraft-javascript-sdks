@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import WebComponentWrapper from '../../utils/WebComponentWrapper';
+import type { Components } from '@searchcraft/javascript-sdk';
 
 const componentName = 'searchcraft-input-label';
 
@@ -17,17 +18,12 @@ const componentMeta: Meta = {
   },
 };
 
-type ComponentProps = {
-  inputLabelClassName?: string;
-  label?: string;
-};
-
-const defaultProps: ComponentProps = {
+const defaultProps: Components.SearchcraftInputLabel = {
   inputLabelClassName: '',
   label: 'Search Label',
 };
 
-export const Default: StoryObj<ComponentProps> = {
+export const Default: StoryObj<Components.SearchcraftInputLabel> = {
   render: (args) => (
     <WebComponentWrapper args={args} componentName={componentName} />
   ),

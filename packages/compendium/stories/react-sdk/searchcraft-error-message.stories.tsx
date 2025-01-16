@@ -1,5 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { SearchcraftErrorMessage } from '@searchcraft/react-sdk';
+import {
+  SearchcraftErrorMessage,
+  type SearchcraftErrorMessageProps,
+} from '@searchcraft/react-sdk';
 
 const componentMeta: Meta = {
   title: 'React SDK/searchcraft-error-message',
@@ -16,17 +19,11 @@ const componentMeta: Meta = {
   },
 };
 
-type ComponentProps = {
-  errorMessage?: string;
-  theme?: 'light' | 'dark';
-};
-
-const defaultProps: ComponentProps = {
+const defaultProps: SearchcraftErrorMessageProps = {
   errorMessage: 'An error occurred while processing your request.',
-  theme: 'light',
 };
 
-export const Default: StoryObj<ComponentProps> = {
+export const Default: StoryObj<SearchcraftErrorMessageProps> = {
   render: (args) => (
     <SearchcraftErrorMessage errorMessage={args.errorMessage} />
   ),

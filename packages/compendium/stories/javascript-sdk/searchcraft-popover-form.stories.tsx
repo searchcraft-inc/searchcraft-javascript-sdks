@@ -2,24 +2,11 @@ import type { Meta, StoryObj } from '@storybook/react';
 import type { SearchResultMappings } from '@searchcraft/javascript-sdk';
 import { config } from '../../utils/DefaultSearchcraftConfig';
 import { useEffect } from 'react';
+import type { Components } from '@searchcraft/javascript-sdk';
 
 const componentMeta: Meta = {
   title: 'Javascript SDK/searchcraft-popover-form',
   argTypes: {},
-};
-
-type ComponentProps = {
-  adInterval: number;
-  customStylesForResults: string | Record<string, Record<string, string>>;
-  searchResultMappings: string | undefined;
-  placeAdAtEnd: boolean;
-  placeAdAtStart: boolean;
-  resultImagePlacement: 'left' | 'right';
-  buttonLabel: string | undefined;
-  buttonTarget: '_blank' | '_self' | '_top' | '_parent';
-  buttonRel: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
-  containerTarget: '_blank' | '_self' | '_top' | '_parent';
-  containerRel: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
 };
 
 const mappings: SearchResultMappings = {
@@ -60,7 +47,7 @@ const mappings: SearchResultMappings = {
   },
 };
 
-export const Default: StoryObj<ComponentProps> = {
+export const Default: StoryObj<Components.SearchcraftPopoverForm> = {
   decorators: [
     (Story) => {
       useEffect(() => {

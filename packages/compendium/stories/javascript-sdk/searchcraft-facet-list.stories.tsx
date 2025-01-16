@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import WebComponentWrapper from '../../utils/WebComponentWrapper';
+import type { Components } from '@searchcraft/javascript-sdk';
 
 const componentName = 'searchcraft-facet-list';
 
@@ -17,19 +18,11 @@ const componentMeta: Meta = {
   },
 };
 
-type ComponentProps = {
-  filters?: Array<{ label: string; value: string }>;
+const defaultProps: Components.SearchcraftFacetList = {
+  fieldName: 'section',
 };
 
-const defaultProps: ComponentProps = {
-  filters: [
-    { label: 'Category 1', value: 'category-1' },
-    { label: 'Category 2', value: 'category-2' },
-    { label: 'Category 3', value: 'category-3' },
-  ],
-};
-
-export const Default: StoryObj<ComponentProps> = {
+export const Default: StoryObj<Components.SearchcraftFacetList> = {
   render: (args) => (
     <WebComponentWrapper args={args} componentName={componentName} />
   ),

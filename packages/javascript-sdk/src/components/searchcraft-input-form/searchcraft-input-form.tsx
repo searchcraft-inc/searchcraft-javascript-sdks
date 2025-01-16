@@ -62,26 +62,42 @@ export class SearchcraftInput {
    * The duration to debounce the input's `inputChange` event.
    */
   @Prop() debounceDelay = 0;
-
-  private debounceTimeout: ReturnType<typeof setTimeout> | null = null;
-
+  /**
+   * Event emitted when the input element has been cleared.
+   */
   @Event() inputCleared: EventEmitter<void>;
+  /**
+   * Event emitted when a query returns with no results received.
+   */
   @Event() noResultsReceived: EventEmitter<void>;
+  /**
+   * Event emitted when a new search request has been submitted.
+   */
+  @Event() querySubmit: EventEmitter<string>;
+  /**
+   * Event emitted when the input has gained focus.
+   */
   @Event() inputFocus: EventEmitter<void>;
+  /**
+   * Event emitted when the input has lost focus.
+   */
   @Event() inputBlur: EventEmitter<void>;
 
   @State() inputValue = this.searchTerm;
   @State() error = false;
+  @State() isSearchcraftInitialized = false;
 
+  private debounceTimeout: ReturnType<typeof setTimeout> | null = null;
   private searchStore = useSearchcraftStore.getState();
 
   init() {
-    if (this.config) {
+    if (this.config && !this.isSearchcraftInitialized) {
       const searchcraft = new SearchcraftCore(this.config, {
         sdkName: packageJson.name,
         sdkVersion: packageJson.version,
       });
       this.searchStore.initialize(searchcraft, true);
+      this.isSearchcraftInitialized = true;
     }
   }
 
@@ -125,7 +141,7 @@ export class SearchcraftInput {
     if (value === useSearchcraftStore.getState().query) {
       return;
     }
-
+    this.querySubmit.emit(value);
     this.searchTerm = value.trim();
     this.error = false;
     this.searchStore.setQuery(this.searchTerm);

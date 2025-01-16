@@ -22,12 +22,13 @@
 
 ## Events
 
-| Event               | Description | Type                |
-| ------------------- | ----------- | ------------------- |
-| `inputBlur`         |             | `CustomEvent<void>` |
-| `inputCleared`      |             | `CustomEvent<void>` |
-| `inputFocus`        |             | `CustomEvent<void>` |
-| `noResultsReceived` |             | `CustomEvent<void>` |
+| Event               | Description                                                  | Type                  |
+| ------------------- | ------------------------------------------------------------ | --------------------- |
+| `inputBlur`         | Event emitted when the input has lost focus.                 | `CustomEvent<void>`   |
+| `inputCleared`      | Event emitted when the input element has been cleared.       | `CustomEvent<void>`   |
+| `inputFocus`        | Event emitted when the input has gained focus.               | `CustomEvent<void>`   |
+| `noResultsReceived` | Event emitted when a query returns with no results received. | `CustomEvent<void>`   |
+| `querySubmit`       | Event emitted when a new search request has been submitted.  | `CustomEvent<string>` |
 
 
 ## Dependencies
