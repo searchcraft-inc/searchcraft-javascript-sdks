@@ -5,28 +5,61 @@
 <!-- Auto Generated Below -->
 
 
+## Overview
+
+This web component is responsible for displaying the results of a search query.
+Once a query is submitted, the component formats and presents an ordered list of the results.
+
+## Usage
+```html
+<!-- index.html -->
+<searchcraft-base-search-results
+  ad-interval="4"
+  place-ad-at-start="false"
+  result-image-placement="right"
+/>
+```
+
+```js
+// index.js
+const baseSearchResults = document.querySelector('searchcraft-base-search-results');
+
+baseSearchResults.searchResultMappings = containerHref: {
+  fieldNames: [
+   {
+     fieldName: 'canonical_link',
+     dataType: 'text',
+   },
+ ],
+};
+
+baseSearchResults.addEventListener('noResults', () => {
+  console.log('No search results found');
+});
+```
+
 ## Properties
 
-| Property                 | Attribute                   | Description | Type                                                                                                                                                                                                                                   | Default     |
-| ------------------------ | --------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| `adInterval`             | `ad-interval`               |             | `number`                                                                                                                                                                                                                               | `4`         |
-| `buttonLabel`            | `button-label`              |             | `string`                                                                                                                                                                                                                               | `undefined` |
-| `buttonRel`              | `button-rel`                |             | `"nofollow" \| "noopener" \| "noreferrer"`                                                                                                                                                                                             | `undefined` |
-| `buttonTarget`           | `button-target`             |             | `"_blank" \| "_parent" \| "_self" \| "_top"`                                                                                                                                                                                           | `'_blank'`  |
-| `containerRel`           | `container-rel`             |             | `"nofollow" \| "noopener" \| "noreferrer"`                                                                                                                                                                                             | `undefined` |
-| `containerTarget`        | `container-target`          |             | `"_blank" \| "_parent" \| "_self" \| "_top"`                                                                                                                                                                                           | `'_blank'`  |
-| `customStylesForResults` | `custom-styles-for-results` |             | `string \| { [x: string]: Record<string, string>; }`                                                                                                                                                                                   | `undefined` |
-| `placeAdAtEnd`           | `place-ad-at-end`           |             | `boolean`                                                                                                                                                                                                                              | `false`     |
-| `placeAdAtStart`         | `place-ad-at-start`         |             | `boolean`                                                                                                                                                                                                                              | `true`      |
-| `resultImagePlacement`   | `result-image-placement`    |             | `"left" \| "right"`                                                                                                                                                                                                                    | `'right'`   |
-| `searchResultMappings`   | --                          |             | `{ body?: SearchResultMapping; buttonHref?: SearchResultMapping; containerHref?: SearchResultMapping; footer?: SearchResultMapping; imageSource?: SearchResultMapping; subtitle?: SearchResultMapping; title?: SearchResultMapping; }` | `undefined` |
+| Property                 | Attribute                   | Description                                                                                                                           | Type                                                                                                                                                                                                                                   | Default     |
+| ------------------------ | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| `adInterval`             | `ad-interval`               | How often ads are injected.                                                                                                           | `number`                                                                                                                                                                                                                               | `4`         |
+| `buttonLabel`            | `button-label`              | The label for the button rendered when containerHref is not present for each result.                                                  | `string`                                                                                                                                                                                                                               | `undefined` |
+| `buttonRel`              | `button-rel`                | The relationship between the current document and the link for the button rendered when containerHref is not present for each result. | `"nofollow" \| "noopener" \| "noreferrer"`                                                                                                                                                                                             | `undefined` |
+| `buttonTarget`           | `button-target`             | Where to open the link for the button rendered when containerHref is not present for each result.                                     | `"_blank" \| "_parent" \| "_self" \| "_top"`                                                                                                                                                                                           | `'_blank'`  |
+| `containerRel`           | `container-rel`             | The relationship between the current document and the link for the containing element for each result.                                | `"nofollow" \| "noopener" \| "noreferrer"`                                                                                                                                                                                             | `undefined` |
+| `containerTarget`        | `container-target`          | Where to open the link for the containing element for each result.                                                                    | `"_blank" \| "_parent" \| "_self" \| "_top"`                                                                                                                                                                                           | `'_blank'`  |
+| `customStylesForResults` | `custom-styles-for-results` | A custom styles object.                                                                                                               | `string \| { [x: string]: Record<string, string>; }`                                                                                                                                                                                   | `undefined` |
+| `placeAdAtEnd`           | `place-ad-at-end`           | Should an ad be placed at the end of the results.                                                                                     | `boolean`                                                                                                                                                                                                                              | `false`     |
+| `placeAdAtStart`         | `place-ad-at-start`         | Should an ad be placed at the start of the results.                                                                                   | `boolean`                                                                                                                                                                                                                              | `true`      |
+| `resultImagePlacement`   | `result-image-placement`    | The placement of the image for each result.                                                                                           | `"left" \| "right"`                                                                                                                                                                                                                    | `'right'`   |
+| `searchResultMappings`   | --                          | Formats the content rendered for each result.                                                                                         | `{ body?: SearchResultMapping; buttonHref?: SearchResultMapping; containerHref?: SearchResultMapping; footer?: SearchResultMapping; imageSource?: SearchResultMapping; subtitle?: SearchResultMapping; title?: SearchResultMapping; }` | `undefined` |
 
 
 ## Events
 
-| Event       | Description | Type                |
-| ----------- | ----------- | ------------------- |
-| `noResults` |             | `CustomEvent<void>` |
+| Event       | Description                   | Type                |
+| ----------- | ----------------------------- | ------------------- |
+| `noResults` | When no results are returned. | `CustomEvent<void>` |
 
 
 ## Dependencies

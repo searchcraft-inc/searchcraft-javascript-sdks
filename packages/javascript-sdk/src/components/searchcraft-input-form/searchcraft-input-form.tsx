@@ -20,6 +20,31 @@ export interface ScInputCustomEvent<T> extends CustomEvent<T> {
   target: HTMLSearchcraftInputFormElement;
 }
 
+/**
+ * This web component provides a user-friendly interface for querying an indexed dataset, enabling users to easily search large collections of data.
+ * It abstracts the complexities of index-based searching, making it accessible to users of all technical levels.
+ *
+ * ## Usage
+ * ```html
+ * <!-- index.html -->
+ * <searchcraft-input-form placeholder-value="Search here" />
+ * ```
+ *
+ * ```js
+ * // index.js
+ * const searchInputForm = document.querySelector('searchcraft-input-form');
+ *
+ * seardchInputForm.config = {
+ *   index: [],
+ *   readKey: '',
+ *   endpointUrl: '',
+ * };
+ *
+ * searchForm.addEventListener('querySubmit', (event) => {
+ *   console.log('Query submitted', event.detail);
+ * });
+ * ```
+ */
 @Component({
   tag: 'searchcraft-input-form',
   styleUrl: 'searchcraft-input-form.module.scss',
@@ -62,42 +87,38 @@ export class SearchcraftInput {
    * The duration to debounce the input's `inputChange` event.
    */
   @Prop() debounceDelay = 0;
+
+  private debounceTimeout: ReturnType<typeof setTimeout> | null = null;
+
   /**
-   * Event emitted when the input element has been cleared.
+   * When the input is cleared.
    */
   @Event() inputCleared: EventEmitter<void>;
   /**
-   * Event emitted when a query returns with no results received.
+   * When no results are returned.
    */
   @Event() noResultsReceived: EventEmitter<void>;
   /**
-   * Event emitted when a new search request has been submitted.
-   */
-  @Event() querySubmit: EventEmitter<string>;
-  /**
-   * Event emitted when the input has gained focus.
+   * When the input becomes focused.
    */
   @Event() inputFocus: EventEmitter<void>;
   /**
-   * Event emitted when the input has lost focus.
+   * When the input becomes unfocused.
    */
   @Event() inputBlur: EventEmitter<void>;
 
   @State() inputValue = this.searchTerm;
   @State() error = false;
-  @State() isSearchcraftInitialized = false;
 
-  private debounceTimeout: ReturnType<typeof setTimeout> | null = null;
   private searchStore = useSearchcraftStore.getState();
 
   init() {
-    if (this.config && !this.isSearchcraftInitialized) {
+    if (this.config) {
       const searchcraft = new SearchcraftCore(this.config, {
         sdkName: packageJson.name,
         sdkVersion: packageJson.version,
       });
       this.searchStore.initialize(searchcraft, true);
-      this.isSearchcraftInitialized = true;
     }
   }
 
@@ -141,7 +162,7 @@ export class SearchcraftInput {
     if (value === useSearchcraftStore.getState().query) {
       return;
     }
-    this.querySubmit.emit(value);
+
     this.searchTerm = value.trim();
     this.error = false;
     this.searchStore.setQuery(this.searchTerm);
