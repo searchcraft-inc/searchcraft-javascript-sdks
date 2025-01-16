@@ -1,7 +1,7 @@
 {
   "name": "@searchcraft/javascript-sdk",
   "private": false,
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "Searchcraft Javascript SDK",
   "author": "Searchcraft",
   "license": "Apache-2.0",
@@ -17,10 +17,6 @@
       "require": "./dist/searchcraft-javascript-sdk/searchcraft-javascript-sdk.cjs.js",
       "types": "./dist/types/index.d.ts"
     },
-    "./dist/*": {
-      "import": "./dist/*",
-      "types": "./dist/*"
-    },
     "./components": {
       "import": "./dist/components/index.js",
       "types": "./dist/components/index.d.ts"
@@ -29,6 +25,10 @@
       "import": "./dist/loader/index.js",
       "require": "./dist/loader/index.cjs",
       "types": "./dist/loader/index.d.ts"
+    },
+    "./dist/components/*": {
+      "import": "./dist/components/*",
+      "types": "./dist/components/*"
     }
   },
   "repository": {
