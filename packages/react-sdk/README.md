@@ -24,9 +24,9 @@ import { useMemo } from 'react'
 
 import Searchcraft, { SearchcraftCore } from '@searchcraft/react-sdk'
 
-// values are created via the Searchcraft Vektron Customer Portal
+// For Searchcraft Cloud, values are created via the Searchcraft Vektron Customer Portal. For self-hosted refer to the API docs. https://docs.searchcraft.io/reference/api/overview/
 const searchcraftConfig = {
-  index: ['test_data'],
+  index: ['data_test'],
   apiKey: '1234.909.jmk',
   endpointURL: 'http://127.0.0.1:8000',
 }
