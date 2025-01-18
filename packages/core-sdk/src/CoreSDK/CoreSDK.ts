@@ -106,7 +106,7 @@ export class SearchcraftCore {
             occur = 'must';
             queryItems.push({
               occur,
-              normal: {
+              exact: {
                 ctx: item.value,
               },
             });
@@ -123,7 +123,7 @@ export class SearchcraftCore {
             occur = 'must';
             queryItems.push({
               occur,
-              normal: {
+              exact: {
                 ctx: item.value,
               },
             });

@@ -79,7 +79,7 @@ export class SearchcraftFilterPanel {
   }
 
   handleExactMatchToggleUpdated(isActive: boolean) {
-    this.searchStore.setSearchMode(isActive ? 'normal' : 'fuzzy');
+    this.searchStore.setSearchMode(isActive ? 'exact' : 'fuzzy');
     this.searchStore.search();
   }
 
