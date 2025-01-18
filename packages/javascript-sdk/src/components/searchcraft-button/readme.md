@@ -5,21 +5,27 @@
 <!-- Auto Generated Below -->
 
 
+## Overview
+
+This web component represents a button to be consumed within the `search-input-form` component.
+It provides a clear, interactive way for users to submit search queries or trigger actions in a search interface.
+It is consumed within the `searchcraft-input-form` component.
+
 ## Properties
 
-| Property       | Attribute       | Description | Type      | Default     |
-| -------------- | --------------- | ----------- | --------- | ----------- |
-| `iconElement`  | --              |             | `Element` | `undefined` |
-| `iconOnly`     | `icon-only`     |             | `boolean` | `false`     |
-| `iconPosition` | `icon-position` |             | `string`  | `'left'`    |
-| `label`        | `label`         |             | `string`  | `'Search'`  |
+| Property       | Attribute       | Description                             | Type      | Default     |
+| -------------- | --------------- | --------------------------------------- | --------- | ----------- |
+| `iconElement`  | --              | The icon element.                       | `Element` | `undefined` |
+| `iconOnly`     | `icon-only`     | Should the button only display an icon. | `boolean` | `false`     |
+| `iconPosition` | `icon-position` | The position of the icon.               | `string`  | `'left'`    |
+| `label`        | `label`         | The label for the button.               | `string`  | `'Search'`  |
 
 
 ## Events
 
-| Event         | Description | Type                |
-| ------------- | ----------- | ------------------- |
-| `buttonClick` |             | `CustomEvent<void>` |
+| Event         | Description                 | Type                |
+| ------------- | --------------------------- | ------------------- |
+| `buttonClick` | When the button is clicked. | `CustomEvent<void>` |
 
 
 ## Dependencies

@@ -5,26 +5,32 @@
 <!-- Auto Generated Below -->
 
 
+## Overview
+
+This web component is designed to display detailed information for a single search result.
+Once a query is submitted, the component formats and presents the result.
+It is consumed within the `searchcraft-base-search-results` component.
+
 ## Properties
 
-| Property           | Attribute           | Description | Type                                         | Default     |
-| ------------------ | ------------------- | ----------- | -------------------------------------------- | ----------- |
-| `bodyContent`      | `body-content`      |             | `string`                                     | `undefined` |
-| `buttonHref`       | `button-href`       |             | `string`                                     | `undefined` |
-| `buttonLabel`      | `button-label`      |             | `string`                                     | `undefined` |
-| `buttonRel`        | `button-rel`        |             | `"nofollow" \| "noopener" \| "noreferrer"`   | `undefined` |
-| `buttonTarget`     | `button-target`     |             | `"_blank" \| "_parent" \| "_self" \| "_top"` | `'_blank'`  |
-| `containerHref`    | `container-href`    |             | `string`                                     | `undefined` |
-| `containerRel`     | `container-rel`     |             | `"nofollow" \| "noopener" \| "noreferrer"`   | `undefined` |
-| `containerTarget`  | `container-target`  |             | `"_blank" \| "_parent" \| "_self" \| "_top"` | `'_blank'`  |
-| `customStyles`     | `custom-styles`     |             | `string`                                     | `undefined` |
-| `documentPosition` | `document-position` |             | `number`                                     | `0`         |
-| `footerContent`    | `footer-content`    |             | `string`                                     | `undefined` |
-| `imageAlt`         | `image-alt`         |             | `string`                                     | `undefined` |
-| `imagePlacement`   | `image-placement`   |             | `"left" \| "right"`                          | `undefined` |
-| `imageSrc`         | `image-src`         |             | `string`                                     | `undefined` |
-| `subtitleContent`  | `subtitle-content`  |             | `string`                                     | `undefined` |
-| `titleContent`     | `title-content`     |             | `string`                                     | `undefined` |
+| Property           | Attribute           | Description                                                                                                           | Type                                         | Default     |
+| ------------------ | ------------------- | --------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- | ----------- |
+| `bodyContent`      | `body-content`      | The body content.                                                                                                     | `string`                                     | `undefined` |
+| `buttonHref`       | `button-href`       | The link for the button rendered when containerHref is not present.                                                   | `string`                                     | `undefined` |
+| `buttonLabel`      | `button-label`      | The label for the button rendered when containerHref is not present.                                                  | `string`                                     | `undefined` |
+| `buttonRel`        | `button-rel`        | The relationship between the current document and the link for the button rendered when containerHref is not present. | `"nofollow" \| "noopener" \| "noreferrer"`   | `undefined` |
+| `buttonTarget`     | `button-target`     | Where to open the link for the button rendered when containerHref is not present.                                     | `"_blank" \| "_parent" \| "_self" \| "_top"` | `'_blank'`  |
+| `containerHref`    | `container-href`    | The link for the containing element.                                                                                  | `string`                                     | `undefined` |
+| `containerRel`     | `container-rel`     | The relationship between the current document and the link for the containing element.                                | `"nofollow" \| "noopener" \| "noreferrer"`   | `undefined` |
+| `containerTarget`  | `container-target`  | Where to open the link for the containing element.                                                                    | `"_blank" \| "_parent" \| "_self" \| "_top"` | `'_blank'`  |
+| `customStyles`     | `custom-styles`     | A custom styles object.                                                                                               | `string`                                     | `undefined` |
+| `documentPosition` | `document-position` | The position in the document. Used with the "document_clicked" measure event.                                         | `number`                                     | `0`         |
+| `footerContent`    | `footer-content`    | The footer content.                                                                                                   | `string`                                     | `undefined` |
+| `imageAlt`         | `image-alt`         | The image alternative text.                                                                                           | `string`                                     | `undefined` |
+| `imagePlacement`   | `image-placement`   | The placement of the image.                                                                                           | `"left" \| "right"`                          | `undefined` |
+| `imageSrc`         | `image-src`         | The image source.                                                                                                     | `string`                                     | `undefined` |
+| `subtitleContent`  | `subtitle-content`  | The subtitle content.                                                                                                 | `string`                                     | `undefined` |
+| `titleContent`     | `title-content`     | The title content.                                                                                                    | `string`                                     | `undefined` |
 
 
 ## Dependencies
