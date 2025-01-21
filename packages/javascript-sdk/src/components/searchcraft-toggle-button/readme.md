@@ -5,19 +5,24 @@
 <!-- Auto Generated Below -->
 
 
+## Overview
+
+This web component simulates a light switch functionality, providing a simple and intuitive toggle between two states—on and off.
+It is consumed within the `searchcraft-filter-panel` component.
+
 ## Properties
 
-| Property   | Attribute   | Description                                                                                                                            | Type     | Default     |
-| ---------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------- |
-| `label`    | `label`     | Type of the toggle - determines what it controls 'mode': toggles between 'fuzzy' and 'normal' 'sort': toggles between 'asc' and 'desc' | `string` | `'Toggle'`  |
-| `subLabel` | `sub-label` |                                                                                                                                        | `string` | `undefined` |
+| Property   | Attribute   | Description                                         | Type     | Default     |
+| ---------- | ----------- | --------------------------------------------------- | -------- | ----------- |
+| `label`    | `label`     | The label.                                          | `string` | `'Toggle'`  |
+| `subLabel` | `sub-label` | The secondary label displayed below the main label. | `string` | `undefined` |
 
 
 ## Events
 
-| Event           | Description | Type                   |
-| --------------- | ----------- | ---------------------- |
-| `toggleUpdated` |             | `CustomEvent<boolean>` |
+| Event           | Description                         | Type                   |
+| --------------- | ----------------------------------- | ---------------------- |
+| `toggleUpdated` | When the toggle element is changed. | `CustomEvent<boolean>` |
 
 
 ## Dependencies

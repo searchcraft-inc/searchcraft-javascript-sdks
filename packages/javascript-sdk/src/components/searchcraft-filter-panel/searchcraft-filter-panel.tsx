@@ -9,12 +9,24 @@ import type {
 import { useSearchcraftStore } from '@provider/store';
 import { getMillis } from '@utils/utils';
 
+/**
+ * This web component represents a series of filters that allows users to refine and control their search queries by applying various filter criteria.
+ *
+ * ## Usage
+ * ```html
+ * <!-- index.html -->
+ * <searchcraft-filter-panel />
+ * ```
+ */
 @Component({
   tag: 'searchcraft-filter-panel',
   styleUrl: 'searchcraft-filter-panel.module.scss',
   shadow: false,
 })
 export class SearchcraftFilterPanel {
+  /**
+   * The items to filter.
+   */
   @Prop() items: FilterItem[] = [];
 
   @State() unsubscribe: (() => void) | undefined;

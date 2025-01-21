@@ -5,12 +5,22 @@
 <!-- Auto Generated Below -->
 
 
+## Overview
+
+This web component serves as the input label for the searchcraft-input-form component.
+
+## Usage
+```html
+<!-- index.html -->
+<searchcraft-input-label label="Search" />
+```
+
 ## Properties
 
-| Property              | Attribute                | Description | Type     | Default     |
-| --------------------- | ------------------------ | ----------- | -------- | ----------- |
-| `inputLabelClassName` | `input-label-class-name` |             | `string` | `''`        |
-| `label`               | `label`                  |             | `string` | `undefined` |
+| Property              | Attribute                | Description                                 | Type     | Default     |
+| --------------------- | ------------------------ | ------------------------------------------- | -------- | ----------- |
+| `inputLabelClassName` | `input-label-class-name` | The classname applied to the label element. | `string` | `''`        |
+| `label`               | `label`                  | The label.                                  | `string` | `undefined` |
 
 
 ## Dependencies

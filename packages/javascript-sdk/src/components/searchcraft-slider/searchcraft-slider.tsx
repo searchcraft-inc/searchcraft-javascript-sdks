@@ -9,21 +9,39 @@ import {
 import { getMillis } from '@utils/utils';
 import classNames from 'classnames';
 
+/**
+ * This web component is designed to allow users to select a value from a range defined by a minimum and maximum value.
+ * The component renders a slider interface, which can be used to visually choose a value between two boundaries.
+ * It is consumed by the `searchcraft-filter-panel` component.
+ */
 @Component({
   tag: 'searchcraft-slider',
   styleUrl: 'searchcraft-slider.module.scss',
   shadow: false,
 })
 export class SearchcraftSlider {
+  /**
+   * The maximum value allowed.
+   */
   @Prop() max = 100;
+  /**
+   * The minimum value allowed.
+   */
   @Prop() min = 0;
+  /**
+   * The granularity that the value must adhere to.
+   */
   @Prop() granularity: number = getMillis('month');
+  /** The type of data allowed. */
   @Prop() dataType: 'number' | 'date' = 'number';
 
   @State() endValue = this.max;
   @State() startValue = this.min;
   @State() lastFocusedHandle: 'min' | 'max' = 'max';
 
+  /**
+   * When the range has changed.
+   * */
   @Event() rangeChanged: EventEmitter<{ startValue: number; endValue: number }>;
 
   componentDidLoad() {

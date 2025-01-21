@@ -5,11 +5,21 @@
 <!-- Auto Generated Below -->
 
 
+## Overview
+
+This web component represents a series of filters that allows users to refine and control their search queries by applying various filter criteria.
+
+## Usage
+```html
+<!-- index.html -->
+<searchcraft-filter-panel />
+```
+
 ## Properties
 
-| Property | Attribute | Description | Type           | Default |
-| -------- | --------- | ----------- | -------------- | ------- |
-| `items`  | --        |             | `FilterItem[]` | `[]`    |
+| Property | Attribute | Description          | Type           | Default |
+| -------- | --------- | -------------------- | -------------- | ------- |
+| `items`  | --        | The items to filter. | `FilterItem[]` | `[]`    |
 
 
 ## Dependencies

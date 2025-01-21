@@ -14,14 +14,39 @@ import type { FacetChild, FacetRoot } from '@searchcraft/core';
 import { useSearchcraftStore, type SearchcraftState } from '@provider/store';
 import { mergeFacetRoots, removeSubstringMatches } from '@utils/utils';
 
+/**
+ * This web component is designed to display facets in a search interface, allowing users to refine their search results by applying filters based on various attributes.
+ * It is consumed within the `searchcraft-filter-panel`.
+ *
+ * ## Usage
+ * ```html
+ * <!-- index.html -->
+ * <searchcraft-facet-list field-name="title" />
+ * ```
+ *
+ * ```js
+ * // index.js
+ * const facetList = document.querySelector('searchcraft-facet-list');
+ *
+ * facetList.addEventListener('facetSelectionUpdated', () => {
+ *   console.log('Facet selection updated');
+ * });
+ * ```
+ */
 @Component({
   tag: 'searchcraft-facet-list',
   styleUrl: 'searchcraft-facet-list.module.scss',
   shadow: false,
 })
 export class SearchcraftFacetList {
+  /**
+   * The name of the field where facets are applied.
+   */
   @Prop() fieldName: string;
 
+  /**
+   * When the facets are updated.
+   */
   @Event() facetSelectionUpdated: EventEmitter<{ paths: string[] }>;
 
   @State() baseFacetRoot: FacetRoot | undefined;

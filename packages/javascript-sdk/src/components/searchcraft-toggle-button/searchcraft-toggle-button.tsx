@@ -8,6 +8,11 @@ import {
   type EventEmitter,
 } from '@stencil/core';
 import classNames from 'classnames';
+
+/**
+ * This web component simulates a light switch functionality, providing a simple and intuitive toggle between two states—on and off.
+ * It is consumed within the `searchcraft-filter-panel` component.
+ */
 @Component({
   tag: 'searchcraft-toggle-button',
   styleUrl: 'searchcraft-toggle-button.module.scss',
@@ -15,13 +20,17 @@ import classNames from 'classnames';
 })
 export class SearchcraftToggleButton {
   /**
-   * Type of the toggle - determines what it controls
-   * 'mode': toggles between 'fuzzy' and 'normal'
-   * 'sort': toggles between 'asc' and 'desc'
+   * The label.
    */
   @Prop() label = 'Toggle';
+  /**
+   * The secondary label displayed below the main label.
+   */
   @Prop() subLabel: string | undefined;
 
+  /**
+   * When the toggle element is changed.
+   */
   @Event() toggleUpdated: EventEmitter<boolean>;
 
   @State() isActive = false;
