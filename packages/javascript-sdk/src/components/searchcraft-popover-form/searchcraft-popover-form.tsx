@@ -172,7 +172,7 @@ export class SearchcraftPopoverForm {
         this.modalElement = document.createElement('searchcraft-popover-form');
         this.modalElement.config = this.config;
         this.modalElement.popoverResultMappings = this.popoverResultMappings;
-        this.modalElement.setAttribute('type', 'modal');
+        this.modalElement.setAttribute('type', 'fullscreen');
         document.body.appendChild(this.modalElement);
       }
     }
