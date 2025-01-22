@@ -19,19 +19,20 @@ import type { PopoverResultMappings } from 'types';
  * const popoverForm = document.querySelector('searchcraft-popover-form');
  *
  * popoverForm.config = {
- *   index: [],
- *   readKey: '',
- *   endpointUrl: '',
+ *   index: [index_name_from_vektron],
+ *   readKey: 'read_key_from_vektron',
+ *   endpointUrl: 'enpoint_url_from_vektron',
  * };
  *
- * popoverForm.popoverResultMappings = containerHref: {
+ * popoverForm.popoverResultMappings = {
+ *  containerHref: {
  *   fieldNames: [
  *    {
  *      fieldName: 'canonical_link',
  *      dataType: 'text',
  *    },
  *  ],
- * };
+ *  };
  * ```
  */
 @Component({
@@ -100,7 +101,10 @@ export class SearchcraftPopoverForm {
 
     // Subscribe to state events
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {
-      this.isPopoverVisibleInState = state.isPopoverVisible;
+      if (this.isPopoverVisibleInState !== state.isPopoverVisible) {
+        this.handlePopoverVisibilityChange(state.isPopoverVisible);
+      }
+
       this.searchResults = { ...state.searchResults };
       this.searchTerm = state.query;
     });
@@ -117,6 +121,14 @@ export class SearchcraftPopoverForm {
       this.isFocused = false;
     }
   };
+
+  /**
+   * Handles when popover visibility is changed in state
+   */
+  handlePopoverVisibilityChange(isVisible: boolean) {
+    this.isPopoverVisibleInState = isVisible;
+    document.body.style.overflow = isVisible ? 'hidden' : 'auto';
+  }
 
   /**
    * Actions to perform when various keys are pressed within the popover form.

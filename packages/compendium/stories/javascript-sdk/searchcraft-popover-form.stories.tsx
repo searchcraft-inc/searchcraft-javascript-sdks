@@ -67,7 +67,63 @@ export const Inline: StoryObj<Components.SearchcraftPopoverForm> = {
           hotkey='k'
           hotkey-modifier='ctrl'
         />
-        <p>
+        <p style={{ marginBottom: 100 }}>
+          Here's some content that shows up underneath the popover. The popover
+          should render above this content when it is active.
+        </p>
+        <p style={{ marginBottom: 100 }}>
+          Here's some content that shows up underneath the popover. The popover
+          should render above this content when it is active.
+        </p>
+        <p style={{ marginBottom: 100 }}>
+          Here's some content that shows up underneath the popover. The popover
+          should render above this content when it is active.
+        </p>
+        <p style={{ marginBottom: 100 }}>
+          Here's some content that shows up underneath the popover. The popover
+          should render above this content when it is active.
+        </p>
+        <p style={{ marginBottom: 100 }}>
+          Here's some content that shows up underneath the popover. The popover
+          should render above this content when it is active.
+        </p>
+        <p style={{ marginBottom: 100 }}>
+          Here's some content that shows up underneath the popover. The popover
+          should render above this content when it is active.
+        </p>
+        <p style={{ marginBottom: 100 }}>
+          Here's some content that shows up underneath the popover. The popover
+          should render above this content when it is active.
+        </p>
+        <p style={{ marginBottom: 100 }}>
+          Here's some content that shows up underneath the popover. The popover
+          should render above this content when it is active.
+        </p>
+        <p style={{ marginBottom: 100 }}>
+          Here's some content that shows up underneath the popover. The popover
+          should render above this content when it is active.
+        </p>
+        <p style={{ marginBottom: 100 }}>
+          Here's some content that shows up underneath the popover. The popover
+          should render above this content when it is active.
+        </p>
+        <p style={{ marginBottom: 100 }}>
+          Here's some content that shows up underneath the popover. The popover
+          should render above this content when it is active.
+        </p>
+        <p style={{ marginBottom: 100 }}>
+          Here's some content that shows up underneath the popover. The popover
+          should render above this content when it is active.
+        </p>
+        <p style={{ marginBottom: 100 }}>
+          Here's some content that shows up underneath the popover. The popover
+          should render above this content when it is active.
+        </p>
+        <p style={{ marginBottom: 100 }}>
+          Here's some content that shows up underneath the popover. The popover
+          should render above this content when it is active.
+        </p>
+        <p style={{ marginBottom: 100 }}>
           Here's some content that shows up underneath the popover. The popover
           should render above this content when it is active.
         </p>

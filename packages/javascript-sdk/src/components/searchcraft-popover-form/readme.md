@@ -20,19 +20,20 @@ This web component is designed to display search results in a popover container 
 const popoverForm = document.querySelector('searchcraft-popover-form');
 
 popoverForm.config = {
-  index: [],
-  readKey: '',
-  endpointUrl: '',
+  index: [index_name_from_vektron],
+  readKey: 'read_key_from_vektron',
+  endpointUrl: 'enpoint_url_from_vektron',
 };
 
-popoverForm.popoverResultMappings = containerHref: {
+popoverForm.popoverResultMappings = {
+ containerHref: {
   fieldNames: [
    {
      fieldName: 'canonical_link',
      dataType: 'text',
    },
  ],
-};
+ };
 ```
 
 ## Properties

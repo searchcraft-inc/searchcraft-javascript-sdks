@@ -322,18 +322,19 @@ export namespace Components {
      * // index.js
      * const popoverForm = document.querySelector('searchcraft-popover-form');
      * popoverForm.config = {
-     *   index: [],
-     *   readKey: '',
-     *   endpointUrl: '',
+     *   index: [index_name_from_vektron],
+     *   readKey: 'read_key_from_vektron',
+     *   endpointUrl: 'enpoint_url_from_vektron',
      * };
-     * popoverForm.popoverResultMappings = containerHref: {
+     * popoverForm.popoverResultMappings = {
+     *  containerHref: {
      *   fieldNames: [
      *    {
      *      fieldName: 'canonical_link',
      *      dataType: 'text',
      *    },
      *  ],
-     * };
+     *  };
      * ```
      */
     interface SearchcraftPopoverForm {
@@ -695,18 +696,19 @@ declare global {
      * // index.js
      * const popoverForm = document.querySelector('searchcraft-popover-form');
      * popoverForm.config = {
-     *   index: [],
-     *   readKey: '',
-     *   endpointUrl: '',
+     *   index: [index_name_from_vektron],
+     *   readKey: 'read_key_from_vektron',
+     *   endpointUrl: 'enpoint_url_from_vektron',
      * };
-     * popoverForm.popoverResultMappings = containerHref: {
+     * popoverForm.popoverResultMappings = {
+     *  containerHref: {
      *   fieldNames: [
      *    {
      *      fieldName: 'canonical_link',
      *      dataType: 'text',
      *    },
      *  ],
-     * };
+     *  };
      * ```
      */
     interface HTMLSearchcraftPopoverFormElement extends Components.SearchcraftPopoverForm, HTMLStencilElement {
@@ -1158,18 +1160,19 @@ declare namespace LocalJSX {
      * // index.js
      * const popoverForm = document.querySelector('searchcraft-popover-form');
      * popoverForm.config = {
-     *   index: [],
-     *   readKey: '',
-     *   endpointUrl: '',
+     *   index: [index_name_from_vektron],
+     *   readKey: 'read_key_from_vektron',
+     *   endpointUrl: 'enpoint_url_from_vektron',
      * };
-     * popoverForm.popoverResultMappings = containerHref: {
+     * popoverForm.popoverResultMappings = {
+     *  containerHref: {
      *   fieldNames: [
      *    {
      *      fieldName: 'canonical_link',
      *      dataType: 'text',
      *    },
      *  ],
-     * };
+     *  };
      * ```
      */
     interface SearchcraftPopoverForm {
@@ -1442,18 +1445,19 @@ declare module "@stencil/core" {
              * // index.js
              * const popoverForm = document.querySelector('searchcraft-popover-form');
              * popoverForm.config = {
-             *   index: [],
-             *   readKey: '',
-             *   endpointUrl: '',
+             *   index: [index_name_from_vektron],
+             *   readKey: 'read_key_from_vektron',
+             *   endpointUrl: 'enpoint_url_from_vektron',
              * };
-             * popoverForm.popoverResultMappings = containerHref: {
+             * popoverForm.popoverResultMappings = {
+             *  containerHref: {
              *   fieldNames: [
              *    {
              *      fieldName: 'canonical_link',
              *      dataType: 'text',
              *    },
              *  ],
-             * };
+             *  };
              * ```
              */
             "searchcraft-popover-form": LocalJSX.SearchcraftPopoverForm & JSXBase.HTMLAttributes<HTMLSearchcraftPopoverFormElement>;
