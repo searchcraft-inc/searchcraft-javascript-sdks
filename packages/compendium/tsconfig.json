@@ -9,9 +9,10 @@
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "jsx": "react-jsx",
+    "jsx": "react-jsx", // Still set for React
     "isolatedModules": true,
-    "noEmit": true
+    "noEmit": true,
+    "types": ["vite/client"] // Add Vite types
   },
   "include": [
     "./.storybook",
