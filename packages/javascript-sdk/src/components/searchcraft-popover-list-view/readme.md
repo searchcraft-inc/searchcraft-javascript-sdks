@@ -18,9 +18,10 @@ It is consumed within the `searchcraft-popover-form` component.
 
 ## Properties
 
-| Property                | Attribute | Description                                   | Type                                                                                                                              | Default     |
-| ----------------------- | --------- | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| `popoverResultMappings` | --        | Formats the content rendered for each result. | `{ title?: SearchResultMapping; subtitle?: SearchResultMapping; imageSource?: SearchResultMapping; href?: SearchResultMapping; }` | `undefined` |
+| Property                | Attribute | Description                                                                                       | Type                                                                                                                                                              | Default     |
+| ----------------------- | --------- | ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| `documents`             | --        | The documents to render in the list view.                                                         | `Record<string, unknown>[]`                                                                                                                                       | `undefined` |
+| `popoverResultMappings` | --        | The mappings that define how the data in the documents are mapped to the list-view-item elements. | `{ title?: SearchResultMapping; subtitle?: SearchResultMapping; imageSource?: SearchResultMapping; imageAlt?: SearchResultMapping; href?: SearchResultMapping; }` | `undefined` |
 
 
 ## Dependencies
@@ -29,9 +30,14 @@ It is consumed within the `searchcraft-popover-form` component.
 
  - [searchcraft-popover-form](../searchcraft-popover-form)
 
+### Depends on
+
+- [searchcraft-popover-list-item](../searchcraft-popover-list-item)
+
 ### Graph
 ```mermaid
 graph TD;
+  searchcraft-popover-list-view --> searchcraft-popover-list-item
   searchcraft-popover-form --> searchcraft-popover-list-view
   style searchcraft-popover-list-view fill:#f9f,stroke:#333,stroke-width:4px
 ```

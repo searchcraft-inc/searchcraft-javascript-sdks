@@ -5,6 +5,7 @@
       "@assets/*": ["assets/*"],
       "@provider/*": ["provider/*"],
       "@components/*": ["components/*"],
+      "@utils": ["utils/index.ts"],
       "@utils/*": ["utils/*"]
     },
     "allowSyntheticDefaultImports": true,

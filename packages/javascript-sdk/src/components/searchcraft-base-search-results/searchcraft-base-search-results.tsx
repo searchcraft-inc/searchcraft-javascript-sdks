@@ -14,7 +14,7 @@ import { useSearchcraftStore } from '@provider/store';
 import {
   getDocumentValueFromSearchResultMapping,
   serializeStyles,
-} from '@utils/utils';
+} from '@utils';
 import type { SearchResultMappings } from 'types';
 
 /**

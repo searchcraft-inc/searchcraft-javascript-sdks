@@ -1,0 +1,13 @@
+/**
+* Variables that need to be part of the preprocessor can go here.
+*/
+
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+
+:root {
+  --sc-breakpoint-sm: #{$breakpoint-sm};
+  --sc-breakpoint-md: #{$breakpoint-md};
+  --sc-breakpoint-lg: #{$breakpoint-lg};
+}
