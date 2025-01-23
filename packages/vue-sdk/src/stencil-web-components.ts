@@ -93,19 +93,20 @@ export const SearchcraftInputForm =
       'customStyles',
       'placeholderValue',
       'searchTerm',
-      'debounceDelay',
       'inputCleared',
       'noResultsReceived',
-      'querySubmit',
       'inputFocus',
       'inputBlur',
+      'inputInit',
+      'querySubmit',
     ],
     [
       'inputCleared',
       'noResultsReceived',
-      'querySubmit',
       'inputFocus',
       'inputBlur',
+      'inputInit',
+      'querySubmit',
     ],
   );
 
@@ -116,24 +117,38 @@ export const SearchcraftInputLabel =
     ['inputLabelClassName', 'label'],
   );
 
+export const SearchcraftPopoverButton =
+  /*@__PURE__*/ defineContainer<JSX.SearchcraftPopoverButton>(
+    'searchcraft-popover-button',
+    () => {},
+  );
+
 export const SearchcraftPopoverForm =
   /*@__PURE__*/ defineContainer<JSX.SearchcraftPopoverForm>(
     'searchcraft-popover-form',
     () => {},
-    ['config', 'type', 'popoverResultMappings'],
+    ['config', 'type', 'popoverResultMappings', 'hotkey', 'hotkeyModifier'],
+  );
+
+export const SearchcraftPopoverListItem =
+  /*@__PURE__*/ defineContainer<JSX.SearchcraftPopoverListItem>(
+    'searchcraft-popover-list-item',
+    () => {},
+    [
+      'titleContent',
+      'subtitleContent',
+      'imageSrc',
+      'imageAlt',
+      'href',
+      'documentPosition',
+    ],
   );
 
 export const SearchcraftPopoverListView =
   /*@__PURE__*/ defineContainer<JSX.SearchcraftPopoverListView>(
     'searchcraft-popover-list-view',
     () => {},
-    ['popoverResultMappings'],
-  );
-
-export const SearchcraftPopoverResult =
-  /*@__PURE__*/ defineContainer<JSX.SearchcraftPopoverResult>(
-    'searchcraft-popover-result',
-    () => {},
+    ['popoverResultMappings', 'documents'],
   );
 
 export const SearchcraftResultsInfo =
