@@ -21,11 +21,11 @@ export interface SearchcraftState {
   removeFacetPathsForIndexField: (fieldName: string) => void;
   addRangeValueForIndexField: (data: RangeValueForIndexField) => void;
   removeRangeValueForIndexField: (fieldName: string) => void;
-  setSearchMode: (mode: 'fuzzy' | 'normal') => void;
+  setSearchMode: (mode: 'fuzzy' | 'exact') => void;
   setSortType: (type: 'asc' | 'desc') => void;
   facetPathsForIndexFields: Record<string, FacetPathsForIndexField>;
   rangeValueForIndexFields: Record<string, RangeValueForIndexField>;
-  searchMode: 'fuzzy' | 'normal';
+  searchMode: 'fuzzy' | 'exact';
   sortType: 'asc' | 'desc';
   facets: FacetPrime | null;
   getSearchcraftInstance: () => SearchcraftCore | null;
