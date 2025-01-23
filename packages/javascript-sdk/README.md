@@ -18,63 +18,66 @@ $ npm install @searchcraft/javascript-sdk
 ```
 ## Initialization and Basic Usage
 
-Import and Initialize the SDK
+### HTML
+Add the web components to your html. They should be placed with the rest of your page content where you'd like them to render in the layout. These are the web components available to use:
+```html
+  <searchcraft-input-form />
+  ..
+  <searchcraft-popover-form />
+  ...
+  <searchcraft-filter-panel />
+  ...
+  <searchcraft-results-info />
+  ...
+  <searchcraft-base-search-results />
 
-Create an instance of SearchcraftCore with your configuration values (available via the Searchcraft Customer Portal - Vektron):
+```
+To see more about the specific attributes required for each component, refer to their individual documentation pages.
 
-```jsx
 
-// main.js
+### Javascript
+Before anything else, the web components must be initialized. Import and Initialize the SDK and call `defineCustomElements()` to set up the web components.
 
-import { SearchcraftCore } from '@searchcraft/javascript-sdk';
+```js
 
 import { defineCustomElements } from '@searchcraft/javascript-sdk/components';
-import { filterPanelItems, searchResultsMappings } from './configs';
-
 defineCustomElements();
 
+```
+
+Create a configuration object that your web components can use.
+```jsx
 const config = {
-  index: ['your_index'],
-  apiKey: 'your_api_key',
-  endpointURL: 'https://api.searchcraft.io',
+  index: ['your_index_from_vektron'],
+  readKey: 'your_read_key_from_vektron',
+  endpointURL: 'your_searchcraft_endpoint_url',
+  searchDebounceDelay: 50, // The amount of debounce, in millis, to add to search requests (optional)
 };
+```
+When the DOM content is loaded:
+- Provide the input form (or popover form) with your `config` object. 
+- If you are using a filter panel, provide the filter panel with the filter panel item configuration.
+- Provide the search results with the search result mapping configuration.
+
+```js
 
 document.addEventListener('DOMContentLoaded', () => {
-  const searchForm = document.querySelector('searchcraft-auto-search-form');
+  const inputForm = document.querySelector('searchcraft-input-form');
+  const filterPanel = document.querySelector('searchcraft-input-form');
   const searchResults = document.querySelector(
     'searchcraft-base-search-results',
   );
 
-  searchForm.config = config;
+  inputForm.config = config;
   filterPanel.items = filterPanelItems;
   searchResults.searchResultMappings = searchResultsMappings;
-  searchResults.setAttribute(
-    'search-result-mappings',
-    JSON.stringify(searchResultsMappings),
-  );
 });
 
-// index.html
-<div>
-  <searchcraft-auto-search-form
-    input-icon-height="27"
-    input-icon-width="27"
-    placeholder-value="Search"
-  />
-  <searchcraft-filter-panel />
-  <searchcraft-results-info />
-  <searchcraft-base-search-results
-    ad-interval="3"
-    place-ad-at-start="false"
-    result-image-placement="right"
-    container-target="_blank"
-  />
-</div>
 
 ```
 
-### Filter Configuration
-Update filterPanelItems in configs.js to add or modify filters.
+### Example Filter Configuration
+This is an example of a filter panel configuration object. This configuration describes what filters are rendered in your filter panel, and what index fields the filter controls correspond with.
 
 ```jsx
 
@@ -115,7 +118,7 @@ export const filterPanelItems = [
 ];
 ```
 
-### Result Mappings
+### Example Result Mappings
 Modify searchResultsMappings in configs.js to customize the appearance and behavior of search results. The `fieldNames` from your index can be mapped to the content of the results using this config.
 
 ```jsx
@@ -162,36 +165,31 @@ export const searchResultsMappings = {
 ```
 
 ### Event Handling
-Add or update event listeners in Main.js to handle additional interactions. The purpose of these events is to allow for updating your consuming applications layout based on events coming from Searchcraft.
+Optionally, if you need to perform other actions, such as modifying page layout, when various searchcraft events are emitted, you can add the following listeners:
 
 ```jsx
-  const searchContent = document.querySelector('#search-content');
-  function setSearchContentVisibility(isVisible) {
-    if (searchContent) {
-      searchContent.style.display = isVisible ? 'flex' : 'none';
-    }
-    if (pageContentPlaceholder) {
-      pageContentPlaceholder.style.display = isVisible ? 'none' : 'block';
-    }
-  }
 
-  setSearchContentVisibility(false);
-
-    searchForm.addEventListener('querySubmit', (event) => {
-    console.log('Query submitted:', event.detail);
-
-    setSearchContentVisibility(true);
+  inputForm.addEventListener('querySubmit', (event) => {
+    // Perform an action
   });
 
-  searchForm.addEventListener('inputClearedOrNoResults', () => {
-    console.log('Input cleared or no search results found.');
+  inputForm.addEventListener('inputCleared', () => {
+    // Perform an action
+  });
 
-    setSearchContentVisibility(false);
+  inputForm.addEventListener('inputFocus', () => {
+    // Perform an action
+  });
+
+  inputForm.addEventListener('inputBlur', () => {
+    // Perform an action
+  });
+
+  inputForm.addEventListener('inputInit', () => {
+    // Perform an action
   });
 
   searchResults.addEventListener('noResults', () => {
-    console.log('no search results found.');
-
-    setSearchContentVisibility(true);
+    // Perform an action
   });
   ```
