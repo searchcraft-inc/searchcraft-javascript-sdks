@@ -7,7 +7,7 @@ import type {
   FacetsFilterItem,
 } from '../../types/searchcraft-filter-panel.types';
 import { useSearchcraftStore } from '@provider/store';
-import { getMillis } from '@utils/utils';
+import { getMillis } from '@utils';
 
 /**
  * This web component represents a series of filters that allows users to refine and control their search queries by applying various filter criteria.
@@ -79,7 +79,7 @@ export class SearchcraftFilterPanel {
   }
 
   handleExactMatchToggleUpdated(isActive: boolean) {
-    this.searchStore.setSearchMode(isActive ? 'normal' : 'fuzzy');
+    this.searchStore.setSearchMode(isActive ? 'exact' : 'fuzzy');
     this.searchStore.search();
   }
 

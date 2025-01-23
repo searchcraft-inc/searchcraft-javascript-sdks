@@ -12,7 +12,7 @@ export type * from './components';
 export {
   parseCustomStyles,
   serializeStyles,
-} from './utils/utils';
+} from './utils';
 
 export { useSearchcraftStore, useThemeStore } from './provider/store';
 

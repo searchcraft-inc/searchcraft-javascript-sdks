@@ -2,7 +2,7 @@ import { Component, h, State } from '@stencil/core';
 
 import { useSearchcraftStore } from '@provider/store';
 
-import { formatNumberWithCommas } from '@utils/utils';
+import { formatNumberWithCommas } from '@utils';
 
 /**
  * This web component is designed to display the number of results returned from a search query.

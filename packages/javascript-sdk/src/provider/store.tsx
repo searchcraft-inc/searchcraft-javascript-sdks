@@ -21,11 +21,11 @@ export interface SearchcraftState {
   removeFacetPathsForIndexField: (fieldName: string) => void;
   addRangeValueForIndexField: (data: RangeValueForIndexField) => void;
   removeRangeValueForIndexField: (fieldName: string) => void;
-  setSearchMode: (mode: 'fuzzy' | 'normal') => void;
+  setSearchMode: (mode: 'fuzzy' | 'exact') => void;
   setSortType: (type: 'asc' | 'desc') => void;
   facetPathsForIndexFields: Record<string, FacetPathsForIndexField>;
   rangeValueForIndexFields: Record<string, RangeValueForIndexField>;
-  searchMode: 'fuzzy' | 'normal';
+  searchMode: 'fuzzy' | 'exact';
   sortType: 'asc' | 'desc';
   facets: FacetPrime | null;
   getSearchcraftInstance: () => SearchcraftCore | null;
@@ -38,6 +38,8 @@ export interface SearchcraftState {
   setIsRequesting: (isRequesting: boolean) => void;
   setQuery: (query: string) => void;
   setSearchResults: (results: SearchcraftResponse | null) => void;
+  setPopoverVisibility: (isVisible: boolean) => void;
+  isPopoverVisible: boolean;
 }
 
 // Zustand store for Searchcraft state
@@ -65,6 +67,12 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
   };
 
   return {
+    setPopoverVisibility: (isVisible: boolean) => {
+      set({
+        isPopoverVisible: isVisible,
+      });
+    },
+    isPopoverVisible: false,
     resetFacetPaths: () => {
       set({
         facetPathsForIndexFields: {},

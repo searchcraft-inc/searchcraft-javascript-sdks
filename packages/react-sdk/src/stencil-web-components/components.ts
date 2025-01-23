@@ -15,9 +15,10 @@ import { SearchcraftFacetList as SearchcraftFacetListElement, defineCustomElemen
 import { SearchcraftFilterPanel as SearchcraftFilterPanelElement, defineCustomElement as defineSearchcraftFilterPanel } from "@searchcraft/javascript-sdk/dist/components/searchcraft-filter-panel.js";
 import { SearchcraftInputForm as SearchcraftInputFormElement, defineCustomElement as defineSearchcraftInputForm } from "@searchcraft/javascript-sdk/dist/components/searchcraft-input-form.js";
 import { SearchcraftInputLabel as SearchcraftInputLabelElement, defineCustomElement as defineSearchcraftInputLabel } from "@searchcraft/javascript-sdk/dist/components/searchcraft-input-label.js";
+import { SearchcraftPopoverButton as SearchcraftPopoverButtonElement, defineCustomElement as defineSearchcraftPopoverButton } from "@searchcraft/javascript-sdk/dist/components/searchcraft-popover-button.js";
 import { SearchcraftPopoverForm as SearchcraftPopoverFormElement, defineCustomElement as defineSearchcraftPopoverForm } from "@searchcraft/javascript-sdk/dist/components/searchcraft-popover-form.js";
+import { SearchcraftPopoverListItem as SearchcraftPopoverListItemElement, defineCustomElement as defineSearchcraftPopoverListItem } from "@searchcraft/javascript-sdk/dist/components/searchcraft-popover-list-item.js";
 import { SearchcraftPopoverListView as SearchcraftPopoverListViewElement, defineCustomElement as defineSearchcraftPopoverListView } from "@searchcraft/javascript-sdk/dist/components/searchcraft-popover-list-view.js";
-import { SearchcraftPopoverResult as SearchcraftPopoverResultElement, defineCustomElement as defineSearchcraftPopoverResult } from "@searchcraft/javascript-sdk/dist/components/searchcraft-popover-result.js";
 import { SearchcraftResultsInfo as SearchcraftResultsInfoElement, defineCustomElement as defineSearchcraftResultsInfo } from "@searchcraft/javascript-sdk/dist/components/searchcraft-results-info.js";
 import { SearchcraftSlider as SearchcraftSliderElement, defineCustomElement as defineSearchcraftSlider } from "@searchcraft/javascript-sdk/dist/components/searchcraft-slider.js";
 import { SearchcraftToggleButton as SearchcraftToggleButtonElement, defineCustomElement as defineSearchcraftToggleButton } from "@searchcraft/javascript-sdk/dist/components/searchcraft-toggle-button.js";
@@ -95,7 +96,8 @@ type SearchcraftInputFormEvents = {
     onInputCleared: EventName<CustomEvent<void>>,
     onNoResultsReceived: EventName<CustomEvent<void>>,
     onInputFocus: EventName<CustomEvent<void>>,
-    onInputBlur: EventName<CustomEvent<void>>
+    onInputBlur: EventName<CustomEvent<void>>,
+    onInputInit: EventName<CustomEvent<void>>
 };
 
 export const SearchcraftInputForm: StencilReactComponent<SearchcraftInputFormElement, SearchcraftInputFormEvents> = /*@__PURE__*/ createComponent<SearchcraftInputFormElement, SearchcraftInputFormEvents>({
@@ -107,7 +109,8 @@ export const SearchcraftInputForm: StencilReactComponent<SearchcraftInputFormEle
         onInputCleared: 'inputCleared',
         onNoResultsReceived: 'noResultsReceived',
         onInputFocus: 'inputFocus',
-        onInputBlur: 'inputBlur'
+        onInputBlur: 'inputBlur',
+        onInputInit: 'inputInit'
     } as SearchcraftInputFormEvents,
     defineCustomElement: defineSearchcraftInputForm
 });
@@ -123,6 +126,17 @@ export const SearchcraftInputLabel: StencilReactComponent<SearchcraftInputLabelE
     defineCustomElement: defineSearchcraftInputLabel
 });
 
+type SearchcraftPopoverButtonEvents = NonNullable<unknown>;
+
+export const SearchcraftPopoverButton: StencilReactComponent<SearchcraftPopoverButtonElement, SearchcraftPopoverButtonEvents> = /*@__PURE__*/ createComponent<SearchcraftPopoverButtonElement, SearchcraftPopoverButtonEvents>({
+    tagName: 'searchcraft-popover-button',
+    elementClass: SearchcraftPopoverButtonElement,
+    // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
+    react: React,
+    events: {} as SearchcraftPopoverButtonEvents,
+    defineCustomElement: defineSearchcraftPopoverButton
+});
+
 type SearchcraftPopoverFormEvents = NonNullable<unknown>;
 
 export const SearchcraftPopoverForm: StencilReactComponent<SearchcraftPopoverFormElement, SearchcraftPopoverFormEvents> = /*@__PURE__*/ createComponent<SearchcraftPopoverFormElement, SearchcraftPopoverFormEvents>({
@@ -134,6 +148,17 @@ export const SearchcraftPopoverForm: StencilReactComponent<SearchcraftPopoverFor
     defineCustomElement: defineSearchcraftPopoverForm
 });
 
+type SearchcraftPopoverListItemEvents = NonNullable<unknown>;
+
+export const SearchcraftPopoverListItem: StencilReactComponent<SearchcraftPopoverListItemElement, SearchcraftPopoverListItemEvents> = /*@__PURE__*/ createComponent<SearchcraftPopoverListItemElement, SearchcraftPopoverListItemEvents>({
+    tagName: 'searchcraft-popover-list-item',
+    elementClass: SearchcraftPopoverListItemElement,
+    // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
+    react: React,
+    events: {} as SearchcraftPopoverListItemEvents,
+    defineCustomElement: defineSearchcraftPopoverListItem
+});
+
 type SearchcraftPopoverListViewEvents = NonNullable<unknown>;
 
 export const SearchcraftPopoverListView: StencilReactComponent<SearchcraftPopoverListViewElement, SearchcraftPopoverListViewEvents> = /*@__PURE__*/ createComponent<SearchcraftPopoverListViewElement, SearchcraftPopoverListViewEvents>({
@@ -143,17 +168,6 @@ export const SearchcraftPopoverListView: StencilReactComponent<SearchcraftPopove
     react: React,
     events: {} as SearchcraftPopoverListViewEvents,
     defineCustomElement: defineSearchcraftPopoverListView
-});
-
-type SearchcraftPopoverResultEvents = NonNullable<unknown>;
-
-export const SearchcraftPopoverResult: StencilReactComponent<SearchcraftPopoverResultElement, SearchcraftPopoverResultEvents> = /*@__PURE__*/ createComponent<SearchcraftPopoverResultElement, SearchcraftPopoverResultEvents>({
-    tagName: 'searchcraft-popover-result',
-    elementClass: SearchcraftPopoverResultElement,
-    // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
-    react: React,
-    events: {} as SearchcraftPopoverResultEvents,
-    defineCustomElement: defineSearchcraftPopoverResult
 });
 
 type SearchcraftResultsInfoEvents = NonNullable<unknown>;

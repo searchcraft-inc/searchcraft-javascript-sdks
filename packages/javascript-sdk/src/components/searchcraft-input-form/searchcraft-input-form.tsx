@@ -11,7 +11,7 @@ import {
 import { type SearchcraftConfig, SearchcraftCore } from '@searchcraft/core';
 import packageJson from '../../../package.json';
 
-import { parseCustomStyles } from '@utils/utils';
+import { parseCustomStyles } from '@utils';
 import { useSearchcraftStore } from '@provider/store';
 import classNames from 'classnames';
 
@@ -106,19 +106,26 @@ export class SearchcraftInput {
    * When the input becomes unfocused.
    */
   @Event() inputBlur: EventEmitter<void>;
+  /**
+   * Event emitted when input initializes
+   */
+  @Event() inputInit: EventEmitter<void>;
 
   @State() inputValue = this.searchTerm;
   @State() error = false;
+  @State() isSearchcraftInitialized = false;
 
   private searchStore = useSearchcraftStore.getState();
 
   init() {
-    if (this.config) {
+    if (this.config && !this.isSearchcraftInitialized) {
       const searchcraft = new SearchcraftCore(this.config, {
         sdkName: packageJson.name,
         sdkVersion: packageJson.version,
       });
       this.searchStore.initialize(searchcraft, true);
+      this.isSearchcraftInitialized = true;
+      this.inputInit.emit();
     }
   }
 
@@ -137,6 +144,9 @@ export class SearchcraftInput {
 
     if (input.value.trim() === '') {
       this.inputCleared.emit();
+      this.searchTerm = '';
+      this.searchStore.setQuery('');
+      this.searchStore.setSearchResults(null);
       return;
     }
 
@@ -208,21 +218,28 @@ export class SearchcraftInput {
       'searchcraft-input-grid-buttonNone': this.buttonPlacement === 'none',
     });
 
+    const shouldHaveVerticalGap = this.inputLabel || this.error;
+    const inputGridStyles = {
+      gap: shouldHaveVerticalGap ? '4px 8px' : '0px 8px',
+    };
+
     return (
       <form class='searchcraft-input-form' onSubmit={this.handleFormSubmit}>
-        <div class={inputGridClassNames}>
+        <div class={inputGridClassNames} style={inputGridStyles}>
           <div class='searchcraft-input-button-wrapper'>
             <searchcraft-button
               onButtonClick={this.handleFormSubmit}
               label={this.buttonLabel}
             />
           </div>
-          <div class='searchcraft-input-label-wrapper'>
-            <searchcraft-input-label label={this.inputLabel} />
-          </div>
+          {this.inputLabel && (
+            <div class='searchcraft-input-label-wrapper'>
+              <searchcraft-input-label label={this.inputLabel} />
+            </div>
+          )}
           {this.error && (
             <div class='searchcraft-input-error-wrapper'>
-              <searchcraft-error-message errorMessage='Please enter a search query.' />
+              <searchcraft-error-message errorMessage='Something went wrong.' />
             </div>
           )}
           <div class='searchcraft-input-wrapper'>

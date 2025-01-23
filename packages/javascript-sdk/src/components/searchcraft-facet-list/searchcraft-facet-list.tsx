@@ -12,7 +12,7 @@ import classNames from 'classnames';
 import type { FacetChild, FacetRoot } from '@searchcraft/core';
 
 import { useSearchcraftStore, type SearchcraftState } from '@provider/store';
-import { mergeFacetRoots, removeSubstringMatches } from '@utils/utils';
+import { mergeFacetRoots, removeSubstringMatches } from '@utils';
 
 /**
  * This web component is designed to display facets in a search interface, allowing users to refine their search results by applying filters based on various attributes.
