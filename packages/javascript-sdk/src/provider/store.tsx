@@ -157,30 +157,29 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
       }
 
       state.setIsRequesting(true);
-      try {
-        const results = await searchcraft.search({
+
+      searchcraft.search(
+        {
           query: state.query,
           mode: state.searchMode,
           sort: state.sortType,
           facetPathsForIndexFields: state.facetPathsForIndexFields,
           rangeValueForIndexFields: state.rangeValueForIndexFields,
-        });
-        const updatedFacets = results.data.facets || null;
+        },
+        (results: SearchcraftResponse) => {
+          const updatedFacets = results.data.facets || null;
 
-        state.setSearchResults(results);
-        state.setFacets(updatedFacets);
+          state.setSearchResults(results);
+          state.setFacets(updatedFacets);
 
-        log(LogLevel.DEBUG, `Search results: ${JSON.stringify(results)}`);
-        log(LogLevel.DEBUG, `Updated facets: ${JSON.stringify(updatedFacets)}`);
-      } catch (error) {
-        console.error(`Search failed: ${(error as Error).message}`);
-        log(
-          LogLevel.ERROR,
-          `Search failed with error: ${(error as Error).message}`,
-        );
-      } finally {
-        state.setIsRequesting(false);
-      }
+          log(LogLevel.DEBUG, `Search results: ${JSON.stringify(results)}`);
+          log(
+            LogLevel.DEBUG,
+            `Updated facets: ${JSON.stringify(updatedFacets)}`,
+          );
+          state.setIsRequesting(false);
+        },
+      );
     },
     initialize: (searchcraftInstance, debug = false) => {
       searchcraft = searchcraftInstance;

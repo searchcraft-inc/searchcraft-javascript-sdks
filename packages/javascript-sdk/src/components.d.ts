@@ -275,10 +275,6 @@ export namespace Components {
          */
         "customStyles": string | Record<string, string>;
         /**
-          * The duration to debounce the input's `inputChange` event.
-         */
-        "debounceDelay": number;
-        /**
           * The label rendered above the input.
          */
         "inputLabel": string | undefined;
@@ -1092,10 +1088,6 @@ declare namespace LocalJSX {
           * A custom styles object to be applied to the input element.
          */
         "customStyles"?: string | Record<string, string>;
-        /**
-          * The duration to debounce the input's `inputChange` event.
-         */
-        "debounceDelay"?: number;
         /**
           * The label rendered above the input.
          */

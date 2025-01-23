@@ -84,13 +84,6 @@ export class SearchcraftInput {
    */
   @Prop() searchTerm = '';
   /**
-   * The duration to debounce the input's `inputChange` event.
-   */
-  @Prop() debounceDelay = 0;
-
-  private debounceTimeout: ReturnType<typeof setTimeout> | null = null;
-
-  /**
    * When the input is cleared.
    */
   @Event() inputCleared: EventEmitter<void>;
@@ -154,18 +147,7 @@ export class SearchcraftInput {
       return;
     }
 
-    if (this.debounceDelay > 0) {
-      if (this.debounceTimeout) {
-        clearTimeout(this.debounceTimeout);
-      }
-
-      this.debounceTimeout = setTimeout(
-        () => this.performSearch(input.value),
-        this.debounceDelay,
-      );
-    } else {
-      this.performSearch(input.value);
-    }
+    this.performSearch(input.value);
   };
 
   private performSearch = async (value: string) => {
@@ -187,11 +169,6 @@ export class SearchcraftInput {
 
   handleClearInput = () => {
     this.inputValue = '';
-
-    if (this.debounceTimeout) {
-      clearTimeout(this.debounceTimeout);
-    }
-
     this.searchTerm = '';
     this.searchStore.setQuery('');
     this.searchStore.setSearchResults(null);

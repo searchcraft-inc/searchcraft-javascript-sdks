@@ -20,6 +20,10 @@ export interface SearchcraftConfig {
    * The Index read key provided by Vektron.
    */
   readKey: string;
+  /**
+   * The amount of delay, in milliseconds, to debounce search requests. Defaults to `0`.
+   */
+  searchDebounceDelay?: number;
 }
 
 export interface SearchcraftSDKInfo {

@@ -40,7 +40,6 @@ searchForm.addEventListener('querySubmit', (event) => {
 | `buttonPlacement`  | `button-placement`  | Where to place the search button.                                              | `"left" \| "none" \| "right"`        | `'none'`         |
 | `config`           | --                  | The Searchcraft config object.                                                 | `SearchcraftConfig`                  | `undefined`      |
 | `customStyles`     | `custom-styles`     | A custom styles object to be applied to the input element.                     | `string \| { [x: string]: string; }` | `{}`             |
-| `debounceDelay`    | `debounce-delay`    | The duration to debounce the input's `inputChange` event.                      | `number`                             | `0`              |
 | `inputLabel`       | `input-label`       | The label rendered above the input.                                            | `string`                             | `undefined`      |
 | `placeholderValue` | `placeholder-value` | The input element's placeholder value.                                         | `string`                             | `'Enter Search'` |
 | `searchTerm`       | `search-term`       | The starting value of the input element.                                       | `string`                             | `''`             |
