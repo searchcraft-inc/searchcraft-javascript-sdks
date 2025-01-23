@@ -14,7 +14,8 @@
     "packages/compendium",
     "packages/core-sdk",
     "packages/react-sdk",
-    "packages/javascript-sdk"
+    "packages/javascript-sdk",
+    "packages/vue-sdk"
   ],
   "devDependencies": {
     "@biomejs/biome": "^1.8.1",
@@ -34,23 +35,31 @@
     "build:core": "yarn workspace @searchcraft/core build && yarn yalc:core",
     "build:sdk-react": "yarn build:core && yarn build:sdk-javascript && yarn workspace @searchcraft/react-sdk build && yarn yalc:sdk-react",
     "build:sdk-javascript": "yarn build:core && yarn workspace @searchcraft/javascript-sdk build && yarn yalc:sdk-javascript",
+    "build:sdk-vue": "yarn build:core && yarn build:sdk-javascript && yarn workspace @searchcraft/vue-sdk build && yarn yalc:sdk-vue",
+    "publish:packages": "npx lerna publish from-package",
     "storybook": "yarn workspace compendium storybook",
     "test:all": "yarn test:core && yarn test:react-sdk && yarn test:javascript-sdk",
     "test:core": "yarn workspace @searchcraft/core test",
     "test:sdk-react": "yarn workspace @searchcraft/react-sdk test",
     "test:sdk-javascript": "yarn workspace @searchcraft/javascript-sdk test",
+    "test:sdk-vue": "yarn workspace @searchcraft/vue-sdk test",
     "watch:all": "nodemon --exec \"yarn build:all\"",
     "watch:core": "nodemon --exec \"yarn build:core\"",
     "watch:sdk-react": "nodemon --exec \"yarn build:sdk-react\"",
     "watch:sdk-javascript": "nodemon --exec \"yarn build:sdk-javascript\"",
     "version:sdks": "yarn lerna version",
+    "watch:sdk-vue": "nodemon --exec \"yarn build:sdk-vue\"",
     "yalc:all": "yarn yalc:core && yarn yalc:sdk-react && yarn yalc:sdk-javascript",
     "yalc:core": "cd packages/core-sdk && yalc publish --private && yalc push --private",
     "yalc:sdk-react": "cd packages/react-sdk && yalc publish && yalc push",
-    "yalc:sdk-javascript": "cd packages/javascript-sdk && yalc publish && yalc push"
+    "yalc:sdk-javascript": "cd packages/javascript-sdk && yalc publish && yalc push",
+    "yalc:sdk-vue": "cd packages/vue-sdk && yalc publish && yalc push"
   },
   "bugs": {
     "url": "https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/issues"
+  },
+  "resolutions": {
+    "vite": "6.0.11"
   },
   "homepage": "https://bitbucket.org/madebychalk/searchcraft-javascript-sdks#readme",
   "dependencies": {}
