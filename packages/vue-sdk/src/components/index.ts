@@ -6,6 +6,8 @@ export { default as SearchcraftFacetList } from './SearchcraftFacetList.vue';
 export { default as SearchcraftFilterPanel } from './SearchcraftFilterPanel.vue';
 export { default as SearchcraftInputForm } from './SearchcraftInputForm.vue';
 export { default as SearchcraftInputLabel } from './SearchcraftInputLabel.vue';
+export { default as SearchcraftPopoverButton } from './SearchcraftPopoverButton.vue';
+export { default as SearchcraftPopoverForm } from './SearchcraftPopoverForm.vue';
 export { default as SearchcraftSlider } from './SearchcraftSlider.vue';
 export { default as SearchcraftResultsInfo } from './SearchcraftResultsInfo.vue';
 export { default as SearchcraftToggleButton } from './SearchcraftToggleButton.vue';
