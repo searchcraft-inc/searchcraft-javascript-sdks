@@ -110,4 +110,38 @@ export const Default: StoryObj<Components.SearchcraftFilterPanel> = {
   args: defaultProps,
 };
 
+export const WithDebounceDelay300: StoryObj<Components.SearchcraftFilterPanel> =
+  {
+    decorators: [
+      (Story) => {
+        useEffect(() => {
+          const searchForm = document.querySelector('searchcraft-input-form');
+          const filterPanel = document.querySelector(
+            'searchcraft-filter-panel',
+          );
+
+          if (searchForm) {
+            searchForm.config = { ...config, searchDebounceDelay: 300 };
+          }
+          if (filterPanel) {
+            filterPanel.items = defaultProps.items;
+          }
+        }, []);
+
+        return <Story />;
+      },
+    ],
+    render: (args) => {
+      return (
+        <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
+          <searchcraft-input-form />
+          <div style={{ paddingTop: 20 }}>
+            <searchcraft-filter-panel />
+          </div>
+        </div>
+      );
+    },
+    args: defaultProps,
+  };
+
 export default componentMeta;

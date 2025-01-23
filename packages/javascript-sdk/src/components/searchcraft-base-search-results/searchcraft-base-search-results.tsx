@@ -14,30 +14,98 @@ import { useSearchcraftStore } from '@provider/store';
 import {
   getDocumentValueFromSearchResultMapping,
   serializeStyles,
-} from '@utils/utils';
+} from '@utils';
 import type { SearchResultMappings } from 'types';
 
+/**
+ * This web component is responsible for displaying the results of a search query.
+ * Once a query is submitted, the component formats and presents an ordered list of the results.
+ *
+ * ## Usage
+ * ```html
+ * <!-- index.html -->
+ * <searchcraft-base-search-results
+ *   ad-interval="4"
+ *   place-ad-at-start="false"
+ *   result-image-placement="right"
+ * />
+ * ```
+ *
+ * ```js
+ * // index.js
+ * const baseSearchResults = document.querySelector('searchcraft-base-search-results');
+ *
+ * baseSearchResults.searchResultMappings = containerHref: {
+ *   fieldNames: [
+ *    {
+ *      fieldName: 'canonical_link',
+ *      dataType: 'text',
+ *    },
+ *  ],
+ * };
+ *
+ * baseSearchResults.addEventListener('noResults', () => {
+ *   console.log('No search results found');
+ * });
+ * ```
+ */
 @Component({
   tag: 'searchcraft-base-search-results',
   styleUrl: 'searchcraft-base-search-results.module.scss',
   shadow: false,
 })
 export class SearchcraftBaseSearchResults {
+  /**
+   * How often ads are injected.
+   */
   @Prop() adInterval = 4;
+  /**
+   * A custom styles object.
+   */
   @Prop() customStylesForResults:
     | string
     | Record<string, Record<string, string>>
     | undefined;
+  /**
+   * Formats the content rendered for each result.
+   */
   @Prop() searchResultMappings: SearchResultMappings | undefined;
+  /**
+   * Should an ad be placed at the end of the results.
+   */
   @Prop() placeAdAtEnd = false;
+  /**
+   * Should an ad be placed at the start of the results.
+   */
   @Prop() placeAdAtStart = true;
+  /**
+   * The placement of the image for each result.
+   */
   @Prop() resultImagePlacement: 'left' | 'right' = 'right';
+  /**
+   * The label for the button rendered when containerHref is not present for each result.
+   */
   @Prop() buttonLabel: string | undefined;
+  /**
+   * Where to open the link for the button rendered when containerHref is not present for each result.
+   */
   @Prop() buttonTarget: '_blank' | '_self' | '_top' | '_parent' = '_blank';
+  /**
+   * The relationship between the current document and the link for the button rendered when containerHref is not present for each result.
+   */
   @Prop() buttonRel: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
+  /**
+   * Where to open the link for the containing element for each result.
+   */
   @Prop() containerTarget: '_blank' | '_self' | '_top' | '_parent' = '_blank';
+  /**
+   * The relationship between the current document and the link for the containing element for each result.
+   */
   @Prop() containerRel: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
 
+  /**
+   * When no results are returned.
+   */
   @Event() noResults: EventEmitter<void>;
 
   @State() hasSearched = false;

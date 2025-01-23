@@ -2,11 +2,13 @@
   "name": "@searchcraft/react-sdk",
   "private": false,
   "author": "Searchcraft",
-  "version": "0.5.3",
+  "version": "0.6.0",
   "description": "Searchcraft React SDK.",
   "type": "module",
   "license": "Apache-2.0",
-  "keywords": ["searchcraft"],
+  "keywords": [
+    "searchcraft"
+  ],
   "scripts": {
     "build": "tsc && vite build",
     "lint": "biome format lint ./src",
@@ -24,7 +26,9 @@
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist/**/*"],
+  "files": [
+    "dist/**/*"
+  ],
   "exports": {
     ".": {
       "import": "./dist/index.js",
@@ -40,7 +44,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.1",
-    "@searchcraft/core": "*",
+    "@searchcraft/core": "^0.6.0",
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.1",
     "@types/node": "^20.11.25",

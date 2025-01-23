@@ -2,8 +2,18 @@ import { Component, h, State } from '@stencil/core';
 
 import { useSearchcraftStore } from '@provider/store';
 
-import { formatNumberWithCommas } from '@utils/utils';
+import { formatNumberWithCommas } from '@utils';
 
+/**
+ * This web component is designed to display the number of results returned from a search query.
+ * It provides users with real-time feedback on the scale of the results, such as the total number of items found.
+ *
+ * ## Usage
+ * ```html
+ * <!-- index.html -->
+ * <searchcraft-results-info />
+ * ```
+ */
 @Component({
   tag: 'searchcraft-results-info',
   styleUrl: 'searchcraft-results-info.module.scss',

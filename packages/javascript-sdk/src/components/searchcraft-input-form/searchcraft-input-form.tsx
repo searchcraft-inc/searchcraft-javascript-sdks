@@ -11,7 +11,7 @@ import {
 import { type SearchcraftConfig, SearchcraftCore } from '@searchcraft/core';
 import packageJson from '../../../package.json';
 
-import { parseCustomStyles } from '@utils/utils';
+import { parseCustomStyles } from '@utils';
 import { useSearchcraftStore } from '@provider/store';
 import classNames from 'classnames';
 
@@ -20,6 +20,31 @@ export interface ScInputCustomEvent<T> extends CustomEvent<T> {
   target: HTMLSearchcraftInputFormElement;
 }
 
+/**
+ * This web component provides a user-friendly interface for querying an indexed dataset, enabling users to easily search large collections of data.
+ * It abstracts the complexities of index-based searching, making it accessible to users of all technical levels.
+ *
+ * ## Usage
+ * ```html
+ * <!-- index.html -->
+ * <searchcraft-input-form placeholder-value="Search here" />
+ * ```
+ *
+ * ```js
+ * // index.js
+ * const searchInputForm = document.querySelector('searchcraft-input-form');
+ *
+ * seardchInputForm.config = {
+ *   index: [],
+ *   readKey: '',
+ *   endpointUrl: '',
+ * };
+ *
+ * searchForm.addEventListener('querySubmit', (event) => {
+ *   console.log('Query submitted', event.detail);
+ * });
+ * ```
+ */
 @Component({
   tag: 'searchcraft-input-form',
   styleUrl: 'searchcraft-input-form.module.scss',
@@ -59,35 +84,34 @@ export class SearchcraftInput {
    */
   @Prop() searchTerm = '';
   /**
-   * The duration to debounce the input's `inputChange` event.
-   */
-  @Prop() debounceDelay = 0;
-  /**
-   * Event emitted when the input element has been cleared.
+   * When the input is cleared.
    */
   @Event() inputCleared: EventEmitter<void>;
   /**
-   * Event emitted when a query returns with no results received.
+   * When no results are returned.
    */
   @Event() noResultsReceived: EventEmitter<void>;
   /**
-   * Event emitted when a new search request has been submitted.
-   */
-  @Event() querySubmit: EventEmitter<string>;
-  /**
-   * Event emitted when the input has gained focus.
+   * When the input becomes focused.
    */
   @Event() inputFocus: EventEmitter<void>;
   /**
-   * Event emitted when the input has lost focus.
+   * When the input becomes unfocused.
    */
   @Event() inputBlur: EventEmitter<void>;
+  /**
+   * Event emitted when input initializes.
+   */
+  @Event() inputInit: EventEmitter<void>;
+  /**
+   * Event emitted when a query has been submitted.
+   */
+  @Event() querySubmit: EventEmitter<string>;
 
   @State() inputValue = this.searchTerm;
   @State() error = false;
   @State() isSearchcraftInitialized = false;
 
-  private debounceTimeout: ReturnType<typeof setTimeout> | null = null;
   private searchStore = useSearchcraftStore.getState();
 
   init() {
@@ -98,6 +122,7 @@ export class SearchcraftInput {
       });
       this.searchStore.initialize(searchcraft, true);
       this.isSearchcraftInitialized = true;
+      this.inputInit.emit();
     }
   }
 
@@ -116,6 +141,9 @@ export class SearchcraftInput {
 
     if (input.value.trim() === '') {
       this.inputCleared.emit();
+      this.searchTerm = '';
+      this.searchStore.setQuery('');
+      this.searchStore.setSearchResults(null);
       return;
     }
 
@@ -123,28 +151,18 @@ export class SearchcraftInput {
       return;
     }
 
-    if (this.debounceDelay > 0) {
-      if (this.debounceTimeout) {
-        clearTimeout(this.debounceTimeout);
-      }
-
-      this.debounceTimeout = setTimeout(
-        () => this.performSearch(input.value),
-        this.debounceDelay,
-      );
-    } else {
-      this.performSearch(input.value);
-    }
+    this.performSearch(input.value);
   };
 
   private performSearch = async (value: string) => {
     if (value === useSearchcraftStore.getState().query) {
       return;
     }
-    this.querySubmit.emit(value);
+
     this.searchTerm = value.trim();
     this.error = false;
     this.searchStore.setQuery(this.searchTerm);
+    this.querySubmit.emit(this.searchTerm);
 
     try {
       await this.searchStore.search();
@@ -156,11 +174,6 @@ export class SearchcraftInput {
 
   handleClearInput = () => {
     this.inputValue = '';
-
-    if (this.debounceTimeout) {
-      clearTimeout(this.debounceTimeout);
-    }
-
     this.searchTerm = '';
     this.searchStore.setQuery('');
     this.searchStore.setSearchResults(null);
@@ -187,21 +200,28 @@ export class SearchcraftInput {
       'searchcraft-input-grid-buttonNone': this.buttonPlacement === 'none',
     });
 
+    const shouldHaveVerticalGap = this.inputLabel || this.error;
+    const inputGridStyles = {
+      gap: shouldHaveVerticalGap ? '4px 8px' : '0px 8px',
+    };
+
     return (
       <form class='searchcraft-input-form' onSubmit={this.handleFormSubmit}>
-        <div class={inputGridClassNames}>
+        <div class={inputGridClassNames} style={inputGridStyles}>
           <div class='searchcraft-input-button-wrapper'>
             <searchcraft-button
               onButtonClick={this.handleFormSubmit}
               label={this.buttonLabel}
             />
           </div>
-          <div class='searchcraft-input-label-wrapper'>
-            <searchcraft-input-label label={this.inputLabel} />
-          </div>
+          {this.inputLabel && (
+            <div class='searchcraft-input-label-wrapper'>
+              <searchcraft-input-label label={this.inputLabel} />
+            </div>
+          )}
           {this.error && (
             <div class='searchcraft-input-error-wrapper'>
-              <searchcraft-error-message errorMessage='Please enter a search query.' />
+              <searchcraft-error-message errorMessage='Something went wrong.' />
             </div>
           )}
           <div class='searchcraft-input-wrapper'>

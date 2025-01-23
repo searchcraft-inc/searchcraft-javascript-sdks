@@ -20,6 +20,10 @@ export interface SearchcraftConfig {
    * The Index read key provided by Vektron.
    */
   readKey: string;
+  /**
+   * The amount of delay, in milliseconds, to debounce search requests. Defaults to `0`.
+   */
+  searchDebounceDelay?: number;
 }
 
 export interface SearchcraftSDKInfo {
@@ -131,9 +135,9 @@ export type SearchParams = {
   limit?: number;
 
   /**
-   * * The search mode, which can be either 'fuzzy' or 'normal'.
+   * * The search mode, which can be either 'fuzzy' or 'exact'.
    */
-  mode: 'fuzzy' | 'normal';
+  mode: 'fuzzy' | 'exact';
 
   /**
    * * The starting point for the results, used for pagination.
@@ -167,7 +171,7 @@ export type SearchParams = {
  */
 export interface QueryItem {
   occur?: string;
-  normal?: { ctx: string };
+  exact?: { ctx: string };
   fuzzy?: { ctx: string };
 }
 
