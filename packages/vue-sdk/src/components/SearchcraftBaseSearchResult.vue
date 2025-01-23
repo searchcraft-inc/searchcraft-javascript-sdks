@@ -8,20 +8,78 @@ export type SearchcraftBaseSearchResultProps =
 
 export default defineComponent({
   name: 'SearchcraftBaseSearchResult',
-  props: Object.keys(Component.prototype || {}).reduce(
-    (props, key) => {
-      props[key] = {
-        type: null as PropType<string | number | boolean | object>,
-        required: false,
-      };
-      return props;
+  props: {
+    titleContent: {
+      type: String as PropType<string>,
+      required: false,
     },
-    {} as Record<string, { type: PropType<unknown>; required: boolean }>,
-  ),
+    subtitleContent: {
+      type: String as PropType<string>,
+      required: false,
+    },
+    bodyContent: {
+      type: String as PropType<string>,
+      required: false,
+    },
+    footerContent: {
+      type: String as PropType<string>,
+      required: false,
+    },
+    buttonLabel: {
+      type: String as PropType<string>,
+      required: false,
+    },
+    buttonHref: {
+      type: String as PropType<string>,
+      required: false,
+    },
+    buttonTarget: {
+      type: String as PropType<string>,
+      required: false,
+    },
+    buttonRel: {
+      type: String as PropType<string>,
+      required: false,
+    },
+    containerHref: {
+      type: String as PropType<string>,
+      required: false,
+    },
+    containerTarget: {
+      type: String as PropType<string>,
+      required: false,
+    },
+    containerRel: {
+      type: String as PropType<string>,
+      required: false,
+    },
+    imageSrc: {
+      type: String as PropType<string>,
+      required: false,
+    },
+    imageAlt: {
+      type: String as PropType<string>,
+      required: false,
+    },
+    imagePlacement: {
+      type: String as PropType<string>,
+      required: false,
+    },
+    customStyles: {
+      type: Object as PropType<Record<string, string>>,
+      required: false,
+    },
+    documentPosition: {
+      type: Number as PropType<number>,
+      required: false,
+    },
+  },
+  components: {
+    Component,
+  },
 });
 </script>
 
 <template>
-  <!-- Pass all props using v-bind -->
   <Component v-bind="$props" />
 </template>

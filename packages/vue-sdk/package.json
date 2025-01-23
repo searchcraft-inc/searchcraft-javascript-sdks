@@ -27,11 +27,14 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.es.js",
       "require": "./dist/index.umd.js"
-    }
+    },
+    "./components": "./dist/components/index.d.ts",
+    "./plugin": "./dist/plugin.d.ts"
   },
-  "files": ["dist/**/*"],
+  "files": ["dist"],
   "peerDependencies": {
     "vue": "^3.5.13"
   },
