@@ -14,6 +14,8 @@ import type {
   SearchcraftSDKInfo,
 } from '../CoreSDKTypes';
 
+const MEASURE_REQUEST_DEBOUNCE = 500;
+
 /**
  * Javascript Class providing the functionality to interact with the Searchcraft BE
  */
@@ -22,6 +24,9 @@ export class SearchcraftCore {
   sdkInfo: SearchcraftSDKInfo;
   userId: string;
   sessionId: string;
+
+  private measureRequestTimeout: NodeJS.Timeout | undefined;
+  private measureRequestsBatched: MeasureRequest[] = [];
 
   constructor(config: SearchcraftConfig, sdkInfo: SearchcraftSDKInfo) {
     if (!config.endpointURL || !config.index || !config.readKey) {
@@ -232,7 +237,7 @@ export class SearchcraftCore {
    * @param {Partial<MeasureRequestProperties>} properties - Additional properties to send with the event.
    * @param {Partial<MeasureRequestUser>} user - Additional user properites to send with the event.
    */
-  sendMeasureEvent = async (
+  sendMeasureEvent = (
     eventName: MeasureEventName,
     properties: Partial<MeasureRequestProperties> = {},
     user: Partial<MeasureRequestUser> = {},
@@ -252,31 +257,38 @@ export class SearchcraftCore {
       },
     };
 
-    const payload = JSON.stringify(request);
-    const url = `${this.baseMeasureUrl}/event`;
+    this.measureRequestsBatched.push(request);
+    clearTimeout(this.measureRequestTimeout);
 
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: this.config.readKey,
-          'X-Sc-User-Id': this.userId,
-        },
-        body: payload,
-        keepalive: true,
-      });
+    this.measureRequestTimeout = setTimeout(async () => {
+      const payload = JSON.stringify({ items: this.measureRequestsBatched });
+      const url = `${this.baseMeasureUrl}/batch`;
 
-      if (!response.ok) {
-        throw new Error(
-          `Failed to send request: ${response.status} ${response.statusText}`,
-        );
+      try {
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: this.config.readKey,
+            'X-Sc-User-Id': this.userId,
+          },
+          body: payload,
+          keepalive: true,
+        });
+
+        if (!response.ok) {
+          throw new Error(
+            `Failed to send request: ${response.status} ${response.statusText}`,
+          );
+        }
+
+        this.measureRequestsBatched = [];
+
+        return;
+      } catch (error) {
+        console.error('Error sending MeasureRequest:', error);
+        throw error;
       }
-
-      return;
-    } catch (error) {
-      console.error('Error sending MeasureRequest:', error);
-      throw error;
-    }
+    }, MEASURE_REQUEST_DEBOUNCE);
   };
 }
