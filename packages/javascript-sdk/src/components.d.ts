@@ -622,6 +622,7 @@ declare global {
         "inputFocus": void;
         "inputBlur": void;
         "inputInit": void;
+        "querySubmit": string;
     }
     /**
      * This web component provides a user-friendly interface for querying an indexed dataset, enabling users to easily search large collections of data.
@@ -1105,13 +1106,17 @@ declare namespace LocalJSX {
          */
         "onInputFocus"?: (event: SearchcraftInputFormCustomEvent<void>) => void;
         /**
-          * Event emitted when input initializes
+          * Event emitted when input initializes.
          */
         "onInputInit"?: (event: SearchcraftInputFormCustomEvent<void>) => void;
         /**
           * When no results are returned.
          */
         "onNoResultsReceived"?: (event: SearchcraftInputFormCustomEvent<void>) => void;
+        /**
+          * Event emitted when a query has been submitted.
+         */
+        "onQuerySubmit"?: (event: SearchcraftInputFormCustomEvent<string>) => void;
         /**
           * The input element's placeholder value.
          */

@@ -100,9 +100,13 @@ export class SearchcraftInput {
    */
   @Event() inputBlur: EventEmitter<void>;
   /**
-   * Event emitted when input initializes
+   * Event emitted when input initializes.
    */
   @Event() inputInit: EventEmitter<void>;
+  /**
+   * Event emitted when a query has been submitted.
+   */
+  @Event() querySubmit: EventEmitter<string>;
 
   @State() inputValue = this.searchTerm;
   @State() error = false;
@@ -158,6 +162,7 @@ export class SearchcraftInput {
     this.searchTerm = value.trim();
     this.error = false;
     this.searchStore.setQuery(this.searchTerm);
+    this.querySubmit.emit(this.searchTerm);
 
     try {
       await this.searchStore.search();
