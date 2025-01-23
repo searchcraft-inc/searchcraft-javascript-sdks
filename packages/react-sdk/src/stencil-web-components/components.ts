@@ -97,7 +97,8 @@ type SearchcraftInputFormEvents = {
     onNoResultsReceived: EventName<CustomEvent<void>>,
     onInputFocus: EventName<CustomEvent<void>>,
     onInputBlur: EventName<CustomEvent<void>>,
-    onInputInit: EventName<CustomEvent<void>>
+    onInputInit: EventName<CustomEvent<void>>,
+    onQuerySubmit: EventName<CustomEvent<string>>
 };
 
 export const SearchcraftInputForm: StencilReactComponent<SearchcraftInputFormElement, SearchcraftInputFormEvents> = /*@__PURE__*/ createComponent<SearchcraftInputFormElement, SearchcraftInputFormEvents>({
@@ -110,7 +111,8 @@ export const SearchcraftInputForm: StencilReactComponent<SearchcraftInputFormEle
         onNoResultsReceived: 'noResultsReceived',
         onInputFocus: 'inputFocus',
         onInputBlur: 'inputBlur',
-        onInputInit: 'inputInit'
+        onInputInit: 'inputInit',
+        onQuerySubmit: 'querySubmit'
     } as SearchcraftInputFormEvents,
     defineCustomElement: defineSearchcraftInputForm
 });

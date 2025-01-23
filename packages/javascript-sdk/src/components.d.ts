@@ -275,10 +275,6 @@ export namespace Components {
          */
         "customStyles": string | Record<string, string>;
         /**
-          * The duration to debounce the input's `inputChange` event.
-         */
-        "debounceDelay": number;
-        /**
           * The label rendered above the input.
          */
         "inputLabel": string | undefined;
@@ -626,6 +622,7 @@ declare global {
         "inputFocus": void;
         "inputBlur": void;
         "inputInit": void;
+        "querySubmit": string;
     }
     /**
      * This web component provides a user-friendly interface for querying an indexed dataset, enabling users to easily search large collections of data.
@@ -1093,10 +1090,6 @@ declare namespace LocalJSX {
          */
         "customStyles"?: string | Record<string, string>;
         /**
-          * The duration to debounce the input's `inputChange` event.
-         */
-        "debounceDelay"?: number;
-        /**
           * The label rendered above the input.
          */
         "inputLabel"?: string | undefined;
@@ -1113,13 +1106,17 @@ declare namespace LocalJSX {
          */
         "onInputFocus"?: (event: SearchcraftInputFormCustomEvent<void>) => void;
         /**
-          * Event emitted when input initializes
+          * Event emitted when input initializes.
          */
         "onInputInit"?: (event: SearchcraftInputFormCustomEvent<void>) => void;
         /**
           * When no results are returned.
          */
         "onNoResultsReceived"?: (event: SearchcraftInputFormCustomEvent<void>) => void;
+        /**
+          * Event emitted when a query has been submitted.
+         */
+        "onQuerySubmit"?: (event: SearchcraftInputFormCustomEvent<string>) => void;
         /**
           * The input element's placeholder value.
          */

@@ -40,7 +40,6 @@ searchForm.addEventListener('querySubmit', (event) => {
 | `buttonPlacement`  | `button-placement`  | Where to place the search button.                                              | `"left" \| "none" \| "right"`        | `'none'`         |
 | `config`           | --                  | The Searchcraft config object.                                                 | `SearchcraftConfig`                  | `undefined`      |
 | `customStyles`     | `custom-styles`     | A custom styles object to be applied to the input element.                     | `string \| { [x: string]: string; }` | `{}`             |
-| `debounceDelay`    | `debounce-delay`    | The duration to debounce the input's `inputChange` event.                      | `number`                             | `0`              |
 | `inputLabel`       | `input-label`       | The label rendered above the input.                                            | `string`                             | `undefined`      |
 | `placeholderValue` | `placeholder-value` | The input element's placeholder value.                                         | `string`                             | `'Enter Search'` |
 | `searchTerm`       | `search-term`       | The starting value of the input element.                                       | `string`                             | `''`             |
@@ -48,13 +47,14 @@ searchForm.addEventListener('querySubmit', (event) => {
 
 ## Events
 
-| Event               | Description                          | Type                |
-| ------------------- | ------------------------------------ | ------------------- |
-| `inputBlur`         | When the input becomes unfocused.    | `CustomEvent<void>` |
-| `inputCleared`      | When the input is cleared.           | `CustomEvent<void>` |
-| `inputFocus`        | When the input becomes focused.      | `CustomEvent<void>` |
-| `inputInit`         | Event emitted when input initializes | `CustomEvent<void>` |
-| `noResultsReceived` | When no results are returned.        | `CustomEvent<void>` |
+| Event               | Description                                    | Type                  |
+| ------------------- | ---------------------------------------------- | --------------------- |
+| `inputBlur`         | When the input becomes unfocused.              | `CustomEvent<void>`   |
+| `inputCleared`      | When the input is cleared.                     | `CustomEvent<void>`   |
+| `inputFocus`        | When the input becomes focused.                | `CustomEvent<void>`   |
+| `inputInit`         | Event emitted when input initializes.          | `CustomEvent<void>`   |
+| `noResultsReceived` | When no results are returned.                  | `CustomEvent<void>`   |
+| `querySubmit`       | Event emitted when a query has been submitted. | `CustomEvent<string>` |
 
 
 ## Dependencies

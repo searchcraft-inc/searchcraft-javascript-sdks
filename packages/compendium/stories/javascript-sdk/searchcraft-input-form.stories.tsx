@@ -62,7 +62,6 @@ const defaultProps: Components.SearchcraftInputForm = {
   customStyles: {},
   placeholderValue: 'Enter Search',
   searchTerm: '',
-  debounceDelay: 0,
 };
 
 const buttonRightProps: Components.SearchcraftInputForm = {
@@ -74,7 +73,6 @@ const buttonRightProps: Components.SearchcraftInputForm = {
   customStyles: {},
   placeholderValue: 'Enter Search',
   searchTerm: '',
-  debounceDelay: 0,
 };
 
 const autoSearchProps: Components.SearchcraftInputForm = {
@@ -86,7 +84,6 @@ const autoSearchProps: Components.SearchcraftInputForm = {
   customStyles: {},
   placeholderValue: 'Enter Search',
   searchTerm: '',
-  debounceDelay: 0,
 };
 
 export const Default: StoryObj<Components.SearchcraftInputForm> = {

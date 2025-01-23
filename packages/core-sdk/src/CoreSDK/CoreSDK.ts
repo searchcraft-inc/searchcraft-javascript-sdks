@@ -25,6 +25,7 @@ export class SearchcraftCore {
   userId: string;
   sessionId: string;
 
+  private searchRequestTimeout: NodeJS.Timeout | undefined;
   private measureRequestTimeout: NodeJS.Timeout | undefined;
   private measureRequestsBatched: MeasureRequest[] = [];
 
@@ -156,77 +157,93 @@ export class SearchcraftCore {
    * @param {SearchParams} searchParams - The parameters for the search.
    * @returns {Promise<SearchcraftResponse>} - Returns the search response or throws an error.
    */
-  search = async (searchParams: SearchParams): Promise<SearchcraftResponse> => {
-    this.sendMeasureEvent('search_requested', {
-      search_term: searchParams.query,
-    });
+  search = (
+    searchParams: SearchParams,
+    callback: (response: SearchcraftResponse) => void,
+  ) => {
+    const performSearch = async () => {
+      this.sendMeasureEvent('search_requested', {
+        search_term: searchParams.query,
+      });
 
-    const quoteCount = (searchParams.query.match(/"/g) || []).length;
-    if (quoteCount % 2 !== 0) {
-      throw new Error(
-        'The search term contains an uneven number of quote characters.',
-      );
-    }
-
-    try {
-      // Build the request body
-      const requestBody: {
-        query: QueryObject;
-        limit: number;
-        offset?: number;
-        order_by?: string;
-        sort?: 'asc' | 'desc';
-      } = {
-        query: this.buildQueryObject(searchParams),
-        limit: searchParams.limit ?? 20, // Default to 20 if not provided
-      };
-
-      // Add offset if provided
-      if (searchParams.offset !== undefined) {
-        requestBody.offset = searchParams.offset;
-      }
-
-      // Handles dynamic sorting and order_by logic
-      if (searchParams.order_by) {
-        requestBody.order_by = searchParams.order_by;
-
-        // Ensure sort defaults to 'asc' if not provided or given an invalid value
-        requestBody.sort =
-          searchParams.sort === 'desc' || searchParams.sort === 'asc'
-            ? searchParams.sort
-            : 'asc';
-      }
-
-      const requestOptions = {
-        method: 'POST',
-        headers: {
-          Authorization: this.config.readKey,
-          'Content-Type': 'application/json',
-          'X-Sc-User-Id': this.userId,
-        },
-        body: JSON.stringify(requestBody),
-      };
-
-      const response = await fetch(this.baseSearchUrl, requestOptions);
-      if (!response.ok) {
+      const quoteCount = (searchParams.query.match(/"/g) || []).length;
+      if (quoteCount % 2 !== 0) {
         throw new Error(
-          `Error: ${response.statusText} (Status: ${response.status})`,
+          'The search term contains an uneven number of quote characters.',
         );
       }
 
-      // TODO: Add schema validation here rather than optimistically cast to SearchcraftResponse.
-      const searchcraftResponse =
-        (await response.json()) as SearchcraftResponse;
+      try {
+        // Build the request body
+        const requestBody: {
+          query: QueryObject;
+          limit: number;
+          offset?: number;
+          order_by?: string;
+          sort?: 'asc' | 'desc';
+        } = {
+          query: this.buildQueryObject(searchParams),
+          limit: searchParams.limit ?? 20, // Default to 20 if not provided
+        };
 
-      this.sendMeasureEvent('search_response_received', {
-        search_term: searchParams.query,
-        number_of_documents: searchcraftResponse.data.count,
-      });
+        // Add offset if provided
+        if (searchParams.offset !== undefined) {
+          requestBody.offset = searchParams.offset;
+        }
 
-      return searchcraftResponse;
-    } catch (error) {
-      console.error('Error parsing response:', error);
-      throw error;
+        // Handles dynamic sorting and order_by logic
+        if (searchParams.order_by) {
+          requestBody.order_by = searchParams.order_by;
+
+          // Ensure sort defaults to 'asc' if not provided or given an invalid value
+          requestBody.sort =
+            searchParams.sort === 'desc' || searchParams.sort === 'asc'
+              ? searchParams.sort
+              : 'asc';
+        }
+
+        const requestOptions = {
+          method: 'POST',
+          headers: {
+            Authorization: this.config.readKey,
+            'Content-Type': 'application/json',
+            'X-Sc-User-Id': this.userId,
+          },
+          body: JSON.stringify(requestBody),
+        };
+
+        const response = await fetch(this.baseSearchUrl, requestOptions);
+        if (!response.ok) {
+          throw new Error(
+            `Error: ${response.statusText} (Status: ${response.status})`,
+          );
+        }
+
+        // TODO: Add schema validation here rather than optimistically cast to SearchcraftResponse.
+        const searchcraftResponse =
+          (await response.json()) as SearchcraftResponse;
+
+        this.sendMeasureEvent('search_response_received', {
+          search_term: searchParams.query,
+          number_of_documents: searchcraftResponse.data.count,
+        });
+
+        callback(searchcraftResponse);
+      } catch (error) {
+        console.error('Error parsing response:', error);
+        throw error;
+      }
+    };
+
+    // Apply a debounce to the search if there is one in the config.
+    clearTimeout(this.searchRequestTimeout);
+    if (this.config.searchDebounceDelay) {
+      this.searchRequestTimeout = setTimeout(
+        performSearch,
+        this.config.searchDebounceDelay,
+      );
+    } else {
+      performSearch();
     }
   };
 
