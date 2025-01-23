@@ -1,4 +1,6 @@
 import { Component, h, Prop } from '@stencil/core';
+
+import { getDocumentValueFromSearchResultMapping } from '@utils';
 import type { PopoverResultMappings } from 'types';
 
 /**
@@ -18,20 +20,59 @@ import type { PopoverResultMappings } from 'types';
 })
 export class SearchcraftPopoverListView {
   /**
-   * Formats the content rendered for each result.
+   * The mappings that define how the data in the documents are mapped to the
+   * list-view-item elements.
    */
   @Prop() popoverResultMappings: PopoverResultMappings | undefined;
+  /**
+   * The documents to render in the list view.
+   */
+  @Prop() documents: Record<string, unknown>[] | undefined;
 
-  componentDidLoad() {}
+  renderDocument(document: Record<string, unknown>, index: number) {
+    /**
+     * Index field values -> Result container props mappings.
+     */
+    const titleContent = getDocumentValueFromSearchResultMapping(
+      document,
+      this.popoverResultMappings.title,
+    );
+    const subtitleContent = getDocumentValueFromSearchResultMapping(
+      document,
+      this.popoverResultMappings.subtitle,
+    );
+    const href = getDocumentValueFromSearchResultMapping(
+      document,
+      this.popoverResultMappings.href,
+    );
+    const imageSource = getDocumentValueFromSearchResultMapping(
+      document,
+      this.popoverResultMappings.imageSource,
+    );
+    const imageAlt = getDocumentValueFromSearchResultMapping(
+      document,
+      this.popoverResultMappings.imageAlt,
+    );
 
-  connectedCallback() {}
-
-  disconnectedCallback() {}
+    return (
+      <searchcraft-popover-list-item
+        key={`${document.document_id}-${index}`}
+        title-content={titleContent}
+        subtitle-content={subtitleContent}
+        image-src={imageSource}
+        image-alt={imageAlt}
+        href={href}
+        document-position={index}
+      />
+    );
+  }
 
   render() {
     return (
-      <div style={{ display: 'flex' }}>
-        <p>[popover list view]</p>
+      <div class='searchcraft-popover-list-view'>
+        {this.documents?.map((document, index) =>
+          this.renderDocument(document, index),
+        )}
       </div>
     );
   }

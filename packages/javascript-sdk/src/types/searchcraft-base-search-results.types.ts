@@ -1,12 +1,4 @@
-export type SearchResultFieldName = {
-  fieldName: string;
-  dataType: 'text' | 'date';
-};
-
-export type SearchResultMapping = {
-  fieldNames: SearchResultFieldName[];
-  delimiter?: string;
-};
+import type { SearchResultMapping } from './_shared.types';
 
 export type SearchResultMappings = {
   body?: SearchResultMapping;
