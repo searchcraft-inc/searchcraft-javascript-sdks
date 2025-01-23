@@ -9,6 +9,8 @@ export * from './SearchcraftFacetList';
 export * from './SearchcraftFilterPanel';
 export * from './SearchcraftInputForm';
 export * from './SearchcraftInputLabel';
+export * from './SearchcraftPopoverButton';
+export * from './SearchcraftPopoverForm';
 export * from './SearchcraftResultsInfo';
 export * from './SearchcraftSlider';
 export * from './SearchcraftToggleButton';
