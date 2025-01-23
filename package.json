@@ -32,7 +32,7 @@
     "build-ci:sdk-react": "yarn build-ci:core && yarn build-ci:sdk-javascript && yarn workspace @searchcraft/react-sdk build",
     "build-ci:sdk-javascript": "yarn build-ci:core && yarn workspace @searchcraft/javascript-sdk build",
     "build-ci:sdk-vue": "yarn build-ci:core && yarn build-ci:sdk-javascript && yarn workspace @searchcraft/vue-sdk build",
-    "build:all": "yarn build:core && yarn build:sdk-react && yarn build:sdk-javascript && yarn yalc:all",
+    "build:all": "yarn build:core && yarn build:sdk-react && yarn build:sdk-javascript && yarn build:sdk-vue && yarn yalc:all",
     "build:core": "yarn workspace @searchcraft/core build && yarn yalc:core",
     "build:sdk-react": "yarn build:core && yarn build:sdk-javascript && yarn workspace @searchcraft/react-sdk build && yarn yalc:sdk-react",
     "build:sdk-javascript": "yarn build:core && yarn workspace @searchcraft/javascript-sdk build && yarn yalc:sdk-javascript",
