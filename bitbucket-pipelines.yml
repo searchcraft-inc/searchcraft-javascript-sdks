@@ -18,7 +18,7 @@ pipelines:
                 echo "lerna.json changed, proceeding with publish"
                 yarn install
                 yarn global add lerna
-                yarn build:all
+                yarn build:all-ci
                 yarn lerna publish from-package --no-private --yes --loglevel debug
               else
                 echo "No changes to lerna.json, skipping publish"
