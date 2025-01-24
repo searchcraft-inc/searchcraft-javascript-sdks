@@ -3,7 +3,9 @@ import type { StorybookConfig } from '@storybook/vue3-vite';
 import vue from '@vitejs/plugin-vue';
 
 const config: StorybookConfig = {
-  stories: ['../../stories/vue-sdk/**/*.stories.@(js|jsx|ts|tsx|vue)'],
+  stories: [
+    '../../stories/vue-config-stories/**/*.stories.@(js|jsx|ts|tsx|vue)',
+  ],
   addons: [
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
@@ -13,6 +15,7 @@ const config: StorybookConfig = {
     name: '@storybook/vue3-vite',
     options: {},
   },
+  staticDirs: ['../../public'],
   viteFinal: (config) => {
     config.plugins = [...(config.plugins || []), vue()];
     config.resolve = {

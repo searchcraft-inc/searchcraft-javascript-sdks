@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import WebComponentWrapper from '../../utils/WebComponentWrapper';
-import { config } from '../../utils/DefaultSearchcraftConfig';
+import WebComponentWrapper from '../../../utils/WebComponentWrapper';
+import { config } from '../../../utils/DefaultSearchcraftConfig';
 
 import type { Components } from '@searchcraft/javascript-sdk';
 

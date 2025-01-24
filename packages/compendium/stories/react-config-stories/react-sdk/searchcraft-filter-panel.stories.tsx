@@ -7,15 +7,27 @@ import type {
   MostRecentToggleFilterItem,
   NumericFilterItem,
 } from '@searchcraft/javascript-sdk';
+import {
+  SearchcraftInputForm,
+  SearchcraftFilterPanel,
+} from '@searchcraft/react-sdk';
 
-import { config } from '../../utils/DefaultSearchcraftConfig';
+import { config } from '../../../utils/DefaultSearchcraftConfig';
 import { useEffect } from 'react';
 
-import type { Components } from '@searchcraft/javascript-sdk';
-
 const componentMeta: Meta = {
-  title: 'Javascript SDK/searchcraft-filter-panel',
+  title: 'React SDK/searchcraft-filter-panel',
   argTypes: {},
+};
+
+type ComponentProps = {
+  items: FilterItem[];
+  clearInput: () => void;
+  config: string;
+  customStylesForInput: string;
+  inputCaptionValue: string;
+  labelForInput: string;
+  placeholderValue: string;
 };
 
 const today = new Date();
@@ -69,7 +81,7 @@ const facetItem: FacetsFilterItem = {
   },
 };
 
-const defaultProps: Components.SearchcraftFilterPanel = {
+const defaultProps: ComponentProps = {
   items: [
     exactMatchItem,
     mostRecentItem,
@@ -77,9 +89,15 @@ const defaultProps: Components.SearchcraftFilterPanel = {
     numericItem,
     facetItem,
   ],
+  clearInput: () => {},
+  config: JSON.stringify(config),
+  customStylesForInput: '{}',
+  inputCaptionValue: 'Search',
+  labelForInput: 'Search for something:',
+  placeholderValue: 'Search here...',
 };
 
-export const Default: StoryObj<Components.SearchcraftFilterPanel> = {
+export const Default: StoryObj<ComponentProps> = {
   decorators: [
     (Story) => {
       useEffect(() => {
@@ -100,48 +118,24 @@ export const Default: StoryObj<Components.SearchcraftFilterPanel> = {
   render: (args) => {
     return (
       <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
-        <searchcraft-input-form />
+        <SearchcraftInputForm
+          autoSearch={true}
+          buttonLabel=''
+          buttonPlacement='none'
+          customStyles={args.customStylesForInput}
+          debounceDelay={0}
+          searchTerm=''
+          inputLabel=''
+          config={config}
+          placeholderValue={args.placeholderValue || ''}
+        />
         <div style={{ paddingTop: 20 }}>
-          <searchcraft-filter-panel />
+          <SearchcraftFilterPanel items={args.items} />
         </div>
       </div>
     );
   },
   args: defaultProps,
 };
-
-export const WithDebounceDelay300: StoryObj<Components.SearchcraftFilterPanel> =
-  {
-    decorators: [
-      (Story) => {
-        useEffect(() => {
-          const searchForm = document.querySelector('searchcraft-input-form');
-          const filterPanel = document.querySelector(
-            'searchcraft-filter-panel',
-          );
-
-          if (searchForm) {
-            searchForm.config = { ...config, searchDebounceDelay: 300 };
-          }
-          if (filterPanel) {
-            filterPanel.items = defaultProps.items;
-          }
-        }, []);
-
-        return <Story />;
-      },
-    ],
-    render: (args) => {
-      return (
-        <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
-          <searchcraft-input-form />
-          <div style={{ paddingTop: 20 }}>
-            <searchcraft-filter-panel />
-          </div>
-        </div>
-      );
-    },
-    args: defaultProps,
-  };
 
 export default componentMeta;

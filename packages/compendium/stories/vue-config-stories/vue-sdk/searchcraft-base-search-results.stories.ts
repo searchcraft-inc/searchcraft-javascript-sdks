@@ -4,7 +4,7 @@ import {
   SearchcraftInputForm,
 } from '@searchcraft/vue-sdk';
 import type { Meta, StoryFn } from '@storybook/vue3';
-import { config } from '../../utils/DefaultSearchcraftConfig';
+import { config } from '../../../utils/DefaultSearchcraftConfig';
 
 export default {
   title: 'Vue SDK/searchcraft-base-search-results',

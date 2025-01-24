@@ -84,7 +84,7 @@ const defaultProps: ComponentProps = {
   placeAdAtStart: false,
   resultImagePlacement: 'right',
   searchResultMappings: mappings,
-  clearInput: () => { },
+  clearInput: () => {},
   config: JSON.stringify(config),
   customStylesForInput: '{}',
   inputCaptionValue: 'Search',

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import WebComponentWrapper from '../../utils/WebComponentWrapper';
+import WebComponentWrapper from '../../../utils/WebComponentWrapper';
 import type { Components } from '@searchcraft/javascript-sdk';
 
 const componentName = 'searchcraft-button';

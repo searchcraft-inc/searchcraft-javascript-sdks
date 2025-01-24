@@ -1,11 +1,12 @@
-import { SearchcraftInputForm } from '@searchcraft/vue-sdk';
+import type { Meta, StoryObj } from '@storybook/react';
+import {
+  SearchcraftInputForm,
+  type SearchcraftInputFormProps,
+} from '@searchcraft/react-sdk';
+import { config } from '../../../utils/DefaultSearchcraftConfig';
 
-import type { Meta, StoryFn } from '@storybook/vue3';
-import { config } from '../../utils/DefaultSearchcraftConfig';
-
-export default {
-  title: 'Vue SDK/searchcraft-input-form',
-  component: SearchcraftInputForm,
+const componentMeta: Meta = {
+  title: 'React SDK/searchcraft-input-form',
   argTypes: {
     config: {
       control: 'object',
@@ -47,12 +48,12 @@ export default {
         'Duration to debounce the input change event, in milliseconds',
     },
   },
-} as Meta;
+};
 
-const defaultProps = {
+const defaultProps: SearchcraftInputFormProps = {
   config: config,
-  autoSearch: true,
-  buttonPlacement: 'none',
+  autoSearch: false,
+  buttonPlacement: 'left',
   buttonLabel: undefined,
   inputLabel: 'Search here',
   customStyles: {},
@@ -61,15 +62,13 @@ const defaultProps = {
   debounceDelay: 0,
 };
 
-export const Default: StoryFn = (args) => ({
-  components: { SearchcraftInputForm },
-  setup() {
-    return { args };
-  },
-  template: `
-    <div style="display: flex;">
-      <SearchcraftInputForm v-bind="args" />
+export const Default: StoryObj<SearchcraftInputFormProps> = {
+  render: (args) => (
+    <div style={{ display: 'flex' }}>
+      <SearchcraftInputForm {...args} />
     </div>
-  `,
-});
-Default.args = defaultProps;
+  ),
+  args: defaultProps,
+};
+
+export default componentMeta;
