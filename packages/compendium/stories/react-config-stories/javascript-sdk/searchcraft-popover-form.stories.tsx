@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import type { PopoverResultMappings } from '@searchcraft/javascript-sdk';
-import { config } from '../../../utils/DefaultSearchcraftConfig';
+import { configAlternate } from '../../../utils/AlternateSearchcraftConfig';
 import { useEffect } from 'react';
 import type { Components } from '@searchcraft/javascript-sdk';
 
@@ -50,7 +50,7 @@ export const Inline: StoryObj<Components.SearchcraftPopoverForm> = {
         const searchForm = document.querySelector('searchcraft-popover-form');
 
         if (searchForm) {
-          searchForm.config = config;
+          searchForm.config = configAlternate;
           searchForm.popoverResultMappings = mappings;
         }
       }, []);
@@ -140,7 +140,7 @@ export const Modal: StoryObj<Components.SearchcraftPopoverForm> = {
         const searchForm = document.querySelector('searchcraft-popover-form');
 
         if (searchForm) {
-          searchForm.config = config;
+          searchForm.config = configAlternate;
           searchForm.popoverResultMappings = mappings;
         }
       }, []);
@@ -174,7 +174,7 @@ export const Fullscreen: StoryObj<Components.SearchcraftPopoverForm> = {
         const searchForm = document.querySelector('searchcraft-popover-form');
 
         if (searchForm) {
-          searchForm.config = config;
+          searchForm.config = configAlternate;
           searchForm.popoverResultMappings = mappings;
         }
       }, []);
