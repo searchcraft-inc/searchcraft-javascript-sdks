@@ -1,0 +1,610 @@
+{
+  "framework": "vue",
+  "name": "@searchcraft/vue-sdk",
+  "version": "0.7.0",
+  "contributions": {
+    "html": {
+      "description-markup": "markdown",
+      "types-syntax": "typescript",
+      "tags": [
+        {
+          "name": "SearchcraftBaseSearchResult",
+          "description": "",
+          "attributes": [
+            {
+              "name": "titleContent",
+              "required": false,
+              "value": {
+                "kind": "expression",
+                "type": "string"
+              }
+            },
+            {
+              "name": "subtitleContent",
+              "required": false,
+              "value": {
+                "kind": "expression",
+                "type": "string"
+              }
+            },
+            {
+              "name": "bodyContent",
+              "required": false,
+              "value": {
+                "kind": "expression",
+                "type": "string"
+              }
+            },
+            {
+              "name": "footerContent",
+              "required": false,
+              "value": {
+                "kind": "expression",
+                "type": "string"
+              }
+            },
+            {
+              "name": "buttonLabel",
+              "required": false,
+              "value": {
+                "kind": "expression",
+                "type": "string"
+              }
+            },
+            {
+              "name": "buttonHref",
+              "required": false,
+              "value": {
+                "kind": "expression",
+                "type": "string"
+              }
+            },
+            {
+              "name": "buttonTarget",
+              "required": false,
+              "value": {
+                "kind": "expression",
+                "type": "string"
+              }
+            },
+            {
+              "name": "buttonRel",
+              "required": false,
+              "value": {
+                "kind": "expression",
+                "type": "string"
+              }
+            },
+            {
+              "name": "containerHref",
+              "required": false,
+              "value": {
+                "kind": "expression",
+                "type": "string"
+              }
+            },
+            {
+              "name": "containerTarget",
+              "required": false,
+              "value": {
+                "kind": "expression",
+                "type": "string"
+              }
+            },
+            {
+              "name": "containerRel",
+              "required": false,
+              "value": {
+                "kind": "expression",
+                "type": "string"
+              }
+            },
+            {
+              "name": "imageSrc",
+              "required": false,
+              "value": {
+                "kind": "expression",
+                "type": "string"
+              }
+            },
+            {
+              "name": "imageAlt",
+              "required": false,
+              "value": {
+                "kind": "expression",
+                "type": "string"
+              }
+            },
+            {
+              "name": "imagePlacement",
+              "required": false,
+              "value": {
+                "kind": "expression",
+                "type": "string"
+              }
+            },
+            {
+              "name": "customStyles",
+              "required": false,
+              "value": {
+                "kind": "expression",
+                "type": "Record<string, string>"
+              }
+            },
+            {
+              "name": "documentPosition",
+              "required": false,
+              "value": {
+                "kind": "expression",
+                "type": "number"
+              }
+            }
+          ],
+          "source": {
+            "module": "./src/components/SearchcraftBaseSearchResult.vue",
+            "symbol": "default"
+          }
+        },
+        {
+          "name": "SearchcraftBaseSearchResults",
+          "description": "",
+          "attributes": [
+            {
+              "name": "adInterval",
+              "value": {
+                "kind": "expression",
+                "type": "number"
+              }
+            },
+            {
+              "name": "customStylesForResults",
+              "value": {
+                "kind": "expression",
+                "type": "object"
+              }
+            },
+            {
+              "name": "searchResultMappings",
+              "value": {
+                "kind": "expression",
+                "type": "object"
+              }
+            },
+            {
+              "name": "placeAdAtEnd",
+              "value": {
+                "kind": "expression",
+                "type": "boolean"
+              }
+            },
+            {
+              "name": "placeAdAtStart",
+              "value": {
+                "kind": "expression",
+                "type": "boolean"
+              }
+            },
+            {
+              "name": "resultImagePlacement",
+              "value": {
+                "kind": "expression",
+                "type": "string"
+              }
+            },
+            {
+              "name": "buttonLabel",
+              "value": {
+                "kind": "expression",
+                "type": "string"
+              }
+            },
+            {
+              "name": "buttonTarget",
+              "value": {
+                "kind": "expression",
+                "type": "string"
+              }
+            },
+            {
+              "name": "buttonRel",
+              "value": {
+                "kind": "expression",
+                "type": "string"
+              }
+            },
+            {
+              "name": "containerTarget",
+              "value": {
+                "kind": "expression",
+                "type": "string"
+              }
+            },
+            {
+              "name": "containerRel",
+              "value": {
+                "kind": "expression",
+                "type": "string"
+              }
+            },
+            {
+              "name": "noResults",
+              "value": {
+                "kind": "expression",
+                "type": "string"
+              }
+            }
+          ],
+          "source": {
+            "module": "./src/components/SearchcraftBaseSearchResults.vue",
+            "symbol": "default"
+          }
+        },
+        {
+          "name": "SearchcraftButton",
+          "description": "",
+          "attributes": [
+            {
+              "name": "text",
+              "value": {
+                "kind": "expression",
+                "type": "string"
+              }
+            },
+            {
+              "name": "disabled",
+              "value": {
+                "kind": "expression",
+                "type": "boolean"
+              }
+            },
+            {
+              "name": "type",
+              "value": {
+                "kind": "expression",
+                "type": "string"
+              }
+            },
+            {
+              "name": "onClick",
+              "value": {
+                "kind": "expression",
+                "type": "func"
+              }
+            }
+          ],
+          "source": {
+            "module": "./src/components/SearchcraftButton.vue",
+            "symbol": "default"
+          }
+        },
+        {
+          "name": "SearchcraftErrorMessage",
+          "description": "",
+          "attributes": [
+            {
+              "name": "errorMessage",
+              "value": {
+                "kind": "expression",
+                "type": "string"
+              }
+            }
+          ],
+          "source": {
+            "module": "./src/components/SearchcraftErrorMessage.vue",
+            "symbol": "default"
+          }
+        },
+        {
+          "name": "SearchcraftFacetList",
+          "description": "",
+          "attributes": [
+            {
+              "name": "fieldName",
+              "required": true,
+              "value": {
+                "kind": "expression",
+                "type": "String as () => Components.SearchcraftFacetList['fieldName']"
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "facetSelectionUpdated"
+            }
+          ],
+          "source": {
+            "module": "./src/components/SearchcraftFacetList.vue",
+            "symbol": "default"
+          }
+        },
+        {
+          "name": "SearchcraftFilterPanel",
+          "description": "",
+          "attributes": [
+            {
+              "name": "items",
+              "required": true,
+              "value": {
+                "kind": "expression",
+                "type": "Array as () => Components.SearchcraftFilterPanel['items']"
+              }
+            }
+          ],
+          "source": {
+            "module": "./src/components/SearchcraftFilterPanel.vue",
+            "symbol": "default"
+          }
+        },
+        {
+          "name": "SearchcraftInputForm",
+          "description": "",
+          "attributes": [
+            {
+              "name": "config",
+              "required": false,
+              "value": {
+                "kind": "expression",
+                "type": "Record<string, unknown>"
+              }
+            },
+            {
+              "name": "autoSearch",
+              "value": {
+                "kind": "expression",
+                "type": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "buttonPlacement",
+              "value": {
+                "kind": "expression",
+                "type": "string"
+              },
+              "default": "'right'"
+            },
+            {
+              "name": "buttonLabel",
+              "value": {
+                "kind": "expression",
+                "type": "string"
+              },
+              "default": "'Search'"
+            },
+            {
+              "name": "inputLabel",
+              "value": {
+                "kind": "expression",
+                "type": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "customStyles",
+              "value": {
+                "kind": "expression",
+                "type": "Record<string, string>"
+              },
+              "default": "() => ({})"
+            },
+            {
+              "name": "placeholderValue",
+              "value": {
+                "kind": "expression",
+                "type": "string"
+              },
+              "default": "'Enter a search term...'"
+            },
+            {
+              "name": "searchTerm",
+              "value": {
+                "kind": "expression",
+                "type": "string"
+              },
+              "default": "''"
+            },
+            {
+              "name": "debounceDelay",
+              "value": {
+                "kind": "expression",
+                "type": "number"
+              },
+              "default": "300"
+            }
+          ],
+          "events": [
+            {
+              "name": "inputCleared"
+            },
+            {
+              "name": "noResultsReceived"
+            },
+            {
+              "name": "querySubmit"
+            },
+            {
+              "name": "inputFocus"
+            },
+            {
+              "name": "inputBlur"
+            }
+          ],
+          "source": {
+            "module": "./src/components/SearchcraftInputForm.vue",
+            "symbol": "default"
+          }
+        },
+        {
+          "name": "SearchcraftInputLabel",
+          "description": "",
+          "attributes": [
+            {
+              "name": "inputLabelClassName",
+              "required": false,
+              "value": {
+                "kind": "expression",
+                "type": "String as () => Components.SearchcraftInputLabel['inputLabelClassName']"
+              }
+            },
+            {
+              "name": "label",
+              "required": false,
+              "value": {
+                "kind": "expression",
+                "type": "String as () => Components.SearchcraftInputLabel['label']"
+              }
+            }
+          ],
+          "source": {
+            "module": "./src/components/SearchcraftInputLabel.vue",
+            "symbol": "default"
+          }
+        },
+        {
+          "name": "SearchcraftPopoverButton",
+          "description": "",
+          "source": {
+            "module": "./src/components/SearchcraftPopoverButton.vue",
+            "symbol": "default"
+          }
+        },
+        {
+          "name": "SearchcraftPopoverForm",
+          "description": "",
+          "attributes": [
+            {
+              "name": "type",
+              "required": false,
+              "value": {
+                "kind": "expression",
+                "type": "String as () => SearchcraftPopoverFormProps['type']"
+              }
+            },
+            {
+              "name": "hotkey",
+              "required": false,
+              "value": {
+                "kind": "expression",
+                "type": "String as () => SearchcraftPopoverFormProps['hotkey']"
+              }
+            },
+            {
+              "name": "hotkeyModifier",
+              "required": false,
+              "value": {
+                "kind": "expression",
+                "type": "String as () => SearchcraftPopoverFormProps['hotkeyModifier']"
+              }
+            },
+            {
+              "name": "config",
+              "required": false,
+              "value": {
+                "kind": "expression",
+                "type": "Object as () => SearchcraftPopoverFormProps['config']"
+              }
+            },
+            {
+              "name": "popoverResultMappings",
+              "required": false,
+              "value": {
+                "kind": "expression",
+                "type": "Object as () => SearchcraftPopoverFormProps['popoverResultMappings']"
+              }
+            }
+          ],
+          "source": {
+            "module": "./src/components/SearchcraftPopoverForm.vue",
+            "symbol": "default"
+          }
+        },
+        {
+          "name": "SearchcraftResultsInfo",
+          "description": "",
+          "source": {
+            "module": "./src/components/SearchcraftResultsInfo.vue",
+            "symbol": "default"
+          }
+        },
+        {
+          "name": "SearchcraftSlider",
+          "description": "",
+          "attributes": [
+            {
+              "name": "max",
+              "required": false,
+              "value": {
+                "kind": "expression",
+                "type": "Number as () => Components.SearchcraftSlider['max']"
+              }
+            },
+            {
+              "name": "min",
+              "required": false,
+              "value": {
+                "kind": "expression",
+                "type": "Number as () => Components.SearchcraftSlider['min']"
+              }
+            },
+            {
+              "name": "granularity",
+              "required": false,
+              "value": {
+                "kind": "expression",
+                "type": "Number as () => Components.SearchcraftSlider['granularity']"
+              }
+            },
+            {
+              "name": "dataType",
+              "required": false,
+              "value": {
+                "kind": "expression",
+                "type": "String as () => Components.SearchcraftSlider['dataType']"
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "rangeChanged"
+            }
+          ],
+          "source": {
+            "module": "./src/components/SearchcraftSlider.vue",
+            "symbol": "default"
+          }
+        },
+        {
+          "name": "SearchcraftToggleButton",
+          "description": "",
+          "attributes": [
+            {
+              "name": "label",
+              "required": false,
+              "value": {
+                "kind": "expression",
+                "type": "String as () => Components.SearchcraftToggleButton['label']"
+              }
+            },
+            {
+              "name": "subLabel",
+              "required": false,
+              "value": {
+                "kind": "expression",
+                "type": "String as () => Components.SearchcraftToggleButton['subLabel']"
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "toggleUpdated"
+            }
+          ],
+          "source": {
+            "module": "./src/components/SearchcraftToggleButton.vue",
+            "symbol": "default"
+          }
+        }
+      ]
+    }
+  }
+}

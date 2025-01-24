@@ -5,13 +5,11 @@
   "description": "Searchcraft Vue SDK.",
   "type": "module",
   "license": "Apache-2.0",
-  "keywords": [
-    "searchcraft"
-  ],
+  "keywords": ["searchcraft"],
   "scripts": {
     "dev": "vite",
     "clean": "rm -rf dist",
-    "build": "yarn clean && vite build",
+    "build": "yarn clean && vite build && vue-docgen-web-types",
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --build"
@@ -36,9 +34,7 @@
     "./components": "./dist/components/index.d.ts",
     "./plugin": "./dist/plugin.d.ts"
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "peerDependencies": {
     "vue": "^3.5.13"
   },
@@ -53,6 +49,8 @@
     "vite": "^6.0.11",
     "vite-plugin-dts": "^4.5.0",
     "vite-plugin-vue-devtools": "^7.7.0",
+    "vue-docgen-web-types": "^0.1.8",
     "vue-tsc": "^2.2.0"
-  }
+  },
+  "web-types": "./web-types.json"
 }

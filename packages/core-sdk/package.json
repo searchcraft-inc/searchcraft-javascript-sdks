@@ -7,18 +7,19 @@
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
-    "build": "vite build",
+    "build": "vite build && typedoc --plugin typedoc-plugin-markdown",
     "dev:watch": "vite",
+    "docs": "typedoc --plugin typedoc-plugin-markdown",
     "test:watch": "vitest",
     "test": "vitest --watch=false"
   },
   "devDependencies": {
     "@types/node": "^22.5.0",
-    "typescript": "^5.5.3"
+    "typescript": "^5.5.3",
+    "typedoc": "^0.25.13",
+    "typedoc-plugin-markdown": "^3.17.1"
   },
   "dependencies": {
     "@thumbmarkjs/thumbmarkjs": "^0.16.1",

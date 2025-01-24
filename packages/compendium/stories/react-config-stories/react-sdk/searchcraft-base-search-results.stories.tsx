@@ -1,11 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/react';
 import type { SearchResultMappings } from '@searchcraft/javascript-sdk';
-import { config } from '../../../utils/DefaultSearchcraftConfig';
-import { useEffect } from 'react';
 import {
-  SearchcraftInputForm,
   SearchcraftBaseSearchResults,
+  SearchcraftInputForm,
 } from '@searchcraft/react-sdk';
+import type { Meta, StoryObj } from '@storybook/react';
+import { useEffect } from 'react';
+import { config } from '../../utils/DefaultSearchcraftConfig';
 
 const componentMeta: Meta = {
   title: 'React SDK/searchcraft-base-search-results',
@@ -27,6 +27,7 @@ type ComponentProps = {
   clearInput: () => void;
   config: string;
   customStylesForInput: string;
+  debounceDelay: number;
   inputCaptionValue: string;
   labelForInput: string;
   placeholderValue: string;
@@ -78,6 +79,7 @@ const defaultProps: ComponentProps = {
   containerRel: 'noreferrer',
   containerTarget: '_blank',
   customStylesForResults: '',
+  debounceDelay: 0,
   placeAdAtEnd: false,
   placeAdAtStart: false,
   resultImagePlacement: 'right',
@@ -118,7 +120,7 @@ export const Default: StoryObj<ComponentProps> = {
           buttonLabel=''
           buttonPlacement='none'
           customStyles={args.customStylesForInput}
-          debounceDelay={0}
+          debounceDelay={args.debounceDelay}
           searchTerm=''
           inputLabel=''
           config={config}
