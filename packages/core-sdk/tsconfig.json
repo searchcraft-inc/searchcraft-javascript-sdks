@@ -22,5 +22,10 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"]
+  "include": ["src"],
+  "typedocOptions": {
+    "plugin": ["typedoc-plugin-markdown"],
+    "entryPoints": ["src/index.ts"],
+    "out": "docs"
+  }
 }
