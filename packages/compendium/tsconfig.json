@@ -18,8 +18,9 @@
     "./.storybook",
     "./stories",
     "examples",
-    "utils/DefaultSearchcraftConfig.ts",
-    "utils/WebComponentWrapper.tsx"
+    "stories/utils/DefaultSearchcraftConfig.ts",
+    "stories/utils/WebComponentWrapper.tsx",
+    "utils"
   ],
   "exclude": ["node_modules", "dist"]
 }

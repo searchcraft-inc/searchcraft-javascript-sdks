@@ -6,7 +6,7 @@ defineCustomElements();
 const preview: Preview = {
   parameters: {
     backgrounds: {
-      default: 'light', // Set the default background by name
+      default: 'light',
       values: [
         { name: 'light', value: '#ffffff' },
         { name: 'dark', value: '#333333' },

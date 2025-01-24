@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import type { SearchResultMappings } from '@searchcraft/javascript-sdk';
-import { config } from '../../utils/DefaultSearchcraftConfig';
+import { config } from '../../../utils/DefaultSearchcraftConfig';
 import { useEffect } from 'react';
 import {
   SearchcraftInputForm,
