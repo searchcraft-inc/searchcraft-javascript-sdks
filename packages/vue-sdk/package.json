@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "vite",
     "clean": "rm -rf dist",
-    "build": "yarn clean && vue-docgen-web-types && vite build",
+    "build": "yarn clean && vite build && vue-docgen-web-types",
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --build"

@@ -9,7 +9,7 @@
   "types": "./dist/index.d.ts",
   "files": ["dist"],
   "scripts": {
-    "build": "vite build",
+    "build": "vite build && typedoc --plugin typedoc-plugin-markdown",
     "dev:watch": "vite",
     "docs": "typedoc --plugin typedoc-plugin-markdown",
     "test:watch": "vitest",
