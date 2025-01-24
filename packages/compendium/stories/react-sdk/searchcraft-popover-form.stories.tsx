@@ -1,7 +1,7 @@
 import type { PopoverResultMappings } from '@searchcraft/javascript-sdk';
 import { SearchcraftPopoverButton, SearchcraftPopoverForm } from '@searchcraft/react-sdk';
 import type { Meta, StoryObj } from '@storybook/react';
-import { configSecondary } from '../../utils/DefaultSearchcraftConfig';
+import { configAlternate } from '../../utils/AlternateSearchcraftConfig';
 
 const componentMeta: Meta = {
   title: 'React SDK/searchcraft-popover-form',
@@ -52,7 +52,7 @@ export const Inline: StoryObj = {
     <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
       <p>Story Note: This story uses the Bazaario env vars</p>
       <SearchcraftPopoverForm
-        config={configSecondary}
+        config={configAlternate}
         hotkey="k"
         hotkeyModifier="ctrl"
         popoverResultMappings={mappings}
@@ -80,7 +80,7 @@ export const Modal: StoryObj = {
         <span>Click me</span>
       </SearchcraftPopoverButton>
       <SearchcraftPopoverForm
-        config={configSecondary}
+        config={configAlternate}
         hotkey="k"
         hotkeyModifier="ctrl"
         popoverResultMappings={mappings}
@@ -104,7 +104,7 @@ export const Fullscreen: StoryObj = {
         <span>Click me</span>
       </SearchcraftPopoverButton>
       <SearchcraftPopoverForm
-        config={configSecondary}
+        config={configAlternate}
         hotkey="k"
         hotkeyModifier="ctrl"
         popoverResultMappings={mappings}
