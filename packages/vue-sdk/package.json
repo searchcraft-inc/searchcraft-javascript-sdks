@@ -1,11 +1,13 @@
 {
   "name": "@searchcraft/vue-sdk",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "private": false,
   "description": "Searchcraft Vue SDK.",
   "type": "module",
   "license": "Apache-2.0",
-  "keywords": ["searchcraft"],
+  "keywords": [
+    "searchcraft"
+  ],
   "scripts": {
     "dev": "vite",
     "clean": "rm -rf dist",
@@ -34,7 +36,9 @@
     "./components": "./dist/components/index.d.ts",
     "./plugin": "./dist/plugin.d.ts"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "peerDependencies": {
     "vue": "^3.5.13"
   },
