@@ -63,7 +63,7 @@ When the DOM content is loaded:
 
 document.addEventListener('DOMContentLoaded', () => {
   const inputForm = document.querySelector('searchcraft-input-form');
-  const filterPanel = document.querySelector('searchcraft-input-form');
+  const filterPanel = document.querySelector('searchcraft-filter-panel');
   const searchResults = document.querySelector(
     'searchcraft-base-search-results',
   );
