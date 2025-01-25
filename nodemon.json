@@ -2,7 +2,8 @@
   "watch": [
     "./packages/core-sdk",
     "./packages/javascript-sdk",
-    "./packages/react-sdk"
+    "./packages/react-sdk",
+    "./packages/vue-sdk"
   ],
   "ignore": [
     "./packages/core-sdk/dist",
@@ -10,7 +11,9 @@
     "./packages/javascript-sdk/.stencil",
     "./packages/javascript-sdk/www",
     "./packages/react-sdk/dist",
-    "./packages/react-sdk/src/stencil-web-components"
+    "./packages/react-sdk/src/stencil-web-components",
+    "./packages/vue-sdk/dist",
+    "./packages/vue-sdk/src/stencil-web-components"
   ],
   "ext": "js,jsx,ts,tsx,json,css,scss"
 }
