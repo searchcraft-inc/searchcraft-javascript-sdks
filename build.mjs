@@ -59,11 +59,12 @@ const startWatching = () => {
       "--exec",
       `node ${process.argv[1]} ${packageAlias || ""} ${
         shouldPublishToYalc ? "--yalc" : ""
+      }  ${
+        isVerbose ? "--verbose" : ""
       }`.trim(),
     ],
     {
-      stdio: "inherit",
-      shell: true
+      stdio: "inherit"
     }
   );
 }
@@ -76,7 +77,6 @@ if (packageAlias && !targetPackageInfo) {
 
 if (shouldWatch) {
   startWatching();
-  process.exit(1);
 }
 
 // Builds the packages that need to be built every time no matter what
