@@ -1,43 +1,75 @@
-# Searchcraft SDKs
+# Searchcraft Javascript SDKs
 
-This monorepo manages the Searchcraft SDKs.
+This project is a monorepo containing framework-specific javascript SDKs for use in front-end consuming applications of Searchcraft.
 
-Each SDK in this repo offers the following APIs:
-- Send a preconfigured search request using the Searchcraft engine
-- Manage the requesting state using reactive properties
-- Prebuilt UIs
-    * BaseSearchForm
-    * AutoSearchForm
-    * BaseSearchResult
-    * BaseSearchResults
+Each SDK provides the following functionality to the consumer:
+- Pre-built components and functionality for the consuming application for the purpose of rendering search forms, search results, and filtering.
+- Communicates with Searchcraft via the Searchcraft API.
+- State management of search results, filtering, and settings.
+- Ability to render ads in-line with search results.
+- Analytics events sent to the Searchcraft /measure endpoint for viewing on the Vektron dashboard.
+
+## Technologies
+- yarn workspaces (yarn classic)
+- Stencil
+- Typescript
+
+## Tooling
+- Stencil output targets
+- typedoc
+- vite
+- Storybook
+- lerna
+- biomejs
+- nodemon
+- Bitbucket pipelines
+- `yalc`
 
 ## Local Development
 
-`yalc` is highly recommended for local development. You can install it with:
+### Installation
+Install dependencies with `yarn install`.
+
+### Building
+Use the build script for local development. The build script handles all of the necessary build steps and build order. It can also handle watching the files and re-running the build during the course of development
+
 ```
-npm install -g yalc
+node build.mjs [package-alias] [--watch] [--yalc]
 ```
+For complete documentation on the build script, refer to the comment header in [build.mjs](build.mjs).
 
-There are a number scripts set up in `package.json` to help streamline local development:
-| Command | Description |
-|-|-|
-|`yarn run:build-all`| Builds all packages in the workspace for production |
-|`yarn run build-<package-name>`| Builds a specific  package for production|
-|`yarn run yalc-all`|Builds & Publishes all packages in the workspace to yalc for local development|
-|`yarn run yalc-<package-name>`|Builds & Publishes a specific package in the workspace to yalc for local development|
-|`yarn run watch-all`|Watch all src files for changes using nodemon. When a change is detect, builds, and publishes to yalc|
-|`yarn run watch-<package-name>`|Watch a specific package for changes using nodemon. When a change is detect, builds, and publishes to yalc|
+**Note**: To use the `--yalc` flag, you must have yalc installed on your machine.
 
+### Storybook
+The one of the workspaces in the project is `compendium`, which is responsible for managing the storybook stories for the SDKs.
 
-### More about `yalc`
-When a package is published to yalc, it just means that the package has been added to a local store in the `.yalc` folders on your machine.
+To view storybook, run:
+- `yarn storybook:react` (React-based stories)
+- `yarn storybook:vue` (Vue-based stories)
 
-If you are working on developing a consuming application, install the package you need using `yalc install <package-name>`. Your consuming application will automatically receive updates when yalc changes are published and pushed out, via one of the scripts described in the table above.
+Keeping `compendium` up-to-date is crucial and should be continuously referenced during the course of development.
 
-[yalc docs](https://github.com/wclr/yalc)
+### Versioning
 
+We use [semver](https://semver.org/) (semantic versioning) for our versioning system.
+
+### Publishing
+
+A Bitbucket pipeline is set up to handle publishing to NPM. `lerna.json` is the source of truth for our versioning system.
+
+To publish:
+1. From the `development` branch, create a new branch called `version-x.x.x`.
+2. Push this branch upstream.
+3. Run `yarn version:sdks` and follow the prompts to select a major, minor, or patch version. The script will automatically increment the yarn workspace package's version numbers and push a commit to your branch.
+4. On bitbucket, pull request to merge the changes up to main: `version-x.x.x` -> `development`, and then `development` -> `main`.
+5. When `development` is merged into `main`, the pipeline will run, which will publish the changes to npm.
+
+## Project Structure
 
 ### Core Package
-The SDKs share a core package that contains shared functionality written in Javascript. The core package is built every time you build the React SDK, the Javascript SDK, or any of the other SDK's that consume the core.
 
-The Searchcraft quickstart react example project in under construction.
+The Core SDK package (`core-sdk`), is a private package that contains the shared business logic for communicating with the Searchcraft API. The other SDKs in the monorepo consume this package.
+
+### Stencil Web Components
+
+The stencil web components (`javascript-sdk`) serve as the base UI package for all the other framework SDKs. The components for other frameworks are generated by the stencil build. Output targets are specified by `stencil.config.ts`. The `javascript-sdk` can be thought of as the `core-ui` package.
