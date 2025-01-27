@@ -1,12 +1,10 @@
-[**@searchcraft/react-sdk**](../README.md)
+[**@searchcraft/react-sdk**](https://docs.searchcraft.io/reference/sdk/react/README.md)
 
 ***
 
-[@searchcraft/react-sdk](../globals.md) / SearchcraftBaseSearchResultProps
+[@searchcraft/react-sdk](https://docs.searchcraft.io/reference/sdk/react/globals.md) / SearchcraftBaseSearchResultProps
 
 # Interface: SearchcraftBaseSearchResultProps
-
-Defined in: [packages/react-sdk/src/components/SearchcraftBaseSearchResult.tsx:6](https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/src/13d0fd25669057ec4d2ef62d1e5c7048e667a0f0/packages/react-sdk/src/components/SearchcraftBaseSearchResult.tsx#lines-6)
 
 ## Extends
 
@@ -17,8 +15,6 @@ Defined in: [packages/react-sdk/src/components/SearchcraftBaseSearchResult.tsx:6
 ### bodyContent
 
 > **bodyContent**: `undefined` \| `string`
-
-Defined in: packages/javascript-sdk/dist/types/components.d.ts:24
 
 The body content.
 
@@ -32,8 +28,6 @@ The body content.
 
 > **buttonHref**: `undefined` \| `string`
 
-Defined in: packages/javascript-sdk/dist/types/components.d.ts:28
-
 The link for the button rendered when containerHref is not present.
 
 #### Inherited from
@@ -45,8 +39,6 @@ The link for the button rendered when containerHref is not present.
 ### buttonLabel
 
 > **buttonLabel**: `undefined` \| `string`
-
-Defined in: packages/javascript-sdk/dist/types/components.d.ts:32
 
 The label for the button rendered when containerHref is not present.
 
@@ -60,8 +52,6 @@ The label for the button rendered when containerHref is not present.
 
 > **buttonRel**: `undefined` \| `"noreferrer"` \| `"noopener"` \| `"nofollow"`
 
-Defined in: packages/javascript-sdk/dist/types/components.d.ts:36
-
 The relationship between the current document and the link for the button rendered when containerHref is not present.
 
 #### Inherited from
@@ -73,8 +63,6 @@ The relationship between the current document and the link for the button render
 ### buttonTarget
 
 > **buttonTarget**: `"_blank"` \| `"_self"` \| `"_top"` \| `"_parent"`
-
-Defined in: packages/javascript-sdk/dist/types/components.d.ts:40
 
 Where to open the link for the button rendered when containerHref is not present.
 
@@ -88,8 +76,6 @@ Where to open the link for the button rendered when containerHref is not present
 
 > **containerHref**: `undefined` \| `string`
 
-Defined in: packages/javascript-sdk/dist/types/components.d.ts:44
-
 The link for the containing element.
 
 #### Inherited from
@@ -101,8 +87,6 @@ The link for the containing element.
 ### containerRel
 
 > **containerRel**: `undefined` \| `"noreferrer"` \| `"noopener"` \| `"nofollow"`
-
-Defined in: packages/javascript-sdk/dist/types/components.d.ts:48
 
 The relationship between the current document and the link for the containing element.
 
@@ -116,8 +100,6 @@ The relationship between the current document and the link for the containing el
 
 > **containerTarget**: `"_blank"` \| `"_self"` \| `"_top"` \| `"_parent"`
 
-Defined in: packages/javascript-sdk/dist/types/components.d.ts:52
-
 Where to open the link for the containing element.
 
 #### Inherited from
@@ -129,8 +111,6 @@ Where to open the link for the containing element.
 ### customStyles
 
 > **customStyles**: `undefined` \| `string`
-
-Defined in: packages/javascript-sdk/dist/types/components.d.ts:56
 
 A custom styles object.
 
@@ -144,8 +124,6 @@ A custom styles object.
 
 > **documentPosition**: `number`
 
-Defined in: packages/javascript-sdk/dist/types/components.d.ts:60
-
 The position in the document. Used with the "document_clicked" measure event.
 
 #### Inherited from
@@ -157,8 +135,6 @@ The position in the document. Used with the "document_clicked" measure event.
 ### footerContent
 
 > **footerContent**: `undefined` \| `string`
-
-Defined in: packages/javascript-sdk/dist/types/components.d.ts:64
 
 The footer content.
 
@@ -172,8 +148,6 @@ The footer content.
 
 > **imageAlt**: `undefined` \| `string`
 
-Defined in: packages/javascript-sdk/dist/types/components.d.ts:68
-
 The image alternative text.
 
 #### Inherited from
@@ -185,8 +159,6 @@ The image alternative text.
 ### imagePlacement
 
 > **imagePlacement**: `"left"` \| `"right"`
-
-Defined in: packages/javascript-sdk/dist/types/components.d.ts:72
 
 The placement of the image.
 
@@ -200,8 +172,6 @@ The placement of the image.
 
 > **imageSrc**: `undefined` \| `string`
 
-Defined in: packages/javascript-sdk/dist/types/components.d.ts:76
-
 The image source.
 
 #### Inherited from
@@ -214,8 +184,6 @@ The image source.
 
 > **subtitleContent**: `undefined` \| `string`
 
-Defined in: packages/javascript-sdk/dist/types/components.d.ts:80
-
 The subtitle content.
 
 #### Inherited from
@@ -227,8 +195,6 @@ The subtitle content.
 ### titleContent
 
 > **titleContent**: `undefined` \| `string`
-
-Defined in: packages/javascript-sdk/dist/types/components.d.ts:84
 
 The title content.
 

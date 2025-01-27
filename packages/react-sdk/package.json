@@ -8,8 +8,8 @@
   "license": "Apache-2.0",
   "keywords": ["searchcraft"],
   "scripts": {
-    "build": "tsc && vite build && typedoc --plugin typedoc-plugin-markdown",
-    "docs": "typedoc --plugin typedoc-plugin-markdown",
+    "build": "tsc && vite build && yarn docs",
+    "docs": "typedoc --options typedoc.json",
     "lint": "biome format lint ./src",
     "test": "vitest --watch=false",
     "test:watch": "vitest"
@@ -51,8 +51,6 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "sass": "^1.56.1",
-    "typedoc": "^0.27.6",
-    "typedoc-plugin-markdown": "^4.4.1",
     "typescript": "^5.5.3"
   }
 }

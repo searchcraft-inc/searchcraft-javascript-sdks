@@ -1,20 +1,18 @@
-[**@searchcraft/react-sdk**](../README.md)
+[**@searchcraft/react-sdk**](https://docs.searchcraft.io/reference/sdk/react/README.md)
 
 ***
 
-[@searchcraft/react-sdk](../globals.md) / SearchcraftInputLabel
+[@searchcraft/react-sdk](https://docs.searchcraft.io/reference/sdk/react/globals.md) / SearchcraftInputLabel
 
 # Function: SearchcraftInputLabel()
 
 > **SearchcraftInputLabel**(`props`, `deprecatedLegacyContext`?): `ReactNode`
 
-Defined in: [packages/react-sdk/src/components/SearchcraftInputLabel.tsx:8](https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/src/13d0fd25669057ec4d2ef62d1e5c7048e667a0f0/packages/react-sdk/src/components/SearchcraftInputLabel.tsx#lines-8)
-
 ## Parameters
 
 ### props
 
-[`SearchcraftInputLabelProps`](../interfaces/SearchcraftInputLabelProps.md)
+[`SearchcraftInputLabelProps`](https://docs.searchcraft.io/reference/sdk/react/interfaces/SearchcraftInputLabelProps.md)
 
 ### deprecatedLegacyContext?
 

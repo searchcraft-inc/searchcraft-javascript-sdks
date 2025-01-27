@@ -1,12 +1,10 @@
-[**@searchcraft/react-sdk**](../README.md)
+[**@searchcraft/react-sdk**](https://docs.searchcraft.io/reference/sdk/react/README.md)
 
 ***
 
-[@searchcraft/react-sdk](../globals.md) / SearchcraftSliderProps
+[@searchcraft/react-sdk](https://docs.searchcraft.io/reference/sdk/react/globals.md) / SearchcraftSliderProps
 
 # Interface: SearchcraftSliderProps
-
-Defined in: [packages/react-sdk/src/components/SearchcraftSlider.tsx:6](https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/src/13d0fd25669057ec4d2ef62d1e5c7048e667a0f0/packages/react-sdk/src/components/SearchcraftSlider.tsx#lines-6)
 
 ## Extends
 
@@ -17,8 +15,6 @@ Defined in: [packages/react-sdk/src/components/SearchcraftSlider.tsx:6](https://
 ### dataType
 
 > **dataType**: `"number"` \| `"date"`
-
-Defined in: packages/javascript-sdk/dist/types/components.d.ts:426
 
 The type of data allowed.
 
@@ -32,8 +28,6 @@ The type of data allowed.
 
 > **granularity**: `number`
 
-Defined in: packages/javascript-sdk/dist/types/components.d.ts:430
-
 The granularity that the value must adhere to.
 
 #### Inherited from
@@ -46,8 +40,6 @@ The granularity that the value must adhere to.
 
 > **max**: `number`
 
-Defined in: packages/javascript-sdk/dist/types/components.d.ts:434
-
 The maximum value allowed.
 
 #### Inherited from
@@ -59,8 +51,6 @@ The maximum value allowed.
 ### min
 
 > **min**: `number`
-
-Defined in: packages/javascript-sdk/dist/types/components.d.ts:438
 
 The minimum value allowed.
 

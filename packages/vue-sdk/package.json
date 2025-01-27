@@ -9,7 +9,8 @@
   "scripts": {
     "dev": "vite",
     "clean": "rm -rf dist",
-    "build": "yarn clean && vite build && vue-docgen-web-types",
+    "build": "yarn clean && vite build",
+    "docs": "typedoc --options typedoc.json",
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --build"

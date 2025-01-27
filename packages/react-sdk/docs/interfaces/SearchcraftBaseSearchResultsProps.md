@@ -1,12 +1,10 @@
-[**@searchcraft/react-sdk**](../README.md)
+[**@searchcraft/react-sdk**](https://docs.searchcraft.io/reference/sdk/react/README.md)
 
 ***
 
-[@searchcraft/react-sdk](../globals.md) / SearchcraftBaseSearchResultsProps
+[@searchcraft/react-sdk](https://docs.searchcraft.io/reference/sdk/react/globals.md) / SearchcraftBaseSearchResultsProps
 
 # Interface: SearchcraftBaseSearchResultsProps
-
-Defined in: [packages/react-sdk/src/components/SearchcraftBaseSearchResults.tsx:6](https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/src/13d0fd25669057ec4d2ef62d1e5c7048e667a0f0/packages/react-sdk/src/components/SearchcraftBaseSearchResults.tsx#lines-6)
 
 ## Extends
 
@@ -17,8 +15,6 @@ Defined in: [packages/react-sdk/src/components/SearchcraftBaseSearchResults.tsx:
 ### adInterval
 
 > **adInterval**: `number`
-
-Defined in: packages/javascript-sdk/dist/types/components.d.ts:118
 
 How often ads are injected.
 
@@ -32,8 +28,6 @@ How often ads are injected.
 
 > **buttonLabel**: `undefined` \| `string`
 
-Defined in: packages/javascript-sdk/dist/types/components.d.ts:122
-
 The label for the button rendered when containerHref is not present for each result.
 
 #### Inherited from
@@ -45,8 +39,6 @@ The label for the button rendered when containerHref is not present for each res
 ### buttonRel
 
 > **buttonRel**: `undefined` \| `"noreferrer"` \| `"noopener"` \| `"nofollow"`
-
-Defined in: packages/javascript-sdk/dist/types/components.d.ts:126
 
 The relationship between the current document and the link for the button rendered when containerHref is not present for each result.
 
@@ -60,8 +52,6 @@ The relationship between the current document and the link for the button render
 
 > **buttonTarget**: `"_blank"` \| `"_self"` \| `"_top"` \| `"_parent"`
 
-Defined in: packages/javascript-sdk/dist/types/components.d.ts:130
-
 Where to open the link for the button rendered when containerHref is not present for each result.
 
 #### Inherited from
@@ -73,8 +63,6 @@ Where to open the link for the button rendered when containerHref is not present
 ### containerRel
 
 > **containerRel**: `undefined` \| `"noreferrer"` \| `"noopener"` \| `"nofollow"`
-
-Defined in: packages/javascript-sdk/dist/types/components.d.ts:134
 
 The relationship between the current document and the link for the containing element for each result.
 
@@ -88,8 +76,6 @@ The relationship between the current document and the link for the containing el
 
 > **containerTarget**: `"_blank"` \| `"_self"` \| `"_top"` \| `"_parent"`
 
-Defined in: packages/javascript-sdk/dist/types/components.d.ts:138
-
 Where to open the link for the containing element for each result.
 
 #### Inherited from
@@ -101,8 +87,6 @@ Where to open the link for the containing element for each result.
 ### customStylesForResults
 
 > **customStylesForResults**: `undefined` \| `string` \| `Record`\<`string`, `Record`\<`string`, `string`\>\>
-
-Defined in: packages/javascript-sdk/dist/types/components.d.ts:142
 
 A custom styles object.
 
@@ -116,8 +100,6 @@ A custom styles object.
 
 > **placeAdAtEnd**: `boolean`
 
-Defined in: packages/javascript-sdk/dist/types/components.d.ts:148
-
 Should an ad be placed at the end of the results.
 
 #### Inherited from
@@ -129,8 +111,6 @@ Should an ad be placed at the end of the results.
 ### placeAdAtStart
 
 > **placeAdAtStart**: `boolean`
-
-Defined in: packages/javascript-sdk/dist/types/components.d.ts:152
 
 Should an ad be placed at the start of the results.
 
@@ -144,8 +124,6 @@ Should an ad be placed at the start of the results.
 
 > **resultImagePlacement**: `"left"` \| `"right"`
 
-Defined in: packages/javascript-sdk/dist/types/components.d.ts:156
-
 The placement of the image for each result.
 
 #### Inherited from
@@ -157,8 +135,6 @@ The placement of the image for each result.
 ### searchResultMappings
 
 > **searchResultMappings**: `undefined` \| `SearchResultMappings`
-
-Defined in: packages/javascript-sdk/dist/types/components.d.ts:160
 
 Formats the content rendered for each result.
 

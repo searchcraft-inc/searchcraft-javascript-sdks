@@ -1,20 +1,18 @@
-[**@searchcraft/react-sdk**](../README.md)
+[**@searchcraft/react-sdk**](https://docs.searchcraft.io/reference/sdk/react/README.md)
 
 ***
 
-[@searchcraft/react-sdk](../globals.md) / SearchcraftErrorMessage
+[@searchcraft/react-sdk](https://docs.searchcraft.io/reference/sdk/react/globals.md) / SearchcraftErrorMessage
 
 # Function: SearchcraftErrorMessage()
 
 > **SearchcraftErrorMessage**(`props`, `deprecatedLegacyContext`?): `ReactNode`
 
-Defined in: [packages/react-sdk/src/components/SearchcraftErrorMessage.tsx:9](https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/src/13d0fd25669057ec4d2ef62d1e5c7048e667a0f0/packages/react-sdk/src/components/SearchcraftErrorMessage.tsx#lines-9)
-
 ## Parameters
 
 ### props
 
-[`SearchcraftErrorMessageProps`](../interfaces/SearchcraftErrorMessageProps.md)
+[`SearchcraftErrorMessageProps`](https://docs.searchcraft.io/reference/sdk/react/interfaces/SearchcraftErrorMessageProps.md)
 
 ### deprecatedLegacyContext?
 

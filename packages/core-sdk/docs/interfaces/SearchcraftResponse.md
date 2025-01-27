@@ -1,32 +1,21 @@
-[@searchcraft/core](../README.md) / [Exports](../modules.md) / SearchcraftResponse
+[**@searchcraft/core**](https://docs.searchcraft.io/reference/sdk/core/README.md)
+
+***
+
+[@searchcraft/core](https://docs.searchcraft.io/reference/sdk/core/globals.md) / SearchcraftResponse
 
 # Interface: SearchcraftResponse
 
 * The structure of a response returned from a Searchcraft operation.
 
-## Table of contents
-
-### Properties
-
-- [data](SearchcraftResponse.md#data)
-- [status](SearchcraftResponse.md#status)
-
 ## Properties
 
 ### data
 
-• **data**: [`SearchResult`](SearchResult.md) \| [`SearchError`](../modules.md#searcherror)
+> **data**: [`SearchResult`](https://docs.searchcraft.io/reference/sdk/core/interfaces/SearchResult.md) \| [`SearchError`](https://docs.searchcraft.io/reference/sdk/core/type-aliases/SearchError.md)
 
-#### Defined in
-
-[CoreSDKTypes/CoreSDKTypes.ts:46](https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/src/9ae1822c027894501f0c9466b2735e3ddcdec128/packages/core-sdk/src/CoreSDKTypes/CoreSDKTypes.ts#lines-46)
-
-___
+***
 
 ### status
 
-• **status**: `number`
-
-#### Defined in
-
-[CoreSDKTypes/CoreSDKTypes.ts:45](https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/src/9ae1822c027894501f0c9466b2735e3ddcdec128/packages/core-sdk/src/CoreSDKTypes/CoreSDKTypes.ts#lines-45)
+> **status**: `number`

@@ -1,164 +1,93 @@
-[@searchcraft/core](../README.md) / [Exports](../modules.md) / MeasureRequestUser
+[**@searchcraft/core**](https://docs.searchcraft.io/reference/sdk/core/README.md)
+
+***
+
+[@searchcraft/core](https://docs.searchcraft.io/reference/sdk/core/globals.md) / MeasureRequestUser
 
 # Interface: MeasureRequestUser
 
 User properties attached to a measure request.
 
-## Table of contents
-
-### Properties
-
-- [city](MeasureRequestUser.md#city)
-- [client\_ip](MeasureRequestUser.md#client_ip)
-- [country](MeasureRequestUser.md#country)
-- [device\_id](MeasureRequestUser.md#device_id)
-- [latitude](MeasureRequestUser.md#latitude)
-- [locale](MeasureRequestUser.md#locale)
-- [longitude](MeasureRequestUser.md#longitude)
-- [os](MeasureRequestUser.md#os)
-- [platform](MeasureRequestUser.md#platform)
-- [region](MeasureRequestUser.md#region)
-- [sdk\_name](MeasureRequestUser.md#sdk_name)
-- [sdk\_version](MeasureRequestUser.md#sdk_version)
-- [user\_agent](MeasureRequestUser.md#user_agent)
-- [user\_id](MeasureRequestUser.md#user_id)
-
 ## Properties
 
-### city
+### city?
 
-• `Optional` **city**: `string`
+> `optional` **city**: `string`
 
-#### Defined in
+***
 
-[CoreSDKTypes/MeasureTypes.ts:47](https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/src/9ae1822c027894501f0c9466b2735e3ddcdec128/packages/core-sdk/src/CoreSDKTypes/MeasureTypes.ts#lines-47)
+### client\_ip?
 
-___
+> `optional` **client\_ip**: `string`
 
-### client\_ip
+***
 
-• `Optional` **client\_ip**: `string`
+### country?
 
-#### Defined in
+> `optional` **country**: `string`
 
-[CoreSDKTypes/MeasureTypes.ts:49](https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/src/9ae1822c027894501f0c9466b2735e3ddcdec128/packages/core-sdk/src/CoreSDKTypes/MeasureTypes.ts#lines-49)
+***
 
-___
+### device\_id?
 
-### country
+> `optional` **device\_id**: `string`
 
-• `Optional` **country**: `string`
+***
 
-#### Defined in
+### latitude?
 
-[CoreSDKTypes/MeasureTypes.ts:46](https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/src/9ae1822c027894501f0c9466b2735e3ddcdec128/packages/core-sdk/src/CoreSDKTypes/MeasureTypes.ts#lines-46)
+> `optional` **latitude**: `number`
 
-___
+***
 
-### device\_id
+### locale?
 
-• `Optional` **device\_id**: `string`
+> `optional` **locale**: `string`
 
-#### Defined in
+***
 
-[CoreSDKTypes/MeasureTypes.ts:48](https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/src/9ae1822c027894501f0c9466b2735e3ddcdec128/packages/core-sdk/src/CoreSDKTypes/MeasureTypes.ts#lines-48)
+### longitude?
 
-___
+> `optional` **longitude**: `number`
 
-### latitude
+***
 
-• `Optional` **latitude**: `number`
+### os?
 
-#### Defined in
+> `optional` **os**: `string`
 
-[CoreSDKTypes/MeasureTypes.ts:57](https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/src/9ae1822c027894501f0c9466b2735e3ddcdec128/packages/core-sdk/src/CoreSDKTypes/MeasureTypes.ts#lines-57)
+***
 
-___
+### platform?
 
-### locale
+> `optional` **platform**: `string`
 
-• `Optional` **locale**: `string`
+***
 
-#### Defined in
+### region?
 
-[CoreSDKTypes/MeasureTypes.ts:50](https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/src/9ae1822c027894501f0c9466b2735e3ddcdec128/packages/core-sdk/src/CoreSDKTypes/MeasureTypes.ts#lines-50)
+> `optional` **region**: `string`
 
-___
+***
 
-### longitude
+### sdk\_name?
 
-• `Optional` **longitude**: `number`
+> `optional` **sdk\_name**: `string`
 
-#### Defined in
+***
 
-[CoreSDKTypes/MeasureTypes.ts:58](https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/src/9ae1822c027894501f0c9466b2735e3ddcdec128/packages/core-sdk/src/CoreSDKTypes/MeasureTypes.ts#lines-58)
+### sdk\_version?
 
-___
+> `optional` **sdk\_version**: `string`
 
-### os
+***
 
-• `Optional` **os**: `string`
+### user\_agent?
 
-#### Defined in
+> `optional` **user\_agent**: `string`
 
-[CoreSDKTypes/MeasureTypes.ts:51](https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/src/9ae1822c027894501f0c9466b2735e3ddcdec128/packages/core-sdk/src/CoreSDKTypes/MeasureTypes.ts#lines-51)
-
-___
-
-### platform
-
-• `Optional` **platform**: `string`
-
-#### Defined in
-
-[CoreSDKTypes/MeasureTypes.ts:52](https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/src/9ae1822c027894501f0c9466b2735e3ddcdec128/packages/core-sdk/src/CoreSDKTypes/MeasureTypes.ts#lines-52)
-
-___
-
-### region
-
-• `Optional` **region**: `string`
-
-#### Defined in
-
-[CoreSDKTypes/MeasureTypes.ts:53](https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/src/9ae1822c027894501f0c9466b2735e3ddcdec128/packages/core-sdk/src/CoreSDKTypes/MeasureTypes.ts#lines-53)
-
-___
-
-### sdk\_name
-
-• `Optional` **sdk\_name**: `string`
-
-#### Defined in
-
-[CoreSDKTypes/MeasureTypes.ts:54](https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/src/9ae1822c027894501f0c9466b2735e3ddcdec128/packages/core-sdk/src/CoreSDKTypes/MeasureTypes.ts#lines-54)
-
-___
-
-### sdk\_version
-
-• `Optional` **sdk\_version**: `string`
-
-#### Defined in
-
-[CoreSDKTypes/MeasureTypes.ts:55](https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/src/9ae1822c027894501f0c9466b2735e3ddcdec128/packages/core-sdk/src/CoreSDKTypes/MeasureTypes.ts#lines-55)
-
-___
-
-### user\_agent
-
-• `Optional` **user\_agent**: `string`
-
-#### Defined in
-
-[CoreSDKTypes/MeasureTypes.ts:56](https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/src/9ae1822c027894501f0c9466b2735e3ddcdec128/packages/core-sdk/src/CoreSDKTypes/MeasureTypes.ts#lines-56)
-
-___
+***
 
 ### user\_id
 
-• **user\_id**: `string`
-
-#### Defined in
-
-[CoreSDKTypes/MeasureTypes.ts:45](https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/src/9ae1822c027894501f0c9466b2735e3ddcdec128/packages/core-sdk/src/CoreSDKTypes/MeasureTypes.ts#lines-45)
+> **user\_id**: `string`

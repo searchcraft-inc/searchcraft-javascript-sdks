@@ -36,10 +36,5 @@
     "src/**/*.vue",
     "src/index.ts"
   ],
-  "references": [{ "path": "./tsconfig.node.json" }],
-  "typedocOptions": {
-    "plugin": ["typedoc-plugin-markdown"],
-    "entryPoints": ["src/index.ts"],
-    "out": "docs"
-  }
+  "references": [{ "path": "./tsconfig.node.json" }]
 }
