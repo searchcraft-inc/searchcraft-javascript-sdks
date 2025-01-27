@@ -87,6 +87,16 @@ const autoSearchProps: Components.SearchcraftInputForm = {
 };
 
 export const Default: StoryObj<Components.SearchcraftInputForm> = {
+  decorators: [
+    (Story) => {
+      return (
+        <>
+          <searchcraft-theme />
+          <Story />
+        </>
+      );
+    },
+  ],
   render: (args) => (
     <WebComponentWrapper args={args} componentName={componentName} />
   ),
@@ -94,6 +104,16 @@ export const Default: StoryObj<Components.SearchcraftInputForm> = {
 };
 
 export const ButtonRight: StoryObj<Components.SearchcraftInputForm> = {
+  decorators: [
+    (Story) => {
+      return (
+        <>
+          <searchcraft-theme />
+          <Story />
+        </>
+      );
+    },
+  ],
   render: (args) => (
     <WebComponentWrapper args={args} componentName={componentName} />
   ),
@@ -101,6 +121,16 @@ export const ButtonRight: StoryObj<Components.SearchcraftInputForm> = {
 };
 
 export const AutoSearch: StoryObj<Components.SearchcraftInputForm> = {
+  decorators: [
+    (Story) => {
+      return (
+        <>
+          <searchcraft-theme />
+          <Story />
+        </>
+      );
+    },
+  ],
   render: (args) => (
     <WebComponentWrapper args={args} componentName={componentName} />
   ),

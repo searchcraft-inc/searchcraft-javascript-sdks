@@ -35,9 +35,7 @@
     "type": "git",
     "url": "https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/"
   },
-  "files": [
-    "dist/"
-  ],
+  "files": ["dist/"],
   "scripts": {
     "build": "stencil build && yarn docs",
     "docs": "typedoc --options typedoc.json",

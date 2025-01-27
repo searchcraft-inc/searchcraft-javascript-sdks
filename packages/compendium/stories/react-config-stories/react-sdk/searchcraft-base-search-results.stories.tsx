@@ -5,7 +5,7 @@ import {
 } from '@searchcraft/react-sdk';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useEffect } from 'react';
-import { config } from '../../utils/DefaultSearchcraftConfig';
+import { config } from '../../../utils/DefaultSearchcraftConfig';
 
 const componentMeta: Meta = {
   title: 'React SDK/searchcraft-base-search-results',

@@ -41,6 +41,16 @@ const defaultProps: Components.SearchcraftButton = {
 };
 
 export const Default: StoryObj<Components.SearchcraftButton> = {
+  decorators: [
+    (Story) => {
+      return (
+        <>
+          <searchcraft-theme />
+          <Story />
+        </>
+      );
+    },
+  ],
   render: (args) => (
     <WebComponentWrapper args={args} componentName={componentName} />
   ),

@@ -23,6 +23,16 @@ const defaultProps: Components.SearchcraftToggleButton = {
 };
 
 export const Default: StoryObj<Components.SearchcraftToggleButton> = {
+  decorators: [
+    (Story) => {
+      return (
+        <>
+          <searchcraft-theme />
+          <Story />
+        </>
+      );
+    },
+  ],
   render: (args) => (
     <div style={{ paddingLeft: 100, paddingRight: 100, paddingTop: 20 }}>
       <WebComponentWrapper args={args} componentName={componentName} />

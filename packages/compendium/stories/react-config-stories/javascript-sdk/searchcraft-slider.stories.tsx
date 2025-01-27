@@ -28,8 +28,21 @@ const defaultProps: Components.SearchcraftSlider = {
 };
 
 export const Default: StoryObj<Components.SearchcraftSlider> = {
+  decorators: [
+    (Story) => {
+      return (
+        <>
+          <searchcraft-theme />
+          <Story />
+        </>
+      );
+    },
+  ],
   render: (args) => (
-    <WebComponentWrapper args={args} componentName={componentName} />
+    <>
+      <searchcraft-theme />
+      <WebComponentWrapper args={args} componentName={componentName} />
+    </>
   ),
   args: defaultProps,
 };

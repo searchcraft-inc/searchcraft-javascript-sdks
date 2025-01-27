@@ -4,7 +4,7 @@
   "version": "0.7.0",
   "type": "module",
   "scripts": {
-    "build": "sass ./src/index.scss ../javascript-sdk/src/themes/hologram.css"
+    "build": "sass --style=compressed ./src/index.scss ../javascript-sdk/src/themes/hologram.css"
   },
   "dependencies": {},
   "devDependencies": {

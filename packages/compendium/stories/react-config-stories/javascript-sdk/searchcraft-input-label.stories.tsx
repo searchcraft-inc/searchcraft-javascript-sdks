@@ -24,6 +24,16 @@ const defaultProps: Components.SearchcraftInputLabel = {
 };
 
 export const Default: StoryObj<Components.SearchcraftInputLabel> = {
+  decorators: [
+    (Story) => {
+      return (
+        <>
+          <searchcraft-theme />
+          <Story />
+        </>
+      );
+    },
+  ],
   render: (args) => (
     <WebComponentWrapper args={args} componentName={componentName} />
   ),

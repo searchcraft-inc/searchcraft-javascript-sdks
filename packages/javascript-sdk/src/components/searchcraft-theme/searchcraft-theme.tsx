@@ -1,28 +1,32 @@
-import { Component, Prop, h } from '@stencil/core';
+import { Component } from '@stencil/core';
 import styles from '../../themes/hologram.css?raw';
 
-/**
- * This web component is designed to display a user-friendly error message when a search query fails, providing clear feedback to users and enhancing their experience when an issue arises during the search process.
- *
- * ## Usage
- * ```html
- * <!-- index.html -->
- * <searchcraft-error-message error-message="No search results found for query" />
- * ```
- */
 @Component({
   tag: 'searchcraft-theme',
   shadow: false,
 })
 export class SearchcraftErrorMessage {
-  /**
-   * The error message.
-   */
-  @Prop() errorMessage?: string;
+  componentDidLoad() {
+    console.log('Loading theme...');
+    console.log(styles);
+    const styleTag =
+      document.querySelector('#searchcraft-theme') ||
+      document.createElement('style');
+    styleTag.innerHTML = styles;
+    styleTag.id = 'searchcraft-theme';
+
+    const head = document.head || document.getElementsByTagName('head')[0];
+    if (!head.contains(styleTag)) {
+      if (head.firstChild) {
+        head.insertBefore(styleTag, head.firstChild);
+      } else {
+        head.appendChild(styleTag);
+      }
+    } else {
+    }
+  }
 
   render() {
-    return (
-      <style>{styles}</style>
-    );
+    return;
   }
 }

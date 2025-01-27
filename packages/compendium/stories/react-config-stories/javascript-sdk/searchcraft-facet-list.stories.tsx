@@ -23,6 +23,16 @@ const defaultProps: Components.SearchcraftFacetList = {
 };
 
 export const Default: StoryObj<Components.SearchcraftFacetList> = {
+  decorators: [
+    (Story) => {
+      return (
+        <>
+          <searchcraft-theme />
+          <Story />
+        </>
+      );
+    },
+  ],
   render: (args) => (
     <WebComponentWrapper args={args} componentName={componentName} />
   ),
