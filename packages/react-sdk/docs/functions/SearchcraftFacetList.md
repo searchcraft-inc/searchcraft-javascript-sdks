@@ -1,20 +1,18 @@
-[**@searchcraft/react-sdk**](../README.md)
+[**@searchcraft/react-sdk**](https://docs.searchcraft.io/reference/sdk/react/README.md)
 
 ***
 
-[@searchcraft/react-sdk](../globals.md) / SearchcraftFacetList
+[@searchcraft/react-sdk](https://docs.searchcraft.io/reference/sdk/react/globals.md) / SearchcraftFacetList
 
 # Function: SearchcraftFacetList()
 
 > **SearchcraftFacetList**(`props`, `deprecatedLegacyContext`?): `ReactNode`
 
-Defined in: [packages/react-sdk/src/components/SearchcraftFacetList.tsx:8](https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/src/13d0fd25669057ec4d2ef62d1e5c7048e667a0f0/packages/react-sdk/src/components/SearchcraftFacetList.tsx#lines-8)
-
 ## Parameters
 
 ### props
 
-[`SearchcraftFacetListProps`](../interfaces/SearchcraftFacetListProps.md)
+[`SearchcraftFacetListProps`](https://docs.searchcraft.io/reference/sdk/react/interfaces/SearchcraftFacetListProps.md)
 
 ### deprecatedLegacyContext?
 

@@ -11,10 +11,5 @@
     "outDir": "dist",
     "sourceMap": true
   },
-  "include": ["src", "vite.config.ts"],
-  "typedocOptions": {
-    "plugin": ["typedoc-plugin-markdown"],
-    "entryPoints": ["src/index.ts"],
-    "out": "docs"
-  }
+  "include": ["src", "vite.config.ts"]
 }

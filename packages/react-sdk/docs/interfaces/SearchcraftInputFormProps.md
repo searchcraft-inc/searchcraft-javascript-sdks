@@ -1,12 +1,10 @@
-[**@searchcraft/react-sdk**](../README.md)
+[**@searchcraft/react-sdk**](https://docs.searchcraft.io/reference/sdk/react/README.md)
 
 ***
 
-[@searchcraft/react-sdk](../globals.md) / SearchcraftInputFormProps
+[@searchcraft/react-sdk](https://docs.searchcraft.io/reference/sdk/react/globals.md) / SearchcraftInputFormProps
 
 # Interface: SearchcraftInputFormProps
-
-Defined in: [packages/react-sdk/src/components/SearchcraftInputForm.tsx:6](https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/src/13d0fd25669057ec4d2ef62d1e5c7048e667a0f0/packages/react-sdk/src/components/SearchcraftInputForm.tsx#lines-6)
 
 ## Extends
 
@@ -17,8 +15,6 @@ Defined in: [packages/react-sdk/src/components/SearchcraftInputForm.tsx:6](https
 ### autoSearch
 
 > **autoSearch**: `boolean`
-
-Defined in: packages/javascript-sdk/dist/types/components.d.ts:260
 
 Whether or not to automatically submit the search term when the input changes.
 
@@ -32,8 +28,6 @@ Whether or not to automatically submit the search term when the input changes.
 
 > **buttonLabel**: `undefined` \| `string`
 
-Defined in: packages/javascript-sdk/dist/types/components.d.ts:264
-
 The label for the submit button.
 
 #### Inherited from
@@ -45,8 +39,6 @@ The label for the submit button.
 ### buttonPlacement
 
 > **buttonPlacement**: `"left"` \| `"right"` \| `"none"`
-
-Defined in: packages/javascript-sdk/dist/types/components.d.ts:268
 
 Where to place the search button.
 
@@ -60,8 +52,6 @@ Where to place the search button.
 
 > **config**: `undefined` \| `SearchcraftConfig`
 
-Defined in: packages/javascript-sdk/dist/types/components.d.ts:272
-
 The Searchcraft config object.
 
 #### Inherited from
@@ -73,8 +63,6 @@ The Searchcraft config object.
 ### customStyles
 
 > **customStyles**: `string` \| `Record`\<`string`, `string`\>
-
-Defined in: packages/javascript-sdk/dist/types/components.d.ts:276
 
 A custom styles object to be applied to the input element.
 
@@ -88,8 +76,6 @@ A custom styles object to be applied to the input element.
 
 > **inputLabel**: `undefined` \| `string`
 
-Defined in: packages/javascript-sdk/dist/types/components.d.ts:280
-
 The label rendered above the input.
 
 #### Inherited from
@@ -102,8 +88,6 @@ The label rendered above the input.
 
 > **placeholderValue**: `string`
 
-Defined in: packages/javascript-sdk/dist/types/components.d.ts:284
-
 The input element's placeholder value.
 
 #### Inherited from
@@ -115,8 +99,6 @@ The input element's placeholder value.
 ### searchTerm
 
 > **searchTerm**: `string`
-
-Defined in: packages/javascript-sdk/dist/types/components.d.ts:288
 
 The starting value of the input element.
 

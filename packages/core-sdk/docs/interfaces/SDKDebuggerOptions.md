@@ -1,45 +1,33 @@
-[@searchcraft/core](../README.md) / [Exports](../modules.md) / SDKDebuggerOptions
+[**@searchcraft/core**](https://docs.searchcraft.io/reference/sdk/core/README.md)
+
+***
+
+[@searchcraft/core](https://docs.searchcraft.io/reference/sdk/core/globals.md) / SDKDebuggerOptions
 
 # Interface: SDKDebuggerOptions
 
-## Table of contents
-
-### Properties
-
-- [logFormatter](SDKDebuggerOptions.md#logformatter)
-- [logLevel](SDKDebuggerOptions.md#loglevel)
-
 ## Properties
 
-### logFormatter
+### logFormatter()?
 
-• `Optional` **logFormatter**: (`level`: [`LogLevel`](../enums/LogLevel.md), `message`: `string`) => `string`
+> `optional` **logFormatter**: (`level`, `message`) => `string`
 
-#### Type declaration
+#### Parameters
 
-▸ (`level`, `message`): `string`
+##### level
 
-##### Parameters
+[`LogLevel`](https://docs.searchcraft.io/reference/sdk/core/enumerations/LogLevel.md)
 
-| Name | Type |
-| :------ | :------ |
-| `level` | [`LogLevel`](../enums/LogLevel.md) |
-| `message` | `string` |
-
-##### Returns
+##### message
 
 `string`
 
-#### Defined in
+#### Returns
 
-[SDKDebugger/SDKDebugger.ts:10](https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/src/9ae1822c027894501f0c9466b2735e3ddcdec128/packages/core-sdk/src/SDKDebugger/SDKDebugger.ts#lines-10)
+`string`
 
-___
+***
 
 ### logLevel
 
-• **logLevel**: [`LogLevel`](../enums/LogLevel.md)
-
-#### Defined in
-
-[SDKDebugger/SDKDebugger.ts:9](https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/src/9ae1822c027894501f0c9466b2735e3ddcdec128/packages/core-sdk/src/SDKDebugger/SDKDebugger.ts#lines-9)
+> **logLevel**: [`LogLevel`](https://docs.searchcraft.io/reference/sdk/core/enumerations/LogLevel.md)

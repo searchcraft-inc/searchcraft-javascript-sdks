@@ -1,20 +1,18 @@
-[**@searchcraft/react-sdk**](../README.md)
+[**@searchcraft/react-sdk**](https://docs.searchcraft.io/reference/sdk/react/README.md)
 
 ***
 
-[@searchcraft/react-sdk](../globals.md) / SearchcraftBaseSearchResults
+[@searchcraft/react-sdk](https://docs.searchcraft.io/reference/sdk/react/globals.md) / SearchcraftBaseSearchResults
 
 # Function: SearchcraftBaseSearchResults()
 
 > **SearchcraftBaseSearchResults**(`props`, `deprecatedLegacyContext`?): `ReactNode`
 
-Defined in: [packages/react-sdk/src/components/SearchcraftBaseSearchResults.tsx:9](https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/src/13d0fd25669057ec4d2ef62d1e5c7048e667a0f0/packages/react-sdk/src/components/SearchcraftBaseSearchResults.tsx#lines-9)
-
 ## Parameters
 
 ### props
 
-[`SearchcraftBaseSearchResultsProps`](../interfaces/SearchcraftBaseSearchResultsProps.md)
+[`SearchcraftBaseSearchResultsProps`](https://docs.searchcraft.io/reference/sdk/react/interfaces/SearchcraftBaseSearchResultsProps.md)
 
 ### deprecatedLegacyContext?
 

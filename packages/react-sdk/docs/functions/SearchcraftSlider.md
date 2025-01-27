@@ -1,20 +1,18 @@
-[**@searchcraft/react-sdk**](../README.md)
+[**@searchcraft/react-sdk**](https://docs.searchcraft.io/reference/sdk/react/README.md)
 
 ***
 
-[@searchcraft/react-sdk](../globals.md) / SearchcraftSlider
+[@searchcraft/react-sdk](https://docs.searchcraft.io/reference/sdk/react/globals.md) / SearchcraftSlider
 
 # Function: SearchcraftSlider()
 
 > **SearchcraftSlider**(`props`, `deprecatedLegacyContext`?): `ReactNode`
 
-Defined in: [packages/react-sdk/src/components/SearchcraftSlider.tsx:8](https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/src/13d0fd25669057ec4d2ef62d1e5c7048e667a0f0/packages/react-sdk/src/components/SearchcraftSlider.tsx#lines-8)
-
 ## Parameters
 
 ### props
 
-[`SearchcraftSliderProps`](../interfaces/SearchcraftSliderProps.md)
+[`SearchcraftSliderProps`](https://docs.searchcraft.io/reference/sdk/react/interfaces/SearchcraftSliderProps.md)
 
 ### deprecatedLegacyContext?
 

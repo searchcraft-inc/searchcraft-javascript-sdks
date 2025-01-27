@@ -6,7 +6,7 @@
 
 The Searchcraft React SDK provides tools for integrating the Searchcraft API into your React applications. It supports core functionalities like searching, managing state, and working with search results.
 
-## Install
+## Installation
 
 Install with Yarn:
 
@@ -22,7 +22,7 @@ $ npm install @searchcraft/react-sdk
 
 ## Initialization and Basic Usage
 
-React Components
+### React Components
 
 The React SDK provides the following prebuilt components for use in your application:
 

@@ -1,55 +1,35 @@
-[@searchcraft/core](../README.md) / [Exports](../modules.md) / QueryItem
+[**@searchcraft/core**](https://docs.searchcraft.io/reference/sdk/core/README.md)
+
+***
+
+[@searchcraft/core](https://docs.searchcraft.io/reference/sdk/core/globals.md) / QueryItem
 
 # Interface: QueryItem
 
 Represents a single condition in a complex query.
 
-## Table of contents
-
-### Properties
-
-- [exact](QueryItem.md#exact)
-- [fuzzy](QueryItem.md#fuzzy)
-- [occur](QueryItem.md#occur)
-
 ## Properties
 
-### exact
+### exact?
 
-• `Optional` **exact**: `Object`
+> `optional` **exact**: `object`
 
-#### Type declaration
+#### ctx
 
-| Name | Type |
-| :------ | :------ |
-| `ctx` | `string` |
+> **ctx**: `string`
 
-#### Defined in
+***
 
-[CoreSDKTypes/CoreSDKTypes.ts:174](https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/src/9ae1822c027894501f0c9466b2735e3ddcdec128/packages/core-sdk/src/CoreSDKTypes/CoreSDKTypes.ts#lines-174)
+### fuzzy?
 
-___
+> `optional` **fuzzy**: `object`
 
-### fuzzy
+#### ctx
 
-• `Optional` **fuzzy**: `Object`
+> **ctx**: `string`
 
-#### Type declaration
+***
 
-| Name | Type |
-| :------ | :------ |
-| `ctx` | `string` |
+### occur?
 
-#### Defined in
-
-[CoreSDKTypes/CoreSDKTypes.ts:175](https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/src/9ae1822c027894501f0c9466b2735e3ddcdec128/packages/core-sdk/src/CoreSDKTypes/CoreSDKTypes.ts#lines-175)
-
-___
-
-### occur
-
-• `Optional` **occur**: `string`
-
-#### Defined in
-
-[CoreSDKTypes/CoreSDKTypes.ts:173](https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/src/9ae1822c027894501f0c9466b2735e3ddcdec128/packages/core-sdk/src/CoreSDKTypes/CoreSDKTypes.ts#lines-173)
+> `optional` **occur**: `string`

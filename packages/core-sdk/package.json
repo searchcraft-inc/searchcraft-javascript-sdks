@@ -9,17 +9,15 @@
   "types": "./dist/index.d.ts",
   "files": ["dist"],
   "scripts": {
-    "build": "vite build && typedoc --plugin typedoc-plugin-markdown",
+    "build": "vite build && yarn docs",
     "dev:watch": "vite",
-    "docs": "typedoc --plugin typedoc-plugin-markdown",
+    "docs": "typedoc --options typedoc.json",
     "test:watch": "vitest",
     "test": "vitest --watch=false"
   },
   "devDependencies": {
     "@types/node": "^22.5.0",
-    "typescript": "^5.5.3",
-    "typedoc": "^0.25.13",
-    "typedoc-plugin-markdown": "^3.17.1"
+    "typescript": "^5.5.3"
   },
   "dependencies": {
     "@thumbmarkjs/thumbmarkjs": "^0.16.1",
