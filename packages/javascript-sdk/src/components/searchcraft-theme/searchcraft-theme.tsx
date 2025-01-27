@@ -1,4 +1,5 @@
 import { Component, Prop, h } from '@stencil/core';
+import styles from '../../themes/hologram.css?raw';
 
 /**
  * This web component is designed to display a user-friendly error message when a search query fails, providing clear feedback to users and enhancing their experience when an issue arises during the search process.
@@ -10,7 +11,7 @@ import { Component, Prop, h } from '@stencil/core';
  * ```
  */
 @Component({
-  tag: 'searchcraft-error-message',
+  tag: 'searchcraft-theme',
   shadow: false,
 })
 export class SearchcraftErrorMessage {
@@ -21,9 +22,7 @@ export class SearchcraftErrorMessage {
 
   render() {
     return (
-      <p class='searchcraft-error-message'>
-        {this.errorMessage || 'Search term is required.'}
-      </p>
+      <style>{styles}</style>
     );
   }
 }

@@ -148,6 +148,11 @@ export const SearchcraftSlider = /*@__PURE__*/ defineContainer<JSX.SearchcraftSl
 ]);
 
 
+export const SearchcraftTheme = /*@__PURE__*/ defineContainer<JSX.SearchcraftTheme>('searchcraft-theme', undefined, [
+  'errorMessage'
+]);
+
+
 export const SearchcraftToggleButton = /*@__PURE__*/ defineContainer<JSX.SearchcraftToggleButton>('searchcraft-toggle-button', undefined, [
   'label',
   'subLabel',

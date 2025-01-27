@@ -47,7 +47,6 @@ export interface ScInputCustomEvent<T> extends CustomEvent<T> {
  */
 @Component({
   tag: 'searchcraft-input-form',
-  styleUrl: 'searchcraft-input-form.module.scss',
   shadow: false,
 })
 export class SearchcraftInput {

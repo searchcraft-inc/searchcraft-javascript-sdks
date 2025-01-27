@@ -92,6 +92,12 @@
 
 ***
 
+### searchcraft-theme
+
+> **searchcraft-theme**: [`SearchcraftTheme`](https://docs.searchcraft.io/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftTheme.md)
+
+***
+
 ### searchcraft-toggle-button
 
 > **searchcraft-toggle-button**: [`SearchcraftToggleButton`](https://docs.searchcraft.io/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftToggleButton.md)

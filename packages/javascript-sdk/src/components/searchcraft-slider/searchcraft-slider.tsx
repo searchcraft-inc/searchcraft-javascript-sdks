@@ -16,7 +16,6 @@ import classNames from 'classnames';
  */
 @Component({
   tag: 'searchcraft-slider',
-  styleUrl: 'searchcraft-slider.module.scss',
   shadow: false,
 })
 export class SearchcraftSlider {

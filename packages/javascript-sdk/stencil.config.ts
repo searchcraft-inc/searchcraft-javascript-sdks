@@ -1,15 +1,9 @@
 import type { Config } from '@stencil/core';
 import { reactOutputTarget } from '@stencil/react-output-target';
-import { sass } from '@stencil/sass';
 import { vueOutputTarget } from '@stencil/vue-output-target';
 
 export const config: Config = {
   namespace: 'searchcraft-javascript-sdk',
-  plugins: [
-    sass({
-      injectGlobalPaths: ['src/theme/main.scss'],
-    }),
-  ],
   outputTargets: [
     {
       type: 'dist',

@@ -8,7 +8,6 @@ import { Component, Fragment, h, Prop } from '@stencil/core';
  */
 @Component({
   tag: 'searchcraft-base-search-result',
-  styleUrl: 'searchcraft-base-search-result.module.scss',
   shadow: false,
 })
 export class SearchcraftBaseSearchResult {

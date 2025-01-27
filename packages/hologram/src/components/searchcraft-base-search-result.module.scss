@@ -1,3 +1,5 @@
+@use '../breakpoints.scss';
+@use "../typography.scss";
 
 .searchcraft-search-result-container {
   all: unset;
@@ -11,7 +13,7 @@
 
   background-color: var(--sc-surface-neutral-primary);
 
-  @media (min-width: $breakpoint-md) {
+  @media (min-width: breakpoints.$breakpoint-md) {
     flex-direction: row;
   }
 }
@@ -32,31 +34,31 @@ a.searchcraft-search-result-container {
   border-radius: var(--sc-image-border-radius);
   width: 100%;
 
-  @media (min-width: $breakpoint-md) {
+  @media (min-width: breakpoints.$breakpoint-md) {
     width: 200px;
   }
 }
 
 .searchcraft-base-search-result-title {
-  @include body-bold();
+  @include typography.body-bold();
   margin: 0;
   color: var(--sc-content-neutral-primary);
 }
 
 .searchcraft-base-search-result-subtitle {
-  @include body-small();
+  @include typography.body-small();
   margin: 0;
   color: var(--sc-content-disabled);
 }
 
 .searchcraft-base-search-result-body-content {
-  @include body();
+  @include typography.body();
   margin: 0;
   color: var(--sc-content-neutral-secondary);
 }
 
 .searchcraft-base-search-result-footer-content {
-  @include body();
+  @include typography.body();
   margin: 0;
   color: var(--sc-content-disabled);
 }

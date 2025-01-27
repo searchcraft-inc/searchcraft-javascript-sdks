@@ -23,4 +23,5 @@
 - [SearchcraftPopoverListView](https://docs.searchcraft.io/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftPopoverListView.md)
 - [SearchcraftResultsInfo](https://docs.searchcraft.io/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftResultsInfo.md)
 - [SearchcraftSlider](https://docs.searchcraft.io/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftSlider.md)
+- [SearchcraftTheme](https://docs.searchcraft.io/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftTheme.md)
 - [SearchcraftToggleButton](https://docs.searchcraft.io/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftToggleButton.md)

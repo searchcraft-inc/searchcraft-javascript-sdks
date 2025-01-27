@@ -81,7 +81,8 @@ if (shouldWatch) {
 
 // Builds the packages that need to be built every time no matter what
 buildPackage({ name: "@searchcraft/core" });
-buildPackage(packages["js"])
+buildPackage({ name: "@searchcraft/hologram" });
+buildPackage({ name: "@searchcraft/javascript-sdk" });
 
 // Build the remaining target package OR all the remaining packages
 if (targetPackageInfo) {

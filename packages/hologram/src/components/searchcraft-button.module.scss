@@ -1,5 +1,7 @@
+@use "../typography.scss";
+
 .searchcraft-button {
-  @include body-bold;
+  @include typography.body-bold;
 
   border-radius: 8px;
   display: flex;

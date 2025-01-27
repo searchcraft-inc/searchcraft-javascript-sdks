@@ -15,7 +15,6 @@ import classNames from 'classnames';
  */
 @Component({
   tag: 'searchcraft-toggle-button',
-  styleUrl: 'searchcraft-toggle-button.module.scss',
   shadow: false,
 })
 export class SearchcraftToggleButton {

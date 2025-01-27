@@ -20,7 +20,6 @@ import { getMillis } from '@utils';
  */
 @Component({
   tag: 'searchcraft-filter-panel',
-  styleUrl: 'searchcraft-filter-panel.module.scss',
   shadow: false,
 })
 export class SearchcraftFilterPanel {

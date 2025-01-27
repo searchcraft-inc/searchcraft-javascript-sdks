@@ -1,3 +1,5 @@
+@use "../typography.scss";
+
 .searchcraft-toggle-button-container {
   display: flex;
   justify-content: space-between;
@@ -6,13 +8,13 @@
 }
 
 .searchcraft-toggle-button-label {
-  @include body();
+  @include typography.body();
   margin: 0;
   color: var(--sc-content-neutral-primary);
 }
 
 .searchcraft-toggle-button-sub-label {
-  @include body-small();
+  @include typography.body-small();
   margin: 0;
   color: var(--sc-content-neutral-secondary);
 }

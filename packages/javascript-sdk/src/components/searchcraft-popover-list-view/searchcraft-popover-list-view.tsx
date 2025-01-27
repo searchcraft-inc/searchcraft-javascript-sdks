@@ -15,7 +15,6 @@ import type { PopoverResultMappings } from 'types';
  */
 @Component({
   tag: 'searchcraft-popover-list-view',
-  styleUrl: 'searchcraft-popover-list-view.module.scss',
   shadow: false,
 })
 export class SearchcraftPopoverListView {
