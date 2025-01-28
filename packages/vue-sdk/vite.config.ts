@@ -1,5 +1,6 @@
 import { resolve } from 'node:path';
 import vue from '@vitejs/plugin-vue';
+import vueJsx from '@vitejs/plugin-vue-jsx';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 
@@ -8,10 +9,11 @@ export default defineConfig({
     vue({
       template: {
         compilerOptions: {
-          isCustomElement: (tag) => tag.startsWith('searchcraft-'), // Treat Stencil components as custom elements
+          isCustomElement: (tag) => tag.startsWith('searchcraft-'),
         },
       },
     }),
+    vueJsx(),
     dts({
       entryRoot: './src',
       outDir: './dist',

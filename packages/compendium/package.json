@@ -20,7 +20,7 @@
     "@chromatic-com/storybook": "^3.2.4",
     "@searchcraft/javascript-sdk": "^0.7.0",
     "@searchcraft/react-sdk": "^0.7.0",
-    "@searchcraft/vue-sdk": "^0.7.0",
+    "@searchcraft/vue-sdk": "*",
     "@storybook/addon-backgrounds": "^8.5.1",
     "@storybook/addon-docs": "^8.5.1",
     "@storybook/addon-essentials": "^8.5.1",
