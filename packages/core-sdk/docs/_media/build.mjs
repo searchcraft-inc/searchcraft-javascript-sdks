@@ -20,6 +20,8 @@
  *   node build.mjs pkg1 --watch --yalc  // Watch, Build, & publish to Yalc
  *
  * Aliases:
+ *   core  -> @searchcraft/core
+ *   hologram -> @searchcraft/hologram
  *   js    -> @searchcraft/javascript-sdk
  *   react -> @searchcraft/react-sdk
  *   vue   -> @searchcraft/vue-sdk
@@ -27,6 +29,14 @@
 import { execSync, spawnSync } from 'node:child_process';
 
 const packages = {
+  core: {
+    name: '@searchcraft/core',
+    path: './packages/core',
+  },
+  hologram: {
+    name: '@searchcraft/hologram',
+    path: './packages/hologram',
+  },
   js: {
     name: '@searchcraft/javascript-sdk',
     path: './packages/javascript-sdk',
@@ -85,18 +95,21 @@ if (shouldWatch) {
 }
 
 // Builds the packages that need to be built every time no matter what
-buildPackage({ name: '@searchcraft/core' });
-buildPackage({ name: '@searchcraft/hologram' });
-buildPackage({ name: '@searchcraft/javascript-sdk' });
+const mandatoryPackagesToBuild = [
+  '@searchcraft/core',
+  '@searchcraft/hologram',
+  '@searchcraft/javascript-sdk',
+];
+mandatoryPackagesToBuild.forEach((name) => buildPackage({ name }));
 
 // Build the remaining target package OR all the remaining packages
 if (targetPackageInfo) {
-  if (targetPackageInfo.name !== '@searchcraft/javascript-sdk') {
+  if (!mandatoryPackagesToBuild.includes(targetPackageInfo.name)) {
     buildPackage(targetPackageInfo);
   }
 } else {
   Object.values(packages).forEach((packageInfo) => {
-    if (packageInfo.name !== '@searchcraft/javascript-sdk') {
+    if (!mandatoryPackagesToBuild.includes(packageInfo.name)) {
       buildPackage(packageInfo);
     }
   });
