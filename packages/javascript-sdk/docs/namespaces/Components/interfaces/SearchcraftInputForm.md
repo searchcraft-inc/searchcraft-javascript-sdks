@@ -38,7 +38,7 @@ Whether or not to automatically submit the search term when the input changes.
 
 ### buttonLabel
 
-> **buttonLabel**: `string`
+> **buttonLabel**: `undefined` \| `string`
 
 The label for the submit button.
 
@@ -46,7 +46,7 @@ The label for the submit button.
 
 ### buttonPlacement
 
-> **buttonPlacement**: `"none"` \| `"left"` \| `"right"`
+> **buttonPlacement**: `"left"` \| `"right"` \| `"none"`
 
 Where to place the search button.
 
@@ -54,7 +54,7 @@ Where to place the search button.
 
 ### config
 
-> **config**: [`SearchcraftConfig`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/SearchcraftConfig.md)
+> **config**: `undefined` \| [`SearchcraftConfig`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/SearchcraftConfig.md)
 
 The Searchcraft config object.
 
@@ -70,7 +70,7 @@ A custom styles object to be applied to the input element.
 
 ### inputLabel
 
-> **inputLabel**: `string`
+> **inputLabel**: `undefined` \| `string`
 
 The label rendered above the input.
 

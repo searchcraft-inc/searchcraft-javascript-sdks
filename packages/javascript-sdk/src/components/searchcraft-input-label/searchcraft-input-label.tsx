@@ -19,7 +19,7 @@ export class SearchcraftInputLabel {
    * The classname applied to the label element.
    */
   @Prop() inputLabelClassName? = '';
-  @Prop() label: string;
+  @Prop() label = '';
 
   render() {
     return (

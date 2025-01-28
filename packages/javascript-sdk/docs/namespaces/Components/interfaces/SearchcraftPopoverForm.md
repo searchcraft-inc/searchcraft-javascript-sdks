@@ -35,7 +35,7 @@ popoverForm.popoverResultMappings = {
 
 ### config
 
-> **config**: [`SearchcraftConfig`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/SearchcraftConfig.md)
+> **config**: `undefined` \| [`SearchcraftConfig`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/SearchcraftConfig.md)
 
 The Searchcraft config object.
 
@@ -51,7 +51,7 @@ The hotkey that activates the popover.
 
 ### hotkeyModifier
 
-> **hotkeyModifier**: `"meta"` \| `"option"` \| `"alt"` \| `"ctrl"`
+> **hotkeyModifier**: `"ctrl"` \| `"meta"` \| `"alt"` \| `"option"`
 
 The hotkey modifier that activates the popover. Used together with the `hotkey` prop.
 
@@ -59,7 +59,7 @@ The hotkey modifier that activates the popover. Used together with the `hotkey` 
 
 ### popoverResultMappings
 
-> **popoverResultMappings**: [`PopoverResultMappings`](https://docs.searchcraft.io/reference/sdk/js-vanilla/type-aliases/PopoverResultMappings.md)
+> **popoverResultMappings**: `undefined` \| [`PopoverResultMappings`](https://docs.searchcraft.io/reference/sdk/js-vanilla/type-aliases/PopoverResultMappings.md)
 
 Formats the content rendered for each result.
 

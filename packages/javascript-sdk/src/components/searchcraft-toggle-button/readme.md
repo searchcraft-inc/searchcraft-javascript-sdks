@@ -12,10 +12,10 @@ It is consumed within the `searchcraft-filter-panel` component.
 
 ## Properties
 
-| Property   | Attribute   | Description                                         | Type     | Default     |
-| ---------- | ----------- | --------------------------------------------------- | -------- | ----------- |
-| `label`    | `label`     | The label.                                          | `string` | `'Toggle'`  |
-| `subLabel` | `sub-label` | The secondary label displayed below the main label. | `string` | `undefined` |
+| Property   | Attribute   | Description                                         | Type                  | Default     |
+| ---------- | ----------- | --------------------------------------------------- | --------------------- | ----------- |
+| `label`    | `label`     | The label.                                          | `string`              | `'Toggle'`  |
+| `subLabel` | `sub-label` | The secondary label displayed below the main label. | `string \| undefined` | `undefined` |
 
 
 ## Events

@@ -104,7 +104,7 @@ Returns true or false depending on how event was initialized. True if event invo
 
 ### currentTarget
 
-> `readonly` **currentTarget**: `EventTarget`
+> `readonly` **currentTarget**: `null` \| `EventTarget`
 
 Returns the object whose event listener's callback is currently being invoked.
 
@@ -198,7 +198,7 @@ Returns true if event was dispatched by the user agent, and false otherwise.
 
 ### ~~srcElement~~
 
-> `readonly` **srcElement**: `EventTarget`
+> `readonly` **srcElement**: `null` \| `EventTarget`
 
 #### Deprecated
 

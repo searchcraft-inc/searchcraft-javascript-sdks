@@ -24,7 +24,7 @@ export class SearchcraftResultsInfo {
   @State() responseTime = '';
   @State() query = '';
 
-  unsubscribe: () => void;
+  unsubscribe: () => void = () => {};
 
   connectedCallback() {
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {

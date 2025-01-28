@@ -41,7 +41,9 @@ export class SearchcraftSlider {
   /**
    * When the range has changed.
    * */
-  @Event() rangeChanged: EventEmitter<{ startValue: number; endValue: number }>;
+  @Event() rangeChanged:
+    | EventEmitter<{ startValue: number; endValue: number }>
+    | undefined;
 
   componentDidLoad() {
     this.startValue = this.min;
@@ -49,7 +51,7 @@ export class SearchcraftSlider {
   }
 
   private emitUpdate = async () => {
-    this.rangeChanged.emit({
+    this.rangeChanged?.emit({
       startValue: this.startValue,
       endValue: this.endValue,
     });

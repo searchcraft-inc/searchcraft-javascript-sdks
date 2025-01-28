@@ -184,7 +184,7 @@ export const SearchcraftResultsInfo: StencilReactComponent<SearchcraftResultsInf
     defineCustomElement: defineSearchcraftResultsInfo
 });
 
-type SearchcraftSliderEvents = { onRangeChanged: EventName<CustomEvent<{ startValue: number; endValue: number }>> };
+type SearchcraftSliderEvents = { onRangeChanged: EventName<CustomEvent<any>> };
 
 export const SearchcraftSlider: StencilReactComponent<SearchcraftSliderElement, SearchcraftSliderEvents> = /*@__PURE__*/ createComponent<SearchcraftSliderElement, SearchcraftSliderEvents>({
     tagName: 'searchcraft-slider',

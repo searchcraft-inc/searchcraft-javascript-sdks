@@ -66,7 +66,7 @@ export class SearchcraftBaseSearchResult {
   /**
    * The placement of the image.
    */
-  @Prop() imagePlacement: 'left' | 'right';
+  @Prop() imagePlacement: 'left' | 'right' = 'right';
   /**
    * A custom styles object.
    */

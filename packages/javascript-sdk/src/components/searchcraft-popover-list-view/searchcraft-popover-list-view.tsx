@@ -34,23 +34,23 @@ export class SearchcraftPopoverListView {
      */
     const titleContent = getDocumentValueFromSearchResultMapping(
       document,
-      this.popoverResultMappings.title,
+      this.popoverResultMappings?.title,
     );
     const subtitleContent = getDocumentValueFromSearchResultMapping(
       document,
-      this.popoverResultMappings.subtitle,
+      this.popoverResultMappings?.subtitle,
     );
     const href = getDocumentValueFromSearchResultMapping(
       document,
-      this.popoverResultMappings.href,
+      this.popoverResultMappings?.href,
     );
     const imageSource = getDocumentValueFromSearchResultMapping(
       document,
-      this.popoverResultMappings.imageSource,
+      this.popoverResultMappings?.imageSource,
     );
     const imageAlt = getDocumentValueFromSearchResultMapping(
       document,
-      this.popoverResultMappings.imageAlt,
+      this.popoverResultMappings?.imageAlt,
     );
 
     return (

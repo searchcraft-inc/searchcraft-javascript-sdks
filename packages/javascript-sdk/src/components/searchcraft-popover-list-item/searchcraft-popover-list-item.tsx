@@ -20,7 +20,7 @@ export class SearchcraftPopoverListItem {
   /** The link href */
   @Prop() href: string | undefined;
   /** The document position relative to the search results (For Measure) */
-  @Prop() documentPosition: number;
+  @Prop() documentPosition = 0;
 
   componentDidLoad() {}
 
@@ -37,8 +37,7 @@ export class SearchcraftPopoverListItem {
     if (searchcraft) {
       const document_position = this.documentPosition;
       const search_term = state.query;
-      const number_of_documents =
-        state.searchResults?.data?.hits?.length || 0;
+      const number_of_documents = state.searchResults?.data?.hits?.length || 0;
 
       searchcraft.sendMeasureEvent('document_clicked', {
         document_position,
@@ -50,7 +49,11 @@ export class SearchcraftPopoverListItem {
 
   render() {
     return (
-      <a class='searchcraft-popover-list-item' href={this.href} onClick={this.handleLinkClick.bind(this)}>
+      <a
+        class='searchcraft-popover-list-item'
+        href={this.href}
+        onClick={this.handleLinkClick.bind(this)}
+      >
         {this.imageSrc && (
           <div class='searchcraft-popover-list-item-image-wrapper'>
             <img

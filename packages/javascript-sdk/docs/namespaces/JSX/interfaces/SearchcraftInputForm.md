@@ -46,7 +46,7 @@ The label for the submit button.
 
 ### buttonPlacement?
 
-> `optional` **buttonPlacement**: `"none"` \| `"left"` \| `"right"`
+> `optional` **buttonPlacement**: `"left"` \| `"right"` \| `"none"`
 
 Where to place the search button.
 

@@ -27,9 +27,9 @@ facetList.addEventListener('facetSelectionUpdated', () => {
 
 ## Properties
 
-| Property    | Attribute    | Description                                     | Type     | Default     |
-| ----------- | ------------ | ----------------------------------------------- | -------- | ----------- |
-| `fieldName` | `field-name` | The name of the field where facets are applied. | `string` | `undefined` |
+| Property    | Attribute    | Description                                     | Type     | Default |
+| ----------- | ------------ | ----------------------------------------------- | -------- | ------- |
+| `fieldName` | `field-name` | The name of the field where facets are applied. | `string` | `''`    |
 
 
 ## Events

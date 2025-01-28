@@ -299,7 +299,7 @@ export namespace Components {
         /**
           * The classname applied to the label element.
          */
-        "inputLabelClassName"?: string;
+        "inputLabelClassName"?: string | undefined;
         "label": string;
     }
     /**
@@ -756,7 +756,7 @@ declare global {
         new (): HTMLSearchcraftResultsInfoElement;
     };
     interface HTMLSearchcraftSliderElementEventMap {
-        "rangeChanged": { startValue: number; endValue: number };
+        "rangeChanged": any;
     }
     /**
      * This web component is designed to allow users to select a value from a range defined by a minimum and maximum value.
@@ -1147,7 +1147,7 @@ declare namespace LocalJSX {
         /**
           * The classname applied to the label element.
          */
-        "inputLabelClassName"?: string;
+        "inputLabelClassName"?: string | undefined;
         "label"?: string;
     }
     /**
@@ -1287,7 +1287,7 @@ declare namespace LocalJSX {
         /**
           * When the range has changed.
          */
-        "onRangeChanged"?: (event: SearchcraftSliderCustomEvent<{ startValue: number; endValue: number }>) => void;
+        "onRangeChanged"?: (event: SearchcraftSliderCustomEvent<any>) => void;
     }
     interface SearchcraftTheme {
     }

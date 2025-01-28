@@ -21,6 +21,6 @@ The label.
 
 ### subLabel
 
-> **subLabel**: `string`
+> **subLabel**: `undefined` \| `string`
 
 The secondary label displayed below the main label.
