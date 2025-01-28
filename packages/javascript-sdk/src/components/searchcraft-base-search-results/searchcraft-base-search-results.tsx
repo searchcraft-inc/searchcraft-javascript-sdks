@@ -16,6 +16,7 @@ import {
   serializeStyles,
 } from '@utils';
 import type { SearchResultMappings } from 'types';
+import type { JSX } from '@stencil/core/internal';
 
 /**
  * This web component is responsible for displaying the results of a search query.
@@ -51,7 +52,6 @@ import type { SearchResultMappings } from 'types';
  */
 @Component({
   tag: 'searchcraft-base-search-results',
-  styleUrl: 'searchcraft-base-search-results.module.scss',
   shadow: false,
 })
 export class SearchcraftBaseSearchResults {
@@ -106,13 +106,13 @@ export class SearchcraftBaseSearchResults {
   /**
    * When no results are returned.
    */
-  @Event() noResults: EventEmitter<void>;
+  @Event() noResults?: EventEmitter<void>;
 
   @State() hasSearched = false;
   @State() query = '';
   @State() searchResults: SearchcraftResponse | null = null;
 
-  private unsubscribe: () => void;
+  private unsubscribe: () => void = () => {};
 
   componentDidLoad() {
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {
@@ -121,7 +121,7 @@ export class SearchcraftBaseSearchResults {
       } else {
         this.hasSearched = false;
       }
-      this.searchResults = { ...state.searchResults };
+      this.searchResults = { ...state.searchResults } as SearchcraftResponse;
       this.query = state.query;
     });
 
@@ -142,37 +142,40 @@ export class SearchcraftBaseSearchResults {
      */
     const titleContent = getDocumentValueFromSearchResultMapping(
       document,
-      this.searchResultMappings.title,
+      this.searchResultMappings?.title,
     );
     const subtitleContent = getDocumentValueFromSearchResultMapping(
       document,
-      this.searchResultMappings.subtitle,
+      this.searchResultMappings?.subtitle,
     );
     const bodyContent = getDocumentValueFromSearchResultMapping(
       document,
-      this.searchResultMappings.body,
+      this.searchResultMappings?.body,
     );
     const containerHref = getDocumentValueFromSearchResultMapping(
       document,
-      this.searchResultMappings.containerHref,
+      this.searchResultMappings?.containerHref,
     );
     const buttonHref = getDocumentValueFromSearchResultMapping(
       document,
-      this.searchResultMappings.buttonHref,
+      this.searchResultMappings?.buttonHref,
     );
     const imageSource = getDocumentValueFromSearchResultMapping(
       document,
-      this.searchResultMappings.imageSource,
+      this.searchResultMappings?.imageSource,
     );
     const footerContent = getDocumentValueFromSearchResultMapping(
       document,
-      this.searchResultMappings.footer,
+      this.searchResultMappings?.footer,
     );
 
-    const serializedStyles =
-      typeof this.customStylesForResults === 'string'
-        ? this.customStylesForResults
-        : serializeStyles(this.customStylesForResults);
+    let serializedStyles = '';
+    if (this.customStylesForResults) {
+      serializedStyles =
+        typeof this.customStylesForResults === 'string'
+          ? this.customStylesForResults
+          : serializeStyles(this.customStylesForResults);
+    }
 
     return (
       <searchcraft-base-search-result
@@ -213,7 +216,7 @@ export class SearchcraftBaseSearchResults {
       this.searchResults?.data?.hits?.map((data, _index) => {
         const { doc: result } = data;
         return result;
-      });
+      }) as Record<string, unknown>[];
 
     const finalComponents: JSX.Element[] = [];
 
@@ -256,7 +259,7 @@ export class SearchcraftBaseSearchResults {
     }
 
     if (this.query.length > 0 && this.searchResults?.data?.hits?.length === 0) {
-      this.noResults.emit();
+      this.noResults?.emit();
     }
 
     return (

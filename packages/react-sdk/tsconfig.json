@@ -1,20 +1,15 @@
 {
-  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "rootDir": ".",
     "baseUrl": ".",
     "jsx": "react-jsx",
+    "outDir": "dist",
     "paths": {
       "@/*": ["./src/*"],
       "@components/*": ["./src/components/*"]
     },
-    "outDir": "dist",
+    "rootDir": ".",
     "sourceMap": true
   },
-  "include": ["src", "vite.config.ts"],
-  "typedocOptions": {
-    "plugin": ["typedoc-plugin-markdown"],
-    "entryPoints": ["src/index.tsx"],
-    "out": "docs"
-  }
+  "extends": "../../tsconfig.json",
+  "include": ["src", "vite.config.ts"]
 }

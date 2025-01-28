@@ -1,0 +1,8 @@
+@use "../typography.scss";
+
+.searchcraft-input-label {
+  @include typography.body-small-bold();
+  color: var(--sc-content-neutral-primary);
+  margin-top: 4px;
+  margin-bottom: 4px;
+}

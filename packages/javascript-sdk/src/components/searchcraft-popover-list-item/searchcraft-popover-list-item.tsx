@@ -1,3 +1,4 @@
+import { useSearchcraftStore } from '@provider/store';
 import { Component, h, Prop } from '@stencil/core';
 
 /**
@@ -5,7 +6,6 @@ import { Component, h, Prop } from '@stencil/core';
  */
 @Component({
   tag: 'searchcraft-popover-list-item',
-  styleUrl: 'searchcraft-popover-list-item.module.scss',
   shadow: false,
 })
 export class SearchcraftPopoverListItem {
@@ -20,7 +20,7 @@ export class SearchcraftPopoverListItem {
   /** The link href */
   @Prop() href: string | undefined;
   /** The document position relative to the search results (For Measure) */
-  @Prop() documentPosition: number;
+  @Prop() documentPosition = 0;
 
   componentDidLoad() {}
 
@@ -30,9 +30,30 @@ export class SearchcraftPopoverListItem {
 
   handleButtonClick() {}
 
+  handleLinkClick = () => {
+    const state = useSearchcraftStore.getState();
+    const searchcraft = state.getSearchcraftInstance();
+
+    if (searchcraft) {
+      const document_position = this.documentPosition;
+      const search_term = state.query;
+      const number_of_documents = state.searchResults?.data?.hits?.length || 0;
+
+      searchcraft.sendMeasureEvent('document_clicked', {
+        document_position,
+        number_of_documents,
+        search_term,
+      });
+    }
+  };
+
   render() {
     return (
-      <a class='searchcraft-popover-list-item' href={this.href}>
+      <a
+        class='searchcraft-popover-list-item'
+        href={this.href}
+        onClick={this.handleLinkClick.bind(this)}
+      >
         {this.imageSrc && (
           <div class='searchcraft-popover-list-item-image-wrapper'>
             <img

@@ -2,7 +2,7 @@
   "name": "@searchcraft/core",
   "private": true,
   "description": "The core functionality shared by SearchCraft's SDKs.",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -11,14 +11,14 @@
     "dist"
   ],
   "scripts": {
-    "build": "vite build",
+    "build": "vite build && yarn docs",
     "dev:watch": "vite",
+    "docs": "typedoc --options typedoc.json",
     "test:watch": "vitest",
     "test": "vitest --watch=false"
   },
   "devDependencies": {
-    "@types/node": "^22.5.0",
-    "typescript": "^5.5.3"
+    "@types/node": "^22.5.0"
   },
   "dependencies": {
     "@thumbmarkjs/thumbmarkjs": "^0.16.1",

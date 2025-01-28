@@ -1,16 +1,15 @@
 {
   "watch": [
-    "./packages/core-sdk",
-    "./packages/javascript-sdk",
-    "./packages/react-sdk"
+    "./packages/core-sdk/src",
+    "./packages/javascript-sdk/src",
+    "./packages/react-sdk/src",
+    "./packages/vue-sdk/src",
+    "./packages/hologram/src"
   ],
   "ignore": [
-    "./packages/core-sdk/dist",
-    "./packages/javascript-sdk/dist",
-    "./packages/javascript-sdk/.stencil",
-    "./packages/javascript-sdk/www",
-    "./packages/react-sdk/dist",
-    "./packages/react-sdk/src/stencil-web-components"
+    "./packages/vue-sdk/src/stencil-web-components.ts",
+    "./packages/react-sdk/src/stencil-web-components/components.ts",
+    "./packages/javascript-sdk/src/themes/*"
   ],
   "ext": "js,jsx,ts,tsx,json,css,scss"
 }

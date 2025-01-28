@@ -17,9 +17,9 @@ This web component is designed to display a user-friendly error message when a s
 
 ## Properties
 
-| Property       | Attribute       | Description        | Type     | Default     |
-| -------------- | --------------- | ------------------ | -------- | ----------- |
-| `errorMessage` | `error-message` | The error message. | `string` | `undefined` |
+| Property       | Attribute       | Description        | Type                  | Default     |
+| -------------- | --------------- | ------------------ | --------------------- | ----------- |
+| `errorMessage` | `error-message` | The error message. | `string \| undefined` | `undefined` |
 
 
 ## Dependencies

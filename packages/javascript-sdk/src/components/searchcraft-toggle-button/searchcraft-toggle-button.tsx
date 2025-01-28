@@ -15,7 +15,6 @@ import classNames from 'classnames';
  */
 @Component({
   tag: 'searchcraft-toggle-button',
-  styleUrl: 'searchcraft-toggle-button.module.scss',
   shadow: false,
 })
 export class SearchcraftToggleButton {
@@ -31,7 +30,7 @@ export class SearchcraftToggleButton {
   /**
    * When the toggle element is changed.
    */
-  @Event() toggleUpdated: EventEmitter<boolean>;
+  @Event() toggleUpdated?: EventEmitter<boolean>;
 
   @State() isActive = false;
   @State() unsubscribe: (() => void) | undefined;
@@ -39,7 +38,7 @@ export class SearchcraftToggleButton {
 
   private handleToggle = async () => {
     this.isActive = !this.isActive;
-    this.toggleUpdated.emit(this.isActive);
+    this.toggleUpdated?.emit(this.isActive);
   };
 
   connectedCallback() {

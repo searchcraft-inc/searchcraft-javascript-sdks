@@ -35,19 +35,18 @@ import { mergeFacetRoots, removeSubstringMatches } from '@utils';
  */
 @Component({
   tag: 'searchcraft-facet-list',
-  styleUrl: 'searchcraft-facet-list.module.scss',
   shadow: false,
 })
 export class SearchcraftFacetList {
   /**
    * The name of the field where facets are applied.
    */
-  @Prop() fieldName: string;
+  @Prop() fieldName = '';
 
   /**
    * When the facets are updated.
    */
-  @Event() facetSelectionUpdated: EventEmitter<{ paths: string[] }>;
+  @Event() facetSelectionUpdated?: EventEmitter<{ paths: string[] }>;
 
   @State() baseFacetRoot: FacetRoot | undefined;
   @State() facetRoot: FacetRoot | undefined;
@@ -67,6 +66,10 @@ export class SearchcraftFacetList {
     const facetPrime = state.searchResults?.data.facets;
     const timeTaken = state.searchResults?.data.time_taken;
 
+    if (!this.fieldName) {
+      return;
+    }
+
     /** Things to do when the state's search term has changed, but before the response received */
     if (
       state.query !== this.lastQuery ||
@@ -80,7 +83,7 @@ export class SearchcraftFacetList {
     /** Things to do when a new response with a new facet prime has been received */
     if (timeTaken !== this.lastTimeTaken && facetPrime) {
       this.facetRoot = undefined;
-      const incomingFacetRoot: FacetRoot = facetPrime.find(
+      const incomingFacetRoot: FacetRoot | undefined = facetPrime.find(
         (facet) => this.fieldName === Object.keys(facet)[0],
       );
 
@@ -89,7 +92,7 @@ export class SearchcraftFacetList {
         this.baseFacetRoot = incomingFacetRoot;
         this.facetRoot = incomingFacetRoot;
         this.hasNewSearchTerm = false;
-      } else if (this.baseFacetRoot) {
+      } else if (this.baseFacetRoot && incomingFacetRoot) {
         /** Data is from an existing search term, merge the facets together */
         this.facetRoot = mergeFacetRoots(
           this.fieldName,
@@ -154,7 +157,7 @@ export class SearchcraftFacetList {
     );
     const pathsWithParentPathsRemoved = removeSubstringMatches(paths);
 
-    this.facetSelectionUpdated.emit({ paths: pathsWithParentPathsRemoved });
+    this.facetSelectionUpdated?.emit({ paths: pathsWithParentPathsRemoved });
   }
 
   formatLabel = (facetChild: FacetChild): string => {
@@ -176,6 +179,10 @@ export class SearchcraftFacetList {
   };
 
   render() {
+    if (!this.fieldName) {
+      return;
+    }
+
     const firstFacet = this.facetRoot?.[this.fieldName];
 
     return (

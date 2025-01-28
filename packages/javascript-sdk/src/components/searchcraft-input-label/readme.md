@@ -17,10 +17,10 @@ This web component serves as the input label for the searchcraft-input-form comp
 
 ## Properties
 
-| Property              | Attribute                | Description                                 | Type     | Default     |
-| --------------------- | ------------------------ | ------------------------------------------- | -------- | ----------- |
-| `inputLabelClassName` | `input-label-class-name` | The classname applied to the label element. | `string` | `''`        |
-| `label`               | `label`                  |                                             | `string` | `undefined` |
+| Property              | Attribute                | Description                                 | Type                  | Default |
+| --------------------- | ------------------------ | ------------------------------------------- | --------------------- | ------- |
+| `inputLabelClassName` | `input-label-class-name` | The classname applied to the label element. | `string \| undefined` | `''`    |
+| `label`               | `label`                  |                                             | `string`              | `''`    |
 
 
 ## Dependencies

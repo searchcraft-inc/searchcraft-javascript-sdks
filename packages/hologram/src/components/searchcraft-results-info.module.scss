@@ -1,0 +1,21 @@
+@use "../breakpoints.scss";
+
+.searchcraft-results-info-container {
+  border-bottom: 1px solid var(--sc-surface-disabled);
+  display: flex;
+  justify-content: flex-start;
+}
+
+.searchcraft-results-info-content {
+  color: var(--sc-content-primary);
+  font-family: var(--sc-font-family);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 20px;
+  margin: 0px 0 8px;
+
+  @media (max-width: breakpoints.$breakpoint-md) {
+    margin: 0;
+    margin-bottom: 8px;
+  }
+}

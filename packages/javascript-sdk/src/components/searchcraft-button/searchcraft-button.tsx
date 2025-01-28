@@ -16,7 +16,6 @@ import classNames from 'classnames';
  */
 @Component({
   tag: 'searchcraft-button',
-  styleUrl: 'searchcraft-button.module.scss',
   shadow: false,
 })
 export class SearchcraftButton {

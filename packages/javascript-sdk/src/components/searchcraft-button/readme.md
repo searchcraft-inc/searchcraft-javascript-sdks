@@ -13,12 +13,12 @@ It is consumed within the `searchcraft-input-form` component.
 
 ## Properties
 
-| Property       | Attribute       | Description                             | Type      | Default     |
-| -------------- | --------------- | --------------------------------------- | --------- | ----------- |
-| `iconElement`  | --              | The icon element.                       | `Element` | `undefined` |
-| `iconOnly`     | `icon-only`     | Should the button only display an icon. | `boolean` | `false`     |
-| `iconPosition` | `icon-position` | The position of the icon.               | `string`  | `'left'`    |
-| `label`        | `label`         | The label for the button.               | `string`  | `'Search'`  |
+| Property       | Attribute       | Description                             | Type                   | Default     |
+| -------------- | --------------- | --------------------------------------- | ---------------------- | ----------- |
+| `iconElement`  | --              | The icon element.                       | `Element \| undefined` | `undefined` |
+| `iconOnly`     | `icon-only`     | Should the button only display an icon. | `boolean`              | `false`     |
+| `iconPosition` | `icon-position` | The position of the icon.               | `string`               | `'left'`    |
+| `label`        | `label`         | The label for the button.               | `string`               | `'Search'`  |
 
 
 ## Events

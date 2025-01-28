@@ -2,7 +2,7 @@
   "name": "@searchcraft/react-sdk",
   "private": false,
   "author": "Searchcraft",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Searchcraft React SDK.",
   "type": "module",
   "license": "Apache-2.0",
@@ -10,7 +10,8 @@
     "searchcraft"
   ],
   "scripts": {
-    "build": "tsc && vite build",
+    "build": "tsc && vite build && yarn docs",
+    "docs": "typedoc --options typedoc.json",
     "lint": "biome format lint ./src",
     "test": "vitest --watch=false",
     "test:watch": "vitest"
@@ -44,7 +45,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.1",
-    "@searchcraft/core": "^0.7.0",
+    "@searchcraft/core": "^0.7.1",
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.1",
     "@types/node": "^20.11.25",
@@ -53,7 +54,6 @@
     "jsdom": "^24.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "sass": "^1.56.1",
-    "typescript": "^5.5.3"
+    "sass": "^1.56.1"
   }
 }

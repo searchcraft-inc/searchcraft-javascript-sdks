@@ -1,0 +1,17 @@
+@use "../typography.scss";
+
+.searchcraft-filter-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.searchcraft-filter-panel-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.searchcraft-filter-panel-label {
+  @include typography.body-small-bold();
+}

@@ -16,7 +16,6 @@ import { formatNumberWithCommas } from '@utils';
  */
 @Component({
   tag: 'searchcraft-results-info',
-  styleUrl: 'searchcraft-results-info.module.scss',
   shadow: false,
 })
 export class SearchcraftResultsInfo {
@@ -25,7 +24,7 @@ export class SearchcraftResultsInfo {
   @State() responseTime = '';
   @State() query = '';
 
-  unsubscribe: () => void;
+  unsubscribe: () => void = () => {};
 
   connectedCallback() {
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {

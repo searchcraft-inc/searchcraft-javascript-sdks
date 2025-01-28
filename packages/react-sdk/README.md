@@ -1,8 +1,8 @@
 # Searchcraft React SDK
 
-This kit provides basic tools for building out a simple search interface using the Searchcraft API. Searching, tracking the request state, and displaying results are all available in this kit.
+The Searchcraft React SDK provides tools for integrating the Searchcraft API into your React applications. It supports core functionalities like searching, managing state, and working with search results.
 
-## Usage
+## Installation
 
 Install with Yarn:
 
@@ -16,193 +16,189 @@ Install with NPM:
 $ npm install @searchcraft/react-sdk
 ```
 
-Wrap your app or target a specific interface and wrap them with the `Searchcraft.Provider` to expose the functionalities of the SDK.
+## Initialization and Basic Usage
+
+### React Components
+
+The React SDK provides the following prebuilt components for use in your application:
 
 ```jsx
 
-import { useMemo } from 'react'
-
-import Searchcraft, { SearchcraftCore } from '@searchcraft/react-sdk'
-
-// For Searchcraft Cloud, values are created via the Searchcraft Vektron Customer Portal. For self-hosted refer to the API docs. https://docs.searchcraft.io/reference/api/overview/
-const searchcraftConfig = {
-  index: ['data_test'],
-  apiKey: '1234.909.jmk',
-  endpointURL: 'http://127.0.0.1:8000',
-}
-
-const Main = () => {
-  // initialize and pass an instance of SearchcraftCore into the provider
-  const searchcraft = useMemo(() => new SearchcraftCore(searchcraftConfig),[]);
-  // debug is optional and has a default value of false
-  return (
-    <Searchcraft.Provider {...{ searchcraft, debug: true }}>
-      <YourApplicationOrScreenGoHere />
-    </Searchcraft.Provider>
-  )
-}
+<SearchInputForm />
+<SearchPopoverForm />
+<FilterPanel />
+<ResultsInfo />
+<BaseSearchResults />
 
 ```
-### Quickstart with useSearchcraft hook
 
-Once your app is wrapped in the `Searchcraft.Provider`, the `useSearchcraft` hook functionalities are available for use.
+These components can be rendered directly in your app and customized with configurations as needed.
 
-```jsx
-import Searchcraft, { useSearchcraft, AutoSearchForm, useTheme } from '@searchcraft/react-sdk'
-
-// values available when using the useSearchcraft hook
-const useSearchContextValues = {
-    error,
-    index,
-    isRequesting,
-    mode,
-    query,
-    search,
-    searchResults,
-    setQuery,
-  };
-
-// import the styles from the SDK
-import '../node_modules/@searchcraft/react-sdk/dist/style.css'
-
-const SearchWithResultsComponent = () => {
-const { isRequesting, query, search, searchResults } = useSearchcraft();
-// useTheme hook is exposed to control the dark and light UIs available. Configured values are 'light' and 'dark'.
-const { toggleTheme, theme } = useTheme();
-
-const handleClearInput = () => {
-  setQuery('')
-};
-
-  return (
-    <>
-    <button onClick={toggleTheme}>Toggle Theme</button>
-      <AutoSearchForm
-        handleSubmit={handleSubmitForm}
-        inputCaptionValue="Search here"
-        onClearInput={handleClearInput}
-        rightToLeftOrientation
-      />
-      <Searchcraft.BaseSearchResults />
-    </>
-  )
-};
-```
-
-## UI Components
-
-The SDK provides 4 pre-built UI components with data provided to them via the `Searchcraft.Provider` and `useSearchcraft` hook.
+Example Setup
 
 ```jsx
-import {
-  // Search input without submit button
-  AutoSearchForm,
-  // Search input with submit button
-  BaseSearchForm,
-  // Single Search Result component that can be customized while iterating over SearchResults
-  BaseSearchResult,
-  // Fully encapsulated list of search results with no iteration required
-  BaseSearchResults,
-  useSearchcraft
-} from '@searchcraft/react-sdk';
 
-// OR
+import React from 'react';
+import { SearchInputForm, FilterPanel, BaseSearchResults } from '@searchcraft/react-sdk/components';
 
-import Searchcraft, { useSearchcraft } from '@searchcraft/react-sdk'
-
-const AutoSearchImplementation = () => {
-  const { query, search, searchResults } = useSearchcraft()
-
-  const handleSubmitForm = async () =>  await search(query, 'fuzzy')
-
-  const handleClearInput = () => setQuery('');
-
-  return (
-    <>
-    // example using compound component pattern
-      <Searchcraft.AutoSearchForm
-        handleSubmit={handleSubmitForm}
-        inputCaptionValue="Search here"
-        onClearInput={handleClearInput}
-        rightToLeftOrientation={true}
-      />
-    </>
-  )
+const config = {
+  index: ['your_index_from_vektron'],
+  readKey: 'your_read_key_from_vektron',
+  endpointURL: 'your_searchcraft_endpoint_url',
+  searchDebounceDelay: 50, // Optional debounce delay in milliseconds
 };
 
-const BaseSearchResults: FC = () => {
-  const { searchResults, query } = useSearchcraft();
+const filterPanelItems = [
+  {
+    type: 'mostRecentToggle',
+    label: 'Most Recent',
+    options: {
+      subLabel: 'Show the most recently published articles first.',
+    },
+  },
+  {
+    type: 'exactMatchToggle',
+    label: 'Exact Match',
+    options: {
+      subLabel: 'Only show results that precisely match your search.',
+    },
+  },
+];
 
+const App = () => {
   return (
     <>
-      {searchResults?.data?.hits?.map((document, index) => {
-        const { doc: result } = document;
-        const callback = () => {
-          console.log('interactive element');
-        };
-        const buttonCallback = () => {
-          console.log('button callback');
-        };
-        return (
-          // example using named import component
-          <BaseSearchResult
-            key={`${result?.id}-${index}`}
-            buttonLabel='View More'
-            buttonCallbackFn={buttonCallback}
-            callbackFn={callback}
-            interactiveResult
-            imageSrc={result?.poster}
-            resultBodyContent={result?.overview}
-            resultHeading={result?.title}
-            resultSubheading={result?.release_date}
-          />
-        );
-      })}
-      {query.length > 0 && searchResults?.data?.hits?.length === 0 && (
-        <ErrorMessage
-          errorMessage={`No search results found for ${query} query`}
-        />
-      )}
+      <SearchInputForm config={config} />
+      <FilterPanel items={filterPanelItems} />
+      <BaseSearchResults />
     </>
   );
 };
+
+
+export default App;
+
 ```
 
-Additionally, you can import individual sub-components that comprise the pre-built UI components.
+Example Filter Configuration
+
+Below is an example of a filter panel configuration object. It specifies the filters to be displayed in the filter panel and maps them to the corresponding index fields.
 
 ```jsx
-import { Input, useSearchcraft } from '@searchcraft/react-sdk';
 
-const InputComponent = () => {
-  const { query, setQuery } = useSearchcraft();
-  const [error, setError] = useState<boolean>(false);
+const today = new Date();
+const pastDate = new Date(today);
+pastDate.setFullYear(today.getFullYear() - 10);
 
-  const handleFormSubmit = (e: { preventDefault: () => void }) => {
-    e.preventDefault();
-    if (query.trim() === '') {
-      setError(true);
-    } else {
-      setError(false);
-      handleSubmit(query);
-    }
-  };
+export const filterPanelItems = [
+  {
+    type: 'mostRecentToggle',
+    label: 'Most Recent',
+    options: {
+      subLabel: 'Show the most recently published articles first.',
+    },
+  },
+  {
+    type: 'exactMatchToggle',
+    label: 'Exact Match',
+    options: {
+      subLabel: 'Only show results that precisely match your search.',
+    },
+  },
+  {
+    type: 'dateRange',
+    fieldName: 'date_published',
+    label: 'Filter by Year',
+    options: {
+      minDate: pastDate,
+      maxDate: today,
+      granularity: 'year',
+    },
+  },
+  {
+    type: 'facets',
+    fieldName: 'section',
+    label: 'Filter by Section',
+  },
+];
 
-  const handleSearchInputChange = (event: { target: { value: string } }) =>
-    setQuery(event.target.value);
-
-  const handleClearInput = () => setQuery('');
-
-  return (
-    <>
-      <Input
-        error={error}
-        onClearInput={handleClearInput}
-        onSearchInputChange={handleSearchInputChange}
-        placeholderValue={placeholderValue}
-        query={query}
-        rightToLeftOrientation={rightToLeftOrientation}
-      />
-    </>
-  )
-};
 ```
+
+Example Result Mappings
+
+Customize the appearance and behavior of search results by modifying the searchResultMappings configuration. Use field names from your index to map the content.
+
+```jsx
+
+export const searchResultMappings = {
+  containerHref: {
+    fieldNames: [
+      {
+        fieldName: 'canonical_link',
+        dataType: 'text',
+      },
+    ],
+  },
+  footer: {
+    fieldNames: [
+      {
+        fieldName: 'date_published',
+        dataType: 'date',
+      },
+      {
+        fieldName: 'author_name',
+        dataType: 'text',
+      },
+    ],
+    delimiter: ' • ',
+  },
+  imageSource: {
+    fieldNames: [
+      {
+        fieldName: 'medium_image',
+        dataType: 'text',
+      },
+    ],
+  },
+  body: {
+    fieldNames: [{ fieldName: 'sub_headline', dataType: 'text' }],
+  },
+  title: {
+    fieldNames: [{ fieldName: 'section_name', dataType: 'text' }],
+  },
+  subtitle: {
+    fieldNames: [{ fieldName: 'headline', dataType: 'text' }],
+  },
+};
+
+```
+
+Event Handling
+
+The React SDK components support event handling for common actions such as query submission, input focus, or search results.
+
+```jsx
+
+<SearchInputForm
+  onQuerySubmit={(event) => {
+    console.log('Query submitted:', event.detail);
+  }}
+  onInputFocus={() => {
+    console.log('Input focused');
+  }}
+  onInputBlur={() => {
+    console.log('Input blurred');
+  }}
+/>
+
+<BaseSearchResults
+  onNoResults={() => {
+    console.log('No results found');
+  }}
+/>
+
+```
+
+Additional Information
+
+For more advanced use cases and component-specific documentation, refer to the official [Searchcraft React SDK documentation](https://docs.searchcraft.io/).

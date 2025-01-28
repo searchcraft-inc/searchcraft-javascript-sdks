@@ -14,5 +14,5 @@ pipelines:
             - npm config set '//registry.npmjs.org/:_authToken' "${NPM_TOKEN}"
             - yarn install
             - yarn global add lerna
-            - yarn build-ci:all
+            - yarn build --verbose
             - yarn lerna publish from-package --no-private --yes --loglevel debug

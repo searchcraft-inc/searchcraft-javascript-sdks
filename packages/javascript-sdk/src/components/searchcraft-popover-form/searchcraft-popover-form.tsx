@@ -37,7 +37,6 @@ import type { PopoverResultMappings } from 'types';
  */
 @Component({
   tag: 'searchcraft-popover-form',
-  styleUrl: 'searchcraft-popover-form.module.scss',
   shadow: false,
 })
 export class SearchcraftPopoverForm {
@@ -105,7 +104,7 @@ export class SearchcraftPopoverForm {
         this.handlePopoverVisibilityChange(state.isPopoverVisible);
       }
 
-      this.searchResults = { ...state.searchResults };
+      this.searchResults = { ...state.searchResults } as SearchcraftResponse;
       this.searchTerm = state.query;
     });
   }
@@ -175,6 +174,7 @@ export class SearchcraftPopoverForm {
 
     if (
       this.type === 'inline' &&
+      window.visualViewport &&
       window.visualViewport.width < this.breakpointSm
     ) {
       useSearchcraftStore.getState().setPopoverVisibility(true);
@@ -262,8 +262,9 @@ export class SearchcraftPopoverForm {
 
   get hasResultsToShow() {
     return (
+      this.searchTerm &&
       this.searchTerm?.trim()?.length > 0 &&
-      this.searchResults?.data?.hits?.length > 0
+      (this.searchResults?.data?.hits?.length || 0) > 0
     );
   }
 
@@ -375,7 +376,7 @@ export class SearchcraftPopoverForm {
       this.searchResults?.data?.hits?.map((data, _index) => {
         const { doc: result } = data;
         return result;
-      });
+      }) as Record<string, unknown>[];
 
     switch (this.type) {
       case 'inline':

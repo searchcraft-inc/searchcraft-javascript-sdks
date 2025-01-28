@@ -8,7 +8,6 @@ import { Component, Fragment, h, Prop } from '@stencil/core';
  */
 @Component({
   tag: 'searchcraft-base-search-result',
-  styleUrl: 'searchcraft-base-search-result.module.scss',
   shadow: false,
 })
 export class SearchcraftBaseSearchResult {
@@ -67,7 +66,7 @@ export class SearchcraftBaseSearchResult {
   /**
    * The placement of the image.
    */
-  @Prop() imagePlacement: 'left' | 'right';
+  @Prop() imagePlacement: 'left' | 'right' = 'right';
   /**
    * A custom styles object.
    */

@@ -12,7 +12,6 @@ import classNames from 'classnames';
  */
 @Component({
   tag: 'searchcraft-input-label',
-  styleUrl: 'searchcraft-input-label.module.scss',
   shadow: false,
 })
 export class SearchcraftInputLabel {
@@ -20,7 +19,7 @@ export class SearchcraftInputLabel {
    * The classname applied to the label element.
    */
   @Prop() inputLabelClassName? = '';
-  @Prop() label: string;
+  @Prop() label = '';
 
   render() {
     return (
