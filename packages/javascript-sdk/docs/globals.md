@@ -24,7 +24,6 @@
 - [SearchcraftInputFormCustomEvent](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/SearchcraftInputFormCustomEvent.md)
 - [SearchcraftSliderCustomEvent](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/SearchcraftSliderCustomEvent.md)
 - [SearchcraftToggleButtonCustomEvent](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/SearchcraftToggleButtonCustomEvent.md)
-- [testInterface](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/testInterface.md)
 
 ## Type Aliases
 
