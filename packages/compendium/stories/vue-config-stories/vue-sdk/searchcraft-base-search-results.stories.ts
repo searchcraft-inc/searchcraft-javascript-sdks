@@ -2,6 +2,7 @@ import type { SearchResultMappings } from '@searchcraft/javascript-sdk';
 import {
   SearchcraftBaseSearchResults,
   SearchcraftInputForm,
+  SearchcraftTheme,
 } from '@searchcraft/vue-sdk';
 import type { Meta, StoryFn } from '@storybook/vue3';
 import { config } from '../../../utils/DefaultSearchcraftConfig';
@@ -150,12 +151,17 @@ const defaultProps = {
 };
 
 export const Default: StoryFn = (args) => ({
-  components: { SearchcraftBaseSearchResults, SearchcraftInputForm },
+  components: {
+    SearchcraftBaseSearchResults,
+    SearchcraftInputForm,
+    SearchcraftTheme,
+  },
   setup() {
     return { args };
   },
   template: `
     <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <SearchcraftTheme />
       <SearchcraftInputForm
         v-bind="{
           config: args.config,

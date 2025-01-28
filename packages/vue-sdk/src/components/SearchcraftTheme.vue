@@ -1,15 +1,13 @@
 <script lang="ts">
 import type { Components } from '@searchcraft/javascript-sdk';
 import { defineComponent } from 'vue';
-import { SearchcraftErrorMessage as Component } from '../stencil-web-components';
+import { SearchcraftTheme as Component } from '../stencil-web-components';
 
-export type SearchcraftErrorMessageProps = Components.SearchcraftErrorMessage;
+export type SearchcraftThemeProps = Components.SearchcraftTheme;
 
 export default defineComponent({
-  name: 'SearchcraftErrorMessage',
-  props: {
-    errorMessage: String,
-  },
+  name: 'SearchcraftTheme',
+  props: {},
   components: {
     Component,
   },
