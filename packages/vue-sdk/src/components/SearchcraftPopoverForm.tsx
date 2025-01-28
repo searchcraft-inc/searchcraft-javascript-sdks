@@ -1,9 +1,8 @@
-<script lang="ts">
 import type { Components } from '@searchcraft/javascript-sdk';
 import { defineComponent } from 'vue';
 import { SearchcraftPopoverForm as Component } from '../stencil-web-components';
 
-export type SearchcraftPopoverFormProps = Components.SearchcraftPopoverForm;
+export type SearchcraftPopoverFormProps = Partial<Components.SearchcraftPopoverForm>;
 
 export default defineComponent({
   name: 'SearchcraftPopoverForm',
@@ -29,12 +28,7 @@ export default defineComponent({
       required: false,
     },
   },
-  components: {
-    Component,
+  setup(props: SearchcraftPopoverFormProps) {
+    return () => <Component {...(props as Components.SearchcraftPopoverForm)} />;
   },
 });
-</script>
-
-<template>
-  <Component v-bind="$props" />
-</template>

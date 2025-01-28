@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "vite",
     "clean": "rm -rf dist",
-    "build": "yarn clean && vite build",
+    "build": "yarn clean && vite build && yarn docs",
     "docs": "typedoc --options typedoc.json",
     "preview": "vite preview",
     "build-only": "vite build",
@@ -50,8 +50,8 @@
     "vite": "^6.0.11",
     "vite-plugin-dts": "^4.5.0",
     "vite-plugin-vue-devtools": "^7.7.0",
+    "@vitejs/plugin-vue-jsx": "^4.1.1",
     "vue-docgen-web-types": "^0.1.8",
     "vue-tsc": "^2.2.0"
-  },
-  "web-types": "./web-types.json"
+  }
 }

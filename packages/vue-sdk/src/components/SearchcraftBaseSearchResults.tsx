@@ -1,17 +1,15 @@
-<script lang="ts">
 import type { Components } from '@searchcraft/javascript-sdk';
 import { defineComponent } from 'vue';
 import { SearchcraftBaseSearchResults as Component } from '../stencil-web-components';
 
-export type SearchcraftBaseSearchResultsProps =
-  Components.SearchcraftBaseSearchResults;
+export type SearchcraftBaseSearchResultsProps = Partial<Components.SearchcraftBaseSearchResults>;
 
 export default defineComponent({
   name: 'SearchcraftBaseSearchResults',
   props: {
     adInterval: Number,
-    customStylesForResults: Object,
-    searchResultMappings: Object,
+    customStylesForResults: Object as () => Record<string, string>,
+    searchResultMappings: Object as () => Record<string, string>,
     placeAdAtEnd: Boolean,
     placeAdAtStart: Boolean,
     resultImagePlacement: String,
@@ -22,12 +20,7 @@ export default defineComponent({
     containerRel: String,
     noResults: String,
   },
-  components: {
-    Component,
+  setup(props: SearchcraftBaseSearchResultsProps) {
+    return () => <Component {...(props as Components.SearchcraftBaseSearchResults)} />;
   },
 });
-</script>
-
-<template>
-  <Component v-bind="$props" />
-</template>
