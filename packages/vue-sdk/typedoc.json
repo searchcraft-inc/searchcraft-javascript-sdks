@@ -1,9 +1,7 @@
 {
   "$schema": "https://typedoc.org/schema.json",
   "plugin": ["typedoc-plugin-markdown"],
-  "entryPoints": [
-    "./src/index.ts"
-  ],
+  "entryPoints": ["./src/index.ts"],
   "outputs": [
     {
       "name": "markdown",
@@ -12,5 +10,9 @@
   ],
   "basePath": "./src/components",
   "publicPath": "https://docs.searchcraft.io/reference/sdk/vue",
-  "disableSources": true
+  "disableSources": true,
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "strictNullChecks": false
+  }
 }

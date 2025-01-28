@@ -32,7 +32,6 @@
   },
   "scripts": {
     "build": "node build.mjs",
-    "typedoc": "typedoc --options typedoc.json",
     "storybook:react": "yarn workspace compendium storybook:react",
     "storybook:vue": "yarn workspace compendium storybook:vue",
     "test:all": "yarn test:core && yarn test:react-sdk && yarn test:javascript-sdk && yarn test:vue-sdk",
