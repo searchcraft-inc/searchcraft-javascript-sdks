@@ -106,7 +106,7 @@ export class SearchcraftBaseSearchResults {
   /**
    * When no results are returned.
    */
-  @Event() noResults: EventEmitter<void> | undefined;
+  @Event() noResults?: EventEmitter<void>;
 
   @State() hasSearched = false;
   @State() query = '';

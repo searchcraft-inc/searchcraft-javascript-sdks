@@ -29,7 +29,7 @@ When the toggle element is changed.
 
 ##### event
 
-[`SearchcraftToggleButtonCustomEvent`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/SearchcraftToggleButtonCustomEvent.md)\<`any`\>
+[`SearchcraftToggleButtonCustomEvent`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/SearchcraftToggleButtonCustomEvent.md)\<`boolean`\>
 
 #### Returns
 

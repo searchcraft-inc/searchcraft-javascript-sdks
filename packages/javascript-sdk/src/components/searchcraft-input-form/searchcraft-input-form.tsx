@@ -80,27 +80,27 @@ export class SearchcraftInput {
   /**
    * When the input is cleared.
    */
-  @Event() inputCleared: EventEmitter<void> | undefined;
+  @Event() inputCleared?: EventEmitter<void>;
   /**
    * When no results are returned.
    */
-  @Event() noResultsReceived: EventEmitter<void> | undefined;
+  @Event() noResultsReceived?: EventEmitter<void>;
   /**
    * When the input becomes focused.
    */
-  @Event() inputFocus: EventEmitter<void> | undefined;
+  @Event() inputFocus?: EventEmitter<void>;
   /**
    * When the input becomes unfocused.
    */
-  @Event() inputBlur: EventEmitter<void> | undefined;
+  @Event() inputBlur?: EventEmitter<void>;
   /**
    * Event emitted when input initializes.
    */
-  @Event() inputInit: EventEmitter<void> | undefined;
+  @Event() inputInit?: EventEmitter<void>;
   /**
    * Event emitted when a query has been submitted.
    */
-  @Event() querySubmit: EventEmitter<string> | undefined;
+  @Event() querySubmit?: EventEmitter<string>;
 
   @State() inputValue = this.searchTerm;
   @State() error = false;

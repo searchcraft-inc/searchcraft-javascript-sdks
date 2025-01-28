@@ -34,9 +34,9 @@ facetList.addEventListener('facetSelectionUpdated', () => {
 
 ## Events
 
-| Event                   | Description                  | Type               |
-| ----------------------- | ---------------------------- | ------------------ |
-| `facetSelectionUpdated` | When the facets are updated. | `CustomEvent<any>` |
+| Event                   | Description                  | Type                                |
+| ----------------------- | ---------------------------- | ----------------------------------- |
+| `facetSelectionUpdated` | When the facets are updated. | `CustomEvent<{ paths: string[]; }>` |
 
 
 ## Dependencies

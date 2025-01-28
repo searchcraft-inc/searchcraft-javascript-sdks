@@ -41,7 +41,7 @@ When the facets are updated.
 
 ##### event
 
-[`SearchcraftFacetListCustomEvent`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/SearchcraftFacetListCustomEvent.md)\<`any`\>
+[`SearchcraftFacetListCustomEvent`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/SearchcraftFacetListCustomEvent.md)\<\{ `paths`: `string`[]; \}\>
 
 #### Returns
 

@@ -30,7 +30,7 @@ export class SearchcraftToggleButton {
   /**
    * When the toggle element is changed.
    */
-  @Event() toggleUpdated: EventEmitter<boolean> | undefined;
+  @Event() toggleUpdated?: EventEmitter<boolean>;
 
   @State() isActive = false;
   @State() unsubscribe: (() => void) | undefined;

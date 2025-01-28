@@ -20,9 +20,9 @@ It is consumed within the `searchcraft-filter-panel` component.
 
 ## Events
 
-| Event           | Description                         | Type               |
-| --------------- | ----------------------------------- | ------------------ |
-| `toggleUpdated` | When the toggle element is changed. | `CustomEvent<any>` |
+| Event           | Description                         | Type                   |
+| --------------- | ----------------------------------- | ---------------------- |
+| `toggleUpdated` | When the toggle element is changed. | `CustomEvent<boolean>` |
 
 
 ## Dependencies

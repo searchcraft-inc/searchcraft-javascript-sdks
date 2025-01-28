@@ -46,7 +46,7 @@ export class SearchcraftFacetList {
   /**
    * When the facets are updated.
    */
-  @Event() facetSelectionUpdated: EventEmitter<{ paths: string[] }> | undefined;
+  @Event() facetSelectionUpdated?: EventEmitter<{ paths: string[] }>;
 
   @State() baseFacetRoot: FacetRoot | undefined;
   @State() facetRoot: FacetRoot | undefined;

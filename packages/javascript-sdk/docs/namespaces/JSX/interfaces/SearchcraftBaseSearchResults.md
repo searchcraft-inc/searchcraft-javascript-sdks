@@ -101,7 +101,7 @@ When no results are returned.
 
 ##### event
 
-[`SearchcraftBaseSearchResultsCustomEvent`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/SearchcraftBaseSearchResultsCustomEvent.md)\<`any`\>
+[`SearchcraftBaseSearchResultsCustomEvent`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/SearchcraftBaseSearchResultsCustomEvent.md)\<`void`\>
 
 #### Returns
 

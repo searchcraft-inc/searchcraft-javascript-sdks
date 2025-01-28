@@ -57,9 +57,9 @@ baseSearchResults.addEventListener('noResults', () => {
 
 ## Events
 
-| Event       | Description                   | Type               |
-| ----------- | ----------------------------- | ------------------ |
-| `noResults` | When no results are returned. | `CustomEvent<any>` |
+| Event       | Description                   | Type                |
+| ----------- | ----------------------------- | ------------------- |
+| `noResults` | When no results are returned. | `CustomEvent<void>` |
 
 
 ## Dependencies

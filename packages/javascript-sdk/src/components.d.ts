@@ -491,7 +491,7 @@ declare global {
         new (): HTMLSearchcraftBaseSearchResultElement;
     };
     interface HTMLSearchcraftBaseSearchResultsElementEventMap {
-        "noResults": any;
+        "noResults": void;
     }
     /**
      * This web component is responsible for displaying the results of a search query.
@@ -572,7 +572,7 @@ declare global {
         new (): HTMLSearchcraftErrorMessageElement;
     };
     interface HTMLSearchcraftFacetListElementEventMap {
-        "facetSelectionUpdated": any;
+        "facetSelectionUpdated": { paths: string[] };
     }
     /**
      * This web component is designed to display facets in a search interface, allowing users to refine their search results by applying filters based on various attributes.
@@ -619,12 +619,12 @@ declare global {
         new (): HTMLSearchcraftFilterPanelElement;
     };
     interface HTMLSearchcraftInputFormElementEventMap {
-        "inputCleared": any;
-        "noResultsReceived": any;
-        "inputFocus": any;
-        "inputBlur": any;
-        "inputInit": any;
-        "querySubmit": any;
+        "inputCleared": void;
+        "noResultsReceived": void;
+        "inputFocus": void;
+        "inputBlur": void;
+        "inputInit": void;
+        "querySubmit": string;
     }
     /**
      * This web component provides a user-friendly interface for querying an indexed dataset, enabling users to easily search large collections of data.
@@ -784,7 +784,7 @@ declare global {
         new (): HTMLSearchcraftThemeElement;
     };
     interface HTMLSearchcraftToggleButtonElementEventMap {
-        "toggleUpdated": any;
+        "toggleUpdated": boolean;
     }
     /**
      * This web component simulates a light switch functionality, providing a simple and intuitive toggle between two states—on and off.
@@ -957,7 +957,7 @@ declare namespace LocalJSX {
         /**
           * When no results are returned.
          */
-        "onNoResults"?: (event: SearchcraftBaseSearchResultsCustomEvent<any>) => void;
+        "onNoResults"?: (event: SearchcraftBaseSearchResultsCustomEvent<void>) => void;
         /**
           * Should an ad be placed at the end of the results.
          */
@@ -1040,7 +1040,7 @@ declare namespace LocalJSX {
         /**
           * When the facets are updated.
          */
-        "onFacetSelectionUpdated"?: (event: SearchcraftFacetListCustomEvent<any>) => void;
+        "onFacetSelectionUpdated"?: (event: SearchcraftFacetListCustomEvent<{ paths: string[] }>) => void;
     }
     /**
      * This web component represents a series of filters that allows users to refine and control their search queries by applying various filter criteria.
@@ -1105,27 +1105,27 @@ declare namespace LocalJSX {
         /**
           * When the input becomes unfocused.
          */
-        "onInputBlur"?: (event: SearchcraftInputFormCustomEvent<any>) => void;
+        "onInputBlur"?: (event: SearchcraftInputFormCustomEvent<void>) => void;
         /**
           * When the input is cleared.
          */
-        "onInputCleared"?: (event: SearchcraftInputFormCustomEvent<any>) => void;
+        "onInputCleared"?: (event: SearchcraftInputFormCustomEvent<void>) => void;
         /**
           * When the input becomes focused.
          */
-        "onInputFocus"?: (event: SearchcraftInputFormCustomEvent<any>) => void;
+        "onInputFocus"?: (event: SearchcraftInputFormCustomEvent<void>) => void;
         /**
           * Event emitted when input initializes.
          */
-        "onInputInit"?: (event: SearchcraftInputFormCustomEvent<any>) => void;
+        "onInputInit"?: (event: SearchcraftInputFormCustomEvent<void>) => void;
         /**
           * When no results are returned.
          */
-        "onNoResultsReceived"?: (event: SearchcraftInputFormCustomEvent<any>) => void;
+        "onNoResultsReceived"?: (event: SearchcraftInputFormCustomEvent<void>) => void;
         /**
           * Event emitted when a query has been submitted.
          */
-        "onQuerySubmit"?: (event: SearchcraftInputFormCustomEvent<any>) => void;
+        "onQuerySubmit"?: (event: SearchcraftInputFormCustomEvent<string>) => void;
         /**
           * The input element's placeholder value.
          */
@@ -1303,7 +1303,7 @@ declare namespace LocalJSX {
         /**
           * When the toggle element is changed.
          */
-        "onToggleUpdated"?: (event: SearchcraftToggleButtonCustomEvent<any>) => void;
+        "onToggleUpdated"?: (event: SearchcraftToggleButtonCustomEvent<boolean>) => void;
         /**
           * The secondary label displayed below the main label.
          */

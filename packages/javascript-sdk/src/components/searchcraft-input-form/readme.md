@@ -47,14 +47,14 @@ searchForm.addEventListener('querySubmit', (event) => {
 
 ## Events
 
-| Event               | Description                                    | Type               |
-| ------------------- | ---------------------------------------------- | ------------------ |
-| `inputBlur`         | When the input becomes unfocused.              | `CustomEvent<any>` |
-| `inputCleared`      | When the input is cleared.                     | `CustomEvent<any>` |
-| `inputFocus`        | When the input becomes focused.                | `CustomEvent<any>` |
-| `inputInit`         | Event emitted when input initializes.          | `CustomEvent<any>` |
-| `noResultsReceived` | When no results are returned.                  | `CustomEvent<any>` |
-| `querySubmit`       | Event emitted when a query has been submitted. | `CustomEvent<any>` |
+| Event               | Description                                    | Type                  |
+| ------------------- | ---------------------------------------------- | --------------------- |
+| `inputBlur`         | When the input becomes unfocused.              | `CustomEvent<void>`   |
+| `inputCleared`      | When the input is cleared.                     | `CustomEvent<void>`   |
+| `inputFocus`        | When the input becomes focused.                | `CustomEvent<void>`   |
+| `inputInit`         | Event emitted when input initializes.          | `CustomEvent<void>`   |
+| `noResultsReceived` | When no results are returned.                  | `CustomEvent<void>`   |
+| `querySubmit`       | Event emitted when a query has been submitted. | `CustomEvent<string>` |
 
 
 ## Dependencies

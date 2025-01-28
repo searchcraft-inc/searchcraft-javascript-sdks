@@ -86,7 +86,7 @@ When the input becomes unfocused.
 
 ##### event
 
-[`SearchcraftInputFormCustomEvent`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/SearchcraftInputFormCustomEvent.md)\<`any`\>
+[`SearchcraftInputFormCustomEvent`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/SearchcraftInputFormCustomEvent.md)\<`void`\>
 
 #### Returns
 
@@ -104,7 +104,7 @@ When the input is cleared.
 
 ##### event
 
-[`SearchcraftInputFormCustomEvent`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/SearchcraftInputFormCustomEvent.md)\<`any`\>
+[`SearchcraftInputFormCustomEvent`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/SearchcraftInputFormCustomEvent.md)\<`void`\>
 
 #### Returns
 
@@ -122,7 +122,7 @@ When the input becomes focused.
 
 ##### event
 
-[`SearchcraftInputFormCustomEvent`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/SearchcraftInputFormCustomEvent.md)\<`any`\>
+[`SearchcraftInputFormCustomEvent`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/SearchcraftInputFormCustomEvent.md)\<`void`\>
 
 #### Returns
 
@@ -140,7 +140,7 @@ Event emitted when input initializes.
 
 ##### event
 
-[`SearchcraftInputFormCustomEvent`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/SearchcraftInputFormCustomEvent.md)\<`any`\>
+[`SearchcraftInputFormCustomEvent`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/SearchcraftInputFormCustomEvent.md)\<`void`\>
 
 #### Returns
 
@@ -158,7 +158,7 @@ When no results are returned.
 
 ##### event
 
-[`SearchcraftInputFormCustomEvent`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/SearchcraftInputFormCustomEvent.md)\<`any`\>
+[`SearchcraftInputFormCustomEvent`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/SearchcraftInputFormCustomEvent.md)\<`void`\>
 
 #### Returns
 
@@ -176,7 +176,7 @@ Event emitted when a query has been submitted.
 
 ##### event
 
-[`SearchcraftInputFormCustomEvent`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/SearchcraftInputFormCustomEvent.md)\<`any`\>
+[`SearchcraftInputFormCustomEvent`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/SearchcraftInputFormCustomEvent.md)\<`string`\>
 
 #### Returns
 
