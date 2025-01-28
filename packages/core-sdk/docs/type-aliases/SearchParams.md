@@ -1,8 +1,8 @@
-[**@searchcraft/core**](https://docs.searchcraft.io/reference/sdk/core/README.md)
+[**@searchcraft/core**](/reference/sdk/core/README.md)
 
 ***
 
-[@searchcraft/core](https://docs.searchcraft.io/reference/sdk/core/globals.md) / SearchParams
+[@searchcraft/core](/reference/sdk/core/globals.md) / SearchParams
 
 # Type Alias: SearchParams
 
@@ -14,7 +14,7 @@
 
 ### facetPathsForIndexFields?
 
-> `optional` **facetPathsForIndexFields**: `Record`\<`string`, [`FacetPathsForIndexField`](https://docs.searchcraft.io/reference/sdk/core/type-aliases/FacetPathsForIndexField.md)\>
+> `optional` **facetPathsForIndexFields**: `Record`\<`string`, [`FacetPathsForIndexField`](/reference/sdk/core/type-aliases/FacetPathsForIndexField.md)\>
 
 ### limit?
 
@@ -51,7 +51,7 @@ Optional parameter.
 
 ### rangeValueForIndexFields?
 
-> `optional` **rangeValueForIndexFields**: `Record`\<`string`, [`RangeValueForIndexField`](https://docs.searchcraft.io/reference/sdk/core/type-aliases/RangeValueForIndexField.md)\>
+> `optional` **rangeValueForIndexFields**: `Record`\<`string`, [`RangeValueForIndexField`](/reference/sdk/core/type-aliases/RangeValueForIndexField.md)\>
 
 ### sort?
 

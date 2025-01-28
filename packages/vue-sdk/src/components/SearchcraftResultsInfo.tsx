@@ -1,13 +1,15 @@
 import type { Components } from '@searchcraft/javascript-sdk';
-import { defineComponent } from 'vue';
 import { SearchcraftResultsInfo as Component } from '../stencil-web-components';
 
-export type SearchcraftResultsInfoProps = Partial<Components.SearchcraftResultsInfo>;
+/**
+ * The Props for the SearchcraftResultsInfo component.
+ */
+export interface SearchcraftResultsInfoProps
+  extends Components.SearchcraftResultsInfo {}
 
-export default defineComponent({
-  name: 'SearchcraftResultsInfo',
-  props: {},
-  setup(props: SearchcraftResultsInfoProps) {
-    return () => <Component {...(props as Components.SearchcraftResultsInfo)} />;
-  },
-});
+/**
+ * The Vue component for SearchcraftResultsInfo.
+ */
+const SearchcraftResultsInfo = Component;
+
+export { SearchcraftResultsInfo };

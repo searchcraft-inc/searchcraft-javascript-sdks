@@ -1,10 +1,12 @@
-[**@searchcraft/react-sdk**](https://docs.searchcraft.io/reference/sdk/react/README.md)
+[**@searchcraft/react-sdk**](/reference/sdk/js-react/README.md)
 
 ***
 
-[@searchcraft/react-sdk](https://docs.searchcraft.io/reference/sdk/react/globals.md) / SearchcraftBaseSearchResultsProps
+[@searchcraft/react-sdk](/reference/sdk/js-react/globals.md) / SearchcraftBaseSearchResultsProps
 
 # Interface: SearchcraftBaseSearchResultsProps
+
+The props for the SearchcraftBaseSearchResults component.
 
 ## Extends
 

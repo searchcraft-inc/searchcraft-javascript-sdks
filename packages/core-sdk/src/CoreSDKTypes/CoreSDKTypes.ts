@@ -1,7 +1,7 @@
 import type { SearchcraftCore } from '../CoreSDK';
 
 /**
- * All fields must be provided to the SDKs to use Searchcraft
+ * The SearchcraftConfig object is used to initialize Searchcraft in your application.
  */
 export interface SearchcraftConfig {
   /**

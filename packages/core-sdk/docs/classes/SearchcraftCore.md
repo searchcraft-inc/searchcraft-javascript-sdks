@@ -1,8 +1,8 @@
-[**@searchcraft/core**](https://docs.searchcraft.io/reference/sdk/core/README.md)
+[**@searchcraft/core**](/reference/sdk/core/README.md)
 
 ***
 
-[@searchcraft/core](https://docs.searchcraft.io/reference/sdk/core/globals.md) / SearchcraftCore
+[@searchcraft/core](/reference/sdk/core/globals.md) / SearchcraftCore
 
 # Class: SearchcraftCore
 
@@ -12,33 +12,33 @@ Javascript Class providing the functionality to interact with the Searchcraft BE
 
 ### new SearchcraftCore()
 
-> **new SearchcraftCore**(`config`, `sdkInfo`): [`SearchcraftCore`](https://docs.searchcraft.io/reference/sdk/core/classes/SearchcraftCore.md)
+> **new SearchcraftCore**(`config`, `sdkInfo`): [`SearchcraftCore`](/reference/sdk/core/classes/SearchcraftCore.md)
 
 #### Parameters
 
 ##### config
 
-[`SearchcraftConfig`](https://docs.searchcraft.io/reference/sdk/core/interfaces/SearchcraftConfig.md)
+[`SearchcraftConfig`](/reference/sdk/core/interfaces/SearchcraftConfig.md)
 
 ##### sdkInfo
 
-[`SearchcraftSDKInfo`](https://docs.searchcraft.io/reference/sdk/core/interfaces/SearchcraftSDKInfo.md)
+[`SearchcraftSDKInfo`](/reference/sdk/core/interfaces/SearchcraftSDKInfo.md)
 
 #### Returns
 
-[`SearchcraftCore`](https://docs.searchcraft.io/reference/sdk/core/classes/SearchcraftCore.md)
+[`SearchcraftCore`](/reference/sdk/core/classes/SearchcraftCore.md)
 
 ## Properties
 
 ### config
 
-> **config**: [`SearchcraftConfig`](https://docs.searchcraft.io/reference/sdk/core/interfaces/SearchcraftConfig.md)
+> **config**: [`SearchcraftConfig`](/reference/sdk/core/interfaces/SearchcraftConfig.md)
 
 ***
 
 ### sdkInfo
 
-> **sdkInfo**: [`SearchcraftSDKInfo`](https://docs.searchcraft.io/reference/sdk/core/interfaces/SearchcraftSDKInfo.md)
+> **sdkInfo**: [`SearchcraftSDKInfo`](/reference/sdk/core/interfaces/SearchcraftSDKInfo.md)
 
 ***
 
@@ -76,7 +76,7 @@ Performs a search operation.
 
 ##### searchParams
 
-[`SearchParams`](https://docs.searchcraft.io/reference/sdk/core/type-aliases/SearchParams.md)
+[`SearchParams`](/reference/sdk/core/type-aliases/SearchParams.md)
 
 The parameters for the search.
 
@@ -102,19 +102,19 @@ Sends a measure event to the `/measure/event` endpoint for analytics purposes.
 
 ##### eventName
 
-[`MeasureEventName`](https://docs.searchcraft.io/reference/sdk/core/type-aliases/MeasureEventName.md)
+[`MeasureEventName`](/reference/sdk/core/type-aliases/MeasureEventName.md)
 
 Name of the event.
 
 ##### properties
 
-`Partial`\<[`MeasureRequestProperties`](https://docs.searchcraft.io/reference/sdk/core/interfaces/MeasureRequestProperties.md)\> = `{}`
+`Partial`\<[`MeasureRequestProperties`](/reference/sdk/core/interfaces/MeasureRequestProperties.md)\> = `{}`
 
 Additional properties to send with the event.
 
 ##### user
 
-`Partial`\<[`MeasureRequestUser`](https://docs.searchcraft.io/reference/sdk/core/interfaces/MeasureRequestUser.md)\> = `{}`
+`Partial`\<[`MeasureRequestUser`](/reference/sdk/core/interfaces/MeasureRequestUser.md)\> = `{}`
 
 Additional user properites to send with the event.
 

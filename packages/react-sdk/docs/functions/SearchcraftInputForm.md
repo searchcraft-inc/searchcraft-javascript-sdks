@@ -1,18 +1,20 @@
-[**@searchcraft/react-sdk**](https://docs.searchcraft.io/reference/sdk/react/README.md)
+[**@searchcraft/react-sdk**](/reference/sdk/js-react/README.md)
 
 ***
 
-[@searchcraft/react-sdk](https://docs.searchcraft.io/reference/sdk/react/globals.md) / SearchcraftInputForm
+[@searchcraft/react-sdk](/reference/sdk/js-react/globals.md) / SearchcraftInputForm
 
 # Function: SearchcraftInputForm()
 
 > **SearchcraftInputForm**(`props`, `deprecatedLegacyContext`?): `ReactNode`
 
+The React component for the SearchcraftInputForm
+
 ## Parameters
 
 ### props
 
-[`SearchcraftInputFormProps`](https://docs.searchcraft.io/reference/sdk/react/interfaces/SearchcraftInputFormProps.md)
+[`SearchcraftInputFormProps`](/reference/sdk/js-react/interfaces/SearchcraftInputFormProps.md)
 
 ### deprecatedLegacyContext?
 

@@ -1,8 +1,8 @@
-[**@searchcraft/core**](https://docs.searchcraft.io/reference/sdk/core/README.md)
+[**@searchcraft/core**](/reference/sdk/core/README.md)
 
 ***
 
-[@searchcraft/core](https://docs.searchcraft.io/reference/sdk/core/globals.md) / SearchIndexEntry
+[@searchcraft/core](/reference/sdk/core/globals.md) / SearchIndexEntry
 
 # Interface: SearchIndexEntry
 
@@ -12,7 +12,7 @@
 
 ### doc?
 
-> `optional` **doc**: [`SearchDocument`](https://docs.searchcraft.io/reference/sdk/core/interfaces/SearchDocument.md)
+> `optional` **doc**: [`SearchDocument`](/reference/sdk/core/interfaces/SearchDocument.md)
 
 ***
 

@@ -1,8 +1,8 @@
-[**@searchcraft/core**](https://docs.searchcraft.io/reference/sdk/core/README.md)
+[**@searchcraft/core**](/reference/sdk/core/README.md)
 
 ***
 
-[@searchcraft/core](https://docs.searchcraft.io/reference/sdk/core/globals.md) / FacetChildObject
+[@searchcraft/core](/reference/sdk/core/globals.md) / FacetChildObject
 
 # Interface: FacetChildObject
 
@@ -10,7 +10,7 @@
 
 ### children
 
-> **children**: `Record`\<`string`, [`FacetChildObject`](https://docs.searchcraft.io/reference/sdk/core/interfaces/FacetChildObject.md)\>
+> **children**: `Record`\<`string`, [`FacetChildObject`](/reference/sdk/core/interfaces/FacetChildObject.md)\>
 
 ***
 

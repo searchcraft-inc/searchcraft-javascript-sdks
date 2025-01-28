@@ -1,8 +1,8 @@
-[**@searchcraft/javascript-sdk**](https://docs.searchcraft.io/reference/sdk/js-vanilla/README.md)
+[**@searchcraft/javascript-sdk**](/reference/sdk/js-vanilla/README.md)
 
 ***
 
-[@searchcraft/javascript-sdk](https://docs.searchcraft.io/reference/sdk/js-vanilla/globals.md) / [Components](https://docs.searchcraft.io/reference/sdk/js-vanilla/namespaces/Components/README.md) / SearchcraftBaseSearchResults
+[@searchcraft/javascript-sdk](/reference/sdk/js-vanilla/globals.md) / [Components](/reference/sdk/js-vanilla/namespaces/Components/README.md) / SearchcraftBaseSearchResults
 
 # Interface: SearchcraftBaseSearchResults
 
@@ -117,6 +117,6 @@ The placement of the image for each result.
 
 ### searchResultMappings
 
-> **searchResultMappings**: `undefined` \| [`SearchResultMappings`](https://docs.searchcraft.io/reference/sdk/js-vanilla/type-aliases/SearchResultMappings.md)
+> **searchResultMappings**: `undefined` \| [`SearchResultMappings`](/reference/sdk/js-vanilla/type-aliases/SearchResultMappings.md)
 
 Formats the content rendered for each result.

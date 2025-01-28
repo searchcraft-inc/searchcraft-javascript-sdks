@@ -1,8 +1,8 @@
-[**@searchcraft/javascript-sdk**](https://docs.searchcraft.io/reference/sdk/js-vanilla/README.md)
+[**@searchcraft/javascript-sdk**](/reference/sdk/js-vanilla/README.md)
 
 ***
 
-[@searchcraft/javascript-sdk](https://docs.searchcraft.io/reference/sdk/js-vanilla/globals.md) / [Components](https://docs.searchcraft.io/reference/sdk/js-vanilla/namespaces/Components/README.md) / SearchcraftInputForm
+[@searchcraft/javascript-sdk](/reference/sdk/js-vanilla/globals.md) / [Components](/reference/sdk/js-vanilla/namespaces/Components/README.md) / SearchcraftInputForm
 
 # Interface: SearchcraftInputForm
 
@@ -54,7 +54,7 @@ Where to place the search button.
 
 ### config
 
-> **config**: `undefined` \| [`SearchcraftConfig`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/SearchcraftConfig.md)
+> **config**: `undefined` \| [`SearchcraftConfig`](/reference/sdk/js-vanilla/interfaces/SearchcraftConfig.md)
 
 The Searchcraft config object.
 

@@ -1,8 +1,8 @@
-[**@searchcraft/core**](https://docs.searchcraft.io/reference/sdk/core/README.md)
+[**@searchcraft/core**](/reference/sdk/core/README.md)
 
 ***
 
-[@searchcraft/core](https://docs.searchcraft.io/reference/sdk/core/globals.md) / SearchcraftResponse
+[@searchcraft/core](/reference/sdk/core/globals.md) / SearchcraftResponse
 
 # Interface: SearchcraftResponse
 
@@ -12,7 +12,7 @@
 
 ### data
 
-> **data**: [`SearchResult`](https://docs.searchcraft.io/reference/sdk/core/interfaces/SearchResult.md) \| [`SearchError`](https://docs.searchcraft.io/reference/sdk/core/type-aliases/SearchError.md)
+> **data**: [`SearchResult`](/reference/sdk/core/interfaces/SearchResult.md) \| [`SearchError`](/reference/sdk/core/type-aliases/SearchError.md)
 
 ***
 

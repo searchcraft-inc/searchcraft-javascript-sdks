@@ -1,14 +1,14 @@
-[**@searchcraft/javascript-sdk**](https://docs.searchcraft.io/reference/sdk/js-vanilla/README.md)
+[**@searchcraft/javascript-sdk**](/reference/sdk/js-vanilla/README.md)
 
 ***
 
-[@searchcraft/javascript-sdk](https://docs.searchcraft.io/reference/sdk/js-vanilla/globals.md) / ExactMatchToggleFilterItem
+[@searchcraft/javascript-sdk](/reference/sdk/js-vanilla/globals.md) / ExactMatchToggleFilterItem
 
 # Interface: ExactMatchToggleFilterItem
 
 ## Extends
 
-- [`FilterItem`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/FilterItem.md)
+- [`FilterItem`](/reference/sdk/js-vanilla/interfaces/FilterItem.md)
 
 ## Properties
 
@@ -18,7 +18,7 @@
 
 #### Inherited from
 
-[`FilterItem`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/FilterItem.md).[`label`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/FilterItem.md#label)
+[`FilterItem`](/reference/sdk/js-vanilla/interfaces/FilterItem.md).[`label`](/reference/sdk/js-vanilla/interfaces/FilterItem.md#label)
 
 ***
 
@@ -32,7 +32,7 @@
 
 #### Overrides
 
-[`FilterItem`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/FilterItem.md).[`options`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/FilterItem.md#options)
+[`FilterItem`](/reference/sdk/js-vanilla/interfaces/FilterItem.md).[`options`](/reference/sdk/js-vanilla/interfaces/FilterItem.md#options)
 
 ***
 
@@ -42,4 +42,4 @@
 
 #### Overrides
 
-[`FilterItem`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/FilterItem.md).[`type`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/FilterItem.md#type)
+[`FilterItem`](/reference/sdk/js-vanilla/interfaces/FilterItem.md).[`type`](/reference/sdk/js-vanilla/interfaces/FilterItem.md#type)

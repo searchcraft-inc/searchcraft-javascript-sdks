@@ -1,8 +1,8 @@
-[**@searchcraft/core**](https://docs.searchcraft.io/reference/sdk/core/README.md)
+[**@searchcraft/core**](/reference/sdk/core/README.md)
 
 ***
 
-[@searchcraft/core](https://docs.searchcraft.io/reference/sdk/core/globals.md) / SDKDebugger
+[@searchcraft/core](/reference/sdk/core/globals.md) / SDKDebugger
 
 # Class: SDKDebugger
 
@@ -10,17 +10,17 @@
 
 ### new SDKDebugger()
 
-> **new SDKDebugger**(`options`): [`SDKDebugger`](https://docs.searchcraft.io/reference/sdk/core/classes/SDKDebugger.md)
+> **new SDKDebugger**(`options`): [`SDKDebugger`](/reference/sdk/core/classes/SDKDebugger.md)
 
 #### Parameters
 
 ##### options
 
-[`SDKDebuggerOptions`](https://docs.searchcraft.io/reference/sdk/core/interfaces/SDKDebuggerOptions.md)
+[`SDKDebuggerOptions`](/reference/sdk/core/interfaces/SDKDebuggerOptions.md)
 
 #### Returns
 
-[`SDKDebugger`](https://docs.searchcraft.io/reference/sdk/core/classes/SDKDebugger.md)
+[`SDKDebugger`](/reference/sdk/core/classes/SDKDebugger.md)
 
 ## Methods
 

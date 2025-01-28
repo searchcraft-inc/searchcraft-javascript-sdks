@@ -1,12 +1,12 @@
-[**@searchcraft/core**](https://docs.searchcraft.io/reference/sdk/core/README.md)
+[**@searchcraft/core**](/reference/sdk/core/README.md)
 
 ***
 
-[@searchcraft/core](https://docs.searchcraft.io/reference/sdk/core/globals.md) / SearchcraftConfig
+[@searchcraft/core](/reference/sdk/core/globals.md) / SearchcraftConfig
 
 # Interface: SearchcraftConfig
 
-All fields must be provided to the SDKs to use Searchcraft
+The SearchcraftConfig object is used to initialize Searchcraft in your application.
 
 ## Properties
 

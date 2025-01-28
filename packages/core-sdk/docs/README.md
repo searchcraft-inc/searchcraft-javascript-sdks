@@ -40,7 +40,7 @@ Use the build script for local development. The build script handles all of the 
 ```
 node build.mjs [package-alias] [--watch] [--yalc]
 ```
-For complete documentation on the build script, refer to the comment header in [build.mjs](https://docs.searchcraft.io/reference/sdk/core/_media/build.mjs).
+For complete documentation on the build script, refer to the comment header in [build.mjs](/reference/sdk/core/_media/build.mjs).
 
 **Note**: To use the `--yalc` flag, you must have yalc installed on your machine.
 

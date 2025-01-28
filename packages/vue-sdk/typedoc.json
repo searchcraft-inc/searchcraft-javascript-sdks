@@ -1,18 +1,24 @@
 {
   "$schema": "https://typedoc.org/schema.json",
-  "plugin": ["typedoc-plugin-markdown"],
+  "basePath": "./src/components",
+  "categorizeByGroup": false,
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "strictNullChecks": false
+  },
+  "defaultCategory": "Components",
+  "disableSources": true,
   "entryPoints": ["./src/index.ts"],
+  "excludeExternals": true,
+  "excludePrivate": true,
+  "excludeProtected": true,
   "outputs": [
     {
       "name": "markdown",
       "path": "./docs"
     }
   ],
-  "basePath": "./src/components",
-  "publicPath": "https://docs.searchcraft.io/reference/sdk/vue",
-  "disableSources": true,
-  "compilerOptions": {
-    "skipLibCheck": true,
-    "strictNullChecks": false
-  }
+  "plugin": ["typedoc-plugin-markdown"],
+  "publicPath": "/reference/sdk/js-vue",
+  "sort": ["source-order"]
 }

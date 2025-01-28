@@ -1,8 +1,8 @@
-[**@searchcraft/core**](https://docs.searchcraft.io/reference/sdk/core/README.md)
+[**@searchcraft/core**](/reference/sdk/core/README.md)
 
 ***
 
-[@searchcraft/core](https://docs.searchcraft.io/reference/sdk/core/globals.md) / SDKDebuggerOptions
+[@searchcraft/core](/reference/sdk/core/globals.md) / SDKDebuggerOptions
 
 # Interface: SDKDebuggerOptions
 
@@ -16,7 +16,7 @@
 
 ##### level
 
-[`LogLevel`](https://docs.searchcraft.io/reference/sdk/core/enumerations/LogLevel.md)
+[`LogLevel`](/reference/sdk/core/enumerations/LogLevel.md)
 
 ##### message
 
@@ -30,4 +30,4 @@
 
 ### logLevel
 
-> **logLevel**: [`LogLevel`](https://docs.searchcraft.io/reference/sdk/core/enumerations/LogLevel.md)
+> **logLevel**: [`LogLevel`](/reference/sdk/core/enumerations/LogLevel.md)
