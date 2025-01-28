@@ -23,9 +23,9 @@ It is consumed by the `searchcraft-filter-panel` component.
 
 ## Events
 
-| Event          | Description                 | Type                                                     |
-| -------------- | --------------------------- | -------------------------------------------------------- |
-| `rangeChanged` | When the range has changed. | `CustomEvent<{ startValue: number; endValue: number; }>` |
+| Event          | Description                 | Type               |
+| -------------- | --------------------------- | ------------------ |
+| `rangeChanged` | When the range has changed. | `CustomEvent<any>` |
 
 
 ## Dependencies

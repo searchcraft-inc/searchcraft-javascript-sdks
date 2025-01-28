@@ -30,7 +30,7 @@ export class SearchcraftToggleButton {
   /**
    * When the toggle element is changed.
    */
-  @Event() toggleUpdated: EventEmitter<boolean>;
+  @Event() toggleUpdated: EventEmitter<boolean> | undefined;
 
   @State() isActive = false;
   @State() unsubscribe: (() => void) | undefined;
@@ -38,7 +38,7 @@ export class SearchcraftToggleButton {
 
   private handleToggle = async () => {
     this.isActive = !this.isActive;
-    this.toggleUpdated.emit(this.isActive);
+    this.toggleUpdated?.emit(this.isActive);
   };
 
   connectedCallback() {

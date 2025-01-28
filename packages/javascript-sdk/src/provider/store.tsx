@@ -170,7 +170,9 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
           const updatedFacets = results.data.facets || null;
 
           state.setSearchResults(results);
-          state.setFacets(updatedFacets);
+          if (updatedFacets) {
+            state.setFacets(updatedFacets);
+          }
 
           log(LogLevel.DEBUG, `Search results: ${JSON.stringify(results)}`);
           log(

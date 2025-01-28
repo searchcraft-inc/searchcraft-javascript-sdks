@@ -51,7 +51,7 @@ The hotkey that activates the popover.
 
 ### hotkeyModifier?
 
-> `optional` **hotkeyModifier**: `"meta"` \| `"option"` \| `"alt"` \| `"ctrl"`
+> `optional` **hotkeyModifier**: `"ctrl"` \| `"meta"` \| `"alt"` \| `"option"`
 
 The hotkey modifier that activates the popover. Used together with the `hotkey` prop.
 

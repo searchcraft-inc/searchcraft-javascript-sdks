@@ -38,7 +38,7 @@ export const SearchcraftBaseSearchResult: StencilReactComponent<SearchcraftBaseS
     defineCustomElement: defineSearchcraftBaseSearchResult
 });
 
-type SearchcraftBaseSearchResultsEvents = { onNoResults: EventName<CustomEvent<void>> };
+type SearchcraftBaseSearchResultsEvents = { onNoResults: EventName<CustomEvent<any>> };
 
 export const SearchcraftBaseSearchResults: StencilReactComponent<SearchcraftBaseSearchResultsElement, SearchcraftBaseSearchResultsEvents> = /*@__PURE__*/ createComponent<SearchcraftBaseSearchResultsElement, SearchcraftBaseSearchResultsEvents>({
     tagName: 'searchcraft-base-search-results',
@@ -71,7 +71,7 @@ export const SearchcraftErrorMessage: StencilReactComponent<SearchcraftErrorMess
     defineCustomElement: defineSearchcraftErrorMessage
 });
 
-type SearchcraftFacetListEvents = { onFacetSelectionUpdated: EventName<CustomEvent<{ paths: string[] }>> };
+type SearchcraftFacetListEvents = { onFacetSelectionUpdated: EventName<CustomEvent<any>> };
 
 export const SearchcraftFacetList: StencilReactComponent<SearchcraftFacetListElement, SearchcraftFacetListEvents> = /*@__PURE__*/ createComponent<SearchcraftFacetListElement, SearchcraftFacetListEvents>({
     tagName: 'searchcraft-facet-list',
@@ -94,12 +94,12 @@ export const SearchcraftFilterPanel: StencilReactComponent<SearchcraftFilterPane
 });
 
 type SearchcraftInputFormEvents = {
-    onInputCleared: EventName<CustomEvent<void>>,
-    onNoResultsReceived: EventName<CustomEvent<void>>,
-    onInputFocus: EventName<CustomEvent<void>>,
-    onInputBlur: EventName<CustomEvent<void>>,
-    onInputInit: EventName<CustomEvent<void>>,
-    onQuerySubmit: EventName<CustomEvent<string>>
+    onInputCleared: EventName<CustomEvent<any>>,
+    onNoResultsReceived: EventName<CustomEvent<any>>,
+    onInputFocus: EventName<CustomEvent<any>>,
+    onInputBlur: EventName<CustomEvent<any>>,
+    onInputInit: EventName<CustomEvent<any>>,
+    onQuerySubmit: EventName<CustomEvent<any>>
 };
 
 export const SearchcraftInputForm: StencilReactComponent<SearchcraftInputFormElement, SearchcraftInputFormEvents> = /*@__PURE__*/ createComponent<SearchcraftInputFormElement, SearchcraftInputFormEvents>({
@@ -184,7 +184,7 @@ export const SearchcraftResultsInfo: StencilReactComponent<SearchcraftResultsInf
     defineCustomElement: defineSearchcraftResultsInfo
 });
 
-type SearchcraftSliderEvents = { onRangeChanged: EventName<CustomEvent<{ startValue: number; endValue: number }>> };
+type SearchcraftSliderEvents = { onRangeChanged: EventName<CustomEvent<any>> };
 
 export const SearchcraftSlider: StencilReactComponent<SearchcraftSliderElement, SearchcraftSliderEvents> = /*@__PURE__*/ createComponent<SearchcraftSliderElement, SearchcraftSliderEvents>({
     tagName: 'searchcraft-slider',
@@ -206,7 +206,7 @@ export const SearchcraftTheme: StencilReactComponent<SearchcraftThemeElement, Se
     defineCustomElement: defineSearchcraftTheme
 });
 
-type SearchcraftToggleButtonEvents = { onToggleUpdated: EventName<CustomEvent<boolean>> };
+type SearchcraftToggleButtonEvents = { onToggleUpdated: EventName<CustomEvent<any>> };
 
 export const SearchcraftToggleButton: StencilReactComponent<SearchcraftToggleButtonElement, SearchcraftToggleButtonEvents> = /*@__PURE__*/ createComponent<SearchcraftToggleButtonElement, SearchcraftToggleButtonEvents>({
     tagName: 'searchcraft-toggle-button',

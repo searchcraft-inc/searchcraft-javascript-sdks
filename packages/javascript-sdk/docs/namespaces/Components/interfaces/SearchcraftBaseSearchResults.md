@@ -45,7 +45,7 @@ How often ads are injected.
 
 ### buttonLabel
 
-> **buttonLabel**: `string`
+> **buttonLabel**: `undefined` \| `string`
 
 The label for the button rendered when containerHref is not present for each result.
 
@@ -53,7 +53,7 @@ The label for the button rendered when containerHref is not present for each res
 
 ### buttonRel
 
-> **buttonRel**: `"noreferrer"` \| `"noopener"` \| `"nofollow"`
+> **buttonRel**: `undefined` \| `"noreferrer"` \| `"noopener"` \| `"nofollow"`
 
 The relationship between the current document and the link for the button rendered when containerHref is not present for each result.
 
@@ -69,7 +69,7 @@ Where to open the link for the button rendered when containerHref is not present
 
 ### containerRel
 
-> **containerRel**: `"noreferrer"` \| `"noopener"` \| `"nofollow"`
+> **containerRel**: `undefined` \| `"noreferrer"` \| `"noopener"` \| `"nofollow"`
 
 The relationship between the current document and the link for the containing element for each result.
 
@@ -85,7 +85,7 @@ Where to open the link for the containing element for each result.
 
 ### customStylesForResults
 
-> **customStylesForResults**: `string` \| `Record`\<`string`, `Record`\<`string`, `string`\>\>
+> **customStylesForResults**: `undefined` \| `string` \| `Record`\<`string`, `Record`\<`string`, `string`\>\>
 
 A custom styles object.
 
@@ -117,6 +117,6 @@ The placement of the image for each result.
 
 ### searchResultMappings
 
-> **searchResultMappings**: [`SearchResultMappings`](https://docs.searchcraft.io/reference/sdk/js-vanilla/type-aliases/SearchResultMappings.md)
+> **searchResultMappings**: `undefined` \| [`SearchResultMappings`](https://docs.searchcraft.io/reference/sdk/js-vanilla/type-aliases/SearchResultMappings.md)
 
 Formats the content rendered for each result.

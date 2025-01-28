@@ -5,6 +5,7 @@
     "jsx": "react",
     "jsxFactory": "h",
     "moduleResolution": "node",
+    "noEmit": false,
     "paths": {
       "@assets/*": ["assets/*"],
       "@components/*": ["components/*"],
@@ -15,5 +16,5 @@
   },
   "exclude": ["node_modules"],
   "extends": "../../tsconfig.json",
-  "include": ["src"]
+  "include": ["src", "package.json"]
 }

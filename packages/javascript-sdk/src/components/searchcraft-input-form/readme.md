@@ -36,25 +36,25 @@ searchForm.addEventListener('querySubmit', (event) => {
 | Property           | Attribute           | Description                                                                    | Type                                 | Default          |
 | ------------------ | ------------------- | ------------------------------------------------------------------------------ | ------------------------------------ | ---------------- |
 | `autoSearch`       | `auto-search`       | Whether or not to automatically submit the search term when the input changes. | `boolean`                            | `true`           |
-| `buttonLabel`      | `button-label`      | The label for the submit button.                                               | `string`                             | `undefined`      |
+| `buttonLabel`      | `button-label`      | The label for the submit button.                                               | `string \| undefined`                | `undefined`      |
 | `buttonPlacement`  | `button-placement`  | Where to place the search button.                                              | `"left" \| "none" \| "right"`        | `'none'`         |
-| `config`           | --                  | The Searchcraft config object.                                                 | `SearchcraftConfig`                  | `undefined`      |
+| `config`           | --                  | The Searchcraft config object.                                                 | `SearchcraftConfig \| undefined`     | `undefined`      |
 | `customStyles`     | `custom-styles`     | A custom styles object to be applied to the input element.                     | `string \| { [x: string]: string; }` | `{}`             |
-| `inputLabel`       | `input-label`       | The label rendered above the input.                                            | `string`                             | `undefined`      |
+| `inputLabel`       | `input-label`       | The label rendered above the input.                                            | `string \| undefined`                | `undefined`      |
 | `placeholderValue` | `placeholder-value` | The input element's placeholder value.                                         | `string`                             | `'Enter Search'` |
 | `searchTerm`       | `search-term`       | The starting value of the input element.                                       | `string`                             | `''`             |
 
 
 ## Events
 
-| Event               | Description                                    | Type                  |
-| ------------------- | ---------------------------------------------- | --------------------- |
-| `inputBlur`         | When the input becomes unfocused.              | `CustomEvent<void>`   |
-| `inputCleared`      | When the input is cleared.                     | `CustomEvent<void>`   |
-| `inputFocus`        | When the input becomes focused.                | `CustomEvent<void>`   |
-| `inputInit`         | Event emitted when input initializes.          | `CustomEvent<void>`   |
-| `noResultsReceived` | When no results are returned.                  | `CustomEvent<void>`   |
-| `querySubmit`       | Event emitted when a query has been submitted. | `CustomEvent<string>` |
+| Event               | Description                                    | Type               |
+| ------------------- | ---------------------------------------------- | ------------------ |
+| `inputBlur`         | When the input becomes unfocused.              | `CustomEvent<any>` |
+| `inputCleared`      | When the input is cleared.                     | `CustomEvent<any>` |
+| `inputFocus`        | When the input becomes focused.                | `CustomEvent<any>` |
+| `inputInit`         | Event emitted when input initializes.          | `CustomEvent<any>` |
+| `noResultsReceived` | When no results are returned.                  | `CustomEvent<any>` |
+| `querySubmit`       | Event emitted when a query has been submitted. | `CustomEvent<any>` |
 
 
 ## Dependencies

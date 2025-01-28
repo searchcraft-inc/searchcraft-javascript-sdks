@@ -4,7 +4,7 @@
     "allowUnreachableCode": false,
     "allowJs": true,
     "baseUrl": ".",
-    "composite": true,
+    "composite": false,
     "declaration": true,
     "declarationMap": true,
     "esModuleInterop": true,

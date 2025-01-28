@@ -69,6 +69,10 @@ function recordToObject(
 
   Object.keys(record).forEach((key) => {
     const fragment = record[key];
+    if (!fragment) {
+      return;
+    }
+
     if (fragment.path === '/') {
       return;
     }
@@ -141,7 +145,7 @@ function filterRecordByParentPaths(
       .map((path) => [path, record1[path]]), // Reconstruct the key-value pairs
   );
 
-  return filteredRecord;
+  return filteredRecord as Record<string, FacetChild>;
 }
 
 export function mergeFacetRoots(
@@ -194,5 +198,5 @@ export function mergeFacetRoots(
 
   return {
     [fieldName]: mergedFacetChild.children,
-  };
+  } as FacetRoot;
 }

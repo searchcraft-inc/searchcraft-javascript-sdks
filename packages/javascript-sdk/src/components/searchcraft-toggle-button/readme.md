@@ -12,17 +12,17 @@ It is consumed within the `searchcraft-filter-panel` component.
 
 ## Properties
 
-| Property   | Attribute   | Description                                         | Type     | Default     |
-| ---------- | ----------- | --------------------------------------------------- | -------- | ----------- |
-| `label`    | `label`     | The label.                                          | `string` | `'Toggle'`  |
-| `subLabel` | `sub-label` | The secondary label displayed below the main label. | `string` | `undefined` |
+| Property   | Attribute   | Description                                         | Type                  | Default     |
+| ---------- | ----------- | --------------------------------------------------- | --------------------- | ----------- |
+| `label`    | `label`     | The label.                                          | `string`              | `'Toggle'`  |
+| `subLabel` | `sub-label` | The secondary label displayed below the main label. | `string \| undefined` | `undefined` |
 
 
 ## Events
 
-| Event           | Description                         | Type                   |
-| --------------- | ----------------------------------- | ---------------------- |
-| `toggleUpdated` | When the toggle element is changed. | `CustomEvent<boolean>` |
+| Event           | Description                         | Type               |
+| --------------- | ----------------------------------- | ------------------ |
+| `toggleUpdated` | When the toggle element is changed. | `CustomEvent<any>` |
 
 
 ## Dependencies

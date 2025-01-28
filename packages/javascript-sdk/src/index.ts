@@ -16,6 +16,12 @@ export {
 
 export { useSearchcraftStore, useThemeStore } from './provider/store';
 
-export { Components } from './components';
+interface testInterface {
+  b: number;
+}
+
+export type { testInterface };
+
+export type { Components } from './components';
 
 export * from './types';

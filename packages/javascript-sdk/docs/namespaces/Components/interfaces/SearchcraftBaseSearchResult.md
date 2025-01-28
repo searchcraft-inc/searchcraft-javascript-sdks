@@ -14,7 +14,7 @@ It is consumed within the `searchcraft-base-search-results` component.
 
 ### bodyContent
 
-> **bodyContent**: `string`
+> **bodyContent**: `undefined` \| `string`
 
 The body content.
 
@@ -22,7 +22,7 @@ The body content.
 
 ### buttonHref
 
-> **buttonHref**: `string`
+> **buttonHref**: `undefined` \| `string`
 
 The link for the button rendered when containerHref is not present.
 
@@ -30,7 +30,7 @@ The link for the button rendered when containerHref is not present.
 
 ### buttonLabel
 
-> **buttonLabel**: `string`
+> **buttonLabel**: `undefined` \| `string`
 
 The label for the button rendered when containerHref is not present.
 
@@ -38,7 +38,7 @@ The label for the button rendered when containerHref is not present.
 
 ### buttonRel
 
-> **buttonRel**: `"noreferrer"` \| `"noopener"` \| `"nofollow"`
+> **buttonRel**: `undefined` \| `"noreferrer"` \| `"noopener"` \| `"nofollow"`
 
 The relationship between the current document and the link for the button rendered when containerHref is not present.
 
@@ -54,7 +54,7 @@ Where to open the link for the button rendered when containerHref is not present
 
 ### containerHref
 
-> **containerHref**: `string`
+> **containerHref**: `undefined` \| `string`
 
 The link for the containing element.
 
@@ -62,7 +62,7 @@ The link for the containing element.
 
 ### containerRel
 
-> **containerRel**: `"noreferrer"` \| `"noopener"` \| `"nofollow"`
+> **containerRel**: `undefined` \| `"noreferrer"` \| `"noopener"` \| `"nofollow"`
 
 The relationship between the current document and the link for the containing element.
 
@@ -78,7 +78,7 @@ Where to open the link for the containing element.
 
 ### customStyles
 
-> **customStyles**: `string`
+> **customStyles**: `undefined` \| `string`
 
 A custom styles object.
 
@@ -94,7 +94,7 @@ The position in the document. Used with the "document_clicked" measure event.
 
 ### footerContent
 
-> **footerContent**: `string`
+> **footerContent**: `undefined` \| `string`
 
 The footer content.
 
@@ -102,7 +102,7 @@ The footer content.
 
 ### imageAlt
 
-> **imageAlt**: `string`
+> **imageAlt**: `undefined` \| `string`
 
 The image alternative text.
 
@@ -118,7 +118,7 @@ The placement of the image.
 
 ### imageSrc
 
-> **imageSrc**: `string`
+> **imageSrc**: `undefined` \| `string`
 
 The image source.
 
@@ -126,7 +126,7 @@ The image source.
 
 ### subtitleContent
 
-> **subtitleContent**: `string`
+> **subtitleContent**: `undefined` \| `string`
 
 The subtitle content.
 
@@ -134,6 +134,6 @@ The subtitle content.
 
 ### titleContent
 
-> **titleContent**: `string`
+> **titleContent**: `undefined` \| `string`
 
 The title content.

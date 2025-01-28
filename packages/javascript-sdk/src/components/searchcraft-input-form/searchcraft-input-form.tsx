@@ -15,11 +15,6 @@ import { parseCustomStyles } from '@utils';
 import { useSearchcraftStore } from '@provider/store';
 import classNames from 'classnames';
 
-export interface ScInputCustomEvent<T> extends CustomEvent<T> {
-  detail: T;
-  target: HTMLSearchcraftInputFormElement;
-}
-
 /**
  * This web component provides a user-friendly interface for querying an indexed dataset, enabling users to easily search large collections of data.
  * It abstracts the complexities of index-based searching, making it accessible to users of all technical levels.
@@ -85,27 +80,27 @@ export class SearchcraftInput {
   /**
    * When the input is cleared.
    */
-  @Event() inputCleared: EventEmitter<void>;
+  @Event() inputCleared: EventEmitter<void> | undefined;
   /**
    * When no results are returned.
    */
-  @Event() noResultsReceived: EventEmitter<void>;
+  @Event() noResultsReceived: EventEmitter<void> | undefined;
   /**
    * When the input becomes focused.
    */
-  @Event() inputFocus: EventEmitter<void>;
+  @Event() inputFocus: EventEmitter<void> | undefined;
   /**
    * When the input becomes unfocused.
    */
-  @Event() inputBlur: EventEmitter<void>;
+  @Event() inputBlur: EventEmitter<void> | undefined;
   /**
    * Event emitted when input initializes.
    */
-  @Event() inputInit: EventEmitter<void>;
+  @Event() inputInit: EventEmitter<void> | undefined;
   /**
    * Event emitted when a query has been submitted.
    */
-  @Event() querySubmit: EventEmitter<string>;
+  @Event() querySubmit: EventEmitter<string> | undefined;
 
   @State() inputValue = this.searchTerm;
   @State() error = false;
@@ -121,7 +116,7 @@ export class SearchcraftInput {
       });
       this.searchStore.initialize(searchcraft, true);
       this.isSearchcraftInitialized = true;
-      this.inputInit.emit();
+      this.inputInit?.emit();
     }
   }
 
@@ -139,7 +134,7 @@ export class SearchcraftInput {
     this.inputValue = input.value;
 
     if (input.value.trim() === '') {
-      this.inputCleared.emit();
+      this.inputCleared?.emit();
       this.searchTerm = '';
       this.searchStore.setQuery('');
       this.searchStore.setSearchResults(null);
@@ -161,13 +156,13 @@ export class SearchcraftInput {
     this.searchTerm = value.trim();
     this.error = false;
     this.searchStore.setQuery(this.searchTerm);
-    this.querySubmit.emit(this.searchTerm);
+    this.querySubmit?.emit(this.searchTerm);
 
     try {
       await this.searchStore.search();
     } catch (error) {
       this.error = true;
-      this.inputCleared.emit();
+      this.inputCleared?.emit();
     }
   };
 
@@ -178,9 +173,7 @@ export class SearchcraftInput {
     this.searchStore.setSearchResults(null);
     this.error = false;
 
-    if (this.inputCleared) {
-      this.inputCleared.emit();
-    }
+    this.inputCleared?.emit();
   };
 
   handleFormSubmit = async (event: Event) => {
@@ -227,8 +220,8 @@ export class SearchcraftInput {
             <input
               autoComplete='off'
               class='searchcraft-input'
-              onFocus={() => this.inputFocus.emit()}
-              onBlur={() => this.inputBlur.emit()}
+              onFocus={() => this.inputFocus?.emit()}
+              onBlur={() => this.inputBlur?.emit()}
               onInput={(event) => {
                 this.handleOnInput(event);
               }}

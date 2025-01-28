@@ -18,10 +18,10 @@ It is consumed within the `searchcraft-popover-form` component.
 
 ## Properties
 
-| Property                | Attribute | Description                                                                                       | Type                                                                                                                                                              | Default     |
-| ----------------------- | --------- | ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| `documents`             | --        | The documents to render in the list view.                                                         | `Record<string, unknown>[]`                                                                                                                                       | `undefined` |
-| `popoverResultMappings` | --        | The mappings that define how the data in the documents are mapped to the list-view-item elements. | `{ title?: SearchResultMapping; subtitle?: SearchResultMapping; imageSource?: SearchResultMapping; imageAlt?: SearchResultMapping; href?: SearchResultMapping; }` | `undefined` |
+| Property                | Attribute | Description                                                                                       | Type                                                                                                                                                                                                                                            | Default     |
+| ----------------------- | --------- | ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| `documents`             | --        | The documents to render in the list view.                                                         | `Record<string, unknown>[] \| undefined`                                                                                                                                                                                                        | `undefined` |
+| `popoverResultMappings` | --        | The mappings that define how the data in the documents are mapped to the list-view-item elements. | `undefined \| { title?: SearchResultMapping \| undefined; subtitle?: SearchResultMapping \| undefined; imageSource?: SearchResultMapping \| undefined; imageAlt?: SearchResultMapping \| undefined; href?: SearchResultMapping \| undefined; }` | `undefined` |
 
 
 ## Dependencies

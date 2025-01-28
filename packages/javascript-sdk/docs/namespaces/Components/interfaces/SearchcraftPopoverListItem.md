@@ -20,7 +20,7 @@ The document position relative to the search results (For Measure)
 
 ### href
 
-> **href**: `string`
+> **href**: `undefined` \| `string`
 
 The link href
 
@@ -28,7 +28,7 @@ The link href
 
 ### imageAlt
 
-> **imageAlt**: `string`
+> **imageAlt**: `undefined` \| `string`
 
 The image alt tag.
 
@@ -36,7 +36,7 @@ The image alt tag.
 
 ### imageSrc
 
-> **imageSrc**: `string`
+> **imageSrc**: `undefined` \| `string`
 
 The source of the image. If not included, no item will be rendered.
 
@@ -44,7 +44,7 @@ The source of the image. If not included, no item will be rendered.
 
 ### subtitleContent
 
-> **subtitleContent**: `string`
+> **subtitleContent**: `undefined` \| `string`
 
 The result subtitle
 
@@ -52,6 +52,6 @@ The result subtitle
 
 ### titleContent
 
-> **titleContent**: `string`
+> **titleContent**: `undefined` \| `string`
 
 The result title

@@ -24,7 +24,7 @@
 
 ### options
 
-> **options**: `object`
+> **options**: `null` \| `object`
 
 ***
 

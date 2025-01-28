@@ -18,7 +18,7 @@ It is consumed within the `searchcraft-popover-form` component.
 
 ### documents
 
-> **documents**: `Record`\<`string`, `unknown`\>[]
+> **documents**: `undefined` \| `Record`\<`string`, `unknown`\>[]
 
 The documents to render in the list view.
 
@@ -26,6 +26,6 @@ The documents to render in the list view.
 
 ### popoverResultMappings
 
-> **popoverResultMappings**: [`PopoverResultMappings`](https://docs.searchcraft.io/reference/sdk/js-vanilla/type-aliases/PopoverResultMappings.md)
+> **popoverResultMappings**: `undefined` \| [`PopoverResultMappings`](https://docs.searchcraft.io/reference/sdk/js-vanilla/type-aliases/PopoverResultMappings.md)
 
 The mappings that define how the data in the documents are mapped to the list-view-item elements.

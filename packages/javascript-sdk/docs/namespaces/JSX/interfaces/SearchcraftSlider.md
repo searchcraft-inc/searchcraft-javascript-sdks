@@ -54,7 +54,7 @@ When the range has changed.
 
 ##### event
 
-[`SearchcraftSliderCustomEvent`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/SearchcraftSliderCustomEvent.md)\<\{ `endValue`: `number`; `startValue`: `number`; \}\>
+[`SearchcraftSliderCustomEvent`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/SearchcraftSliderCustomEvent.md)\<`any`\>
 
 #### Returns
 
