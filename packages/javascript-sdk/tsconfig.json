@@ -1,27 +1,19 @@
 {
   "compilerOptions": {
     "baseUrl": "./src",
-    "paths": {
-      "@assets/*": ["assets/*"],
-      "@provider/*": ["provider/*"],
-      "@components/*": ["components/*"],
-      "@utils": ["utils/index.ts"],
-      "@utils/*": ["utils/*"]
-    },
-    "allowSyntheticDefaultImports": true,
-    "allowUnreachableCode": false,
-    "declaration": false,
     "experimentalDecorators": true,
-    "lib": ["dom", "es2017"],
-    "moduleResolution": "node",
-    "module": "esnext",
-    "target": "es2017",
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
     "jsx": "react",
     "jsxFactory": "h",
-    "resolveJsonModule": true
+    "moduleResolution": "node",
+    "paths": {
+      "@assets/*": ["assets/*"],
+      "@components/*": ["components/*"],
+      "@provider/*": ["provider/*"],
+      "@utils": ["utils/index.ts"],
+      "@utils/*": ["utils/*"]
+    }
   },
-  "include": ["src"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "extends": "../../tsconfig.json",
+  "include": ["src"]
 }
