@@ -2,6 +2,7 @@ import type { PopoverResultMappings } from '@searchcraft/javascript-sdk';
 import {
   SearchcraftPopoverButton,
   SearchcraftPopoverForm,
+  SearchcraftTheme,
 } from '@searchcraft/vue-sdk';
 import type { Meta, StoryFn } from '@storybook/vue3';
 import { configAlternate } from '../../../utils/AlternateSearchcraftConfig';
@@ -47,12 +48,13 @@ const mappings: PopoverResultMappings = {
 };
 
 export const Inline: StoryFn = (args) => ({
-  components: { SearchcraftPopoverForm },
+  components: { SearchcraftPopoverForm, SearchcraftTheme },
   setup() {
     return { args, mappings, configAlternate };
   },
   template: `
     <div style="padding: 10px 20px;">
+      <SearchcraftTheme />
       <p>Story Note: This story uses the Bazaario env vars</p>
       <SearchcraftPopoverForm
         :config="configAlternate"
@@ -70,12 +72,17 @@ export const Inline: StoryFn = (args) => ({
 });
 
 export const Modal: StoryFn = (args) => ({
-  components: { SearchcraftPopoverForm, SearchcraftPopoverButton },
+  components: {
+    SearchcraftPopoverForm,
+    SearchcraftPopoverButton,
+    SearchcraftTheme,
+  },
   setup() {
     return { args, mappings, configAlternate };
   },
   template: `
     <div style="padding: 10px 20px;">
+      <SearchcraftTheme />
       <p>Story Note: This story uses the Bazaario env vars</p>
       <SearchcraftPopoverButton>
         <span>Click me</span>
@@ -92,12 +99,17 @@ export const Modal: StoryFn = (args) => ({
 });
 
 export const Fullscreen: StoryFn = (args) => ({
-  components: { SearchcraftPopoverForm, SearchcraftPopoverButton },
+  components: {
+    SearchcraftPopoverForm,
+    SearchcraftPopoverButton,
+    SearchcraftTheme,
+  },
   setup() {
     return { args, mappings, configAlternate };
   },
   template: `
     <div style="padding: 10px 20px;">
+      <SearchcraftTheme />
       <p>Story Note: This story uses the Bazaario env vars</p>
       <SearchcraftPopoverButton>
         <span>Click me</span>

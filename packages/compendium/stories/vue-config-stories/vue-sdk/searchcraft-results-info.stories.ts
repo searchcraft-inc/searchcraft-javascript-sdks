@@ -1,4 +1,4 @@
-import { SearchcraftResultsInfo } from '@searchcraft/vue-sdk';
+import { SearchcraftResultsInfo, SearchcraftTheme } from '@searchcraft/vue-sdk';
 import type { Meta, StoryFn } from '@storybook/vue3';
 
 export default {
@@ -15,12 +15,13 @@ const defaultProps = {
 };
 
 export const Default: StoryFn = (args) => ({
-  components: { SearchcraftResultsInfo },
+  components: { SearchcraftResultsInfo, SearchcraftTheme },
   setup() {
     return { args };
   },
   template: `
     <div style="padding: 1rem;">
+      <SearchcraftTheme />
       <SearchcraftResultsInfo v-bind="args" />
     </div>
   `,

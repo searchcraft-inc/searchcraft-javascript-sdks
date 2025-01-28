@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import {
   SearchcraftResultsInfo,
+  SearchcraftTheme,
   type SearchcraftResultsInfoProps,
 } from '@searchcraft/react-sdk';
 
@@ -35,6 +36,16 @@ const defaultProps: SearchcraftResultsInfoProps = {
 };
 
 export const Default: StoryObj = {
+  decorators: [
+    (Story) => {
+      return (
+        <>
+          <SearchcraftTheme />
+          <Story />
+        </>
+      );
+    },
+  ],
   render: (args) => <SearchcraftResultsInfo />,
   args: defaultProps,
 };

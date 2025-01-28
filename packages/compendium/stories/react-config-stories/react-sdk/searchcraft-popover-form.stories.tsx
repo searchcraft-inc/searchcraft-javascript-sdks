@@ -2,6 +2,7 @@ import type { PopoverResultMappings } from '@searchcraft/javascript-sdk';
 import {
   SearchcraftPopoverButton,
   SearchcraftPopoverForm,
+  SearchcraftTheme,
 } from '@searchcraft/react-sdk';
 import type { Meta, StoryObj } from '@storybook/react';
 import { configAlternate } from '../../../utils/AlternateSearchcraftConfig';
@@ -47,6 +48,14 @@ const mappings: PopoverResultMappings = {
 
 export const Inline: StoryObj = {
   decorators: [
+    (Story) => {
+      return (
+        <>
+          <SearchcraftTheme />
+          <Story />
+        </>
+      );
+    },
     (Story) => {
       return <Story />;
     },

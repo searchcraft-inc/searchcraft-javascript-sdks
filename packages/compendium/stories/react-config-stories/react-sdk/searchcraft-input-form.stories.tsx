@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import {
   SearchcraftInputForm,
   type SearchcraftInputFormProps,
+  SearchcraftTheme,
 } from '@searchcraft/react-sdk';
 import { config } from '../../../utils/DefaultSearchcraftConfig';
 
@@ -63,6 +64,16 @@ const defaultProps: SearchcraftInputFormProps = {
 };
 
 export const Default: StoryObj<SearchcraftInputFormProps> = {
+  decorators: [
+    (Story) => {
+      return (
+        <>
+          <SearchcraftTheme />
+          <Story />
+        </>
+      );
+    },
+  ],
   render: (args) => (
     <div style={{ display: 'flex' }}>
       <SearchcraftInputForm {...args} />

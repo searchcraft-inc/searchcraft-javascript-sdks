@@ -10,6 +10,7 @@ import type {
 import {
   SearchcraftInputForm,
   SearchcraftFilterPanel,
+  SearchcraftTheme,
 } from '@searchcraft/react-sdk';
 
 import { config } from '../../../utils/DefaultSearchcraftConfig';
@@ -99,6 +100,14 @@ const defaultProps: ComponentProps = {
 
 export const Default: StoryObj<ComponentProps> = {
   decorators: [
+    (Story) => {
+      return (
+        <>
+          <SearchcraftTheme />
+          <Story />
+        </>
+      );
+    },
     (Story) => {
       useEffect(() => {
         const searchForm = document.querySelector('searchcraft-input-form');

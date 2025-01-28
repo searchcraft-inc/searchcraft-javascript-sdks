@@ -1,4 +1,4 @@
-import { SearchcraftInputForm } from '@searchcraft/vue-sdk';
+import { SearchcraftInputForm, SearchcraftTheme } from '@searchcraft/vue-sdk';
 
 import type { Meta, StoryFn } from '@storybook/vue3';
 import { config } from '../../../utils/DefaultSearchcraftConfig';
@@ -62,12 +62,13 @@ const defaultProps = {
 };
 
 export const Default: StoryFn = (args) => ({
-  components: { SearchcraftInputForm },
+  components: { SearchcraftInputForm, SearchcraftTheme },
   setup() {
     return { args };
   },
   template: `
     <div style="display: flex;">
+      <SearchcraftTheme />
       <SearchcraftInputForm v-bind="args" />
     </div>
   `,

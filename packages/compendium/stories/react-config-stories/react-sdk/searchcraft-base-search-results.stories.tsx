@@ -2,6 +2,7 @@ import type { SearchResultMappings } from '@searchcraft/javascript-sdk';
 import {
   SearchcraftBaseSearchResults,
   SearchcraftInputForm,
+  SearchcraftTheme,
 } from '@searchcraft/react-sdk';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useEffect } from 'react';
@@ -94,6 +95,14 @@ const defaultProps: ComponentProps = {
 
 export const Default: StoryObj<ComponentProps> = {
   decorators: [
+    (Story) => {
+      return (
+        <>
+          <SearchcraftTheme />
+          <Story />
+        </>
+      );
+    },
     (Story) => {
       useEffect(() => {
         const searchForm = document.querySelector('searchcraft-input-form');

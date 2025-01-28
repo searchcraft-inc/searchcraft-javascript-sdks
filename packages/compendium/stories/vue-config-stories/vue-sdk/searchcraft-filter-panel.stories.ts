@@ -9,6 +9,7 @@ import type {
 import {
   SearchcraftFilterPanel,
   SearchcraftInputForm,
+  SearchcraftTheme,
 } from '@searchcraft/vue-sdk';
 import type { Meta, StoryFn } from '@storybook/vue3';
 
@@ -98,12 +99,17 @@ const defaultProps: ComponentProps = {
 };
 
 export const Default: StoryFn = (args) => ({
-  components: { SearchcraftInputForm, SearchcraftFilterPanel },
+  components: {
+    SearchcraftInputForm,
+    SearchcraftFilterPanel,
+    SearchcraftTheme,
+  },
   setup() {
     return { args, config };
   },
   template: `
     <div style="padding: 10px 20px;">
+      <SearchcraftTheme />
       <SearchcraftInputForm
         autoSearch
         buttonLabel=""
