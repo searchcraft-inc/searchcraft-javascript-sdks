@@ -34,9 +34,15 @@ Add the web components to your html. They should be placed with the rest of your
   <searchcraft-results-info />
   ...
   <searchcraft-base-search-results />
+  ...
+  <searchcraft-theme /> (Required to apply theme to components)
 
 ```
 To see more about the specific attributes required for each component, refer to their individual documentation pages.
+
+### Themes & Styles
+
+**Note** To apply Searchcraft's built-in css theme to the components, which is highly recommended, please make sure that the `<searchcraft-theme>` component is placed somewhere on your HTML page. This component adds a `<style>` tag that applies the searchcraft theme. Without this component, the searchcraft theme will _not_ be applied, and the components will render without styles.
 
 ### Javascript
 Before anything else, the web components must be initialized. Import and Initialize the SDK and call `defineCustomElements()` to set up the web components.
