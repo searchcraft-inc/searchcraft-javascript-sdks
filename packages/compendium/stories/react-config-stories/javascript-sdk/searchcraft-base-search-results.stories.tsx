@@ -50,6 +50,14 @@ const mappings: SearchResultMappings = {
 export const Default: StoryObj<Components.SearchcraftBaseSearchResults> = {
   decorators: [
     (Story) => {
+      return (
+        <>
+          <searchcraft-theme />
+          <Story />
+        </>
+      );
+    },
+    (Story) => {
       useEffect(() => {
         const searchForm = document.querySelector('searchcraft-input-form');
         const searchResults = document.querySelector(

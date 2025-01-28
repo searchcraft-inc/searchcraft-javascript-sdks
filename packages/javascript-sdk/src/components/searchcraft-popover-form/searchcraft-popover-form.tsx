@@ -37,7 +37,6 @@ import type { PopoverResultMappings } from 'types';
  */
 @Component({
   tag: 'searchcraft-popover-form',
-  styleUrl: 'searchcraft-popover-form.module.scss',
   shadow: false,
 })
 export class SearchcraftPopoverForm {

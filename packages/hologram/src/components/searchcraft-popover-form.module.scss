@@ -1,3 +1,6 @@
+@use "../typography.scss";
+@use "../breakpoints.scss";
+
 /**
  * Styles applied to all popover form variants.
  */
@@ -19,7 +22,7 @@
   }
 
   & .searchcraft-popover-form-cancel-button {
-    @include body();
+    @include typography.body();
     border: 0;
     outline: 0;
     padding: 0;
@@ -95,7 +98,7 @@
   padding: 0;
   background-color: var(--sc-surface-neutral-secondary);
 
-  @media (min-width: $breakpoint-sm) {
+  @media (min-width: breakpoints.$breakpoint-sm) {
     padding: 16px;
     background-color: transparent;
   }
@@ -112,7 +115,7 @@
     background-color: rgba(0,0,0, 0.5);
     display: none;
 
-    @media (min-width: $breakpoint-sm) {
+    @media (min-width: breakpoints.$breakpoint-sm) {
       display: block;
     }
   }
@@ -126,7 +129,7 @@
     border-radius: var(--sc-popover-form-border-radius);
     overflow: hidden;
 
-    @media (min-width: $breakpoint-sm) {
+    @media (min-width: breakpoints.$breakpoint-sm) {
       inset: auto;
       position: relative;
       width: 100%;
@@ -143,7 +146,7 @@
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 
-    @media (min-width: $breakpoint-sm) {
+    @media (min-width: breakpoints.$breakpoint-sm) {
       max-height: var(--sc-popover-list-view-height)
     }
   }
@@ -151,7 +154,7 @@
   & searchcraft-popover-list-view {
     overflow: scroll;
 
-    @media (min-width: $breakpoint-sm) {
+    @media (min-width: breakpoints.$breakpoint-sm) {
       overflow: auto;
     }
   }

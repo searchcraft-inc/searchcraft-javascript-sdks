@@ -6,7 +6,6 @@ import { Component, h, Prop } from '@stencil/core';
  */
 @Component({
   tag: 'searchcraft-popover-list-item',
-  styleUrl: 'searchcraft-popover-list-item.module.scss',
   shadow: false,
 })
 export class SearchcraftPopoverListItem {

@@ -1,3 +1,5 @@
+@use "../breakpoints.scss";
+
 .searchcraft-results-info-container {
   border-bottom: 1px solid var(--sc-surface-disabled);
   display: flex;
@@ -12,7 +14,7 @@
   line-height: 20px;
   margin: 0px 0 8px;
 
-  @media (max-width: $breakpoint-md) {
+  @media (max-width: breakpoints.$breakpoint-md) {
     margin: 0;
     margin-bottom: 8px;
   }

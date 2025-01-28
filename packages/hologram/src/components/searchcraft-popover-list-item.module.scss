@@ -1,3 +1,5 @@
+@use "../typography.scss";
+
 .searchcraft-popover-list-item {
   all: unset;
   display: flex;
@@ -21,13 +23,13 @@
 }
 
 .searchcraft-popover-list-item-title {
-  @include body();
+  @include typography.body();
   margin: 0;
   color: inherit;
 }
 
 .searchcraft-popover-list-item-subtitle {
-  @include body-small();
+  @include typography.body-small();
   margin: 0;
   color: inherit;
 }

@@ -1,15 +1,23 @@
 import type { Config } from '@stencil/core';
 import { reactOutputTarget } from '@stencil/react-output-target';
-import { sass } from '@stencil/sass';
 import { vueOutputTarget } from '@stencil/vue-output-target';
+import { readFileSync } from 'node:fs';
+
+const loadRawAsString = () => {
+  return {
+    name: 'loadRawAsString',
+    load(id: string) {
+      if (id.endsWith('?raw')) {
+        const content = readFileSync(id.replace('?raw', '')).toString('utf-8');
+        return `export default \`${content.replace(/`/g, '\\`')}\``;
+      }
+    },
+  };
+};
 
 export const config: Config = {
   namespace: 'searchcraft-javascript-sdk',
-  plugins: [
-    sass({
-      injectGlobalPaths: ['src/theme/main.scss'],
-    }),
-  ],
+  plugins: [loadRawAsString()],
   outputTargets: [
     {
       type: 'dist',
@@ -43,6 +51,6 @@ export const config: Config = {
     },
   ],
   testing: {
-    browserHeadless: 'new',
+    browserHeadless: 'shell',
   },
 };

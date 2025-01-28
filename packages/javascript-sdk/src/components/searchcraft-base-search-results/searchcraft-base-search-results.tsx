@@ -51,7 +51,6 @@ import type { SearchResultMappings } from 'types';
  */
 @Component({
   tag: 'searchcraft-base-search-results',
-  styleUrl: 'searchcraft-base-search-results.module.scss',
   shadow: false,
 })
 export class SearchcraftBaseSearchResults {

@@ -437,6 +437,8 @@ export namespace Components {
          */
         "min": number;
     }
+    interface SearchcraftTheme {
+    }
     /**
      * This web component simulates a light switch functionality, providing a simple and intuitive toggle between two states—on and off.
      * It is consumed within the `searchcraft-filter-panel` component.
@@ -775,6 +777,12 @@ declare global {
         prototype: HTMLSearchcraftSliderElement;
         new (): HTMLSearchcraftSliderElement;
     };
+    interface HTMLSearchcraftThemeElement extends Components.SearchcraftTheme, HTMLStencilElement {
+    }
+    var HTMLSearchcraftThemeElement: {
+        prototype: HTMLSearchcraftThemeElement;
+        new (): HTMLSearchcraftThemeElement;
+    };
     interface HTMLSearchcraftToggleButtonElementEventMap {
         "toggleUpdated": boolean;
     }
@@ -811,6 +819,7 @@ declare global {
         "searchcraft-popover-list-view": HTMLSearchcraftPopoverListViewElement;
         "searchcraft-results-info": HTMLSearchcraftResultsInfoElement;
         "searchcraft-slider": HTMLSearchcraftSliderElement;
+        "searchcraft-theme": HTMLSearchcraftThemeElement;
         "searchcraft-toggle-button": HTMLSearchcraftToggleButtonElement;
     }
 }
@@ -1280,6 +1289,8 @@ declare namespace LocalJSX {
          */
         "onRangeChanged"?: (event: SearchcraftSliderCustomEvent<{ startValue: number; endValue: number }>) => void;
     }
+    interface SearchcraftTheme {
+    }
     /**
      * This web component simulates a light switch functionality, providing a simple and intuitive toggle between two states—on and off.
      * It is consumed within the `searchcraft-filter-panel` component.
@@ -1313,6 +1324,7 @@ declare namespace LocalJSX {
         "searchcraft-popover-list-view": SearchcraftPopoverListView;
         "searchcraft-results-info": SearchcraftResultsInfo;
         "searchcraft-slider": SearchcraftSlider;
+        "searchcraft-theme": SearchcraftTheme;
         "searchcraft-toggle-button": SearchcraftToggleButton;
     }
 }
@@ -1488,6 +1500,7 @@ declare module "@stencil/core" {
              * It is consumed by the `searchcraft-filter-panel` component.
              */
             "searchcraft-slider": LocalJSX.SearchcraftSlider & JSXBase.HTMLAttributes<HTMLSearchcraftSliderElement>;
+            "searchcraft-theme": LocalJSX.SearchcraftTheme & JSXBase.HTMLAttributes<HTMLSearchcraftThemeElement>;
             /**
              * This web component simulates a light switch functionality, providing a simple and intuitive toggle between two states—on and off.
              * It is consumed within the `searchcraft-filter-panel` component.

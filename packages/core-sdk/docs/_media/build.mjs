@@ -24,54 +24,59 @@
  *   react -> @searchcraft/react-sdk
  *   vue   -> @searchcraft/vue-sdk
  */
-import { execSync, spawnSync } from "child_process";
+import { execSync, spawnSync } from 'node:child_process';
 
 const packages = {
-  js: { name: "@searchcraft/javascript-sdk", path: "./packages/javascript-sdk" },
-  react: { name: "@searchcraft/react-sdk", path: "./packages/react-sdk" },
-  vue: { name: "@searchcraft/vue-sdk", path: "./packages/vue-sdk" },
+  js: {
+    name: '@searchcraft/javascript-sdk',
+    path: './packages/javascript-sdk',
+  },
+  react: { name: '@searchcraft/react-sdk', path: './packages/react-sdk' },
+  vue: { name: '@searchcraft/vue-sdk', path: './packages/vue-sdk' },
 };
 
 const args = process.argv.slice(2);
-const shouldWatch = args.includes("--watch");
-const shouldPublishToYalc = args.includes("--yalc");
-const isVerbose = args.includes("--verbose");
-const packageAlias = args.find((arg) => !arg.includes("--"));
+const shouldWatch = args.includes('--watch');
+const shouldPublishToYalc = args.includes('--yalc');
+const isVerbose = args.includes('--verbose');
+const packageAlias = args.find((arg) => !arg.includes('--'));
 const targetPackageInfo = packages[packageAlias];
 
 const buildPackage = (packageInfo) => {
   console.log(`Building package ${packageInfo.name} ...`);
-  execSync(`yarn workspace ${packageInfo.name} build`, { stdio: isVerbose ? "inherit" : "ignore" });
+  execSync(`yarn workspace ${packageInfo.name} build`, {
+    stdio: isVerbose ? 'inherit' : 'ignore',
+  });
   console.log(`Package ${packageInfo.name} built successfully.`);
 
   if (shouldPublishToYalc && packageInfo.path) {
     console.log(`Publishing ${packageInfo.name} to yalc...`);
-    execSync(`cd ${packageInfo.path} && yalc publish && yalc push`, { stdio: isVerbose ? "inherit" : "ignore" });
+    execSync(`cd ${packageInfo.path} && yalc publish && yalc push`, {
+      stdio: isVerbose ? 'inherit' : 'ignore',
+    });
     console.log(`Package ${packageInfo.name} published to yalc.`);
   }
 };
 
 const startWatching = () => {
   spawnSync(
-    "npx",
+    'npx',
     [
-      "nodemon",
-      "--exec",
-      `node ${process.argv[1]} ${packageAlias || ""} ${
-        shouldPublishToYalc ? "--yalc" : ""
-      }  ${
-        isVerbose ? "--verbose" : ""
-      }`.trim(),
+      'nodemon',
+      '--exec',
+      `node ${process.argv[1]} ${packageAlias || ''} ${
+        shouldPublishToYalc ? '--yalc' : ''
+      }  ${isVerbose ? '--verbose' : ''}`.trim(),
     ],
     {
-      stdio: "inherit"
-    }
+      stdio: 'inherit',
+    },
   );
-}
+};
 
 if (packageAlias && !targetPackageInfo) {
   console.error(`Unknown package alias: ${packageAlias}`);
-  console.error("Available package aliases:", Object.keys(packages).join(", "));
+  console.error('Available package aliases:', Object.keys(packages).join(', '));
   process.exit(1);
 }
 
@@ -80,20 +85,21 @@ if (shouldWatch) {
 }
 
 // Builds the packages that need to be built every time no matter what
-buildPackage({ name: "@searchcraft/core" });
-buildPackage(packages["js"])
+buildPackage({ name: '@searchcraft/core' });
+buildPackage({ name: '@searchcraft/hologram' });
+buildPackage({ name: '@searchcraft/javascript-sdk' });
 
 // Build the remaining target package OR all the remaining packages
 if (targetPackageInfo) {
-  if (targetPackageInfo.name !== "@searchcraft/javascript-sdk") {
+  if (targetPackageInfo.name !== '@searchcraft/javascript-sdk') {
     buildPackage(targetPackageInfo);
   }
 } else {
   Object.values(packages).forEach((packageInfo) => {
-    if (packageInfo.name !== "@searchcraft/javascript-sdk") {
+    if (packageInfo.name !== '@searchcraft/javascript-sdk') {
       buildPackage(packageInfo);
     }
   });
 }
 
-console.log("Build process completed successfully!");
+console.log('Build process completed successfully!');

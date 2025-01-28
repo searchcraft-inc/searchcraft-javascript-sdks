@@ -35,7 +35,6 @@ import { mergeFacetRoots, removeSubstringMatches } from '@utils';
  */
 @Component({
   tag: 'searchcraft-facet-list',
-  styleUrl: 'searchcraft-facet-list.module.scss',
   shadow: false,
 })
 export class SearchcraftFacetList {

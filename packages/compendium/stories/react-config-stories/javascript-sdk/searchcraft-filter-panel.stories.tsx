@@ -114,6 +114,14 @@ export const WithDebounceDelay300: StoryObj<Components.SearchcraftFilterPanel> =
   {
     decorators: [
       (Story) => {
+        return (
+          <>
+            <searchcraft-theme />
+            <Story />
+          </>
+        );
+      },
+      (Story) => {
         useEffect(() => {
           const searchForm = document.querySelector('searchcraft-input-form');
           const filterPanel = document.querySelector(

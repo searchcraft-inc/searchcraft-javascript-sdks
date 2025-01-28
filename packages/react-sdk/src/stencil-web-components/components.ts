@@ -21,6 +21,7 @@ import { SearchcraftPopoverListItem as SearchcraftPopoverListItemElement, define
 import { SearchcraftPopoverListView as SearchcraftPopoverListViewElement, defineCustomElement as defineSearchcraftPopoverListView } from "@searchcraft/javascript-sdk/dist/components/searchcraft-popover-list-view.js";
 import { SearchcraftResultsInfo as SearchcraftResultsInfoElement, defineCustomElement as defineSearchcraftResultsInfo } from "@searchcraft/javascript-sdk/dist/components/searchcraft-results-info.js";
 import { SearchcraftSlider as SearchcraftSliderElement, defineCustomElement as defineSearchcraftSlider } from "@searchcraft/javascript-sdk/dist/components/searchcraft-slider.js";
+import { SearchcraftTheme as SearchcraftThemeElement, defineCustomElement as defineSearchcraftTheme } from "@searchcraft/javascript-sdk/dist/components/searchcraft-theme.js";
 import { SearchcraftToggleButton as SearchcraftToggleButtonElement, defineCustomElement as defineSearchcraftToggleButton } from "@searchcraft/javascript-sdk/dist/components/searchcraft-toggle-button.js";
 import type { EventName, StencilReactComponent } from '@stencil/react-output-target/runtime';
 import { createComponent } from '@stencil/react-output-target/runtime';
@@ -192,6 +193,17 @@ export const SearchcraftSlider: StencilReactComponent<SearchcraftSliderElement, 
     react: React,
     events: { onRangeChanged: 'rangeChanged' } as SearchcraftSliderEvents,
     defineCustomElement: defineSearchcraftSlider
+});
+
+type SearchcraftThemeEvents = NonNullable<unknown>;
+
+export const SearchcraftTheme: StencilReactComponent<SearchcraftThemeElement, SearchcraftThemeEvents> = /*@__PURE__*/ createComponent<SearchcraftThemeElement, SearchcraftThemeEvents>({
+    tagName: 'searchcraft-theme',
+    elementClass: SearchcraftThemeElement,
+    // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
+    react: React,
+    events: {} as SearchcraftThemeEvents,
+    defineCustomElement: defineSearchcraftTheme
 });
 
 type SearchcraftToggleButtonEvents = { onToggleUpdated: EventName<CustomEvent<boolean>> };

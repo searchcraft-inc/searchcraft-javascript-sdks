@@ -36,6 +36,16 @@ const defaultProps: Components.SearchcraftResultsInfo = {
 };
 
 export const Default: StoryObj<Components.SearchcraftResultsInfo> = {
+  decorators: [
+    (Story) => {
+      return (
+        <>
+          <searchcraft-theme />
+          <Story />
+        </>
+      );
+    },
+  ],
   render: (args) => (
     <WebComponentWrapper args={args} componentName={componentName} />
   ),

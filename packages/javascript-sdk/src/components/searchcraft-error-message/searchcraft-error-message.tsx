@@ -11,7 +11,6 @@ import { Component, Prop, h } from '@stencil/core';
  */
 @Component({
   tag: 'searchcraft-error-message',
-  styleUrl: 'searchcraft-error-message.module.scss',
   shadow: false,
 })
 export class SearchcraftErrorMessage {

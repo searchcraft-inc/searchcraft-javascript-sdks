@@ -46,6 +46,14 @@ const mappings: PopoverResultMappings = {
 export const Inline: StoryObj<Components.SearchcraftPopoverForm> = {
   decorators: [
     (Story) => {
+      return (
+        <>
+          <searchcraft-theme />
+          <Story />
+        </>
+      );
+    },
+    (Story) => {
       useEffect(() => {
         const searchForm = document.querySelector('searchcraft-popover-form');
 

@@ -1,3 +1,5 @@
+@use "../typography.scss";
+
 .searchcraft-input-grid {
   display: grid;
   gap: 4px 8px;
@@ -83,7 +85,7 @@
 }
 
 .searchcraft-input {
-  @include body();
+  @include typography.body();
   background-color: var(--sc-surface-neutral-secondary);
   border-radius: var(--sc-input-border-radius);
   border: none;
