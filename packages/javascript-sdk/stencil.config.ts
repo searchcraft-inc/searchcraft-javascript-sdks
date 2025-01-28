@@ -1,7 +1,7 @@
+import { readFileSync } from 'node:fs';
 import type { Config } from '@stencil/core';
 import { reactOutputTarget } from '@stencil/react-output-target';
 import { vueOutputTarget } from '@stencil/vue-output-target';
-import { readFileSync } from 'node:fs';
 
 const loadRawAsString = () => {
   return {
