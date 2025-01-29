@@ -50,14 +50,6 @@ const mappings: SearchResultMappings = {
 export const Default: StoryObj<Components.SearchcraftBaseSearchResults> = {
   decorators: [
     (Story) => {
-      return (
-        <>
-          <searchcraft-theme />
-          <Story />
-        </>
-      );
-    },
-    (Story) => {
       useEffect(() => {
         const searchForm = document.querySelector('searchcraft-input-form');
         const searchResults = document.querySelector(
@@ -77,21 +69,24 @@ export const Default: StoryObj<Components.SearchcraftBaseSearchResults> = {
   ],
   render: (args) => {
     return (
-      <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
-        <searchcraft-input-form />
-        <div style={{ paddingTop: 20 }}>
-          <searchcraft-base-search-results
-            ad-interval={args.adInterval}
-            place-ad-at-end
-            place-ad-at-start
-            result-image-placement={args.resultImagePlacement}
-            button-target={args.buttonTarget}
-            button-rel={args.buttonRel}
-            container-target={args.containerTarget}
-            container-rel={args.containerRel}
-          />
+      <>
+        <searchcraft-theme />
+        <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
+          <searchcraft-input-form />
+          <div style={{ paddingTop: 20 }}>
+            <searchcraft-base-search-results
+              ad-interval={args.adInterval}
+              place-ad-at-end
+              place-ad-at-start
+              result-image-placement={args.resultImagePlacement}
+              button-target={args.buttonTarget}
+              button-rel={args.buttonRel}
+              container-target={args.containerTarget}
+              container-rel={args.containerRel}
+            />
+          </div>
         </div>
-      </div>
+      </>
     );
   },
   args: {},
