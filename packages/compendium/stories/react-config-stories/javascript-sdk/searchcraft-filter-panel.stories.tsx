@@ -3,7 +3,6 @@ import type {
   DateRangeFilterItem,
   ExactMatchToggleFilterItem,
   FacetsFilterItem,
-  FilterItem,
   MostRecentToggleFilterItem,
   NumericFilterItem,
 } from '@searchcraft/javascript-sdk';
@@ -97,14 +96,17 @@ export const Default: StoryObj<Components.SearchcraftFilterPanel> = {
       return <Story />;
     },
   ],
-  render: (args) => {
+  render: () => {
     return (
-      <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
-        <searchcraft-input-form />
-        <div style={{ paddingTop: 20 }}>
-          <searchcraft-filter-panel />
+      <>
+        <searchcraft-theme />
+        <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
+          <searchcraft-input-form />
+          <div style={{ paddingTop: 20 }}>
+            <searchcraft-filter-panel />
+          </div>
         </div>
-      </div>
+      </>
     );
   },
   args: defaultProps,
@@ -114,12 +116,7 @@ export const WithDebounceDelay300: StoryObj<Components.SearchcraftFilterPanel> =
   {
     decorators: [
       (Story) => {
-        return (
-          <>
-            <searchcraft-theme />
-            <Story />
-          </>
-        );
+        return <Story />;
       },
       (Story) => {
         useEffect(() => {
@@ -139,14 +136,17 @@ export const WithDebounceDelay300: StoryObj<Components.SearchcraftFilterPanel> =
         return <Story />;
       },
     ],
-    render: (args) => {
+    render: () => {
       return (
-        <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
-          <searchcraft-input-form />
-          <div style={{ paddingTop: 20 }}>
-            <searchcraft-filter-panel />
+        <>
+          <searchcraft-theme />
+          <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
+            <searchcraft-input-form />
+            <div style={{ paddingTop: 20 }}>
+              <searchcraft-filter-panel />
+            </div>
           </div>
-        </div>
+        </>
       );
     },
     args: defaultProps,

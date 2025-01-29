@@ -47,82 +47,68 @@ const mappings: PopoverResultMappings = {
 };
 
 export const Inline: StoryObj = {
-  decorators: [
-    (Story) => {
-      return (
-        <>
-          <SearchcraftTheme />
-          <Story />
-        </>
-      );
-    },
-    (Story) => {
-      return <Story />;
-    },
-  ],
-  render: (args) => (
-    <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
-      <p>Story Note: This story uses the Bazaario env vars</p>
-      <SearchcraftPopoverForm
-        config={configAlternate}
-        hotkey='k'
-        hotkeyModifier='ctrl'
-        popoverResultMappings={mappings}
-        type='inline'
-      />
-      <p style={{ marginBottom: 100 }}>
-        Here's some content that shows up underneath the popover. The popover
-        should render above this content when it is active.
-      </p>
-    </div>
+  render: () => (
+    <>
+      <SearchcraftTheme />
+      <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
+        <p>Story Note: This story uses the Bazaario env vars</p>
+        <SearchcraftPopoverForm
+          config={configAlternate}
+          hotkey='k'
+          hotkeyModifier='ctrl'
+          popoverResultMappings={mappings}
+          type='inline'
+        />
+        <p style={{ marginBottom: 100 }}>
+          Here's some content that shows up underneath the popover. The popover
+          should render above this content when it is active.
+        </p>
+      </div>
+    </>
   ),
   args: {},
 };
 
 export const Modal: StoryObj = {
-  decorators: [
-    (Story) => {
-      return <Story />;
-    },
-  ],
-  render: (args) => (
-    <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
-      <p>Story Note: This story uses the Bazaario env vars</p>
-      <SearchcraftPopoverButton>
-        <span>Click me</span>
-      </SearchcraftPopoverButton>
-      <SearchcraftPopoverForm
-        config={configAlternate}
-        hotkey='k'
-        hotkeyModifier='ctrl'
-        popoverResultMappings={mappings}
-        type='modal'
-      />
-    </div>
+  render: () => (
+    <>
+      <SearchcraftTheme />
+      <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
+        <p>Story Note: This story uses the Bazaario env vars</p>
+        <SearchcraftPopoverButton>
+          <span>Click me</span>
+        </SearchcraftPopoverButton>
+        <SearchcraftPopoverForm
+          config={configAlternate}
+          hotkey='k'
+          hotkeyModifier='ctrl'
+          popoverResultMappings={mappings}
+          type='modal'
+        />
+      </div>
+    </>
   ),
   args: {},
 };
 
 export const Fullscreen: StoryObj = {
-  decorators: [
-    (Story) => {
-      return <Story />;
-    },
-  ],
-  render: (args) => (
-    <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
-      <p>Story Note: This story uses the Bazaario env vars</p>
-      <SearchcraftPopoverButton>
-        <span>Click me</span>
-      </SearchcraftPopoverButton>
-      <SearchcraftPopoverForm
-        config={configAlternate}
-        hotkey='k'
-        hotkeyModifier='ctrl'
-        popoverResultMappings={mappings}
-        type='fullscreen'
-      />
-    </div>
+  render: () => (
+    <>
+      <SearchcraftTheme />
+      <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
+        <p>Story Note: This story uses the Bazaario env vars</p>
+        <SearchcraftPopoverButton>
+          <span>Click me</span>
+        </SearchcraftPopoverButton>
+        <SearchcraftPopoverForm
+          config={configAlternate}
+          hotkey='k'
+          hotkeyModifier='ctrl'
+          popoverResultMappings={mappings}
+          type='fullscreen'
+        />
+      </div>
+    </>
   ),
   args: {},
 };
