@@ -1,119 +1,117 @@
 :root {
-  /** Typography */
+  --sc-text-base-size: 1em;
+  --sc-text-scale-ratio: 1.1;
   --sc-font-family: sans-serif;
+  --sc-font-bold: 700;
+  --sc-font-normal: 400;
 
-  --sc-heading-1-font-size: 32px;
-  --sc-heading-1-line-height: 36px;
-  --sc-heading-1-font-weight: 700;
+  // heading 1 - 32px
+  --sc-heading-1-font-size: calc(
+    var(--sc-text-base-size) * var(--sc-text-scale-ratio) *
+      var(--sc-text-scale-ratio) * var(--sc-text-scale-ratio) *
+      var(--sc-text-scale-ratio) * var(--sc-text-scale-ratio) *
+      var(--sc-text-scale-ratio) * var(--sc-text-scale-ratio)
+  );
 
-  --sc-heading-2-font-size: 29px;
-  --sc-heading-2-line-height: 32px;
-  --sc-heading-2-font-weight: 700;
+  // heading 2 - 29px
+  --sc-heading-2-font-size: calc(
+    var(--sc-text-base-size) * var(--sc-text-scale-ratio) *
+      var(--sc-text-scale-ratio) * var(--sc-text-scale-ratio) *
+      var(--sc-text-scale-ratio) * var(--sc-text-scale-ratio) *
+      var(--sc-text-scale-ratio)
+  );
 
-  --sc-heading-3-font-size: 26px;
-  --sc-heading-3-line-height: 28px;
-  --sc-heading-3-font-weight: 700;
+  // heading 3 - 26px
+  --sc-heading-3-font-size: calc(
+    var(--sc-text-base-size) * var(--sc-text-scale-ratio) *
+      var(--sc-text-scale-ratio) * var(--sc-text-scale-ratio) *
+      var(--sc-text-scale-ratio) * var(--sc-text-scale-ratio)
+  );
 
-  --sc-heading-4-font-size: 23px;
-  --sc-heading-4-line-height: 24px;
-  --sc-heading-4-font-weight: 700;
+  // heading 4 - 23px
+  --sc-heading-4-font-size: calc(
+    var(--sc-text-base-size) * var(--sc-text-scale-ratio) *
+      var(--sc-text-scale-ratio) * var(--sc-text-scale-ratio) *
+      var(--sc-text-scale-ratio)
+  );
 
-  --sc-heading-5-font-size: 20px;
-  --sc-heading-5-line-height: 24px;
-  --sc-heading-5-font-weight: 700;
+  // heading 5 - 20px
+  --sc-heading-5-font-size: calc(
+    var(--sc-text-base-size) * var(--sc-text-scale-ratio) *
+      var(--sc-text-scale-ratio) * var(--sc-text-scale-ratio)
+  );
 
-  --sc-heading-6-font-size: 10px;
-  --sc-heading-6-line-height: 12px;
-  --sc-heading-6-font-weight: 700;
+  // heading 6 - 10px
+  --sc-heading-6-font-size: calc(
+    var(--sc-text-base-size) /
+      (
+        var(--sc-text-scale-ratio) * var(--sc-text-scale-ratio) *
+          var(--sc-text-scale-ratio) * var(--sc-text-scale-ratio)
+      )
+  );
 
-  --sc-body-bold-font-size: 16px;
-  --sc-body-bold-line-height: 20px;
-  --sc-body-bold-font-weight: 700;
+  // body - 16px
+  --sc-body-font-size: calc(var(--sc-text-base-size));
 
-  --sc-body-font-size: 16px;
-  --sc-body-line-height: 20px;
-  --sc-body-font-weight:400;
-
-  --sc-body-small-bold-font-size: 12px;
-  --sc-body-small-bold-line-height: 16px;
-  --sc-body-small-bold-font-weight: 700;
-
-  --sc-body-small-font-size: 12px;
-  --sc-body-small-line-height: 16px;
-  --sc-body-small-font-weight: 400;
+  // body small - 12px
+  --sc-body-small-font-size: calc(
+    var(--sc-text-base-size) /
+      (
+        var(--sc-text-scale-ratio) * var(--sc-text-scale-ratio) *
+          var(--sc-text-scale-ratio)
+      )
+  );
 }
 
 @mixin font-base {
   font-family: var(--sc-font-family);
+  font-weight: var(--sc-font-normal);
+  line-height: 1.25; // consistent for all variants
   -webkit-font-smoothing: antialiased;
 }
 
 @mixin heading-1 {
   @include font-base();
   font-size: var(--sc-heading-1-font-size);
-  font-weight: var(--sc-heading-1-font-weight);
-  line-height: var(--sc-heading-1-line-height);
+  font-weight: var(--sc-font-bold);
 }
 
 @mixin heading-2 {
   @include font-base();
   font-size: var(--sc-heading-2-font-size);
-  font-weight: var(--sc-heading-2-font-weight);
-  line-height: var(--sc-heading-2-line-height);
+  font-weight: var(--sc-font-bold);
 }
 
 @mixin heading-3 {
   @include font-base();
   font-size: var(--sc-heading-3-font-size);
-  font-weight: var(--sc-heading-3-font-weight);
-  line-height: var(--sc-heading-3-line-height);
+  font-weight: var(--sc-font-bold);
 }
 
 @mixin heading-4 {
   @include font-base();
   font-size: var(--sc-heading-4-font-size);
-  font-weight: var(--sc-heading-4-font-weight);
-  line-height: var(--sc-heading-4-line-height);
+  font-weight: var(--sc-font-bold);
 }
 
 @mixin heading-5 {
   @include font-base();
   font-size: var(--sc-heading-5-font-size);
-  font-weight: var(--sc-heading-5-font-weight);
-  line-height: var(--sc-heading-5-line-height);
+  font-weight: var(--sc-font-bold);
 }
 
 @mixin heading-6 {
   @include font-base();
-  font-size: var(--sc-heaing-6-font-size);
-  font-weight: var(--sc-heading-6-font-weight);
-  line-height: var(--sc-heading-6-line-height);
-}
-
-@mixin body-bold {
-  @include font-base();
-  font-size: var(--sc-body-bold-font-size);
-  font-weight: var(--sc-body-bold-font-weight);
-  line-height: var(--sc-body-bold-line-height);
+  font-size: var(--sc-heading-6-font-size);
+  font-weight: var(--sc-font-bold);
 }
 
 @mixin body {
   @include font-base();
   font-size: var(--sc-body-font-size);
-  font-weight: var(--sc-body-font-weight);
-  line-height: var(--sc-body-line-height);
-}
-
-@mixin body-small-bold {
-  @include font-base();
-  font-size: var(--sc-body-small-bold-font-size);
-  font-weight: var(--sc-body-small-bold-font-weight);
-  line-height: var(--sc-body-small-bold-line-height);
 }
 
 @mixin body-small {
   @include font-base();
   font-size: var(--sc-body-small-font-size);
-  font-weight: var(--sc-body-small-font-weight);
-  line-height: var(--sc-body-small-line-height);
 }

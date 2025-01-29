@@ -1,5 +1,28 @@
 @use "../typography.scss";
 
+:root {
+  /**
+   * Border radius of the input form element.
+   */
+  --sc-input-border-radius: var(--sc-border-radius);
+  /**
+   * Icon size of the "magnifying glass" icon rendered in the input form.
+   */
+  --sc-input-search-icon-size: 20px;
+  /**
+   * Icon size of the `x` button rendered in the input form.
+   */
+  --sc-input-clear-icon-size: 20px;
+  /**
+   * Padding on the left side of the input form.
+   */
+  --sc-input-padding-left: 44px;
+  /**
+   * Padding on the right side of the input form.
+   */
+  --sc-input-padding-right: 44px;
+}
+
 .searchcraft-input-grid {
   display: grid;
   gap: 4px 8px;
@@ -135,6 +158,7 @@
   pointer-events: none;
   width: var(--sc-input-search-icon-size);
   height: var(--sc-input-search-icon-size);
+  color: var(--sc-content-neutral-secondary);
 }
 
 .searchcraft-input-clear-button {
@@ -155,4 +179,5 @@
 .searchcraft-input-clear-icon {
   width: var(--sc-input-clear-icon-size);
   height: var(--sc-input-clear-icon-size);
+  color: var(--sc-content-brand);
 }

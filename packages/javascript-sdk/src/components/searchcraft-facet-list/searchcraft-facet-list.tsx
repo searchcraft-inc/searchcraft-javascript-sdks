@@ -229,7 +229,18 @@ export class SearchcraftFacetList {
                       'searchcraft-filter-list-dash-container',
                     )}
                   >
-                    <searchcraft-dash-icon />
+                    <svg width='14' height='3' viewBox='0 0 14 3' fill='none'>
+                      <title>Checkbox Dash</title>
+                      <line
+                        x1='1.5'
+                        y1='1.5'
+                        x2='12.5'
+                        y2='1.5'
+                        stroke='white'
+                        stroke-width='3'
+                        stroke-linecap='round'
+                      />
+                    </svg>
                   </div>
                 ) : (
                   <div
@@ -238,7 +249,16 @@ export class SearchcraftFacetList {
                       'searchcraft-filter-list-check-container',
                     )}
                   >
-                    <searchcraft-check-icon />
+                    <svg width='16' height='16' viewBox='0 0 16 16' fill='none'>
+                      <title>Checkbox Check</title>
+                      <path
+                        d='M13.9999 2L5.74988 10L1.99988 6.36364'
+                        stroke='white'
+                        stroke-width='3'
+                        stroke-linecap='round'
+                        stroke-linejoin='round'
+                      />
+                    </svg>
                   </div>
                 )}
                 {this.formatLabel(facetChild)}
@@ -271,7 +291,21 @@ export class SearchcraftFacetList {
                           'searchcraft-filter-list-check-container',
                         )}
                       >
-                        <searchcraft-check-icon />
+                        <svg
+                          width='16'
+                          height='16'
+                          viewBox='0 0 16 16'
+                          fill='none'
+                        >
+                          <title>Checkbox Check</title>
+                          <path
+                            d='M13.9999 2L5.74988 10L1.99988 6.36364'
+                            stroke='white'
+                            stroke-width='3'
+                            stroke-linecap='round'
+                            stroke-linejoin='round'
+                          />
+                        </svg>
                       </div>
                       {this.formatSubLabel(grandchild, facetChild)}
                     </label>
