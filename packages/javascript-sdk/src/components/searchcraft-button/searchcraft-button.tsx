@@ -4,7 +4,6 @@ import {
   type EventEmitter,
   Prop,
   h,
-  State,
   Fragment,
 } from '@stencil/core';
 import classNames from 'classnames';
@@ -41,8 +40,6 @@ export class SearchcraftButton {
    */
   @Event() buttonClick!: EventEmitter<void>;
 
-  @State() isRequesting = false;
-
   private handleClick = () => {
     this.buttonClick.emit();
   };
@@ -56,11 +53,7 @@ export class SearchcraftButton {
             onClick={this.handleClick}
             type='submit'
           >
-            {this.isRequesting ? (
-              <searchcraft-spinner-dark />
-            ) : (
-              this.iconElement
-            )}
+            {this.iconElement}
           </button>
         ) : (
           <button

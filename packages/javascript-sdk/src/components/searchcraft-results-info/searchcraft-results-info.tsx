@@ -19,7 +19,6 @@ import { formatNumberWithCommas } from '@utils';
   shadow: false,
 })
 export class SearchcraftResultsInfo {
-  @State() isRequesting = false;
   @State() resultsCount = 0;
   @State() responseTime = '';
   @State() query = '';
@@ -28,7 +27,6 @@ export class SearchcraftResultsInfo {
 
   connectedCallback() {
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {
-      this.isRequesting = state.isRequesting;
       this.resultsCount = state.searchResults?.data?.count || 0;
       this.responseTime = (
         (state.searchResults?.data?.time_taken || 0) * 1000

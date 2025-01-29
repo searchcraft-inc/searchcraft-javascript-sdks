@@ -26,10 +26,6 @@ const componentMeta: Meta = {
       options: ['light', 'dark'],
       description: 'The theme of the button (light or dark).',
     },
-    isRequesting: {
-      control: 'boolean',
-      description: 'Indicates if the button is in a loading state.',
-    },
   },
 };
 

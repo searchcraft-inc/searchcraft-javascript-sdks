@@ -1,4 +1,8 @@
-import { SearchcraftResultsInfo, SearchcraftTheme } from '@searchcraft/vue-sdk';
+import {
+  SearchcraftResultsInfo,
+  SearchcraftTheme,
+  type SearchcraftResultsInfoProps,
+} from '@searchcraft/vue-sdk';
 import type { Meta, StoryFn } from '@storybook/vue3';
 
 export default {
@@ -7,8 +11,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const defaultProps = {
-  isRequesting: false,
+const defaultProps: SearchcraftResultsInfoProps = {
   resultsCount: 12345,
   responseTime: '200.35',
   query: 'example query',

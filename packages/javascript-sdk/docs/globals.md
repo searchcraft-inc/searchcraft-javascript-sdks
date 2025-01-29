@@ -37,4 +37,3 @@
 - [parseCustomStyles](/reference/sdk/js-vanilla/functions/parseCustomStyles.md)
 - [serializeStyles](/reference/sdk/js-vanilla/functions/serializeStyles.md)
 - [useSearchcraftStore](/reference/sdk/js-vanilla/functions/useSearchcraftStore.md)
-- [useThemeStore](/reference/sdk/js-vanilla/functions/useThemeStore.md)
