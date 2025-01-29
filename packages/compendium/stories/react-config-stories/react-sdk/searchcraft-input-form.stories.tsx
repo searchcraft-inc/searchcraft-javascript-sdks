@@ -64,20 +64,13 @@ const defaultProps: SearchcraftInputFormProps = {
 };
 
 export const Default: StoryObj<SearchcraftInputFormProps> = {
-  decorators: [
-    (Story) => {
-      return (
-        <>
-          <SearchcraftTheme />
-          <Story />
-        </>
-      );
-    },
-  ],
   render: (args) => (
-    <div style={{ display: 'flex' }}>
-      <SearchcraftInputForm {...args} />
-    </div>
+    <>
+      <SearchcraftTheme />
+      <div style={{ display: 'flex' }}>
+        <SearchcraftInputForm {...args} />
+      </div>
+    </>
   ),
   args: defaultProps,
 };

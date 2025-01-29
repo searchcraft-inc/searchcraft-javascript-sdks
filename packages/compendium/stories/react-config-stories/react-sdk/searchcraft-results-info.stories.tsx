@@ -41,7 +41,12 @@ export const Default: StoryObj = {
       );
     },
   ],
-  render: (args) => <SearchcraftResultsInfo />,
+  render: () => (
+    <>
+      <SearchcraftTheme />
+      <SearchcraftResultsInfo />
+    </>
+  ),
   args: defaultProps,
 };
 
