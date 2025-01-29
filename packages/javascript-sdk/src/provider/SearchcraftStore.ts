@@ -1,13 +1,13 @@
 import { create } from 'zustand';
 
 import {
-  SDKDebugger,
+  Logger,
   LogLevel,
   type FacetPathsForIndexField,
   type RangeValueForIndexField,
   type SearchcraftResponse,
-  type SearchcraftListViewItem,
-  type SearchIndexEntry,
+  type SearchClientResponseItem,
+  type AdClientResponseItem,
 } from '@searchcraft/core';
 import type {
   SearchcraftState,
@@ -16,6 +16,7 @@ import type {
 } from './SearchcraftStore.types';
 
 const initialSearchcraftStateValues: SearchcraftStateValues = {
+  adClientResponseItems: [],
   core: undefined,
   logger: undefined,
   facetPathsForIndexFields: {},
@@ -23,7 +24,7 @@ const initialSearchcraftStateValues: SearchcraftStateValues = {
   searchTerm: '',
   rangeValueForIndexFields: {},
   searchMode: 'fuzzy',
-  searchResponseListViewItems: [],
+  searchClientResponseItems: [],
   searchResponseTimeTaken: undefined,
   searchResponseFacetPrime: undefined,
   sortType: 'asc',
@@ -52,7 +53,7 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
     initialize: (searchcraftInstance, debug = false) => {
       const core = searchcraftInstance;
       const logger = debug
-        ? new SDKDebugger({ logLevel: LogLevel.DEBUG })
+        ? new Logger({ logLevel: LogLevel.DEBUG })
         : undefined;
 
       set({
@@ -101,47 +102,51 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
           LogLevel.INFO,
           'No search request was made: search term was empty.',
         );
-        set({ searchResponseListViewItems: [] });
+        set({ searchClientResponseItems: [] });
         return;
       }
 
-      state.core.search(
+      const handleSearchcraftResponse = (
+        response: SearchcraftResponse,
+        items: SearchClientResponseItem[],
+      ) => {
+        const facetsFromResponse = response.data.facets;
+
+        set({
+          searchClientResponseItems: items,
+          searchResponseTimeTaken: response.data.time_taken || 0,
+        });
+
+        if (facetsFromResponse) {
+          set({ searchResponseFacetPrime: facetsFromResponse });
+        }
+
+        state.logger?.log(
+          LogLevel.DEBUG,
+          `Search results: ${JSON.stringify(items)}`,
+        );
+        state.logger?.log(
+          LogLevel.DEBUG,
+          `Facets from response: ${JSON.stringify(facetsFromResponse)}`,
+        );
+      };
+
+      const handleAdResponse = (
+        adClientResponseItems: AdClientResponseItem[],
+      ) => {
+        set({ adClientResponseItems });
+      };
+
+      state.core.getItems(
         {
-          query: state.searchTerm,
+          searchTerm: state.searchTerm,
           mode: state.searchMode,
           sort: state.sortType,
           facetPathsForIndexFields: state.facetPathsForIndexFields,
           rangeValueForIndexFields: state.rangeValueForIndexFields,
         },
-        (response: SearchcraftResponse) => {
-          // Extracts the documents from the response and maps them to  list view items
-          const listViewItems: SearchcraftListViewItem[] = (
-            response.data.hits || []
-          )
-            ?.map((entry: SearchIndexEntry) => entry.doc) // SearchcraftResponse -> (SearchDocument || undefined)[]
-            .filter((item) => !!item) // (SearchDocument || undefined)[] -> SearchDocument[]
-            .map((document) => ({ type: 'SearchDocument', document })); // SearchDocument[] -> SearchcraftListViewItem
-
-          const updatedFacets = response.data.facets;
-
-          set({
-            searchResponseListViewItems: listViewItems,
-            searchResponseTimeTaken: response.data.time_taken || 0,
-          });
-
-          if (updatedFacets) {
-            set({ searchResponseFacetPrime: updatedFacets });
-          }
-
-          state.logger?.log(
-            LogLevel.DEBUG,
-            `Search results: ${JSON.stringify(listViewItems)}`,
-          );
-          state.logger?.log(
-            LogLevel.DEBUG,
-            `Updated facets: ${JSON.stringify(updatedFacets)}`,
-          );
-        },
+        handleSearchcraftResponse,
+        handleAdResponse,
       );
     },
     setPopoverVisibility: (isVisible: boolean) => {
@@ -164,8 +169,8 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
         }),
       });
     },
-    setSearchResponseListViewItems: (items) =>
-      set({ searchResponseListViewItems: items }),
+    setSearchClientResponseItems: (items) =>
+      set({ searchClientResponseItems: items }),
   };
 
   const stateObject: SearchcraftState = {

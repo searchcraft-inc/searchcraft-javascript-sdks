@@ -11,12 +11,9 @@
 
 ## Interfaces
 
-- [DateRangeFilterItem](/reference/sdk/js-vanilla/interfaces/DateRangeFilterItem.md)
-- [ExactMatchToggleFilterItem](/reference/sdk/js-vanilla/interfaces/ExactMatchToggleFilterItem.md)
-- [FacetsFilterItem](/reference/sdk/js-vanilla/interfaces/FacetsFilterItem.md)
+- [AdClientResponseItem](/reference/sdk/js-vanilla/interfaces/AdClientResponseItem.md)
 - [FilterItem](/reference/sdk/js-vanilla/interfaces/FilterItem.md)
-- [MostRecentToggleFilterItem](/reference/sdk/js-vanilla/interfaces/MostRecentToggleFilterItem.md)
-- [NumericFilterItem](/reference/sdk/js-vanilla/interfaces/NumericFilterItem.md)
+- [SearchClientResponseItem](/reference/sdk/js-vanilla/interfaces/SearchClientResponseItem.md)
 - [SearchcraftBaseSearchResultsCustomEvent](/reference/sdk/js-vanilla/interfaces/SearchcraftBaseSearchResultsCustomEvent.md)
 - [SearchcraftButtonCustomEvent](/reference/sdk/js-vanilla/interfaces/SearchcraftButtonCustomEvent.md)
 - [SearchcraftConfig](/reference/sdk/js-vanilla/interfaces/SearchcraftConfig.md)

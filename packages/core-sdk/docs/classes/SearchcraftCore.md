@@ -30,21 +30,27 @@ Javascript Class providing the functionality to interact with the Searchcraft BE
 
 ## Properties
 
+### adClient
+
+> **adClient**: `undefined` \| `AdClient`
+
+***
+
 ### config
 
 > **config**: [`SearchcraftConfig`](/reference/sdk/core/interfaces/SearchcraftConfig.md)
 
 ***
 
-### sdkInfo
+### measureClient
 
-> **sdkInfo**: [`SearchcraftSDKInfo`](/reference/sdk/core/interfaces/SearchcraftSDKInfo.md)
+> **measureClient**: `undefined` \| `MeasureClient`
 
 ***
 
-### sessionId
+### searchClient
 
-> **sessionId**: `string`
+> **searchClient**: `undefined` \| `SearchClient`
 
 ***
 
@@ -54,23 +60,11 @@ Javascript Class providing the functionality to interact with the Searchcraft BE
 
 ## Methods
 
-### initMeasure()
+### getItems()
 
-> **initMeasure**(): `Promise`\<`void`\>
+> **getItems**(`searchParams`, `itemsCallback`, `adCallback`): `void`
 
-Initializes this.userId based on config & sends the `sdk_innitialized` event.
-
-#### Returns
-
-`Promise`\<`void`\>
-
-***
-
-### search()
-
-> **search**(`searchParams`, `callback`): `void`
-
-Performs a search operation.
+Gets items from the SearchClient and the AdClient.
 
 #### Parameters
 
@@ -78,45 +72,33 @@ Performs a search operation.
 
 [`SearchParams`](/reference/sdk/core/type-aliases/SearchParams.md)
 
-The parameters for the search.
+##### itemsCallback
 
-##### callback
+(`response`, `items`) => `void`
 
-(`response`) => `void`
+##### adCallback
+
+(`adClientResponseItems`) => `void`
 
 #### Returns
 
 `void`
 
-- Returns the search response or throws an error.
-
 ***
 
-### sendMeasureEvent()
+### initClients()
 
-> **sendMeasureEvent**(`eventName`, `properties`, `user`): `void`
-
-Sends a measure event to the `/measure/event` endpoint for analytics purposes.
+> **initClients**(`config`, `sdkInfo`): `void`
 
 #### Parameters
 
-##### eventName
+##### config
 
-[`MeasureEventName`](/reference/sdk/core/type-aliases/MeasureEventName.md)
+[`SearchcraftConfig`](/reference/sdk/core/interfaces/SearchcraftConfig.md)
 
-Name of the event.
+##### sdkInfo
 
-##### properties
-
-`Partial`\<[`MeasureRequestProperties`](/reference/sdk/core/interfaces/MeasureRequestProperties.md)\> = `{}`
-
-Additional properties to send with the event.
-
-##### user
-
-`Partial`\<[`MeasureRequestUser`](/reference/sdk/core/interfaces/MeasureRequestUser.md)\> = `{}`
-
-Additional user properites to send with the event.
+[`SearchcraftSDKInfo`](/reference/sdk/core/interfaces/SearchcraftSDKInfo.md)
 
 #### Returns
 

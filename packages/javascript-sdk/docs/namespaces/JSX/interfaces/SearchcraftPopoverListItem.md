@@ -18,40 +18,12 @@ The document position relative to the search results (For Measure)
 
 ***
 
-### href?
+### item?
 
-> `optional` **href**: `string`
-
-The link href
+> `optional` **item**: [`SearchClientResponseItem`](/reference/sdk/js-vanilla/interfaces/SearchClientResponseItem.md)
 
 ***
 
-### imageAlt?
+### popoverResultMappings?
 
-> `optional` **imageAlt**: `string`
-
-The image alt tag.
-
-***
-
-### imageSrc?
-
-> `optional` **imageSrc**: `string`
-
-The source of the image. If not included, no item will be rendered.
-
-***
-
-### subtitleContent?
-
-> `optional` **subtitleContent**: `string`
-
-The result subtitle
-
-***
-
-### titleContent?
-
-> `optional` **titleContent**: `string`
-
-The result title
+> `optional` **popoverResultMappings**: [`PopoverResultMappings`](/reference/sdk/js-vanilla/type-aliases/PopoverResultMappings.md)

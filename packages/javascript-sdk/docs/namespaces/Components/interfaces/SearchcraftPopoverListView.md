@@ -16,11 +16,9 @@ It is consumed within the `searchcraft-popover-form` component.
 
 ## Properties
 
-### documents
+### adClientResponseItems
 
-> **documents**: `undefined` \| `Record`\<`string`, `unknown`\>[]
-
-The documents to render in the list view.
+> **adClientResponseItems**: `undefined` \| [`AdClientResponseItem`](/reference/sdk/js-vanilla/interfaces/AdClientResponseItem.md)[]
 
 ***
 
@@ -29,3 +27,11 @@ The documents to render in the list view.
 > **popoverResultMappings**: `undefined` \| [`PopoverResultMappings`](/reference/sdk/js-vanilla/type-aliases/PopoverResultMappings.md)
 
 The mappings that define how the data in the documents are mapped to the list-view-item elements.
+
+***
+
+### searchClientResponseItems
+
+> **searchClientResponseItems**: `undefined` \| [`SearchClientResponseItem`](/reference/sdk/js-vanilla/interfaces/SearchClientResponseItem.md)[]
+
+The items to render in the list view.

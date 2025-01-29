@@ -2,15 +2,15 @@
 
 ***
 
-[@searchcraft/core](/reference/sdk/core/globals.md) / SDKDebugger
+[@searchcraft/core](/reference/sdk/core/globals.md) / Logger
 
-# Class: SDKDebugger
+# Class: Logger
 
 ## Constructors
 
-### new SDKDebugger()
+### new Logger()
 
-> **new SDKDebugger**(`options`): [`SDKDebugger`](/reference/sdk/core/classes/SDKDebugger.md)
+> **new Logger**(`options`): [`Logger`](/reference/sdk/core/classes/Logger.md)
 
 #### Parameters
 
@@ -20,7 +20,7 @@
 
 #### Returns
 
-[`SDKDebugger`](/reference/sdk/core/classes/SDKDebugger.md)
+[`Logger`](/reference/sdk/core/classes/Logger.md)
 
 ## Methods
 

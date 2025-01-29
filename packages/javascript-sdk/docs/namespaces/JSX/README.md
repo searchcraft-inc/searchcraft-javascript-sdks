@@ -20,6 +20,7 @@
 - [SearchcraftPopoverButton](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftPopoverButton.md)
 - [SearchcraftPopoverForm](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftPopoverForm.md)
 - [SearchcraftPopoverListItem](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftPopoverListItem.md)
+- [SearchcraftPopoverListItemAd](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftPopoverListItemAd.md)
 - [SearchcraftPopoverListView](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftPopoverListView.md)
 - [SearchcraftResultsInfo](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftResultsInfo.md)
 - [SearchcraftSlider](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftSlider.md)

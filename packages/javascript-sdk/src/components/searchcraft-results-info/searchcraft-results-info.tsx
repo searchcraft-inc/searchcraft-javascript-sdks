@@ -27,7 +27,7 @@ export class SearchcraftResultsInfo {
 
   connectedCallback() {
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {
-      this.resultsCount = state.searchResponseListViewItems.length;
+      this.resultsCount = state.searchClientResponseItems.length;
       this.responseTime = ((state.searchResponseTimeTaken || 0) * 1000).toFixed(
         2,
       );

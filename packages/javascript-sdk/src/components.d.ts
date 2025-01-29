@@ -7,10 +7,10 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { PopoverResultMappings, SearchResultMappings } from "./types/index";
 import { FilterItem } from "./types/searchcraft-filter-panel.types";
-import { SearchcraftConfig } from "@searchcraft/core";
+import { AdClientResponseItem, SearchClientResponseItem, SearchcraftConfig } from "@searchcraft/core";
 export { PopoverResultMappings, SearchResultMappings } from "./types/index";
 export { FilterItem } from "./types/searchcraft-filter-panel.types";
-export { SearchcraftConfig } from "@searchcraft/core";
+export { AdClientResponseItem, SearchClientResponseItem, SearchcraftConfig } from "@searchcraft/core";
 export namespace Components {
     /**
      * This web component is designed to display detailed information for a single search result.
@@ -363,26 +363,14 @@ export namespace Components {
           * The document position relative to the search results (For Measure)
          */
         "documentPosition": number;
-        /**
-          * The link href
-         */
-        "href": string | undefined;
-        /**
-          * The image alt tag.
-         */
-        "imageAlt": string | undefined;
-        /**
-          * The source of the image. If not included, no item will be rendered.
-         */
-        "imageSrc": string | undefined;
-        /**
-          * The result subtitle
-         */
-        "subtitleContent": string | undefined;
-        /**
-          * The result title
-         */
-        "titleContent": string | undefined;
+        "item": SearchClientResponseItem | undefined;
+        "popoverResultMappings": PopoverResultMappings | undefined;
+    }
+    /**
+     * A single list item rendered in a searchcraft-popover-list-view.
+     */
+    interface SearchcraftPopoverListItemAd {
+        "adClientResponseItem"?: AdClientResponseItem;
     }
     /**
      * This web component is designed to display a list of results within a popover interface.
@@ -394,14 +382,15 @@ export namespace Components {
      * ```
      */
     interface SearchcraftPopoverListView {
-        /**
-          * The documents to render in the list view.
-         */
-        "documents": Record<string, unknown>[] | undefined;
+        "adClientResponseItems": AdClientResponseItem[] | undefined;
         /**
           * The mappings that define how the data in the documents are mapped to the list-view-item elements.
          */
         "popoverResultMappings": PopoverResultMappings | undefined;
+        /**
+          * The items to render in the list view.
+         */
+        "searchClientResponseItems": SearchClientResponseItem[] | undefined;
     }
     /**
      * This web component is designed to display the number of results returned from a search query.
@@ -735,6 +724,15 @@ declare global {
         new (): HTMLSearchcraftPopoverListItemElement;
     };
     /**
+     * A single list item rendered in a searchcraft-popover-list-view.
+     */
+    interface HTMLSearchcraftPopoverListItemAdElement extends Components.SearchcraftPopoverListItemAd, HTMLStencilElement {
+    }
+    var HTMLSearchcraftPopoverListItemAdElement: {
+        prototype: HTMLSearchcraftPopoverListItemAdElement;
+        new (): HTMLSearchcraftPopoverListItemAdElement;
+    };
+    /**
      * This web component is designed to display a list of results within a popover interface.
      * It is consumed within the `searchcraft-popover-form` component.
      * ## Usage
@@ -834,6 +832,7 @@ declare global {
         "searchcraft-popover-button": HTMLSearchcraftPopoverButtonElement;
         "searchcraft-popover-form": HTMLSearchcraftPopoverFormElement;
         "searchcraft-popover-list-item": HTMLSearchcraftPopoverListItemElement;
+        "searchcraft-popover-list-item-ad": HTMLSearchcraftPopoverListItemAdElement;
         "searchcraft-popover-list-view": HTMLSearchcraftPopoverListViewElement;
         "searchcraft-results-info": HTMLSearchcraftResultsInfoElement;
         "searchcraft-slider": HTMLSearchcraftSliderElement;
@@ -1229,26 +1228,14 @@ declare namespace LocalJSX {
           * The document position relative to the search results (For Measure)
          */
         "documentPosition"?: number;
-        /**
-          * The link href
-         */
-        "href"?: string | undefined;
-        /**
-          * The image alt tag.
-         */
-        "imageAlt"?: string | undefined;
-        /**
-          * The source of the image. If not included, no item will be rendered.
-         */
-        "imageSrc"?: string | undefined;
-        /**
-          * The result subtitle
-         */
-        "subtitleContent"?: string | undefined;
-        /**
-          * The result title
-         */
-        "titleContent"?: string | undefined;
+        "item"?: SearchClientResponseItem | undefined;
+        "popoverResultMappings"?: PopoverResultMappings | undefined;
+    }
+    /**
+     * A single list item rendered in a searchcraft-popover-list-view.
+     */
+    interface SearchcraftPopoverListItemAd {
+        "adClientResponseItem"?: AdClientResponseItem;
     }
     /**
      * This web component is designed to display a list of results within a popover interface.
@@ -1260,14 +1247,15 @@ declare namespace LocalJSX {
      * ```
      */
     interface SearchcraftPopoverListView {
-        /**
-          * The documents to render in the list view.
-         */
-        "documents"?: Record<string, unknown>[] | undefined;
+        "adClientResponseItems"?: AdClientResponseItem[] | undefined;
         /**
           * The mappings that define how the data in the documents are mapped to the list-view-item elements.
          */
         "popoverResultMappings"?: PopoverResultMappings | undefined;
+        /**
+          * The items to render in the list view.
+         */
+        "searchClientResponseItems"?: SearchClientResponseItem[] | undefined;
     }
     /**
      * This web component is designed to display the number of results returned from a search query.
@@ -1348,6 +1336,7 @@ declare namespace LocalJSX {
         "searchcraft-popover-button": SearchcraftPopoverButton;
         "searchcraft-popover-form": SearchcraftPopoverForm;
         "searchcraft-popover-list-item": SearchcraftPopoverListItem;
+        "searchcraft-popover-list-item-ad": SearchcraftPopoverListItemAd;
         "searchcraft-popover-list-view": SearchcraftPopoverListView;
         "searchcraft-results-info": SearchcraftResultsInfo;
         "searchcraft-slider": SearchcraftSlider;
@@ -1501,6 +1490,10 @@ declare module "@stencil/core" {
              * A single list item rendered in a searchcraft-popover-list-view.
              */
             "searchcraft-popover-list-item": LocalJSX.SearchcraftPopoverListItem & JSXBase.HTMLAttributes<HTMLSearchcraftPopoverListItemElement>;
+            /**
+             * A single list item rendered in a searchcraft-popover-list-view.
+             */
+            "searchcraft-popover-list-item-ad": LocalJSX.SearchcraftPopoverListItemAd & JSXBase.HTMLAttributes<HTMLSearchcraftPopoverListItemAdElement>;
             /**
              * This web component is designed to display a list of results within a popover interface.
              * It is consumed within the `searchcraft-popover-form` component.

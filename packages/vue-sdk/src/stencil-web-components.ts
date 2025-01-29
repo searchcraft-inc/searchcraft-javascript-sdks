@@ -119,18 +119,21 @@ export const SearchcraftPopoverForm = /*@__PURE__*/ defineContainer<JSX.Searchcr
 
 
 export const SearchcraftPopoverListItem = /*@__PURE__*/ defineContainer<JSX.SearchcraftPopoverListItem>('searchcraft-popover-list-item', undefined, [
-  'titleContent',
-  'subtitleContent',
-  'imageSrc',
-  'imageAlt',
-  'href',
+  'item',
+  'popoverResultMappings',
   'documentPosition'
+]);
+
+
+export const SearchcraftPopoverListItemAd = /*@__PURE__*/ defineContainer<JSX.SearchcraftPopoverListItemAd>('searchcraft-popover-list-item-ad', undefined, [
+  'adClientResponseItem'
 ]);
 
 
 export const SearchcraftPopoverListView = /*@__PURE__*/ defineContainer<JSX.SearchcraftPopoverListView>('searchcraft-popover-list-view', undefined, [
   'popoverResultMappings',
-  'documents'
+  'searchClientResponseItems',
+  'adClientResponseItems'
 ]);
 
 

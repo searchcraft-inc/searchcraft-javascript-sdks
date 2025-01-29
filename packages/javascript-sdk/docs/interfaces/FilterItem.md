@@ -6,14 +6,6 @@
 
 # Interface: FilterItem
 
-## Extended by
-
-- [`FacetsFilterItem`](/reference/sdk/js-vanilla/interfaces/FacetsFilterItem.md)
-- [`NumericFilterItem`](/reference/sdk/js-vanilla/interfaces/NumericFilterItem.md)
-- [`DateRangeFilterItem`](/reference/sdk/js-vanilla/interfaces/DateRangeFilterItem.md)
-- [`ExactMatchToggleFilterItem`](/reference/sdk/js-vanilla/interfaces/ExactMatchToggleFilterItem.md)
-- [`MostRecentToggleFilterItem`](/reference/sdk/js-vanilla/interfaces/MostRecentToggleFilterItem.md)
-
 ## Properties
 
 ### label

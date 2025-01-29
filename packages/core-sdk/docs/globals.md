@@ -10,11 +10,16 @@
 
 ## Classes
 
-- [SDKDebugger](/reference/sdk/core/classes/SDKDebugger.md)
+- [Logger](/reference/sdk/core/classes/Logger.md)
 - [SearchcraftCore](/reference/sdk/core/classes/SearchcraftCore.md)
 
 ## Interfaces
 
+- [AdClientResponseItem](/reference/sdk/core/interfaces/AdClientResponseItem.md)
+- [ADMAd](/reference/sdk/core/interfaces/ADMAd.md)
+- [ADMProductAd](/reference/sdk/core/interfaces/ADMProductAd.md)
+- [ADMResponse](/reference/sdk/core/interfaces/ADMResponse.md)
+- [ADMTextAd](/reference/sdk/core/interfaces/ADMTextAd.md)
 - [BatchMeasureRequest](/reference/sdk/core/interfaces/BatchMeasureRequest.md)
 - [FacetChild](/reference/sdk/core/interfaces/FacetChild.md)
 - [FacetChildObject](/reference/sdk/core/interfaces/FacetChildObject.md)
@@ -23,8 +28,8 @@
 - [MeasureRequestUser](/reference/sdk/core/interfaces/MeasureRequestUser.md)
 - [QueryItem](/reference/sdk/core/interfaces/QueryItem.md)
 - [SDKDebuggerOptions](/reference/sdk/core/interfaces/SDKDebuggerOptions.md)
+- [SearchClientResponseItem](/reference/sdk/core/interfaces/SearchClientResponseItem.md)
 - [SearchcraftConfig](/reference/sdk/core/interfaces/SearchcraftConfig.md)
-- [SearchcraftListViewItem](/reference/sdk/core/interfaces/SearchcraftListViewItem.md)
 - [SearchcraftResponse](/reference/sdk/core/interfaces/SearchcraftResponse.md)
 - [SearchcraftResponseData](/reference/sdk/core/interfaces/SearchcraftResponseData.md)
 - [SearchcraftSDKInfo](/reference/sdk/core/interfaces/SearchcraftSDKInfo.md)
@@ -40,7 +45,7 @@
 - [MeasureEventName](/reference/sdk/core/type-aliases/MeasureEventName.md)
 - [QueryObject](/reference/sdk/core/type-aliases/QueryObject.md)
 - [RangeValueForIndexField](/reference/sdk/core/type-aliases/RangeValueForIndexField.md)
-- [SearchcraftListViewItemType](/reference/sdk/core/type-aliases/SearchcraftListViewItemType.md)
+- [SearchcraftAdProvider](/reference/sdk/core/type-aliases/SearchcraftAdProvider.md)
 - [SearchcraftResponseError](/reference/sdk/core/type-aliases/SearchcraftResponseError.md)
 - [SearchParams](/reference/sdk/core/type-aliases/SearchParams.md)
 - [SimpleQuery](/reference/sdk/core/type-aliases/SimpleQuery.md)

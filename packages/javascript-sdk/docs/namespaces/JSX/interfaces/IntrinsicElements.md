@@ -74,6 +74,12 @@
 
 ***
 
+### searchcraft-popover-list-item-ad
+
+> **searchcraft-popover-list-item-ad**: [`SearchcraftPopoverListItemAd`](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftPopoverListItemAd.md)
+
+***
+
 ### searchcraft-popover-list-view
 
 > **searchcraft-popover-list-view**: [`SearchcraftPopoverListView`](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftPopoverListView.md)
