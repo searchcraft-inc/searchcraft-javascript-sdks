@@ -19,7 +19,7 @@ const initialSearchcraftStateValues: SearchcraftStateValues = {
   facets: undefined,
   facetPathsForIndexFields: {},
   isPopoverVisible: false,
-  query: '',
+  searchTerm: '',
   rangeValueForIndexFields: {},
   searchMode: 'fuzzy',
   searchResults: null,
@@ -86,14 +86,14 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
       const state = get();
       state.logger?.log(
         LogLevel.INFO,
-        `Starting search with search term: "${state.query}"`,
+        `Starting search with search term: "${state.searchTerm}"`,
       );
 
       if (!state.core) {
         throw new Error('Searchcraft instance is not initialized.');
       }
 
-      if (!state.query.trim()) {
+      if (!state.searchTerm.trim()) {
         state.logger?.log(
           LogLevel.INFO,
           'No search request was made: search term was empty.',
@@ -104,7 +104,7 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
 
       state.core.search(
         {
-          query: state.query,
+          query: state.searchTerm,
           mode: state.searchMode,
           sort: state.sortType,
           facetPathsForIndexFields: state.facetPathsForIndexFields,
@@ -136,14 +136,14 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
     },
     setSearchMode: (mode) => set({ searchMode: mode }),
     setSortType: (type) => set({ sortType: type }),
-    setQuery: (query) => {
+    setSearchTerm: (searchTerm) => {
       /**
-       * When a new query is set, also reset the sort type, search mode, and facet paths.
+       * When a new searchTerm is set, also reset the sort type, search mode, and facet paths.
        */
       set({
-        query,
+        searchTerm,
         facetPathsForIndexFields: {},
-        ...(query.trim().length === 0 && {
+        ...(searchTerm.trim().length === 0 && {
           searchMode: 'fuzzy',
           sortType: 'asc',
         }),

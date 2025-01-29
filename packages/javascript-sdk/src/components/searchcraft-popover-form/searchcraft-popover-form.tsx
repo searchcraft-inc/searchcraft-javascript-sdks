@@ -105,7 +105,7 @@ export class SearchcraftPopoverForm {
       }
 
       this.searchResults = { ...state.searchResults } as SearchcraftResponse;
-      this.searchTerm = state.query;
+      this.searchTerm = state.searchTerm;
     });
   }
 

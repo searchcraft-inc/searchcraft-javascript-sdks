@@ -21,8 +21,8 @@ export interface SearchcraftStateFunctions {
   search: () => Promise<void>;
   setFacets: (facets: FacetPrime) => void;
   setPopoverVisibility: (isVisible: boolean) => void;
-  setQuery: (query: string) => void;
   setSearchResults: (results: SearchcraftResponse | null) => void;
+  setSearchTerm: (searchTerm: string) => void;
   setSearchMode: (mode: 'fuzzy' | 'exact') => void;
   setSortType: (type: 'asc' | 'desc') => void;
 }
@@ -36,10 +36,10 @@ export interface SearchcraftStateValues {
   facets: FacetPrime | undefined;
   facetPathsForIndexFields: Record<string, FacetPathsForIndexField>;
   isPopoverVisible: boolean;
-  query: string;
   rangeValueForIndexFields: Record<string, RangeValueForIndexField>;
   searchMode: 'fuzzy' | 'exact';
   searchResults: SearchcraftResponse | null;
+  searchTerm: string;
   sortType: 'asc' | 'desc';
 }
 

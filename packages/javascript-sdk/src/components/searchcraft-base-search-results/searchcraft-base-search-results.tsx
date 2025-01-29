@@ -109,25 +109,25 @@ export class SearchcraftBaseSearchResults {
   @Event() noResults?: EventEmitter<void>;
 
   @State() hasSearched = false;
-  @State() query = '';
+  @State() searchTerm = '';
   @State() searchResults: SearchcraftResponse | null = null;
 
   private unsubscribe: () => void = () => {};
 
   componentDidLoad() {
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {
-      if (state.query.length > 0) {
+      if (state.searchTerm.length > 0) {
         this.hasSearched = true;
       } else {
         this.hasSearched = false;
       }
       this.searchResults = { ...state.searchResults } as SearchcraftResponse;
-      this.query = state.query;
+      this.searchTerm = state.searchTerm;
     });
 
-    const { searchResults, query } = useSearchcraftStore.getState();
+    const { searchResults, searchTerm } = useSearchcraftStore.getState();
     this.searchResults = searchResults;
-    this.query = query;
+    this.searchTerm = searchTerm;
   }
 
   disconnectedCallback() {
@@ -200,7 +200,7 @@ export class SearchcraftBaseSearchResults {
   }
 
   render() {
-    if (this.query.trim() === '') {
+    if (this.searchTerm.trim() === '') {
       return (
         <div class='searchcraft-search-results-empty-state-container'>
           <slot name='empty-search' />
@@ -258,18 +258,21 @@ export class SearchcraftBaseSearchResults {
       );
     }
 
-    if (this.query.length > 0 && this.searchResults?.data?.hits?.length === 0) {
+    if (
+      this.searchTerm.length > 0 &&
+      this.searchResults?.data?.hits?.length === 0
+    ) {
       this.noResults?.emit();
     }
 
     return (
       <div class='searchcraft-search-results-container'>
         {finalComponents}
-        {this.query.length > 0 &&
+        {this.searchTerm.length > 0 &&
           this.searchResults?.data?.hits?.length === 0 && (
             <div class='searchcraft-search-results-error-message-container'>
               <searchcraft-error-message
-                error-message={`No search results found for "${this.query}" query`}
+                error-message={`No search results found for "${this.searchTerm}" query`}
               />
             </div>
           )}

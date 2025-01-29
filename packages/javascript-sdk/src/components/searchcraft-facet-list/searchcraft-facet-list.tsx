@@ -54,7 +54,7 @@ export class SearchcraftFacetList {
   @State() lastTimeTaken: number | undefined;
   @State() hasNewSearchTerm = false;
 
-  @State() lastQuery: string | undefined;
+  @State() lastSearchTerm: string | undefined;
   @State() lastSearchMode: string | undefined;
   @State() lastSortType: string | undefined;
 
@@ -72,7 +72,7 @@ export class SearchcraftFacetList {
 
     /** Things to do when the state's search term has changed, but before the response received */
     if (
-      state.query !== this.lastQuery ||
+      state.searchTerm !== this.lastSearchTerm ||
       state.searchMode !== this.lastSearchMode ||
       state.sortType !== this.lastSortType
     ) {
@@ -102,7 +102,7 @@ export class SearchcraftFacetList {
       }
     }
 
-    this.lastQuery = state.query;
+    this.lastSearchTerm = state.searchTerm;
     this.lastSearchMode = state.searchMode;
     this.lastSortType = state.sortType;
     this.lastTimeTaken = timeTaken;

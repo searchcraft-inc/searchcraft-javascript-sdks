@@ -21,7 +21,7 @@ import { formatNumberWithCommas } from '@utils';
 export class SearchcraftResultsInfo {
   @State() resultsCount = 0;
   @State() responseTime = '';
-  @State() query = '';
+  @State() searchTerm = '';
 
   unsubscribe: () => void = () => {};
 
@@ -31,7 +31,7 @@ export class SearchcraftResultsInfo {
       this.responseTime = (
         (state.searchResults?.data?.time_taken || 0) * 1000
       ).toFixed(2);
-      this.query = state.query || '';
+      this.searchTerm = state.searchTerm || '';
     });
   }
 
@@ -42,7 +42,7 @@ export class SearchcraftResultsInfo {
   }
 
   render() {
-    if (!this.query || this.resultsCount === 0) {
+    if (!this.searchTerm || this.resultsCount === 0) {
       return null;
     }
     const formattedResults = formatNumberWithCommas(this.resultsCount);
