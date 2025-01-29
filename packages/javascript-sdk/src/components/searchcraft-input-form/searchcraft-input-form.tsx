@@ -136,8 +136,8 @@ export class SearchcraftInput {
     if (input.value.trim() === '') {
       this.inputCleared?.emit();
       this.searchTerm = '';
-      this.searchStore.setQuery('');
-      this.searchStore.setSearchResults(null);
+      this.searchStore.setSearchTerm('');
+      this.searchStore.setSearchResponseListViewItems([]);
       return;
     }
 
@@ -149,13 +149,13 @@ export class SearchcraftInput {
   };
 
   private performSearch = async (value: string) => {
-    if (value === useSearchcraftStore.getState().query) {
+    if (value === useSearchcraftStore.getState().searchTerm) {
       return;
     }
 
     this.searchTerm = value.trim();
     this.error = false;
-    this.searchStore.setQuery(this.searchTerm);
+    this.searchStore.setSearchTerm(this.searchTerm);
     this.querySubmit?.emit(this.searchTerm);
 
     try {
@@ -169,8 +169,8 @@ export class SearchcraftInput {
   handleClearInput = () => {
     this.inputValue = '';
     this.searchTerm = '';
-    this.searchStore.setQuery('');
-    this.searchStore.setSearchResults(null);
+    this.searchStore.setSearchTerm('');
+    this.searchStore.setSearchResponseListViewItems([]);
     this.error = false;
 
     this.inputCleared?.emit();

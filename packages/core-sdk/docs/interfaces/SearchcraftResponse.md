@@ -6,13 +6,13 @@
 
 # Interface: SearchcraftResponse
 
-* The structure of a response returned from a Searchcraft operation.
+The structure of a response returned from a Searchcraft operation.
 
 ## Properties
 
 ### data
 
-> **data**: [`SearchResult`](/reference/sdk/core/interfaces/SearchResult.md) \| [`SearchError`](/reference/sdk/core/type-aliases/SearchError.md)
+> **data**: [`SearchcraftResponseData`](/reference/sdk/core/interfaces/SearchcraftResponseData.md) \| [`SearchcraftResponseError`](/reference/sdk/core/type-aliases/SearchcraftResponseError.md)
 
 ***
 

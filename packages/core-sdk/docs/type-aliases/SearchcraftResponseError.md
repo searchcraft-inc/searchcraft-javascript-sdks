@@ -2,13 +2,13 @@
 
 ***
 
-[@searchcraft/core](/reference/sdk/core/globals.md) / SearchError
+[@searchcraft/core](/reference/sdk/core/globals.md) / SearchcraftResponseError
 
-# Type Alias: SearchError
+# Type Alias: SearchcraftResponseError
 
-> **SearchError**: `object`
+> **SearchcraftResponseError**: `object`
 
-* Error returned when a search is unsuccessful.
+Error returned when a search is unsuccessful.
 
 ## Type declaration
 

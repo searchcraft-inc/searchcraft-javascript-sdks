@@ -2,11 +2,11 @@
 
 ***
 
-[@searchcraft/core](/reference/sdk/core/globals.md) / SearchResult
+[@searchcraft/core](/reference/sdk/core/globals.md) / SearchcraftResponseData
 
-# Interface: SearchResult
+# Interface: SearchcraftResponseData
 
-* Top-level result returned when a search is successful.
+Top-level result returned when a search is successful.
 
 ## Properties
 

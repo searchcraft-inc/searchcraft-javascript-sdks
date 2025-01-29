@@ -3,9 +3,11 @@ import { create } from 'zustand';
 import {
   SDKDebugger,
   LogLevel,
-  type SearchcraftResponse,
   type FacetPathsForIndexField,
   type RangeValueForIndexField,
+  type SearchcraftResponse,
+  type SearchcraftListViewItem,
+  type SearchIndexEntry,
 } from '@searchcraft/core';
 import type {
   SearchcraftState,
@@ -16,13 +18,14 @@ import type {
 const initialSearchcraftStateValues: SearchcraftStateValues = {
   core: undefined,
   logger: undefined,
-  facets: undefined,
   facetPathsForIndexFields: {},
   isPopoverVisible: false,
-  query: '',
+  searchTerm: '',
   rangeValueForIndexFields: {},
   searchMode: 'fuzzy',
-  searchResults: null,
+  searchResponseListViewItems: [],
+  searchResponseTimeTaken: undefined,
+  searchResponseFacetPrime: undefined,
   sortType: 'asc',
 };
 
@@ -86,41 +89,53 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
       const state = get();
       state.logger?.log(
         LogLevel.INFO,
-        `Starting search with search term: "${state.query}"`,
+        `Starting search with search term: "${state.searchTerm}"`,
       );
 
       if (!state.core) {
         throw new Error('Searchcraft instance is not initialized.');
       }
 
-      if (!state.query.trim()) {
+      if (!state.searchTerm.trim()) {
         state.logger?.log(
           LogLevel.INFO,
           'No search request was made: search term was empty.',
         );
-        state.setSearchResults(null);
+        set({ searchResponseListViewItems: [] });
         return;
       }
 
       state.core.search(
         {
-          query: state.query,
+          query: state.searchTerm,
           mode: state.searchMode,
           sort: state.sortType,
           facetPathsForIndexFields: state.facetPathsForIndexFields,
           rangeValueForIndexFields: state.rangeValueForIndexFields,
         },
-        (results: SearchcraftResponse) => {
-          const updatedFacets = results.data.facets || null;
+        (response: SearchcraftResponse) => {
+          // Extracts the documents from the response and maps them to  list view items
+          const listViewItems: SearchcraftListViewItem[] = (
+            response.data.hits || []
+          )
+            ?.map((entry: SearchIndexEntry) => entry.doc) // SearchcraftResponse -> (SearchDocument || undefined)[]
+            .filter((item) => !!item) // (SearchDocument || undefined)[] -> SearchDocument[]
+            .map((document) => ({ type: 'SearchDocument', document })); // SearchDocument[] -> SearchcraftListViewItem
 
-          state.setSearchResults(results);
+          const updatedFacets = response.data.facets;
+
+          set({
+            searchResponseListViewItems: listViewItems,
+            searchResponseTimeTaken: response.data.time_taken || 0,
+          });
+
           if (updatedFacets) {
-            state.setFacets(updatedFacets);
+            set({ searchResponseFacetPrime: updatedFacets });
           }
 
           state.logger?.log(
             LogLevel.DEBUG,
-            `Search results: ${JSON.stringify(results)}`,
+            `Search results: ${JSON.stringify(listViewItems)}`,
           );
           state.logger?.log(
             LogLevel.DEBUG,
@@ -136,21 +151,21 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
     },
     setSearchMode: (mode) => set({ searchMode: mode }),
     setSortType: (type) => set({ sortType: type }),
-    setQuery: (query) => {
+    setSearchTerm: (searchTerm) => {
       /**
-       * When a new query is set, also reset the sort type, search mode, and facet paths.
+       * When a new searchTerm is set, also reset the sort type, search mode, and facet paths.
        */
       set({
-        query,
+        searchTerm,
         facetPathsForIndexFields: {},
-        ...(query.trim().length === 0 && {
+        ...(searchTerm.trim().length === 0 && {
           searchMode: 'fuzzy',
           sortType: 'asc',
         }),
       });
     },
-    setSearchResults: (results) => set({ searchResults: results }),
-    setFacets: (facets) => set({ facets }),
+    setSearchResponseListViewItems: (items) =>
+      set({ searchResponseListViewItems: items }),
   };
 
   const stateObject: SearchcraftState = {

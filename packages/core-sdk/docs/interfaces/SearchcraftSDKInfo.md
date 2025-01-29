@@ -6,6 +6,8 @@
 
 # Interface: SearchcraftSDKInfo
 
+Used internally by consuming packages as part of the core sdk constructor.
+
 ## Properties
 
 ### sdkName

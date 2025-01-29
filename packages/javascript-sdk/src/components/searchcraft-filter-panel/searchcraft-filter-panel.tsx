@@ -29,16 +29,16 @@ export class SearchcraftFilterPanel {
   @Prop() items: FilterItem[] = [];
 
   @State() unsubscribe: (() => void) | undefined;
-  @State() lastQuery: string | undefined;
+  @State() lastSearchTerm: string | undefined;
 
   private searchStore = useSearchcraftStore.getState();
 
   componentDidLoad() {
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {
-      if (this.lastQuery !== state.query) {
+      if (this.lastSearchTerm !== state.searchTerm) {
         // A place to put actions to do when the query changes
       }
-      this.lastQuery = state.query || '';
+      this.lastSearchTerm = state.searchTerm || '';
     });
   }
 

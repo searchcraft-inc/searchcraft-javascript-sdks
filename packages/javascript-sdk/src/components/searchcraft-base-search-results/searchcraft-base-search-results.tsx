@@ -7,7 +7,10 @@ import {
   type EventEmitter,
 } from '@stencil/core';
 
-import type { SearchcraftResponse } from '@searchcraft/core';
+import type {
+  SearchcraftListViewItem,
+  SearchDocument,
+} from '@searchcraft/core';
 
 import { useSearchcraftStore } from '@provider/store';
 
@@ -109,25 +112,28 @@ export class SearchcraftBaseSearchResults {
   @Event() noResults?: EventEmitter<void>;
 
   @State() hasSearched = false;
-  @State() query = '';
-  @State() searchResults: SearchcraftResponse | null = null;
+  @State() searchTerm = '';
+  @State() searchResponseListViewItems: SearchcraftListViewItem[] = [];
 
   private unsubscribe: () => void = () => {};
 
   componentDidLoad() {
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {
-      if (state.query.length > 0) {
+      if (state.searchTerm.length > 0) {
         this.hasSearched = true;
       } else {
         this.hasSearched = false;
       }
-      this.searchResults = { ...state.searchResults } as SearchcraftResponse;
-      this.query = state.query;
+      this.searchResponseListViewItems = [
+        ...state.searchResponseListViewItems,
+      ] as SearchcraftListViewItem[];
+      this.searchTerm = state.searchTerm;
     });
 
-    const { searchResults, query } = useSearchcraftStore.getState();
-    this.searchResults = searchResults;
-    this.query = query;
+    const { searchResponseListViewItems, searchTerm } =
+      useSearchcraftStore.getState();
+    this.searchResponseListViewItems = searchResponseListViewItems;
+    this.searchTerm = searchTerm;
   }
 
   disconnectedCallback() {
@@ -200,7 +206,7 @@ export class SearchcraftBaseSearchResults {
   }
 
   render() {
-    if (this.query.trim() === '') {
+    if (this.searchTerm.trim() === '') {
       return (
         <div class='searchcraft-search-results-empty-state-container'>
           <slot name='empty-search' />
@@ -208,15 +214,13 @@ export class SearchcraftBaseSearchResults {
       );
     }
 
-    if (!this.searchResults?.data) {
+    if (this.searchResponseListViewItems.length === 0) {
       return;
     }
 
-    const documents: Record<string, unknown>[] =
-      this.searchResults?.data?.hits?.map((data, _index) => {
-        const { doc: result } = data;
-        return result;
-      }) as Record<string, unknown>[];
+    const documents: SearchDocument[] = this.searchResponseListViewItems.map(
+      (item) => item.document,
+    );
 
     const finalComponents: JSX.Element[] = [];
 
@@ -258,18 +262,21 @@ export class SearchcraftBaseSearchResults {
       );
     }
 
-    if (this.query.length > 0 && this.searchResults?.data?.hits?.length === 0) {
+    if (
+      this.searchTerm.length > 0 &&
+      this.searchResponseListViewItems.length === 0
+    ) {
       this.noResults?.emit();
     }
 
     return (
       <div class='searchcraft-search-results-container'>
         {finalComponents}
-        {this.query.length > 0 &&
-          this.searchResults?.data?.hits?.length === 0 && (
+        {this.searchTerm.length > 0 &&
+          this.searchResponseListViewItems.length === 0 && (
             <div class='searchcraft-search-results-error-message-container'>
               <searchcraft-error-message
-                error-message={`No search results found for "${this.query}" query`}
+                error-message={`No search results found for "${this.searchTerm}" query`}
               />
             </div>
           )}

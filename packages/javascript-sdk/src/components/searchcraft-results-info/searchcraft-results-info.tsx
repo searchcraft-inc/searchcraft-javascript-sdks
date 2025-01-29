@@ -21,17 +21,17 @@ import { formatNumberWithCommas } from '@utils';
 export class SearchcraftResultsInfo {
   @State() resultsCount = 0;
   @State() responseTime = '';
-  @State() query = '';
+  @State() searchTerm = '';
 
   unsubscribe: () => void = () => {};
 
   connectedCallback() {
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {
-      this.resultsCount = state.searchResults?.data?.count || 0;
-      this.responseTime = (
-        (state.searchResults?.data?.time_taken || 0) * 1000
-      ).toFixed(2);
-      this.query = state.query || '';
+      this.resultsCount = state.searchResponseListViewItems.length;
+      this.responseTime = ((state.searchResponseTimeTaken || 0) * 1000).toFixed(
+        2,
+      );
+      this.searchTerm = state.searchTerm || '';
     });
   }
 
@@ -42,7 +42,7 @@ export class SearchcraftResultsInfo {
   }
 
   render() {
-    if (!this.query || this.resultsCount === 0) {
+    if (!this.searchTerm || this.resultsCount === 0) {
       return null;
     }
     const formattedResults = formatNumberWithCommas(this.resultsCount);
