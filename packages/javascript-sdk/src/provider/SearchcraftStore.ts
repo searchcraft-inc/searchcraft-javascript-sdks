@@ -3,9 +3,11 @@ import { create } from 'zustand';
 import {
   SDKDebugger,
   LogLevel,
-  type SearchcraftResponse,
   type FacetPathsForIndexField,
   type RangeValueForIndexField,
+  type SearchcraftResponse,
+  type SearchcraftListViewItem,
+  type SearchIndexEntry,
 } from '@searchcraft/core';
 import type {
   SearchcraftState,
@@ -16,13 +18,14 @@ import type {
 const initialSearchcraftStateValues: SearchcraftStateValues = {
   core: undefined,
   logger: undefined,
-  facets: undefined,
   facetPathsForIndexFields: {},
   isPopoverVisible: false,
   searchTerm: '',
   rangeValueForIndexFields: {},
   searchMode: 'fuzzy',
-  searchResults: null,
+  searchResponseListViewItems: [],
+  searchResponseTimeTaken: undefined,
+  searchResponseFacetPrime: undefined,
   sortType: 'asc',
 };
 
@@ -98,7 +101,7 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
           LogLevel.INFO,
           'No search request was made: search term was empty.',
         );
-        state.setSearchResults(null);
+        set({ searchResponseListViewItems: [] });
         return;
       }
 
@@ -110,17 +113,29 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
           facetPathsForIndexFields: state.facetPathsForIndexFields,
           rangeValueForIndexFields: state.rangeValueForIndexFields,
         },
-        (results: SearchcraftResponse) => {
-          const updatedFacets = results.data.facets || null;
+        (response: SearchcraftResponse) => {
+          // Extracts the documents from the response and maps them to  list view items
+          const listViewItems: SearchcraftListViewItem[] = (
+            response.data.hits || []
+          )
+            ?.map((entry: SearchIndexEntry) => entry.doc) // SearchcraftResponse -> (SearchDocument || undefined)[]
+            .filter((item) => !!item) // (SearchDocument || undefined)[] -> SearchDocument[]
+            .map((document) => ({ type: 'SearchDocument', document })); // SearchDocument[] -> SearchcraftListViewItem
 
-          state.setSearchResults(results);
+          const updatedFacets = response.data.facets;
+
+          set({
+            searchResponseListViewItems: listViewItems,
+            searchResponseTimeTaken: response.data.time_taken || 0,
+          });
+
           if (updatedFacets) {
-            state.setFacets(updatedFacets);
+            set({ searchResponseFacetPrime: updatedFacets });
           }
 
           state.logger?.log(
             LogLevel.DEBUG,
-            `Search results: ${JSON.stringify(results)}`,
+            `Search results: ${JSON.stringify(listViewItems)}`,
           );
           state.logger?.log(
             LogLevel.DEBUG,
@@ -149,8 +164,8 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
         }),
       });
     },
-    setSearchResults: (results) => set({ searchResults: results }),
-    setFacets: (facets) => set({ facets }),
+    setSearchResponseListViewItems: (items) =>
+      set({ searchResponseListViewItems: items }),
   };
 
   const stateObject: SearchcraftState = {

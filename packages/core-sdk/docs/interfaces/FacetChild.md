@@ -6,7 +6,7 @@
 
 # Interface: FacetChild
 
-* Represents the structure of facets, which group search results into categories.
+Represents the structure of facets, which group search results into categories.
 
 ## Properties
 

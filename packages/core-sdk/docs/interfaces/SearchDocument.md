@@ -4,20 +4,17 @@
 
 [@searchcraft/core](/reference/sdk/core/globals.md) / SearchDocument
 
-# Interface: SearchDocument\<T\>
+# Interface: SearchDocument
 
-* Generic data document returned within a SearchResult.
-* Allows for extensibility with custom fields using a generic type parameter.
+Data document returned within a SearchResult.
 
-## Type Parameters
+## Extends
 
-• **T** *extends* `Record`\<`string`, `string` \| `number`\> = `Record`\<`string`, `string` \| `number`\>
-
-An optional type that defines additional properties on the document.
+- `Record`\<`string`, `string` \| `number`\>
 
 ## Indexable
 
-\[`key`: `string`\]: `string` \| `number` \| `T`\[keyof `T`\]
+\[`key`: `string`\]: `string` \| `number`
 
 ## Properties
 

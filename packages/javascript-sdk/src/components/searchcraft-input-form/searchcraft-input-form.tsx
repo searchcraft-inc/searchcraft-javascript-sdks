@@ -137,7 +137,7 @@ export class SearchcraftInput {
       this.inputCleared?.emit();
       this.searchTerm = '';
       this.searchStore.setSearchTerm('');
-      this.searchStore.setSearchResults(null);
+      this.searchStore.setSearchResponseListViewItems([]);
       return;
     }
 
@@ -170,7 +170,7 @@ export class SearchcraftInput {
     this.inputValue = '';
     this.searchTerm = '';
     this.searchStore.setSearchTerm('');
-    this.searchStore.setSearchResults(null);
+    this.searchStore.setSearchResponseListViewItems([]);
     this.error = false;
 
     this.inputCleared?.emit();

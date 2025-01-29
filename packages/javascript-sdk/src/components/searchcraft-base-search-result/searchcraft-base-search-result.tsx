@@ -85,7 +85,7 @@ export class SearchcraftBaseSearchResult {
       const document_position = this.documentPosition;
       const search_term = this.searchcraftStore.searchTerm;
       const number_of_documents =
-        this.searchcraftStore.searchResults?.data?.hits?.length || 0;
+        this.searchcraftStore.searchResponseListViewItems.length;
 
       searchcraft.sendMeasureEvent('document_clicked', {
         document_position,

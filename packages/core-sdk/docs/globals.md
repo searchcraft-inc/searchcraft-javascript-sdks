@@ -24,12 +24,12 @@
 - [QueryItem](/reference/sdk/core/interfaces/QueryItem.md)
 - [SDKDebuggerOptions](/reference/sdk/core/interfaces/SDKDebuggerOptions.md)
 - [SearchcraftConfig](/reference/sdk/core/interfaces/SearchcraftConfig.md)
-- [SearchcraftInstance](/reference/sdk/core/interfaces/SearchcraftInstance.md)
+- [SearchcraftListViewItem](/reference/sdk/core/interfaces/SearchcraftListViewItem.md)
 - [SearchcraftResponse](/reference/sdk/core/interfaces/SearchcraftResponse.md)
+- [SearchcraftResponseData](/reference/sdk/core/interfaces/SearchcraftResponseData.md)
 - [SearchcraftSDKInfo](/reference/sdk/core/interfaces/SearchcraftSDKInfo.md)
 - [SearchDocument](/reference/sdk/core/interfaces/SearchDocument.md)
 - [SearchIndexEntry](/reference/sdk/core/interfaces/SearchIndexEntry.md)
-- [SearchResult](/reference/sdk/core/interfaces/SearchResult.md)
 
 ## Type Aliases
 
@@ -40,6 +40,7 @@
 - [MeasureEventName](/reference/sdk/core/type-aliases/MeasureEventName.md)
 - [QueryObject](/reference/sdk/core/type-aliases/QueryObject.md)
 - [RangeValueForIndexField](/reference/sdk/core/type-aliases/RangeValueForIndexField.md)
-- [SearchError](/reference/sdk/core/type-aliases/SearchError.md)
+- [SearchcraftListViewItemType](/reference/sdk/core/type-aliases/SearchcraftListViewItemType.md)
+- [SearchcraftResponseError](/reference/sdk/core/type-aliases/SearchcraftResponseError.md)
 - [SearchParams](/reference/sdk/core/type-aliases/SearchParams.md)
 - [SimpleQuery](/reference/sdk/core/type-aliases/SimpleQuery.md)

@@ -7,7 +7,10 @@ import {
   type EventEmitter,
 } from '@stencil/core';
 
-import type { SearchcraftResponse } from '@searchcraft/core';
+import type {
+  SearchcraftListViewItem,
+  SearchDocument,
+} from '@searchcraft/core';
 
 import { useSearchcraftStore } from '@provider/store';
 
@@ -110,7 +113,7 @@ export class SearchcraftBaseSearchResults {
 
   @State() hasSearched = false;
   @State() searchTerm = '';
-  @State() searchResults: SearchcraftResponse | null = null;
+  @State() searchResponseListViewItems: SearchcraftListViewItem[] = [];
 
   private unsubscribe: () => void = () => {};
 
@@ -121,12 +124,15 @@ export class SearchcraftBaseSearchResults {
       } else {
         this.hasSearched = false;
       }
-      this.searchResults = { ...state.searchResults } as SearchcraftResponse;
+      this.searchResponseListViewItems = [
+        ...state.searchResponseListViewItems,
+      ] as SearchcraftListViewItem[];
       this.searchTerm = state.searchTerm;
     });
 
-    const { searchResults, searchTerm } = useSearchcraftStore.getState();
-    this.searchResults = searchResults;
+    const { searchResponseListViewItems, searchTerm } =
+      useSearchcraftStore.getState();
+    this.searchResponseListViewItems = searchResponseListViewItems;
     this.searchTerm = searchTerm;
   }
 
@@ -208,15 +214,13 @@ export class SearchcraftBaseSearchResults {
       );
     }
 
-    if (!this.searchResults?.data) {
+    if (this.searchResponseListViewItems.length === 0) {
       return;
     }
 
-    const documents: Record<string, unknown>[] =
-      this.searchResults?.data?.hits?.map((data, _index) => {
-        const { doc: result } = data;
-        return result;
-      }) as Record<string, unknown>[];
+    const documents: SearchDocument[] = this.searchResponseListViewItems.map(
+      (item) => item.document,
+    );
 
     const finalComponents: JSX.Element[] = [];
 
@@ -260,7 +264,7 @@ export class SearchcraftBaseSearchResults {
 
     if (
       this.searchTerm.length > 0 &&
-      this.searchResults?.data?.hits?.length === 0
+      this.searchResponseListViewItems.length === 0
     ) {
       this.noResults?.emit();
     }
@@ -269,7 +273,7 @@ export class SearchcraftBaseSearchResults {
       <div class='searchcraft-search-results-container'>
         {finalComponents}
         {this.searchTerm.length > 0 &&
-          this.searchResults?.data?.hits?.length === 0 && (
+          this.searchResponseListViewItems.length === 0 && (
             <div class='searchcraft-search-results-error-message-container'>
               <searchcraft-error-message
                 error-message={`No search results found for "${this.searchTerm}" query`}

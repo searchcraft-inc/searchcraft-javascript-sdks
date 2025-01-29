@@ -27,10 +27,10 @@ export class SearchcraftResultsInfo {
 
   connectedCallback() {
     this.unsubscribe = useSearchcraftStore.subscribe((state) => {
-      this.resultsCount = state.searchResults?.data?.count || 0;
-      this.responseTime = (
-        (state.searchResults?.data?.time_taken || 0) * 1000
-      ).toFixed(2);
+      this.resultsCount = state.searchResponseListViewItems.length;
+      this.responseTime = ((state.searchResponseTimeTaken || 0) * 1000).toFixed(
+        2,
+      );
       this.searchTerm = state.searchTerm || '';
     });
   }

@@ -63,8 +63,8 @@ export class SearchcraftFacetList {
   private searchStore = useSearchcraftStore.getState();
 
   handleStateUpdate(state: SearchcraftState) {
-    const facetPrime = state.searchResults?.data.facets;
-    const timeTaken = state.searchResults?.data.time_taken;
+    const facetPrime = state.searchResponseFacetPrime;
+    const timeTaken = state.searchResponseTimeTaken;
 
     if (!this.fieldName) {
       return;

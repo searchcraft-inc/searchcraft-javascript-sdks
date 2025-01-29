@@ -4,7 +4,7 @@ import type {
   RangeValueForIndexField,
   SDKDebugger,
   SearchcraftCore,
-  SearchcraftResponse,
+  SearchcraftListViewItem,
 } from '@searchcraft/core';
 
 /**
@@ -19,9 +19,8 @@ export interface SearchcraftStateFunctions {
   removeRangeValueForIndexField: (fieldName: string) => void;
   resetFacetPaths: () => void;
   search: () => Promise<void>;
-  setFacets: (facets: FacetPrime) => void;
   setPopoverVisibility: (isVisible: boolean) => void;
-  setSearchResults: (results: SearchcraftResponse | null) => void;
+  setSearchResponseListViewItems: (results: SearchcraftListViewItem[]) => void;
   setSearchTerm: (searchTerm: string) => void;
   setSearchMode: (mode: 'fuzzy' | 'exact') => void;
   setSortType: (type: 'asc' | 'desc') => void;
@@ -33,12 +32,13 @@ export interface SearchcraftStateFunctions {
 export interface SearchcraftStateValues {
   core: SearchcraftCore | undefined;
   logger: SDKDebugger | undefined;
-  facets: FacetPrime | undefined;
   facetPathsForIndexFields: Record<string, FacetPathsForIndexField>;
   isPopoverVisible: boolean;
   rangeValueForIndexFields: Record<string, RangeValueForIndexField>;
   searchMode: 'fuzzy' | 'exact';
-  searchResults: SearchcraftResponse | null;
+  searchResponseListViewItems: SearchcraftListViewItem[];
+  searchResponseTimeTaken: number | undefined;
+  searchResponseFacetPrime: FacetPrime | undefined;
   searchTerm: string;
   sortType: 'asc' | 'desc';
 }

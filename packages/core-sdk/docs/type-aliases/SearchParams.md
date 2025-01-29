@@ -8,7 +8,7 @@
 
 > **SearchParams**: `object`
 
-* Parameters required to make a successful Search request.
+Parameters required to make a successful Search request.
 
 ## Type declaration
 
@@ -20,34 +20,34 @@
 
 > `optional` **limit**: `number`
 
-* The maximum number of results to return per page.
+The maximum number of results to return per page.
 Optional parameter. Defaults to 20 if not provided.
 
 ### mode
 
 > **mode**: `"fuzzy"` \| `"exact"`
 
-* The search mode, which can be either 'fuzzy' or 'exact'.
+The search mode, which can be either 'fuzzy' or 'exact'.
 
 ### offset?
 
 > `optional` **offset**: `number`
 
-* The starting point for the results, used for pagination.
+The starting point for the results, used for pagination.
 Optional parameter.
 
 ### order\_by?
 
 > `optional` **order\_by**: `string`
 
-* The field to order the results by (e.g., 'date_published', 'title', etc.).
+The field to order the results by (e.g., 'date_published', 'title', etc.).
 Optional parameter.
 
 ### query
 
 > **query**: `string`
 
-* The search query provided by the user.
+The search query provided by the user.
 
 ### rangeValueForIndexFields?
 
@@ -57,5 +57,5 @@ Optional parameter.
 
 > `optional` **sort**: `"asc"` \| `"desc"`
 
-* The sort order, which can be either 'asc' or 'desc'.
+The sort order, which can be either 'asc' or 'desc'.
 Optional parameter.

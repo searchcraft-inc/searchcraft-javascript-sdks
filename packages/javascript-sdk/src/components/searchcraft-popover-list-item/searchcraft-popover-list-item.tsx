@@ -37,7 +37,7 @@ export class SearchcraftPopoverListItem {
     if (searchcraft) {
       const document_position = this.documentPosition;
       const search_term = state.searchTerm;
-      const number_of_documents = state.searchResults?.data?.hits?.length || 0;
+      const number_of_documents = state.searchResponseListViewItems.length || 0;
 
       searchcraft.sendMeasureEvent('document_clicked', {
         document_position,

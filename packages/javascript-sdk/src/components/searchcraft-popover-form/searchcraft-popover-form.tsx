@@ -1,6 +1,10 @@
 import { Component, Element, Prop, State, h } from '@stencil/core';
 import classNames from 'classnames';
-import type { SearchcraftConfig, SearchcraftResponse } from '@searchcraft/core';
+import type {
+  SearchcraftConfig,
+  SearchcraftListViewItem,
+  SearchDocument,
+} from '@searchcraft/core';
 
 import { useSearchcraftStore } from '@provider/store';
 import type { PopoverResultMappings } from 'types';
@@ -67,7 +71,7 @@ export class SearchcraftPopoverForm {
 
   @State() isPopoverVisibleInState = false;
   @State() unsubscribe: (() => void) | undefined;
-  @State() searchResults: SearchcraftResponse | undefined;
+  @State() searchResponseListViewItems: SearchcraftListViewItem[] = [];
   @State() searchTerm: string | undefined;
   @State() isFocused = false;
   @State() breakpointSm = 576;
@@ -104,7 +108,7 @@ export class SearchcraftPopoverForm {
         this.handlePopoverVisibilityChange(state.isPopoverVisible);
       }
 
-      this.searchResults = { ...state.searchResults } as SearchcraftResponse;
+      this.searchResponseListViewItems = [...state.searchResponseListViewItems];
       this.searchTerm = state.searchTerm;
     });
   }
@@ -264,7 +268,7 @@ export class SearchcraftPopoverForm {
     return (
       this.searchTerm &&
       this.searchTerm?.trim()?.length > 0 &&
-      (this.searchResults?.data?.hits?.length || 0) > 0
+      this.searchResponseListViewItems.length > 0
     );
   }
 
@@ -372,11 +376,9 @@ export class SearchcraftPopoverForm {
   }
 
   render() {
-    const documents: Record<string, unknown>[] =
-      this.searchResults?.data?.hits?.map((data, _index) => {
-        const { doc: result } = data;
-        return result;
-      }) as Record<string, unknown>[];
+    const documents: SearchDocument[] = this.searchResponseListViewItems.map(
+      (item) => item.document,
+    );
 
     switch (this.type) {
       case 'inline':
