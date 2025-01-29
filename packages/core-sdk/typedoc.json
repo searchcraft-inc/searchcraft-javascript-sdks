@@ -1,9 +1,7 @@
 {
   "$schema": "https://typedoc.org/schema.json",
   "plugin": ["typedoc-plugin-markdown"],
-  "entryPoints": [
-    "./src/index.ts"
-  ],
+  "entryPoints": ["./src/index.ts"],
   "outputs": [
     {
       "name": "markdown",
@@ -11,6 +9,6 @@
     }
   ],
   "basePath": "./src",
-  "publicPath": "https://docs.searchcraft.io/reference/sdk/core",
+  "publicPath": "/reference/sdk/core",
   "disableSources": true
 }

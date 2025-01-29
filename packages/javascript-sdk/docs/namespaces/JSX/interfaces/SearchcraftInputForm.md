@@ -1,8 +1,8 @@
-[**@searchcraft/javascript-sdk**](https://docs.searchcraft.io/reference/sdk/js-vanilla/README.md)
+[**@searchcraft/javascript-sdk**](/reference/sdk/js-vanilla/README.md)
 
 ***
 
-[@searchcraft/javascript-sdk](https://docs.searchcraft.io/reference/sdk/js-vanilla/globals.md) / [JSX](https://docs.searchcraft.io/reference/sdk/js-vanilla/namespaces/JSX/README.md) / SearchcraftInputForm
+[@searchcraft/javascript-sdk](/reference/sdk/js-vanilla/globals.md) / [JSX](/reference/sdk/js-vanilla/namespaces/JSX/README.md) / SearchcraftInputForm
 
 # Interface: SearchcraftInputForm
 
@@ -54,7 +54,7 @@ Where to place the search button.
 
 ### config?
 
-> `optional` **config**: [`SearchcraftConfig`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/SearchcraftConfig.md)
+> `optional` **config**: [`SearchcraftConfig`](/reference/sdk/js-vanilla/interfaces/SearchcraftConfig.md)
 
 The Searchcraft config object.
 
@@ -86,7 +86,7 @@ When the input becomes unfocused.
 
 ##### event
 
-[`SearchcraftInputFormCustomEvent`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/SearchcraftInputFormCustomEvent.md)\<`void`\>
+[`SearchcraftInputFormCustomEvent`](/reference/sdk/js-vanilla/interfaces/SearchcraftInputFormCustomEvent.md)\<`void`\>
 
 #### Returns
 
@@ -104,7 +104,7 @@ When the input is cleared.
 
 ##### event
 
-[`SearchcraftInputFormCustomEvent`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/SearchcraftInputFormCustomEvent.md)\<`void`\>
+[`SearchcraftInputFormCustomEvent`](/reference/sdk/js-vanilla/interfaces/SearchcraftInputFormCustomEvent.md)\<`void`\>
 
 #### Returns
 
@@ -122,7 +122,7 @@ When the input becomes focused.
 
 ##### event
 
-[`SearchcraftInputFormCustomEvent`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/SearchcraftInputFormCustomEvent.md)\<`void`\>
+[`SearchcraftInputFormCustomEvent`](/reference/sdk/js-vanilla/interfaces/SearchcraftInputFormCustomEvent.md)\<`void`\>
 
 #### Returns
 
@@ -140,7 +140,7 @@ Event emitted when input initializes.
 
 ##### event
 
-[`SearchcraftInputFormCustomEvent`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/SearchcraftInputFormCustomEvent.md)\<`void`\>
+[`SearchcraftInputFormCustomEvent`](/reference/sdk/js-vanilla/interfaces/SearchcraftInputFormCustomEvent.md)\<`void`\>
 
 #### Returns
 
@@ -158,7 +158,7 @@ When no results are returned.
 
 ##### event
 
-[`SearchcraftInputFormCustomEvent`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/SearchcraftInputFormCustomEvent.md)\<`void`\>
+[`SearchcraftInputFormCustomEvent`](/reference/sdk/js-vanilla/interfaces/SearchcraftInputFormCustomEvent.md)\<`void`\>
 
 #### Returns
 
@@ -176,7 +176,7 @@ Event emitted when a query has been submitted.
 
 ##### event
 
-[`SearchcraftInputFormCustomEvent`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/SearchcraftInputFormCustomEvent.md)\<`string`\>
+[`SearchcraftInputFormCustomEvent`](/reference/sdk/js-vanilla/interfaces/SearchcraftInputFormCustomEvent.md)\<`string`\>
 
 #### Returns
 

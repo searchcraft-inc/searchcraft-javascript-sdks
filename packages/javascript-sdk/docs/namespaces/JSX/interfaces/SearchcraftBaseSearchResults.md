@@ -1,8 +1,8 @@
-[**@searchcraft/javascript-sdk**](https://docs.searchcraft.io/reference/sdk/js-vanilla/README.md)
+[**@searchcraft/javascript-sdk**](/reference/sdk/js-vanilla/README.md)
 
 ***
 
-[@searchcraft/javascript-sdk](https://docs.searchcraft.io/reference/sdk/js-vanilla/globals.md) / [JSX](https://docs.searchcraft.io/reference/sdk/js-vanilla/namespaces/JSX/README.md) / SearchcraftBaseSearchResults
+[@searchcraft/javascript-sdk](/reference/sdk/js-vanilla/globals.md) / [JSX](/reference/sdk/js-vanilla/namespaces/JSX/README.md) / SearchcraftBaseSearchResults
 
 # Interface: SearchcraftBaseSearchResults
 
@@ -101,7 +101,7 @@ When no results are returned.
 
 ##### event
 
-[`SearchcraftBaseSearchResultsCustomEvent`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/SearchcraftBaseSearchResultsCustomEvent.md)\<`void`\>
+[`SearchcraftBaseSearchResultsCustomEvent`](/reference/sdk/js-vanilla/interfaces/SearchcraftBaseSearchResultsCustomEvent.md)\<`void`\>
 
 #### Returns
 
@@ -135,6 +135,6 @@ The placement of the image for each result.
 
 ### searchResultMappings?
 
-> `optional` **searchResultMappings**: [`SearchResultMappings`](https://docs.searchcraft.io/reference/sdk/js-vanilla/type-aliases/SearchResultMappings.md)
+> `optional` **searchResultMappings**: [`SearchResultMappings`](/reference/sdk/js-vanilla/type-aliases/SearchResultMappings.md)
 
 Formats the content rendered for each result.

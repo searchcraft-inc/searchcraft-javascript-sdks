@@ -1,4 +1,4 @@
-[**@searchcraft/react-sdk**](https://docs.searchcraft.io/reference/sdk/react/README.md)
+[**@searchcraft/react-sdk**](/reference/sdk/js-react/README.md)
 
 ***
 
@@ -6,20 +6,20 @@
 
 ## Interfaces
 
-- [SearchcraftBaseSearchResultsProps](https://docs.searchcraft.io/reference/sdk/react/interfaces/SearchcraftBaseSearchResultsProps.md)
-- [SearchcraftFilterPanelProps](https://docs.searchcraft.io/reference/sdk/react/interfaces/SearchcraftFilterPanelProps.md)
-- [SearchcraftInputFormProps](https://docs.searchcraft.io/reference/sdk/react/interfaces/SearchcraftInputFormProps.md)
-- [SearchcraftPopoverButtonProps](https://docs.searchcraft.io/reference/sdk/react/interfaces/SearchcraftPopoverButtonProps.md)
-- [SearchcraftPopoverFormProps](https://docs.searchcraft.io/reference/sdk/react/interfaces/SearchcraftPopoverFormProps.md)
-- [SearchcraftResultsInfoProps](https://docs.searchcraft.io/reference/sdk/react/interfaces/SearchcraftResultsInfoProps.md)
-- [SearchcraftThemeProps](https://docs.searchcraft.io/reference/sdk/react/interfaces/SearchcraftThemeProps.md)
+- [SearchcraftBaseSearchResultsProps](/reference/sdk/js-react/interfaces/SearchcraftBaseSearchResultsProps.md)
+- [SearchcraftFilterPanelProps](/reference/sdk/js-react/interfaces/SearchcraftFilterPanelProps.md)
+- [SearchcraftInputFormProps](/reference/sdk/js-react/interfaces/SearchcraftInputFormProps.md)
+- [SearchcraftPopoverButtonProps](/reference/sdk/js-react/interfaces/SearchcraftPopoverButtonProps.md)
+- [SearchcraftPopoverFormProps](/reference/sdk/js-react/interfaces/SearchcraftPopoverFormProps.md)
+- [SearchcraftResultsInfoProps](/reference/sdk/js-react/interfaces/SearchcraftResultsInfoProps.md)
+- [SearchcraftThemeProps](/reference/sdk/js-react/interfaces/SearchcraftThemeProps.md)
 
 ## Functions
 
-- [SearchcraftBaseSearchResults](https://docs.searchcraft.io/reference/sdk/react/functions/SearchcraftBaseSearchResults.md)
-- [SearchcraftFilterPanel](https://docs.searchcraft.io/reference/sdk/react/functions/SearchcraftFilterPanel.md)
-- [SearchcraftInputForm](https://docs.searchcraft.io/reference/sdk/react/functions/SearchcraftInputForm.md)
-- [SearchcraftPopoverButton](https://docs.searchcraft.io/reference/sdk/react/functions/SearchcraftPopoverButton.md)
-- [SearchcraftPopoverForm](https://docs.searchcraft.io/reference/sdk/react/functions/SearchcraftPopoverForm.md)
-- [SearchcraftResultsInfo](https://docs.searchcraft.io/reference/sdk/react/functions/SearchcraftResultsInfo.md)
-- [SearchcraftTheme](https://docs.searchcraft.io/reference/sdk/react/functions/SearchcraftTheme.md)
+- [SearchcraftBaseSearchResults](/reference/sdk/js-react/functions/SearchcraftBaseSearchResults.md)
+- [SearchcraftFilterPanel](/reference/sdk/js-react/functions/SearchcraftFilterPanel.md)
+- [SearchcraftInputForm](/reference/sdk/js-react/functions/SearchcraftInputForm.md)
+- [SearchcraftPopoverButton](/reference/sdk/js-react/functions/SearchcraftPopoverButton.md)
+- [SearchcraftPopoverForm](/reference/sdk/js-react/functions/SearchcraftPopoverForm.md)
+- [SearchcraftResultsInfo](/reference/sdk/js-react/functions/SearchcraftResultsInfo.md)
+- [SearchcraftTheme](/reference/sdk/js-react/functions/SearchcraftTheme.md)

@@ -1,8 +1,8 @@
-[**@searchcraft/core**](https://docs.searchcraft.io/reference/sdk/core/README.md)
+[**@searchcraft/core**](/reference/sdk/core/README.md)
 
 ***
 
-[@searchcraft/core](https://docs.searchcraft.io/reference/sdk/core/globals.md) / MeasureRequest
+[@searchcraft/core](/reference/sdk/core/globals.md) / MeasureRequest
 
 # Interface: MeasureRequest
 
@@ -12,16 +12,16 @@ The type representing a measure request.
 
 ### event\_name
 
-> **event\_name**: [`MeasureEventName`](https://docs.searchcraft.io/reference/sdk/core/type-aliases/MeasureEventName.md)
+> **event\_name**: [`MeasureEventName`](/reference/sdk/core/type-aliases/MeasureEventName.md)
 
 ***
 
 ### properties
 
-> **properties**: [`MeasureRequestProperties`](https://docs.searchcraft.io/reference/sdk/core/interfaces/MeasureRequestProperties.md)
+> **properties**: [`MeasureRequestProperties`](/reference/sdk/core/interfaces/MeasureRequestProperties.md)
 
 ***
 
 ### user
 
-> **user**: [`MeasureRequestUser`](https://docs.searchcraft.io/reference/sdk/core/interfaces/MeasureRequestUser.md)
+> **user**: [`MeasureRequestUser`](/reference/sdk/core/interfaces/MeasureRequestUser.md)

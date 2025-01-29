@@ -1,10 +1,12 @@
-[**@searchcraft/react-sdk**](https://docs.searchcraft.io/reference/sdk/react/README.md)
+[**@searchcraft/react-sdk**](/reference/sdk/js-react/README.md)
 
 ***
 
-[@searchcraft/react-sdk](https://docs.searchcraft.io/reference/sdk/react/globals.md) / SearchcraftPopoverFormProps
+[@searchcraft/react-sdk](/reference/sdk/js-react/globals.md) / SearchcraftPopoverFormProps
 
 # Interface: SearchcraftPopoverFormProps
+
+The props for the SearchcraftPopoverForm component.
 
 ## Extends
 

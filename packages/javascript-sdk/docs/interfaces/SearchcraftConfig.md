@@ -1,12 +1,12 @@
-[**@searchcraft/javascript-sdk**](https://docs.searchcraft.io/reference/sdk/js-vanilla/README.md)
+[**@searchcraft/javascript-sdk**](/reference/sdk/js-vanilla/README.md)
 
 ***
 
-[@searchcraft/javascript-sdk](https://docs.searchcraft.io/reference/sdk/js-vanilla/globals.md) / SearchcraftConfig
+[@searchcraft/javascript-sdk](/reference/sdk/js-vanilla/globals.md) / SearchcraftConfig
 
 # Interface: SearchcraftConfig
 
-All fields must be provided to the SDKs to use Searchcraft
+The SearchcraftConfig object is used to initialize Searchcraft in your application.
 
 ## Properties
 

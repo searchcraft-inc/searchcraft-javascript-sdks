@@ -437,6 +437,15 @@ export namespace Components {
          */
         "min": number;
     }
+    /**
+     * This web component adds Searchcraft's built-in css theme to your page's <head> tag.
+     * It does not render anything visible, its only function is to manage the css styles on the page.
+     * ## Usage
+     * ```html
+     * <!-- index.html -->
+     * <searchcraft-theme />
+     * ```
+     */
     interface SearchcraftTheme {
     }
     /**
@@ -777,6 +786,15 @@ declare global {
         prototype: HTMLSearchcraftSliderElement;
         new (): HTMLSearchcraftSliderElement;
     };
+    /**
+     * This web component adds Searchcraft's built-in css theme to your page's <head> tag.
+     * It does not render anything visible, its only function is to manage the css styles on the page.
+     * ## Usage
+     * ```html
+     * <!-- index.html -->
+     * <searchcraft-theme />
+     * ```
+     */
     interface HTMLSearchcraftThemeElement extends Components.SearchcraftTheme, HTMLStencilElement {
     }
     var HTMLSearchcraftThemeElement: {
@@ -1289,6 +1307,15 @@ declare namespace LocalJSX {
          */
         "onRangeChanged"?: (event: SearchcraftSliderCustomEvent<any>) => void;
     }
+    /**
+     * This web component adds Searchcraft's built-in css theme to your page's <head> tag.
+     * It does not render anything visible, its only function is to manage the css styles on the page.
+     * ## Usage
+     * ```html
+     * <!-- index.html -->
+     * <searchcraft-theme />
+     * ```
+     */
     interface SearchcraftTheme {
     }
     /**
@@ -1500,6 +1527,15 @@ declare module "@stencil/core" {
              * It is consumed by the `searchcraft-filter-panel` component.
              */
             "searchcraft-slider": LocalJSX.SearchcraftSlider & JSXBase.HTMLAttributes<HTMLSearchcraftSliderElement>;
+            /**
+             * This web component adds Searchcraft's built-in css theme to your page's <head> tag.
+             * It does not render anything visible, its only function is to manage the css styles on the page.
+             * ## Usage
+             * ```html
+             * <!-- index.html -->
+             * <searchcraft-theme />
+             * ```
+             */
             "searchcraft-theme": LocalJSX.SearchcraftTheme & JSXBase.HTMLAttributes<HTMLSearchcraftThemeElement>;
             /**
              * This web component simulates a light switch functionality, providing a simple and intuitive toggle between two states—on and off.

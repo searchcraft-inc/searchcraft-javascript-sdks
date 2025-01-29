@@ -1,8 +1,8 @@
-[**@searchcraft/javascript-sdk**](https://docs.searchcraft.io/reference/sdk/js-vanilla/README.md)
+[**@searchcraft/javascript-sdk**](/reference/sdk/js-vanilla/README.md)
 
 ***
 
-[@searchcraft/javascript-sdk](https://docs.searchcraft.io/reference/sdk/js-vanilla/globals.md) / [JSX](https://docs.searchcraft.io/reference/sdk/js-vanilla/namespaces/JSX/README.md) / SearchcraftFilterPanel
+[@searchcraft/javascript-sdk](/reference/sdk/js-vanilla/globals.md) / [JSX](/reference/sdk/js-vanilla/namespaces/JSX/README.md) / SearchcraftFilterPanel
 
 # Interface: SearchcraftFilterPanel
 
@@ -17,6 +17,6 @@ This web component represents a series of filters that allows users to refine an
 
 ### items?
 
-> `optional` **items**: [`FilterItem`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/FilterItem.md)[]
+> `optional` **items**: [`FilterItem`](/reference/sdk/js-vanilla/interfaces/FilterItem.md)[]
 
 The items to filter.
