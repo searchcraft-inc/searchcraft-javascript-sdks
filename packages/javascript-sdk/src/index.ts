@@ -14,7 +14,7 @@ export {
   serializeStyles,
 } from './utils';
 
-export { useSearchcraftStore, useThemeStore } from './provider/store';
+export { useSearchcraftStore } from './provider/store';
 
 export type { Components } from './components';
 

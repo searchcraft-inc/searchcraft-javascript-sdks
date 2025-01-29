@@ -72,6 +72,26 @@
 
 ***
 
+### log()
+
+> **log**(`level`, `message`): `void`
+
+#### Parameters
+
+##### level
+
+[`LogLevel`](/reference/sdk/core/enumerations/LogLevel.md)
+
+##### message
+
+`string`
+
+#### Returns
+
+`void`
+
+***
+
 ### warn()
 
 > **warn**(`message`): `void`

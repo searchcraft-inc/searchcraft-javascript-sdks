@@ -47,4 +47,21 @@ export class SDKDebugger {
       console.error(this.logFormatter(LogLevel.ERROR, message));
     }
   }
+
+  log(level: LogLevel, message: string) {
+    switch (level) {
+      case LogLevel.DEBUG:
+        this.debug(message);
+        break;
+      case LogLevel.INFO:
+        this.info(message);
+        break;
+      case LogLevel.WARN:
+        this.warn(message);
+        break;
+      case LogLevel.ERROR:
+        this.error(message);
+        break;
+    }
+  }
 }
