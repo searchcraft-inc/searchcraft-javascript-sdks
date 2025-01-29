@@ -1,8 +1,8 @@
-[**@searchcraft/javascript-sdk**](https://docs.searchcraft.io/reference/sdk/js-vanilla/README.md)
+[**@searchcraft/javascript-sdk**](/reference/sdk/js-vanilla/README.md)
 
 ***
 
-[@searchcraft/javascript-sdk](https://docs.searchcraft.io/reference/sdk/js-vanilla/globals.md) / [Components](https://docs.searchcraft.io/reference/sdk/js-vanilla/namespaces/Components/README.md) / SearchcraftPopoverForm
+[@searchcraft/javascript-sdk](/reference/sdk/js-vanilla/globals.md) / [Components](/reference/sdk/js-vanilla/namespaces/Components/README.md) / SearchcraftPopoverForm
 
 # Interface: SearchcraftPopoverForm
 
@@ -35,7 +35,7 @@ popoverForm.popoverResultMappings = {
 
 ### config
 
-> **config**: `undefined` \| [`SearchcraftConfig`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/SearchcraftConfig.md)
+> **config**: `undefined` \| [`SearchcraftConfig`](/reference/sdk/js-vanilla/interfaces/SearchcraftConfig.md)
 
 The Searchcraft config object.
 
@@ -59,7 +59,7 @@ The hotkey modifier that activates the popover. Used together with the `hotkey` 
 
 ### popoverResultMappings
 
-> **popoverResultMappings**: `undefined` \| [`PopoverResultMappings`](https://docs.searchcraft.io/reference/sdk/js-vanilla/type-aliases/PopoverResultMappings.md)
+> **popoverResultMappings**: `undefined` \| [`PopoverResultMappings`](/reference/sdk/js-vanilla/type-aliases/PopoverResultMappings.md)
 
 Formats the content rendered for each result.
 

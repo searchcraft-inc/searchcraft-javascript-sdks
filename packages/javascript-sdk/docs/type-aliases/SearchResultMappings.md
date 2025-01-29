@@ -1,8 +1,8 @@
-[**@searchcraft/javascript-sdk**](https://docs.searchcraft.io/reference/sdk/js-vanilla/README.md)
+[**@searchcraft/javascript-sdk**](/reference/sdk/js-vanilla/README.md)
 
 ***
 
-[@searchcraft/javascript-sdk](https://docs.searchcraft.io/reference/sdk/js-vanilla/globals.md) / SearchResultMappings
+[@searchcraft/javascript-sdk](/reference/sdk/js-vanilla/globals.md) / SearchResultMappings
 
 # Type Alias: SearchResultMappings
 
@@ -12,28 +12,28 @@
 
 ### body?
 
-> `optional` **body**: [`SearchResultMapping`](https://docs.searchcraft.io/reference/sdk/js-vanilla/type-aliases/SearchResultMapping.md)
+> `optional` **body**: [`SearchResultMapping`](/reference/sdk/js-vanilla/type-aliases/SearchResultMapping.md)
 
 ### buttonHref?
 
-> `optional` **buttonHref**: [`SearchResultMapping`](https://docs.searchcraft.io/reference/sdk/js-vanilla/type-aliases/SearchResultMapping.md)
+> `optional` **buttonHref**: [`SearchResultMapping`](/reference/sdk/js-vanilla/type-aliases/SearchResultMapping.md)
 
 ### containerHref?
 
-> `optional` **containerHref**: [`SearchResultMapping`](https://docs.searchcraft.io/reference/sdk/js-vanilla/type-aliases/SearchResultMapping.md)
+> `optional` **containerHref**: [`SearchResultMapping`](/reference/sdk/js-vanilla/type-aliases/SearchResultMapping.md)
 
 ### footer?
 
-> `optional` **footer**: [`SearchResultMapping`](https://docs.searchcraft.io/reference/sdk/js-vanilla/type-aliases/SearchResultMapping.md)
+> `optional` **footer**: [`SearchResultMapping`](/reference/sdk/js-vanilla/type-aliases/SearchResultMapping.md)
 
 ### imageSource?
 
-> `optional` **imageSource**: [`SearchResultMapping`](https://docs.searchcraft.io/reference/sdk/js-vanilla/type-aliases/SearchResultMapping.md)
+> `optional` **imageSource**: [`SearchResultMapping`](/reference/sdk/js-vanilla/type-aliases/SearchResultMapping.md)
 
 ### subtitle?
 
-> `optional` **subtitle**: [`SearchResultMapping`](https://docs.searchcraft.io/reference/sdk/js-vanilla/type-aliases/SearchResultMapping.md)
+> `optional` **subtitle**: [`SearchResultMapping`](/reference/sdk/js-vanilla/type-aliases/SearchResultMapping.md)
 
 ### title?
 
-> `optional` **title**: [`SearchResultMapping`](https://docs.searchcraft.io/reference/sdk/js-vanilla/type-aliases/SearchResultMapping.md)
+> `optional` **title**: [`SearchResultMapping`](/reference/sdk/js-vanilla/type-aliases/SearchResultMapping.md)

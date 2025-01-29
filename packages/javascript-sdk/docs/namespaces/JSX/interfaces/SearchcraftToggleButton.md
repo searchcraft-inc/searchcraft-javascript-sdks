@@ -1,8 +1,8 @@
-[**@searchcraft/javascript-sdk**](https://docs.searchcraft.io/reference/sdk/js-vanilla/README.md)
+[**@searchcraft/javascript-sdk**](/reference/sdk/js-vanilla/README.md)
 
 ***
 
-[@searchcraft/javascript-sdk](https://docs.searchcraft.io/reference/sdk/js-vanilla/globals.md) / [JSX](https://docs.searchcraft.io/reference/sdk/js-vanilla/namespaces/JSX/README.md) / SearchcraftToggleButton
+[@searchcraft/javascript-sdk](/reference/sdk/js-vanilla/globals.md) / [JSX](/reference/sdk/js-vanilla/namespaces/JSX/README.md) / SearchcraftToggleButton
 
 # Interface: SearchcraftToggleButton
 
@@ -29,7 +29,7 @@ When the toggle element is changed.
 
 ##### event
 
-[`SearchcraftToggleButtonCustomEvent`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/SearchcraftToggleButtonCustomEvent.md)\<`boolean`\>
+[`SearchcraftToggleButtonCustomEvent`](/reference/sdk/js-vanilla/interfaces/SearchcraftToggleButtonCustomEvent.md)\<`boolean`\>
 
 #### Returns
 

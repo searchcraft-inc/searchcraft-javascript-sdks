@@ -1,8 +1,8 @@
-[**@searchcraft/core**](https://docs.searchcraft.io/reference/sdk/core/README.md)
+[**@searchcraft/core**](/reference/sdk/core/README.md)
 
 ***
 
-[@searchcraft/core](https://docs.searchcraft.io/reference/sdk/core/globals.md) / BatchMeasureRequest
+[@searchcraft/core](/reference/sdk/core/globals.md) / BatchMeasureRequest
 
 # Interface: BatchMeasureRequest
 
@@ -13,4 +13,4 @@ Uses /measure/batch request.
 
 ### items
 
-> **items**: [`MeasureRequest`](https://docs.searchcraft.io/reference/sdk/core/interfaces/MeasureRequest.md)[]
+> **items**: [`MeasureRequest`](/reference/sdk/core/interfaces/MeasureRequest.md)[]

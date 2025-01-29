@@ -1,18 +1,20 @@
-[**@searchcraft/react-sdk**](https://docs.searchcraft.io/reference/sdk/react/README.md)
+[**@searchcraft/react-sdk**](/reference/sdk/js-react/README.md)
 
 ***
 
-[@searchcraft/react-sdk](https://docs.searchcraft.io/reference/sdk/react/globals.md) / SearchcraftFilterPanel
+[@searchcraft/react-sdk](/reference/sdk/js-react/globals.md) / SearchcraftFilterPanel
 
 # Function: SearchcraftFilterPanel()
 
 > **SearchcraftFilterPanel**(`props`, `deprecatedLegacyContext`?): `ReactNode`
 
+The React component for the SearchcraftFilterPanel.
+
 ## Parameters
 
 ### props
 
-[`SearchcraftFilterPanelProps`](https://docs.searchcraft.io/reference/sdk/react/interfaces/SearchcraftFilterPanelProps.md)
+[`SearchcraftFilterPanelProps`](/reference/sdk/js-react/interfaces/SearchcraftFilterPanelProps.md)
 
 ### deprecatedLegacyContext?
 

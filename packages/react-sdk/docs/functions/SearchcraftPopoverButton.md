@@ -1,18 +1,20 @@
-[**@searchcraft/react-sdk**](https://docs.searchcraft.io/reference/sdk/react/README.md)
+[**@searchcraft/react-sdk**](/reference/sdk/js-react/README.md)
 
 ***
 
-[@searchcraft/react-sdk](https://docs.searchcraft.io/reference/sdk/react/globals.md) / SearchcraftPopoverButton
+[@searchcraft/react-sdk](/reference/sdk/js-react/globals.md) / SearchcraftPopoverButton
 
 # Function: SearchcraftPopoverButton()
 
 > **SearchcraftPopoverButton**(`props`, `deprecatedLegacyContext`?): `ReactNode`
 
+The React component for the SearchcraftPopoverButton.
+
 ## Parameters
 
 ### props
 
-[`SearchcraftPopoverButtonProps`](https://docs.searchcraft.io/reference/sdk/react/interfaces/SearchcraftPopoverButtonProps.md)
+[`SearchcraftPopoverButtonProps`](/reference/sdk/js-react/interfaces/SearchcraftPopoverButtonProps.md)
 
 ### deprecatedLegacyContext?
 

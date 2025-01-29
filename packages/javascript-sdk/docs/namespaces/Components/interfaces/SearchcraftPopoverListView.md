@@ -1,8 +1,8 @@
-[**@searchcraft/javascript-sdk**](https://docs.searchcraft.io/reference/sdk/js-vanilla/README.md)
+[**@searchcraft/javascript-sdk**](/reference/sdk/js-vanilla/README.md)
 
 ***
 
-[@searchcraft/javascript-sdk](https://docs.searchcraft.io/reference/sdk/js-vanilla/globals.md) / [Components](https://docs.searchcraft.io/reference/sdk/js-vanilla/namespaces/Components/README.md) / SearchcraftPopoverListView
+[@searchcraft/javascript-sdk](/reference/sdk/js-vanilla/globals.md) / [Components](/reference/sdk/js-vanilla/namespaces/Components/README.md) / SearchcraftPopoverListView
 
 # Interface: SearchcraftPopoverListView
 
@@ -26,6 +26,6 @@ The documents to render in the list view.
 
 ### popoverResultMappings
 
-> **popoverResultMappings**: `undefined` \| [`PopoverResultMappings`](https://docs.searchcraft.io/reference/sdk/js-vanilla/type-aliases/PopoverResultMappings.md)
+> **popoverResultMappings**: `undefined` \| [`PopoverResultMappings`](/reference/sdk/js-vanilla/type-aliases/PopoverResultMappings.md)
 
 The mappings that define how the data in the documents are mapped to the list-view-item elements.

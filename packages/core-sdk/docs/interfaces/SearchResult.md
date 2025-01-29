@@ -1,8 +1,8 @@
-[**@searchcraft/core**](https://docs.searchcraft.io/reference/sdk/core/README.md)
+[**@searchcraft/core**](/reference/sdk/core/README.md)
 
 ***
 
-[@searchcraft/core](https://docs.searchcraft.io/reference/sdk/core/globals.md) / SearchResult
+[@searchcraft/core](/reference/sdk/core/globals.md) / SearchResult
 
 # Interface: SearchResult
 
@@ -18,13 +18,13 @@
 
 ### facets?
 
-> `optional` **facets**: [`FacetPrime`](https://docs.searchcraft.io/reference/sdk/core/type-aliases/FacetPrime.md)
+> `optional` **facets**: [`FacetPrime`](/reference/sdk/core/type-aliases/FacetPrime.md)
 
 ***
 
 ### hits?
 
-> `optional` **hits**: [`SearchIndexEntry`](https://docs.searchcraft.io/reference/sdk/core/interfaces/SearchIndexEntry.md)[]
+> `optional` **hits**: [`SearchIndexEntry`](/reference/sdk/core/interfaces/SearchIndexEntry.md)[]
 
 ***
 

@@ -1,9 +1,11 @@
-[**@searchcraft/vue-sdk**](https://docs.searchcraft.io/reference/sdk/vue/README.md)
+[**@searchcraft/vue-sdk**](/reference/sdk/js-vue/README.md)
 
 ***
 
-[@searchcraft/vue-sdk](https://docs.searchcraft.io/reference/sdk/vue/globals.md) / SearchcraftPopoverButton
+[@searchcraft/vue-sdk](/reference/sdk/js-vue/globals.md) / SearchcraftPopoverButton
 
 # Variable: SearchcraftPopoverButton
 
-> **SearchcraftPopoverButton**: `DefineComponent`\<\{\}, () => `Element`, \{\}, \{\}, \{\}, `ComponentOptionsMixin`, `ComponentOptionsMixin`, \{\}, `string`, `PublicProps`, `ToResolvedProps`\<\{\}, \{\}\>, \{\}, \{\}, \{\}, \{\}, `string`, `ComponentProvideOptions`, `true`, \{\}, `any`\>
+> `const` **SearchcraftPopoverButton**: `DefineSetupFnComponent`\<`SearchcraftPopoverButton` & `InputProps`\<`string` \| `number` \| `boolean`\>, \{\}, \{\}, `SearchcraftPopoverButton` & `InputProps`\<`string` \| `number` \| `boolean`\>, `PublicProps`\> = `Component`
+
+The Vue component for the SearchcraftPopoverButton.

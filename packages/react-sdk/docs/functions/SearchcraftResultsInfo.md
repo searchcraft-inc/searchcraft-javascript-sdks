@@ -1,18 +1,20 @@
-[**@searchcraft/react-sdk**](https://docs.searchcraft.io/reference/sdk/react/README.md)
+[**@searchcraft/react-sdk**](/reference/sdk/js-react/README.md)
 
 ***
 
-[@searchcraft/react-sdk](https://docs.searchcraft.io/reference/sdk/react/globals.md) / SearchcraftResultsInfo
+[@searchcraft/react-sdk](/reference/sdk/js-react/globals.md) / SearchcraftResultsInfo
 
 # Function: SearchcraftResultsInfo()
 
 > **SearchcraftResultsInfo**(`props`, `deprecatedLegacyContext`?): `ReactNode`
 
+The React component for SearchcraftResultsInfo.
+
 ## Parameters
 
 ### props
 
-[`SearchcraftResultsInfoProps`](https://docs.searchcraft.io/reference/sdk/react/interfaces/SearchcraftResultsInfoProps.md)
+[`SearchcraftResultsInfoProps`](/reference/sdk/js-react/interfaces/SearchcraftResultsInfoProps.md)
 
 ### deprecatedLegacyContext?
 

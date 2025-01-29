@@ -1,18 +1,20 @@
-[**@searchcraft/react-sdk**](https://docs.searchcraft.io/reference/sdk/react/README.md)
+[**@searchcraft/react-sdk**](/reference/sdk/js-react/README.md)
 
 ***
 
-[@searchcraft/react-sdk](https://docs.searchcraft.io/reference/sdk/react/globals.md) / SearchcraftTheme
+[@searchcraft/react-sdk](/reference/sdk/js-react/globals.md) / SearchcraftTheme
 
 # Function: SearchcraftTheme()
 
 > **SearchcraftTheme**(`props`, `deprecatedLegacyContext`?): `ReactNode`
 
+The react component for SearchcraftTheme.
+
 ## Parameters
 
 ### props
 
-[`SearchcraftThemeProps`](https://docs.searchcraft.io/reference/sdk/react/interfaces/SearchcraftThemeProps.md)
+[`SearchcraftThemeProps`](/reference/sdk/js-react/interfaces/SearchcraftThemeProps.md)
 
 ### deprecatedLegacyContext?
 

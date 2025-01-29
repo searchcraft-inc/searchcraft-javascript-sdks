@@ -1,8 +1,8 @@
-[**@searchcraft/core**](https://docs.searchcraft.io/reference/sdk/core/README.md)
+[**@searchcraft/core**](/reference/sdk/core/README.md)
 
 ***
 
-[@searchcraft/core](https://docs.searchcraft.io/reference/sdk/core/globals.md) / SearchDocument
+[@searchcraft/core](/reference/sdk/core/globals.md) / SearchDocument
 
 # Interface: SearchDocument\<T\>
 

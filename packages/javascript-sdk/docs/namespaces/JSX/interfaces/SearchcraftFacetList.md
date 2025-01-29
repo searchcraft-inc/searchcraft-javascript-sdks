@@ -1,8 +1,8 @@
-[**@searchcraft/javascript-sdk**](https://docs.searchcraft.io/reference/sdk/js-vanilla/README.md)
+[**@searchcraft/javascript-sdk**](/reference/sdk/js-vanilla/README.md)
 
 ***
 
-[@searchcraft/javascript-sdk](https://docs.searchcraft.io/reference/sdk/js-vanilla/globals.md) / [JSX](https://docs.searchcraft.io/reference/sdk/js-vanilla/namespaces/JSX/README.md) / SearchcraftFacetList
+[@searchcraft/javascript-sdk](/reference/sdk/js-vanilla/globals.md) / [JSX](/reference/sdk/js-vanilla/namespaces/JSX/README.md) / SearchcraftFacetList
 
 # Interface: SearchcraftFacetList
 
@@ -41,7 +41,7 @@ When the facets are updated.
 
 ##### event
 
-[`SearchcraftFacetListCustomEvent`](https://docs.searchcraft.io/reference/sdk/js-vanilla/interfaces/SearchcraftFacetListCustomEvent.md)\<\{ `paths`: `string`[]; \}\>
+[`SearchcraftFacetListCustomEvent`](/reference/sdk/js-vanilla/interfaces/SearchcraftFacetListCustomEvent.md)\<\{ `paths`: `string`[]; \}\>
 
 #### Returns
 

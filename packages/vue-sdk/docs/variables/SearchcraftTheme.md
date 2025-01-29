@@ -1,9 +1,11 @@
-[**@searchcraft/vue-sdk**](https://docs.searchcraft.io/reference/sdk/vue/README.md)
+[**@searchcraft/vue-sdk**](/reference/sdk/js-vue/README.md)
 
 ***
 
-[@searchcraft/vue-sdk](https://docs.searchcraft.io/reference/sdk/vue/globals.md) / SearchcraftTheme
+[@searchcraft/vue-sdk](/reference/sdk/js-vue/globals.md) / SearchcraftTheme
 
 # Variable: SearchcraftTheme
 
-> **SearchcraftTheme**: `DefineComponent`\<\{\}, () => `Element`, \{\}, \{\}, \{\}, `ComponentOptionsMixin`, `ComponentOptionsMixin`, \{\}, `string`, `PublicProps`, `ToResolvedProps`\<\{\}, \{\}\>, \{\}, \{\}, \{\}, \{\}, `string`, `ComponentProvideOptions`, `true`, \{\}, `any`\>
+> `const` **SearchcraftTheme**: `DefineSetupFnComponent`\<`SearchcraftTheme` & `InputProps`\<`string` \| `number` \| `boolean`\>, \{\}, \{\}, `SearchcraftTheme` & `InputProps`\<`string` \| `number` \| `boolean`\>, `PublicProps`\> = `Component`
+
+The Vue component for SearchcraftTheme.
