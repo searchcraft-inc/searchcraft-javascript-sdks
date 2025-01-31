@@ -9,6 +9,7 @@
 ## Interfaces
 
 - [SearchcraftBaseSearchResult](/reference/sdk/js-vanilla/namespaces/Components/interfaces/SearchcraftBaseSearchResult.md)
+- [SearchcraftBaseSearchResultAd](/reference/sdk/js-vanilla/namespaces/Components/interfaces/SearchcraftBaseSearchResultAd.md)
 - [SearchcraftBaseSearchResults](/reference/sdk/js-vanilla/namespaces/Components/interfaces/SearchcraftBaseSearchResults.md)
 - [SearchcraftButton](/reference/sdk/js-vanilla/namespaces/Components/interfaces/SearchcraftButton.md)
 - [SearchcraftErrorMessage](/reference/sdk/js-vanilla/namespaces/Components/interfaces/SearchcraftErrorMessage.md)

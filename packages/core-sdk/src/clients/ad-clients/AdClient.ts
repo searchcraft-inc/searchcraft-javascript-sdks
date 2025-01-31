@@ -9,7 +9,6 @@ export class AdClient {
 
   constructor(config: SearchcraftConfig) {
     this.config = config;
-    console.log(this.config);
   }
 
   async getAdsForSearchParams(

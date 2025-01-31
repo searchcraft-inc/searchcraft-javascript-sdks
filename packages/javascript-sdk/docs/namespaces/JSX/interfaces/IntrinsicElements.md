@@ -14,6 +14,12 @@
 
 ***
 
+### searchcraft-base-search-result-ad
+
+> **searchcraft-base-search-result-ad**: [`SearchcraftBaseSearchResultAd`](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftBaseSearchResultAd.md)
+
+***
+
 ### searchcraft-base-search-results
 
 > **searchcraft-base-search-results**: [`SearchcraftBaseSearchResults`](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftBaseSearchResults.md)

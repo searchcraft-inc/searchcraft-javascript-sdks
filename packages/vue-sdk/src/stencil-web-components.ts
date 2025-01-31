@@ -9,31 +9,26 @@ import type { JSX } from '@searchcraft/javascript-sdk';
 
 
 export const SearchcraftBaseSearchResult = /*@__PURE__*/ defineContainer<JSX.SearchcraftBaseSearchResult>('searchcraft-base-search-result', undefined, [
-  'titleContent',
-  'subtitleContent',
-  'bodyContent',
-  'footerContent',
-  'buttonLabel',
-  'buttonHref',
-  'buttonTarget',
-  'buttonRel',
-  'containerHref',
+  'item',
+  'searchResultMappings',
   'containerTarget',
   'containerRel',
-  'imageSrc',
-  'imageAlt',
+  'buttonTarget',
+  'buttonRel',
   'imagePlacement',
   'customStyles',
   'documentPosition'
 ]);
 
 
+export const SearchcraftBaseSearchResultAd = /*@__PURE__*/ defineContainer<JSX.SearchcraftBaseSearchResultAd>('searchcraft-base-search-result-ad', undefined, [
+  'adClientResponseItem'
+]);
+
+
 export const SearchcraftBaseSearchResults = /*@__PURE__*/ defineContainer<JSX.SearchcraftBaseSearchResults>('searchcraft-base-search-results', undefined, [
-  'adInterval',
   'customStylesForResults',
   'searchResultMappings',
-  'placeAdAtEnd',
-  'placeAdAtStart',
   'resultImagePlacement',
   'buttonLabel',
   'buttonTarget',

@@ -45,7 +45,6 @@
 - [MeasureEventName](/reference/sdk/core/type-aliases/MeasureEventName.md)
 - [QueryObject](/reference/sdk/core/type-aliases/QueryObject.md)
 - [RangeValueForIndexField](/reference/sdk/core/type-aliases/RangeValueForIndexField.md)
-- [SearchcraftAdProvider](/reference/sdk/core/type-aliases/SearchcraftAdProvider.md)
 - [SearchcraftResponseError](/reference/sdk/core/type-aliases/SearchcraftResponseError.md)
 - [SearchParams](/reference/sdk/core/type-aliases/SearchParams.md)
 - [SimpleQuery](/reference/sdk/core/type-aliases/SimpleQuery.md)
