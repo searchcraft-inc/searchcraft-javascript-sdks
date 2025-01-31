@@ -16,13 +16,6 @@ Parameters required to make a successful Search request.
 
 > `optional` **facetPathsForIndexFields**: `Record`\<`string`, [`FacetPathsForIndexField`](/reference/sdk/core/type-aliases/FacetPathsForIndexField.md)\>
 
-### limit?
-
-> `optional` **limit**: `number`
-
-The maximum number of results to return per page.
-Optional parameter. Defaults to 20 if not provided.
-
 ### mode
 
 > **mode**: `"fuzzy"` \| `"exact"`
@@ -43,15 +36,15 @@ Optional parameter.
 The field to order the results by (e.g., 'date_published', 'title', etc.).
 Optional parameter.
 
-### query
-
-> **query**: `string`
-
-The search query provided by the user.
-
 ### rangeValueForIndexFields?
 
 > `optional` **rangeValueForIndexFields**: `Record`\<`string`, [`RangeValueForIndexField`](/reference/sdk/core/type-aliases/RangeValueForIndexField.md)\>
+
+### searchTerm
+
+> **searchTerm**: `string`
+
+The search term provided by the user.
 
 ### sort?
 

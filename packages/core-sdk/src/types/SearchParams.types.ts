@@ -39,12 +39,6 @@ export type QueryObject = SimpleQuery | ComplexQuery;
  */
 export type SearchParams = {
   /**
-   * The maximum number of results to return per page.
-   * Optional parameter. Defaults to 20 if not provided.
-   */
-  limit?: number;
-
-  /**
    * The search mode, which can be either 'fuzzy' or 'exact'.
    */
   mode: 'fuzzy' | 'exact';
@@ -62,9 +56,9 @@ export type SearchParams = {
   order_by?: string;
 
   /**
-   * The search query provided by the user.
+   * The search term provided by the user.
    */
-  query: string;
+  searchTerm: string;
 
   /**
    * The sort order, which can be either 'asc' or 'desc'.

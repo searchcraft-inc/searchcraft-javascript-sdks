@@ -18,40 +18,12 @@ The document position relative to the search results (For Measure)
 
 ***
 
-### href
+### item
 
-> **href**: `undefined` \| `string`
-
-The link href
+> **item**: `undefined` \| [`SearchClientResponseItem`](/reference/sdk/js-vanilla/interfaces/SearchClientResponseItem.md)
 
 ***
 
-### imageAlt
+### popoverResultMappings
 
-> **imageAlt**: `undefined` \| `string`
-
-The image alt tag.
-
-***
-
-### imageSrc
-
-> **imageSrc**: `undefined` \| `string`
-
-The source of the image. If not included, no item will be rendered.
-
-***
-
-### subtitleContent
-
-> **subtitleContent**: `undefined` \| `string`
-
-The result subtitle
-
-***
-
-### titleContent
-
-> **titleContent**: `undefined` \| `string`
-
-The result title
+> **popoverResultMappings**: `undefined` \| [`PopoverResultMappings`](/reference/sdk/js-vanilla/type-aliases/PopoverResultMappings.md)

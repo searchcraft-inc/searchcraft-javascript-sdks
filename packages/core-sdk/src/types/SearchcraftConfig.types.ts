@@ -1,3 +1,5 @@
+import type { SearchcraftAdProvider } from './SearchClientResponses.types';
+
 /**
  * The SearchcraftConfig object is used to initialize Searchcraft in your application.
  */
@@ -22,6 +24,17 @@ export interface SearchcraftConfig {
    * The amount of delay, in milliseconds, to debounce search requests. Defaults to `0`.
    */
   searchDebounceDelay?: number;
+  /**
+   * The maximum number of results to return per page.
+   */
+  searchResultsPerPage?: number;
+  /**
+   * Name of the ad provider to use.
+   */
+  adProvider?: SearchcraftAdProvider;
+  admProductAdQuantity?: number;
+  admTextAdQuantity?: number;
+  admSub: string;
 }
 
 /**

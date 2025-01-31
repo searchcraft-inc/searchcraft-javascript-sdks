@@ -10,7 +10,7 @@ export interface SDKDebuggerOptions {
   logFormatter?: (level: LogLevel, message: string) => string;
 }
 
-export class SDKDebugger {
+export class Logger {
   private logLevel: LogLevel;
   private logFormatter: (level: LogLevel, message: string) => string;
 

@@ -10,6 +10,32 @@ The SearchcraftConfig object is used to initialize Searchcraft in your applicati
 
 ## Properties
 
+### admProductAdQuantity?
+
+> `optional` **admProductAdQuantity**: `number`
+
+***
+
+### admSub
+
+> **admSub**: `string`
+
+***
+
+### admTextAdQuantity?
+
+> `optional` **admTextAdQuantity**: `number`
+
+***
+
+### adProvider?
+
+> `optional` **adProvider**: [`SearchcraftAdProvider`](/reference/sdk/core/type-aliases/SearchcraftAdProvider.md)
+
+Name of the ad provider to use.
+
+***
+
 ### endpointURL
 
 > **endpointURL**: `string`
@@ -39,6 +65,14 @@ The Index read key provided by Vektron.
 > `optional` **searchDebounceDelay**: `number`
 
 The amount of delay, in milliseconds, to debounce search requests. Defaults to `0`.
+
+***
+
+### searchResultsPerPage?
+
+> `optional` **searchResultsPerPage**: `number`
+
+The maximum number of results to return per page.
 
 ***
 

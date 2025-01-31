@@ -8,7 +8,7 @@ import {
 } from '@stencil/core';
 
 import type {
-  SearchcraftListViewItem,
+  SearchClientResponseItem,
   SearchDocument,
 } from '@searchcraft/core';
 
@@ -113,7 +113,7 @@ export class SearchcraftBaseSearchResults {
 
   @State() hasSearched = false;
   @State() searchTerm = '';
-  @State() searchResponseListViewItems: SearchcraftListViewItem[] = [];
+  @State() searchClientResponseItems: SearchClientResponseItem[] = [];
 
   private unsubscribe: () => void = () => {};
 
@@ -124,15 +124,15 @@ export class SearchcraftBaseSearchResults {
       } else {
         this.hasSearched = false;
       }
-      this.searchResponseListViewItems = [
-        ...state.searchResponseListViewItems,
-      ] as SearchcraftListViewItem[];
+      this.searchClientResponseItems = [
+        ...state.searchClientResponseItems,
+      ] as SearchClientResponseItem[];
       this.searchTerm = state.searchTerm;
     });
 
-    const { searchResponseListViewItems, searchTerm } =
+    const { searchClientResponseItems, searchTerm } =
       useSearchcraftStore.getState();
-    this.searchResponseListViewItems = searchResponseListViewItems;
+    this.searchClientResponseItems = searchClientResponseItems;
     this.searchTerm = searchTerm;
   }
 
@@ -214,11 +214,11 @@ export class SearchcraftBaseSearchResults {
       );
     }
 
-    if (this.searchResponseListViewItems.length === 0) {
+    if (this.searchClientResponseItems.length === 0) {
       return;
     }
 
-    const documents: SearchDocument[] = this.searchResponseListViewItems.map(
+    const documents: SearchDocument[] = this.searchClientResponseItems.map(
       (item) => item.document,
     );
 
@@ -264,7 +264,7 @@ export class SearchcraftBaseSearchResults {
 
     if (
       this.searchTerm.length > 0 &&
-      this.searchResponseListViewItems.length === 0
+      this.searchClientResponseItems.length === 0
     ) {
       this.noResults?.emit();
     }
@@ -273,7 +273,7 @@ export class SearchcraftBaseSearchResults {
       <div class='searchcraft-search-results-container'>
         {finalComponents}
         {this.searchTerm.length > 0 &&
-          this.searchResponseListViewItems.length === 0 && (
+          this.searchClientResponseItems.length === 0 && (
             <div class='searchcraft-search-results-error-message-container'>
               <searchcraft-error-message
                 error-message={`No search results found for "${this.searchTerm}" query`}

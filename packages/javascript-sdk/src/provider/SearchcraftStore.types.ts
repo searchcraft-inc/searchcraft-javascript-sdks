@@ -2,9 +2,10 @@ import type {
   FacetPathsForIndexField,
   FacetPrime,
   RangeValueForIndexField,
-  SDKDebugger,
+  Logger,
   SearchcraftCore,
-  SearchcraftListViewItem,
+  SearchClientResponseItem,
+  AdClientResponseItem,
 } from '@searchcraft/core';
 
 /**
@@ -20,7 +21,7 @@ export interface SearchcraftStateFunctions {
   resetFacetPaths: () => void;
   search: () => Promise<void>;
   setPopoverVisibility: (isVisible: boolean) => void;
-  setSearchResponseListViewItems: (results: SearchcraftListViewItem[]) => void;
+  setSearchClientResponseItems: (results: SearchClientResponseItem[]) => void;
   setSearchTerm: (searchTerm: string) => void;
   setSearchMode: (mode: 'fuzzy' | 'exact') => void;
   setSortType: (type: 'asc' | 'desc') => void;
@@ -30,13 +31,14 @@ export interface SearchcraftStateFunctions {
  * Values stored in SearchcraftStore.
  */
 export interface SearchcraftStateValues {
+  adClientResponseItems: AdClientResponseItem[];
   core: SearchcraftCore | undefined;
-  logger: SDKDebugger | undefined;
+  logger: Logger | undefined;
   facetPathsForIndexFields: Record<string, FacetPathsForIndexField>;
   isPopoverVisible: boolean;
   rangeValueForIndexFields: Record<string, RangeValueForIndexField>;
   searchMode: 'fuzzy' | 'exact';
-  searchResponseListViewItems: SearchcraftListViewItem[];
+  searchClientResponseItems: SearchClientResponseItem[];
   searchResponseTimeTaken: number | undefined;
   searchResponseFacetPrime: FacetPrime | undefined;
   searchTerm: string;

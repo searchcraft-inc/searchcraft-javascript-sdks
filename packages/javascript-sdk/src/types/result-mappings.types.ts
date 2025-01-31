@@ -9,3 +9,11 @@ export type SearchResultMappings = {
   subtitle?: SearchResultMapping;
   title?: SearchResultMapping;
 };
+
+export type PopoverResultMappings = {
+  title?: SearchResultMapping;
+  subtitle?: SearchResultMapping;
+  imageSource?: SearchResultMapping;
+  imageAlt?: SearchResultMapping;
+  href?: SearchResultMapping;
+};
