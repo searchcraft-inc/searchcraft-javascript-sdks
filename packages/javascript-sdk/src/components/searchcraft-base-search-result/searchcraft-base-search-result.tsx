@@ -1,5 +1,11 @@
 import { useSearchcraftStore } from '@provider/store';
-import { Component, Fragment, h, Prop } from '@stencil/core';
+import type {
+  SearchClientResponseItem,
+  SearchDocument,
+} from '@searchcraft/core';
+import { Component, Fragment, h, Prop, State } from '@stencil/core';
+import { getDocumentValueFromSearchResultMapping } from '@utils';
+import type { SearchResultMappings } from 'types';
 
 /**
  * This web component is designed to display detailed information for a single search result.
@@ -11,42 +17,8 @@ import { Component, Fragment, h, Prop } from '@stencil/core';
   shadow: false,
 })
 export class SearchcraftBaseSearchResult {
-  /**
-   * The title content.
-   */
-  @Prop() titleContent: string | undefined;
-  /**
-   * The subtitle content.
-   */
-  @Prop() subtitleContent: string | undefined;
-  /**
-   * The body content.
-   */
-  @Prop() bodyContent: string | undefined;
-  /**
-   * The footer content.
-   */
-  @Prop() footerContent: string | undefined;
-  /**
-   * The label for the button rendered when containerHref is not present.
-   */
-  @Prop() buttonLabel: string | undefined;
-  /**
-   * The link for the button rendered when containerHref is not present.
-   */
-  @Prop() buttonHref: string | undefined;
-  /**
-   * Where to open the link for the button rendered when containerHref is not present.
-   */
-  @Prop() buttonTarget: '_blank' | '_self' | '_top' | '_parent' = '_blank';
-  /**
-   * The relationship between the current document and the link for the button rendered when containerHref is not present.
-   */
-  @Prop() buttonRel: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
-  /**
-   * The link for the containing element.
-   */
-  @Prop() containerHref: string | undefined;
+  @Prop() item: SearchClientResponseItem | undefined;
+  @Prop() searchResultMappings: SearchResultMappings | undefined;
   /**
    * Where to open the link for the containing element.
    */
@@ -56,13 +28,13 @@ export class SearchcraftBaseSearchResult {
    */
   @Prop() containerRel: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
   /**
-   * The image source.
+   * Where to open the link for the button rendered when containerHref is not present.
    */
-  @Prop() imageSrc: string | undefined;
+  @Prop() buttonTarget: '_blank' | '_self' | '_top' | '_parent' = '_blank';
   /**
-   * The image alternative text.
+   * The relationship between the current document and the link for the button rendered when containerHref is not present.
    */
-  @Prop() imageAlt: string | undefined;
+  @Prop() buttonRel: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
   /**
    * The placement of the image.
    */
@@ -76,9 +48,56 @@ export class SearchcraftBaseSearchResult {
    */
   @Prop() documentPosition = 0;
 
+  @State() titleContent: string | undefined;
+  @State() subtitleContent: string | undefined;
+  @State() bodyContent: string | undefined;
+  @State() footerContent: string | undefined;
+  @State() buttonLabel: string | undefined;
+  @State() buttonHref: string | undefined;
+  @State() containerHref: string | undefined;
+  @State() imageSrc: string | undefined;
+  @State() imageAlt: string | undefined;
+
   private searchcraftStore = useSearchcraftStore.getState();
 
-  private recordMeasureEvent = () => {
+  connectedCallback() {
+    if (this.item) {
+      this.mapValuesFromDocument(this.item.document);
+    }
+  }
+
+  mapValuesFromDocument(document: SearchDocument) {
+    this.titleContent = getDocumentValueFromSearchResultMapping(
+      document,
+      this.searchResultMappings?.title,
+    );
+    this.subtitleContent = getDocumentValueFromSearchResultMapping(
+      document,
+      this.searchResultMappings?.subtitle,
+    );
+    this.bodyContent = getDocumentValueFromSearchResultMapping(
+      document,
+      this.searchResultMappings?.body,
+    );
+    this.containerHref = getDocumentValueFromSearchResultMapping(
+      document,
+      this.searchResultMappings?.containerHref,
+    );
+    this.buttonHref = getDocumentValueFromSearchResultMapping(
+      document,
+      this.searchResultMappings?.buttonHref,
+    );
+    this.imageSrc = getDocumentValueFromSearchResultMapping(
+      document,
+      this.searchResultMappings?.imageSource,
+    );
+    this.footerContent = getDocumentValueFromSearchResultMapping(
+      document,
+      this.searchResultMappings?.footer,
+    );
+  }
+
+  private handleLinkClick = () => {
     const searchcraft = this.searchcraftStore.getSearchcraftInstance();
 
     if (searchcraft) {
@@ -176,7 +195,7 @@ export class SearchcraftBaseSearchResult {
       return (
         <a
           class='searchcraft-search-result-container'
-          onClick={this.recordMeasureEvent}
+          onClick={this.handleLinkClick}
           href={this.containerHref}
           rel={this.containerRel}
           style={styles.container || {}}

@@ -14,11 +14,15 @@ The SearchcraftConfig object is used to initialize Searchcraft in your applicati
 
 > `optional` **admProductAdQuantity**: `number`
 
+The maximum number of product ads to show for a single search term.
+
 ***
 
 ### admSub
 
 > **admSub**: `string`
+
+The adm sub value.
 
 ***
 
@@ -26,11 +30,13 @@ The SearchcraftConfig object is used to initialize Searchcraft in your applicati
 
 > `optional` **admTextAdQuantity**: `number`
 
+The maximum number of text ads to show for a single search term.
+
 ***
 
 ### adProvider?
 
-> `optional` **adProvider**: [`SearchcraftAdProvider`](/reference/sdk/core/type-aliases/SearchcraftAdProvider.md)
+> `optional` **adProvider**: `"adMarketplace"` \| `"Nativo"` \| `"Custom"` \| `"None"`
 
 Name of the ad provider to use.
 

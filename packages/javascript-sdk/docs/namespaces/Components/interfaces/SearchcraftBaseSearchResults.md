@@ -35,14 +35,6 @@ baseSearchResults.addEventListener('noResults', () => {
 
 ## Properties
 
-### adInterval
-
-> **adInterval**: `number`
-
-How often ads are injected.
-
-***
-
 ### buttonLabel
 
 > **buttonLabel**: `undefined` \| `string`
@@ -88,22 +80,6 @@ Where to open the link for the containing element for each result.
 > **customStylesForResults**: `undefined` \| `string` \| `Record`\<`string`, `Record`\<`string`, `string`\>\>
 
 A custom styles object.
-
-***
-
-### placeAdAtEnd
-
-> **placeAdAtEnd**: `boolean`
-
-Should an ad be placed at the end of the results.
-
-***
-
-### placeAdAtStart
-
-> **placeAdAtStart**: `boolean`
-
-Should an ad be placed at the start of the results.
 
 ***
 

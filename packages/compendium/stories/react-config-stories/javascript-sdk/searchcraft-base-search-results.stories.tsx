@@ -1,5 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import type { SearchResultMappings } from '@searchcraft/javascript-sdk';
+import type {
+  SearchcraftConfig,
+  SearchResultMappings,
+} from '@searchcraft/javascript-sdk';
 import { config } from '../../../utils/DefaultSearchcraftConfig';
 import { useEffect } from 'react';
 import type { Components } from '@searchcraft/javascript-sdk';
@@ -58,6 +61,58 @@ export const Default: StoryObj<Components.SearchcraftBaseSearchResults> = {
 
         if (searchForm) {
           searchForm.config = config;
+        }
+        if (searchResults) {
+          searchResults.searchResultMappings = mappings;
+        }
+      }, []);
+
+      return <Story />;
+    },
+  ],
+  render: (args) => {
+    return (
+      <>
+        <searchcraft-theme />
+        <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
+          <searchcraft-input-form />
+          <div style={{ paddingTop: 20 }}>
+            <searchcraft-base-search-results
+              ad-interval={args.adInterval}
+              place-ad-at-end
+              place-ad-at-start
+              result-image-placement={args.resultImagePlacement}
+              button-target={args.buttonTarget}
+              button-rel={args.buttonRel}
+              container-target={args.containerTarget}
+              container-rel={args.containerRel}
+            />
+          </div>
+        </div>
+      </>
+    );
+  },
+  args: {},
+};
+
+export const WithAds: StoryObj<Components.SearchcraftBaseSearchResults> = {
+  decorators: [
+    (Story) => {
+      useEffect(() => {
+        const searchForm = document.querySelector('searchcraft-input-form');
+        const searchResults = document.querySelector(
+          'searchcraft-base-search-results',
+        );
+
+        if (searchForm) {
+          const adConfig: SearchcraftConfig = {
+            ...config,
+            adProvider: 'adMarketplace',
+            admSub: 'searchbox1',
+            admProductAdQuantity: 2,
+            admTextAdQuantity: 2,
+          };
+          searchForm.config = adConfig;
         }
         if (searchResults) {
           searchResults.searchResultMappings = mappings;

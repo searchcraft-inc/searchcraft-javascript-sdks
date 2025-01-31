@@ -10,6 +10,7 @@
 
 - [IntrinsicElements](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/IntrinsicElements.md)
 - [SearchcraftBaseSearchResult](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftBaseSearchResult.md)
+- [SearchcraftBaseSearchResultAd](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftBaseSearchResultAd.md)
 - [SearchcraftBaseSearchResults](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftBaseSearchResults.md)
 - [SearchcraftButton](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftButton.md)
 - [SearchcraftErrorMessage](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftErrorMessage.md)

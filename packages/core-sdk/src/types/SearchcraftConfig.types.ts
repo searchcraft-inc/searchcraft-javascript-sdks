@@ -1,5 +1,3 @@
-import type { SearchcraftAdProvider } from './SearchClientResponses.types';
-
 /**
  * The SearchcraftConfig object is used to initialize Searchcraft in your application.
  */
@@ -31,9 +29,18 @@ export interface SearchcraftConfig {
   /**
    * Name of the ad provider to use.
    */
-  adProvider?: SearchcraftAdProvider;
+  adProvider?: 'adMarketplace' | 'Nativo' | 'Custom' | 'None';
+  /**
+   * The maximum number of product ads to show for a single search term.
+   */
   admProductAdQuantity?: number;
+  /**
+   * The maximum number of text ads to show for a single search term.
+   */
   admTextAdQuantity?: number;
+  /**
+   * The adm sub value.
+   */
   admSub: string;
 }
 

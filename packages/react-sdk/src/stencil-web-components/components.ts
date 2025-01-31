@@ -7,6 +7,7 @@
 
 /* eslint-disable */
 
+import { SearchcraftBaseSearchResultAd as SearchcraftBaseSearchResultAdElement, defineCustomElement as defineSearchcraftBaseSearchResultAd } from "@searchcraft/javascript-sdk/dist/components/searchcraft-base-search-result-ad.js";
 import { SearchcraftBaseSearchResult as SearchcraftBaseSearchResultElement, defineCustomElement as defineSearchcraftBaseSearchResult } from "@searchcraft/javascript-sdk/dist/components/searchcraft-base-search-result.js";
 import { SearchcraftBaseSearchResults as SearchcraftBaseSearchResultsElement, defineCustomElement as defineSearchcraftBaseSearchResults } from "@searchcraft/javascript-sdk/dist/components/searchcraft-base-search-results.js";
 import { SearchcraftButton as SearchcraftButtonElement, defineCustomElement as defineSearchcraftButton } from "@searchcraft/javascript-sdk/dist/components/searchcraft-button.js";
@@ -37,6 +38,17 @@ export const SearchcraftBaseSearchResult: StencilReactComponent<SearchcraftBaseS
     react: React,
     events: {} as SearchcraftBaseSearchResultEvents,
     defineCustomElement: defineSearchcraftBaseSearchResult
+});
+
+type SearchcraftBaseSearchResultAdEvents = NonNullable<unknown>;
+
+export const SearchcraftBaseSearchResultAd: StencilReactComponent<SearchcraftBaseSearchResultAdElement, SearchcraftBaseSearchResultAdEvents> = /*@__PURE__*/ createComponent<SearchcraftBaseSearchResultAdElement, SearchcraftBaseSearchResultAdEvents>({
+    tagName: 'searchcraft-base-search-result-ad',
+    elementClass: SearchcraftBaseSearchResultAdElement,
+    // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
+    react: React,
+    events: {} as SearchcraftBaseSearchResultAdEvents,
+    defineCustomElement: defineSearchcraftBaseSearchResultAd
 });
 
 type SearchcraftBaseSearchResultsEvents = { onNoResults: EventName<CustomEvent<void>> };

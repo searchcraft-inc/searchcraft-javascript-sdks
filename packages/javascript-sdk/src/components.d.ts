@@ -5,12 +5,12 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { AdClientResponseItem, SearchClientResponseItem, SearchcraftConfig } from "@searchcraft/core";
 import { PopoverResultMappings, SearchResultMappings } from "./types/index";
 import { FilterItem } from "./types/searchcraft-filter-panel.types";
-import { AdClientResponseItem, SearchClientResponseItem, SearchcraftConfig } from "@searchcraft/core";
+export { AdClientResponseItem, SearchClientResponseItem, SearchcraftConfig } from "@searchcraft/core";
 export { PopoverResultMappings, SearchResultMappings } from "./types/index";
 export { FilterItem } from "./types/searchcraft-filter-panel.types";
-export { AdClientResponseItem, SearchClientResponseItem, SearchcraftConfig } from "@searchcraft/core";
 export namespace Components {
     /**
      * This web component is designed to display detailed information for a single search result.
@@ -19,18 +19,6 @@ export namespace Components {
      */
     interface SearchcraftBaseSearchResult {
         /**
-          * The body content.
-         */
-        "bodyContent": string | undefined;
-        /**
-          * The link for the button rendered when containerHref is not present.
-         */
-        "buttonHref": string | undefined;
-        /**
-          * The label for the button rendered when containerHref is not present.
-         */
-        "buttonLabel": string | undefined;
-        /**
           * The relationship between the current document and the link for the button rendered when containerHref is not present.
          */
         "buttonRel": 'noreferrer' | 'noopener' | 'nofollow' | undefined;
@@ -38,10 +26,6 @@ export namespace Components {
           * Where to open the link for the button rendered when containerHref is not present.
          */
         "buttonTarget": '_blank' | '_self' | '_top' | '_parent';
-        /**
-          * The link for the containing element.
-         */
-        "containerHref": string | undefined;
         /**
           * The relationship between the current document and the link for the containing element.
          */
@@ -59,29 +43,17 @@ export namespace Components {
          */
         "documentPosition": number;
         /**
-          * The footer content.
-         */
-        "footerContent": string | undefined;
-        /**
-          * The image alternative text.
-         */
-        "imageAlt": string | undefined;
-        /**
           * The placement of the image.
          */
         "imagePlacement": 'left' | 'right';
-        /**
-          * The image source.
-         */
-        "imageSrc": string | undefined;
-        /**
-          * The subtitle content.
-         */
-        "subtitleContent": string | undefined;
-        /**
-          * The title content.
-         */
-        "titleContent": string | undefined;
+        "item": SearchClientResponseItem | undefined;
+        "searchResultMappings": SearchResultMappings | undefined;
+    }
+    /**
+     * A single list item rendered in a searchcraft-popover-list-view.
+     */
+    interface SearchcraftBaseSearchResultAd {
+        "adClientResponseItem"?: AdClientResponseItem;
     }
     /**
      * This web component is responsible for displaying the results of a search query.
@@ -113,10 +85,6 @@ export namespace Components {
      */
     interface SearchcraftBaseSearchResults {
         /**
-          * How often ads are injected.
-         */
-        "adInterval": number;
-        /**
           * The label for the button rendered when containerHref is not present for each result.
          */
         "buttonLabel": string | undefined;
@@ -142,14 +110,6 @@ export namespace Components {
         "customStylesForResults": | string
     | Record<string, Record<string, string>>
     | undefined;
-        /**
-          * Should an ad be placed at the end of the results.
-         */
-        "placeAdAtEnd": boolean;
-        /**
-          * Should an ad be placed at the start of the results.
-         */
-        "placeAdAtStart": boolean;
         /**
           * The placement of the image for each result.
          */
@@ -488,6 +448,15 @@ declare global {
         prototype: HTMLSearchcraftBaseSearchResultElement;
         new (): HTMLSearchcraftBaseSearchResultElement;
     };
+    /**
+     * A single list item rendered in a searchcraft-popover-list-view.
+     */
+    interface HTMLSearchcraftBaseSearchResultAdElement extends Components.SearchcraftBaseSearchResultAd, HTMLStencilElement {
+    }
+    var HTMLSearchcraftBaseSearchResultAdElement: {
+        prototype: HTMLSearchcraftBaseSearchResultAdElement;
+        new (): HTMLSearchcraftBaseSearchResultAdElement;
+    };
     interface HTMLSearchcraftBaseSearchResultsElementEventMap {
         "noResults": void;
     }
@@ -822,6 +791,7 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "searchcraft-base-search-result": HTMLSearchcraftBaseSearchResultElement;
+        "searchcraft-base-search-result-ad": HTMLSearchcraftBaseSearchResultAdElement;
         "searchcraft-base-search-results": HTMLSearchcraftBaseSearchResultsElement;
         "searchcraft-button": HTMLSearchcraftButtonElement;
         "searchcraft-error-message": HTMLSearchcraftErrorMessageElement;
@@ -848,18 +818,6 @@ declare namespace LocalJSX {
      */
     interface SearchcraftBaseSearchResult {
         /**
-          * The body content.
-         */
-        "bodyContent"?: string | undefined;
-        /**
-          * The link for the button rendered when containerHref is not present.
-         */
-        "buttonHref"?: string | undefined;
-        /**
-          * The label for the button rendered when containerHref is not present.
-         */
-        "buttonLabel"?: string | undefined;
-        /**
           * The relationship between the current document and the link for the button rendered when containerHref is not present.
          */
         "buttonRel"?: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
@@ -867,10 +825,6 @@ declare namespace LocalJSX {
           * Where to open the link for the button rendered when containerHref is not present.
          */
         "buttonTarget"?: '_blank' | '_self' | '_top' | '_parent';
-        /**
-          * The link for the containing element.
-         */
-        "containerHref"?: string | undefined;
         /**
           * The relationship between the current document and the link for the containing element.
          */
@@ -888,29 +842,17 @@ declare namespace LocalJSX {
          */
         "documentPosition"?: number;
         /**
-          * The footer content.
-         */
-        "footerContent"?: string | undefined;
-        /**
-          * The image alternative text.
-         */
-        "imageAlt"?: string | undefined;
-        /**
           * The placement of the image.
          */
         "imagePlacement"?: 'left' | 'right';
-        /**
-          * The image source.
-         */
-        "imageSrc"?: string | undefined;
-        /**
-          * The subtitle content.
-         */
-        "subtitleContent"?: string | undefined;
-        /**
-          * The title content.
-         */
-        "titleContent"?: string | undefined;
+        "item"?: SearchClientResponseItem | undefined;
+        "searchResultMappings"?: SearchResultMappings | undefined;
+    }
+    /**
+     * A single list item rendered in a searchcraft-popover-list-view.
+     */
+    interface SearchcraftBaseSearchResultAd {
+        "adClientResponseItem"?: AdClientResponseItem;
     }
     /**
      * This web component is responsible for displaying the results of a search query.
@@ -942,10 +884,6 @@ declare namespace LocalJSX {
      */
     interface SearchcraftBaseSearchResults {
         /**
-          * How often ads are injected.
-         */
-        "adInterval"?: number;
-        /**
           * The label for the button rendered when containerHref is not present for each result.
          */
         "buttonLabel"?: string | undefined;
@@ -975,14 +913,6 @@ declare namespace LocalJSX {
           * When no results are returned.
          */
         "onNoResults"?: (event: SearchcraftBaseSearchResultsCustomEvent<void>) => void;
-        /**
-          * Should an ad be placed at the end of the results.
-         */
-        "placeAdAtEnd"?: boolean;
-        /**
-          * Should an ad be placed at the start of the results.
-         */
-        "placeAdAtStart"?: boolean;
         /**
           * The placement of the image for each result.
          */
@@ -1326,6 +1256,7 @@ declare namespace LocalJSX {
     }
     interface IntrinsicElements {
         "searchcraft-base-search-result": SearchcraftBaseSearchResult;
+        "searchcraft-base-search-result-ad": SearchcraftBaseSearchResultAd;
         "searchcraft-base-search-results": SearchcraftBaseSearchResults;
         "searchcraft-button": SearchcraftButton;
         "searchcraft-error-message": SearchcraftErrorMessage;
@@ -1354,6 +1285,10 @@ declare module "@stencil/core" {
              * It is consumed within the `searchcraft-base-search-results` component.
              */
             "searchcraft-base-search-result": LocalJSX.SearchcraftBaseSearchResult & JSXBase.HTMLAttributes<HTMLSearchcraftBaseSearchResultElement>;
+            /**
+             * A single list item rendered in a searchcraft-popover-list-view.
+             */
+            "searchcraft-base-search-result-ad": LocalJSX.SearchcraftBaseSearchResultAd & JSXBase.HTMLAttributes<HTMLSearchcraftBaseSearchResultAdElement>;
             /**
              * This web component is responsible for displaying the results of a search query.
              * Once a query is submitted, the component formats and presents an ordered list of the results.

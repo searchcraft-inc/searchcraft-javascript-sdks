@@ -1,0 +1,50 @@
+@use "../typography.scss";
+
+.searchcraft-base-ad {
+  all: unset;
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+  gap: 8px;
+  padding-right: var(--sc-popover-list-item-padding-horizontal);
+  padding-left: var(--sc-popover-list-item-padding-horizontal);
+  padding-top: var(--sc-popover-list-item-padding-vertical);
+  padding-bottom: var(--sc-popover-list-item-padding-vertical);
+  background-color: var(--sc-surface-neutral-primary);
+  border-radius: 16px;
+
+  border: 1px solid blue;
+}
+
+.searchcraft-base-ad-title {
+  @include typography.body();
+  margin: 0;
+  color: inherit;
+}
+
+.searchcraft-base-ad-subtitle {
+  @include typography.body-small();
+  margin: 0;
+  color: inherit;
+}
+
+.searchcraft-base-ad-image-wrapper {
+  width: var(--sc-popover-list-item-image-size);
+  height: var(--sc-popover-list-item-image-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.searchcraft-base-ad-image {
+  max-width: var(--sc-popover-list-item-image-size);
+  max-height: var(--sc-popover-list-item-image-size);
+}
+
+.searchcraft-base-ad-info-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+}
