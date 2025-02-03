@@ -26,7 +26,7 @@ export class MeasureClient {
   ) {
     this.config = {
       ...config,
-      // Strips off the trailing '/' from an endpointURL is one is accidentally added
+      // Strips off the trailing '/' from an endpointURL if one is accidentally added
       endpointURL: removeTrailingSlashFromEndpointURL(config.endpointURL),
     };
     this.sdkInfo = sdkInfo;
