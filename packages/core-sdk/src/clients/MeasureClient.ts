@@ -7,7 +7,6 @@ import type {
   SearchcraftConfig,
   SearchcraftSDKInfo,
 } from '../types';
-import { removeTrailingSlashFromEndpointURL } from '../utils';
 
 const MEASURE_REQUEST_DEBOUNCE = 500;
 
@@ -24,11 +23,7 @@ export class MeasureClient {
     sdkInfo: SearchcraftSDKInfo,
     userId: string,
   ) {
-    this.config = {
-      ...config,
-      // Strips off the trailing '/' from an endpointURL if one is accidentally added
-      endpointURL: removeTrailingSlashFromEndpointURL(config.endpointURL),
-    };
+    this.config = config;
     this.sdkInfo = sdkInfo;
     this.userId = userId;
     this.sessionId = nanoid();

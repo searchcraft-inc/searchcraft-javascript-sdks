@@ -4,7 +4,7 @@ import type {
   SearchcraftConfig,
   SearchcraftResponse,
 } from '../types';
-import { buildQueryObject, removeTrailingSlashFromEndpointURL } from '../utils';
+import { buildQueryObject } from '../utils';
 
 import type { MeasureClient } from './MeasureClient';
 
@@ -19,11 +19,7 @@ export class SearchClient {
     measureClient: MeasureClient,
   ) {
     this.measureClient = measureClient;
-    this.config = {
-      ...config,
-      // Strips off the trailing '/' from an endpointURL if one is accidentally added
-      endpointURL: removeTrailingSlashFromEndpointURL(config.endpointURL),
-    };
+    this.config = config;
     this.userId = userId;
   }
 

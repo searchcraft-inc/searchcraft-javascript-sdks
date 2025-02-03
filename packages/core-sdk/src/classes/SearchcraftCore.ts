@@ -1,21 +1,22 @@
-import type {
-  SearchcraftConfig,
-  SearchParams,
-  SearchcraftSDKInfo,
-  SearchClientResponseItem,
-  SearchIndexEntry,
-  SearchcraftResponse,
-  AdClientResponseItem,
-} from '../types';
+import { getFingerprint } from '@thumbmarkjs/thumbmarkjs';
+import { nanoid } from 'nanoid';
 import {
   type AdClient,
   AdMarketplaceClient,
   MeasureClient,
   NativoClient,
 } from '../clients';
-import { getFingerprint } from '@thumbmarkjs/thumbmarkjs';
 import { SearchClient } from '../clients/SearchClient';
-import { nanoid } from 'nanoid';
+import type {
+  AdClientResponseItem,
+  SearchClientResponseItem,
+  SearchIndexEntry,
+  SearchParams,
+  SearchcraftConfig,
+  SearchcraftResponse,
+  SearchcraftSDKInfo,
+} from '../types';
+import { removeTrailingSlashFromEndpointURL } from '../utils';
 
 /**
  * Javascript Class providing the functionality to interact with the Searchcraft BE
@@ -36,7 +37,11 @@ export class SearchcraftCore {
       );
     }
 
-    this.config = config;
+    this.config = {
+      ...config,
+      // Strips off the trailing '/' from an endpointURL if one is accidentally added
+      endpointURL: removeTrailingSlashFromEndpointURL(config.endpointURL),
+    };
     this.userId = '';
 
     this.initClients(config, sdkInfo);
