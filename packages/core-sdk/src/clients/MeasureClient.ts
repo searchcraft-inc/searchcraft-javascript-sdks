@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid';
 import type {
   MeasureEventName,
   MeasureRequest,
@@ -6,7 +7,7 @@ import type {
   SearchcraftConfig,
   SearchcraftSDKInfo,
 } from '../types';
-import { nanoid } from 'nanoid';
+import { removeTrailingSlashFromEndpointURL } from '../utils';
 
 const MEASURE_REQUEST_DEBOUNCE = 500;
 
@@ -17,6 +18,7 @@ export class MeasureClient {
   private sdkInfo: SearchcraftSDKInfo;
   private userId: string;
   private sessionId: string;
+  private parsedEndpointURL: string;
 
   constructor(
     config: SearchcraftConfig,
@@ -27,6 +29,10 @@ export class MeasureClient {
     this.sdkInfo = sdkInfo;
     this.userId = userId;
     this.sessionId = nanoid();
+    // Strips off the trailing '/' from an endpointURL is one is accidentally added
+    this.parsedEndpointURL = removeTrailingSlashFromEndpointURL(
+      this.config.endpointURL,
+    );
 
     this.sendMeasureEvent('sdk_initialized');
   }
@@ -35,7 +41,7 @@ export class MeasureClient {
    * Getter for the base url used by the /measure endpoints.
    */
   private get baseMeasureUrl(): string {
-    return `${this.config.endpointURL}/measure`;
+    return `${this.parsedEndpointURL}/measure`;
   }
 
   /**
