@@ -4,7 +4,7 @@ import type {
   SearchcraftConfig,
   SearchcraftResponse,
 } from '../types';
-import { buildQueryObject, removeTrailingSlashFromEndpointURL } from '../utils';
+import { buildQueryObject } from '../utils';
 
 import type { MeasureClient } from './MeasureClient';
 
@@ -12,7 +12,6 @@ export class SearchClient {
   private measureClient: MeasureClient;
   private config: SearchcraftConfig;
   private userId: string;
-  private parsedEndpointURL: string;
 
   constructor(
     config: SearchcraftConfig,
@@ -22,17 +21,13 @@ export class SearchClient {
     this.measureClient = measureClient;
     this.config = config;
     this.userId = userId;
-    // Strips off the trailing '/' from an endpointURL is one is accidentally added
-    this.parsedEndpointURL = removeTrailingSlashFromEndpointURL(
-      this.config.endpointURL,
-    );
   }
 
   /**
    * Getter for the base url used by the /search endpoint.
    */
   private get baseSearchUrl(): string {
-    return `${this.parsedEndpointURL}/index/${this.config.index.join(',')}/search`;
+    return `${this.config.endpointURL}/index/${this.config.index.join(',')}/search`;
   }
 
   /**
