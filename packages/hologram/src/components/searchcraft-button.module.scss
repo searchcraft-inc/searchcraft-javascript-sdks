@@ -1,10 +1,11 @@
 @use "../typography.scss";
 
 .searchcraft-button {
-  @include typography.body-bold;
+  @include typography.body;
 
   border-radius: 8px;
   display: flex;
+  font-weight: var(--sc-font-bold);
   padding: 12px 20px;
   position: relative;
 

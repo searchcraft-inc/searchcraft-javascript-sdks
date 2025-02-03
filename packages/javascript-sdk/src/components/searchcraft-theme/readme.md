@@ -13,8 +13,16 @@ It does not render anything visible, its only function is to manage the css styl
 ## Usage
 ```html
 <!-- index.html -->
-<searchcraft-theme />
+<searchcraft-theme theme="light" custom-theme="{}" />
 ```
+
+## Properties
+
+| Property      | Attribute      | Description                            | Type     | Default   |
+| ------------- | -------------- | -------------------------------------- | -------- | --------- |
+| `customTheme` | `custom-theme` | The custom theme configuration object. | `string` | `'[]'`    |
+| `theme`       | `theme`        | The name of the theme.                 | `string` | `'light'` |
+
 
 ----------------------------------------------
 

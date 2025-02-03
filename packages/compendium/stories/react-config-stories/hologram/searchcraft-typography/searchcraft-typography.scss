@@ -1,0 +1,61 @@
+@use "@searchcraft/hologram/src/typography.scss";
+
+.typography-samples {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.typography-sample {
+    display: grid;
+    grid-template-columns: 80px minmax(0, 1fr);
+    gap: 20px;
+}
+
+.typography-sample-heading {
+    @include typography.body-small();
+    align-items: center;
+    color: var(--sc-content-disabled);
+    display: flex;
+    justify-content: flex-end;
+    margin: 0;
+}
+
+.typography-sample-text {
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.heading-1 {
+    @include typography.heading-1();
+}
+
+.heading-2 {
+    @include typography.heading-2();
+}
+
+.heading-3 {
+    @include typography.heading-3();
+}
+
+.heading-4 {
+    @include typography.heading-4();
+}
+
+.heading-5 {
+    @include typography.heading-5();
+}
+
+.heading-6 {
+    @include typography.heading-6();
+}
+
+.body {
+    @include typography.body();
+}
+
+.body-small {
+    @include typography.body-small();
+}

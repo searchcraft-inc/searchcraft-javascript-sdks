@@ -1,5 +1,33 @@
 @use "../typography.scss";
 @use "../breakpoints.scss";
+@use "../appearance.scss";
+
+:root {
+  /**
+   * Border radius applied to popover form containers.
+   */
+  --sc-popover-form-border-radius: var(--sc-border-radius);
+  /**
+   * Height of the list view/results container portion of the popover form.
+   */
+  --sc-popover-list-view-height: 400px;
+  /**
+   * Size of images of list view items in the popover list view.
+   */
+  --sc-popover-list-item-image-size: 60px;
+  /**
+   * Horizontal padding of popover list items.
+   */
+  --sc-popover-list-item-padding-horizontal: 8px;
+  /**
+   * Vertical padding of popover list items.
+   */
+  --sc-popover-list-item-padding-vertical: 8px;
+  /**
+   * Maximum width of popover forms of type `modal`.
+   */
+  --sc-popover-modal-max-width: 570px;
+}
 
 /**
  * Styles applied to all popover form variants.
@@ -23,6 +51,10 @@
 
   & .searchcraft-popover-form-cancel-button {
     @include typography.body();
+    @include appearance.offset-border-radius(
+      var(--sc-popover-form-border-radius),
+      12px
+    );
     border: 0;
     outline: 0;
     padding: 0;
@@ -31,7 +63,6 @@
     cursor: pointer;
     padding-left: 12px;
     padding-right: 12px;
-    border-radius: calc(var(--sc-popover-form-border-radius) * 0.8);
 
     &:hover {
       background-color: var(--sc-surface-brand-secondary-hover);
@@ -81,7 +112,7 @@
     background-color: var(--sc-surface-neutral-secondary);
     border-bottom-left-radius: var(--sc-popover-form-border-radius);
     border-bottom-right-radius: var(--sc-popover-form-border-radius);
-    max-height: var(--sc-popover-list-view-height)
+    max-height: var(--sc-popover-list-view-height);
   }
 }
 
@@ -104,7 +135,10 @@
   }
 
   & .searchcraft-input {
-    border-radius: calc(var(--sc-popover-form-border-radius) * 0.8);
+    @include appearance.offset-border-radius(
+      var(--sc-popover-form-border-radius),
+      12px
+    );
     outline-width: 1px;
     outline-color: var(--sc-border-neutral);
   }
@@ -112,7 +146,7 @@
   & .searchcraft-popover-form-modal-backdrop {
     position: absolute;
     inset: 0;
-    background-color: rgba(0,0,0, 0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     display: none;
 
     @media (min-width: breakpoints.$breakpoint-sm) {
@@ -147,7 +181,7 @@
     border-bottom-right-radius: 0;
 
     @media (min-width: breakpoints.$breakpoint-sm) {
-      max-height: var(--sc-popover-list-view-height)
+      max-height: var(--sc-popover-list-view-height);
     }
   }
 
@@ -175,7 +209,10 @@
   }
 
   & .searchcraft-input {
-    border-radius: calc(var(--sc-popover-form-border-radius) * 0.8);
+    @include appearance.offset-border-radius(
+      var(--sc-popover-form-border-radius),
+      12px
+    );
     outline-width: 1px;
     outline-color: var(--sc-border-neutral);
   }

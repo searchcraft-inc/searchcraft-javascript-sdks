@@ -1,0 +1,149 @@
+@use "@searchcraft/hologram/src/typography.scss";
+
+.color-groups-heading,
+.components-heading {
+    @include typography.heading-4();
+}
+.color-groups,
+.color-groups td,
+.color-groups th {
+    border-collapse: collapse;
+    border: 1px solid var(--sc-surface-disabled);
+}
+
+.color-groups {
+    @include typography.body();
+    color: var(--sc-content-disabled);
+    font-size: 14px;
+}
+
+.color-groups td,
+.color-groups th {
+    padding: 20px;
+}
+
+.color-group {
+    display: grid;
+    grid-template-columns: repeat(2, 100px);
+    grid-template-rows: 100px;
+    gap: 20px;
+}
+
+.brand {
+    background-color: var(--sc-surface-brand-primary);
+}
+
+.brand:hover {
+    background-color: var(--sc-surface-brand-primary-hover);
+}
+
+.brand:active {
+    background-color: var(--sc-surface-brand-primary-active);
+}
+
+.background {
+    background-color: var(--sc-surface-neutral-primary);
+}
+
+.background:hover {
+    background-color: var(--sc-surface-neutral-primary-hover);
+}
+
+.background:active {
+    background-color: var(--sc-surface-neutral-primary-active);
+}
+
+.success {
+    background-color: var(--sc-surface-success-primary);
+}
+
+.success:hover {
+    background-color: var(--sc-surface-success-primary-hover);
+}
+
+.success:active {
+    background-color: var(--sc-surface-success-primary-active);
+}
+
+.success-secondary {
+    background-color: var(--sc-surface-success-secondary);
+}
+
+.success-secondary:hover {
+    background-color: var(--sc-surface-success-secondary-hover);
+}
+
+.success-secondary:active {
+    background-color: var(--sc-surface-success-secondary-active);
+}
+
+.caution {
+    background-color: var(--sc-surface-caution-primary);
+}
+
+.caution:hover {
+    background-color: var(--sc-surface-caution-primary-hover);
+}
+
+.caution:active {
+    background-color: var(--sc-surface-caution-primary-active);
+}
+
+.caution-secondary {
+    background-color: var(--sc-surface-caution-secondary);
+}
+
+.caution-secondary:hover {
+    background-color: var(--sc-surface-caution-secondary-hover);
+}
+
+.caution-secondary:active {
+    background-color: var(--sc-surface-caution-secondary-active);
+}
+
+.danger {
+    background-color: var(--sc-surface-danger-primary);
+}
+
+.danger:hover {
+    background-color: var(--sc-surface-danger-primary-hover);
+}
+
+.danger:active {
+    background-color: var(--sc-surface-danger-primary-active);
+}
+
+.danger-secondary {
+    background-color: var(--sc-surface-danger-secondary);
+}
+
+.danger-secondary:hover {
+    background-color: var(--sc-surface-danger-secondary-hover);
+}
+
+.danger-secondary:active {
+    background-color: var(--sc-surface-danger-secondary-active);
+}
+
+.components {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.components-heading {
+    margin-top: 80px;
+}
+
+.components-subheading {
+    @include typography.body();
+    color: var(--sc-content-disabled);
+    font-size: 14px;
+    margin: 0;
+}
+
+.component {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

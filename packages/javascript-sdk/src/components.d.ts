@@ -392,10 +392,18 @@ export namespace Components {
      * ## Usage
      * ```html
      * <!-- index.html -->
-     * <searchcraft-theme />
+     * <searchcraft-theme theme="light" custom-theme="{}" />
      * ```
      */
     interface SearchcraftTheme {
+        /**
+          * The custom theme configuration object.
+         */
+        "customTheme": string;
+        /**
+          * The name of the theme.
+         */
+        "theme": string;
     }
     /**
      * This web component simulates a light switch functionality, providing a simple and intuitive toggle between two states—on and off.
@@ -759,7 +767,7 @@ declare global {
      * ## Usage
      * ```html
      * <!-- index.html -->
-     * <searchcraft-theme />
+     * <searchcraft-theme theme="light" custom-theme="{}" />
      * ```
      */
     interface HTMLSearchcraftThemeElement extends Components.SearchcraftTheme, HTMLStencilElement {
@@ -1231,10 +1239,18 @@ declare namespace LocalJSX {
      * ## Usage
      * ```html
      * <!-- index.html -->
-     * <searchcraft-theme />
+     * <searchcraft-theme theme="light" custom-theme="{}" />
      * ```
      */
     interface SearchcraftTheme {
+        /**
+          * The custom theme configuration object.
+         */
+        "customTheme"?: string;
+        /**
+          * The name of the theme.
+         */
+        "theme"?: string;
     }
     /**
      * This web component simulates a light switch functionality, providing a simple and intuitive toggle between two states—on and off.
@@ -1461,7 +1477,7 @@ declare module "@stencil/core" {
              * ## Usage
              * ```html
              * <!-- index.html -->
-             * <searchcraft-theme />
+             * <searchcraft-theme theme="light" custom-theme="{}" />
              * ```
              */
             "searchcraft-theme": LocalJSX.SearchcraftTheme & JSXBase.HTMLAttributes<HTMLSearchcraftThemeElement>;

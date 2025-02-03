@@ -11,5 +11,21 @@ It does not render anything visible, its only function is to manage the css styl
 ## Usage
 ```html
 <!-- index.html -->
-<searchcraft-theme />
+<searchcraft-theme theme="light" custom-theme="{}" />
 ```
+
+## Properties
+
+### customTheme
+
+> **customTheme**: `string`
+
+The custom theme configuration object.
+
+***
+
+### theme
+
+> **theme**: `string`
+
+The name of the theme.

@@ -1,0 +1,30 @@
+@use "@searchcraft/hologram/src/typography.scss";
+
+.border-radii {
+  display: flex;
+  flex-wrap: warp;
+  gap: 20px;
+}
+
+.border-radius {
+  align-items: center;
+  border: 2px dashed var(--sc-border-brand);
+  border-radius: var(--sc-border-radius);
+  display: flex;
+  height: 200px;
+  justify-content: center;
+  width: 200px;
+}
+
+.border-radius > p {
+  @include typography.body();
+  font-weight: var(--sc-font-bold);
+}
+
+.border-radius-sm {
+  border-radius: var(--sc-border-radius-sm);
+}
+
+.border-radius-lg {
+  border-radius: var(--sc-border-radius-lg);
+}
