@@ -44,7 +44,7 @@ export class SearchcraftCore {
     };
     this.userId = '';
 
-    this.initClients(config, sdkInfo);
+    this.initClients(this.config, sdkInfo);
   }
 
   initClients(config: SearchcraftConfig, sdkInfo: SearchcraftSDKInfo) {
