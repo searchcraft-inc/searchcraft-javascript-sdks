@@ -8,4 +8,17 @@
 
 > `const` **SearchcraftFilterPanel**: `DefineSetupFnComponent`\<`SearchcraftFilterPanel` & `InputProps`\<`string` \| `number` \| `boolean`\>, \{\}, \{\}, `SearchcraftFilterPanel` & `InputProps`\<`string` \| `number` \| `boolean`\>, `PublicProps`\> = `Component`
 
-The SearchcraftFilterPanel Vue Component.
+A component that represents a filter panel UI view, allowing users to refine and control their search queries by applying various filter criteria.
+
+## Example
+
+```vue
+<script setup>
+import SearchcraftFilterPanel from '@my-library/vue';
+import filterItems from './filterItems';
+</script>
+
+<template>
+  <SearchcraftFilterPanel :items="filterItems" />
+</template>
+```

@@ -10,8 +10,19 @@ interface SearchcraftResultsInfoProps
   extends Components.SearchcraftResultsInfo {}
 
 /**
- * The React component for SearchcraftResultsInfo.
- * @param props
+ * A component that displays the number of results returned from a search query.
+ *
+ * @example
+ * ```tsx
+ * import React from 'react';
+ * import { SearchcraftResultsInfo } from '@searchcraft/react-sdk';
+ *
+ * const MyResultsInfo = () => {
+ *   return <SearchcraftResultsInfo />;
+ * };
+ *
+ * export default MyResultsInfo;
+ * ```
  */
 const SearchcraftResultsInfo: FC<SearchcraftResultsInfoProps> = (props) => (
   <Component {...props} />

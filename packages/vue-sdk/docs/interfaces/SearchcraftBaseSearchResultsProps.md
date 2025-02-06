@@ -14,18 +14,6 @@ The Props Used by the `SearchcraftBaseSearchResults` Component.
 
 ## Properties
 
-### adInterval
-
-> **adInterval**: `number`
-
-How often ads are injected.
-
-#### Inherited from
-
-`Components.SearchcraftBaseSearchResults.adInterval`
-
-***
-
 ### buttonLabel
 
 > **buttonLabel**: `string`
@@ -95,30 +83,6 @@ A custom styles object.
 #### Inherited from
 
 `Components.SearchcraftBaseSearchResults.customStylesForResults`
-
-***
-
-### placeAdAtEnd
-
-> **placeAdAtEnd**: `boolean`
-
-Should an ad be placed at the end of the results.
-
-#### Inherited from
-
-`Components.SearchcraftBaseSearchResults.placeAdAtEnd`
-
-***
-
-### placeAdAtStart
-
-> **placeAdAtStart**: `boolean`
-
-Should an ad be placed at the start of the results.
-
-#### Inherited from
-
-`Components.SearchcraftBaseSearchResults.placeAdAtStart`
 
 ***
 
