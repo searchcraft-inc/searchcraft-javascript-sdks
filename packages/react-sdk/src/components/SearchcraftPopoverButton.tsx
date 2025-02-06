@@ -10,8 +10,23 @@ interface SearchcraftPopoverButtonProps
   extends Components.SearchcraftPopoverButton {}
 
 /**
- * The React component for the SearchcraftPopoverButton.
- * @param props
+ * A button component that, when clicked, toggles the visibility of a popover.
+ *
+ * @example
+ * ```tsx
+ * import React from 'react';
+ * import { SearchcraftPopoverButton } from '@searchcraft/react-sdk';
+ *
+ * const MyPopoverTrigger = () => {
+ *   return (
+ *     <SearchcraftPopoverButton>
+ *       Open Popover
+ *     </SearchcraftPopoverButton>
+ *   );
+ * };
+ *
+ * export default MyPopoverTrigger;
+ * ```
  */
 const SearchcraftPopoverButton: FC<SearchcraftPopoverButtonProps> = (props) => (
   <Component {...props} />

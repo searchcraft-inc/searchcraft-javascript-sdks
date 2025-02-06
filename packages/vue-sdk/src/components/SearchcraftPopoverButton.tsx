@@ -8,7 +8,20 @@ export interface SearchcraftPopoverButtonProps
   extends Components.SearchcraftPopoverButton {}
 
 /**
- * The Vue component for the SearchcraftPopoverButton.
+ * A button component that, when clicked, toggles the visibility of a popover.
+ *
+ * @example
+ * ```vue
+ * <script setup>
+ * import SearchcraftPopoverButton from '@searchcraft/vue-sdk';
+ * </script>
+ *
+ * <template>
+ *   <SearchcraftPopoverButton>
+ *     Open Popover
+ *   </SearchcraftPopoverButton>
+ * </template>
+ * ```
  */
 const SearchcraftPopoverButton = Component;
 

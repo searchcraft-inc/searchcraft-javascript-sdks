@@ -8,7 +8,7 @@
 
 > **SearchcraftFilterPanel**(`props`, `deprecatedLegacyContext`?): `ReactNode`
 
-The React component for the SearchcraftFilterPanel.
+A component that represents a filter panel UI view, allowing users to refine and control their search queries by applying various filter criteria.
 
 ## Parameters
 
@@ -29,3 +29,19 @@ The React component for the SearchcraftFilterPanel.
 ## Returns
 
 `ReactNode`
+
+## Example
+
+```tsx
+import React from 'react';
+import { SearchcraftFilterPanel } from '@searchcraft/react-sdk';
+import filterItems from './filterItems';
+
+const MyFilterComponent = () => {
+  return (
+    <SearchcraftFilterPanel items={filterItems} />
+  );
+};
+
+export default MyFilterComponent;
+```

@@ -7,7 +7,7 @@
 
 ## Overview
 
-This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field.
+This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field, or when a popover-button is pressed.
 
 ## Usage
 ```html

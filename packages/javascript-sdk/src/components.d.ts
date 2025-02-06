@@ -268,7 +268,7 @@ export namespace Components {
     interface SearchcraftPopoverButton {
     }
     /**
-     * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field.
+     * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field, or when a popover-button is pressed.
      * ## Usage
      * ```html
      * <!-- index.html -->
@@ -354,7 +354,6 @@ export namespace Components {
     }
     /**
      * This web component is designed to display the number of results returned from a search query.
-     * It provides users with real-time feedback on the scale of the results, such as the total number of items found.
      * ## Usage
      * ```html
      * <!-- index.html -->
@@ -660,7 +659,7 @@ declare global {
         new (): HTMLSearchcraftPopoverButtonElement;
     };
     /**
-     * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field.
+     * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field, or when a popover-button is pressed.
      * ## Usage
      * ```html
      * <!-- index.html -->
@@ -726,7 +725,6 @@ declare global {
     };
     /**
      * This web component is designed to display the number of results returned from a search query.
-     * It provides users with real-time feedback on the scale of the results, such as the total number of items found.
      * ## Usage
      * ```html
      * <!-- index.html -->
@@ -1111,7 +1109,7 @@ declare namespace LocalJSX {
     interface SearchcraftPopoverButton {
     }
     /**
-     * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field.
+     * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field, or when a popover-button is pressed.
      * ## Usage
      * ```html
      * <!-- index.html -->
@@ -1197,7 +1195,6 @@ declare namespace LocalJSX {
     }
     /**
      * This web component is designed to display the number of results returned from a search query.
-     * It provides users with real-time feedback on the scale of the results, such as the total number of items found.
      * ## Usage
      * ```html
      * <!-- index.html -->
@@ -1411,7 +1408,7 @@ declare module "@stencil/core" {
              */
             "searchcraft-popover-button": LocalJSX.SearchcraftPopoverButton & JSXBase.HTMLAttributes<HTMLSearchcraftPopoverButtonElement>;
             /**
-             * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field.
+             * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field, or when a popover-button is pressed.
              * ## Usage
              * ```html
              * <!-- index.html -->
@@ -1457,7 +1454,6 @@ declare module "@stencil/core" {
             "searchcraft-popover-list-view": LocalJSX.SearchcraftPopoverListView & JSXBase.HTMLAttributes<HTMLSearchcraftPopoverListViewElement>;
             /**
              * This web component is designed to display the number of results returned from a search query.
-             * It provides users with real-time feedback on the scale of the results, such as the total number of items found.
              * ## Usage
              * ```html
              * <!-- index.html -->

@@ -8,4 +8,17 @@
 
 > `const` **SearchcraftTheme**: `DefineSetupFnComponent`\<`SearchcraftTheme` & `InputProps`\<`string` \| `number` \| `boolean`\>, \{\}, \{\}, `SearchcraftTheme` & `InputProps`\<`string` \| `number` \| `boolean`\>, `PublicProps`\> = `Component`
 
-The Vue component for SearchcraftTheme.
+A component that applies Searchcraft's built-in CSS theme to your page.
+It does not render anything visible—its only function is to manage the CSS styles on the page.
+
+## Example
+
+```vue
+<script setup>
+import SearchcraftTheme from '@searchcraft/vue-sdk';
+</script>
+
+<template>
+  <SearchcraftTheme theme="light" :customTheme="[]" />
+</template>
+```

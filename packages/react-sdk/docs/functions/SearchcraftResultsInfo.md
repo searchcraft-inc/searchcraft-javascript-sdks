@@ -8,7 +8,7 @@
 
 > **SearchcraftResultsInfo**(`props`, `deprecatedLegacyContext`?): `ReactNode`
 
-The React component for SearchcraftResultsInfo.
+A component that displays the number of results returned from a search query.
 
 ## Parameters
 
@@ -29,3 +29,16 @@ The React component for SearchcraftResultsInfo.
 ## Returns
 
 `ReactNode`
+
+## Example
+
+```tsx
+import React from 'react';
+import { SearchcraftResultsInfo } from '@searchcraft/react-sdk';
+
+const MyResultsInfo = () => {
+  return <SearchcraftResultsInfo />;
+};
+
+export default MyResultsInfo;
+```

@@ -8,7 +8,18 @@ export interface SearchcraftResultsInfoProps
   extends Components.SearchcraftResultsInfo {}
 
 /**
- * The Vue component for SearchcraftResultsInfo.
+ * A component that displays the number of results returned from a search query.
+ *
+ * @example
+ * ```vue
+ * <script setup>
+ * import SearchcraftResultsInfo from '@searchcraft/vue-sdk';
+ * </script>
+ *
+ * <template>
+ *   <SearchcraftResultsInfo />
+ * </template>
+ * ```
  */
 const SearchcraftResultsInfo = Component;
 

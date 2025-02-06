@@ -8,4 +8,18 @@
 
 > `const` **SearchcraftPopoverButton**: `DefineSetupFnComponent`\<`SearchcraftPopoverButton` & `InputProps`\<`string` \| `number` \| `boolean`\>, \{\}, \{\}, `SearchcraftPopoverButton` & `InputProps`\<`string` \| `number` \| `boolean`\>, `PublicProps`\> = `Component`
 
-The Vue component for the SearchcraftPopoverButton.
+A button component that, when clicked, toggles the visibility of a popover.
+
+## Example
+
+```vue
+<script setup>
+import SearchcraftPopoverButton from '@searchcraft/vue-sdk';
+</script>
+
+<template>
+  <SearchcraftPopoverButton>
+    Open Popover
+  </SearchcraftPopoverButton>
+</template>
+```

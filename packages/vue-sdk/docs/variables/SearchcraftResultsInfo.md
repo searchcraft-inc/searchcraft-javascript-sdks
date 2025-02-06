@@ -8,4 +8,16 @@
 
 > `const` **SearchcraftResultsInfo**: `DefineSetupFnComponent`\<`SearchcraftResultsInfo` & `InputProps`\<`string` \| `number` \| `boolean`\>, \{\}, \{\}, `SearchcraftResultsInfo` & `InputProps`\<`string` \| `number` \| `boolean`\>, `PublicProps`\> = `Component`
 
-The Vue component for SearchcraftResultsInfo.
+A component that displays the number of results returned from a search query.
+
+## Example
+
+```vue
+<script setup>
+import SearchcraftResultsInfo from '@searchcraft/vue-sdk';
+</script>
+
+<template>
+  <SearchcraftResultsInfo />
+</template>
+```
