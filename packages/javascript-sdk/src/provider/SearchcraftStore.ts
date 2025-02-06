@@ -27,6 +27,9 @@ const initialSearchcraftStateValues: SearchcraftStateValues = {
   searchClientResponseItems: [],
   searchResponseTimeTaken: undefined,
   searchResponseFacetPrime: undefined,
+  searchResultsCount: 0,
+  searchResultsPerPage: 20,
+  searchResultsPage: 1,
   sortType: 'asc',
 };
 
@@ -59,6 +62,7 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
       set({
         core,
         logger,
+        searchResultsPerPage: core.config.searchResultsPerPage || 20,
       });
     },
     removeFacetPathsForIndexField: (fieldName: string) =>
@@ -102,7 +106,12 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
           LogLevel.INFO,
           'No search request was made: search term was empty.',
         );
-        set({ searchClientResponseItems: [] });
+        set({
+          searchClientResponseItems: [],
+          searchResultsCount: 0,
+          searchResultsPage: 1,
+          searchTerm: '',
+        });
         return;
       }
 
@@ -112,9 +121,17 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
       ) => {
         const facetsFromResponse = response.data.facets;
 
-        set({
-          searchClientResponseItems: items,
-          searchResponseTimeTaken: response.data.time_taken || 0,
+        set((state) => {
+          return {
+            searchClientResponseItems: items,
+            searchResponseTimeTaken: response.data.time_taken || 0,
+            searchResultsPage:
+              // reset to first page when response count changes
+              response.data.count === state.searchResultsCount
+                ? state.searchResultsPage
+                : 1,
+            searchResultsCount: response.data.count || 0,
+          };
         });
 
         if (facetsFromResponse) {
@@ -144,6 +161,10 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
           sort: state.sortType,
           facetPathsForIndexFields: state.facetPathsForIndexFields,
           rangeValueForIndexFields: state.rangeValueForIndexFields,
+          offset: state.searchResultsPerPage
+            ? state.searchResultsPerPage * (state.searchResultsPage - 1)
+            : 0,
+          limit: state.searchResultsPerPage,
         },
         handleSearchcraftResponse,
         handleAdResponse,
@@ -171,6 +192,14 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
     },
     setSearchClientResponseItems: (items) =>
       set({ searchClientResponseItems: items }),
+    setSearchResultsPage: async (page) => {
+      set({ searchResultsPage: page });
+      await functions.search();
+    },
+    setSearchResultsPerPage: async (perPage) => {
+      set({ searchResultsPerPage: perPage });
+      await functions.search();
+    },
   };
 
   const stateObject: SearchcraftState = {

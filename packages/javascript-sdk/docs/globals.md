@@ -19,12 +19,14 @@
 - [SearchcraftConfig](/reference/sdk/js-vanilla/interfaces/SearchcraftConfig.md)
 - [SearchcraftFacetListCustomEvent](/reference/sdk/js-vanilla/interfaces/SearchcraftFacetListCustomEvent.md)
 - [SearchcraftInputFormCustomEvent](/reference/sdk/js-vanilla/interfaces/SearchcraftInputFormCustomEvent.md)
+- [SearchcraftSelectCustomEvent](/reference/sdk/js-vanilla/interfaces/SearchcraftSelectCustomEvent.md)
 - [SearchcraftSliderCustomEvent](/reference/sdk/js-vanilla/interfaces/SearchcraftSliderCustomEvent.md)
 - [SearchcraftToggleButtonCustomEvent](/reference/sdk/js-vanilla/interfaces/SearchcraftToggleButtonCustomEvent.md)
 
 ## Type Aliases
 
 - [PopoverResultMappings](/reference/sdk/js-vanilla/type-aliases/PopoverResultMappings.md)
+- [SearchcraftSelectOption](/reference/sdk/js-vanilla/type-aliases/SearchcraftSelectOption.md)
 - [SearchResultFieldName](/reference/sdk/js-vanilla/type-aliases/SearchResultFieldName.md)
 - [SearchResultMapping](/reference/sdk/js-vanilla/type-aliases/SearchResultMapping.md)
 - [SearchResultMappings](/reference/sdk/js-vanilla/type-aliases/SearchResultMappings.md)

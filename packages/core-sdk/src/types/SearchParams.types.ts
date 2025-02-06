@@ -50,6 +50,12 @@ export type SearchParams = {
   offset?: number;
 
   /**
+   * The number of results returned.
+   * Optional parameter.
+   */
+  limit?: number;
+
+  /**
    * The field to order the results by (e.g., 'date_published', 'title', etc.).
    * Optional parameter.
    */

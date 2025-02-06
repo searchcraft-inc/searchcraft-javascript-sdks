@@ -52,8 +52,8 @@
   & .searchcraft-popover-form-cancel-button {
     @include typography.body();
     @include appearance.offset-border-radius(
-      var(--sc-popover-form-border-radius),
-      12px
+      --sc-popover-form-border-radius,
+      -12px
     );
     border: 0;
     outline: 0;
@@ -136,8 +136,8 @@
 
   & .searchcraft-input {
     @include appearance.offset-border-radius(
-      var(--sc-popover-form-border-radius),
-      12px
+      --sc-popover-form-border-radius,
+      -12px
     );
     outline-width: 1px;
     outline-color: var(--sc-border-neutral);
@@ -210,8 +210,8 @@
 
   & .searchcraft-input {
     @include appearance.offset-border-radius(
-      var(--sc-popover-form-border-radius),
-      12px
+      --sc-popover-form-border-radius,
+      -12px
     );
     outline-width: 1px;
     outline-color: var(--sc-border-neutral);

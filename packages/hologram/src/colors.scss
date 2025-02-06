@@ -3,12 +3,12 @@
   --sc-surface-neutral-primary: var(--sc-color-background, #ffffff);
 
   --sc-color-background-hover: hsl(
-    from var(--sc-surface-neutral-primary) h s clamp(10, calc(l + 5), 95)
+    from var(--sc-color-background) h s clamp(10, calc(l + 5), 95)
   );
   --sc-surface-neutral-primary-hover: var(--sc-color-background-hover, #fafafa);
 
   --sc-color-background-active: hsl(
-    from var(--sc-surface-neutral-primary) h s clamp(5, calc(l - 5), 90)
+    from var(--sc-color-background) h s clamp(5, calc(l - 5), 90)
   );
   --sc-surface-neutral-primary-active: var(
     --sc-color-background-active,
@@ -50,12 +50,12 @@
   --sc-surface-brand-primary: var(--sc-color-brand, #000000);
 
   --sc-color-brand-hover: hsl(
-    from var(--sc-surface-brand-primary) h s clamp(20, calc(l + 5), 95)
+    from var(--sc-color-brand) h s clamp(20, calc(l + 5), 95)
   );
   --sc-surface-brand-primary-hover: var(--sc-color-brand-hover, #2e2e2e);
 
   --sc-color-brand-active: hsl(
-    from var(--sc-surface-brand-primary) h s clamp(10, calc(l - 5), 85)
+    from var(--sc-color-brand) h s clamp(10, calc(l - 5), 85)
   );
   --sc-surface-brand-primary-active: var(--sc-color-brand-active, #292929);
 
@@ -244,10 +244,10 @@
 
     // primary
     --sc-color-background-hover: hsl(
-      from var(--sc-surface-neutral-primary) h s clamp(10%, calc(l + 5%), 95%)
+      from var(--sc-color-background) h s clamp(10%, calc(l + 5%), 95%)
     );
     --sc-color-background-active: hsl(
-      from var(--sc-surface-neutral-primary) h s clamp(5%, calc(l - 5%), 90%)
+      from var(--sc-color-background) h s clamp(5%, calc(l - 5%), 90%)
     );
 
     // content
@@ -258,11 +258,11 @@
     /** ------------ BRAND ------------- */
     // primary
     --sc-color-brand-hover: hsl(
-      from var(--sc-surface-brand-primary) h s clamp(20%, calc(l + 5%), 95%)
+      from var(--sc-color-brand) h s clamp(20%, calc(l + 5%), 95%)
     );
 
     --sc-color-brand-active: hsl(
-      from var(--sc-surface-brand-primary) h s clamp(10%, calc(l - 5%), 85%)
+      from var(--sc-color-brand) h s clamp(10%, calc(l - 5%), 85%)
     );
 
     /** ------------ SUCCESS ------------- */

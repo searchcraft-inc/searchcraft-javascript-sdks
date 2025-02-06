@@ -20,7 +20,7 @@ It abstracts the complexities of index-based searching, making it accessible to 
 // index.js
 const searchInputForm = document.querySelector('searchcraft-input-form');
 
-seardchInputForm.config = {
+searchInputForm.config = {
   index: [],
   readKey: '',
   endpointUrl: '',

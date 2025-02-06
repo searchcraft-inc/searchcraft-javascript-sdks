@@ -5,6 +5,13 @@
   --sc-border-radius-lg: calc(var(--sc-border-radius) * 2);
 }
 
+/**
+ * Usage:
+ * .some-class {
+ *   @include appearance.offset-border-radius(--sc-border-radius-lg, 8px);
+ * }
+ */
 @mixin offset-border-radius($radius, $distance) {
-  border-radius: max(0, calc($radius + $distance));
+  border-radius: calc($radius + $distance); // for units
+  border-radius: calc(var(#{$radius}) + $distance); // for variable name
 }

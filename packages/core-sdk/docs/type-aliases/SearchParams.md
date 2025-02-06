@@ -16,6 +16,13 @@ Parameters required to make a successful Search request.
 
 > `optional` **facetPathsForIndexFields**: `Record`\<`string`, [`FacetPathsForIndexField`](/reference/sdk/core/type-aliases/FacetPathsForIndexField.md)\>
 
+### limit?
+
+> `optional` **limit**: `number`
+
+The number of results returned.
+Optional parameter.
+
 ### mode
 
 > **mode**: `"fuzzy"` \| `"exact"`

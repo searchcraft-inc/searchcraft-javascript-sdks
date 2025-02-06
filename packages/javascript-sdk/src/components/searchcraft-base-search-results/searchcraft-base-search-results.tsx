@@ -98,6 +98,8 @@ export class SearchcraftBaseSearchResults {
   @State() searchTerm = '';
   @State() searchClientResponseItems: SearchClientResponseItem[] = [];
   @State() adClientResponseItems: AdClientResponseItem[] = [];
+  @State() searchResultsPerPage;
+  @State() searchResultsPage;
 
   private unsubscribe: () => void = () => {};
 
@@ -118,6 +120,8 @@ export class SearchcraftBaseSearchResults {
     this.searchClientResponseItems = [...state.searchClientResponseItems];
     this.adClientResponseItems = [...state.adClientResponseItems];
     this.searchTerm = state.searchTerm;
+    this.searchResultsPage = state.searchResultsPage;
+    this.searchResultsPerPage = state.searchResultsPerPage;
   }
 
   render() {
@@ -166,7 +170,9 @@ export class SearchcraftBaseSearchResults {
             button-label={this.buttonLabel || 'View more'}
             button-rel={this.buttonRel}
             button-target={this.buttonTarget}
-            document-position={index}
+            document-position={
+              this.searchResultsPerPage * this.searchResultsPage + index
+            }
             searchResultMappings={this.searchResultMappings}
             item={item}
           />

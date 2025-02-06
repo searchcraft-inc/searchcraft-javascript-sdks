@@ -31,6 +31,8 @@ export class SearchcraftPopoverListView {
    */
   @Prop() searchClientResponseItems: SearchClientResponseItem[] | undefined;
   @Prop() adClientResponseItems: AdClientResponseItem[] | undefined;
+  @Prop() searchResultsPage!: number;
+  @Prop() searchResultsPerPage!: number;
 
   render() {
     return (
@@ -46,7 +48,9 @@ export class SearchcraftPopoverListView {
             item={item}
             key={item.id}
             popoverResultMappings={this.popoverResultMappings}
-            documentPosition={index}
+            documentPosition={
+              this.searchResultsPerPage * (this.searchResultsPage - 1) + index
+            }
           />
         ))}
       </div>

@@ -1,7 +1,8 @@
 import type { FC } from 'react';
 
-import { SearchcraftResultsInfo as Component } from '../stencil-web-components/components';
 import type { Components } from '@searchcraft/javascript-sdk';
+
+import { SearchcraftResultsInfo as Component } from '../stencil-web-components/components';
 
 /**
  * The Props for the SearchcraftResultsInfo component.
@@ -10,15 +11,22 @@ interface SearchcraftResultsInfoProps
   extends Components.SearchcraftResultsInfo {}
 
 /**
- * A component that displays the number of results returned from a search query.
+ * This React component is designed to display the number of results returned from a search query.
  *
  * @example
  * ```tsx
- * import React from 'react';
+ * import React, { useEffect, useRef } from 'react';
  * import { SearchcraftResultsInfo } from '@searchcraft/react-sdk';
  *
  * const MyResultsInfo = () => {
- *   return <SearchcraftResultsInfo />;
+ *   const ref = useRef();
+ *
+ *   useEffect(() => {
+ *     ref.current.customFormatter = (range, count, responseTime) =>
+ *       `${range[0]}-${range[1]} of ${count} results in ${responseTime}ms`;
+ *   });
+ *
+ *   return <SearchcraftResultsInfo ref={ref} />;
  * };
  *
  * export default MyResultsInfo;
