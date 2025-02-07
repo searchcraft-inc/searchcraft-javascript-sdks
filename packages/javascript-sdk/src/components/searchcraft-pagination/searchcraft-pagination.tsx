@@ -186,7 +186,7 @@ export class SearchcraftPagination {
             onButtonClick={() =>
               this.handleGoToPage(Math.max(1, this.searchResultsPage - 1))
             }
-            label='PREVIOUS'
+            label='Previous'
             iconPosition='left'
             icon={
               <svg
@@ -206,6 +206,7 @@ export class SearchcraftPagination {
                 />
               </svg>
             }
+            iconOnly
           />
         </div>
         <ul class='searchcraft-pagination-list'>
@@ -231,7 +232,7 @@ export class SearchcraftPagination {
                 ),
               );
             }}
-            label='NEXT'
+            label='Next'
             iconPosition='right'
             icon={
               <svg
@@ -251,6 +252,7 @@ export class SearchcraftPagination {
                 />
               </svg>
             }
+            iconOnly
           />
         </div>
       </div>
