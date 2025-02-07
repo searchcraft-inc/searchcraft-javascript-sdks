@@ -17,5 +17,3 @@ export {
 export { useSearchcraftStore } from './provider/store';
 
 export type { Components } from './components';
-
-export * from './types';

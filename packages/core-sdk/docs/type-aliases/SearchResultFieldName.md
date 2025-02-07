@@ -1,8 +1,8 @@
-[**@searchcraft/javascript-sdk**](/reference/sdk/js-vanilla/README.md)
+[**@searchcraft/core**](/reference/sdk/core/README.md)
 
 ***
 
-[@searchcraft/javascript-sdk](/reference/sdk/js-vanilla/globals.md) / SearchResultFieldName
+[@searchcraft/core](/reference/sdk/core/globals.md) / SearchResultFieldName
 
 # Type Alias: SearchResultFieldName
 

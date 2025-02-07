@@ -27,8 +27,6 @@
 
 - [PopoverResultMappings](/reference/sdk/js-vanilla/type-aliases/PopoverResultMappings.md)
 - [SearchcraftSelectOption](/reference/sdk/js-vanilla/type-aliases/SearchcraftSelectOption.md)
-- [SearchResultFieldName](/reference/sdk/js-vanilla/type-aliases/SearchResultFieldName.md)
-- [SearchResultMapping](/reference/sdk/js-vanilla/type-aliases/SearchResultMapping.md)
 - [SearchResultMappings](/reference/sdk/js-vanilla/type-aliases/SearchResultMappings.md)
 
 ## Functions

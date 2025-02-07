@@ -5,7 +5,7 @@ import type {
 } from '@searchcraft/core';
 import { Component, Fragment, h, Prop, State } from '@stencil/core';
 import { getDocumentValueFromSearchResultMapping } from '@utils';
-import type { SearchResultMappings } from 'types';
+import type { SearchResultMappings } from '@searchcraft/core';
 
 /**
  * This web component is designed to display detailed information for a single search result.

@@ -2,10 +2,10 @@ import { useSearchcraftStore } from '@provider/store';
 import type {
   SearchDocument,
   SearchClientResponseItem,
+  PopoverResultMappings,
 } from '@searchcraft/core';
 import { Component, h, Prop, State } from '@stencil/core';
 import { getDocumentValueFromSearchResultMapping } from '@utils';
-import type { PopoverResultMappings } from 'types';
 
 /**
  * A single list item rendered in a searchcraft-popover-list-view.
