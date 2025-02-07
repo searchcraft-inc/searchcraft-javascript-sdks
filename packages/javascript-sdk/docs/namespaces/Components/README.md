@@ -9,6 +9,7 @@
 ## Interfaces
 
 - [SearchcraftBaseSearchResult](/reference/sdk/js-vanilla/namespaces/Components/interfaces/SearchcraftBaseSearchResult.md)
+- [SearchcraftBaseSearchResultAd](/reference/sdk/js-vanilla/namespaces/Components/interfaces/SearchcraftBaseSearchResultAd.md)
 - [SearchcraftBaseSearchResults](/reference/sdk/js-vanilla/namespaces/Components/interfaces/SearchcraftBaseSearchResults.md)
 - [SearchcraftButton](/reference/sdk/js-vanilla/namespaces/Components/interfaces/SearchcraftButton.md)
 - [SearchcraftErrorMessage](/reference/sdk/js-vanilla/namespaces/Components/interfaces/SearchcraftErrorMessage.md)
@@ -16,11 +17,15 @@
 - [SearchcraftFilterPanel](/reference/sdk/js-vanilla/namespaces/Components/interfaces/SearchcraftFilterPanel.md)
 - [SearchcraftInputForm](/reference/sdk/js-vanilla/namespaces/Components/interfaces/SearchcraftInputForm.md)
 - [SearchcraftInputLabel](/reference/sdk/js-vanilla/namespaces/Components/interfaces/SearchcraftInputLabel.md)
+- [SearchcraftPagination](/reference/sdk/js-vanilla/namespaces/Components/interfaces/SearchcraftPagination.md)
 - [SearchcraftPopoverButton](/reference/sdk/js-vanilla/namespaces/Components/interfaces/SearchcraftPopoverButton.md)
 - [SearchcraftPopoverForm](/reference/sdk/js-vanilla/namespaces/Components/interfaces/SearchcraftPopoverForm.md)
 - [SearchcraftPopoverListItem](/reference/sdk/js-vanilla/namespaces/Components/interfaces/SearchcraftPopoverListItem.md)
+- [SearchcraftPopoverListItemAd](/reference/sdk/js-vanilla/namespaces/Components/interfaces/SearchcraftPopoverListItemAd.md)
 - [SearchcraftPopoverListView](/reference/sdk/js-vanilla/namespaces/Components/interfaces/SearchcraftPopoverListView.md)
 - [SearchcraftResultsInfo](/reference/sdk/js-vanilla/namespaces/Components/interfaces/SearchcraftResultsInfo.md)
+- [SearchcraftSearchResultsPerPage](/reference/sdk/js-vanilla/namespaces/Components/interfaces/SearchcraftSearchResultsPerPage.md)
+- [SearchcraftSelect](/reference/sdk/js-vanilla/namespaces/Components/interfaces/SearchcraftSelect.md)
 - [SearchcraftSlider](/reference/sdk/js-vanilla/namespaces/Components/interfaces/SearchcraftSlider.md)
 - [SearchcraftTheme](/reference/sdk/js-vanilla/namespaces/Components/interfaces/SearchcraftTheme.md)
 - [SearchcraftToggleButton](/reference/sdk/js-vanilla/namespaces/Components/interfaces/SearchcraftToggleButton.md)

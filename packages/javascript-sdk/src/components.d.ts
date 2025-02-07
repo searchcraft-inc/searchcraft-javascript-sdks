@@ -5,12 +5,10 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { PopoverResultMappings, SearchResultMappings } from "./types/index";
-import { FilterItem } from "./types/searchcraft-filter-panel.types";
-import { SearchcraftConfig } from "@searchcraft/core";
-export { PopoverResultMappings, SearchResultMappings } from "./types/index";
-export { FilterItem } from "./types/searchcraft-filter-panel.types";
-export { SearchcraftConfig } from "@searchcraft/core";
+import { AdClientResponseItem, FilterItem, PopoverResultMappings, SearchClientResponseItem, SearchcraftConfig, SearchResultMappings } from "@searchcraft/core";
+import { SearchcraftSelectOption } from "./components/searchcraft-select/searchcraft-select";
+export { AdClientResponseItem, FilterItem, PopoverResultMappings, SearchClientResponseItem, SearchcraftConfig, SearchResultMappings } from "@searchcraft/core";
+export { SearchcraftSelectOption } from "./components/searchcraft-select/searchcraft-select";
 export namespace Components {
     /**
      * This web component is designed to display detailed information for a single search result.
@@ -19,18 +17,6 @@ export namespace Components {
      */
     interface SearchcraftBaseSearchResult {
         /**
-          * The body content.
-         */
-        "bodyContent": string | undefined;
-        /**
-          * The link for the button rendered when containerHref is not present.
-         */
-        "buttonHref": string | undefined;
-        /**
-          * The label for the button rendered when containerHref is not present.
-         */
-        "buttonLabel": string | undefined;
-        /**
           * The relationship between the current document and the link for the button rendered when containerHref is not present.
          */
         "buttonRel": 'noreferrer' | 'noopener' | 'nofollow' | undefined;
@@ -38,10 +24,6 @@ export namespace Components {
           * Where to open the link for the button rendered when containerHref is not present.
          */
         "buttonTarget": '_blank' | '_self' | '_top' | '_parent';
-        /**
-          * The link for the containing element.
-         */
-        "containerHref": string | undefined;
         /**
           * The relationship between the current document and the link for the containing element.
          */
@@ -59,29 +41,17 @@ export namespace Components {
          */
         "documentPosition": number;
         /**
-          * The footer content.
-         */
-        "footerContent": string | undefined;
-        /**
-          * The image alternative text.
-         */
-        "imageAlt": string | undefined;
-        /**
           * The placement of the image.
          */
         "imagePlacement": 'left' | 'right';
-        /**
-          * The image source.
-         */
-        "imageSrc": string | undefined;
-        /**
-          * The subtitle content.
-         */
-        "subtitleContent": string | undefined;
-        /**
-          * The title content.
-         */
-        "titleContent": string | undefined;
+        "item": SearchClientResponseItem | undefined;
+        "searchResultMappings": SearchResultMappings | undefined;
+    }
+    /**
+     * A single list item rendered in a searchcraft-popover-list-view.
+     */
+    interface SearchcraftBaseSearchResultAd {
+        "adClientResponseItem"?: AdClientResponseItem;
     }
     /**
      * This web component is responsible for displaying the results of a search query.
@@ -113,10 +83,6 @@ export namespace Components {
      */
     interface SearchcraftBaseSearchResults {
         /**
-          * How often ads are injected.
-         */
-        "adInterval": number;
-        /**
           * The label for the button rendered when containerHref is not present for each result.
          */
         "buttonLabel": string | undefined;
@@ -143,14 +109,6 @@ export namespace Components {
     | Record<string, Record<string, string>>
     | undefined;
         /**
-          * Should an ad be placed at the end of the results.
-         */
-        "placeAdAtEnd": boolean;
-        /**
-          * Should an ad be placed at the start of the results.
-         */
-        "placeAdAtStart": boolean;
-        /**
           * The placement of the image for each result.
          */
         "resultImagePlacement": 'left' | 'right';
@@ -166,21 +124,33 @@ export namespace Components {
      */
     interface SearchcraftButton {
         /**
+          * Whether the button is disabled.
+         */
+        "disabled"?: boolean;
+        /**
+          * Controls the visual representation of the button.
+         */
+        "hierarchy"?: 'primary' | 'tertiary';
+        /**
           * The icon element.
          */
-        "iconElement"?: Element;
+        "icon"?: Element;
         /**
           * Should the button only display an icon.
          */
-        "iconOnly": boolean;
+        "iconOnly"?: boolean;
         /**
           * The position of the icon.
          */
-        "iconPosition": string;
+        "iconPosition"?: 'left' | 'right';
         /**
           * The label for the button.
          */
         "label": string;
+        /**
+          * The type of the button.
+         */
+        "type"?: 'submit' | 'reset' | 'button';
     }
     /**
      * This web component is designed to display a user-friendly error message when a search query fails, providing clear feedback to users and enhancing their experience when an issue arises during the search process.
@@ -243,7 +213,7 @@ export namespace Components {
      * ```js
      * // index.js
      * const searchInputForm = document.querySelector('searchcraft-input-form');
-     * seardchInputForm.config = {
+     * searchInputForm.config = {
      *   index: [],
      *   readKey: '',
      *   endpointUrl: '',
@@ -303,12 +273,27 @@ export namespace Components {
         "label": string;
     }
     /**
+     * This web component is designed to facilitate pagination of search results.
+     * Once a query is submitted, calculates the number for pages.
+     * ## Usage
+     * ```html
+     * <!-- index.html -->
+     * <searchcraft-pagination />
+     * ```
+     */
+    interface SearchcraftPagination {
+        /**
+          * The custom styles object.
+         */
+        "customStyles"?: string;
+    }
+    /**
      * Renders a button which, when clicked, turns on popover visibility.
      */
     interface SearchcraftPopoverButton {
     }
     /**
-     * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field.
+     * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field, or when a popover-button is pressed.
      * ## Usage
      * ```html
      * <!-- index.html -->
@@ -363,26 +348,14 @@ export namespace Components {
           * The document position relative to the search results (For Measure)
          */
         "documentPosition": number;
-        /**
-          * The link href
-         */
-        "href": string | undefined;
-        /**
-          * The image alt tag.
-         */
-        "imageAlt": string | undefined;
-        /**
-          * The source of the image. If not included, no item will be rendered.
-         */
-        "imageSrc": string | undefined;
-        /**
-          * The result subtitle
-         */
-        "subtitleContent": string | undefined;
-        /**
-          * The result title
-         */
-        "titleContent": string | undefined;
+        "item": SearchClientResponseItem | undefined;
+        "popoverResultMappings": PopoverResultMappings | undefined;
+    }
+    /**
+     * A single list item rendered in a searchcraft-popover-list-view.
+     */
+    interface SearchcraftPopoverListItemAd {
+        "adClientResponseItem"?: AdClientResponseItem;
     }
     /**
      * This web component is designed to display a list of results within a popover interface.
@@ -394,25 +367,109 @@ export namespace Components {
      * ```
      */
     interface SearchcraftPopoverListView {
-        /**
-          * The documents to render in the list view.
-         */
-        "documents": Record<string, unknown>[] | undefined;
+        "adClientResponseItems": AdClientResponseItem[] | undefined;
         /**
           * The mappings that define how the data in the documents are mapped to the list-view-item elements.
          */
         "popoverResultMappings": PopoverResultMappings | undefined;
+        /**
+          * The items to render in the list view.
+         */
+        "searchClientResponseItems": SearchClientResponseItem[] | undefined;
+        "searchResultsPage": number;
+        "searchResultsPerPage": number;
     }
     /**
      * This web component is designed to display the number of results returned from a search query.
-     * It provides users with real-time feedback on the scale of the results, such as the total number of items found.
      * ## Usage
      * ```html
      * <!-- index.html -->
+     * <script>
+     *  const resultsInfo = document.querySelector('searchcraft-results-info');
+     *  resultsInfo.customFormatter = (range, count, responseTime) =>
+     *    `${range[0]}-${range[1]} of ${count} results in ${responseTime}ms`;
+     * </script>
      * <searchcraft-results-info />
      * ```
      */
     interface SearchcraftResultsInfo {
+        /**
+          * The custom formatter for the resulting string.
+          * @example ```ts  resultsInfo.customFormatter = (range, count, responseTime) =>    `${range[0]}-${range[1]} of ${count} results in ${responseTime}ms`; ```
+         */
+        "customFormatter"?: (
+    range: [string, string],
+    count: string,
+    responseTime: string,
+  ) => void;
+        /**
+          * The custom styles object.
+         */
+        "customStyles"?: string;
+    }
+    /**
+     * This web component is designed to choose the number of search results displayed.
+     * ## Usage
+     * ```html
+     * <!-- index.html -->
+     * <searchcraft-search-results-per-page increment="20" />
+     * ```
+     */
+    interface SearchcraftSearchResultsPerPage {
+        /**
+          * The custom styles object.
+         */
+        "customStyles"?: string;
+        /**
+          * The amount the options will increase (e.g. 20 = [20, 40, 60, 80, 100]). The base value is defined by the `searchResultsPerPage` option in the configuration.
+         */
+        "increment": string | number;
+    }
+    /**
+     * This web component is designed to allow users to select between a group of options.
+     * ## Usage
+     * ```html
+     * <!-- index.html -->
+     * <searchcraft-select
+     *  inputId="searchcraft-select"
+     *  name="searchcraft-select"
+     *  options="[{ label: 'label', value: 'value' }]"
+     * />
+     * ```
+     */
+    interface SearchcraftSelect {
+        /**
+          * The caption displayed below the select input.
+         */
+        "caption"?: string;
+        /**
+          * A custom styles object.
+         */
+        "customStyles"?: string;
+        /**
+          * Whether the select input is disabled.
+         */
+        "disabled"?: boolean;
+        /**
+          * The ID for the select input.
+         */
+        "inputId": string;
+        /**
+          * The label of the select input.
+         */
+        "label"?: string;
+        /**
+          * The ID for the label of the select input.
+         */
+        "labelId"?: string;
+        /**
+          * The name of the select input.
+         */
+        "name": string;
+        /**
+          * The options for the select input.
+         */
+        "options": SearchcraftSelectOption[] | string;
     }
     /**
      * This web component is designed to allow users to select a value from a range defined by a minimum and maximum value.
@@ -443,10 +500,18 @@ export namespace Components {
      * ## Usage
      * ```html
      * <!-- index.html -->
-     * <searchcraft-theme />
+     * <searchcraft-theme theme="light" custom-theme="{}" />
      * ```
      */
     interface SearchcraftTheme {
+        /**
+          * The custom theme configuration object.
+         */
+        "customTheme": string;
+        /**
+          * The name of the theme.
+         */
+        "theme": string;
     }
     /**
      * This web component simulates a light switch functionality, providing a simple and intuitive toggle between two states—on and off.
@@ -479,6 +544,10 @@ export interface SearchcraftInputFormCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSearchcraftInputFormElement;
 }
+export interface SearchcraftSelectCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSearchcraftSelectElement;
+}
 export interface SearchcraftSliderCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSearchcraftSliderElement;
@@ -498,6 +567,15 @@ declare global {
     var HTMLSearchcraftBaseSearchResultElement: {
         prototype: HTMLSearchcraftBaseSearchResultElement;
         new (): HTMLSearchcraftBaseSearchResultElement;
+    };
+    /**
+     * A single list item rendered in a searchcraft-popover-list-view.
+     */
+    interface HTMLSearchcraftBaseSearchResultAdElement extends Components.SearchcraftBaseSearchResultAd, HTMLStencilElement {
+    }
+    var HTMLSearchcraftBaseSearchResultAdElement: {
+        prototype: HTMLSearchcraftBaseSearchResultAdElement;
+        new (): HTMLSearchcraftBaseSearchResultAdElement;
     };
     interface HTMLSearchcraftBaseSearchResultsElementEventMap {
         "noResults": void;
@@ -646,7 +724,7 @@ declare global {
      * ```js
      * // index.js
      * const searchInputForm = document.querySelector('searchcraft-input-form');
-     * seardchInputForm.config = {
+     * searchInputForm.config = {
      *   index: [],
      *   readKey: '',
      *   endpointUrl: '',
@@ -685,6 +763,21 @@ declare global {
         new (): HTMLSearchcraftInputLabelElement;
     };
     /**
+     * This web component is designed to facilitate pagination of search results.
+     * Once a query is submitted, calculates the number for pages.
+     * ## Usage
+     * ```html
+     * <!-- index.html -->
+     * <searchcraft-pagination />
+     * ```
+     */
+    interface HTMLSearchcraftPaginationElement extends Components.SearchcraftPagination, HTMLStencilElement {
+    }
+    var HTMLSearchcraftPaginationElement: {
+        prototype: HTMLSearchcraftPaginationElement;
+        new (): HTMLSearchcraftPaginationElement;
+    };
+    /**
      * Renders a button which, when clicked, turns on popover visibility.
      */
     interface HTMLSearchcraftPopoverButtonElement extends Components.SearchcraftPopoverButton, HTMLStencilElement {
@@ -694,7 +787,7 @@ declare global {
         new (): HTMLSearchcraftPopoverButtonElement;
     };
     /**
-     * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field.
+     * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field, or when a popover-button is pressed.
      * ## Usage
      * ```html
      * <!-- index.html -->
@@ -735,6 +828,15 @@ declare global {
         new (): HTMLSearchcraftPopoverListItemElement;
     };
     /**
+     * A single list item rendered in a searchcraft-popover-list-view.
+     */
+    interface HTMLSearchcraftPopoverListItemAdElement extends Components.SearchcraftPopoverListItemAd, HTMLStencilElement {
+    }
+    var HTMLSearchcraftPopoverListItemAdElement: {
+        prototype: HTMLSearchcraftPopoverListItemAdElement;
+        new (): HTMLSearchcraftPopoverListItemAdElement;
+    };
+    /**
      * This web component is designed to display a list of results within a popover interface.
      * It is consumed within the `searchcraft-popover-form` component.
      * ## Usage
@@ -751,10 +853,14 @@ declare global {
     };
     /**
      * This web component is designed to display the number of results returned from a search query.
-     * It provides users with real-time feedback on the scale of the results, such as the total number of items found.
      * ## Usage
      * ```html
      * <!-- index.html -->
+     * <script>
+     *  const resultsInfo = document.querySelector('searchcraft-results-info');
+     *  resultsInfo.customFormatter = (range, count, responseTime) =>
+     *    `${range[0]}-${range[1]} of ${count} results in ${responseTime}ms`;
+     * </script>
      * <searchcraft-results-info />
      * ```
      */
@@ -763,6 +869,49 @@ declare global {
     var HTMLSearchcraftResultsInfoElement: {
         prototype: HTMLSearchcraftResultsInfoElement;
         new (): HTMLSearchcraftResultsInfoElement;
+    };
+    /**
+     * This web component is designed to choose the number of search results displayed.
+     * ## Usage
+     * ```html
+     * <!-- index.html -->
+     * <searchcraft-search-results-per-page increment="20" />
+     * ```
+     */
+    interface HTMLSearchcraftSearchResultsPerPageElement extends Components.SearchcraftSearchResultsPerPage, HTMLStencilElement {
+    }
+    var HTMLSearchcraftSearchResultsPerPageElement: {
+        prototype: HTMLSearchcraftSearchResultsPerPageElement;
+        new (): HTMLSearchcraftSearchResultsPerPageElement;
+    };
+    interface HTMLSearchcraftSelectElementEventMap {
+        "selectChange": string;
+    }
+    /**
+     * This web component is designed to allow users to select between a group of options.
+     * ## Usage
+     * ```html
+     * <!-- index.html -->
+     * <searchcraft-select
+     *  inputId="searchcraft-select"
+     *  name="searchcraft-select"
+     *  options="[{ label: 'label', value: 'value' }]"
+     * />
+     * ```
+     */
+    interface HTMLSearchcraftSelectElement extends Components.SearchcraftSelect, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSearchcraftSelectElementEventMap>(type: K, listener: (this: HTMLSearchcraftSelectElement, ev: SearchcraftSelectCustomEvent<HTMLSearchcraftSelectElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSearchcraftSelectElementEventMap>(type: K, listener: (this: HTMLSearchcraftSelectElement, ev: SearchcraftSelectCustomEvent<HTMLSearchcraftSelectElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLSearchcraftSelectElement: {
+        prototype: HTMLSearchcraftSelectElement;
+        new (): HTMLSearchcraftSelectElement;
     };
     interface HTMLSearchcraftSliderElementEventMap {
         "rangeChanged": any;
@@ -792,7 +941,7 @@ declare global {
      * ## Usage
      * ```html
      * <!-- index.html -->
-     * <searchcraft-theme />
+     * <searchcraft-theme theme="light" custom-theme="{}" />
      * ```
      */
     interface HTMLSearchcraftThemeElement extends Components.SearchcraftTheme, HTMLStencilElement {
@@ -824,6 +973,7 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "searchcraft-base-search-result": HTMLSearchcraftBaseSearchResultElement;
+        "searchcraft-base-search-result-ad": HTMLSearchcraftBaseSearchResultAdElement;
         "searchcraft-base-search-results": HTMLSearchcraftBaseSearchResultsElement;
         "searchcraft-button": HTMLSearchcraftButtonElement;
         "searchcraft-error-message": HTMLSearchcraftErrorMessageElement;
@@ -831,11 +981,15 @@ declare global {
         "searchcraft-filter-panel": HTMLSearchcraftFilterPanelElement;
         "searchcraft-input-form": HTMLSearchcraftInputFormElement;
         "searchcraft-input-label": HTMLSearchcraftInputLabelElement;
+        "searchcraft-pagination": HTMLSearchcraftPaginationElement;
         "searchcraft-popover-button": HTMLSearchcraftPopoverButtonElement;
         "searchcraft-popover-form": HTMLSearchcraftPopoverFormElement;
         "searchcraft-popover-list-item": HTMLSearchcraftPopoverListItemElement;
+        "searchcraft-popover-list-item-ad": HTMLSearchcraftPopoverListItemAdElement;
         "searchcraft-popover-list-view": HTMLSearchcraftPopoverListViewElement;
         "searchcraft-results-info": HTMLSearchcraftResultsInfoElement;
+        "searchcraft-search-results-per-page": HTMLSearchcraftSearchResultsPerPageElement;
+        "searchcraft-select": HTMLSearchcraftSelectElement;
         "searchcraft-slider": HTMLSearchcraftSliderElement;
         "searchcraft-theme": HTMLSearchcraftThemeElement;
         "searchcraft-toggle-button": HTMLSearchcraftToggleButtonElement;
@@ -849,18 +1003,6 @@ declare namespace LocalJSX {
      */
     interface SearchcraftBaseSearchResult {
         /**
-          * The body content.
-         */
-        "bodyContent"?: string | undefined;
-        /**
-          * The link for the button rendered when containerHref is not present.
-         */
-        "buttonHref"?: string | undefined;
-        /**
-          * The label for the button rendered when containerHref is not present.
-         */
-        "buttonLabel"?: string | undefined;
-        /**
           * The relationship between the current document and the link for the button rendered when containerHref is not present.
          */
         "buttonRel"?: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
@@ -868,10 +1010,6 @@ declare namespace LocalJSX {
           * Where to open the link for the button rendered when containerHref is not present.
          */
         "buttonTarget"?: '_blank' | '_self' | '_top' | '_parent';
-        /**
-          * The link for the containing element.
-         */
-        "containerHref"?: string | undefined;
         /**
           * The relationship between the current document and the link for the containing element.
          */
@@ -889,29 +1027,17 @@ declare namespace LocalJSX {
          */
         "documentPosition"?: number;
         /**
-          * The footer content.
-         */
-        "footerContent"?: string | undefined;
-        /**
-          * The image alternative text.
-         */
-        "imageAlt"?: string | undefined;
-        /**
           * The placement of the image.
          */
         "imagePlacement"?: 'left' | 'right';
-        /**
-          * The image source.
-         */
-        "imageSrc"?: string | undefined;
-        /**
-          * The subtitle content.
-         */
-        "subtitleContent"?: string | undefined;
-        /**
-          * The title content.
-         */
-        "titleContent"?: string | undefined;
+        "item"?: SearchClientResponseItem | undefined;
+        "searchResultMappings"?: SearchResultMappings | undefined;
+    }
+    /**
+     * A single list item rendered in a searchcraft-popover-list-view.
+     */
+    interface SearchcraftBaseSearchResultAd {
+        "adClientResponseItem"?: AdClientResponseItem;
     }
     /**
      * This web component is responsible for displaying the results of a search query.
@@ -943,10 +1069,6 @@ declare namespace LocalJSX {
      */
     interface SearchcraftBaseSearchResults {
         /**
-          * How often ads are injected.
-         */
-        "adInterval"?: number;
-        /**
           * The label for the button rendered when containerHref is not present for each result.
          */
         "buttonLabel"?: string | undefined;
@@ -977,14 +1099,6 @@ declare namespace LocalJSX {
          */
         "onNoResults"?: (event: SearchcraftBaseSearchResultsCustomEvent<void>) => void;
         /**
-          * Should an ad be placed at the end of the results.
-         */
-        "placeAdAtEnd"?: boolean;
-        /**
-          * Should an ad be placed at the start of the results.
-         */
-        "placeAdAtStart"?: boolean;
-        /**
           * The placement of the image for each result.
          */
         "resultImagePlacement"?: 'left' | 'right';
@@ -1000,9 +1114,17 @@ declare namespace LocalJSX {
      */
     interface SearchcraftButton {
         /**
+          * Whether the button is disabled.
+         */
+        "disabled"?: boolean;
+        /**
+          * Controls the visual representation of the button.
+         */
+        "hierarchy"?: 'primary' | 'tertiary';
+        /**
           * The icon element.
          */
-        "iconElement"?: Element;
+        "icon"?: Element;
         /**
           * Should the button only display an icon.
          */
@@ -1010,15 +1132,19 @@ declare namespace LocalJSX {
         /**
           * The position of the icon.
          */
-        "iconPosition"?: string;
+        "iconPosition"?: 'left' | 'right';
         /**
           * The label for the button.
          */
         "label"?: string;
         /**
-          * When the button is clicked.
+          * The event fired when the button is clicked.
          */
         "onButtonClick"?: (event: SearchcraftButtonCustomEvent<void>) => void;
+        /**
+          * The type of the button.
+         */
+        "type"?: 'submit' | 'reset' | 'button';
     }
     /**
      * This web component is designed to display a user-friendly error message when a search query fails, providing clear feedback to users and enhancing their experience when an issue arises during the search process.
@@ -1085,7 +1211,7 @@ declare namespace LocalJSX {
      * ```js
      * // index.js
      * const searchInputForm = document.querySelector('searchcraft-input-form');
-     * seardchInputForm.config = {
+     * searchInputForm.config = {
      *   index: [],
      *   readKey: '',
      *   endpointUrl: '',
@@ -1169,12 +1295,27 @@ declare namespace LocalJSX {
         "label"?: string;
     }
     /**
+     * This web component is designed to facilitate pagination of search results.
+     * Once a query is submitted, calculates the number for pages.
+     * ## Usage
+     * ```html
+     * <!-- index.html -->
+     * <searchcraft-pagination />
+     * ```
+     */
+    interface SearchcraftPagination {
+        /**
+          * The custom styles object.
+         */
+        "customStyles"?: string;
+    }
+    /**
      * Renders a button which, when clicked, turns on popover visibility.
      */
     interface SearchcraftPopoverButton {
     }
     /**
-     * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field.
+     * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field, or when a popover-button is pressed.
      * ## Usage
      * ```html
      * <!-- index.html -->
@@ -1229,26 +1370,14 @@ declare namespace LocalJSX {
           * The document position relative to the search results (For Measure)
          */
         "documentPosition"?: number;
-        /**
-          * The link href
-         */
-        "href"?: string | undefined;
-        /**
-          * The image alt tag.
-         */
-        "imageAlt"?: string | undefined;
-        /**
-          * The source of the image. If not included, no item will be rendered.
-         */
-        "imageSrc"?: string | undefined;
-        /**
-          * The result subtitle
-         */
-        "subtitleContent"?: string | undefined;
-        /**
-          * The result title
-         */
-        "titleContent"?: string | undefined;
+        "item"?: SearchClientResponseItem | undefined;
+        "popoverResultMappings"?: PopoverResultMappings | undefined;
+    }
+    /**
+     * A single list item rendered in a searchcraft-popover-list-view.
+     */
+    interface SearchcraftPopoverListItemAd {
+        "adClientResponseItem"?: AdClientResponseItem;
     }
     /**
      * This web component is designed to display a list of results within a popover interface.
@@ -1260,25 +1389,113 @@ declare namespace LocalJSX {
      * ```
      */
     interface SearchcraftPopoverListView {
-        /**
-          * The documents to render in the list view.
-         */
-        "documents"?: Record<string, unknown>[] | undefined;
+        "adClientResponseItems"?: AdClientResponseItem[] | undefined;
         /**
           * The mappings that define how the data in the documents are mapped to the list-view-item elements.
          */
         "popoverResultMappings"?: PopoverResultMappings | undefined;
+        /**
+          * The items to render in the list view.
+         */
+        "searchClientResponseItems"?: SearchClientResponseItem[] | undefined;
+        "searchResultsPage": number;
+        "searchResultsPerPage": number;
     }
     /**
      * This web component is designed to display the number of results returned from a search query.
-     * It provides users with real-time feedback on the scale of the results, such as the total number of items found.
      * ## Usage
      * ```html
      * <!-- index.html -->
+     * <script>
+     *  const resultsInfo = document.querySelector('searchcraft-results-info');
+     *  resultsInfo.customFormatter = (range, count, responseTime) =>
+     *    `${range[0]}-${range[1]} of ${count} results in ${responseTime}ms`;
+     * </script>
      * <searchcraft-results-info />
      * ```
      */
     interface SearchcraftResultsInfo {
+        /**
+          * The custom formatter for the resulting string.
+          * @example ```ts  resultsInfo.customFormatter = (range, count, responseTime) =>    `${range[0]}-${range[1]} of ${count} results in ${responseTime}ms`; ```
+         */
+        "customFormatter"?: (
+    range: [string, string],
+    count: string,
+    responseTime: string,
+  ) => void;
+        /**
+          * The custom styles object.
+         */
+        "customStyles"?: string;
+    }
+    /**
+     * This web component is designed to choose the number of search results displayed.
+     * ## Usage
+     * ```html
+     * <!-- index.html -->
+     * <searchcraft-search-results-per-page increment="20" />
+     * ```
+     */
+    interface SearchcraftSearchResultsPerPage {
+        /**
+          * The custom styles object.
+         */
+        "customStyles"?: string;
+        /**
+          * The amount the options will increase (e.g. 20 = [20, 40, 60, 80, 100]). The base value is defined by the `searchResultsPerPage` option in the configuration.
+         */
+        "increment"?: string | number;
+    }
+    /**
+     * This web component is designed to allow users to select between a group of options.
+     * ## Usage
+     * ```html
+     * <!-- index.html -->
+     * <searchcraft-select
+     *  inputId="searchcraft-select"
+     *  name="searchcraft-select"
+     *  options="[{ label: 'label', value: 'value' }]"
+     * />
+     * ```
+     */
+    interface SearchcraftSelect {
+        /**
+          * The caption displayed below the select input.
+         */
+        "caption"?: string;
+        /**
+          * A custom styles object.
+         */
+        "customStyles"?: string;
+        /**
+          * Whether the select input is disabled.
+         */
+        "disabled"?: boolean;
+        /**
+          * The ID for the select input.
+         */
+        "inputId": string;
+        /**
+          * The label of the select input.
+         */
+        "label"?: string;
+        /**
+          * The ID for the label of the select input.
+         */
+        "labelId"?: string;
+        /**
+          * The name of the select input.
+         */
+        "name": string;
+        /**
+          * The event fired when the select is changed.
+         */
+        "onSelectChange"?: (event: SearchcraftSelectCustomEvent<string>) => void;
+        /**
+          * The options for the select input.
+         */
+        "options"?: SearchcraftSelectOption[] | string;
     }
     /**
      * This web component is designed to allow users to select a value from a range defined by a minimum and maximum value.
@@ -1313,10 +1530,18 @@ declare namespace LocalJSX {
      * ## Usage
      * ```html
      * <!-- index.html -->
-     * <searchcraft-theme />
+     * <searchcraft-theme theme="light" custom-theme="{}" />
      * ```
      */
     interface SearchcraftTheme {
+        /**
+          * The custom theme configuration object.
+         */
+        "customTheme"?: string;
+        /**
+          * The name of the theme.
+         */
+        "theme"?: string;
     }
     /**
      * This web component simulates a light switch functionality, providing a simple and intuitive toggle between two states—on and off.
@@ -1338,6 +1563,7 @@ declare namespace LocalJSX {
     }
     interface IntrinsicElements {
         "searchcraft-base-search-result": SearchcraftBaseSearchResult;
+        "searchcraft-base-search-result-ad": SearchcraftBaseSearchResultAd;
         "searchcraft-base-search-results": SearchcraftBaseSearchResults;
         "searchcraft-button": SearchcraftButton;
         "searchcraft-error-message": SearchcraftErrorMessage;
@@ -1345,11 +1571,15 @@ declare namespace LocalJSX {
         "searchcraft-filter-panel": SearchcraftFilterPanel;
         "searchcraft-input-form": SearchcraftInputForm;
         "searchcraft-input-label": SearchcraftInputLabel;
+        "searchcraft-pagination": SearchcraftPagination;
         "searchcraft-popover-button": SearchcraftPopoverButton;
         "searchcraft-popover-form": SearchcraftPopoverForm;
         "searchcraft-popover-list-item": SearchcraftPopoverListItem;
+        "searchcraft-popover-list-item-ad": SearchcraftPopoverListItemAd;
         "searchcraft-popover-list-view": SearchcraftPopoverListView;
         "searchcraft-results-info": SearchcraftResultsInfo;
+        "searchcraft-search-results-per-page": SearchcraftSearchResultsPerPage;
+        "searchcraft-select": SearchcraftSelect;
         "searchcraft-slider": SearchcraftSlider;
         "searchcraft-theme": SearchcraftTheme;
         "searchcraft-toggle-button": SearchcraftToggleButton;
@@ -1365,6 +1595,10 @@ declare module "@stencil/core" {
              * It is consumed within the `searchcraft-base-search-results` component.
              */
             "searchcraft-base-search-result": LocalJSX.SearchcraftBaseSearchResult & JSXBase.HTMLAttributes<HTMLSearchcraftBaseSearchResultElement>;
+            /**
+             * A single list item rendered in a searchcraft-popover-list-view.
+             */
+            "searchcraft-base-search-result-ad": LocalJSX.SearchcraftBaseSearchResultAd & JSXBase.HTMLAttributes<HTMLSearchcraftBaseSearchResultAdElement>;
             /**
              * This web component is responsible for displaying the results of a search query.
              * Once a query is submitted, the component formats and presents an ordered list of the results.
@@ -1446,7 +1680,7 @@ declare module "@stencil/core" {
              * ```js
              * // index.js
              * const searchInputForm = document.querySelector('searchcraft-input-form');
-             * seardchInputForm.config = {
+             * searchInputForm.config = {
              *   index: [],
              *   readKey: '',
              *   endpointUrl: '',
@@ -1467,11 +1701,21 @@ declare module "@stencil/core" {
              */
             "searchcraft-input-label": LocalJSX.SearchcraftInputLabel & JSXBase.HTMLAttributes<HTMLSearchcraftInputLabelElement>;
             /**
+             * This web component is designed to facilitate pagination of search results.
+             * Once a query is submitted, calculates the number for pages.
+             * ## Usage
+             * ```html
+             * <!-- index.html -->
+             * <searchcraft-pagination />
+             * ```
+             */
+            "searchcraft-pagination": LocalJSX.SearchcraftPagination & JSXBase.HTMLAttributes<HTMLSearchcraftPaginationElement>;
+            /**
              * Renders a button which, when clicked, turns on popover visibility.
              */
             "searchcraft-popover-button": LocalJSX.SearchcraftPopoverButton & JSXBase.HTMLAttributes<HTMLSearchcraftPopoverButtonElement>;
             /**
-             * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field.
+             * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field, or when a popover-button is pressed.
              * ## Usage
              * ```html
              * <!-- index.html -->
@@ -1502,6 +1746,10 @@ declare module "@stencil/core" {
              */
             "searchcraft-popover-list-item": LocalJSX.SearchcraftPopoverListItem & JSXBase.HTMLAttributes<HTMLSearchcraftPopoverListItemElement>;
             /**
+             * A single list item rendered in a searchcraft-popover-list-view.
+             */
+            "searchcraft-popover-list-item-ad": LocalJSX.SearchcraftPopoverListItemAd & JSXBase.HTMLAttributes<HTMLSearchcraftPopoverListItemAdElement>;
+            /**
              * This web component is designed to display a list of results within a popover interface.
              * It is consumed within the `searchcraft-popover-form` component.
              * ## Usage
@@ -1513,14 +1761,40 @@ declare module "@stencil/core" {
             "searchcraft-popover-list-view": LocalJSX.SearchcraftPopoverListView & JSXBase.HTMLAttributes<HTMLSearchcraftPopoverListViewElement>;
             /**
              * This web component is designed to display the number of results returned from a search query.
-             * It provides users with real-time feedback on the scale of the results, such as the total number of items found.
              * ## Usage
              * ```html
              * <!-- index.html -->
+             * <script>
+             *  const resultsInfo = document.querySelector('searchcraft-results-info');
+             *  resultsInfo.customFormatter = (range, count, responseTime) =>
+             *    `${range[0]}-${range[1]} of ${count} results in ${responseTime}ms`;
+             * </script>
              * <searchcraft-results-info />
              * ```
              */
             "searchcraft-results-info": LocalJSX.SearchcraftResultsInfo & JSXBase.HTMLAttributes<HTMLSearchcraftResultsInfoElement>;
+            /**
+             * This web component is designed to choose the number of search results displayed.
+             * ## Usage
+             * ```html
+             * <!-- index.html -->
+             * <searchcraft-search-results-per-page increment="20" />
+             * ```
+             */
+            "searchcraft-search-results-per-page": LocalJSX.SearchcraftSearchResultsPerPage & JSXBase.HTMLAttributes<HTMLSearchcraftSearchResultsPerPageElement>;
+            /**
+             * This web component is designed to allow users to select between a group of options.
+             * ## Usage
+             * ```html
+             * <!-- index.html -->
+             * <searchcraft-select
+             *  inputId="searchcraft-select"
+             *  name="searchcraft-select"
+             *  options="[{ label: 'label', value: 'value' }]"
+             * />
+             * ```
+             */
+            "searchcraft-select": LocalJSX.SearchcraftSelect & JSXBase.HTMLAttributes<HTMLSearchcraftSelectElement>;
             /**
              * This web component is designed to allow users to select a value from a range defined by a minimum and maximum value.
              * The component renders a slider interface, which can be used to visually choose a value between two boundaries.
@@ -1533,7 +1807,7 @@ declare module "@stencil/core" {
              * ## Usage
              * ```html
              * <!-- index.html -->
-             * <searchcraft-theme />
+             * <searchcraft-theme theme="light" custom-theme="{}" />
              * ```
              */
             "searchcraft-theme": LocalJSX.SearchcraftTheme & JSXBase.HTMLAttributes<HTMLSearchcraftThemeElement>;

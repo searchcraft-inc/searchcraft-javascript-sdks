@@ -1,108 +1,341 @@
 :root {
-  --sc-surface-disabled: #D9D9D9;
-  --sc-surface-neutral-primary: #FFFFFF;
-  --sc-surface-neutral-secondary: #F3F3F3;
-  --sc-surface-neutral-light: #FFFFFF;
-  --sc-surface-neutral-primary-hover: #FAFAFA;
-  --sc-surface-neutral-primary-active: #F7F7F7;
-  --sc-surface-neutral-secondary-hover: #EDEDED;
-  --sc-surface-neutral-secondary-active: #E6E6E6;
-  --sc-surface-brand-primary: #000000;
-  --sc-surface-brand-secondary: #E6E6E6;
-  --sc-surface-brand-primary-hover: #2E2E2E;
-  --sc-surface-brand-primary-active: #292929;
-  --sc-surface-brand-secondary-hover: #EBEBEB;
-  --sc-surface-brand-secondary-active: #E0E0E0;
-  --sc-surface-success-primary: #008000;
-  --sc-surface-success-secondary: #CCFFCC;
-  --sc-surface-success-primary-hover: #009900;
-  --sc-surface-success-primary-active: #006600;
-  --sc-surface-success-secondary-hover: #E6FFE6;
-  --sc-surface-success-secondary-active: #E6FFE6;
-  --sc-surface-caution-primary: #CC6600;
-  --sc-surface-caution-secondary: #FFD9B3;
-  --sc-surface-caution-primary-hover: #E57300;
-  --sc-surface-caution-primary-active: #B25A00;
-  --sc-surface-caution-secondary-hover: #FFE5CC;
-  --sc-surface-caution-secondary-active: #FFCC99;
-  --sc-surface-danger-primary: #CC0000;
-  --sc-surface-danger-secondary: #FFCCCC;
-  --sc-surface-danger-primary-hover: #E50000;
-  --sc-surface-danger-primary-active: #B30000;
-  --sc-surface-danger-secondary-hover: #FFE7E7;
-  --sc-surface-danger-secondary-active: #FFB3B3;
-  --sc-content-brand: #000000;
-  --sc-content-success: #008000;
-  --sc-content-caution: #994D00;
-  --sc-content-danger: #990000;
-  --sc-content-disabled: #737373;
-  --sc-content-neutral-primary: #292929;
-  --sc-content-neutral-secondary: #404040;
-  --sc-content-brand-on-primary: #FFFFFF;
-  --sc-content-success-on-primary: #FFFFFF;
-  --sc-content-caution-on-primary: #FFFFFF;
-  --sc-content-danger-on-primary: #FFFFFF;
-  --sc-content-disabled-on-disabled: #737373;
-  --sc-border-neutral: rgba(0,0,0, 0.1);
-  --sc-border-brand: #000000;
-  --sc-border-success: #008000;
-  --sc-border-caution: #CC6600;
-  --sc-border-danger: #CC0000;
-  --sc-border-disabled: #737373;
+  /** ------------ NEUTRAL ------------- */
+  --sc-surface-neutral-primary: var(--sc-color-background, #ffffff);
+
+  --sc-color-background-hover: hsl(
+    from var(--sc-color-background) h s clamp(10, calc(l + 5), 95)
+  );
+  --sc-surface-neutral-primary-hover: var(--sc-color-background-hover, #fafafa);
+
+  --sc-color-background-active: hsl(
+    from var(--sc-color-background) h s clamp(5, calc(l - 5), 90)
+  );
+  --sc-surface-neutral-primary-active: var(
+    --sc-color-background-active,
+    #f7f7f7
+  );
+
+  // secondary
+  --sc-surface-neutral-secondary: var(
+    --sc-color-background-secondary,
+    var(--sc-color-background, #f3f3f3)
+  );
+
+  --sc-surface-neutral-secondary-hover: var(
+    --sc-color-background-secondary-hover,
+    var(--sc-color-background-hover, #e6e6e6)
+  );
+
+  --sc-surface-neutral-secondary-active: var(
+    --sc-color-background-secondary-active,
+    var(--sc-color-background-active, #e0e0e0)
+  );
+
+  // light
+  --sc-surface-neutral-light: #ffffff;
+
+  // content
+  --sc-content-neutral-primary: var(--sc-color-foreground, #292929);
+
+  --sc-color-foreground-secondary: hsl(
+    from var(--sc-color-foreground) h s clamp(10, calc(l + 5), 90)
+  );
+  --sc-content-neutral-secondary: var(--sc-color-foreground-secondary, #404040);
+
+  // border
+  --sc-border-neutral: rgba(0, 0, 0, 0.1);
+
+  /** ------------ BRAND ------------- */
+  // primary
+  --sc-surface-brand-primary: var(--sc-color-brand, #000000);
+
+  --sc-color-brand-hover: hsl(
+    from var(--sc-color-brand) h s clamp(20, calc(l + 5), 95)
+  );
+  --sc-surface-brand-primary-hover: var(--sc-color-brand-hover, #2e2e2e);
+
+  --sc-color-brand-active: hsl(
+    from var(--sc-color-brand) h s clamp(10, calc(l - 5), 85)
+  );
+  --sc-surface-brand-primary-active: var(--sc-color-brand-active, #292929);
+
+  // secondary
+  --sc-surface-brand-secondary: var(
+    --sc-color-brand-secondary,
+    var(--sc-color-brand, #e6e6e6)
+  );
+
+  --sc-surface-brand-secondary-hover: var(
+    --sc-color-brand-secondary-hover,
+    var(--sc-color-brand-hover, #ebebeb)
+  );
+
+  --sc-surface-brand-secondary-active: var(
+    --sc-color-brand-secondary-active,
+    var(--sc-color-brand-active, #e0e0e0)
+  );
+
+  // content
+  --sc-content-brand: var(
+    --sc-color-brand-text,
+    var(--sc-surface-brand-primary)
+  );
+  --sc-content-brand-on-primary: #ffffff;
+
+  // border
+  --sc-border-brand: var(--sc-surface-brand-primary);
+
+  /** ------------ SUCCESS ------------- */
+  // primary
+  --sc-surface-success-primary: var(--sc-color-success, #008000);
+
+  --sc-color-success-primary-hover: hsl(from var(--sc-color-success) h s 30);
+  --sc-surface-success-primary-hover: var(
+    --sc-color-success-primary-hover,
+    #009900
+  );
+
+  --sc-color-success-primary-active: hsl(from var(--sc-color-success) h s 20);
+  --sc-surface-success-primary-active: var(
+    --sc-color-success-primary-active,
+    #006600
+  );
+
+  // secondary
+  --sc-color-success-secondary: hsl(from var(--sc-color-success) h s 90);
+  --sc-surface-success-secondary: var(--sc-color-success-secondary, #ccffcc);
+
+  --sc-color-success-secondary-hover: hsl(
+    from var(--sc-color-success-secondary) h s 95
+  );
+  --sc-surface-success-secondary-hover: var(
+    --sc-color-success-secondary-hover,
+    #e6ffe6
+  );
+
+  --sc-color-success-secondary-active: hsl(
+    from var(--sc-color-success-secondary) h s 85
+  );
+  --sc-surface-success-secondary-active: var(
+    --sc-color-success-secondary-active,
+    #b2ffb2
+  );
+
+  // content
+  --sc-content-success: var(
+    --sc-color-brand-text,
+    hsl(from var(--sc-surface-success-primary) h s 30)
+  );
+  --sc-content-success-on-primary: #ffffff;
+
+  // border
+  --sc-border-success: var(--sc-surface-success-primary);
+
+  /** ------------ CAUTION ------------- */
+  // primary
+  --sc-surface-caution-primary: var(--sc-color-caution, #cc6600);
+
+  --sc-color-caution-primary-hover: hsl(from var(--sc-color-caution) h s 30);
+  --sc-surface-caution-primary-hover: var(
+    --sc-color-caution-primary-hover,
+    #e57300
+  );
+
+  --sc-color-caution-primary-active: hsl(from var(--sc-color-caution) h s 20);
+  --sc-surface-caution-primary-active: var(
+    --sc-color-caution-primary-active,
+    #b25a00
+  );
+
+  // secondary
+  --sc-color-caution-secondary: hsl(from var(--sc-color-caution) h s 90);
+  --sc-surface-caution-secondary: var(--sc-color-caution-secondary, #ffd9b3);
+
+  --sc-color-caution-secondary-hover: hsl(
+    from var(--sc-color-caution-secondary) h s 95
+  );
+  --sc-surface-caution-secondary-hover: var(
+    --sc-color-caution-secondary-hover,
+    #ffe5cc
+  );
+
+  --sc-color-caution-secondary-active: hsl(
+    from var(--sc-color-caution-secondary) h s 85
+  );
+  --sc-surface-caution-secondary-active: var(
+    --sc-color-caution-secondary-active,
+    #ffcc99
+  );
+
+  // content
+  --sc-content-caution: var(
+    --sc-color-caution-text,
+    hsl(from var(--sc-surface-caution-primary) h s 30)
+  );
+  --sc-content-caution-on-primary: #ffffff;
+
+  // border
+  --sc-border-caution: var(--sc-surface-caution-primary);
+
+  /** ------------ DANGER ------------- */
+  // primary
+  --sc-surface-danger-primary: var(--sc-color-danger, #cc0000);
+
+  --sc-color-danger-primary-hover: hsl(from var(--sc-color-danger) h s 30);
+  --sc-surface-danger-primary-hover: var(
+    --sc-color-danger-primary-hover,
+    #e50000
+  );
+
+  --sc-color-danger-primary-active: hsl(from var(--sc-color-danger) h s 20);
+  --sc-surface-danger-primary-active: var(
+    --sc-color-danger-primary-active,
+    #b30000
+  );
+
+  // secondary
+  --sc-color-danger-secondary: hsl(from var(--sc-color-danger) h s 90);
+  --sc-surface-danger-secondary: var(--sc-color-danger-secondary, #ffcccc);
+
+  --sc-color-danger-secondary-hover: hsl(
+    from var(--sc-color-danger-secondary) h s 95
+  );
+  --sc-surface-danger-secondary-hover: var(
+    --sc-color-danger-secondary-hover,
+    #ffe7e7
+  );
+
+  --sc-color-danger-secondary-active: hsl(
+    from var(--sc-color-danger-secondary) h s 85
+  );
+  --sc-surface-danger-secondary-active: var(
+    --sc-color-danger-secondary-active,
+    #ffb3b3
+  );
+
+  // content
+  --sc-content-danger: var(
+    --sc-color-caution-text,
+    hsl(from var(--sc-surface-danger-primary) h s 30)
+  );
+  --sc-content-danger-on-primary: #ffffff;
+
+  // border
+  --sc-border-danger: var(--sc-surface-danger-primary);
+
+  /* ------------ DISABLED ------------- */
+  --sc-color-disabled: hsl(from var(--sc-color-page-primary) h s calc(l * 0.5));
+  --sc-surface-disabled: var(--sc-color-disabled, #d9d9d9);
+  --sc-color-disabled-text: hsl(
+    from var(--sc-color-text-primary) h s calc(l * 0.5)
+  );
+  --sc-content-disabled: var(--sc-color-disabled-text, #737373);
+  --sc-content-disabled-on-disabled: var(--sc-color-disabled-text, #737373);
 }
 
-// @media (prefers-color-scheme: dark) {
-//   /* Dark mode variables */
-//   :root {
-//     --sc-surface-disabled: #737373;
-//     --sc-surface-neutral-primary: #242424;
-//     --sc-surface-neutral-secondary: #1A1A1A;
-//     --sc-surface-neutral-light: #FFFFFF;
-//     --sc-surface-neutral-primary-hover: #2E2E2E;
-//     --sc-surface-neutral-primary-active: #292929;
-//     --sc-surface-neutral-secondary-hover: #1F1F1F;
-//     --sc-surface-neutral-secondary-active: #1C1C1C;
-//     --sc-surface-brand-primary: #FFFFFF;
-//     --sc-surface-brand-secondary: #4D4D4D;
-//     --sc-surface-brand-primary-hover: #FAFAFA;
-//     --sc-surface-brand-primary-active: #F7F7F7;
-//     --sc-surface-brand-secondary-hover: #595959;
-//     --sc-surface-brand-secondary-active: #404040;
-//     --sc-surface-success-primary: #008000;
-//     --sc-surface-success-secondary: #265926;
-//     --sc-surface-success-primary-hover: #009900;
-//     --sc-surface-success-primary-active: #006600;
-//     --sc-surface-success-secondary-hover: #2E6B2E;
-//     --sc-surface-success-secondary-active: #1F471F;
-//     --sc-surface-caution-primary: #CC6600;
-//     --sc-surface-caution-secondary: #604020;
-//     --sc-surface-caution-primary-hover: #E57300;
-//     --sc-surface-caution-primary-active: #B25A00;
-//     --sc-surface-caution-secondary-hover: #734D26;
-//     --sc-surface-caution-secondary-active: #4D331A;
-//     --sc-surface-danger-primary: #CC0000;
-//     --sc-surface-danger-secondary: #602020;
-//     --sc-surface-danger-primary-hover: #E50000;
-//     --sc-surface-danger-primary-active: #B30000;
-//     --sc-surface-danger-secondary-hover: #732626;
-//     --sc-surface-danger-secondary-active: #4D1A1A;
-//     --sc-content-brand: #FFFFFF;
-//     --sc-content-success: #99FF99;
-//     --sc-content-caution: #FFCC99;
-//     --sc-content-danger: #FFB3B3;
-//     --sc-content-disabled: #BFBFBF;
-//     --sc-content-neutral-primary: #FFFFFF;
-//     --sc-content-neutral-secondary: #E6E6E6;
-//     --sc-content-brand-on-primary: #292929;
-//     --sc-content-success-on-primary: #FFFFFF;
-//     --sc-content-caution-on-primary: #FFFFFF;
-//     --sc-content-danger-on-primary: #FFFFFF;
-//     --sc-content-disabled-on-disabled: #D9D9D9;
-//     --sc-border-neutral: rgba(255,255,255, 0.1);
-//     --sc-border-brand: #FFFFFF;
-//     --sc-border-success: #99FF99;
-//     --sc-border-caution: #FFCC99;
-//     --sc-border-danger: #FFB3B3;
-//     --sc-border-disabled: #BFBFBF;
-//   }
-// }
+/**
+ * Safari specific styles.
+ * Safari requires `%` in hsl definitions.
+ */
+@supports (hanging-punctuation: first) and (font: -apple-system-body) and
+  (-webkit-appearance: none) {
+  :root {
+    /** ------------ NEUTRAL ------------- */
+
+    // primary
+    --sc-color-background-hover: hsl(
+      from var(--sc-color-background) h s clamp(10%, calc(l + 5%), 95%)
+    );
+    --sc-color-background-active: hsl(
+      from var(--sc-color-background) h s clamp(5%, calc(l - 5%), 90%)
+    );
+
+    // content
+    --sc-color-foreground-secondary: hsl(
+      from var(--sc-color-foreground) h s clamp(10%, calc(l + 5%), 90%)
+    );
+
+    /** ------------ BRAND ------------- */
+    // primary
+    --sc-color-brand-hover: hsl(
+      from var(--sc-color-brand) h s clamp(20%, calc(l + 5%), 95%)
+    );
+
+    --sc-color-brand-active: hsl(
+      from var(--sc-color-brand) h s clamp(10%, calc(l - 5%), 85%)
+    );
+
+    /** ------------ SUCCESS ------------- */
+    // primary
+    --sc-color-success-primary-hover: hsl(from var(--sc-color-success) h s 30%);
+
+    --sc-color-success-primary-active: hsl(
+      from var(--sc-color-success) h s 20%
+    );
+
+    // secondary
+    --sc-color-success-secondary: hsl(from var(--sc-color-success) h s 90%);
+
+    --sc-color-success-secondary-hover: hsl(
+      from var(--sc-color-success-secondary) h s 95%
+    );
+
+    --sc-color-success-secondary-active: hsl(
+      from var(--sc-color-success-secondary) h s 85%
+    );
+
+    // content
+    --sc-content-success: var(
+      --sc-color-brand-text,
+      hsl(from var(--sc-surface-success-primary) h s 30%)
+    );
+
+    /** ------------ CAUTION ------------- */
+    // primary
+    --sc-color-caution-primary-hover: hsl(from var(--sc-color-caution) h s 30%);
+
+    --sc-color-caution-primary-active: hsl(
+      from var(--sc-color-caution) h s 20%
+    );
+
+    // secondary
+    --sc-color-caution-secondary: hsl(from var(--sc-color-caution) h s 90%);
+
+    --sc-color-caution-secondary-hover: hsl(
+      from var(--sc-color-caution-secondary) h s 95%
+    );
+
+    --sc-color-caution-secondary-active: hsl(
+      from var(--sc-color-caution-secondary) h s 85%
+    );
+
+    // content
+    --sc-content-caution: var(
+      --sc-color-caution-text,
+      hsl(from var(--sc-surface-caution-primary) h s 30%)
+    );
+
+    /** ------------ DANGER ------------- */
+    // primary
+    --sc-color-danger-primary-hover: hsl(from var(--sc-color-danger) h s 30%);
+
+    --sc-color-danger-primary-active: hsl(from var(--sc-color-danger) h s 20%);
+
+    // secondary
+    --sc-color-danger-secondary: hsl(from var(--sc-color-danger) h s 90%);
+
+    --sc-color-danger-secondary-hover: hsl(
+      from var(--sc-color-danger-secondary) h s 95%
+    );
+
+    --sc-color-danger-secondary-active: hsl(
+      from var(--sc-color-danger-secondary) h s 85%
+    );
+
+    // content
+    --sc-content-danger: var(
+      --sc-color-caution-text,
+      hsl(from var(--sc-surface-danger-primary) h s 30%)
+    );
+  }
+}

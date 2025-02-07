@@ -1,51 +1,17 @@
-/** Appearance & Layout */
 :root {
-  /**
-   * Border radius of the input form element.
-   */
-  --sc-input-border-radius: 8px;
-  /**
-   * Icon size of the "magnifying glass" icon rendered in the input form.
-   */
-  --sc-input-search-icon-size: 20px;
-  /**
-   * Icon size of the `x` button rendered in the input form.
-   */
-  --sc-input-clear-icon-size: 20px;
-  /**
-   * Padding on the left side of the input form.
-   */
-  --sc-input-padding-left: 44px;
-  /**
-   * Padding on the right side of the input form.
-   */
-  --sc-input-padding-right: 44px;
-  /**
-   * Border radius applied to result images.
-   */
-  --sc-image-border-radius: 8px;
-  /**
-   * Border radius applied to popover form containers.
-   */
-  --sc-popover-form-border-radius: 8px;
-  /**
-   * Height of the list view/results container portion of the popover form.
-   */
-  --sc-popover-list-view-height: 400px;
-  /**
-   * Size of images of list view items in the popoer list view.
-   */
-  --sc-popover-list-item-image-size: 60px;
-  /**
-   * Horizontal padding of popover list items.
-   */
-  --sc-popover-list-item-padding-horizontal: 8px;
-  /**
-   * Vertical padding of popover list items.
-   */
-  --sc-popover-list-item-padding-vertical: 8px;
-  /**
-   * Maximum width of popover forms of type `modal`.
-   */
-  --sc-popover-modal-max-width: 570px;
+  // border radius
+  --sc-border-radius: 8px;
+  --sc-border-radius-sm: calc(var(--sc-border-radius) / 2);
+  --sc-border-radius-lg: calc(var(--sc-border-radius) * 2);
+}
+
+/**
+ * Usage:
+ * .some-class {
+ *   @include appearance.offset-border-radius(--sc-border-radius-lg, 8px);
+ * }
+ */
+@mixin offset-border-radius($radius, $distance) {
+  border-radius: calc($radius + $distance); // for units
+  border-radius: calc(var(#{$radius}) + $distance); // for variable name
 }

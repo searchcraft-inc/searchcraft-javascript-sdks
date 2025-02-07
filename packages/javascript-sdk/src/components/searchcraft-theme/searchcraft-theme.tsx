@@ -1,4 +1,4 @@
-import { Component } from '@stencil/core';
+import { Component, Prop } from '@stencil/core';
 import styles from '../../themes/hologram.css?raw';
 
 /**
@@ -8,32 +8,57 @@ import styles from '../../themes/hologram.css?raw';
  * ## Usage
  * ```html
  * <!-- index.html -->
- * <searchcraft-theme />
+ * <searchcraft-theme theme="light" custom-theme="{}" />
  * ```
  */
 @Component({
   tag: 'searchcraft-theme',
   shadow: false,
 })
-export class SearchcraftErrorMessage {
+export class SearchcraftTheme {
+  /**
+   * The name of the theme.
+   */
+  @Prop() theme = 'light';
+  /**
+   * The custom theme configuration object.
+   */
+  @Prop() customTheme = '[]';
+
+  private camelToKebab = (string) => {
+    return string
+      .replace(/[A-Z]/g, (match) => `-${match.toLowerCase()}`) // Convert uppercase letters to `-lowercase`
+      .toLowerCase(); // Ensure the whole string is in lowercase
+  };
+
   componentDidLoad() {
-    console.log('Loading theme...');
-    console.log(styles);
-    const styleTag =
+    // Inject style element
+    const styleElement =
       document.querySelector('#searchcraft-theme') ||
       document.createElement('style');
-    styleTag.innerHTML = styles;
-    styleTag.id = 'searchcraft-theme';
+    styleElement.innerHTML = styles;
+    styleElement.id = 'searchcraft-theme';
 
     const head = document.head || document.getElementsByTagName('head')[0];
-    if (!head.contains(styleTag)) {
+
+    if (!head.contains(styleElement)) {
       if (head.firstChild) {
-        head.insertBefore(styleTag, head.firstChild);
+        head.insertBefore(styleElement, head.firstChild);
       } else {
-        head.appendChild(styleTag);
+        head.appendChild(styleElement);
       }
-    } else {
     }
+
+    // Add theme name to body
+    document.body.dataset.theme = this.theme;
+
+    // Add CSS variables from customTheme configuration to document
+    Object.entries(JSON.parse(this.customTheme)).map(([key, value]) => {
+      document.documentElement.style.setProperty(
+        `--${this.camelToKebab(key)}`,
+        `${value}`,
+      );
+    });
   }
 
   render() {

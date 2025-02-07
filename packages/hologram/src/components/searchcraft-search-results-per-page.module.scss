@@ -1,0 +1,19 @@
+@use "../typography.scss";
+
+.searchcraft-search-results-per-page {
+  display: flex;
+}
+
+.searchcraft-search-results-per-page-select {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+}
+
+.searchcraft-search-results-per-page-select-label {
+  @include typography.body();
+}
+
+.searchcraft-search-results-per-page-select-input {
+  min-width: 120px;
+}

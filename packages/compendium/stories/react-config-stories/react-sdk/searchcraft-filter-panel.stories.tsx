@@ -101,14 +101,6 @@ const defaultProps: ComponentProps = {
 export const Default: StoryObj<ComponentProps> = {
   decorators: [
     (Story) => {
-      return (
-        <>
-          <SearchcraftTheme />
-          <Story />
-        </>
-      );
-    },
-    (Story) => {
       useEffect(() => {
         const searchForm = document.querySelector('searchcraft-input-form');
         const filterPanel = document.querySelector('searchcraft-filter-panel');
@@ -126,22 +118,25 @@ export const Default: StoryObj<ComponentProps> = {
   ],
   render: (args) => {
     return (
-      <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
-        <SearchcraftInputForm
-          autoSearch={true}
-          buttonLabel=''
-          buttonPlacement='none'
-          customStyles={args.customStylesForInput}
-          debounceDelay={0}
-          searchTerm=''
-          inputLabel=''
-          config={config}
-          placeholderValue={args.placeholderValue || ''}
-        />
-        <div style={{ paddingTop: 20 }}>
-          <SearchcraftFilterPanel items={args.items} />
+      <>
+        <SearchcraftTheme />
+        <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
+          <SearchcraftInputForm
+            autoSearch={true}
+            buttonLabel=''
+            buttonPlacement='none'
+            customStyles={args.customStylesForInput}
+            debounceDelay={0}
+            searchTerm=''
+            inputLabel=''
+            config={config}
+            placeholderValue={args.placeholderValue || ''}
+          />
+          <div style={{ paddingTop: 20 }}>
+            <SearchcraftFilterPanel items={args.items} />
+          </div>
         </div>
-      </div>
+      </>
     );
   },
   args: defaultProps,

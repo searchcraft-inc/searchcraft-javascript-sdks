@@ -7,7 +7,7 @@ const componentName = 'searchcraft-button';
 const componentMeta: Meta = {
   title: 'Javascript SDK/searchcraft-button',
   argTypes: {
-    iconElement: {
+    icon: {
       control: 'text',
       description: 'Optional icon element to display.',
     },
@@ -26,33 +26,22 @@ const componentMeta: Meta = {
       options: ['light', 'dark'],
       description: 'The theme of the button (light or dark).',
     },
-    isRequesting: {
-      control: 'boolean',
-      description: 'Indicates if the button is in a loading state.',
-    },
   },
 };
 
 const defaultProps: Components.SearchcraftButton = {
-  iconElement: undefined,
+  icon: undefined,
   iconOnly: false,
   iconPosition: 'left',
   label: 'Search',
 };
 
 export const Default: StoryObj<Components.SearchcraftButton> = {
-  decorators: [
-    (Story) => {
-      return (
-        <>
-          <searchcraft-theme />
-          <Story />
-        </>
-      );
-    },
-  ],
   render: (args) => (
-    <WebComponentWrapper args={args} componentName={componentName} />
+    <>
+      <searchcraft-theme />
+      <WebComponentWrapper args={args} componentName={componentName} />
+    </>
   ),
   args: defaultProps,
 };

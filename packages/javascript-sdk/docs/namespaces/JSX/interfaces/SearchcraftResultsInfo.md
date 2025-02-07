@@ -7,9 +7,49 @@
 # Interface: SearchcraftResultsInfo
 
 This web component is designed to display the number of results returned from a search query.
-It provides users with real-time feedback on the scale of the results, such as the total number of items found.
 ## Usage
 ```html
 <!-- index.html -->
+<script>
+ const resultsInfo = document.querySelector('searchcraft-results-info');
+ resultsInfo.customFormatter = (range, count, responseTime) =>
+   `${range[0]}-${range[1]} of ${count} results in ${responseTime}ms`;
+</script>
 <searchcraft-results-info />
 ```
+
+## Properties
+
+### customFormatter()?
+
+> `optional` **customFormatter**: (`range`, `count`, `responseTime`) => `void`
+
+The custom formatter for the resulting string.
+
+#### Parameters
+
+##### range
+
+\[`string`, `string`\]
+
+##### count
+
+`string`
+
+##### responseTime
+
+`string`
+
+#### Returns
+
+`void`
+
+#### Example
+
+***
+
+### customStyles?
+
+> `optional` **customStyles**: `string`
+
+The custom styles object.

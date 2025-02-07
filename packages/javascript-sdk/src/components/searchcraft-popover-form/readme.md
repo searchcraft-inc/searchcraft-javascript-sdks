@@ -7,7 +7,7 @@
 
 ## Overview
 
-This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field.
+This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field, or when a popover-button is pressed.
 
 ## Usage
 ```html
@@ -66,6 +66,7 @@ graph TD;
   searchcraft-input-form --> searchcraft-button
   searchcraft-input-form --> searchcraft-input-label
   searchcraft-input-form --> searchcraft-error-message
+  searchcraft-popover-list-view --> searchcraft-popover-list-item-ad
   searchcraft-popover-list-view --> searchcraft-popover-list-item
   style searchcraft-popover-form fill:#f9f,stroke:#333,stroke-width:4px
 ```

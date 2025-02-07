@@ -1,5 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import type { PopoverResultMappings } from '@searchcraft/javascript-sdk';
+import type {
+  PopoverResultMappings,
+  SearchcraftConfig,
+} from '@searchcraft/javascript-sdk';
 import { configAlternate } from '../../../utils/AlternateSearchcraftConfig';
 import { useEffect } from 'react';
 import type { Components } from '@searchcraft/javascript-sdk';
@@ -46,14 +49,6 @@ const mappings: PopoverResultMappings = {
 export const Inline: StoryObj<Components.SearchcraftPopoverForm> = {
   decorators: [
     (Story) => {
-      return (
-        <>
-          <searchcraft-theme />
-          <Story />
-        </>
-      );
-    },
-    (Story) => {
       useEffect(() => {
         const searchForm = document.querySelector('searchcraft-popover-form');
 
@@ -66,76 +61,124 @@ export const Inline: StoryObj<Components.SearchcraftPopoverForm> = {
       return <Story />;
     },
   ],
-  render: (args) => {
+  render: () => {
     return (
-      <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
-        <p>Story Note: This story uses the Bazaario env vars</p>
-        <searchcraft-popover-form
-          type='inline'
-          hotkey='k'
-          hotkey-modifier='ctrl'
-        />
-        <p style={{ marginBottom: 100 }}>
-          Here's some content that shows up underneath the popover. The popover
-          should render above this content when it is active.
-        </p>
-        <p style={{ marginBottom: 100 }}>
-          Here's some content that shows up underneath the popover. The popover
-          should render above this content when it is active.
-        </p>
-        <p style={{ marginBottom: 100 }}>
-          Here's some content that shows up underneath the popover. The popover
-          should render above this content when it is active.
-        </p>
-        <p style={{ marginBottom: 100 }}>
-          Here's some content that shows up underneath the popover. The popover
-          should render above this content when it is active.
-        </p>
-        <p style={{ marginBottom: 100 }}>
-          Here's some content that shows up underneath the popover. The popover
-          should render above this content when it is active.
-        </p>
-        <p style={{ marginBottom: 100 }}>
-          Here's some content that shows up underneath the popover. The popover
-          should render above this content when it is active.
-        </p>
-        <p style={{ marginBottom: 100 }}>
-          Here's some content that shows up underneath the popover. The popover
-          should render above this content when it is active.
-        </p>
-        <p style={{ marginBottom: 100 }}>
-          Here's some content that shows up underneath the popover. The popover
-          should render above this content when it is active.
-        </p>
-        <p style={{ marginBottom: 100 }}>
-          Here's some content that shows up underneath the popover. The popover
-          should render above this content when it is active.
-        </p>
-        <p style={{ marginBottom: 100 }}>
-          Here's some content that shows up underneath the popover. The popover
-          should render above this content when it is active.
-        </p>
-        <p style={{ marginBottom: 100 }}>
-          Here's some content that shows up underneath the popover. The popover
-          should render above this content when it is active.
-        </p>
-        <p style={{ marginBottom: 100 }}>
-          Here's some content that shows up underneath the popover. The popover
-          should render above this content when it is active.
-        </p>
-        <p style={{ marginBottom: 100 }}>
-          Here's some content that shows up underneath the popover. The popover
-          should render above this content when it is active.
-        </p>
-        <p style={{ marginBottom: 100 }}>
-          Here's some content that shows up underneath the popover. The popover
-          should render above this content when it is active.
-        </p>
-        <p style={{ marginBottom: 100 }}>
-          Here's some content that shows up underneath the popover. The popover
-          should render above this content when it is active.
-        </p>
-      </div>
+      <>
+        <searchcraft-theme />
+        <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
+          <p>Story Note: This story uses the Bazaario env vars</p>
+          <searchcraft-popover-form
+            type='inline'
+            hotkey='k'
+            hotkey-modifier='ctrl'
+          />
+          <p style={{ marginBottom: 100 }}>
+            Here's some content that shows up underneath the popover. The
+            popover should render above this content when it is active.
+          </p>
+          <p style={{ marginBottom: 100 }}>
+            Here's some content that shows up underneath the popover. The
+            popover should render above this content when it is active.
+          </p>
+          <p style={{ marginBottom: 100 }}>
+            Here's some content that shows up underneath the popover. The
+            popover should render above this content when it is active.
+          </p>
+          <p style={{ marginBottom: 100 }}>
+            Here's some content that shows up underneath the popover. The
+            popover should render above this content when it is active.
+          </p>
+          <p style={{ marginBottom: 100 }}>
+            Here's some content that shows up underneath the popover. The
+            popover should render above this content when it is active.
+          </p>
+          <p style={{ marginBottom: 100 }}>
+            Here's some content that shows up underneath the popover. The
+            popover should render above this content when it is active.
+          </p>
+          <p style={{ marginBottom: 100 }}>
+            Here's some content that shows up underneath the popover. The
+            popover should render above this content when it is active.
+          </p>
+          <p style={{ marginBottom: 100 }}>
+            Here's some content that shows up underneath the popover. The
+            popover should render above this content when it is active.
+          </p>
+          <p style={{ marginBottom: 100 }}>
+            Here's some content that shows up underneath the popover. The
+            popover should render above this content when it is active.
+          </p>
+          <p style={{ marginBottom: 100 }}>
+            Here's some content that shows up underneath the popover. The
+            popover should render above this content when it is active.
+          </p>
+          <p style={{ marginBottom: 100 }}>
+            Here's some content that shows up underneath the popover. The
+            popover should render above this content when it is active.
+          </p>
+          <p style={{ marginBottom: 100 }}>
+            Here's some content that shows up underneath the popover. The
+            popover should render above this content when it is active.
+          </p>
+          <p style={{ marginBottom: 100 }}>
+            Here's some content that shows up underneath the popover. The
+            popover should render above this content when it is active.
+          </p>
+          <p style={{ marginBottom: 100 }}>
+            Here's some content that shows up underneath the popover. The
+            popover should render above this content when it is active.
+          </p>
+          <p style={{ marginBottom: 100 }}>
+            Here's some content that shows up underneath the popover. The
+            popover should render above this content when it is active.
+          </p>
+        </div>
+      </>
+    );
+  },
+  args: {},
+};
+
+export const InlineWithAds: StoryObj<Components.SearchcraftPopoverForm> = {
+  decorators: [
+    (Story) => {
+      useEffect(() => {
+        const searchForm = document.querySelector('searchcraft-popover-form');
+
+        const config: SearchcraftConfig = {
+          ...configAlternate,
+          adProvider: 'adMarketplace',
+          admSub: 'searchbox1',
+          admProductAdQuantity: 3,
+          admTextAdQuantity: 3,
+        };
+
+        if (searchForm) {
+          searchForm.config = config;
+          searchForm.popoverResultMappings = mappings;
+        }
+      }, []);
+
+      return <Story />;
+    },
+  ],
+  render: () => {
+    return (
+      <>
+        <searchcraft-theme />
+        <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
+          <p>Story Note: This story uses the Bazaario env vars</p>
+          <searchcraft-popover-form
+            type='inline'
+            hotkey='k'
+            hotkey-modifier='ctrl'
+          />
+          <p style={{ marginBottom: 100 }}>
+            Here's some content that shows up underneath the popover. The
+            popover should render above this content when it is active.
+          </p>
+        </div>
+      </>
     );
   },
   args: {},
@@ -156,20 +199,23 @@ export const Modal: StoryObj<Components.SearchcraftPopoverForm> = {
       return <Story />;
     },
   ],
-  render: (args) => {
+  render: () => {
     return (
-      <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
-        <p>Story Note: This story uses the Bazaario env vars</p>
-        <searchcraft-popover-button>
-          <span>Click me</span>
-        </searchcraft-popover-button>
+      <>
+        <searchcraft-theme />
+        <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
+          <p>Story Note: This story uses the Bazaario env vars</p>
+          <searchcraft-popover-button>
+            <span>Click me</span>
+          </searchcraft-popover-button>
 
-        <searchcraft-popover-form
-          type='modal'
-          hotkey='k'
-          hotkey-modifier='ctrl'
-        />
-      </div>
+          <searchcraft-popover-form
+            type='modal'
+            hotkey='k'
+            hotkey-modifier='ctrl'
+          />
+        </div>
+      </>
     );
   },
   args: {},
@@ -190,21 +236,24 @@ export const Fullscreen: StoryObj<Components.SearchcraftPopoverForm> = {
       return <Story />;
     },
   ],
-  render: (args) => {
+  render: () => {
     return (
-      <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
-        <p>Story Note: This story uses the Bazaario env vars</p>
+      <>
+        <searchcraft-theme />
+        <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
+          <p>Story Note: This story uses the Bazaario env vars</p>
 
-        <searchcraft-popover-button>
-          <span>Click me</span>
-        </searchcraft-popover-button>
+          <searchcraft-popover-button>
+            <span>Click me</span>
+          </searchcraft-popover-button>
 
-        <searchcraft-popover-form
-          type='fullscreen'
-          hotkey='k'
-          hotkey-modifier='ctrl'
-        />
-      </div>
+          <searchcraft-popover-form
+            type='fullscreen'
+            hotkey='k'
+            hotkey-modifier='ctrl'
+          />
+        </div>
+      </>
     );
   },
   args: {},

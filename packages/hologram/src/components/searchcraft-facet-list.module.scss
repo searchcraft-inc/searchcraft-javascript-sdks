@@ -6,7 +6,7 @@
 
 .filterCheckboxLabel {
   align-items: center;
-  color: var(--sc-content-primary);
+  color: var(--sc-content-brand);
   display: flex;
   font-family: var(--sc-font-family);
   font-size: 14px;
@@ -19,7 +19,7 @@
 .filterCheckboxLabel input[type="checkbox"] {
   align-items: center;
   appearance: none;
-  background-color: var(--sc-surface-brand-secondary-hover);
+  background-color: var(--sc-surface-neutral-secondary);
   border: 1px solid var(--sc-surface-disabled);
   border-radius: 8px;
   cursor: pointer;
@@ -61,7 +61,7 @@
 .childFilterCheckboxLabel input[type="checkbox"] {
   align-items: center;
   appearance: none;
-  background-color: var(--sc-surface-brand-secondary-hover);
+  background-color: var(--sc-surface-neutral-secondary-hover);
   border: 1px solid var(--sc-surface-disabled);
   border-radius: 8px;
   cursor: pointer;

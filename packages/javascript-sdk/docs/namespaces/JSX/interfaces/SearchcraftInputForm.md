@@ -16,7 +16,7 @@ It abstracts the complexities of index-based searching, making it accessible to 
 ```js
 // index.js
 const searchInputForm = document.querySelector('searchcraft-input-form');
-seardchInputForm.config = {
+searchInputForm.config = {
   index: [],
   readKey: '',
   endpointUrl: '',
@@ -46,7 +46,7 @@ The label for the submit button.
 
 ### buttonPlacement?
 
-> `optional` **buttonPlacement**: `"left"` \| `"right"` \| `"none"`
+> `optional` **buttonPlacement**: `"none"` \| `"left"` \| `"right"`
 
 Where to place the search button.
 

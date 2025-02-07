@@ -12,20 +12,20 @@
 
 ### href?
 
-> `optional` **href**: [`SearchResultMapping`](/reference/sdk/js-vanilla/type-aliases/SearchResultMapping.md)
+> `optional` **href**: `SearchResultMapping`
 
 ### imageAlt?
 
-> `optional` **imageAlt**: [`SearchResultMapping`](/reference/sdk/js-vanilla/type-aliases/SearchResultMapping.md)
+> `optional` **imageAlt**: `SearchResultMapping`
 
 ### imageSource?
 
-> `optional` **imageSource**: [`SearchResultMapping`](/reference/sdk/js-vanilla/type-aliases/SearchResultMapping.md)
+> `optional` **imageSource**: `SearchResultMapping`
 
 ### subtitle?
 
-> `optional` **subtitle**: [`SearchResultMapping`](/reference/sdk/js-vanilla/type-aliases/SearchResultMapping.md)
+> `optional` **subtitle**: `SearchResultMapping`
 
 ### title?
 
-> `optional` **title**: [`SearchResultMapping`](/reference/sdk/js-vanilla/type-aliases/SearchResultMapping.md)
+> `optional` **title**: `SearchResultMapping`

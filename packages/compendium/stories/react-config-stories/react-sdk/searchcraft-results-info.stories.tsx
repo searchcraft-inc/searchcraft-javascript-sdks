@@ -8,10 +8,6 @@ import {
 const componentMeta: Meta = {
   title: 'React SDK/searchcraft-results-info',
   argTypes: {
-    isRequesting: {
-      control: 'boolean',
-      description: 'Indicates if a search request is in progress.',
-    },
     resultsCount: {
       control: 'number',
       description: 'The number of results returned by the search.',
@@ -29,7 +25,6 @@ const componentMeta: Meta = {
 };
 
 const defaultProps: SearchcraftResultsInfoProps = {
-  isRequesting: false,
   resultsCount: 12345,
   responseTime: '200.35',
   query: 'example query',
@@ -46,7 +41,12 @@ export const Default: StoryObj = {
       );
     },
   ],
-  render: (args) => <SearchcraftResultsInfo />,
+  render: () => (
+    <>
+      <SearchcraftTheme />
+      <SearchcraftResultsInfo />
+    </>
+  ),
   args: defaultProps,
 };
 

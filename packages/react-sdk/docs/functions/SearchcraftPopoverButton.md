@@ -8,7 +8,7 @@
 
 > **SearchcraftPopoverButton**(`props`, `deprecatedLegacyContext`?): `ReactNode`
 
-The React component for the SearchcraftPopoverButton.
+A button component that, when clicked, toggles the visibility of a popover.
 
 ## Parameters
 
@@ -29,3 +29,20 @@ The React component for the SearchcraftPopoverButton.
 ## Returns
 
 `ReactNode`
+
+## Example
+
+```tsx
+import React from 'react';
+import { SearchcraftPopoverButton } from '@searchcraft/react-sdk';
+
+const MyPopoverTrigger = () => {
+  return (
+    <SearchcraftPopoverButton>
+      Open Popover
+    </SearchcraftPopoverButton>
+  );
+};
+
+export default MyPopoverTrigger;
+```

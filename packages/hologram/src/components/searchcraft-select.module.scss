@@ -1,0 +1,53 @@
+@use "../typography.scss";
+
+.searchcraft-select {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.searchcraft-select-label {
+  @include typography.body-small();
+  font-weight: var(--sc-font-bold);
+}
+
+.searchcraft-select-input-wrapper {
+  position: relative;
+}
+
+.searchcraft-select-input {
+  @include typography.body();
+  appearance: none;
+  background-color: var(--sc-surface-neutral-secondary);
+  border: 2px solid transparent;
+  border-radius: var(--sc-border-radius);
+  cursor: pointer;
+  height: 44px;
+  padding: 0 44px 0 16px;
+  width: 100%;
+
+  &:hover {
+    background-color: var(--sc-surface-neutral-secondary-hover);
+  }
+
+  &:active {
+    background-color: var(--sc-surface-neutral-secondary-active);
+  }
+
+  &:focus {
+    border-color: var(--sc-border-brand);
+    outline: none;
+  }
+}
+
+.searchcraft-select-input-icon {
+  pointer-events: none;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.searchcraft-select-caption {
+  @include typography.body-small();
+}

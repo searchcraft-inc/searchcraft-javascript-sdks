@@ -12,30 +12,6 @@ It is consumed within the `searchcraft-base-search-results` component.
 
 ## Properties
 
-### bodyContent?
-
-> `optional` **bodyContent**: `string`
-
-The body content.
-
-***
-
-### buttonHref?
-
-> `optional` **buttonHref**: `string`
-
-The link for the button rendered when containerHref is not present.
-
-***
-
-### buttonLabel?
-
-> `optional` **buttonLabel**: `string`
-
-The label for the button rendered when containerHref is not present.
-
-***
-
 ### buttonRel?
 
 > `optional` **buttonRel**: `"noreferrer"` \| `"noopener"` \| `"nofollow"`
@@ -49,14 +25,6 @@ The relationship between the current document and the link for the button render
 > `optional` **buttonTarget**: `"_blank"` \| `"_self"` \| `"_top"` \| `"_parent"`
 
 Where to open the link for the button rendered when containerHref is not present.
-
-***
-
-### containerHref?
-
-> `optional` **containerHref**: `string`
-
-The link for the containing element.
 
 ***
 
@@ -92,22 +60,6 @@ The position in the document. Used with the "document_clicked" measure event.
 
 ***
 
-### footerContent?
-
-> `optional` **footerContent**: `string`
-
-The footer content.
-
-***
-
-### imageAlt?
-
-> `optional` **imageAlt**: `string`
-
-The image alternative text.
-
-***
-
 ### imagePlacement?
 
 > `optional` **imagePlacement**: `"left"` \| `"right"`
@@ -116,24 +68,12 @@ The placement of the image.
 
 ***
 
-### imageSrc?
+### item?
 
-> `optional` **imageSrc**: `string`
-
-The image source.
+> `optional` **item**: [`SearchClientResponseItem`](/reference/sdk/js-vanilla/interfaces/SearchClientResponseItem.md)
 
 ***
 
-### subtitleContent?
+### searchResultMappings?
 
-> `optional` **subtitleContent**: `string`
-
-The subtitle content.
-
-***
-
-### titleContent?
-
-> `optional` **titleContent**: `string`
-
-The title content.
+> `optional` **searchResultMappings**: [`SearchResultMappings`](/reference/sdk/js-vanilla/type-aliases/SearchResultMappings.md)

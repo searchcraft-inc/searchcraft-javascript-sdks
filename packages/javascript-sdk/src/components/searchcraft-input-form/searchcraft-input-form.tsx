@@ -29,7 +29,7 @@ import classNames from 'classnames';
  * // index.js
  * const searchInputForm = document.querySelector('searchcraft-input-form');
  *
- * seardchInputForm.config = {
+ * searchInputForm.config = {
  *   index: [],
  *   readKey: '',
  *   endpointUrl: '',
@@ -133,29 +133,25 @@ export class SearchcraftInput {
     const input = event.target as HTMLInputElement;
     this.inputValue = input.value;
 
-    if (input.value.trim() === '') {
-      this.inputCleared?.emit();
-      this.searchTerm = '';
-      this.searchStore.setQuery('');
-      this.searchStore.setSearchResults(null);
+    if (!this.autoSearch) {
       return;
     }
 
-    if (!this.autoSearch) {
-      return;
+    if (input.value.trim() === '') {
+      this.inputCleared?.emit();
     }
 
     this.performSearch(input.value);
   };
 
   private performSearch = async (value: string) => {
-    if (value === useSearchcraftStore.getState().query) {
+    if (value === useSearchcraftStore.getState().searchTerm) {
       return;
     }
 
     this.searchTerm = value.trim();
     this.error = false;
-    this.searchStore.setQuery(this.searchTerm);
+    this.searchStore.setSearchTerm(this.searchTerm);
     this.querySubmit?.emit(this.searchTerm);
 
     try {
@@ -169,8 +165,8 @@ export class SearchcraftInput {
   handleClearInput = () => {
     this.inputValue = '';
     this.searchTerm = '';
-    this.searchStore.setQuery('');
-    this.searchStore.setSearchResults(null);
+    this.searchStore.setSearchTerm('');
+    this.searchStore.setSearchClientResponseItems([]);
     this.error = false;
 
     this.inputCleared?.emit();
@@ -243,7 +239,7 @@ export class SearchcraftInput {
                 </title>
                 <path
                   d='M17.5 17.5L13.875 13.875M15.8333 9.16667C15.8333 12.8486 12.8486 15.8333 9.16667 15.8333C5.48477 15.8333 2.5 12.8486 2.5 9.16667C2.5 5.48477 5.48477 2.5 9.16667 2.5C12.8486 2.5 15.8333 5.48477 15.8333 9.16667Z'
-                  stroke='#404040'
+                  stroke='currentColor'
                   stroke-width='1.5'
                   stroke-linecap='round'
                   stroke-linejoin='round'
@@ -268,7 +264,7 @@ export class SearchcraftInput {
                   </title>
                   <path
                     d='M14 8L8 14M8 8L14 14M21 11C21 16.5228 16.5228 21 11 21C5.47715 21 1 16.5228 1 11C1 5.47715 5.47715 1 11 1C16.5228 1 21 5.47715 21 11Z'
-                    stroke='black'
+                    stroke='currentColor'
                     stroke-width='1.5'
                     stroke-linecap='round'
                     stroke-linejoin='round'

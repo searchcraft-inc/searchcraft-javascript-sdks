@@ -8,4 +8,30 @@
 
 > `const` **SearchcraftBaseSearchResults**: `DefineSetupFnComponent`\<`SearchcraftBaseSearchResults` & `InputProps`\<`string` \| `number` \| `boolean`\>, \{\}, \{\}, `SearchcraftBaseSearchResults` & `InputProps`\<`string` \| `number` \| `boolean`\>, `PublicProps`\> = `Component`
 
-The Base Search Results
+A component that renders a list of search results with customizable styles, layout, and link behavior.
+
+## Example
+
+```vue
+<script setup>
+import SearchcraftBaseSearchResults from '@searchcraft/vue-sdk';
+import searchResultMappings from './searchResultMappings';
+
+const handleNoResults = () => {
+  console.log("No search results found");
+};
+</script>
+
+<template>
+  <SearchcraftBaseSearchResults
+    :searchResultMappings="searchResultMappings"
+    resultImagePlacement="left"
+    buttonLabel="View More"
+    buttonTarget="_blank"
+    buttonRel="noopener"
+    containerTarget="_self"
+    containerRel="nofollow"
+    @noResults="handleNoResults"
+  />
+</template>
+```

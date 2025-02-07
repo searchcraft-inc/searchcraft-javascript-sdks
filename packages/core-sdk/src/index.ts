@@ -1,3 +1,2 @@
-export * from './CoreSDK';
-export * from './CoreSDKTypes';
-export * from './SDKDebugger';
+export * from './classes';
+export * from './types';

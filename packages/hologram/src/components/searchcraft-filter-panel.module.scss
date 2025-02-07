@@ -13,5 +13,6 @@
 }
 
 .searchcraft-filter-panel-label {
-  @include typography.body-small-bold();
+  @include typography.body-small();
+  font-weight: var(--sc-font-bold);
 }

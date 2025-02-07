@@ -8,10 +8,6 @@ const componentName = 'searchcraft-results-info';
 const componentMeta: Meta = {
   title: 'Javascript SDK/searchcraft-results-info',
   argTypes: {
-    isRequesting: {
-      control: 'boolean',
-      description: 'Indicates if a search request is in progress.',
-    },
     resultsCount: {
       control: 'number',
       description: 'The number of results returned by the search.',
@@ -29,25 +25,17 @@ const componentMeta: Meta = {
 };
 
 const defaultProps: Components.SearchcraftResultsInfo = {
-  isRequesting: false,
   resultsCount: 12345,
   responseTime: '200.35',
   query: 'example query',
 };
 
 export const Default: StoryObj<Components.SearchcraftResultsInfo> = {
-  decorators: [
-    (Story) => {
-      return (
-        <>
-          <searchcraft-theme />
-          <Story />
-        </>
-      );
-    },
-  ],
   render: (args) => (
-    <WebComponentWrapper args={args} componentName={componentName} />
+    <>
+      <searchcraft-theme />
+      <WebComponentWrapper args={args} componentName={componentName} />
+    </>
   ),
   args: defaultProps,
 };

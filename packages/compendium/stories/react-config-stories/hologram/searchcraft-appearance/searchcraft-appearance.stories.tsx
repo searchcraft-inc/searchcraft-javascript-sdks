@@ -1,0 +1,56 @@
+import type { Meta, StoryObj } from '@storybook/react';
+
+import './searchcraft-appearance.scss';
+
+const componentMeta: Meta = {
+  title: 'Hologram/searchcraft-theme',
+  argTypes: {
+    borderRadius: {
+      control: {
+        type: 'number',
+        min: 0,
+      },
+      description: 'Base border radius used to generate other values.',
+    },
+  },
+};
+
+const defaultProps = {
+  borderRadius: 8,
+};
+
+export const Appearance: StoryObj<{
+  borderRadius: number;
+}> = {
+  render: (args) => {
+    return (
+      <>
+        <searchcraft-theme />
+        <style
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
+          dangerouslySetInnerHTML={{
+            __html: `
+              :root {
+                --sc-border-radius: ${args.borderRadius || defaultProps.borderRadius}px;
+              }
+            `,
+          }}
+        />
+        <div className='border-radii'>
+          <div className='border-radius border-radius-sm'>
+            <p>SM</p>
+          </div>
+          <div className='border-radius'>
+            <p>BASE</p>
+          </div>
+          <div className='border-radius border-radius-lg'>
+            <p>LG</p>
+          </div>
+        </div>
+      </>
+    );
+  },
+  args: defaultProps,
+};
+
+export default componentMeta;

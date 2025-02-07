@@ -28,16 +28,6 @@ const defaultProps: Components.SearchcraftSlider = {
 };
 
 export const Default: StoryObj<Components.SearchcraftSlider> = {
-  decorators: [
-    (Story) => {
-      return (
-        <>
-          <searchcraft-theme />
-          <Story />
-        </>
-      );
-    },
-  ],
   render: (args) => (
     <>
       <searchcraft-theme />

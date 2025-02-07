@@ -1,7 +1,10 @@
+import type {
+  AdClientResponseItem,
+  SearchClientResponseItem,
+} from '@searchcraft/core';
 import { Component, h, Prop } from '@stencil/core';
 
-import { getDocumentValueFromSearchResultMapping } from '@utils';
-import type { PopoverResultMappings } from 'types';
+import type { PopoverResultMappings } from '@searchcraft/core';
 
 /**
  * This web component is designed to display a list of results within a popover interface.
@@ -24,54 +27,32 @@ export class SearchcraftPopoverListView {
    */
   @Prop() popoverResultMappings: PopoverResultMappings | undefined;
   /**
-   * The documents to render in the list view.
+   * The items to render in the list view.
    */
-  @Prop() documents: Record<string, unknown>[] | undefined;
-
-  renderDocument(document: Record<string, unknown>, index: number) {
-    /**
-     * Index field values -> Result container props mappings.
-     */
-    const titleContent = getDocumentValueFromSearchResultMapping(
-      document,
-      this.popoverResultMappings?.title,
-    );
-    const subtitleContent = getDocumentValueFromSearchResultMapping(
-      document,
-      this.popoverResultMappings?.subtitle,
-    );
-    const href = getDocumentValueFromSearchResultMapping(
-      document,
-      this.popoverResultMappings?.href,
-    );
-    const imageSource = getDocumentValueFromSearchResultMapping(
-      document,
-      this.popoverResultMappings?.imageSource,
-    );
-    const imageAlt = getDocumentValueFromSearchResultMapping(
-      document,
-      this.popoverResultMappings?.imageAlt,
-    );
-
-    return (
-      <searchcraft-popover-list-item
-        key={`${document.document_id}-${index}`}
-        title-content={titleContent}
-        subtitle-content={subtitleContent}
-        image-src={imageSource}
-        image-alt={imageAlt}
-        href={href}
-        document-position={index}
-      />
-    );
-  }
+  @Prop() searchClientResponseItems: SearchClientResponseItem[] | undefined;
+  @Prop() adClientResponseItems: AdClientResponseItem[] | undefined;
+  @Prop() searchResultsPage!: number;
+  @Prop() searchResultsPerPage!: number;
 
   render() {
     return (
       <div class='searchcraft-popover-list-view'>
-        {this.documents?.map((document, index) =>
-          this.renderDocument(document, index),
-        )}
+        {this.adClientResponseItems?.map((item) => (
+          <searchcraft-popover-list-item-ad
+            adClientResponseItem={item}
+            key={item.adId}
+          />
+        ))}
+        {this.searchClientResponseItems?.map((item, index) => (
+          <searchcraft-popover-list-item
+            item={item}
+            key={item.id}
+            popoverResultMappings={this.popoverResultMappings}
+            documentPosition={
+              this.searchResultsPerPage * (this.searchResultsPage - 1) + index
+            }
+          />
+        ))}
       </div>
     );
   }

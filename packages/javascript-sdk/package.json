@@ -1,7 +1,7 @@
 {
   "name": "@searchcraft/javascript-sdk",
   "private": false,
-  "version": "0.7.2",
+  "version": "0.8.0",
   "description": "Searchcraft Javascript SDK",
   "author": "Searchcraft",
   "license": "Apache-2.0",
@@ -51,7 +51,7 @@
     "classnames": "^2.3.2"
   },
   "devDependencies": {
-    "@searchcraft/core": "^0.7.2",
+    "@searchcraft/core": "^0.8.0",
     "@searchcraft/javascript-sdk": "*",
     "@stencil/core": "^4.7.0",
     "@stencil/react-output-target": "^0.8.2",

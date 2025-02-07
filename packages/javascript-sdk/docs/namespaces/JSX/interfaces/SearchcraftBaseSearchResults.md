@@ -35,14 +35,6 @@ baseSearchResults.addEventListener('noResults', () => {
 
 ## Properties
 
-### adInterval?
-
-> `optional` **adInterval**: `number`
-
-How often ads are injected.
-
-***
-
 ### buttonLabel?
 
 > `optional` **buttonLabel**: `string`
@@ -106,22 +98,6 @@ When no results are returned.
 #### Returns
 
 `void`
-
-***
-
-### placeAdAtEnd?
-
-> `optional` **placeAdAtEnd**: `boolean`
-
-Should an ad be placed at the end of the results.
-
-***
-
-### placeAdAtStart?
-
-> `optional` **placeAdAtStart**: `boolean`
-
-Should an ad be placed at the start of the results.
 
 ***
 

@@ -1,5 +1,11 @@
 import { useSearchcraftStore } from '@provider/store';
-import { Component, h, Prop } from '@stencil/core';
+import type {
+  SearchDocument,
+  SearchClientResponseItem,
+  PopoverResultMappings,
+} from '@searchcraft/core';
+import { Component, h, Prop, State } from '@stencil/core';
+import { getDocumentValueFromSearchResultMapping } from '@utils';
 
 /**
  * A single list item rendered in a searchcraft-popover-list-view.
@@ -9,26 +15,47 @@ import { Component, h, Prop } from '@stencil/core';
   shadow: false,
 })
 export class SearchcraftPopoverListItem {
-  /** The result title */
-  @Prop() titleContent: string | undefined;
-  /** The result subtitle */
-  @Prop() subtitleContent: string | undefined;
-  /** The source of the image. If not included, no item will be rendered. */
-  @Prop() imageSrc: string | undefined;
-  /** The image alt tag. */
-  @Prop() imageAlt: string | undefined;
-  /** The link href */
-  @Prop() href: string | undefined;
+  @Prop() item: SearchClientResponseItem | undefined;
+  @Prop() popoverResultMappings: PopoverResultMappings | undefined;
   /** The document position relative to the search results (For Measure) */
   @Prop() documentPosition = 0;
 
-  componentDidLoad() {}
+  @State() href?: string;
+  @State() imageSrc?: string;
+  @State() imageAlt?: string;
+  @State() titleContent?: string;
+  @State() subtitleContent?: string;
 
-  connectedCallback() {}
+  mapValuesFromDocument(document: SearchDocument) {
+    this.titleContent = getDocumentValueFromSearchResultMapping(
+      document,
+      this.popoverResultMappings?.title,
+    );
+    this.subtitleContent = getDocumentValueFromSearchResultMapping(
+      document,
+      this.popoverResultMappings?.subtitle,
+    );
+    this.href = getDocumentValueFromSearchResultMapping(
+      document,
+      this.popoverResultMappings?.href,
+    );
+    this.imageSrc = getDocumentValueFromSearchResultMapping(
+      document,
+      this.popoverResultMappings?.imageSource,
+    );
+    this.imageAlt = getDocumentValueFromSearchResultMapping(
+      document,
+      this.popoverResultMappings?.imageAlt,
+    );
+  }
+
+  connectedCallback() {
+    if (this.item) {
+      this.mapValuesFromDocument(this.item.document);
+    }
+  }
 
   disconnectedCallback() {}
-
-  handleButtonClick() {}
 
   handleLinkClick = () => {
     const state = useSearchcraftStore.getState();
@@ -36,10 +63,10 @@ export class SearchcraftPopoverListItem {
 
     if (searchcraft) {
       const document_position = this.documentPosition;
-      const search_term = state.query;
-      const number_of_documents = state.searchResults?.data?.hits?.length || 0;
+      const search_term = state.searchTerm;
+      const number_of_documents = state.searchClientResponseItems.length || 0;
 
-      searchcraft.sendMeasureEvent('document_clicked', {
+      searchcraft.measureClient?.sendMeasureEvent('document_clicked', {
         document_position,
         number_of_documents,
         search_term,

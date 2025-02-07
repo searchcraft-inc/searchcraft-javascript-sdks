@@ -1,12 +1,16 @@
 import { Component, Element, Prop, State, h } from '@stencil/core';
 import classNames from 'classnames';
-import type { SearchcraftConfig, SearchcraftResponse } from '@searchcraft/core';
+import type {
+  SearchcraftConfig,
+  SearchClientResponseItem,
+  AdClientResponseItem,
+  PopoverResultMappings,
+} from '@searchcraft/core';
 
 import { useSearchcraftStore } from '@provider/store';
-import type { PopoverResultMappings } from 'types';
 
 /**
- * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field.
+ * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field, or when a popover-button is pressed.
  *
  * ## Usage
  * ```html
@@ -67,12 +71,15 @@ export class SearchcraftPopoverForm {
 
   @State() isPopoverVisibleInState = false;
   @State() unsubscribe: (() => void) | undefined;
-  @State() searchResults: SearchcraftResponse | undefined;
+  @State() searchClientResponseItems: SearchClientResponseItem[] = [];
+  @State() adClientResponseItems: AdClientResponseItem[] = [];
   @State() searchTerm: string | undefined;
   @State() isFocused = false;
   @State() breakpointSm = 576;
   @State() breakpointMd = 768;
   @State() breakpointLg = 992;
+  @State() searchResultsPage;
+  @State() searchResultsPerPage;
 
   @State() modalElement;
 
@@ -104,8 +111,11 @@ export class SearchcraftPopoverForm {
         this.handlePopoverVisibilityChange(state.isPopoverVisible);
       }
 
-      this.searchResults = { ...state.searchResults } as SearchcraftResponse;
-      this.searchTerm = state.query;
+      this.searchClientResponseItems = [...state.searchClientResponseItems];
+      this.adClientResponseItems = [...state.adClientResponseItems];
+      this.searchTerm = state.searchTerm;
+      this.searchResultsPage = state.searchResultsPage;
+      this.searchResultsPerPage = state.searchResultsPerPage;
     });
   }
 
@@ -264,11 +274,11 @@ export class SearchcraftPopoverForm {
     return (
       this.searchTerm &&
       this.searchTerm?.trim()?.length > 0 &&
-      (this.searchResults?.data?.hits?.length || 0) > 0
+      this.searchClientResponseItems.length > 0
     );
   }
 
-  renderInlinePopover(documents: Record<string, unknown>[]) {
+  renderInlinePopover() {
     const isListViewVisible = this.hasResultsToShow && this.isFocused;
 
     const popoverFormClassNames = classNames(
@@ -289,7 +299,10 @@ export class SearchcraftPopoverForm {
             <div class='searchcraft-popover-inline-wrapper-inner'>
               <searchcraft-popover-list-view
                 popoverResultMappings={this.popoverResultMappings}
-                documents={documents}
+                searchClientResponseItems={this.searchClientResponseItems}
+                adClientResponseItems={this.adClientResponseItems}
+                searchResultsPage={this.searchResultsPage}
+                searchResultsPerPage={this.searchResultsPerPage}
               />
             </div>
           </div>
@@ -298,7 +311,7 @@ export class SearchcraftPopoverForm {
     );
   }
 
-  renderModalPopover(documents: Record<string, unknown>[]) {
+  renderModalPopover() {
     if (this.isPopoverVisibleInState) {
       const popoverFormClassNames = classNames('searchcraft-popover-form', {
         'searchcraft-popover-form-active': this.hasResultsToShow,
@@ -330,7 +343,10 @@ export class SearchcraftPopoverForm {
               {this.hasResultsToShow && (
                 <searchcraft-popover-list-view
                   popoverResultMappings={this.popoverResultMappings}
-                  documents={documents}
+                  searchClientResponseItems={this.searchClientResponseItems}
+                  adClientResponseItems={this.adClientResponseItems}
+                  searchResultsPage={this.searchResultsPage}
+                  searchResultsPerPage={this.searchResultsPerPage}
                 />
               )}
             </div>
@@ -340,7 +356,7 @@ export class SearchcraftPopoverForm {
     }
   }
 
-  renderFullscreenPopover(documents: Record<string, unknown>[]) {
+  renderFullscreenPopover() {
     if (this.isPopoverVisibleInState) {
       return (
         <div class='searchcraft-popover-form-fullscreen'>
@@ -362,7 +378,10 @@ export class SearchcraftPopoverForm {
             {this.hasResultsToShow && (
               <searchcraft-popover-list-view
                 popoverResultMappings={this.popoverResultMappings}
-                documents={documents}
+                searchClientResponseItems={this.searchClientResponseItems}
+                adClientResponseItems={this.adClientResponseItems}
+                searchResultsPage={this.searchResultsPage}
+                searchResultsPerPage={this.searchResultsPerPage}
               />
             )}
           </div>
@@ -372,19 +391,13 @@ export class SearchcraftPopoverForm {
   }
 
   render() {
-    const documents: Record<string, unknown>[] =
-      this.searchResults?.data?.hits?.map((data, _index) => {
-        const { doc: result } = data;
-        return result;
-      }) as Record<string, unknown>[];
-
     switch (this.type) {
       case 'inline':
-        return this.renderInlinePopover(documents);
+        return this.renderInlinePopover();
       case 'modal':
-        return this.renderModalPopover(documents);
+        return this.renderModalPopover();
       case 'fullscreen':
-        return this.renderFullscreenPopover(documents);
+        return this.renderFullscreenPopover();
     }
   }
 }

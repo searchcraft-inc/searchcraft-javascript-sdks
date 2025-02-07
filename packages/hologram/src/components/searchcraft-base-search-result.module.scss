@@ -1,10 +1,11 @@
-@use '../breakpoints.scss';
+@use "../appearance.scss";
+@use "../breakpoints.scss";
 @use "../typography.scss";
 
 .searchcraft-search-result-container {
   all: unset;
   align-items: flex-start;
-  border-radius: 16px;
+  border-radius: var(--sc-border-radius-lg);
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -31,7 +32,7 @@ a.searchcraft-search-result-container {
 }
 
 .searchcraft-search-result-image {
-  border-radius: var(--sc-image-border-radius);
+  @include appearance.offset-border-radius(--sc-border-radius-lg, -8px);
   width: 100%;
 
   @media (min-width: breakpoints.$breakpoint-md) {
@@ -40,25 +41,26 @@ a.searchcraft-search-result-container {
 }
 
 .searchcraft-base-search-result-title {
-  @include typography.body-bold();
-  margin: 0;
+  @include typography.body();
   color: var(--sc-content-neutral-primary);
+  font-weight: var(--sc-font-bold);
+  margin: 0;
 }
 
 .searchcraft-base-search-result-subtitle {
   @include typography.body-small();
-  margin: 0;
   color: var(--sc-content-disabled);
+  margin: 0;
 }
 
 .searchcraft-base-search-result-body-content {
   @include typography.body();
-  margin: 0;
   color: var(--sc-content-neutral-secondary);
+  margin: 0;
 }
 
 .searchcraft-base-search-result-footer-content {
   @include typography.body();
-  margin: 0;
   color: var(--sc-content-disabled);
+  margin: 0;
 }

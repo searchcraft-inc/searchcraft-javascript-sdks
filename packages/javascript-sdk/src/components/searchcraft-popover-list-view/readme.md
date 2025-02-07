@@ -18,10 +18,13 @@ It is consumed within the `searchcraft-popover-form` component.
 
 ## Properties
 
-| Property                | Attribute | Description                                                                                       | Type                                                                                                                                                                                                                                            | Default     |
-| ----------------------- | --------- | ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| `documents`             | --        | The documents to render in the list view.                                                         | `Record<string, unknown>[] \| undefined`                                                                                                                                                                                                        | `undefined` |
-| `popoverResultMappings` | --        | The mappings that define how the data in the documents are mapped to the list-view-item elements. | `undefined \| { title?: SearchResultMapping \| undefined; subtitle?: SearchResultMapping \| undefined; imageSource?: SearchResultMapping \| undefined; imageAlt?: SearchResultMapping \| undefined; href?: SearchResultMapping \| undefined; }` | `undefined` |
+| Property                            | Attribute                 | Description                                                                                       | Type                                                                                                                                                                                                                                            | Default     |
+| ----------------------------------- | ------------------------- | ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| `adClientResponseItems`             | --                        |                                                                                                   | `AdClientResponseItem[] \| undefined`                                                                                                                                                                                                           | `undefined` |
+| `popoverResultMappings`             | --                        | The mappings that define how the data in the documents are mapped to the list-view-item elements. | `undefined \| { title?: SearchResultMapping \| undefined; subtitle?: SearchResultMapping \| undefined; imageSource?: SearchResultMapping \| undefined; imageAlt?: SearchResultMapping \| undefined; href?: SearchResultMapping \| undefined; }` | `undefined` |
+| `searchClientResponseItems`         | --                        | The items to render in the list view.                                                             | `SearchClientResponseItem[] \| undefined`                                                                                                                                                                                                       | `undefined` |
+| `searchResultsPage` _(required)_    | `search-results-page`     |                                                                                                   | `number`                                                                                                                                                                                                                                        | `undefined` |
+| `searchResultsPerPage` _(required)_ | `search-results-per-page` |                                                                                                   | `number`                                                                                                                                                                                                                                        | `undefined` |
 
 
 ## Dependencies
@@ -32,11 +35,13 @@ It is consumed within the `searchcraft-popover-form` component.
 
 ### Depends on
 
+- [searchcraft-popover-list-item-ad](../searchcraft-popover-list-item-ad)
 - [searchcraft-popover-list-item](../searchcraft-popover-list-item)
 
 ### Graph
 ```mermaid
 graph TD;
+  searchcraft-popover-list-view --> searchcraft-popover-list-item-ad
   searchcraft-popover-list-view --> searchcraft-popover-list-item
   searchcraft-popover-form --> searchcraft-popover-list-view
   style searchcraft-popover-list-view fill:#f9f,stroke:#333,stroke-width:4px
