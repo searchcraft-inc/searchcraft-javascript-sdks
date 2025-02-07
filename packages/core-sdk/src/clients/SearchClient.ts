@@ -5,6 +5,7 @@ import type {
   SearchcraftResponse,
 } from '../types';
 import { buildQueryObject } from '../utils';
+import { sanitize } from '../utils/sanitize';
 
 import type { MeasureClient } from './MeasureClient';
 
@@ -37,15 +38,10 @@ export class SearchClient {
   getSearchResponse = async (
     searchParams: SearchParams,
   ): Promise<SearchcraftResponse> => {
-    const quoteCount = (searchParams.searchTerm.match(/"/g) || []).length;
-    if (quoteCount % 2 !== 0) {
-      throw new Error(
-        'The search term contains an uneven number of quote characters.',
-      );
-    }
+    const searchTerm = sanitize(searchParams.searchTerm);
 
     this.measureClient?.sendMeasureEvent('search_requested', {
-      search_term: searchParams.searchTerm,
+      search_term: searchTerm,
     });
 
     try {
@@ -58,13 +54,9 @@ export class SearchClient {
         sort?: 'asc' | 'desc';
       } = {
         query: buildQueryObject(searchParams),
-        limit: this.config.searchResultsPerPage || 20, // Default to 20 if not provided
+        offset: searchParams.offset || 0, // Default to 0 (first page) if not provided
+        limit: searchParams.limit || this.config.searchResultsPerPage || 20, // Default to 20 if not provided
       };
-
-      // Add offset if provided
-      if (searchParams.offset !== undefined) {
-        requestBody.offset = searchParams.offset;
-      }
 
       // Handles dynamic sorting and order_by logic
       if (searchParams.order_by) {
@@ -99,7 +91,7 @@ export class SearchClient {
         (await response.json()) as SearchcraftResponse;
 
       this.measureClient?.sendMeasureEvent('search_response_received', {
-        search_term: searchParams.searchTerm,
+        search_term: searchTerm,
         number_of_documents: searchcraftResponse.data.count,
       });
 

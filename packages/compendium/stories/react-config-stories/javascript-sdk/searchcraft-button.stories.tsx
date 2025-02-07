@@ -7,7 +7,7 @@ const componentName = 'searchcraft-button';
 const componentMeta: Meta = {
   title: 'Javascript SDK/searchcraft-button',
   argTypes: {
-    iconElement: {
+    icon: {
       control: 'text',
       description: 'Optional icon element to display.',
     },
@@ -30,7 +30,7 @@ const componentMeta: Meta = {
 };
 
 const defaultProps: Components.SearchcraftButton = {
-  iconElement: undefined,
+  icon: undefined,
   iconOnly: false,
   iconPosition: 'left',
   label: 'Search',

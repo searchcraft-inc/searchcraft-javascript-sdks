@@ -19,55 +19,64 @@ import classNames from 'classnames';
 })
 export class SearchcraftButton {
   /**
+   * Controls the visual representation of the button.
+   */
+  @Prop() hierarchy?: 'primary' | 'tertiary' = 'primary';
+  /**
+   * Whether the button is disabled.
+   */
+  @Prop() disabled?: boolean = false;
+  /**
    * The icon element.
    */
-  @Prop() iconElement?: Element;
+  @Prop() icon?: Element;
   /**
    * Should the button only display an icon.
    */
-  @Prop() iconOnly = false;
+  @Prop() iconOnly?: boolean = false;
   /**
    * The position of the icon.
    */
-  @Prop() iconPosition = 'left';
+  @Prop() iconPosition?: 'left' | 'right' = 'left';
   /**
    * The label for the button.
    */
   @Prop() label = 'Search';
-
   /**
-   * When the button is clicked.
+   * The type of the button.
+   */
+  @Prop() type?: 'submit' | 'reset' | 'button' = 'button';
+  /**
+   * The event fired when the button is clicked.
    */
   @Event() buttonClick!: EventEmitter<void>;
 
-  private handleClick = () => {
+  private handleButtonClick = () => {
     this.buttonClick.emit();
   };
 
   render() {
     return (
-      <Fragment>
+      <button
+        class={classNames('searchcraft-button', {
+          'searchcraft-button-primary': this.hierarchy === 'primary',
+          'searchcraft-button-tertiary': this.hierarchy === 'tertiary',
+          'searchcraft-button-disabled': this.disabled,
+        })}
+        disabled={this.disabled}
+        onClick={this.handleButtonClick}
+        type={this.type}
+      >
         {this.iconOnly ? (
-          <button
-            class={classNames('searchcraft-button')}
-            onClick={this.handleClick}
-            type='submit'
-          >
-            {this.iconElement}
-          </button>
+          this.icon
         ) : (
-          <button
-            class={classNames('searchcraft-button')}
-            onClick={this.handleClick}
-            type='submit'
-          >
-            {this.iconPosition === 'left' && this.iconElement}
-            <span class={classNames('buttonLabel', 'searchcraft-button-label')}>
-              {this.label}
-            </span>
-          </button>
+          <Fragment>
+            {this.iconPosition === 'left' && this.icon}
+            <span>{this.label}</span>
+            {this.iconPosition === 'right' && this.icon}
+          </Fragment>
         )}
-      </Fragment>
+      </button>
     );
   }
 }

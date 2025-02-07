@@ -22,6 +22,8 @@ export interface SearchcraftStateFunctions {
   search: () => Promise<void>;
   setPopoverVisibility: (isVisible: boolean) => void;
   setSearchClientResponseItems: (results: SearchClientResponseItem[]) => void;
+  setSearchResultsPage: (page: number) => void;
+  setSearchResultsPerPage: (perPage: number) => void;
   setSearchTerm: (searchTerm: string) => void;
   setSearchMode: (mode: 'fuzzy' | 'exact') => void;
   setSortType: (type: 'asc' | 'desc') => void;
@@ -41,6 +43,9 @@ export interface SearchcraftStateValues {
   searchClientResponseItems: SearchClientResponseItem[];
   searchResponseTimeTaken: number | undefined;
   searchResponseFacetPrime: FacetPrime | undefined;
+  searchResultsCount: number;
+  searchResultsPage: number;
+  searchResultsPerPage: number;
   searchTerm: string;
   sortType: 'asc' | 'desc';
 }

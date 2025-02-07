@@ -29,7 +29,7 @@ import classNames from 'classnames';
  * // index.js
  * const searchInputForm = document.querySelector('searchcraft-input-form');
  *
- * seardchInputForm.config = {
+ * searchInputForm.config = {
  *   index: [],
  *   readKey: '',
  *   endpointUrl: '',
@@ -133,16 +133,12 @@ export class SearchcraftInput {
     const input = event.target as HTMLInputElement;
     this.inputValue = input.value;
 
-    if (input.value.trim() === '') {
-      this.inputCleared?.emit();
-      this.searchTerm = '';
-      this.searchStore.setSearchTerm('');
-      this.searchStore.setSearchClientResponseItems([]);
+    if (!this.autoSearch) {
       return;
     }
 
-    if (!this.autoSearch) {
-      return;
+    if (input.value.trim() === '') {
+      this.inputCleared?.emit();
     }
 
     this.performSearch(input.value);

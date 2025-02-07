@@ -42,10 +42,13 @@ export const SearchcraftBaseSearchResults = /*@__PURE__*/ defineContainer<JSX.Se
 
 
 export const SearchcraftButton = /*@__PURE__*/ defineContainer<JSX.SearchcraftButton>('searchcraft-button', undefined, [
-  'iconElement',
+  'hierarchy',
+  'disabled',
+  'icon',
   'iconOnly',
   'iconPosition',
   'label',
+  'type',
   'buttonClick'
 ], [
   'buttonClick'
@@ -101,6 +104,11 @@ export const SearchcraftInputLabel = /*@__PURE__*/ defineContainer<JSX.Searchcra
 ]);
 
 
+export const SearchcraftPagination = /*@__PURE__*/ defineContainer<JSX.SearchcraftPagination>('searchcraft-pagination', undefined, [
+  'customStyles'
+]);
+
+
 export const SearchcraftPopoverButton = /*@__PURE__*/ defineContainer<JSX.SearchcraftPopoverButton>('searchcraft-popover-button', undefined);
 
 
@@ -128,11 +136,37 @@ export const SearchcraftPopoverListItemAd = /*@__PURE__*/ defineContainer<JSX.Se
 export const SearchcraftPopoverListView = /*@__PURE__*/ defineContainer<JSX.SearchcraftPopoverListView>('searchcraft-popover-list-view', undefined, [
   'popoverResultMappings',
   'searchClientResponseItems',
-  'adClientResponseItems'
+  'adClientResponseItems',
+  'searchResultsPage',
+  'searchResultsPerPage'
 ]);
 
 
-export const SearchcraftResultsInfo = /*@__PURE__*/ defineContainer<JSX.SearchcraftResultsInfo>('searchcraft-results-info', undefined);
+export const SearchcraftResultsInfo = /*@__PURE__*/ defineContainer<JSX.SearchcraftResultsInfo>('searchcraft-results-info', undefined, [
+  'customFormatter',
+  'customStyles'
+]);
+
+
+export const SearchcraftSearchResultsPerPage = /*@__PURE__*/ defineContainer<JSX.SearchcraftSearchResultsPerPage>('searchcraft-search-results-per-page', undefined, [
+  'increment',
+  'customStyles'
+]);
+
+
+export const SearchcraftSelect = /*@__PURE__*/ defineContainer<JSX.SearchcraftSelect>('searchcraft-select', undefined, [
+  'caption',
+  'disabled',
+  'inputId',
+  'label',
+  'labelId',
+  'name',
+  'options',
+  'customStyles',
+  'selectChange'
+], [
+  'selectChange'
+]);
 
 
 export const SearchcraftSlider = /*@__PURE__*/ defineContainer<JSX.SearchcraftSlider>('searchcraft-slider', undefined, [

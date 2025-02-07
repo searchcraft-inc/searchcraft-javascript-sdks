@@ -8,3 +8,5 @@ export * from './SearchcraftPopoverButton';
 export * from './SearchcraftPopoverForm';
 export * from './SearchcraftResultsInfo';
 export * from './SearchcraftTheme';
+export * from './SearchcraftPagination';
+export * from './SearchcraftSearchResultsPerPage';

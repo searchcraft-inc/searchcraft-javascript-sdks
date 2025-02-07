@@ -1,28 +1,72 @@
 @use "../typography.scss";
 
 .searchcraft-button {
-  @include typography.body;
-
-  border-radius: 8px;
+  @include typography.body();
+  background: none;
+  border: 2px solid transparent;
+  border-radius: var(--sc-border-radius);
+  cursor: pointer;
   display: flex;
-  font-weight: var(--sc-font-bold);
-  padding: 12px 20px;
+  gap: 4px;
+  padding: 12px;
   position: relative;
 
+  &.searchcraft-button-disabled {
+    cursor: not-allowed;
+  }
+}
+
+.searchcraft-button-primary {
   background-color: var(--sc-surface-brand-primary);
-  border: 1px solid var(--sc-border-primary);
   color: var(--sc-content-brand-on-primary);
+  font-weight: var(--sc-font-bold);
 
   &:hover {
-    cursor: pointer;
     background-color: var(--sc-surface-brand-primary-hover);
   }
 
   &:focus {
-    outline: 2px solid var(--sc-surface-brand-primary);
+    border-color: var(--sc-border-primary);
+  }
+
+  &:active {
+    background-color: var(--sc-surface-brand-primary-active);
+  }
+
+  &.searchcraft-button-disabled,
+  &.searchcraft-button-disabled:hover,
+  &.searchcraft-button-disabled:focus,
+  &.searchcraft-button-disabled:active {
+    background-color: var(--sc-surface-disabled);
+    border-color: transparent;
+    color: var(--sc-content-disabled);
   }
 }
 
-.buttonLabel {
-  position: relative;
+.searchcraft-button-tertiary {
+  background-color: var(--sc-surface-neutral-primary);
+  color: var(--sc-content-brand);
+  font-weight: var(--sc-font-normal);
+
+  &:hover {
+    background-color: var(--sc-surface-brand-secondary-hover);
+  }
+
+  &:focus {
+    background-color: var(--sc-surface-neutral-light);
+    border-color: var(--sc-border-primary);
+  }
+
+  &:active {
+    background-color: var(--sc-surface-brand-secondary-active);
+  }
+
+  &.searchcraft-button-disabled,
+  &.searchcraft-button-disabled:hover,
+  &.searchcraft-button-disabled:focus,
+  &.searchcraft-button-disabled:active {
+    background-color: var(--sc-surface-neutral-light);
+    border-color: transparent;
+    color: var(--sc-content-disabled);
+  }
 }

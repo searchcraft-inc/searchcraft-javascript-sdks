@@ -62,6 +62,12 @@
 
 ***
 
+### searchcraft-pagination
+
+> **searchcraft-pagination**: [`SearchcraftPagination`](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftPagination.md)
+
+***
+
 ### searchcraft-popover-button
 
 > **searchcraft-popover-button**: [`SearchcraftPopoverButton`](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftPopoverButton.md)
@@ -95,6 +101,18 @@
 ### searchcraft-results-info
 
 > **searchcraft-results-info**: [`SearchcraftResultsInfo`](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftResultsInfo.md)
+
+***
+
+### searchcraft-search-results-per-page
+
+> **searchcraft-search-results-per-page**: [`SearchcraftSearchResultsPerPage`](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftSearchResultsPerPage.md)
+
+***
+
+### searchcraft-select
+
+> **searchcraft-select**: [`SearchcraftSelect`](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftSelect.md)
 
 ***
 

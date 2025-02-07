@@ -12,25 +12,41 @@ It is consumed within the `searchcraft-input-form` component.
 
 ## Properties
 
-### iconElement?
+### disabled?
 
-> `optional` **iconElement**: `Element`
+> `optional` **disabled**: `boolean`
+
+Whether the button is disabled.
+
+***
+
+### hierarchy?
+
+> `optional` **hierarchy**: `"primary"` \| `"tertiary"`
+
+Controls the visual representation of the button.
+
+***
+
+### icon?
+
+> `optional` **icon**: `Element`
 
 The icon element.
 
 ***
 
-### iconOnly
+### iconOnly?
 
-> **iconOnly**: `boolean`
+> `optional` **iconOnly**: `boolean`
 
 Should the button only display an icon.
 
 ***
 
-### iconPosition
+### iconPosition?
 
-> **iconPosition**: `string`
+> `optional` **iconPosition**: `"left"` \| `"right"`
 
 The position of the icon.
 
@@ -41,3 +57,11 @@ The position of the icon.
 > **label**: `string`
 
 The label for the button.
+
+***
+
+### type?
+
+> `optional` **type**: `"button"` \| `"submit"` \| `"reset"`
+
+The type of the button.

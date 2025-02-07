@@ -199,20 +199,23 @@ export const Modal: StoryObj<Components.SearchcraftPopoverForm> = {
       return <Story />;
     },
   ],
-  render: (args) => {
+  render: () => {
     return (
-      <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
-        <p>Story Note: This story uses the Bazaario env vars</p>
-        <searchcraft-popover-button>
-          <span>Click me</span>
-        </searchcraft-popover-button>
+      <>
+        <searchcraft-theme />
+        <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
+          <p>Story Note: This story uses the Bazaario env vars</p>
+          <searchcraft-popover-button>
+            <span>Click me</span>
+          </searchcraft-popover-button>
 
-        <searchcraft-popover-form
-          type='modal'
-          hotkey='k'
-          hotkey-modifier='ctrl'
-        />
-      </div>
+          <searchcraft-popover-form
+            type='modal'
+            hotkey='k'
+            hotkey-modifier='ctrl'
+          />
+        </div>
+      </>
     );
   },
   args: {},
@@ -233,21 +236,24 @@ export const Fullscreen: StoryObj<Components.SearchcraftPopoverForm> = {
       return <Story />;
     },
   ],
-  render: (args) => {
+  render: () => {
     return (
-      <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
-        <p>Story Note: This story uses the Bazaario env vars</p>
+      <>
+        <searchcraft-theme />
+        <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
+          <p>Story Note: This story uses the Bazaario env vars</p>
 
-        <searchcraft-popover-button>
-          <span>Click me</span>
-        </searchcraft-popover-button>
+          <searchcraft-popover-button>
+            <span>Click me</span>
+          </searchcraft-popover-button>
 
-        <searchcraft-popover-form
-          type='fullscreen'
-          hotkey='k'
-          hotkey-modifier='ctrl'
-        />
-      </div>
+          <searchcraft-popover-form
+            type='fullscreen'
+            hotkey='k'
+            hotkey-modifier='ctrl'
+          />
+        </div>
+      </>
     );
   },
   args: {},

@@ -35,3 +35,15 @@ The mappings that define how the data in the documents are mapped to the list-vi
 > `optional` **searchClientResponseItems**: [`SearchClientResponseItem`](/reference/sdk/js-vanilla/interfaces/SearchClientResponseItem.md)[]
 
 The items to render in the list view.
+
+***
+
+### searchResultsPage
+
+> **searchResultsPage**: `number`
+
+***
+
+### searchResultsPerPage
+
+> **searchResultsPerPage**: `number`

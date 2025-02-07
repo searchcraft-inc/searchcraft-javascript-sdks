@@ -78,6 +78,8 @@ export class SearchcraftPopoverForm {
   @State() breakpointSm = 576;
   @State() breakpointMd = 768;
   @State() breakpointLg = 992;
+  @State() searchResultsPage;
+  @State() searchResultsPerPage;
 
   @State() modalElement;
 
@@ -112,6 +114,8 @@ export class SearchcraftPopoverForm {
       this.searchClientResponseItems = [...state.searchClientResponseItems];
       this.adClientResponseItems = [...state.adClientResponseItems];
       this.searchTerm = state.searchTerm;
+      this.searchResultsPage = state.searchResultsPage;
+      this.searchResultsPerPage = state.searchResultsPerPage;
     });
   }
 
@@ -297,6 +301,8 @@ export class SearchcraftPopoverForm {
                 popoverResultMappings={this.popoverResultMappings}
                 searchClientResponseItems={this.searchClientResponseItems}
                 adClientResponseItems={this.adClientResponseItems}
+                searchResultsPage={this.searchResultsPage}
+                searchResultsPerPage={this.searchResultsPerPage}
               />
             </div>
           </div>
@@ -339,6 +345,8 @@ export class SearchcraftPopoverForm {
                   popoverResultMappings={this.popoverResultMappings}
                   searchClientResponseItems={this.searchClientResponseItems}
                   adClientResponseItems={this.adClientResponseItems}
+                  searchResultsPage={this.searchResultsPage}
+                  searchResultsPerPage={this.searchResultsPerPage}
                 />
               )}
             </div>
@@ -372,6 +380,8 @@ export class SearchcraftPopoverForm {
                 popoverResultMappings={this.popoverResultMappings}
                 searchClientResponseItems={this.searchClientResponseItems}
                 adClientResponseItems={this.adClientResponseItems}
+                searchResultsPage={this.searchResultsPage}
+                searchResultsPerPage={this.searchResultsPerPage}
               />
             )}
           </div>

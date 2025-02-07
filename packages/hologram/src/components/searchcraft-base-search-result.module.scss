@@ -1,17 +1,11 @@
+@use "../appearance.scss";
 @use "../breakpoints.scss";
 @use "../typography.scss";
-
-:root {
-  /**
-   * Border radius applied to result images.
-   */
-  --sc-image-border-radius: var(--sc-border-radius);
-}
 
 .searchcraft-search-result-container {
   all: unset;
   align-items: flex-start;
-  border-radius: 16px;
+  border-radius: var(--sc-border-radius-lg);
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -38,7 +32,7 @@ a.searchcraft-search-result-container {
 }
 
 .searchcraft-search-result-image {
-  border-radius: var(--sc-image-border-radius);
+  @include appearance.offset-border-radius(--sc-border-radius-lg, -8px);
   width: 100%;
 
   @media (min-width: breakpoints.$breakpoint-md) {
