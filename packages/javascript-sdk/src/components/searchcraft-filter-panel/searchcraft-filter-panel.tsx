@@ -5,7 +5,7 @@ import type {
   NumericFilterItem,
   ExactMatchToggleFilterItem,
   FacetsFilterItem,
-} from '../../types/searchcraft-filter-panel.types';
+} from '@searchcraft/core';
 import { useSearchcraftStore } from '@provider/store';
 import { getMillis } from '@utils';
 

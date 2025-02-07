@@ -4,7 +4,7 @@ import type {
 } from '@searchcraft/core';
 import { Component, h, Prop } from '@stencil/core';
 
-import type { PopoverResultMappings } from 'types';
+import type { PopoverResultMappings } from '@searchcraft/core';
 
 /**
  * This web component is designed to display a list of results within a popover interface.

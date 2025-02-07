@@ -1,8 +1,8 @@
-[**@searchcraft/javascript-sdk**](/reference/sdk/js-vanilla/README.md)
+[**@searchcraft/core**](/reference/sdk/core/README.md)
 
 ***
 
-[@searchcraft/javascript-sdk](/reference/sdk/js-vanilla/globals.md) / SearchResultMapping
+[@searchcraft/core](/reference/sdk/core/globals.md) / SearchResultMapping
 
 # Type Alias: SearchResultMapping
 
@@ -21,6 +21,6 @@ The delimiter used to join them.
 
 ### fieldNames
 
-> **fieldNames**: [`SearchResultFieldName`](/reference/sdk/js-vanilla/type-aliases/SearchResultFieldName.md)[]
+> **fieldNames**: [`SearchResultFieldName`](/reference/sdk/core/type-aliases/SearchResultFieldName.md)[]
 
 The fields to map to.

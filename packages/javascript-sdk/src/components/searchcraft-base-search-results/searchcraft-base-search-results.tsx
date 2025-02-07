@@ -15,7 +15,7 @@ import type {
 import { type SearchcraftState, useSearchcraftStore } from '@provider/store';
 
 import { serializeStyles } from '@utils';
-import type { SearchResultMappings } from 'types';
+import type { SearchResultMappings } from '@searchcraft/core';
 
 /**
  * This web component is responsible for displaying the results of a search query.
