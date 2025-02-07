@@ -58,6 +58,7 @@ export class SearchcraftButton {
   render() {
     return (
       <button
+        aria-label={this.label}
         class={classNames('searchcraft-button', {
           'searchcraft-button-primary': this.hierarchy === 'primary',
           'searchcraft-button-tertiary': this.hierarchy === 'tertiary',
