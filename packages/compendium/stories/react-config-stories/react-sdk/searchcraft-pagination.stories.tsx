@@ -7,11 +7,13 @@ import {
   SearchcraftBaseSearchResults,
   SearchcraftPagination,
   SearchcraftSearchResultsPerPage,
+  Searchcraft,
 } from '@searchcraft/react-sdk';
 
 import type { SearchResultMappings } from '@searchcraft/javascript-sdk';
 
 import { config } from '../../../utils/DefaultSearchcraftConfig';
+import { useEffect } from 'react';
 
 const searchResultMappings: SearchResultMappings = {
   containerHref: {
@@ -59,6 +61,14 @@ const componentMeta: Meta = {
 const defaultProps = {};
 
 export const Default: StoryObj = {
+  decorators: [
+    (Story) => {
+      useEffect(() => {
+        new Searchcraft(config);
+      }, []);
+      return <Story />;
+    },
+  ],
   render: () => (
     <>
       <SearchcraftTheme />

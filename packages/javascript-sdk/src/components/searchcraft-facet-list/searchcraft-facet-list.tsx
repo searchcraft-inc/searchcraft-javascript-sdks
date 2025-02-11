@@ -11,7 +11,7 @@ import classNames from 'classnames';
 
 import type { FacetChild, FacetRoot } from '@searchcraft/core';
 
-import { useSearchcraftStore, type SearchcraftState } from '@provider/store';
+import { searchcraftStore, type SearchcraftState } from '@store';
 import { mergeFacetRoots, removeSubstringMatches } from '@utils';
 
 /**
@@ -60,7 +60,7 @@ export class SearchcraftFacetList {
 
   @State() unsubscribe: (() => void) | undefined;
 
-  private searchStore = useSearchcraftStore.getState();
+  private searchStore = searchcraftStore.getState();
 
   handleStateUpdate(state: SearchcraftState) {
     const facetPrime = state.searchResponseFacetPrime;
@@ -111,7 +111,7 @@ export class SearchcraftFacetList {
   connectedCallback() {
     this.handleStateUpdate(this.searchStore);
 
-    this.unsubscribe = useSearchcraftStore.subscribe((state) => {
+    this.unsubscribe = searchcraftStore.subscribe((state) => {
       this.handleStateUpdate(state);
     });
   }

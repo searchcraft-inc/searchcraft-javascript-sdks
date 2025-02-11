@@ -1,5 +1,6 @@
 import type { SearchResultMappings } from '@searchcraft/javascript-sdk';
 import {
+  Searchcraft,
   SearchcraftBaseSearchResults,
   SearchcraftInputForm,
   SearchcraftTheme,
@@ -157,6 +158,7 @@ export const Default: StoryFn = (args) => ({
     SearchcraftTheme,
   },
   setup() {
+    new Searchcraft(config);
     return { args };
   },
   template: `
@@ -164,7 +166,6 @@ export const Default: StoryFn = (args) => ({
       <SearchcraftTheme />
       <SearchcraftInputForm
         v-bind="{
-          config: args.config,
           autoSearch: args.autoSearch,
           buttonPlacement: args.buttonPlacement,
           placeholderValue: args.placeholderValue,

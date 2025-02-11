@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "jsx": "react-jsx",
-    "moduleResolution": "Node",
+    "moduleResolution": "node",
     "types": ["vite/client"] // Add Vite types
   },
   "exclude": ["node_modules", "dist"],

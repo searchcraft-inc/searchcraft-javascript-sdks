@@ -17,6 +17,9 @@ import type {
   SearchcraftSDKInfo,
 } from '../types';
 import { removeTrailingSlashFromEndpointURL } from '../utils';
+import { defineCustomElements } from '@searchcraft/javascript-sdk';
+
+defineCustomElements();
 
 /**
  * Javascript Class providing the functionality to interact with the Searchcraft BE
@@ -45,6 +48,48 @@ export class SearchcraftCore {
     this.userId = '';
 
     this.initClients(this.config, sdkInfo);
+    this.initInputForms();
+    this.startObservingMutations();
+  }
+
+  private initInputForms() {
+    const inputForms: Record<string, unknown>[] = document.querySelectorAll(
+      'searchcraft-input-form',
+    ) as unknown as Record<string, unknown>[];
+
+    // Adds a timeout to give the stencil components time to initialize.
+    setTimeout(() => {
+      inputForms.forEach((form) => {
+        form.core = this;
+      });
+    }, 40);
+  }
+
+  /**
+   * When changes happen in the DOM, we want to link any input forms found to the instance of the core.
+   */
+  private startObservingMutations() {
+    const observer = new MutationObserver((mutationsList, _observer) => {
+      let newInputFormDetected = false;
+      for (const mutation of mutationsList) {
+        if (mutation.type === 'childList') {
+          mutation.addedNodes.forEach((node) => {
+            if (
+              node.nodeType === 1 &&
+              (node as HTMLElement).className.toLowerCase() ===
+                'searchcraft-input-form'
+            ) {
+              newInputFormDetected = true;
+            }
+          });
+        }
+      }
+      if (newInputFormDetected) {
+        this.initInputForms();
+      }
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
   }
 
   initClients(config: SearchcraftConfig, sdkInfo: SearchcraftSDKInfo) {

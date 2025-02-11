@@ -1,4 +1,4 @@
-import { create } from 'zustand';
+import { createStore } from 'zustand';
 
 import {
   Logger,
@@ -8,6 +8,7 @@ import {
   type SearchcraftResponse,
   type SearchClientResponseItem,
   type AdClientResponseItem,
+  type SearchcraftCore,
 } from '@searchcraft/core';
 import type {
   SearchcraftState,
@@ -33,7 +34,10 @@ const initialSearchcraftStateValues: SearchcraftStateValues = {
   sortType: 'asc',
 };
 
-const useSearchcraftStore = create<SearchcraftState>((set, get) => {
+// let storeInstance: StoreApi<SearchcraftState> | null = null;
+
+// Function to create or reuse the store
+const searchcraftStore = createStore<SearchcraftState>((set, get) => {
   const functions: SearchcraftStateFunctions = {
     addFacetPathsForIndexField: (data: FacetPathsForIndexField) =>
       set((state) => ({
@@ -54,7 +58,7 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
       return core;
     },
     initialize: (searchcraftInstance, debug = false) => {
-      const core = searchcraftInstance;
+      const core = searchcraftInstance as SearchcraftCore;
       const logger = debug
         ? new Logger({ logLevel: LogLevel.DEBUG })
         : undefined;
@@ -210,4 +214,6 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
   return stateObject;
 });
 
-export { useSearchcraftStore };
+console.log('getting store');
+
+export { searchcraftStore };

@@ -5,6 +5,7 @@ import {
   SearchcraftBaseSearchResults,
   SearchcraftPagination,
   SearchcraftSearchResultsPerPage,
+  Searchcraft,
 } from '@searchcraft/vue-sdk';
 
 import type { Meta, StoryFn } from '@storybook/vue3';
@@ -71,7 +72,8 @@ export const Default: StoryFn = () => ({
     SearchcraftSearchResultsPerPage,
   },
   setup() {
-    return { customFormatter, config, searchResultMappings };
+    new Searchcraft(config);
+    return { customFormatter, searchResultMappings };
   },
   template: `
     <div>
@@ -81,7 +83,7 @@ export const Default: StoryFn = () => ({
       />
       <SearchcraftPagination />
       <SearchcraftSearchResultsPerPage />
-      <SearchcraftInputForm :config="config" />
+      <SearchcraftInputForm />
       <SearchcraftBaseSearchResults
         v-bind="{
           searchResultMappings: searchResultMappings

@@ -1,4 +1,4 @@
-import { useSearchcraftStore } from '@provider/store';
+import { searchcraftStore } from '@store';
 import { Component, h, State, Prop } from '@stencil/core';
 import classNames from 'classnames';
 
@@ -45,7 +45,7 @@ export class SearchcraftSearchResultsPerPage {
   private unsubscribe: () => void = () => {};
 
   componentDidLoad() {
-    this.unsubscribe = useSearchcraftStore.subscribe((state) => {
+    this.unsubscribe = searchcraftStore.subscribe((state) => {
       // store vars
       this.searchTerm = state.searchTerm;
       this.searchResultsPerPage = state.searchResultsPerPage;
@@ -63,7 +63,7 @@ export class SearchcraftSearchResultsPerPage {
     });
 
     this.initialSearchResultsPerPage =
-      useSearchcraftStore.getState().searchResultsPerPage;
+      searchcraftStore.getState().searchResultsPerPage;
   }
 
   disconnectedCallback() {

@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import WebComponentWrapper from '../../../utils/WebComponentWrapper';
-import type { Components } from '@searchcraft/javascript-sdk';
+import { Searchcraft, type Components } from '@searchcraft/javascript-sdk';
+import { config } from '../../../utils/DefaultSearchcraftConfig';
+import { useEffect } from 'react';
 
 const componentName = 'searchcraft-error-message';
 
@@ -24,6 +26,14 @@ const defaultProps: Components.SearchcraftErrorMessage = {
 };
 
 export const Default: StoryObj<Components.SearchcraftErrorMessage> = {
+  decorators: [
+    (Story) => {
+      useEffect(() => {
+        new Searchcraft(config);
+      }, []);
+      return <Story />;
+    },
+  ],
   render: (args) => (
     <>
       <searchcraft-theme />

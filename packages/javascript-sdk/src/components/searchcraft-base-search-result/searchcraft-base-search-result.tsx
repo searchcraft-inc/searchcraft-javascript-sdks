@@ -1,4 +1,4 @@
-import { useSearchcraftStore } from '@provider/store';
+import { searchcraftStore } from '@store';
 import type {
   SearchClientResponseItem,
   SearchDocument,
@@ -58,7 +58,7 @@ export class SearchcraftBaseSearchResult {
   @State() imageSrc: string | undefined;
   @State() imageAlt: string | undefined;
 
-  private searchcraftStore = useSearchcraftStore.getState();
+  private searchcraftStore = searchcraftStore.getState();
 
   connectedCallback() {
     if (this.item) {

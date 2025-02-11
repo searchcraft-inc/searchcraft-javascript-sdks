@@ -4,6 +4,10 @@
 
 # @searchcraft/react-sdk
 
+## Classes
+
+- [Searchcraft](/reference/sdk/js-react/classes/Searchcraft.md)
+
 ## Interfaces
 
 - [SearchcraftBaseSearchResultsProps](/reference/sdk/js-react/interfaces/SearchcraftBaseSearchResultsProps.md)

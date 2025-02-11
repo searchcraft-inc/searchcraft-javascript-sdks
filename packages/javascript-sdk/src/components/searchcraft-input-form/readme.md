@@ -38,7 +38,7 @@ searchForm.addEventListener('querySubmit', (event) => {
 | `autoSearch`       | `auto-search`       | Whether or not to automatically submit the search term when the input changes. | `boolean`                            | `true`           |
 | `buttonLabel`      | `button-label`      | The label for the submit button.                                               | `string \| undefined`                | `undefined`      |
 | `buttonPlacement`  | `button-placement`  | Where to place the search button.                                              | `"left" \| "none" \| "right"`        | `'none'`         |
-| `config`           | --                  | The Searchcraft config object.                                                 | `SearchcraftConfig \| undefined`     | `undefined`      |
+| `core`             | --                  |                                                                                | `SearchcraftCore \| undefined`       | `undefined`      |
 | `customStyles`     | `custom-styles`     | A custom styles object to be applied to the input element.                     | `string \| { [x: string]: string; }` | `{}`             |
 | `inputLabel`       | `input-label`       | The label rendered above the input.                                            | `string \| undefined`                | `undefined`      |
 | `placeholderValue` | `placeholder-value` | The input element's placeholder value.                                         | `string`                             | `'Enter Search'` |

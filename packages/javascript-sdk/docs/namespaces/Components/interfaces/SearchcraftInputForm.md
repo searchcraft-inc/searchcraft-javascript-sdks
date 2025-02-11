@@ -52,11 +52,9 @@ Where to place the search button.
 
 ***
 
-### config
+### core?
 
-> **config**: `undefined` \| [`SearchcraftConfig`](/reference/sdk/js-vanilla/interfaces/SearchcraftConfig.md)
-
-The Searchcraft config object.
+> `optional` **core**: [`SearchcraftCore`](/reference/sdk/js-vanilla/classes/SearchcraftCore.md)
 
 ***
 

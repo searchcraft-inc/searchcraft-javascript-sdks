@@ -15,7 +15,7 @@ export interface SearchcraftStateFunctions {
   addFacetPathsForIndexField: (data: FacetPathsForIndexField) => void;
   addRangeValueForIndexField: (data: RangeValueForIndexField) => void;
   getSearchcraftInstance: () => SearchcraftCore | undefined;
-  initialize: (searchcraft: SearchcraftCore, debug?: boolean) => void;
+  initialize: (searchcraft: unknown, debug?: boolean) => void;
   removeFacetPathsForIndexField: (fieldName: string) => void;
   removeRangeValueForIndexField: (fieldName: string) => void;
   resetFacetPaths: () => void;

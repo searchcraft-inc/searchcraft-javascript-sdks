@@ -15,11 +15,6 @@ This web component is designed to display search results in a popover container 
 ```js
 // index.js
 const popoverForm = document.querySelector('searchcraft-popover-form');
-popoverForm.config = {
-  index: [index_name_from_vektron],
-  readKey: 'read_key_from_vektron',
-  endpointUrl: 'enpoint_url_from_vektron',
-};
 popoverForm.popoverResultMappings = {
  containerHref: {
   fieldNames: [
@@ -32,14 +27,6 @@ popoverForm.popoverResultMappings = {
 ```
 
 ## Properties
-
-### config?
-
-> `optional` **config**: [`SearchcraftConfig`](/reference/sdk/js-vanilla/interfaces/SearchcraftConfig.md)
-
-The Searchcraft config object.
-
-***
 
 ### hotkey?
 

@@ -14,18 +14,6 @@ The props for the SearchcraftPopoverForm component.
 
 ## Properties
 
-### config
-
-> **config**: `undefined` \| `SearchcraftConfig`
-
-The Searchcraft config object.
-
-#### Inherited from
-
-`Components.SearchcraftPopoverForm.config`
-
-***
-
 ### hotkey
 
 > **hotkey**: `string`

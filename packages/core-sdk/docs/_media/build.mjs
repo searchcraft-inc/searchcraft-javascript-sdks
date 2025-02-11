@@ -66,6 +66,12 @@ const buildPackage = (packageInfo) => {
     });
     console.log(`Package ${packageInfo.name} published to yalc.`);
   }
+
+  if (packageInfo.name === '@searchcraft/javascript-sdk') {
+    console.log('Running post-build script for @searchcraft/javascript-sdk...');
+    execSync('cd packages/javascript-sdk && node post-build.js');
+    console.log('Post-build script complete for javascript-sdk.');
+  }
 };
 
 const startWatching = () => {

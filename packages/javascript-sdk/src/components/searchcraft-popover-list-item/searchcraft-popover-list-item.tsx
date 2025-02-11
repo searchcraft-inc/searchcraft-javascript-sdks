@@ -1,4 +1,4 @@
-import { useSearchcraftStore } from '@provider/store';
+import { searchcraftStore } from '@store';
 import type {
   SearchDocument,
   SearchClientResponseItem,
@@ -58,7 +58,7 @@ export class SearchcraftPopoverListItem {
   disconnectedCallback() {}
 
   handleLinkClick = () => {
-    const state = useSearchcraftStore.getState();
+    const state = searchcraftStore.getState();
     const searchcraft = state.getSearchcraftInstance();
 
     if (searchcraft) {

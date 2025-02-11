@@ -1,4 +1,4 @@
-import { useSearchcraftStore } from '@provider/store';
+import { searchcraftStore } from '@store';
 import { Component, h } from '@stencil/core';
 
 /**
@@ -10,7 +10,7 @@ import { Component, h } from '@stencil/core';
 })
 export class SearchcraftPopoverButton {
   handleOnClick() {
-    useSearchcraftStore.getState().setPopoverVisibility(true);
+    searchcraftStore.getState().setPopoverVisibility(true);
   }
 
   render() {

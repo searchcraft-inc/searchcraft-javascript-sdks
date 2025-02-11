@@ -74,7 +74,6 @@ export const SearchcraftFilterPanel = /*@__PURE__*/ defineContainer<JSX.Searchcr
 
 
 export const SearchcraftInputForm = /*@__PURE__*/ defineContainer<JSX.SearchcraftInputForm>('searchcraft-input-form', undefined, [
-  'config',
   'autoSearch',
   'buttonPlacement',
   'buttonLabel',
@@ -82,6 +81,7 @@ export const SearchcraftInputForm = /*@__PURE__*/ defineContainer<JSX.Searchcraf
   'customStyles',
   'placeholderValue',
   'searchTerm',
+  'core',
   'inputCleared',
   'noResultsReceived',
   'inputFocus',
@@ -113,7 +113,6 @@ export const SearchcraftPopoverButton = /*@__PURE__*/ defineContainer<JSX.Search
 
 
 export const SearchcraftPopoverForm = /*@__PURE__*/ defineContainer<JSX.SearchcraftPopoverForm>('searchcraft-popover-form', undefined, [
-  'config',
   'type',
   'popoverResultMappings',
   'hotkey',

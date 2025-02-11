@@ -4,6 +4,10 @@
 
 # @searchcraft/vue-sdk
 
+## Classes
+
+- [Searchcraft](/reference/sdk/js-vue/classes/Searchcraft.md)
+
 ## Interfaces
 
 - [SearchcraftBaseSearchResultsProps](/reference/sdk/js-vue/interfaces/SearchcraftBaseSearchResultsProps.md)

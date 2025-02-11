@@ -1,7 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import WebComponentWrapper from '../../../utils/WebComponentWrapper';
 
-import type { Components } from '@searchcraft/javascript-sdk';
+import { Searchcraft, type Components } from '@searchcraft/javascript-sdk';
+import { config } from '../../../utils/DefaultSearchcraftConfig';
+import { useEffect } from 'react';
 
 const componentName = 'searchcraft-slider';
 
@@ -28,6 +30,14 @@ const defaultProps: Components.SearchcraftSlider = {
 };
 
 export const Default: StoryObj<Components.SearchcraftSlider> = {
+  decorators: [
+    (Story) => {
+      useEffect(() => {
+        new Searchcraft(config);
+      }, []);
+      return <Story />;
+    },
+  ],
   render: (args) => (
     <>
       <searchcraft-theme />

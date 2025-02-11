@@ -1,9 +1,12 @@
-import { useEffect } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import type { SearchResultMappings } from '@searchcraft/javascript-sdk';
+import {
+  Searchcraft,
+  type SearchResultMappings,
+} from '@searchcraft/javascript-sdk';
 
 import { config } from '../../../utils/DefaultSearchcraftConfig';
+import { useEffect } from 'react';
 
 const searchResultMappings: SearchResultMappings = {
   containerHref: {
@@ -54,15 +57,11 @@ export const Default: StoryObj = {
   decorators: [
     (Story) => {
       useEffect(() => {
-        const inputForm = document.querySelector('searchcraft-input-form');
+        new Searchcraft(config);
         const baseSearchResults = document.querySelector(
           'searchcraft-base-search-results',
         );
         const resultsInfo = document.querySelector('searchcraft-results-info');
-
-        if (inputForm) {
-          inputForm.config = { ...config };
-        }
 
         if (baseSearchResults) {
           baseSearchResults.searchResultMappings = searchResultMappings;

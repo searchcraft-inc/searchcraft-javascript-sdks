@@ -1,11 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import type {
-  SearchcraftConfig,
-  SearchResultMappings,
+import {
+  Searchcraft,
+  type SearchcraftConfig,
+  type SearchResultMappings,
 } from '@searchcraft/javascript-sdk';
 import { config } from '../../../utils/DefaultSearchcraftConfig';
-import { useEffect } from 'react';
 import type { Components } from '@searchcraft/javascript-sdk';
+import { useEffect } from 'react';
 
 const componentMeta: Meta = {
   title: 'Javascript SDK/searchcraft-base-search-results',
@@ -54,14 +55,11 @@ export const Default: StoryObj<Components.SearchcraftBaseSearchResults> = {
   decorators: [
     (Story) => {
       useEffect(() => {
-        const searchForm = document.querySelector('searchcraft-input-form');
+        new Searchcraft(config);
         const searchResults = document.querySelector(
           'searchcraft-base-search-results',
         );
 
-        if (searchForm) {
-          searchForm.config = config;
-        }
         if (searchResults) {
           searchResults.searchResultMappings = mappings;
         }
@@ -99,21 +97,17 @@ export const WithAds: StoryObj<Components.SearchcraftBaseSearchResults> = {
   decorators: [
     (Story) => {
       useEffect(() => {
-        const searchForm = document.querySelector('searchcraft-input-form');
+        const adConfig: SearchcraftConfig = {
+          ...config,
+          adProvider: 'adMarketplace',
+          admSub: 'searchbox1',
+          admProductAdQuantity: 2,
+          admTextAdQuantity: 2,
+        };
+        new Searchcraft(adConfig);
         const searchResults = document.querySelector(
           'searchcraft-base-search-results',
         );
-
-        if (searchForm) {
-          const adConfig: SearchcraftConfig = {
-            ...config,
-            adProvider: 'adMarketplace',
-            admSub: 'searchbox1',
-            admProductAdQuantity: 2,
-            admTextAdQuantity: 2,
-          };
-          searchForm.config = adConfig;
-        }
         if (searchResults) {
           searchResults.searchResultMappings = mappings;
         }

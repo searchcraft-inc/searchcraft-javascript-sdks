@@ -50,15 +50,13 @@ Where to place the search button.
 
 ***
 
-### config
+### core?
 
-> **config**: `SearchcraftConfig`
-
-The Searchcraft config object.
+> `optional` **core**: `SearchcraftCore`
 
 #### Inherited from
 
-`Components.SearchcraftInputForm.config`
+`Components.SearchcraftInputForm.core`
 
 ***
 

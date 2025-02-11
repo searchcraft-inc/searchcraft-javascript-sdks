@@ -1,16 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import type {
-  DateRangeFilterItem,
-  ExactMatchToggleFilterItem,
-  FacetsFilterItem,
-  MostRecentToggleFilterItem,
-  NumericFilterItem,
+import {
+  Searchcraft,
+  type DateRangeFilterItem,
+  type ExactMatchToggleFilterItem,
+  type FacetsFilterItem,
+  type MostRecentToggleFilterItem,
+  type NumericFilterItem,
 } from '@searchcraft/javascript-sdk';
 
 import { config } from '../../../utils/DefaultSearchcraftConfig';
-import { useEffect } from 'react';
 
 import type { Components } from '@searchcraft/javascript-sdk';
+import { useEffect } from 'react';
 
 const componentMeta: Meta = {
   title: 'Javascript SDK/searchcraft-filter-panel',
@@ -82,12 +83,9 @@ export const Default: StoryObj<Components.SearchcraftFilterPanel> = {
   decorators: [
     (Story) => {
       useEffect(() => {
-        const searchForm = document.querySelector('searchcraft-input-form');
+        new Searchcraft(config);
         const filterPanel = document.querySelector('searchcraft-filter-panel');
 
-        if (searchForm) {
-          searchForm.config = config;
-        }
         if (filterPanel) {
           filterPanel.items = defaultProps.items;
         }
@@ -120,14 +118,10 @@ export const WithDebounceDelay300: StoryObj<Components.SearchcraftFilterPanel> =
       },
       (Story) => {
         useEffect(() => {
-          const searchForm = document.querySelector('searchcraft-input-form');
+          new Searchcraft(config);
           const filterPanel = document.querySelector(
             'searchcraft-filter-panel',
           );
-
-          if (searchForm) {
-            searchForm.config = { ...config, searchDebounceDelay: 300 };
-          }
           if (filterPanel) {
             filterPanel.items = defaultProps.items;
           }
