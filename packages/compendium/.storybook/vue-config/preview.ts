@@ -1,7 +1,4 @@
-import { defineCustomElements } from '@searchcraft/javascript-sdk';
 import type { Preview } from '@storybook/vue3';
-
-defineCustomElements();
 
 const preview: Preview = {
   parameters: {

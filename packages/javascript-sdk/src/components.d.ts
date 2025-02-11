@@ -213,14 +213,6 @@ export namespace Components {
      * ```js
      * // index.js
      * const searchInputForm = document.querySelector('searchcraft-input-form');
-     * searchInputForm.config = {
-     *   index: [],
-     *   readKey: '',
-     *   endpointUrl: '',
-     * };
-     * searchForm.addEventListener('querySubmit', (event) => {
-     *   console.log('Query submitted', event.detail);
-     * });
      * ```
      */
     interface SearchcraftInputForm {
@@ -694,12 +686,10 @@ declare global {
         new (): HTMLSearchcraftFilterPanelElement;
     };
     interface HTMLSearchcraftInputFormElementEventMap {
-        "inputCleared": void;
         "noResultsReceived": void;
         "inputFocus": void;
         "inputBlur": void;
         "inputInit": void;
-        "querySubmit": string;
     }
     /**
      * This web component provides a user-friendly interface for querying an indexed dataset, enabling users to easily search large collections of data.
@@ -712,14 +702,6 @@ declare global {
      * ```js
      * // index.js
      * const searchInputForm = document.querySelector('searchcraft-input-form');
-     * searchInputForm.config = {
-     *   index: [],
-     *   readKey: '',
-     *   endpointUrl: '',
-     * };
-     * searchForm.addEventListener('querySubmit', (event) => {
-     *   console.log('Query submitted', event.detail);
-     * });
      * ```
      */
     interface HTMLSearchcraftInputFormElement extends Components.SearchcraftInputForm, HTMLStencilElement {
@@ -1194,14 +1176,6 @@ declare namespace LocalJSX {
      * ```js
      * // index.js
      * const searchInputForm = document.querySelector('searchcraft-input-form');
-     * searchInputForm.config = {
-     *   index: [],
-     *   readKey: '',
-     *   endpointUrl: '',
-     * };
-     * searchForm.addEventListener('querySubmit', (event) => {
-     *   console.log('Query submitted', event.detail);
-     * });
      * ```
      */
     interface SearchcraftInputForm {
@@ -1231,10 +1205,6 @@ declare namespace LocalJSX {
          */
         "onInputBlur"?: (event: SearchcraftInputFormCustomEvent<void>) => void;
         /**
-          * When the input is cleared.
-         */
-        "onInputCleared"?: (event: SearchcraftInputFormCustomEvent<void>) => void;
-        /**
           * When the input becomes focused.
          */
         "onInputFocus"?: (event: SearchcraftInputFormCustomEvent<void>) => void;
@@ -1246,10 +1216,6 @@ declare namespace LocalJSX {
           * When no results are returned.
          */
         "onNoResultsReceived"?: (event: SearchcraftInputFormCustomEvent<void>) => void;
-        /**
-          * Event emitted when a query has been submitted.
-         */
-        "onQuerySubmit"?: (event: SearchcraftInputFormCustomEvent<string>) => void;
         /**
           * The input element's placeholder value.
          */
@@ -1651,14 +1617,6 @@ declare module "@stencil/core" {
              * ```js
              * // index.js
              * const searchInputForm = document.querySelector('searchcraft-input-form');
-             * searchInputForm.config = {
-             *   index: [],
-             *   readKey: '',
-             *   endpointUrl: '',
-             * };
-             * searchForm.addEventListener('querySubmit', (event) => {
-             *   console.log('Query submitted', event.detail);
-             * });
              * ```
              */
             "searchcraft-input-form": LocalJSX.SearchcraftInputForm & JSXBase.HTMLAttributes<HTMLSearchcraftInputFormElement>;

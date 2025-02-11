@@ -1,3 +1,8 @@
+/**
+ * Post-build script for @searchcraft/javascript-sdk.
+ * The purpose of this script is to Create and run a `defineCustomElements()` function.
+ * `defineCustomElements` does not automatically exist when building with stencil's `single-output-target` option, which we need to use.
+ */
 const { join } = require('node:path');
 const {
   readFileSync,
@@ -15,8 +20,6 @@ const INDEX_DTS_FILE = join(OUTPUT_DIR, 'index.d.ts');
 const files = readdirSync(OUTPUT_DIR)
   .filter((file) => file.endsWith('.js'))
   .filter((fileName) => fileName.startsWith('searchcraft'));
-
-console.log(files);
 
 const importString = files
   .map((file) => {
@@ -37,6 +40,10 @@ ${importString}
 export const defineCustomElements = () => {
   ${functionString}
 };
+
+// Call defineCustomElements as soon as it's available
+defineCustomElements();
+
 `.trim();
 
 // Write the generated file

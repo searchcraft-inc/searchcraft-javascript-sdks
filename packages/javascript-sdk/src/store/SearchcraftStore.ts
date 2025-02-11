@@ -9,6 +9,8 @@ import {
   type SearchClientResponseItem,
   type AdClientResponseItem,
   type SearchcraftCore,
+  type SubscriptionEventName,
+  type SubscriptionEventMap,
 } from '@searchcraft/core';
 import type {
   SearchcraftState,
@@ -34,8 +36,6 @@ const initialSearchcraftStateValues: SearchcraftStateValues = {
   sortType: 'asc',
 };
 
-// let storeInstance: StoreApi<SearchcraftState> | null = null;
-
 // Function to create or reuse the store
 const searchcraftStore = createStore<SearchcraftState>((set, get) => {
   const functions: SearchcraftStateFunctions = {
@@ -53,6 +53,15 @@ const searchcraftStore = createStore<SearchcraftState>((set, get) => {
           [data.fieldName]: data,
         },
       })),
+    emitEvent: <T extends SubscriptionEventName>(
+      eventName: T,
+      event: SubscriptionEventMap[T],
+    ) => {
+      const { core } = get();
+      if (core) {
+        core.emitEvent(eventName, event);
+      }
+    },
     getSearchcraftInstance: () => {
       const { core } = get();
       return core;
@@ -182,6 +191,13 @@ const searchcraftStore = createStore<SearchcraftState>((set, get) => {
     setSearchMode: (mode) => set({ searchMode: mode }),
     setSortType: (type) => set({ sortType: type }),
     setSearchTerm: (searchTerm) => {
+      const { emitEvent } = get();
+
+      if (searchTerm.length === 0) {
+        emitEvent('input_cleared', {
+          name: 'input_cleared',
+        });
+      }
       /**
        * When a new searchTerm is set, also reset the sort type, search mode, and facet paths.
        */
@@ -213,7 +229,5 @@ const searchcraftStore = createStore<SearchcraftState>((set, get) => {
 
   return stateObject;
 });
-
-console.log('getting store');
 
 export { searchcraftStore };

@@ -40,7 +40,6 @@
   },
   "devDependencies": {
     "@searchcraft/core": "^0.8.2",
-    "@searchcraft/javascript-sdk": "*",
     "@stencil/core": "^4.7.0",
     "@stencil/react-output-target": "^0.8.2",
     "@stencil/sass": "^3.0.12",

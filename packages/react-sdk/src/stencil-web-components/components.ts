@@ -110,12 +110,10 @@ export const SearchcraftFilterPanel: StencilReactComponent<SearchcraftFilterPane
 });
 
 type SearchcraftInputFormEvents = {
-    onInputCleared: EventName<CustomEvent<void>>,
     onNoResultsReceived: EventName<CustomEvent<void>>,
     onInputFocus: EventName<CustomEvent<void>>,
     onInputBlur: EventName<CustomEvent<void>>,
-    onInputInit: EventName<CustomEvent<void>>,
-    onQuerySubmit: EventName<CustomEvent<string>>
+    onInputInit: EventName<CustomEvent<void>>
 };
 
 export const SearchcraftInputForm: StencilReactComponent<SearchcraftInputFormElement, SearchcraftInputFormEvents> = /*@__PURE__*/ createComponent<SearchcraftInputFormElement, SearchcraftInputFormEvents>({
@@ -124,12 +122,10 @@ export const SearchcraftInputForm: StencilReactComponent<SearchcraftInputFormEle
     // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
     react: React,
     events: {
-        onInputCleared: 'inputCleared',
         onNoResultsReceived: 'noResultsReceived',
         onInputFocus: 'inputFocus',
         onInputBlur: 'inputBlur',
-        onInputInit: 'inputInit',
-        onQuerySubmit: 'querySubmit'
+        onInputInit: 'inputInit'
     } as SearchcraftInputFormEvents,
     defineCustomElement: defineSearchcraftInputForm
 });

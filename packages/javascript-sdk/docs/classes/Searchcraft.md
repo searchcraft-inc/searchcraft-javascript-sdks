@@ -114,19 +114,23 @@ Gets items from the SearchClient and the AdClient.
 
 ## Methods
 
-### initClients()
+### emitEvent()
 
-> **initClients**(`config`, `sdkInfo`): `void`
+> **emitEvent**\<`T`\>(`eventName`, `event`): `void`
+
+#### Type Parameters
+
+• **T** *extends* keyof `SubscriptionEventMap`
 
 #### Parameters
 
-##### config
+##### eventName
 
-[`SearchcraftConfig`](/reference/sdk/js-vanilla/interfaces/SearchcraftConfig.md)
+`T`
 
-##### sdkInfo
+##### event
 
-`SearchcraftSDKInfo`
+`SubscriptionEventMap`\[`T`\]
 
 #### Returns
 
@@ -134,4 +138,32 @@ Gets items from the SearchClient and the AdClient.
 
 #### Inherited from
 
-[`SearchcraftCore`](/reference/sdk/js-vanilla/classes/SearchcraftCore.md).[`initClients`](/reference/sdk/js-vanilla/classes/SearchcraftCore.md#initclients)
+[`SearchcraftCore`](/reference/sdk/js-vanilla/classes/SearchcraftCore.md).[`emitEvent`](/reference/sdk/js-vanilla/classes/SearchcraftCore.md#emitevent)
+
+***
+
+### subscribe()
+
+> **subscribe**\<`T`\>(`eventName`, `callback`): `UnsubscribeFunction`
+
+#### Type Parameters
+
+• **T** *extends* keyof `SubscriptionEventMap`
+
+#### Parameters
+
+##### eventName
+
+`T`
+
+##### callback
+
+`SubscriptionEventCallback`\<`T`\>
+
+#### Returns
+
+`UnsubscribeFunction`
+
+#### Inherited from
+
+[`SearchcraftCore`](/reference/sdk/js-vanilla/classes/SearchcraftCore.md).[`subscribe`](/reference/sdk/js-vanilla/classes/SearchcraftCore.md#subscribe)

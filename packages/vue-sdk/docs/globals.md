@@ -31,4 +31,3 @@
 - [SearchcraftResultsInfo](/reference/sdk/js-vue/variables/SearchcraftResultsInfo.md)
 - [SearchcraftSearchResultsPerPage](/reference/sdk/js-vue/variables/SearchcraftSearchResultsPerPage.md)
 - [SearchcraftTheme](/reference/sdk/js-vue/variables/SearchcraftTheme.md)
-- [ComponentLibrary](/reference/sdk/js-vue/variables/ComponentLibrary.md)

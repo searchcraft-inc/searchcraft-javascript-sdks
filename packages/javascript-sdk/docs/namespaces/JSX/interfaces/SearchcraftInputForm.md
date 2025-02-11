@@ -16,14 +16,6 @@ It abstracts the complexities of index-based searching, making it accessible to 
 ```js
 // index.js
 const searchInputForm = document.querySelector('searchcraft-input-form');
-searchInputForm.config = {
-  index: [],
-  readKey: '',
-  endpointUrl: '',
-};
-searchForm.addEventListener('querySubmit', (event) => {
-  console.log('Query submitted', event.detail);
-});
 ```
 
 ## Properties
@@ -92,24 +84,6 @@ When the input becomes unfocused.
 
 ***
 
-### onInputCleared()?
-
-> `optional` **onInputCleared**: (`event`) => `void`
-
-When the input is cleared.
-
-#### Parameters
-
-##### event
-
-[`SearchcraftInputFormCustomEvent`](/reference/sdk/js-vanilla/interfaces/SearchcraftInputFormCustomEvent.md)\<`void`\>
-
-#### Returns
-
-`void`
-
-***
-
 ### onInputFocus()?
 
 > `optional` **onInputFocus**: (`event`) => `void`
@@ -157,24 +131,6 @@ When no results are returned.
 ##### event
 
 [`SearchcraftInputFormCustomEvent`](/reference/sdk/js-vanilla/interfaces/SearchcraftInputFormCustomEvent.md)\<`void`\>
-
-#### Returns
-
-`void`
-
-***
-
-### onQuerySubmit()?
-
-> `optional` **onQuerySubmit**: (`event`) => `void`
-
-Event emitted when a query has been submitted.
-
-#### Parameters
-
-##### event
-
-[`SearchcraftInputFormCustomEvent`](/reference/sdk/js-vanilla/interfaces/SearchcraftInputFormCustomEvent.md)\<`string`\>
 
 #### Returns
 

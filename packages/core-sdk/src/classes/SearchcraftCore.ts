@@ -15,11 +15,12 @@ import type {
   SearchcraftConfig,
   SearchcraftResponse,
   SearchcraftSDKInfo,
+  UnsubscribeFunction,
+  SubscriptionEventName,
+  SubscriptionEventCallback,
+  SubscriptionEventMap,
 } from '../types';
 import { removeTrailingSlashFromEndpointURL } from '../utils';
-import { defineCustomElements } from '@searchcraft/javascript-sdk';
-
-defineCustomElements();
 
 /**
  * Javascript Class providing the functionality to interact with the Searchcraft BE
@@ -32,6 +33,9 @@ export class SearchcraftCore {
   userId: string;
 
   private requestTimeout: NodeJS.Timeout | undefined;
+  private subscriptionEvents: {
+    [K in SubscriptionEventName]?: Array<SubscriptionEventCallback<K>>;
+  } = {};
 
   constructor(config: SearchcraftConfig, sdkInfo: SearchcraftSDKInfo) {
     if (!config.endpointURL || !config.index || !config.readKey) {
@@ -92,7 +96,7 @@ export class SearchcraftCore {
     observer.observe(document.body, { childList: true, subtree: true });
   }
 
-  initClients(config: SearchcraftConfig, sdkInfo: SearchcraftSDKInfo) {
+  private initClients(config: SearchcraftConfig, sdkInfo: SearchcraftSDKInfo) {
     // Adds a timeout so that the resource-intensive `initClients` does not cause any render-blocking issues.
     setTimeout(async () => {
       let userId = this.config.userId;
@@ -103,7 +107,7 @@ export class SearchcraftCore {
       }
 
       this.measureClient = new MeasureClient(config, sdkInfo, userId);
-      this.searchClient = new SearchClient(config, userId, this.measureClient);
+      this.searchClient = new SearchClient(this, config, userId);
 
       switch (config.adProvider) {
         case 'adMarketplace':
@@ -114,6 +118,33 @@ export class SearchcraftCore {
           break;
       }
     }, 300);
+  }
+
+  emitEvent<T extends SubscriptionEventName>(
+    eventName: T,
+    event: SubscriptionEventMap[T],
+  ) {
+    this.subscriptionEvents[eventName]?.forEach((callback) => {
+      (callback as SubscriptionEventCallback<T>)(event);
+    });
+  }
+
+  subscribe<T extends SubscriptionEventName>(
+    eventName: T,
+    callback: SubscriptionEventCallback<T>,
+  ): UnsubscribeFunction {
+    if (!this.subscriptionEvents[eventName]) {
+      this.subscriptionEvents[eventName] = [];
+    }
+    (this.subscriptionEvents[eventName] as SubscriptionEventCallback<T>[]).push(
+      callback,
+    );
+
+    return () => {
+      (this.subscriptionEvents[eventName] as SubscriptionEventCallback<T>[]) = (
+        this.subscriptionEvents[eventName] as SubscriptionEventCallback<T>[]
+      ).filter((cb) => cb !== callback);
+    };
   }
 
   /**

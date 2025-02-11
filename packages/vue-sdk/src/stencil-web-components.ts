@@ -82,19 +82,15 @@ export const SearchcraftInputForm = /*@__PURE__*/ defineContainer<JSX.Searchcraf
   'placeholderValue',
   'searchTerm',
   'core',
-  'inputCleared',
   'noResultsReceived',
   'inputFocus',
   'inputBlur',
-  'inputInit',
-  'querySubmit'
+  'inputInit'
 ], [
-  'inputCleared',
   'noResultsReceived',
   'inputFocus',
   'inputBlur',
-  'inputInit',
-  'querySubmit'
+  'inputInit'
 ]);
 
 

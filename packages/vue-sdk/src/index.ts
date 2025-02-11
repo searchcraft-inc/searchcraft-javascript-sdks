@@ -5,7 +5,6 @@ import packageJson from '../package.json';
  * Export all components and plugins for the Vue SDK here.
  */
 export * from './components';
-export * from './plugin';
 
 /**
  * The consumer-facing Searchcraft class.

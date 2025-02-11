@@ -64,10 +64,6 @@ export class SearchcraftInput {
    */
   @Prop() searchTerm = '';
   /**
-   * When the input is cleared.
-   */
-  @Event() inputCleared?: EventEmitter<void>;
-  /**
    * When no results are returned.
    */
   @Event() noResultsReceived?: EventEmitter<void>;
@@ -83,10 +79,6 @@ export class SearchcraftInput {
    * Event emitted when input initializes.
    */
   @Event() inputInit?: EventEmitter<void>;
-  /**
-   * Event emitted when a query has been submitted.
-   */
-  @Event() querySubmit?: EventEmitter<string>;
 
   @State() inputValue = this.searchTerm;
   @State() error = false;
@@ -98,6 +90,7 @@ export class SearchcraftInput {
   init() {
     if (this.core) {
       this.searchStore.initialize(this.core);
+      this.inputInit?.emit();
     }
   }
 
@@ -118,10 +111,6 @@ export class SearchcraftInput {
       return;
     }
 
-    if (input.value.trim() === '') {
-      this.inputCleared?.emit();
-    }
-
     this.performSearch(input.value);
   };
 
@@ -133,14 +122,12 @@ export class SearchcraftInput {
     this.searchTerm = value.trim();
     this.error = false;
     this.searchStore.setSearchTerm(this.searchTerm);
-    this.querySubmit?.emit(this.searchTerm);
 
     try {
       await this.searchStore.search();
     } catch (error) {
       console.log(error);
       this.error = true;
-      this.inputCleared?.emit();
     }
   };
 
@@ -150,8 +137,6 @@ export class SearchcraftInput {
     this.searchStore.setSearchTerm('');
     this.searchStore.setSearchClientResponseItems([]);
     this.error = false;
-
-    this.inputCleared?.emit();
   };
 
   handleFormSubmit = async (event: Event) => {

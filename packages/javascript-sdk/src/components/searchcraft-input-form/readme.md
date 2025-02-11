@@ -20,15 +20,6 @@ It abstracts the complexities of index-based searching, making it accessible to 
 // index.js
 const searchInputForm = document.querySelector('searchcraft-input-form');
 
-searchInputForm.config = {
-  index: [],
-  readKey: '',
-  endpointUrl: '',
-};
-
-searchForm.addEventListener('querySubmit', (event) => {
-  console.log('Query submitted', event.detail);
-});
 ```
 
 ## Properties
@@ -47,14 +38,12 @@ searchForm.addEventListener('querySubmit', (event) => {
 
 ## Events
 
-| Event               | Description                                    | Type                  |
-| ------------------- | ---------------------------------------------- | --------------------- |
-| `inputBlur`         | When the input becomes unfocused.              | `CustomEvent<void>`   |
-| `inputCleared`      | When the input is cleared.                     | `CustomEvent<void>`   |
-| `inputFocus`        | When the input becomes focused.                | `CustomEvent<void>`   |
-| `inputInit`         | Event emitted when input initializes.          | `CustomEvent<void>`   |
-| `noResultsReceived` | When no results are returned.                  | `CustomEvent<void>`   |
-| `querySubmit`       | Event emitted when a query has been submitted. | `CustomEvent<string>` |
+| Event               | Description                           | Type                |
+| ------------------- | ------------------------------------- | ------------------- |
+| `inputBlur`         | When the input becomes unfocused.     | `CustomEvent<void>` |
+| `inputFocus`        | When the input becomes focused.       | `CustomEvent<void>` |
+| `inputInit`         | Event emitted when input initializes. | `CustomEvent<void>` |
+| `noResultsReceived` | When no results are returned.         | `CustomEvent<void>` |
 
 
 ## Dependencies
