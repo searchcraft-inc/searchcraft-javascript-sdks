@@ -52,13 +52,25 @@ const isVerbose = args.includes('--verbose');
 const packageAlias = args.find((arg) => !arg.includes('--'));
 const targetPackageInfo = packages[packageAlias];
 
+/**
+ * Builds an individual package.
+ */
 const buildPackage = (packageInfo) => {
+  // Build the package
   console.log(`Building package ${packageInfo.name} ...`);
   execSync(`yarn workspace ${packageInfo.name} build`, {
     stdio: isVerbose ? 'inherit' : 'ignore',
   });
   console.log(`Package ${packageInfo.name} built successfully.`);
 
+  // Post-build step (for javascript-sdk)
+  if (packageInfo.name === '@searchcraft/javascript-sdk') {
+    console.log('Running post-build script for @searchcraft/javascript-sdk...');
+    execSync('cd packages/javascript-sdk && node post-build.js');
+    console.log('Post-build script complete for javascript-sdk.');
+  }
+
+  // Yalc publishing
   if (shouldPublishToYalc && packageInfo.path) {
     console.log(`Publishing ${packageInfo.name} to yalc...`);
     execSync(`cd ${packageInfo.path} && yalc publish && yalc push`, {
@@ -66,14 +78,11 @@ const buildPackage = (packageInfo) => {
     });
     console.log(`Package ${packageInfo.name} published to yalc.`);
   }
-
-  if (packageInfo.name === '@searchcraft/javascript-sdk') {
-    console.log('Running post-build script for @searchcraft/javascript-sdk...');
-    execSync('cd packages/javascript-sdk && node post-build.js');
-    console.log('Post-build script complete for javascript-sdk.');
-  }
 };
 
+/**
+ * Starts nodemon when --watch arg is present
+ */
 const startWatching = () => {
   spawnSync(
     'npx',
@@ -102,15 +111,19 @@ if (shouldWatch) {
 
 // Builds the packages that need to be built every time no matter what
 const mandatoryPackagesToBuild = [
-  '@searchcraft/core',
-  '@searchcraft/hologram',
-  '@searchcraft/javascript-sdk',
+  { name: '@searchcraft/core', path: './packages/core-sdk' },
+  { name: '@searchcraft/hologram', path: './packages/hologram' },
+  { name: '@searchcraft/javascript-sdk', path: './packages/javascript-sdk' },
 ];
-mandatoryPackagesToBuild.forEach((name) => buildPackage({ name }));
+mandatoryPackagesToBuild.forEach((item) => buildPackage(item));
 
 // Build the remaining target package OR all the remaining packages
 if (targetPackageInfo) {
-  if (!mandatoryPackagesToBuild.includes(targetPackageInfo.name)) {
+  if (
+    !mandatoryPackagesToBuild
+      .map((item) => item.name)
+      .includes(targetPackageInfo.name)
+  ) {
     buildPackage(targetPackageInfo);
   }
 } else {

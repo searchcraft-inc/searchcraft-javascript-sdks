@@ -181,6 +181,12 @@ export class SearchcraftCore {
             document,
           })); // SearchDocument[] -> SearchClientResponseItem
 
+        if (searchItems.length === 0) {
+          this.emitEvent('no_results_returned', {
+            name: 'no_results_returned',
+          });
+        }
+
         itemsCallback(searchResponse, searchItems);
       })();
 
