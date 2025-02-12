@@ -14,6 +14,7 @@ A single list item rendered in a searchcraft-popover-list-view.
 | Property               | Attribute | Description | Type                                | Default     |
 | ---------------------- | --------- | ----------- | ----------------------------------- | ----------- |
 | `adClientResponseItem` | --        |             | `AdClientResponseItem \| undefined` | `undefined` |
+| `type`                 | `type`    |             | `"adm" \| "custom" \| "nativo"`     | `'custom'`  |
 
 
 ## Dependencies

@@ -19,7 +19,6 @@
 - [AdClientResponseItem](/reference/sdk/js-vanilla/interfaces/AdClientResponseItem.md)
 - [FilterItem](/reference/sdk/js-vanilla/interfaces/FilterItem.md)
 - [SearchClientResponseItem](/reference/sdk/js-vanilla/interfaces/SearchClientResponseItem.md)
-- [SearchcraftBaseSearchResultsCustomEvent](/reference/sdk/js-vanilla/interfaces/SearchcraftBaseSearchResultsCustomEvent.md)
 - [SearchcraftButtonCustomEvent](/reference/sdk/js-vanilla/interfaces/SearchcraftButtonCustomEvent.md)
 - [SearchcraftConfig](/reference/sdk/js-vanilla/interfaces/SearchcraftConfig.md)
 - [SearchcraftFacetListCustomEvent](/reference/sdk/js-vanilla/interfaces/SearchcraftFacetListCustomEvent.md)
@@ -30,6 +29,7 @@
 
 ## Type Aliases
 
+- [AdClientResponseItemType](/reference/sdk/js-vanilla/type-aliases/AdClientResponseItemType.md)
 - [PopoverResultMappings](/reference/sdk/js-vanilla/type-aliases/PopoverResultMappings.md)
 - [SearchcraftSelectOption](/reference/sdk/js-vanilla/type-aliases/SearchcraftSelectOption.md)
 - [SearchResultMappings](/reference/sdk/js-vanilla/type-aliases/SearchResultMappings.md)

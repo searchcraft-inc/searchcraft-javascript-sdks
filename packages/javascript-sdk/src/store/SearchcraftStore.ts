@@ -9,8 +9,6 @@ import {
   type SearchClientResponseItem,
   type AdClientResponseItem,
   type SearchcraftCore,
-  type SubscriptionEventName,
-  type SubscriptionEventMap,
 } from '@searchcraft/core';
 import type {
   SearchcraftState,
@@ -36,7 +34,6 @@ const initialSearchcraftStateValues: SearchcraftStateValues = {
   sortType: 'asc',
 };
 
-// Function to create or reuse the store
 const searchcraftStore = createStore<SearchcraftState>((set, get) => {
   const functions: SearchcraftStateFunctions = {
     addFacetPathsForIndexField: (data: FacetPathsForIndexField) =>
@@ -53,15 +50,6 @@ const searchcraftStore = createStore<SearchcraftState>((set, get) => {
           [data.fieldName]: data,
         },
       })),
-    emitEvent: <T extends SubscriptionEventName>(
-      eventName: T,
-      event: SubscriptionEventMap[T],
-    ) => {
-      const { core } = get();
-      if (core) {
-        core.emitEvent(eventName, event);
-      }
-    },
     getSearchcraftInstance: () => {
       const { core } = get();
       return core;
@@ -191,10 +179,10 @@ const searchcraftStore = createStore<SearchcraftState>((set, get) => {
     setSearchMode: (mode) => set({ searchMode: mode }),
     setSortType: (type) => set({ sortType: type }),
     setSearchTerm: (searchTerm) => {
-      const { emitEvent } = get();
+      const { core } = get();
 
-      if (searchTerm.length === 0) {
-        emitEvent('input_cleared', {
+      if (core && searchTerm.length === 0) {
+        core.emitEvent('input_cleared', {
           name: 'input_cleared',
         });
       }

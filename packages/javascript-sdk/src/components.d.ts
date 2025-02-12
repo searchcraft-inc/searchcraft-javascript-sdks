@@ -5,9 +5,9 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { AdClientResponseItem, FilterItem, PopoverResultMappings, SearchClientResponseItem, SearchcraftCore, SearchResultMappings } from "@searchcraft/core";
+import { AdClientResponseItem, AdClientResponseItemType, FilterItem, PopoverResultMappings, SearchClientResponseItem, SearchcraftCore, SearchResultMappings } from "@searchcraft/core";
 import { SearchcraftSelectOption } from "./components/searchcraft-select/searchcraft-select";
-export { AdClientResponseItem, FilterItem, PopoverResultMappings, SearchClientResponseItem, SearchcraftCore, SearchResultMappings } from "@searchcraft/core";
+export { AdClientResponseItem, AdClientResponseItemType, FilterItem, PopoverResultMappings, SearchClientResponseItem, SearchcraftCore, SearchResultMappings } from "@searchcraft/core";
 export { SearchcraftSelectOption } from "./components/searchcraft-select/searchcraft-select";
 export namespace Components {
     /**
@@ -52,6 +52,7 @@ export namespace Components {
      */
     interface SearchcraftBaseSearchResultAd {
         "adClientResponseItem"?: AdClientResponseItem;
+        "type": AdClientResponseItemType;
     }
     /**
      * This web component is responsible for displaying the results of a search query.
@@ -336,6 +337,7 @@ export namespace Components {
      */
     interface SearchcraftPopoverListItemAd {
         "adClientResponseItem"?: AdClientResponseItem;
+        "type": AdClientResponseItemType;
     }
     /**
      * This web component is designed to display a list of results within a popover interface.
@@ -508,10 +510,6 @@ export namespace Components {
         "subLabel": string | undefined;
     }
 }
-export interface SearchcraftBaseSearchResultsCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLSearchcraftBaseSearchResultsElement;
-}
 export interface SearchcraftButtonCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSearchcraftButtonElement;
@@ -557,9 +555,6 @@ declare global {
         prototype: HTMLSearchcraftBaseSearchResultAdElement;
         new (): HTMLSearchcraftBaseSearchResultAdElement;
     };
-    interface HTMLSearchcraftBaseSearchResultsElementEventMap {
-        "noResults": void;
-    }
     /**
      * This web component is responsible for displaying the results of a search query.
      * Once a query is submitted, the component formats and presents an ordered list of the results.
@@ -589,14 +584,6 @@ declare global {
      * ```
      */
     interface HTMLSearchcraftBaseSearchResultsElement extends Components.SearchcraftBaseSearchResults, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLSearchcraftBaseSearchResultsElementEventMap>(type: K, listener: (this: HTMLSearchcraftBaseSearchResultsElement, ev: SearchcraftBaseSearchResultsCustomEvent<HTMLSearchcraftBaseSearchResultsElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLSearchcraftBaseSearchResultsElementEventMap>(type: K, listener: (this: HTMLSearchcraftBaseSearchResultsElement, ev: SearchcraftBaseSearchResultsCustomEvent<HTMLSearchcraftBaseSearchResultsElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSearchcraftBaseSearchResultsElement: {
         prototype: HTMLSearchcraftBaseSearchResultsElement;
@@ -686,7 +673,6 @@ declare global {
         new (): HTMLSearchcraftFilterPanelElement;
     };
     interface HTMLSearchcraftInputFormElementEventMap {
-        "noResultsReceived": void;
         "inputFocus": void;
         "inputBlur": void;
         "inputInit": void;
@@ -1003,6 +989,7 @@ declare namespace LocalJSX {
      */
     interface SearchcraftBaseSearchResultAd {
         "adClientResponseItem"?: AdClientResponseItem;
+        "type"?: AdClientResponseItemType;
     }
     /**
      * This web component is responsible for displaying the results of a search query.
@@ -1059,10 +1046,6 @@ declare namespace LocalJSX {
         "customStylesForResults"?: | string
     | Record<string, Record<string, string>>
     | undefined;
-        /**
-          * When no results are returned.
-         */
-        "onNoResults"?: (event: SearchcraftBaseSearchResultsCustomEvent<void>) => void;
         /**
           * The placement of the image for each result.
          */
@@ -1213,10 +1196,6 @@ declare namespace LocalJSX {
          */
         "onInputInit"?: (event: SearchcraftInputFormCustomEvent<void>) => void;
         /**
-          * When no results are returned.
-         */
-        "onNoResultsReceived"?: (event: SearchcraftInputFormCustomEvent<void>) => void;
-        /**
           * The input element's placeholder value.
          */
         "placeholderValue"?: string;
@@ -1315,6 +1294,7 @@ declare namespace LocalJSX {
      */
     interface SearchcraftPopoverListItemAd {
         "adClientResponseItem"?: AdClientResponseItem;
+        "type"?: AdClientResponseItemType;
     }
     /**
      * This web component is designed to display a list of results within a popover interface.

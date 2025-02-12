@@ -8,18 +8,12 @@
 
 ## Properties
 
-### adId
+### id
 
-> **adId**: `string`
-
-***
-
-### admAd?
-
-> `optional` **admAd**: `ADMAd`
+> **id**: `string`
 
 ***
 
 ### type
 
-> **type**: `"adm-text-ad"` \| `"adm-product-ad"` \| `"nativo-ad"`
+> **type**: [`AdClientResponseItemType`](/reference/sdk/js-vanilla/type-aliases/AdClientResponseItemType.md)

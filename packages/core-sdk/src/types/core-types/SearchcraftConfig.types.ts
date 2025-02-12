@@ -42,6 +42,13 @@ export interface SearchcraftConfig {
    * The adm sub value.
    */
   admSub: string;
+  /**
+   * Custom ads
+   */
+  customAdStartQuantity?: number;
+  customAdEndQuantity?: number;
+  customAdInterstialInterval?: number;
+  customAdTemplate?: (properties: string) => string;
 }
 
 /**

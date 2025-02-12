@@ -17,9 +17,8 @@
 
 - [AdClientResponseItem](/reference/sdk/core/interfaces/AdClientResponseItem.md)
 - [ADMAd](/reference/sdk/core/interfaces/ADMAd.md)
-- [ADMProductAd](/reference/sdk/core/interfaces/ADMProductAd.md)
+- [ADMClientResponseItem](/reference/sdk/core/interfaces/ADMClientResponseItem.md)
 - [ADMResponse](/reference/sdk/core/interfaces/ADMResponse.md)
-- [ADMTextAd](/reference/sdk/core/interfaces/ADMTextAd.md)
 - [AdSlotSubscriptionEvent](/reference/sdk/core/interfaces/AdSlotSubscriptionEvent.md)
 - [BatchMeasureRequest](/reference/sdk/core/interfaces/BatchMeasureRequest.md)
 - [DateRangeFilterItem](/reference/sdk/core/interfaces/DateRangeFilterItem.md)
@@ -50,6 +49,7 @@
 
 ## Type Aliases
 
+- [AdClientResponseItemType](/reference/sdk/core/type-aliases/AdClientResponseItemType.md)
 - [ComplexQuery](/reference/sdk/core/type-aliases/ComplexQuery.md)
 - [FacetPathsForIndexField](/reference/sdk/core/type-aliases/FacetPathsForIndexField.md)
 - [FacetPrime](/reference/sdk/core/type-aliases/FacetPrime.md)

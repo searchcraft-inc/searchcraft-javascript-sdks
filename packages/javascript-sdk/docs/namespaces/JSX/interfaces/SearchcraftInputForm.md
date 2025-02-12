@@ -120,24 +120,6 @@ Event emitted when input initializes.
 
 ***
 
-### onNoResultsReceived()?
-
-> `optional` **onNoResultsReceived**: (`event`) => `void`
-
-When no results are returned.
-
-#### Parameters
-
-##### event
-
-[`SearchcraftInputFormCustomEvent`](/reference/sdk/js-vanilla/interfaces/SearchcraftInputFormCustomEvent.md)\<`void`\>
-
-#### Returns
-
-`void`
-
-***
-
 ### placeholderValue?
 
 > `optional` **placeholderValue**: `string`

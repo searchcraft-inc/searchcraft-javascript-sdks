@@ -6,20 +6,18 @@
 
 # Interface: AdClientResponseItem
 
+## Extended by
+
+- [`ADMClientResponseItem`](/reference/sdk/core/interfaces/ADMClientResponseItem.md)
+
 ## Properties
 
-### adId
+### id
 
-> **adId**: `string`
-
-***
-
-### admAd?
-
-> `optional` **admAd**: [`ADMAd`](/reference/sdk/core/interfaces/ADMAd.md)
+> **id**: `string`
 
 ***
 
 ### type
 
-> **type**: `"adm-text-ad"` \| `"adm-product-ad"` \| `"nativo-ad"`
+> **type**: [`AdClientResponseItemType`](/reference/sdk/core/type-aliases/AdClientResponseItemType.md)

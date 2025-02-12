@@ -52,27 +52,20 @@ baseSearchResults.addEventListener('noResults', () => {
 | `searchResultMappings`   | --                          | Formats the content rendered for each result.                                                                                         | `undefined \| { body?: SearchResultMapping \| undefined; buttonHref?: SearchResultMapping \| undefined; containerHref?: SearchResultMapping \| undefined; footer?: SearchResultMapping \| undefined; imageSource?: SearchResultMapping \| undefined; subtitle?: SearchResultMapping \| undefined; title?: SearchResultMapping \| undefined; }` | `undefined` |
 
 
-## Events
-
-| Event       | Description                   | Type                |
-| ----------- | ----------------------------- | ------------------- |
-| `noResults` | When no results are returned. | `CustomEvent<void>` |
-
-
 ## Dependencies
 
 ### Depends on
 
+- [searchcraft-error-message](../searchcraft-error-message)
 - [searchcraft-base-search-result-ad](../searchcraft-base-search-result-ad)
 - [searchcraft-base-search-result](../searchcraft-base-search-result)
-- [searchcraft-error-message](../searchcraft-error-message)
 
 ### Graph
 ```mermaid
 graph TD;
+  searchcraft-base-search-results --> searchcraft-error-message
   searchcraft-base-search-results --> searchcraft-base-search-result-ad
   searchcraft-base-search-results --> searchcraft-base-search-result
-  searchcraft-base-search-results --> searchcraft-error-message
   style searchcraft-base-search-results fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

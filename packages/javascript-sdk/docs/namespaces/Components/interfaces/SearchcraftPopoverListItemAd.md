@@ -13,3 +13,9 @@ A single list item rendered in a searchcraft-popover-list-view.
 ### adClientResponseItem?
 
 > `optional` **adClientResponseItem**: [`AdClientResponseItem`](/reference/sdk/js-vanilla/interfaces/AdClientResponseItem.md)
+
+***
+
+### type
+
+> **type**: [`AdClientResponseItemType`](/reference/sdk/js-vanilla/type-aliases/AdClientResponseItemType.md)

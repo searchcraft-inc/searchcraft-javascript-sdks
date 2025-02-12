@@ -22,6 +22,7 @@ export const SearchcraftBaseSearchResult = /*@__PURE__*/ defineContainer<JSX.Sea
 
 
 export const SearchcraftBaseSearchResultAd = /*@__PURE__*/ defineContainer<JSX.SearchcraftBaseSearchResultAd>('searchcraft-base-search-result-ad', undefined, [
+  'type',
   'adClientResponseItem'
 ]);
 
@@ -34,10 +35,7 @@ export const SearchcraftBaseSearchResults = /*@__PURE__*/ defineContainer<JSX.Se
   'buttonTarget',
   'buttonRel',
   'containerTarget',
-  'containerRel',
-  'noResults'
-], [
-  'noResults'
+  'containerRel'
 ]);
 
 
@@ -82,12 +80,10 @@ export const SearchcraftInputForm = /*@__PURE__*/ defineContainer<JSX.Searchcraf
   'placeholderValue',
   'searchTerm',
   'core',
-  'noResultsReceived',
   'inputFocus',
   'inputBlur',
   'inputInit'
 ], [
-  'noResultsReceived',
   'inputFocus',
   'inputBlur',
   'inputInit'
@@ -124,6 +120,7 @@ export const SearchcraftPopoverListItem = /*@__PURE__*/ defineContainer<JSX.Sear
 
 
 export const SearchcraftPopoverListItemAd = /*@__PURE__*/ defineContainer<JSX.SearchcraftPopoverListItemAd>('searchcraft-popover-list-item-ad', undefined, [
+  'type',
   'adClientResponseItem'
 ]);
 

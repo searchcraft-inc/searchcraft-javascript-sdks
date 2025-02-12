@@ -42,6 +42,42 @@ Name of the ad provider to use.
 
 ***
 
+### customAdEndQuantity?
+
+> `optional` **customAdEndQuantity**: `number`
+
+***
+
+### customAdInterstialInterval?
+
+> `optional` **customAdInterstialInterval**: `number`
+
+***
+
+### customAdStartQuantity?
+
+> `optional` **customAdStartQuantity**: `number`
+
+Custom ads
+
+***
+
+### customAdTemplate()?
+
+> `optional` **customAdTemplate**: (`properties`) => `string`
+
+#### Parameters
+
+##### properties
+
+`string`
+
+#### Returns
+
+`string`
+
+***
+
 ### endpointURL
 
 > **endpointURL**: `string`

@@ -54,14 +54,14 @@ export const SearchcraftBaseSearchResultAd: StencilReactComponent<SearchcraftBas
     defineCustomElement: defineSearchcraftBaseSearchResultAd
 });
 
-type SearchcraftBaseSearchResultsEvents = { onNoResults: EventName<CustomEvent<void>> };
+type SearchcraftBaseSearchResultsEvents = NonNullable<unknown>;
 
 export const SearchcraftBaseSearchResults: StencilReactComponent<SearchcraftBaseSearchResultsElement, SearchcraftBaseSearchResultsEvents> = /*@__PURE__*/ createComponent<SearchcraftBaseSearchResultsElement, SearchcraftBaseSearchResultsEvents>({
     tagName: 'searchcraft-base-search-results',
     elementClass: SearchcraftBaseSearchResultsElement,
     // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
     react: React,
-    events: { onNoResults: 'noResults' } as SearchcraftBaseSearchResultsEvents,
+    events: {} as SearchcraftBaseSearchResultsEvents,
     defineCustomElement: defineSearchcraftBaseSearchResults
 });
 
@@ -110,7 +110,6 @@ export const SearchcraftFilterPanel: StencilReactComponent<SearchcraftFilterPane
 });
 
 type SearchcraftInputFormEvents = {
-    onNoResultsReceived: EventName<CustomEvent<void>>,
     onInputFocus: EventName<CustomEvent<void>>,
     onInputBlur: EventName<CustomEvent<void>>,
     onInputInit: EventName<CustomEvent<void>>
@@ -122,7 +121,6 @@ export const SearchcraftInputForm: StencilReactComponent<SearchcraftInputFormEle
     // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
     react: React,
     events: {
-        onNoResultsReceived: 'noResultsReceived',
         onInputFocus: 'inputFocus',
         onInputBlur: 'inputBlur',
         onInputInit: 'inputInit'
