@@ -89,6 +89,7 @@ export class SearchcraftBaseSearchResults {
   @State() adClientResponseItems: AdClientResponseItem[] = [];
   @State() searchResultsPerPage;
   @State() searchResultsPage;
+  @State() isSearchInProgress = false;
   @State() config?: SearchcraftConfig;
 
   private unsubscribe: () => void = () => {};
@@ -125,6 +126,7 @@ export class SearchcraftBaseSearchResults {
     this.searchResultsPage = state.searchResultsPage;
     this.searchResultsPerPage = state.searchResultsPerPage;
     this.config = state.core?.config;
+    this.isSearchInProgress = state.isSearchInProgress;
   }
 
   renderEmptyState() {
@@ -151,8 +153,8 @@ export class SearchcraftBaseSearchResults {
     return (
       <div class='searchcraft-search-results-container'>
         {this.adClientResponseItems?.map((item) => (
-          <searchcraft-base-search-result-ad
-            type='adm'
+          <searchcraft-ad
+            adSource='adMarketplace'
             adClientResponseItem={item}
             key={item.id}
           />
@@ -180,20 +182,31 @@ export class SearchcraftBaseSearchResults {
 
   renderWithCustomAds() {
     const itemsToRender: JSX.Element[] = [];
-    const interstitialInterval = this.config?.customAdInterstialInterval || 0;
+    const interstitialInterval = this.config?.customAdInterstitialInterval || 0;
+    const interstitialQuantity = this.config?.customAdInterstitialQuantity || 1;
     const adStartQuantity = this.config?.customAdStartQuantity || 0;
     const adEndQuantity = this.config?.customAdEndQuantity || 0;
     const searchItems = this.searchClientResponseItems || [];
 
     // Renders ads at beginning
     for (let n = 0; n < adStartQuantity; n++) {
-      itemsToRender.push(
-        <searchcraft-base-search-result-ad type='custom' key={`${n}-ad`} />,
-      );
+      itemsToRender.push(<searchcraft-ad adSource='Custom' key={`${n}-ad`} />);
     }
 
     // Renders search results + interstitial ads
     searchItems.forEach((item, index) => {
+      if (
+        interstitialInterval &&
+        index % interstitialInterval === 0 &&
+        index + interstitialInterval < searchItems.length &&
+        index >= interstitialInterval
+      ) {
+        for (let n = 0; n < interstitialQuantity; n++) {
+          itemsToRender.push(
+            <searchcraft-ad adSource='Custom' key={`${item.id}-ad-${n}`} />,
+          );
+        }
+      }
       itemsToRender.push(
         <searchcraft-base-search-result
           key={item.id}
@@ -211,23 +224,11 @@ export class SearchcraftBaseSearchResults {
           item={item}
         />,
       );
-
-      if (
-        interstitialInterval &&
-        index % interstitialInterval === 0 &&
-        index + interstitialInterval < searchItems.length
-      ) {
-        itemsToRender.push(
-          <searchcraft-base-search-result-ad type='custom' key={item.id} />,
-        );
-      }
     });
 
     // Renders ads at end
     for (let n = 0; n < adEndQuantity; n++) {
-      itemsToRender.push(
-        <searchcraft-base-search-result-ad type='custom' key={`${n}-ad`} />,
-      );
+      itemsToRender.push(<searchcraft-ad adSource='Custom' key={`${n}-ad`} />);
     }
 
     return (
@@ -266,12 +267,13 @@ export class SearchcraftBaseSearchResults {
 
     if (
       this.searchTerm.length > 0 &&
-      this.searchClientResponseItems.length === 0
+      this.searchClientResponseItems.length === 0 &&
+      !this.isSearchInProgress
     ) {
       return this.renderNoResultsFoundState();
     }
 
-    switch (this.config?.adProvider || 'None') {
+    switch (this.config?.adSource || 'None') {
       case 'adMarketplace':
         return this.renderWithADMAds();
       case 'Custom':

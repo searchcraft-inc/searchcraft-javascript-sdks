@@ -34,11 +34,11 @@ The maximum number of text ads to show for a single search term.
 
 ***
 
-### adProvider?
+### adSource?
 
-> `optional` **adProvider**: `"adMarketplace"` \| `"Nativo"` \| `"Custom"` \| `"None"`
+> `optional` **adSource**: `"adMarketplace"` \| `"Nativo"` \| `"Custom"` \| `"None"`
 
-Name of the ad provider to use.
+Name of the ad source to use.
 
 ***
 
@@ -46,11 +46,23 @@ Name of the ad provider to use.
 
 > `optional` **customAdEndQuantity**: `number`
 
+The number of custom ads to render at the end of the search results page.
+
 ***
 
-### customAdInterstialInterval?
+### customAdInterstitialInterval?
 
-> `optional` **customAdInterstialInterval**: `number`
+> `optional` **customAdInterstitialInterval**: `number`
+
+Renders a custom ad in between search results, at the specified interval.
+
+***
+
+### customAdInterstitialQuantity?
+
+> `optional` **customAdInterstitialQuantity**: `number`
+
+Specifies the number of ads to be rendered in each interstitial in between search results.
 
 ***
 
@@ -58,23 +70,15 @@ Name of the ad provider to use.
 
 > `optional` **customAdStartQuantity**: `number`
 
-Custom ads
+The number of custom ads to render at the start of the search results page.
 
 ***
 
-### customAdTemplate()?
+### customAdTemplate?
 
-> `optional` **customAdTemplate**: (`properties`) => `string`
+> `optional` **customAdTemplate**: [`CustomAdTemplateRenderFunction`](/reference/sdk/core/type-aliases/CustomAdTemplateRenderFunction.md)
 
-#### Parameters
-
-##### properties
-
-`string`
-
-#### Returns
-
-`string`
+A callback function responsible for rendering the custom ad containers.
 
 ***
 

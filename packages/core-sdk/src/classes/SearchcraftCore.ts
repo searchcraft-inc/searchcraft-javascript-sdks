@@ -110,7 +110,7 @@ export class SearchcraftCore {
       this.measureClient = new MeasureClient(config, sdkInfo, userId);
       this.searchClient = new SearchClient(this, config, userId);
 
-      switch (config.adProvider) {
+      switch (config.adSource) {
         case 'adMarketplace':
           this.adClient = new AdMarketplaceClient(config);
           break;

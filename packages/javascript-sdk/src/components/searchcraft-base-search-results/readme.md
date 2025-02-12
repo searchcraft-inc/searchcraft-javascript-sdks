@@ -57,14 +57,14 @@ baseSearchResults.addEventListener('noResults', () => {
 ### Depends on
 
 - [searchcraft-error-message](../searchcraft-error-message)
-- [searchcraft-base-search-result-ad](../searchcraft-base-search-result-ad)
+- [searchcraft-ad](../searchcraft-ad)
 - [searchcraft-base-search-result](../searchcraft-base-search-result)
 
 ### Graph
 ```mermaid
 graph TD;
   searchcraft-base-search-results --> searchcraft-error-message
-  searchcraft-base-search-results --> searchcraft-base-search-result-ad
+  searchcraft-base-search-results --> searchcraft-ad
   searchcraft-base-search-results --> searchcraft-base-search-result
   style searchcraft-base-search-results fill:#f9f,stroke:#333,stroke-width:4px
 ```

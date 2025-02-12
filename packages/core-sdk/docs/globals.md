@@ -16,11 +16,12 @@
 ## Interfaces
 
 - [AdClientResponseItem](/reference/sdk/core/interfaces/AdClientResponseItem.md)
+- [AdContainerSubscriptionEvent](/reference/sdk/core/interfaces/AdContainerSubscriptionEvent.md)
 - [ADMAd](/reference/sdk/core/interfaces/ADMAd.md)
 - [ADMClientResponseItem](/reference/sdk/core/interfaces/ADMClientResponseItem.md)
 - [ADMResponse](/reference/sdk/core/interfaces/ADMResponse.md)
-- [AdSlotSubscriptionEvent](/reference/sdk/core/interfaces/AdSlotSubscriptionEvent.md)
 - [BatchMeasureRequest](/reference/sdk/core/interfaces/BatchMeasureRequest.md)
+- [CustomAdTemplateRenderData](/reference/sdk/core/interfaces/CustomAdTemplateRenderData.md)
 - [DateRangeFilterItem](/reference/sdk/core/interfaces/DateRangeFilterItem.md)
 - [ExactMatchToggleFilterItem](/reference/sdk/core/interfaces/ExactMatchToggleFilterItem.md)
 - [FacetChild](/reference/sdk/core/interfaces/FacetChild.md)
@@ -49,8 +50,8 @@
 
 ## Type Aliases
 
-- [AdClientResponseItemType](/reference/sdk/core/type-aliases/AdClientResponseItemType.md)
 - [ComplexQuery](/reference/sdk/core/type-aliases/ComplexQuery.md)
+- [CustomAdTemplateRenderFunction](/reference/sdk/core/type-aliases/CustomAdTemplateRenderFunction.md)
 - [FacetPathsForIndexField](/reference/sdk/core/type-aliases/FacetPathsForIndexField.md)
 - [FacetPrime](/reference/sdk/core/type-aliases/FacetPrime.md)
 - [FacetRoot](/reference/sdk/core/type-aliases/FacetRoot.md)
@@ -58,6 +59,7 @@
 - [PopoverResultMappings](/reference/sdk/core/type-aliases/PopoverResultMappings.md)
 - [QueryObject](/reference/sdk/core/type-aliases/QueryObject.md)
 - [RangeValueForIndexField](/reference/sdk/core/type-aliases/RangeValueForIndexField.md)
+- [SearchcraftAdSource](/reference/sdk/core/type-aliases/SearchcraftAdSource.md)
 - [SearchcraftResponseError](/reference/sdk/core/type-aliases/SearchcraftResponseError.md)
 - [SearchParams](/reference/sdk/core/type-aliases/SearchParams.md)
 - [SearchResultFieldName](/reference/sdk/core/type-aliases/SearchResultFieldName.md)

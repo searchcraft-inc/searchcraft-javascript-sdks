@@ -76,9 +76,6 @@ export const Default: StoryObj<Components.SearchcraftBaseSearchResults> = {
           <searchcraft-input-form />
           <div style={{ paddingTop: 20 }}>
             <searchcraft-base-search-results
-              ad-interval={args.adInterval}
-              place-ad-at-end
-              place-ad-at-start
               result-image-placement={args.resultImagePlacement}
               button-target={args.buttonTarget}
               button-rel={args.buttonRel}
@@ -93,52 +90,114 @@ export const Default: StoryObj<Components.SearchcraftBaseSearchResults> = {
   args: {},
 };
 
-export const WithAds: StoryObj<Components.SearchcraftBaseSearchResults> = {
-  decorators: [
-    (Story) => {
-      useEffect(() => {
-        const adConfig: SearchcraftConfig = {
-          ...config,
-          adProvider: 'adMarketplace',
-          admSub: 'searchbox1',
-          admProductAdQuantity: 2,
-          admTextAdQuantity: 2,
-        };
-        new Searchcraft(adConfig);
-        const searchResults = document.querySelector(
-          'searchcraft-base-search-results',
-        );
-        if (searchResults) {
-          searchResults.searchResultMappings = mappings;
-        }
-      }, []);
+export const WithAdMarketplaceAds: StoryObj<Components.SearchcraftBaseSearchResults> =
+  {
+    decorators: [
+      (Story) => {
+        useEffect(() => {
+          const adConfig: SearchcraftConfig = {
+            ...config,
+            adSource: 'adMarketplace',
+            admSub: 'searchbox1',
+            admProductAdQuantity: 2,
+            admTextAdQuantity: 2,
+          };
+          new Searchcraft(adConfig);
+          const searchResults = document.querySelector(
+            'searchcraft-base-search-results',
+          );
+          if (searchResults) {
+            searchResults.searchResultMappings = mappings;
+          }
+        }, []);
 
-      return <Story />;
+        return <Story />;
+      },
+    ],
+    render: (args) => {
+      return (
+        <>
+          <searchcraft-theme />
+          <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
+            <searchcraft-input-form />
+            <div style={{ paddingTop: 20 }}>
+              <searchcraft-base-search-results
+                result-image-placement={args.resultImagePlacement}
+                button-target={args.buttonTarget}
+                button-rel={args.buttonRel}
+                container-target={args.containerTarget}
+                container-rel={args.containerRel}
+              />
+            </div>
+          </div>
+        </>
+      );
     },
-  ],
-  render: (args) => {
-    return (
-      <>
-        <searchcraft-theme />
-        <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
-          <searchcraft-input-form />
-          <div style={{ paddingTop: 20 }}>
-            <searchcraft-base-search-results
-              ad-interval={args.adInterval}
-              place-ad-at-end
-              place-ad-at-start
-              result-image-placement={args.resultImagePlacement}
-              button-target={args.buttonTarget}
-              button-rel={args.buttonRel}
-              container-target={args.containerTarget}
-              container-rel={args.containerRel}
-            />
+    args: {},
+  };
+
+export const WithCustomAds: StoryObj<Components.SearchcraftBaseSearchResults> =
+  {
+    decorators: [
+      (Story) => {
+        useEffect(() => {
+          const searchcraft = new Searchcraft({
+            ...config,
+            adSource: 'Custom',
+            customAdStartQuantity: 2,
+            customAdInterstitialInterval: 4,
+            customAdInterstitialQuantity: 3,
+            customAdEndQuantity: 4,
+            customAdTemplate(data) {
+              return `
+              <p>hello world ${data.adContainerId} ${data.searchTerm}</p>
+            `;
+            },
+          });
+
+          const unsubscribe = searchcraft.subscribe(
+            'ad_container_rendered',
+            (event) => {
+              console.log(
+                'Ad slot shown!',
+                event.data.adSource,
+                event.data.adContainerId,
+                event.data.searchTerm,
+              );
+            },
+          );
+
+          const searchResults = document.querySelector(
+            'searchcraft-base-search-results',
+          );
+          if (searchResults) {
+            searchResults.searchResultMappings = mappings;
+          }
+        }, []);
+
+        return <Story />;
+      },
+    ],
+    render: (args) => {
+      return (
+        <>
+          <searchcraft-theme />
+          <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
+            <searchcraft-input-form />
+            <div style={{ paddingTop: 20 }}>
+              <searchcraft-base-search-results
+                result-image-placement={args.resultImagePlacement}
+                button-target={args.buttonTarget}
+                button-rel={args.buttonRel}
+                container-target={args.containerTarget}
+                container-rel={args.containerRel}
+              />
+            </div>
           </div>
-        </div>
-      </>
-    );
-  },
-  args: {},
-};
+        </>
+      );
+    },
+    args: {},
+  };
 
 export default componentMeta;

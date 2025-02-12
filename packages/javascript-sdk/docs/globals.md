@@ -29,8 +29,8 @@
 
 ## Type Aliases
 
-- [AdClientResponseItemType](/reference/sdk/js-vanilla/type-aliases/AdClientResponseItemType.md)
 - [PopoverResultMappings](/reference/sdk/js-vanilla/type-aliases/PopoverResultMappings.md)
+- [SearchcraftAdSource](/reference/sdk/js-vanilla/type-aliases/SearchcraftAdSource.md)
 - [SearchcraftSelectOption](/reference/sdk/js-vanilla/type-aliases/SearchcraftSelectOption.md)
 - [SearchResultMappings](/reference/sdk/js-vanilla/type-aliases/SearchResultMappings.md)
 

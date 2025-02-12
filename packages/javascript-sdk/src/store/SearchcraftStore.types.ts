@@ -38,6 +38,7 @@ export interface SearchcraftStateValues {
   logger: Logger | undefined;
   facetPathsForIndexFields: Record<string, FacetPathsForIndexField>;
   isPopoverVisible: boolean;
+  isSearchInProgress: boolean;
   rangeValueForIndexFields: Record<string, RangeValueForIndexField>;
   searchMode: 'fuzzy' | 'exact';
   searchClientResponseItems: SearchClientResponseItem[];

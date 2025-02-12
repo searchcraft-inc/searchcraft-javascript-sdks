@@ -8,12 +8,12 @@
 
 ## Properties
 
-### id
+### adSource
 
-> **id**: `string`
+> **adSource**: [`SearchcraftAdSource`](/reference/sdk/js-vanilla/type-aliases/SearchcraftAdSource.md)
 
 ***
 
-### type
+### id
 
-> **type**: [`AdClientResponseItemType`](/reference/sdk/js-vanilla/type-aliases/AdClientResponseItemType.md)
+> **id**: `string`

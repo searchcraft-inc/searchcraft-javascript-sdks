@@ -24,6 +24,16 @@
 
 ***
 
+### adSource
+
+> **adSource**: [`SearchcraftAdSource`](/reference/sdk/core/type-aliases/SearchcraftAdSource.md)
+
+#### Inherited from
+
+[`AdClientResponseItem`](/reference/sdk/core/interfaces/AdClientResponseItem.md).[`adSource`](/reference/sdk/core/interfaces/AdClientResponseItem.md#adsource)
+
+***
+
 ### id
 
 > **id**: `string`
@@ -31,13 +41,3 @@
 #### Inherited from
 
 [`AdClientResponseItem`](/reference/sdk/core/interfaces/AdClientResponseItem.md).[`id`](/reference/sdk/core/interfaces/AdClientResponseItem.md#id)
-
-***
-
-### type
-
-> **type**: [`AdClientResponseItemType`](/reference/sdk/core/type-aliases/AdClientResponseItemType.md)
-
-#### Inherited from
-
-[`AdClientResponseItem`](/reference/sdk/core/interfaces/AdClientResponseItem.md).[`type`](/reference/sdk/core/interfaces/AdClientResponseItem.md#type)

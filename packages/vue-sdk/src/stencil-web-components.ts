@@ -8,6 +8,12 @@ import type { JSX } from '@searchcraft/javascript-sdk';
 
 
 
+export const SearchcraftAd = /*@__PURE__*/ defineContainer<JSX.SearchcraftAd>('searchcraft-ad', undefined, [
+  'adSource',
+  'adClientResponseItem'
+]);
+
+
 export const SearchcraftBaseSearchResult = /*@__PURE__*/ defineContainer<JSX.SearchcraftBaseSearchResult>('searchcraft-base-search-result', undefined, [
   'item',
   'searchResultMappings',
@@ -18,12 +24,6 @@ export const SearchcraftBaseSearchResult = /*@__PURE__*/ defineContainer<JSX.Sea
   'imagePlacement',
   'customStyles',
   'documentPosition'
-]);
-
-
-export const SearchcraftBaseSearchResultAd = /*@__PURE__*/ defineContainer<JSX.SearchcraftBaseSearchResultAd>('searchcraft-base-search-result-ad', undefined, [
-  'type',
-  'adClientResponseItem'
 ]);
 
 
@@ -116,12 +116,6 @@ export const SearchcraftPopoverListItem = /*@__PURE__*/ defineContainer<JSX.Sear
   'item',
   'popoverResultMappings',
   'documentPosition'
-]);
-
-
-export const SearchcraftPopoverListItemAd = /*@__PURE__*/ defineContainer<JSX.SearchcraftPopoverListItemAd>('searchcraft-popover-list-item-ad', undefined, [
-  'type',
-  'adClientResponseItem'
 ]);
 
 

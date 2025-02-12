@@ -22,6 +22,7 @@ const initialSearchcraftStateValues: SearchcraftStateValues = {
   logger: undefined,
   facetPathsForIndexFields: {},
   isPopoverVisible: false,
+  isSearchInProgress: false,
   searchTerm: '',
   rangeValueForIndexFields: {},
   searchMode: 'fuzzy',
@@ -116,6 +117,8 @@ const searchcraftStore = createStore<SearchcraftState>((set, get) => {
         return;
       }
 
+      set({ isSearchInProgress: true });
+
       const handleSearchcraftResponse = (
         response: SearchcraftResponse,
         items: SearchClientResponseItem[],
@@ -124,6 +127,7 @@ const searchcraftStore = createStore<SearchcraftState>((set, get) => {
 
         set((state) => {
           return {
+            isSearchInProgress: false,
             searchClientResponseItems: items,
             searchResponseTimeTaken: response.data.time_taken || 0,
             searchResultsPage:

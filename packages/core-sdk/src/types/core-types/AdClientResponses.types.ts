@@ -1,14 +1,13 @@
+import type { SearchcraftAdSource } from './SearchcraftConfig.types';
+
 export interface ADMResponse {
   partial_qt: string;
   text_ads: ADMAd[];
   product_ads: ADMAd[];
 }
-
-export type AdClientResponseItemType = 'adm' | 'nativo' | 'custom';
-
 export interface AdClientResponseItem {
   id: string;
-  type: AdClientResponseItemType;
+  adSource: SearchcraftAdSource;
 }
 
 export interface ADMClientResponseItem extends AdClientResponseItem {

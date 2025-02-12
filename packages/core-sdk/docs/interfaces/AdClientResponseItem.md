@@ -12,12 +12,12 @@
 
 ## Properties
 
-### id
+### adSource
 
-> **id**: `string`
+> **adSource**: [`SearchcraftAdSource`](/reference/sdk/core/type-aliases/SearchcraftAdSource.md)
 
 ***
 
-### type
+### id
 
-> **type**: [`AdClientResponseItemType`](/reference/sdk/core/type-aliases/AdClientResponseItemType.md)
+> **id**: `string`

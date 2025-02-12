@@ -41,9 +41,9 @@ export class SearchcraftPopoverListView {
     return (
       <div class='searchcraft-popover-list-view'>
         {this.adClientResponseItems?.map((item) => (
-          <searchcraft-popover-list-item-ad
+          <searchcraft-ad
             adClientResponseItem={item}
-            type='adm'
+            adSource='adMarketplace'
             key={item.id}
           />
         ))}
@@ -63,20 +63,32 @@ export class SearchcraftPopoverListView {
 
   renderWithCustomAds() {
     const itemsToRender: JSX.Element[] = [];
-    const interstitialInterval = this.config?.customAdInterstialInterval || 0;
+    const interstitialInterval = this.config?.customAdInterstitialInterval || 0;
+    const interstitialQuantity = this.config?.customAdInterstitialQuantity || 1;
     const adStartQuantity = this.config?.customAdStartQuantity || 0;
     const adEndQuantity = this.config?.customAdEndQuantity || 0;
     const searchItems = this.searchClientResponseItems || [];
 
     // Renders ads at beginning
     for (let n = 0; n < adStartQuantity; n++) {
-      itemsToRender.push(
-        <searchcraft-popover-list-item-ad type='custom' key={`${n}-ad`} />,
-      );
+      itemsToRender.push(<searchcraft-ad adSource='Custom' key={`${n}-ad`} />);
     }
 
     // Renders search results + interstitial ads
     searchItems.forEach((item, index) => {
+      if (
+        interstitialInterval &&
+        index % interstitialInterval === 0 &&
+        index + interstitialInterval < searchItems.length &&
+        index >= interstitialInterval
+      ) {
+        for (let n = 0; n < interstitialQuantity; n++) {
+          itemsToRender.push(
+            <searchcraft-ad adSource='Custom' key={`${item.id}-ad-${n}`} />,
+          );
+        }
+      }
+
       itemsToRender.push(
         <searchcraft-popover-list-item
           item={item}
@@ -87,26 +99,11 @@ export class SearchcraftPopoverListView {
           }
         />,
       );
-
-      if (
-        interstitialInterval &&
-        index % interstitialInterval === 0 &&
-        index + interstitialInterval < searchItems.length
-      ) {
-        itemsToRender.push(
-          <searchcraft-popover-list-item-ad
-            type='custom'
-            key={`${item.id}-ad`}
-          />,
-        );
-      }
     });
 
     // Renders ads at end
     for (let n = 0; n < adEndQuantity; n++) {
-      itemsToRender.push(
-        <searchcraft-popover-list-item-ad type='custom' key={`${n}-ad`} />,
-      );
+      itemsToRender.push(<searchcraft-ad adSource='Custom' key={`${n}-ad`} />);
     }
 
     return <div class='searchcraft-popover-list-view'>{itemsToRender}</div>;
@@ -130,7 +127,7 @@ export class SearchcraftPopoverListView {
   }
 
   render() {
-    switch (this.config?.adProvider || 'None') {
+    switch (this.config?.adSource || 'None') {
       case 'adMarketplace':
         return this.renderWithADMAds();
       case 'Custom':

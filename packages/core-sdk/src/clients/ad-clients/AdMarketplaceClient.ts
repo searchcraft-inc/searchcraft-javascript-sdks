@@ -37,7 +37,7 @@ export class AdMarketplaceClient extends AdClient {
     const productAds: ADMClientResponseItem[] = admResponse.product_ads.map(
       (ad) => ({
         id: nanoid(),
-        type: 'adm',
+        adSource: 'adMarketplace',
         admAdType: 'adm-product-ad',
         admAd: ad,
       }),
@@ -45,7 +45,7 @@ export class AdMarketplaceClient extends AdClient {
 
     const textAds: ADMClientResponseItem[] = admResponse.text_ads.map((ad) => ({
       id: nanoid(),
-      type: 'adm',
+      adSource: 'adMarketplace',
       admAdType: 'adm-text-ad',
       admAd: ad,
     }));
