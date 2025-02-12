@@ -15,6 +15,10 @@ import type {
   SearchcraftConfig,
   SearchcraftResponse,
   SearchcraftSDKInfo,
+  UnsubscribeFunction,
+  SubscriptionEventName,
+  SubscriptionEventCallback,
+  SubscriptionEventMap,
 } from '../types';
 import { removeTrailingSlashFromEndpointURL } from '../utils';
 
@@ -29,6 +33,9 @@ export class SearchcraftCore {
   userId: string;
 
   private requestTimeout: NodeJS.Timeout | undefined;
+  private subscriptionEvents: {
+    [K in SubscriptionEventName]?: Array<SubscriptionEventCallback<K>>;
+  } = {};
 
   constructor(config: SearchcraftConfig, sdkInfo: SearchcraftSDKInfo) {
     if (!config.endpointURL || !config.index || !config.readKey) {
@@ -45,9 +52,51 @@ export class SearchcraftCore {
     this.userId = '';
 
     this.initClients(this.config, sdkInfo);
+    this.initInputForms();
+    this.startObservingMutations();
   }
 
-  initClients(config: SearchcraftConfig, sdkInfo: SearchcraftSDKInfo) {
+  private initInputForms() {
+    const inputForms: Record<string, unknown>[] = document.querySelectorAll(
+      'searchcraft-input-form',
+    ) as unknown as Record<string, unknown>[];
+
+    // Adds a timeout to give the stencil components time to initialize.
+    setTimeout(() => {
+      inputForms.forEach((form) => {
+        form.core = this;
+      });
+    }, 40);
+  }
+
+  /**
+   * When changes happen in the DOM, we want to link any input forms found to the instance of the core.
+   */
+  private startObservingMutations() {
+    const observer = new MutationObserver((mutationsList, _observer) => {
+      let newInputFormDetected = false;
+      for (const mutation of mutationsList) {
+        if (mutation.type === 'childList') {
+          mutation.addedNodes.forEach((node) => {
+            if (
+              node.nodeType === 1 &&
+              (node as HTMLElement).className.toLowerCase() ===
+                'searchcraft-input-form'
+            ) {
+              newInputFormDetected = true;
+            }
+          });
+        }
+      }
+      if (newInputFormDetected) {
+        this.initInputForms();
+      }
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+  }
+
+  private initClients(config: SearchcraftConfig, sdkInfo: SearchcraftSDKInfo) {
     // Adds a timeout so that the resource-intensive `initClients` does not cause any render-blocking issues.
     setTimeout(async () => {
       let userId = this.config.userId;
@@ -58,7 +107,7 @@ export class SearchcraftCore {
       }
 
       this.measureClient = new MeasureClient(config, sdkInfo, userId);
-      this.searchClient = new SearchClient(config, userId, this.measureClient);
+      this.searchClient = new SearchClient(this, config, userId);
 
       switch (config.adProvider) {
         case 'adMarketplace':
@@ -69,6 +118,33 @@ export class SearchcraftCore {
           break;
       }
     }, 300);
+  }
+
+  emitEvent<T extends SubscriptionEventName>(
+    eventName: T,
+    event: SubscriptionEventMap[T],
+  ) {
+    this.subscriptionEvents[eventName]?.forEach((callback) => {
+      (callback as SubscriptionEventCallback<T>)(event);
+    });
+  }
+
+  subscribe<T extends SubscriptionEventName>(
+    eventName: T,
+    callback: SubscriptionEventCallback<T>,
+  ): UnsubscribeFunction {
+    if (!this.subscriptionEvents[eventName]) {
+      this.subscriptionEvents[eventName] = [];
+    }
+    (this.subscriptionEvents[eventName] as SubscriptionEventCallback<T>[]).push(
+      callback,
+    );
+
+    return () => {
+      (this.subscriptionEvents[eventName] as SubscriptionEventCallback<T>[]) = (
+        this.subscriptionEvents[eventName] as SubscriptionEventCallback<T>[]
+      ).filter((cb) => cb !== callback);
+    };
   }
 
   /**
@@ -104,6 +180,12 @@ export class SearchcraftCore {
             id: nanoid(),
             document,
           })); // SearchDocument[] -> SearchClientResponseItem
+
+        if (searchItems.length === 0) {
+          this.emitEvent('no_results_returned', {
+            name: 'no_results_returned',
+          });
+        }
 
         itemsCallback(searchResponse, searchItems);
       })();

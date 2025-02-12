@@ -9,12 +9,12 @@
     "paths": {
       "@assets/*": ["assets/*"],
       "@components/*": ["components/*"],
-      "@provider/*": ["provider/*"],
+      "@store": ["store/index.ts"],
       "@utils": ["utils/index.ts"],
       "@utils/*": ["utils/*"]
     }
   },
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "post-build.js"],
   "extends": "../../tsconfig.json",
-  "include": ["src", "package.json"]
+  "include": ["src", "package.json", "post-build.js"]
 }

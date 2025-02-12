@@ -1,3 +1,7 @@
+import { type SearchcraftConfig, SearchcraftCore } from '@searchcraft/core';
+import { searchcraftStore } from '@store';
+import packageJson from '../package.json';
+
 /**
  * @fileoverview entry point for your component library
  *
@@ -8,12 +12,24 @@
  * to consume components of this package as outlined in the `README.md`.
  */
 export type * from './components';
+export type { SearchcraftConfig };
+export { searchcraftStore };
 
 export {
   parseCustomStyles,
   serializeStyles,
 } from './utils';
 
-export { useSearchcraftStore } from './provider/store';
-
 export type { Components } from './components';
+
+/**
+ * The consumer-facing `Searchcraft` class.
+ */
+export class Searchcraft extends SearchcraftCore {
+  constructor(config: SearchcraftConfig) {
+    super(config, {
+      sdkName: packageJson.name,
+      sdkVersion: packageJson.version,
+    });
+  }
+}

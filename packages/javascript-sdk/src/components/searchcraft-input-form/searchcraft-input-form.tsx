@@ -7,13 +7,12 @@ import {
   type EventEmitter,
   Watch,
 } from '@stencil/core';
+import classNames from 'classnames';
 
-import { type SearchcraftConfig, SearchcraftCore } from '@searchcraft/core';
-import packageJson from '../../../package.json';
+import type { SearchcraftCore } from '@searchcraft/core';
 
 import { parseCustomStyles } from '@utils';
-import { useSearchcraftStore } from '@provider/store';
-import classNames from 'classnames';
+import { searchcraftStore } from '@store';
 
 /**
  * This web component provides a user-friendly interface for querying an indexed dataset, enabling users to easily search large collections of data.
@@ -29,15 +28,6 @@ import classNames from 'classnames';
  * // index.js
  * const searchInputForm = document.querySelector('searchcraft-input-form');
  *
- * searchInputForm.config = {
- *   index: [],
- *   readKey: '',
- *   endpointUrl: '',
- * };
- *
- * searchForm.addEventListener('querySubmit', (event) => {
- *   console.log('Query submitted', event.detail);
- * });
  * ```
  */
 @Component({
@@ -45,10 +35,6 @@ import classNames from 'classnames';
   shadow: false,
 })
 export class SearchcraftInput {
-  /**
-   * The Searchcraft config object.
-   */
-  @Prop() config: SearchcraftConfig | undefined;
   /**
    * Whether or not to automatically submit the search term when the input changes.
    */
@@ -78,10 +64,6 @@ export class SearchcraftInput {
    */
   @Prop() searchTerm = '';
   /**
-   * When the input is cleared.
-   */
-  @Event() inputCleared?: EventEmitter<void>;
-  /**
    * When no results are returned.
    */
   @Event() noResultsReceived?: EventEmitter<void>;
@@ -97,35 +79,27 @@ export class SearchcraftInput {
    * Event emitted when input initializes.
    */
   @Event() inputInit?: EventEmitter<void>;
-  /**
-   * Event emitted when a query has been submitted.
-   */
-  @Event() querySubmit?: EventEmitter<string>;
 
   @State() inputValue = this.searchTerm;
   @State() error = false;
-  @State() isSearchcraftInitialized = false;
 
-  private searchStore = useSearchcraftStore.getState();
+  @Prop() core?: SearchcraftCore;
+
+  private searchStore = searchcraftStore.getState();
 
   init() {
-    if (this.config && !this.isSearchcraftInitialized) {
-      const searchcraft = new SearchcraftCore(this.config, {
-        sdkName: packageJson.name,
-        sdkVersion: packageJson.version,
-      });
-      this.searchStore.initialize(searchcraft, true);
-      this.isSearchcraftInitialized = true;
+    if (this.core) {
+      this.searchStore.initialize(this.core);
       this.inputInit?.emit();
     }
   }
 
-  componentDidLoad() {
+  connectedCallback() {
     this.init();
   }
 
-  @Watch('config')
-  onConfigChange() {
+  @Watch('core')
+  onCoreChange() {
     this.init();
   }
 
@@ -137,28 +111,23 @@ export class SearchcraftInput {
       return;
     }
 
-    if (input.value.trim() === '') {
-      this.inputCleared?.emit();
-    }
-
     this.performSearch(input.value);
   };
 
   private performSearch = async (value: string) => {
-    if (value === useSearchcraftStore.getState().searchTerm) {
+    if (value === searchcraftStore.getState().searchTerm) {
       return;
     }
 
     this.searchTerm = value.trim();
     this.error = false;
     this.searchStore.setSearchTerm(this.searchTerm);
-    this.querySubmit?.emit(this.searchTerm);
 
     try {
       await this.searchStore.search();
     } catch (error) {
+      console.log(error);
       this.error = true;
-      this.inputCleared?.emit();
     }
   };
 
@@ -168,8 +137,6 @@ export class SearchcraftInput {
     this.searchStore.setSearchTerm('');
     this.searchStore.setSearchClientResponseItems([]);
     this.error = false;
-
-    this.inputCleared?.emit();
   };
 
   handleFormSubmit = async (event: Event) => {

@@ -2,7 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 import WebComponentWrapper from '../../../utils/WebComponentWrapper';
 import { config } from '../../../utils/DefaultSearchcraftConfig';
 
-import type { Components } from '@searchcraft/javascript-sdk';
+import { Searchcraft, type Components } from '@searchcraft/javascript-sdk';
+import { useEffect } from 'react';
 
 const componentName = 'searchcraft-input-form';
 
@@ -87,6 +88,14 @@ const autoSearchProps: Components.SearchcraftInputForm = {
 };
 
 export const Default: StoryObj<Components.SearchcraftInputForm> = {
+  decorators: [
+    (Story) => {
+      useEffect(() => {
+        new Searchcraft(config);
+      }, []);
+      return <Story />;
+    },
+  ],
   render: (args) => (
     <>
       <searchcraft-theme />
@@ -99,6 +108,9 @@ export const Default: StoryObj<Components.SearchcraftInputForm> = {
 export const ButtonRight: StoryObj<Components.SearchcraftInputForm> = {
   decorators: [
     (Story) => {
+      useEffect(() => {
+        new Searchcraft(config);
+      }, []);
       return <Story />;
     },
   ],
@@ -114,6 +126,9 @@ export const ButtonRight: StoryObj<Components.SearchcraftInputForm> = {
 export const AutoSearch: StoryObj<Components.SearchcraftInputForm> = {
   decorators: [
     (Story) => {
+      useEffect(() => {
+        new Searchcraft(config);
+      }, []);
       return <Story />;
     },
   ],

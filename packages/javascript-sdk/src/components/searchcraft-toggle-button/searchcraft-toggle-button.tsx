@@ -1,4 +1,4 @@
-import { useSearchcraftStore } from '@provider/store';
+import { searchcraftStore } from '@store';
 import {
   Component,
   Event,
@@ -43,7 +43,7 @@ export class SearchcraftToggleButton {
 
   connectedCallback() {
     /** When the query changes, sets toggle button state back to inactive. */
-    this.unsubscribe = useSearchcraftStore.subscribe((state) => {
+    this.unsubscribe = searchcraftStore.subscribe((state) => {
       if (
         state.searchTerm !== this.lastSearchTerm &&
         state.searchTerm.trim().length === 0

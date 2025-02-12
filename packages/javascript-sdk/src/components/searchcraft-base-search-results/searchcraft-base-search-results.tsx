@@ -12,7 +12,7 @@ import type {
   SearchClientResponseItem,
 } from '@searchcraft/core';
 
-import { type SearchcraftState, useSearchcraftStore } from '@provider/store';
+import { type SearchcraftState, searchcraftStore } from '@store';
 
 import { serializeStyles } from '@utils';
 import type { SearchResultMappings } from '@searchcraft/core';
@@ -104,10 +104,10 @@ export class SearchcraftBaseSearchResults {
   private unsubscribe: () => void = () => {};
 
   componentDidLoad() {
-    this.unsubscribe = useSearchcraftStore.subscribe((state) =>
+    this.unsubscribe = searchcraftStore.subscribe((state) =>
       this.handleStateChange(state),
     );
-    const currentState = useSearchcraftStore.getState();
+    const currentState = searchcraftStore.getState();
     this.searchClientResponseItems = currentState.searchClientResponseItems;
     this.searchTerm = currentState.searchTerm;
   }

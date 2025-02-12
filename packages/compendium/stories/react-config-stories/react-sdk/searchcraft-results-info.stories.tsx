@@ -1,9 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import {
+  Searchcraft,
   SearchcraftResultsInfo,
   SearchcraftTheme,
   type SearchcraftResultsInfoProps,
 } from '@searchcraft/react-sdk';
+import { config } from '../../../utils/DefaultSearchcraftConfig';
+import { useEffect } from 'react';
 
 const componentMeta: Meta = {
   title: 'React SDK/searchcraft-results-info',
@@ -33,12 +36,10 @@ const defaultProps: SearchcraftResultsInfoProps = {
 export const Default: StoryObj = {
   decorators: [
     (Story) => {
-      return (
-        <>
-          <SearchcraftTheme />
-          <Story />
-        </>
-      );
+      useEffect(() => {
+        new Searchcraft(config);
+      }, []);
+      return <Story />;
     },
   ],
   render: () => (

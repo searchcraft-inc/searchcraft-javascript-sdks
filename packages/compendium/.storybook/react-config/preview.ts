@@ -1,7 +1,4 @@
-import { defineCustomElements } from '@searchcraft/javascript-sdk/components';
 import type { Preview } from '@storybook/react';
-
-defineCustomElements();
 
 const preview: Preview = {
   parameters: {

@@ -60,6 +60,30 @@ Javascript Class providing the functionality to interact with the Searchcraft BE
 
 ## Methods
 
+### emitEvent()
+
+> **emitEvent**\<`T`\>(`eventName`, `event`): `void`
+
+#### Type Parameters
+
+• **T** *extends* keyof [`SubscriptionEventMap`](/reference/sdk/core/interfaces/SubscriptionEventMap.md)
+
+#### Parameters
+
+##### eventName
+
+`T`
+
+##### event
+
+[`SubscriptionEventMap`](/reference/sdk/core/interfaces/SubscriptionEventMap.md)\[`T`\]
+
+#### Returns
+
+`void`
+
+***
+
 ### getItems()
 
 > **getItems**(`searchParams`, `itemsCallback`, `adCallback`): `void`
@@ -86,20 +110,24 @@ Gets items from the SearchClient and the AdClient.
 
 ***
 
-### initClients()
+### subscribe()
 
-> **initClients**(`config`, `sdkInfo`): `void`
+> **subscribe**\<`T`\>(`eventName`, `callback`): [`UnsubscribeFunction`](/reference/sdk/core/type-aliases/UnsubscribeFunction.md)
+
+#### Type Parameters
+
+• **T** *extends* keyof [`SubscriptionEventMap`](/reference/sdk/core/interfaces/SubscriptionEventMap.md)
 
 #### Parameters
 
-##### config
+##### eventName
 
-[`SearchcraftConfig`](/reference/sdk/core/interfaces/SearchcraftConfig.md)
+`T`
 
-##### sdkInfo
+##### callback
 
-[`SearchcraftSDKInfo`](/reference/sdk/core/interfaces/SearchcraftSDKInfo.md)
+[`SubscriptionEventCallback`](/reference/sdk/core/type-aliases/SubscriptionEventCallback.md)\<`T`\>
 
 #### Returns
 
-`void`
+[`UnsubscribeFunction`](/reference/sdk/core/type-aliases/UnsubscribeFunction.md)

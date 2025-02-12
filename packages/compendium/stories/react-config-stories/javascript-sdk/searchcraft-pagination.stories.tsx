@@ -1,9 +1,12 @@
-import { useEffect } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import type { SearchResultMappings } from '@searchcraft/javascript-sdk';
+import {
+  Searchcraft,
+  type SearchResultMappings,
+} from '@searchcraft/javascript-sdk';
 
 import { config } from '../../../utils/DefaultSearchcraftConfig';
+import { useEffect } from 'react';
 
 const searchResultMappings: SearchResultMappings = {
   containerHref: {
@@ -54,15 +57,23 @@ export const Default: StoryObj = {
   decorators: [
     (Story) => {
       useEffect(() => {
-        const inputForm = document.querySelector('searchcraft-input-form');
+        const searchcraft = new Searchcraft(config);
+
+        const unsubscribe = searchcraft.subscribe(
+          'query_submitted',
+          (event) => {
+            console.log('QUERY SUBMITTED! ', event.data.searchTerm);
+          },
+        );
+
+        const unsubscribe2 = searchcraft.subscribe('input_cleared', (event) => {
+          console.log('INPUT CLEARED ', event);
+        });
+
         const baseSearchResults = document.querySelector(
           'searchcraft-base-search-results',
         );
         const resultsInfo = document.querySelector('searchcraft-results-info');
-
-        if (inputForm) {
-          inputForm.config = { ...config };
-        }
 
         if (baseSearchResults) {
           baseSearchResults.searchResultMappings = searchResultMappings;
@@ -72,6 +83,11 @@ export const Default: StoryObj = {
           resultsInfo.customFormatter = (range, count, responseTime) =>
             `${range[0]}-${range[1]} of ${count} results in ${responseTime}ms`;
         }
+
+        return () => {
+          unsubscribe();
+          unsubscribe2();
+        };
       }, []);
 
       return <Story />;

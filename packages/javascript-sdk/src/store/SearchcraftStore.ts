@@ -1,4 +1,4 @@
-import { create } from 'zustand';
+import { createStore } from 'zustand';
 
 import {
   Logger,
@@ -8,6 +8,9 @@ import {
   type SearchcraftResponse,
   type SearchClientResponseItem,
   type AdClientResponseItem,
+  type SearchcraftCore,
+  type SubscriptionEventName,
+  type SubscriptionEventMap,
 } from '@searchcraft/core';
 import type {
   SearchcraftState,
@@ -33,7 +36,8 @@ const initialSearchcraftStateValues: SearchcraftStateValues = {
   sortType: 'asc',
 };
 
-const useSearchcraftStore = create<SearchcraftState>((set, get) => {
+// Function to create or reuse the store
+const searchcraftStore = createStore<SearchcraftState>((set, get) => {
   const functions: SearchcraftStateFunctions = {
     addFacetPathsForIndexField: (data: FacetPathsForIndexField) =>
       set((state) => ({
@@ -49,12 +53,21 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
           [data.fieldName]: data,
         },
       })),
+    emitEvent: <T extends SubscriptionEventName>(
+      eventName: T,
+      event: SubscriptionEventMap[T],
+    ) => {
+      const { core } = get();
+      if (core) {
+        core.emitEvent(eventName, event);
+      }
+    },
     getSearchcraftInstance: () => {
       const { core } = get();
       return core;
     },
     initialize: (searchcraftInstance, debug = false) => {
-      const core = searchcraftInstance;
+      const core = searchcraftInstance as SearchcraftCore;
       const logger = debug
         ? new Logger({ logLevel: LogLevel.DEBUG })
         : undefined;
@@ -178,6 +191,13 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
     setSearchMode: (mode) => set({ searchMode: mode }),
     setSortType: (type) => set({ sortType: type }),
     setSearchTerm: (searchTerm) => {
+      const { emitEvent } = get();
+
+      if (searchTerm.length === 0) {
+        emitEvent('input_cleared', {
+          name: 'input_cleared',
+        });
+      }
       /**
        * When a new searchTerm is set, also reset the sort type, search mode, and facet paths.
        */
@@ -210,4 +230,4 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
   return stateObject;
 });
 
-export { useSearchcraftStore };
+export { searchcraftStore };

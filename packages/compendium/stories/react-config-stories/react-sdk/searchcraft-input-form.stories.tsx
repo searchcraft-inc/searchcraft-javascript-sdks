@@ -1,10 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import {
+  Searchcraft,
   SearchcraftInputForm,
   type SearchcraftInputFormProps,
   SearchcraftTheme,
 } from '@searchcraft/react-sdk';
 import { config } from '../../../utils/DefaultSearchcraftConfig';
+import { useEffect } from 'react';
 
 const componentMeta: Meta = {
   title: 'React SDK/searchcraft-input-form',
@@ -52,7 +54,6 @@ const componentMeta: Meta = {
 };
 
 const defaultProps: SearchcraftInputFormProps = {
-  config: config,
   autoSearch: false,
   buttonPlacement: 'left',
   buttonLabel: undefined,
@@ -60,10 +61,17 @@ const defaultProps: SearchcraftInputFormProps = {
   customStyles: {},
   placeholderValue: 'Enter Search',
   searchTerm: '',
-  debounceDelay: 0,
 };
 
 export const Default: StoryObj<SearchcraftInputFormProps> = {
+  decorators: [
+    (Story) => {
+      useEffect(() => {
+        new Searchcraft(config);
+      }, []);
+      return <Story />;
+    },
+  ],
   render: (args) => (
     <>
       <SearchcraftTheme />

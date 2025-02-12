@@ -5,9 +5,9 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { AdClientResponseItem, FilterItem, PopoverResultMappings, SearchClientResponseItem, SearchcraftConfig, SearchResultMappings } from "@searchcraft/core";
+import { AdClientResponseItem, FilterItem, PopoverResultMappings, SearchClientResponseItem, SearchcraftCore, SearchResultMappings } from "@searchcraft/core";
 import { SearchcraftSelectOption } from "./components/searchcraft-select/searchcraft-select";
-export { AdClientResponseItem, FilterItem, PopoverResultMappings, SearchClientResponseItem, SearchcraftConfig, SearchResultMappings } from "@searchcraft/core";
+export { AdClientResponseItem, FilterItem, PopoverResultMappings, SearchClientResponseItem, SearchcraftCore, SearchResultMappings } from "@searchcraft/core";
 export { SearchcraftSelectOption } from "./components/searchcraft-select/searchcraft-select";
 export namespace Components {
     /**
@@ -213,14 +213,6 @@ export namespace Components {
      * ```js
      * // index.js
      * const searchInputForm = document.querySelector('searchcraft-input-form');
-     * searchInputForm.config = {
-     *   index: [],
-     *   readKey: '',
-     *   endpointUrl: '',
-     * };
-     * searchForm.addEventListener('querySubmit', (event) => {
-     *   console.log('Query submitted', event.detail);
-     * });
      * ```
      */
     interface SearchcraftInputForm {
@@ -236,10 +228,7 @@ export namespace Components {
           * Where to place the search button.
          */
         "buttonPlacement": 'left' | 'right' | 'none';
-        /**
-          * The Searchcraft config object.
-         */
-        "config": SearchcraftConfig | undefined;
+        "core"?: SearchcraftCore;
         /**
           * A custom styles object to be applied to the input element.
          */
@@ -302,11 +291,6 @@ export namespace Components {
      * ```js
      * // index.js
      * const popoverForm = document.querySelector('searchcraft-popover-form');
-     * popoverForm.config = {
-     *   index: [index_name_from_vektron],
-     *   readKey: 'read_key_from_vektron',
-     *   endpointUrl: 'enpoint_url_from_vektron',
-     * };
      * popoverForm.popoverResultMappings = {
      *  containerHref: {
      *   fieldNames: [
@@ -319,10 +303,6 @@ export namespace Components {
      * ```
      */
     interface SearchcraftPopoverForm {
-        /**
-          * The Searchcraft config object.
-         */
-        "config": SearchcraftConfig | undefined;
         /**
           * The hotkey that activates the popover.
          */
@@ -706,12 +686,10 @@ declare global {
         new (): HTMLSearchcraftFilterPanelElement;
     };
     interface HTMLSearchcraftInputFormElementEventMap {
-        "inputCleared": void;
         "noResultsReceived": void;
         "inputFocus": void;
         "inputBlur": void;
         "inputInit": void;
-        "querySubmit": string;
     }
     /**
      * This web component provides a user-friendly interface for querying an indexed dataset, enabling users to easily search large collections of data.
@@ -724,14 +702,6 @@ declare global {
      * ```js
      * // index.js
      * const searchInputForm = document.querySelector('searchcraft-input-form');
-     * searchInputForm.config = {
-     *   index: [],
-     *   readKey: '',
-     *   endpointUrl: '',
-     * };
-     * searchForm.addEventListener('querySubmit', (event) => {
-     *   console.log('Query submitted', event.detail);
-     * });
      * ```
      */
     interface HTMLSearchcraftInputFormElement extends Components.SearchcraftInputForm, HTMLStencilElement {
@@ -796,11 +766,6 @@ declare global {
      * ```js
      * // index.js
      * const popoverForm = document.querySelector('searchcraft-popover-form');
-     * popoverForm.config = {
-     *   index: [index_name_from_vektron],
-     *   readKey: 'read_key_from_vektron',
-     *   endpointUrl: 'enpoint_url_from_vektron',
-     * };
      * popoverForm.popoverResultMappings = {
      *  containerHref: {
      *   fieldNames: [
@@ -1211,14 +1176,6 @@ declare namespace LocalJSX {
      * ```js
      * // index.js
      * const searchInputForm = document.querySelector('searchcraft-input-form');
-     * searchInputForm.config = {
-     *   index: [],
-     *   readKey: '',
-     *   endpointUrl: '',
-     * };
-     * searchForm.addEventListener('querySubmit', (event) => {
-     *   console.log('Query submitted', event.detail);
-     * });
      * ```
      */
     interface SearchcraftInputForm {
@@ -1234,10 +1191,7 @@ declare namespace LocalJSX {
           * Where to place the search button.
          */
         "buttonPlacement"?: 'left' | 'right' | 'none';
-        /**
-          * The Searchcraft config object.
-         */
-        "config"?: SearchcraftConfig | undefined;
+        "core"?: SearchcraftCore;
         /**
           * A custom styles object to be applied to the input element.
          */
@@ -1251,10 +1205,6 @@ declare namespace LocalJSX {
          */
         "onInputBlur"?: (event: SearchcraftInputFormCustomEvent<void>) => void;
         /**
-          * When the input is cleared.
-         */
-        "onInputCleared"?: (event: SearchcraftInputFormCustomEvent<void>) => void;
-        /**
           * When the input becomes focused.
          */
         "onInputFocus"?: (event: SearchcraftInputFormCustomEvent<void>) => void;
@@ -1266,10 +1216,6 @@ declare namespace LocalJSX {
           * When no results are returned.
          */
         "onNoResultsReceived"?: (event: SearchcraftInputFormCustomEvent<void>) => void;
-        /**
-          * Event emitted when a query has been submitted.
-         */
-        "onQuerySubmit"?: (event: SearchcraftInputFormCustomEvent<string>) => void;
         /**
           * The input element's placeholder value.
          */
@@ -1324,11 +1270,6 @@ declare namespace LocalJSX {
      * ```js
      * // index.js
      * const popoverForm = document.querySelector('searchcraft-popover-form');
-     * popoverForm.config = {
-     *   index: [index_name_from_vektron],
-     *   readKey: 'read_key_from_vektron',
-     *   endpointUrl: 'enpoint_url_from_vektron',
-     * };
      * popoverForm.popoverResultMappings = {
      *  containerHref: {
      *   fieldNames: [
@@ -1341,10 +1282,6 @@ declare namespace LocalJSX {
      * ```
      */
     interface SearchcraftPopoverForm {
-        /**
-          * The Searchcraft config object.
-         */
-        "config"?: SearchcraftConfig | undefined;
         /**
           * The hotkey that activates the popover.
          */
@@ -1680,14 +1617,6 @@ declare module "@stencil/core" {
              * ```js
              * // index.js
              * const searchInputForm = document.querySelector('searchcraft-input-form');
-             * searchInputForm.config = {
-             *   index: [],
-             *   readKey: '',
-             *   endpointUrl: '',
-             * };
-             * searchForm.addEventListener('querySubmit', (event) => {
-             *   console.log('Query submitted', event.detail);
-             * });
              * ```
              */
             "searchcraft-input-form": LocalJSX.SearchcraftInputForm & JSXBase.HTMLAttributes<HTMLSearchcraftInputFormElement>;
@@ -1724,11 +1653,6 @@ declare module "@stencil/core" {
              * ```js
              * // index.js
              * const popoverForm = document.querySelector('searchcraft-popover-form');
-             * popoverForm.config = {
-             *   index: [index_name_from_vektron],
-             *   readKey: 'read_key_from_vektron',
-             *   endpointUrl: 'enpoint_url_from_vektron',
-             * };
              * popoverForm.popoverResultMappings = {
              *  containerHref: {
              *   fieldNames: [

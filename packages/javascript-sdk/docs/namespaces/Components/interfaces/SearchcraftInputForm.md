@@ -16,14 +16,6 @@ It abstracts the complexities of index-based searching, making it accessible to 
 ```js
 // index.js
 const searchInputForm = document.querySelector('searchcraft-input-form');
-searchInputForm.config = {
-  index: [],
-  readKey: '',
-  endpointUrl: '',
-};
-searchForm.addEventListener('querySubmit', (event) => {
-  console.log('Query submitted', event.detail);
-});
 ```
 
 ## Properties
@@ -52,11 +44,9 @@ Where to place the search button.
 
 ***
 
-### config
+### core?
 
-> **config**: `undefined` \| [`SearchcraftConfig`](/reference/sdk/js-vanilla/interfaces/SearchcraftConfig.md)
-
-The Searchcraft config object.
+> `optional` **core**: [`SearchcraftCore`](/reference/sdk/js-vanilla/classes/SearchcraftCore.md)
 
 ***
 

@@ -1,13 +1,12 @@
 import { Component, Element, Prop, State, h } from '@stencil/core';
 import classNames from 'classnames';
 import type {
-  SearchcraftConfig,
   SearchClientResponseItem,
   AdClientResponseItem,
   PopoverResultMappings,
 } from '@searchcraft/core';
 
-import { useSearchcraftStore } from '@provider/store';
+import { searchcraftStore } from '@store';
 
 /**
  * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field, or when a popover-button is pressed.
@@ -21,12 +20,6 @@ import { useSearchcraftStore } from '@provider/store';
  * ```js
  * // index.js
  * const popoverForm = document.querySelector('searchcraft-popover-form');
- *
- * popoverForm.config = {
- *   index: [index_name_from_vektron],
- *   readKey: 'read_key_from_vektron',
- *   endpointUrl: 'enpoint_url_from_vektron',
- * };
  *
  * popoverForm.popoverResultMappings = {
  *  containerHref: {
@@ -44,10 +37,6 @@ import { useSearchcraftStore } from '@provider/store';
   shadow: false,
 })
 export class SearchcraftPopoverForm {
-  /**
-   * The Searchcraft config object.
-   */
-  @Prop() config: SearchcraftConfig | undefined;
   /**
    * The type of popover form to render.
    *
@@ -98,15 +87,14 @@ export class SearchcraftPopoverForm {
       computedStyle.getPropertyValue('--sc-breakpoint-lg').trim(),
     );
     // Set popover visiblity in state
-    this.isPopoverVisibleInState =
-      useSearchcraftStore.getState().isPopoverVisible;
+    this.isPopoverVisibleInState = searchcraftStore.getState().isPopoverVisible;
 
     // Add event listeners
     document.addEventListener('click', this.handleDocumentClick);
     document.addEventListener('keydown', this.handleDocumentKeyDown);
 
     // Subscribe to state events
-    this.unsubscribe = useSearchcraftStore.subscribe((state) => {
+    this.unsubscribe = searchcraftStore.subscribe((state) => {
       if (this.isPopoverVisibleInState !== state.isPopoverVisible) {
         this.handlePopoverVisibilityChange(state.isPopoverVisible);
       }
@@ -161,7 +149,7 @@ export class SearchcraftPopoverForm {
         this.focusOnNextListItem(event.key);
         break;
       case 'Escape':
-        useSearchcraftStore.getState().setPopoverVisibility(false);
+        searchcraftStore.getState().setPopoverVisibility(false);
         break;
       default:
         return;
@@ -187,12 +175,11 @@ export class SearchcraftPopoverForm {
       window.visualViewport &&
       window.visualViewport.width < this.breakpointSm
     ) {
-      useSearchcraftStore.getState().setPopoverVisibility(true);
+      searchcraftStore.getState().setPopoverVisibility(true);
 
       // Appends a popover form of type=`modal` to the body
       if (!this.modalElement) {
         this.modalElement = document.createElement('searchcraft-popover-form');
-        this.modalElement.config = this.config;
         this.modalElement.popoverResultMappings = this.popoverResultMappings;
         this.modalElement.setAttribute('type', 'fullscreen');
         document.body.appendChild(this.modalElement);
@@ -201,7 +188,7 @@ export class SearchcraftPopoverForm {
   }
 
   handleModalBackdropClick(_event: MouseEvent) {
-    useSearchcraftStore.getState().setPopoverVisibility(false);
+    searchcraftStore.getState().setPopoverVisibility(false);
   }
 
   /**
@@ -221,7 +208,7 @@ export class SearchcraftPopoverForm {
         ) as HTMLInputElement | undefined;
         hostElementInput?.focus();
       } else {
-        useSearchcraftStore
+        searchcraftStore
           .getState()
           .setPopoverVisibility(!this.isPopoverVisibleInState);
       }
@@ -229,7 +216,7 @@ export class SearchcraftPopoverForm {
   }
 
   handleCancelButtonClick() {
-    useSearchcraftStore.getState().setPopoverVisibility(false);
+    searchcraftStore.getState().setPopoverVisibility(false);
   }
 
   /**
@@ -291,7 +278,6 @@ export class SearchcraftPopoverForm {
     return (
       <div class={popoverFormClassNames}>
         <searchcraft-input-form
-          config={this.config}
           onInputFocus={this.handleInputFocus.bind(this)}
         />
         {isListViewVisible && (
@@ -328,7 +314,6 @@ export class SearchcraftPopoverForm {
             <div class={popoverFormClassNames}>
               <div class='searchcraft-popover-form-input-wrapper'>
                 <searchcraft-input-form
-                  config={this.config}
                   onInputFocus={this.handleInputFocus.bind(this)}
                   onInputInit={this.handleInputInit.bind(this)}
                 />
@@ -363,7 +348,6 @@ export class SearchcraftPopoverForm {
           <div class='searchcraft-popover-form'>
             <div class='searchcraft-popover-form-input-wrapper'>
               <searchcraft-input-form
-                config={this.config}
                 onInputFocus={this.handleInputFocus.bind(this)}
                 onInputInit={this.handleInputInit.bind(this)}
               />
