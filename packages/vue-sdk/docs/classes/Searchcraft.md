@@ -114,19 +114,23 @@ Gets items from the SearchClient and the AdClient.
 
 ## Methods
 
-### initClients()
+### emitEvent()
 
-> **initClients**(`config`, `sdkInfo`): `void`
+> **emitEvent**\<`T`\>(`eventName`, `event`): `void`
+
+#### Type Parameters
+
+• **T** *extends* keyof `SubscriptionEventMap`
 
 #### Parameters
 
-##### config
+##### eventName
 
-`SearchcraftConfig`
+`T`
 
-##### sdkInfo
+##### event
 
-`SearchcraftSDKInfo`
+`SubscriptionEventMap`\[`T`\]
 
 #### Returns
 
@@ -134,4 +138,32 @@ Gets items from the SearchClient and the AdClient.
 
 #### Inherited from
 
-`SearchcraftCore.initClients`
+`SearchcraftCore.emitEvent`
+
+***
+
+### subscribe()
+
+> **subscribe**\<`T`\>(`eventName`, `callback`): `UnsubscribeFunction`
+
+#### Type Parameters
+
+• **T** *extends* keyof `SubscriptionEventMap`
+
+#### Parameters
+
+##### eventName
+
+`T`
+
+##### callback
+
+`SubscriptionEventCallback`\<`T`\>
+
+#### Returns
+
+`UnsubscribeFunction`
+
+#### Inherited from
+
+`SearchcraftCore.subscribe`
