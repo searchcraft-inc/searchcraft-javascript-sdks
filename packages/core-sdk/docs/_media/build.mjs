@@ -99,6 +99,7 @@ const startWatching = () => {
   );
 };
 
+// Exit when an unknown package alias was specified
 if (packageAlias && !targetPackageInfo) {
   console.error(`Unknown package alias: ${packageAlias}`);
   console.error('Available package aliases:', Object.keys(packages).join(', '));

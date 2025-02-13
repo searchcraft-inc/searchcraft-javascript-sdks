@@ -6,8 +6,6 @@ import type {
   SearchcraftCore,
   SearchClientResponseItem,
   AdClientResponseItem,
-  SubscriptionEventName,
-  SubscriptionEventMap,
 } from '@searchcraft/core';
 
 /**
@@ -17,10 +15,6 @@ export interface SearchcraftStateFunctions {
   addFacetPathsForIndexField: (data: FacetPathsForIndexField) => void;
   addRangeValueForIndexField: (data: RangeValueForIndexField) => void;
   getSearchcraftInstance: () => SearchcraftCore | undefined;
-  emitEvent: <T extends SubscriptionEventName>(
-    eventName: T,
-    event: SubscriptionEventMap[T],
-  ) => void;
   initialize: (searchcraft: unknown, debug?: boolean) => void;
   removeFacetPathsForIndexField: (fieldName: string) => void;
   removeRangeValueForIndexField: (fieldName: string) => void;
@@ -44,6 +38,7 @@ export interface SearchcraftStateValues {
   logger: Logger | undefined;
   facetPathsForIndexFields: Record<string, FacetPathsForIndexField>;
   isPopoverVisible: boolean;
+  isSearchInProgress: boolean;
   rangeValueForIndexFields: Record<string, RangeValueForIndexField>;
   searchMode: 'fuzzy' | 'exact';
   searchClientResponseItems: SearchClientResponseItem[];

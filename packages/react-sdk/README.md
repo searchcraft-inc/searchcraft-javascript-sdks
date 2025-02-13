@@ -198,8 +198,8 @@ You can subscribe to various events within Searchcraft:
   });
 
 
-  const unsubscribeCallback = searchcraft.subscribe('ad_slot_shown', (event) => {
-    // Do something when a new ad slot has been shown
+  const unsubscribeCallback = searchcraft.subscribe('ad_container_rendered', (event) => {
+    // Do something when a new ad container has been rendered
   });
 ```
 

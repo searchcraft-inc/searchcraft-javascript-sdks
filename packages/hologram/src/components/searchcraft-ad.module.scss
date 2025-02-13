@@ -1,6 +1,10 @@
 @use "../typography.scss";
 
-.searchcraft-base-ad {
+.searchcraft-custom-ad {
+  @include typography.body();
+}
+
+.searchcraft-adm-ad {
   all: unset;
   display: flex;
   flex-direction: row;
@@ -10,25 +14,32 @@
   padding-left: var(--sc-popover-list-item-padding-horizontal);
   padding-top: var(--sc-popover-list-item-padding-vertical);
   padding-bottom: var(--sc-popover-list-item-padding-vertical);
-  background-color: var(--sc-surface-neutral-primary);
-  border-radius: 16px;
 
+  &:focus {
+    background-color: var(--sc-surface-neutral-secondary-active);
+    color: var(--sc-content-neutral-secondary);
+  }
+
+  &:hover {
+    background-color: var(--sc-surface-neutral-secondary-hover);
+    color: var(--sc-content-neutral-secondary);
+  }
   border: 1px solid blue;
 }
 
-.searchcraft-base-ad-title {
+.searchcraft-adm-ad-title {
   @include typography.body();
   margin: 0;
   color: inherit;
 }
 
-.searchcraft-base-ad-subtitle {
+.searchcraft-adm-ad-subtitle {
   @include typography.body-small();
   margin: 0;
   color: inherit;
 }
 
-.searchcraft-base-ad-image-wrapper {
+.searchcraft-adm-ad-image-wrapper {
   width: var(--sc-popover-list-item-image-size);
   height: var(--sc-popover-list-item-image-size);
   display: flex;
@@ -37,12 +48,12 @@
   flex-shrink: 0;
 }
 
-.searchcraft-base-ad-image {
+.searchcraft-adm-ad-image {
   max-width: var(--sc-popover-list-item-image-size);
   max-height: var(--sc-popover-list-item-image-size);
 }
 
-.searchcraft-base-ad-info-wrapper {
+.searchcraft-adm-ad-info-wrapper {
   display: flex;
   flex-direction: column;
   gap: 8px;

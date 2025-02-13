@@ -8,15 +8,15 @@
 
 ## Properties
 
-### searchcraft-base-search-result
+### searchcraft-ad
 
-> **searchcraft-base-search-result**: [`SearchcraftBaseSearchResult`](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftBaseSearchResult.md)
+> **searchcraft-ad**: [`SearchcraftAd`](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftAd.md)
 
 ***
 
-### searchcraft-base-search-result-ad
+### searchcraft-base-search-result
 
-> **searchcraft-base-search-result-ad**: [`SearchcraftBaseSearchResultAd`](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftBaseSearchResultAd.md)
+> **searchcraft-base-search-result**: [`SearchcraftBaseSearchResult`](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftBaseSearchResult.md)
 
 ***
 
@@ -83,12 +83,6 @@
 ### searchcraft-popover-list-item
 
 > **searchcraft-popover-list-item**: [`SearchcraftPopoverListItem`](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftPopoverListItem.md)
-
-***
-
-### searchcraft-popover-list-item-ad
-
-> **searchcraft-popover-list-item-ad**: [`SearchcraftPopoverListItemAd`](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftPopoverListItemAd.md)
 
 ***
 

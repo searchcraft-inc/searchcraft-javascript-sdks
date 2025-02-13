@@ -59,7 +59,7 @@ graph TD;
   searchcraft-input-form --> searchcraft-button
   searchcraft-input-form --> searchcraft-input-label
   searchcraft-input-form --> searchcraft-error-message
-  searchcraft-popover-list-view --> searchcraft-popover-list-item-ad
+  searchcraft-popover-list-view --> searchcraft-ad
   searchcraft-popover-list-view --> searchcraft-popover-list-item
   style searchcraft-popover-form fill:#f9f,stroke:#333,stroke-width:4px
 ```

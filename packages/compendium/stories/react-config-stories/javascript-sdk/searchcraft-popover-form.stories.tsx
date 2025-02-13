@@ -145,7 +145,7 @@ export const InlineWithAds: StoryObj<Components.SearchcraftPopoverForm> = {
       useEffect(() => {
         const config: SearchcraftConfig = {
           ...configAlternate,
-          adProvider: 'adMarketplace',
+          adSource: 'adMarketplace',
           admSub: 'searchbox1',
           admProductAdQuantity: 3,
           admTextAdQuantity: 3,

@@ -8,7 +8,7 @@
 
 ## Extended by
 
-- [`AdSlotSubscriptionEvent`](/reference/sdk/core/interfaces/AdSlotSubscriptionEvent.md)
+- [`AdContainerSubscriptionEvent`](/reference/sdk/core/interfaces/AdContainerSubscriptionEvent.md)
 - [`QuerySubmittedEvent`](/reference/sdk/core/interfaces/QuerySubmittedEvent.md)
 - [`InputClearedEvent`](/reference/sdk/core/interfaces/InputClearedEvent.md)
 - [`NoResultsReturnedEvent`](/reference/sdk/core/interfaces/NoResultsReturnedEvent.md)

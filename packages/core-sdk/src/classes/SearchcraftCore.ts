@@ -3,6 +3,7 @@ import { nanoid } from 'nanoid';
 import {
   type AdClient,
   AdMarketplaceClient,
+  CustomAdClient,
   MeasureClient,
   NativoClient,
 } from '../clients';
@@ -109,12 +110,15 @@ export class SearchcraftCore {
       this.measureClient = new MeasureClient(config, sdkInfo, userId);
       this.searchClient = new SearchClient(this, config, userId);
 
-      switch (config.adProvider) {
+      switch (config.adSource) {
         case 'adMarketplace':
           this.adClient = new AdMarketplaceClient(config);
           break;
         case 'Nativo':
           this.adClient = new NativoClient(config);
+          break;
+        case 'Custom':
+          this.adClient = new CustomAdClient(config);
           break;
       }
     }, 300);

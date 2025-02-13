@@ -9,8 +9,8 @@
 ## Interfaces
 
 - [IntrinsicElements](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/IntrinsicElements.md)
+- [SearchcraftAd](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftAd.md)
 - [SearchcraftBaseSearchResult](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftBaseSearchResult.md)
-- [SearchcraftBaseSearchResultAd](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftBaseSearchResultAd.md)
 - [SearchcraftBaseSearchResults](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftBaseSearchResults.md)
 - [SearchcraftButton](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftButton.md)
 - [SearchcraftErrorMessage](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftErrorMessage.md)
@@ -22,7 +22,6 @@
 - [SearchcraftPopoverButton](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftPopoverButton.md)
 - [SearchcraftPopoverForm](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftPopoverForm.md)
 - [SearchcraftPopoverListItem](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftPopoverListItem.md)
-- [SearchcraftPopoverListItemAd](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftPopoverListItemAd.md)
 - [SearchcraftPopoverListView](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftPopoverListView.md)
 - [SearchcraftResultsInfo](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftResultsInfo.md)
 - [SearchcraftSearchResultsPerPage](/reference/sdk/js-vanilla/namespaces/JSX/interfaces/SearchcraftSearchResultsPerPage.md)

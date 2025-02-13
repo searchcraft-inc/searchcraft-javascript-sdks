@@ -8,18 +8,12 @@
 
 ## Properties
 
-### adId
+### adSource
 
-> **adId**: `string`
-
-***
-
-### admAd?
-
-> `optional` **admAd**: `ADMAd`
+> **adSource**: [`SearchcraftAdSource`](/reference/sdk/js-vanilla/type-aliases/SearchcraftAdSource.md)
 
 ***
 
-### type
+### id
 
-> **type**: `"adm-text-ad"` \| `"adm-product-ad"` \| `"nativo-ad"`
+> **id**: `string`

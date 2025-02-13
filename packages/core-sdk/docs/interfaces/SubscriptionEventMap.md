@@ -8,9 +8,9 @@
 
 ## Properties
 
-### ad\_slot\_shown
+### ad\_container\_rendered
 
-> **ad\_slot\_shown**: [`AdSlotSubscriptionEvent`](/reference/sdk/core/interfaces/AdSlotSubscriptionEvent.md)
+> **ad\_container\_rendered**: [`AdContainerSubscriptionEvent`](/reference/sdk/core/interfaces/AdContainerSubscriptionEvent.md)
 
 ***
 

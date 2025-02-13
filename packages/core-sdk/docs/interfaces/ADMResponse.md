@@ -16,10 +16,10 @@
 
 ### product\_ads
 
-> **product\_ads**: [`ADMProductAd`](/reference/sdk/core/interfaces/ADMProductAd.md)[]
+> **product\_ads**: [`ADMAd`](/reference/sdk/core/interfaces/ADMAd.md)[]
 
 ***
 
 ### text\_ads
 
-> **text\_ads**: [`ADMTextAd`](/reference/sdk/core/interfaces/ADMTextAd.md)[]
+> **text\_ads**: [`ADMAd`](/reference/sdk/core/interfaces/ADMAd.md)[]

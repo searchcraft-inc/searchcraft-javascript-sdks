@@ -64,10 +64,6 @@ export class SearchcraftInput {
    */
   @Prop() searchTerm = '';
   /**
-   * When no results are returned.
-   */
-  @Event() noResultsReceived?: EventEmitter<void>;
-  /**
    * When the input becomes focused.
    */
   @Event() inputFocus?: EventEmitter<void>;

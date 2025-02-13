@@ -58,17 +58,29 @@ export const Default: StoryObj = {
     (Story) => {
       useEffect(() => {
         const searchcraft = new Searchcraft(config);
+        const callbacks: (() => void)[] = [];
 
-        const unsubscribe = searchcraft.subscribe(
-          'query_submitted',
-          (event) => {
+        callbacks.push(
+          searchcraft.subscribe('query_submitted', (event) => {
             console.log('QUERY SUBMITTED! ', event.data.searchTerm);
-          },
+          }),
         );
 
-        const unsubscribe2 = searchcraft.subscribe('input_cleared', (event) => {
-          console.log('INPUT CLEARED ', event);
-        });
+        callbacks.push(
+          searchcraft.subscribe('input_cleared', (event) => {
+            console.log('INPUT CLEARED ', event);
+          }),
+        );
+
+        callbacks.push(
+          searchcraft.subscribe('ad_container_rendered', (event) => {
+            console.log(
+              'Ad container rendered!',
+              event.data.adContainerId,
+              event.data.searchTerm,
+            );
+          }),
+        );
 
         const baseSearchResults = document.querySelector(
           'searchcraft-base-search-results',
@@ -85,8 +97,84 @@ export const Default: StoryObj = {
         }
 
         return () => {
-          unsubscribe();
-          unsubscribe2();
+          callbacks.forEach((cb) => cb());
+        };
+      }, []);
+
+      return <Story />;
+    },
+  ],
+  render: () => (
+    <>
+      <searchcraft-theme />
+      <searchcraft-results-info />
+      <searchcraft-pagination />
+      <searchcraft-search-results-per-page />
+      <searchcraft-input-form />
+      <searchcraft-base-search-results />
+    </>
+  ),
+  args: defaultProps,
+};
+
+export const WithCustomAds: StoryObj = {
+  decorators: [
+    (Story) => {
+      useEffect(() => {
+        const callbacks: (() => void)[] = [];
+
+        const searchcraft = new Searchcraft({
+          ...config,
+          adSource: 'Custom',
+          customAdStartQuantity: 2,
+          customAdInterstitialInterval: 4,
+          customAdInterstitialQuantity: 3,
+          customAdEndQuantity: 4,
+          customAdTemplate(data) {
+            return `
+            <p>pagination world ${data.adContainerId} ${data.searchTerm}</p>
+          `;
+          },
+        });
+
+        callbacks.push(
+          searchcraft.subscribe('query_submitted', (event) => {
+            console.log('QUERY SUBMITTED! ', event.data.searchTerm);
+          }),
+        );
+
+        callbacks.push(
+          searchcraft.subscribe('input_cleared', (event) => {
+            console.log('INPUT CLEARED ', event);
+          }),
+        );
+
+        callbacks.push(
+          searchcraft.subscribe('ad_container_rendered', (event) => {
+            console.log(
+              'Ad container rendered!',
+              event.data.adContainerId,
+              event.data.searchTerm,
+            );
+          }),
+        );
+
+        const baseSearchResults = document.querySelector(
+          'searchcraft-base-search-results',
+        );
+        const resultsInfo = document.querySelector('searchcraft-results-info');
+
+        if (baseSearchResults) {
+          baseSearchResults.searchResultMappings = searchResultMappings;
+        }
+
+        if (resultsInfo) {
+          resultsInfo.customFormatter = (range, count, responseTime) =>
+            `${range[0]}-${range[1]} of ${count} results in ${responseTime}ms`;
+        }
+
+        return () => {
+          callbacks.forEach((cb) => cb());
         };
       }, []);
 

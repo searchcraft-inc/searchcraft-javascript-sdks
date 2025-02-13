@@ -38,12 +38,11 @@ const searchInputForm = document.querySelector('searchcraft-input-form');
 
 ## Events
 
-| Event               | Description                           | Type                |
-| ------------------- | ------------------------------------- | ------------------- |
-| `inputBlur`         | When the input becomes unfocused.     | `CustomEvent<void>` |
-| `inputFocus`        | When the input becomes focused.       | `CustomEvent<void>` |
-| `inputInit`         | Event emitted when input initializes. | `CustomEvent<void>` |
-| `noResultsReceived` | When no results are returned.         | `CustomEvent<void>` |
+| Event        | Description                           | Type                |
+| ------------ | ------------------------------------- | ------------------- |
+| `inputBlur`  | When the input becomes unfocused.     | `CustomEvent<void>` |
+| `inputFocus` | When the input becomes focused.       | `CustomEvent<void>` |
+| `inputInit`  | Event emitted when input initializes. | `CustomEvent<void>` |
 
 
 ## Dependencies
