@@ -35,13 +35,13 @@ It is consumed within the `searchcraft-popover-form` component.
 
 ### Depends on
 
-- [searchcraft-popover-list-item-ad](../searchcraft-popover-list-item-ad)
+- [searchcraft-ad](../searchcraft-ad)
 - [searchcraft-popover-list-item](../searchcraft-popover-list-item)
 
 ### Graph
 ```mermaid
 graph TD;
-  searchcraft-popover-list-view --> searchcraft-popover-list-item-ad
+  searchcraft-popover-list-view --> searchcraft-ad
   searchcraft-popover-list-view --> searchcraft-popover-list-item
   searchcraft-popover-form --> searchcraft-popover-list-view
   style searchcraft-popover-list-view fill:#f9f,stroke:#333,stroke-width:4px

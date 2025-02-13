@@ -83,24 +83,6 @@ A custom styles object.
 
 ***
 
-### onNoResults()?
-
-> `optional` **onNoResults**: (`event`) => `void`
-
-When no results are returned.
-
-#### Parameters
-
-##### event
-
-[`SearchcraftBaseSearchResultsCustomEvent`](/reference/sdk/js-vanilla/interfaces/SearchcraftBaseSearchResultsCustomEvent.md)\<`void`\>
-
-#### Returns
-
-`void`
-
-***
-
 ### resultImagePlacement?
 
 > `optional` **resultImagePlacement**: `"left"` \| `"right"`

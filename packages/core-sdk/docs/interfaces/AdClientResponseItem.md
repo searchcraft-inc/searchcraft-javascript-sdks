@@ -6,20 +6,18 @@
 
 # Interface: AdClientResponseItem
 
+## Extended by
+
+- [`ADMClientResponseItem`](/reference/sdk/core/interfaces/ADMClientResponseItem.md)
+
 ## Properties
 
-### adId
+### adSource
 
-> **adId**: `string`
-
-***
-
-### admAd?
-
-> `optional` **admAd**: [`ADMAd`](/reference/sdk/core/interfaces/ADMAd.md)
+> **adSource**: [`SearchcraftAdSource`](/reference/sdk/core/type-aliases/SearchcraftAdSource.md)
 
 ***
 
-### type
+### id
 
-> **type**: `"adm-text-ad"` \| `"adm-product-ad"` \| `"nativo-ad"`
+> **id**: `string`

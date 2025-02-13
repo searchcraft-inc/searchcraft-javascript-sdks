@@ -36,14 +36,29 @@ These components can be added to your Vue app and customized with configurations
 
 Example Setup
 
+#### Example Setup
+
+As early as possible in the app lifecycle, initialize the Searchcraft object:
+```jsx
+import { Searchcraft } from '@searchcraft/react-sdk';
+
+const searchcraft = new Searchcraft({
+  index: ['your_index_from_vektron'],
+  readKey: 'your_read_key_from_vektron',
+  endpointURL: 'your_searchcraft_endpoint_url',
+  searchDebounceDelay: 50, // Optional debounce delay in milliseconds
+})
+
+```
+
+Add components to your application:
+
 ```jsx
 
 <template>
-  <SearchcraftProvider :config="config">
-    <SearchInputForm />
-    <FilterPanel :items="filterPanelItems" />
-    <BaseSearchResults />
-  </SearchcraftProvider>
+  <SearchInputForm />
+  <FilterPanel :items="filterPanelItems" />
+  <BaseSearchResults />
 </template>
 
 <script>
@@ -63,12 +78,6 @@ export default {
   },
   data() {
     return {
-      config: {
-        index: ['your_index_from_vektron'],
-        readKey: 'your_read_key_from_vektron',
-        endpointURL: 'your_searchcraft_endpoint_url',
-        searchDebounceDelay: 50, // Optional debounce delay in milliseconds
-      },
       filterPanelItems: [
         {
           type: 'mostRecentToggle',
@@ -185,43 +194,28 @@ export const searchResultMappings = {
 
 ```
 
-Event Handling
-
-The Vue SDK components emit events for common actions like query submission, input focus, or search results. These events can be handled using Vue’s v-on or @ syntax.
+#### Event Handling
+You can subscribe to various events within Searchcraft:
 
 ```jsx
 
-Example
+  const searchcraft = new Searchcraft({
+    index: ['your_index_from_vektron'],
+    readKey: 'your_read_key_from_vektron',
+    endpointURL: 'your_searchcraft_endpoint_url',
+  });
 
-<template>
-  <SearchInputForm
-    @querySubmit="handleQuerySubmit"
-    @inputFocus="handleInputFocus"
-    @inputBlur="handleInputBlur"
-  />
-  <BaseSearchResults @noResults="handleNoResults" />
-</template>
+  const unsubscribeCallback = searchcraft.subscribe('query_submitted', (event) => {
+    // Do something in your application when a query has been submitted
+  });
 
-<script>
-export default {
-  methods: {
-    handleQuerySubmit(event) {
-      console.log('Query submitted:', event.detail);
-    },
-    handleInputFocus() {
-      console.log('Input focused');
-    },
-    handleInputBlur() {
-      console.log('Input blurred');
-    },
-    handleNoResults() {
-      console.log('No results found');
-    },
-  },
-};
-</script>
 
+  const unsubscribeCallback = searchcraft.subscribe('ad_container_rendered', (event) => {
+    // Do something when a new ad container has been rendered
+  });
 ```
+
+For a complete listing of event subscriptions, refer to the api reference.
 
 Additional Information
 

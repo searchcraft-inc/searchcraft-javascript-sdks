@@ -1,11 +1,13 @@
 import type { PopoverResultMappings } from '@searchcraft/javascript-sdk';
 import {
+  Searchcraft,
   SearchcraftPopoverButton,
   SearchcraftPopoverForm,
   SearchcraftTheme,
 } from '@searchcraft/react-sdk';
 import type { Meta, StoryObj } from '@storybook/react';
 import { configAlternate } from '../../../utils/AlternateSearchcraftConfig';
+import { useEffect } from 'react';
 
 const componentMeta: Meta = {
   title: 'React SDK/searchcraft-popover-form',
@@ -47,6 +49,14 @@ const mappings: PopoverResultMappings = {
 };
 
 export const Inline: StoryObj = {
+  decorators: [
+    (Story) => {
+      useEffect(() => {
+        new Searchcraft(configAlternate);
+      }, []);
+      return <Story />;
+    },
+  ],
   render: () => (
     <>
       <SearchcraftTheme />
@@ -70,6 +80,14 @@ export const Inline: StoryObj = {
 };
 
 export const Modal: StoryObj = {
+  decorators: [
+    (Story) => {
+      useEffect(() => {
+        new Searchcraft(configAlternate);
+      }, []);
+      return <Story />;
+    },
+  ],
   render: () => (
     <>
       <SearchcraftTheme />
@@ -79,7 +97,6 @@ export const Modal: StoryObj = {
           <span>Click me</span>
         </SearchcraftPopoverButton>
         <SearchcraftPopoverForm
-          config={configAlternate}
           hotkey='k'
           hotkeyModifier='ctrl'
           popoverResultMappings={mappings}
@@ -92,6 +109,14 @@ export const Modal: StoryObj = {
 };
 
 export const Fullscreen: StoryObj = {
+  decorators: [
+    (Story) => {
+      useEffect(() => {
+        new Searchcraft(configAlternate);
+      }, []);
+      return <Story />;
+    },
+  ],
   render: () => (
     <>
       <SearchcraftTheme />
@@ -101,7 +126,6 @@ export const Fullscreen: StoryObj = {
           <span>Click me</span>
         </SearchcraftPopoverButton>
         <SearchcraftPopoverForm
-          config={configAlternate}
           hotkey='k'
           hotkeyModifier='ctrl'
           popoverResultMappings={mappings}

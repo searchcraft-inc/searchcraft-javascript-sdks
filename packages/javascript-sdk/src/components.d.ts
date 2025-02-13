@@ -5,11 +5,18 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { AdClientResponseItem, FilterItem, PopoverResultMappings, SearchClientResponseItem, SearchcraftConfig, SearchResultMappings } from "@searchcraft/core";
+import { AdClientResponseItem, FilterItem, PopoverResultMappings, SearchClientResponseItem, SearchcraftAdSource, SearchcraftCore, SearchResultMappings } from "@searchcraft/core";
 import { SearchcraftSelectOption } from "./components/searchcraft-select/searchcraft-select";
-export { AdClientResponseItem, FilterItem, PopoverResultMappings, SearchClientResponseItem, SearchcraftConfig, SearchResultMappings } from "@searchcraft/core";
+export { AdClientResponseItem, FilterItem, PopoverResultMappings, SearchClientResponseItem, SearchcraftAdSource, SearchcraftCore, SearchResultMappings } from "@searchcraft/core";
 export { SearchcraftSelectOption } from "./components/searchcraft-select/searchcraft-select";
 export namespace Components {
+    /**
+     * An inline ad meant to be rendered in a list of search results.
+     */
+    interface SearchcraftAd {
+        "adClientResponseItem"?: AdClientResponseItem;
+        "adSource": SearchcraftAdSource;
+    }
     /**
      * This web component is designed to display detailed information for a single search result.
      * Once a query is submitted, the component formats and presents the result.
@@ -46,12 +53,6 @@ export namespace Components {
         "imagePlacement": 'left' | 'right';
         "item": SearchClientResponseItem | undefined;
         "searchResultMappings": SearchResultMappings | undefined;
-    }
-    /**
-     * A single list item rendered in a searchcraft-popover-list-view.
-     */
-    interface SearchcraftBaseSearchResultAd {
-        "adClientResponseItem"?: AdClientResponseItem;
     }
     /**
      * This web component is responsible for displaying the results of a search query.
@@ -213,14 +214,6 @@ export namespace Components {
      * ```js
      * // index.js
      * const searchInputForm = document.querySelector('searchcraft-input-form');
-     * searchInputForm.config = {
-     *   index: [],
-     *   readKey: '',
-     *   endpointUrl: '',
-     * };
-     * searchForm.addEventListener('querySubmit', (event) => {
-     *   console.log('Query submitted', event.detail);
-     * });
      * ```
      */
     interface SearchcraftInputForm {
@@ -236,10 +229,7 @@ export namespace Components {
           * Where to place the search button.
          */
         "buttonPlacement": 'left' | 'right' | 'none';
-        /**
-          * The Searchcraft config object.
-         */
-        "config": SearchcraftConfig | undefined;
+        "core"?: SearchcraftCore;
         /**
           * A custom styles object to be applied to the input element.
          */
@@ -302,11 +292,6 @@ export namespace Components {
      * ```js
      * // index.js
      * const popoverForm = document.querySelector('searchcraft-popover-form');
-     * popoverForm.config = {
-     *   index: [index_name_from_vektron],
-     *   readKey: 'read_key_from_vektron',
-     *   endpointUrl: 'enpoint_url_from_vektron',
-     * };
      * popoverForm.popoverResultMappings = {
      *  containerHref: {
      *   fieldNames: [
@@ -319,10 +304,6 @@ export namespace Components {
      * ```
      */
     interface SearchcraftPopoverForm {
-        /**
-          * The Searchcraft config object.
-         */
-        "config": SearchcraftConfig | undefined;
         /**
           * The hotkey that activates the popover.
          */
@@ -350,12 +331,6 @@ export namespace Components {
         "documentPosition": number;
         "item": SearchClientResponseItem | undefined;
         "popoverResultMappings": PopoverResultMappings | undefined;
-    }
-    /**
-     * A single list item rendered in a searchcraft-popover-list-view.
-     */
-    interface SearchcraftPopoverListItemAd {
-        "adClientResponseItem"?: AdClientResponseItem;
     }
     /**
      * This web component is designed to display a list of results within a popover interface.
@@ -528,10 +503,6 @@ export namespace Components {
         "subLabel": string | undefined;
     }
 }
-export interface SearchcraftBaseSearchResultsCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLSearchcraftBaseSearchResultsElement;
-}
 export interface SearchcraftButtonCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSearchcraftButtonElement;
@@ -558,6 +529,15 @@ export interface SearchcraftToggleButtonCustomEvent<T> extends CustomEvent<T> {
 }
 declare global {
     /**
+     * An inline ad meant to be rendered in a list of search results.
+     */
+    interface HTMLSearchcraftAdElement extends Components.SearchcraftAd, HTMLStencilElement {
+    }
+    var HTMLSearchcraftAdElement: {
+        prototype: HTMLSearchcraftAdElement;
+        new (): HTMLSearchcraftAdElement;
+    };
+    /**
      * This web component is designed to display detailed information for a single search result.
      * Once a query is submitted, the component formats and presents the result.
      * It is consumed within the `searchcraft-base-search-results` component.
@@ -568,18 +548,6 @@ declare global {
         prototype: HTMLSearchcraftBaseSearchResultElement;
         new (): HTMLSearchcraftBaseSearchResultElement;
     };
-    /**
-     * A single list item rendered in a searchcraft-popover-list-view.
-     */
-    interface HTMLSearchcraftBaseSearchResultAdElement extends Components.SearchcraftBaseSearchResultAd, HTMLStencilElement {
-    }
-    var HTMLSearchcraftBaseSearchResultAdElement: {
-        prototype: HTMLSearchcraftBaseSearchResultAdElement;
-        new (): HTMLSearchcraftBaseSearchResultAdElement;
-    };
-    interface HTMLSearchcraftBaseSearchResultsElementEventMap {
-        "noResults": void;
-    }
     /**
      * This web component is responsible for displaying the results of a search query.
      * Once a query is submitted, the component formats and presents an ordered list of the results.
@@ -609,14 +577,6 @@ declare global {
      * ```
      */
     interface HTMLSearchcraftBaseSearchResultsElement extends Components.SearchcraftBaseSearchResults, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLSearchcraftBaseSearchResultsElementEventMap>(type: K, listener: (this: HTMLSearchcraftBaseSearchResultsElement, ev: SearchcraftBaseSearchResultsCustomEvent<HTMLSearchcraftBaseSearchResultsElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLSearchcraftBaseSearchResultsElementEventMap>(type: K, listener: (this: HTMLSearchcraftBaseSearchResultsElement, ev: SearchcraftBaseSearchResultsCustomEvent<HTMLSearchcraftBaseSearchResultsElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSearchcraftBaseSearchResultsElement: {
         prototype: HTMLSearchcraftBaseSearchResultsElement;
@@ -706,12 +666,9 @@ declare global {
         new (): HTMLSearchcraftFilterPanelElement;
     };
     interface HTMLSearchcraftInputFormElementEventMap {
-        "inputCleared": void;
-        "noResultsReceived": void;
         "inputFocus": void;
         "inputBlur": void;
         "inputInit": void;
-        "querySubmit": string;
     }
     /**
      * This web component provides a user-friendly interface for querying an indexed dataset, enabling users to easily search large collections of data.
@@ -724,14 +681,6 @@ declare global {
      * ```js
      * // index.js
      * const searchInputForm = document.querySelector('searchcraft-input-form');
-     * searchInputForm.config = {
-     *   index: [],
-     *   readKey: '',
-     *   endpointUrl: '',
-     * };
-     * searchForm.addEventListener('querySubmit', (event) => {
-     *   console.log('Query submitted', event.detail);
-     * });
      * ```
      */
     interface HTMLSearchcraftInputFormElement extends Components.SearchcraftInputForm, HTMLStencilElement {
@@ -796,11 +745,6 @@ declare global {
      * ```js
      * // index.js
      * const popoverForm = document.querySelector('searchcraft-popover-form');
-     * popoverForm.config = {
-     *   index: [index_name_from_vektron],
-     *   readKey: 'read_key_from_vektron',
-     *   endpointUrl: 'enpoint_url_from_vektron',
-     * };
      * popoverForm.popoverResultMappings = {
      *  containerHref: {
      *   fieldNames: [
@@ -826,15 +770,6 @@ declare global {
     var HTMLSearchcraftPopoverListItemElement: {
         prototype: HTMLSearchcraftPopoverListItemElement;
         new (): HTMLSearchcraftPopoverListItemElement;
-    };
-    /**
-     * A single list item rendered in a searchcraft-popover-list-view.
-     */
-    interface HTMLSearchcraftPopoverListItemAdElement extends Components.SearchcraftPopoverListItemAd, HTMLStencilElement {
-    }
-    var HTMLSearchcraftPopoverListItemAdElement: {
-        prototype: HTMLSearchcraftPopoverListItemAdElement;
-        new (): HTMLSearchcraftPopoverListItemAdElement;
     };
     /**
      * This web component is designed to display a list of results within a popover interface.
@@ -972,8 +907,8 @@ declare global {
         new (): HTMLSearchcraftToggleButtonElement;
     };
     interface HTMLElementTagNameMap {
+        "searchcraft-ad": HTMLSearchcraftAdElement;
         "searchcraft-base-search-result": HTMLSearchcraftBaseSearchResultElement;
-        "searchcraft-base-search-result-ad": HTMLSearchcraftBaseSearchResultAdElement;
         "searchcraft-base-search-results": HTMLSearchcraftBaseSearchResultsElement;
         "searchcraft-button": HTMLSearchcraftButtonElement;
         "searchcraft-error-message": HTMLSearchcraftErrorMessageElement;
@@ -985,7 +920,6 @@ declare global {
         "searchcraft-popover-button": HTMLSearchcraftPopoverButtonElement;
         "searchcraft-popover-form": HTMLSearchcraftPopoverFormElement;
         "searchcraft-popover-list-item": HTMLSearchcraftPopoverListItemElement;
-        "searchcraft-popover-list-item-ad": HTMLSearchcraftPopoverListItemAdElement;
         "searchcraft-popover-list-view": HTMLSearchcraftPopoverListViewElement;
         "searchcraft-results-info": HTMLSearchcraftResultsInfoElement;
         "searchcraft-search-results-per-page": HTMLSearchcraftSearchResultsPerPageElement;
@@ -996,6 +930,13 @@ declare global {
     }
 }
 declare namespace LocalJSX {
+    /**
+     * An inline ad meant to be rendered in a list of search results.
+     */
+    interface SearchcraftAd {
+        "adClientResponseItem"?: AdClientResponseItem;
+        "adSource"?: SearchcraftAdSource;
+    }
     /**
      * This web component is designed to display detailed information for a single search result.
      * Once a query is submitted, the component formats and presents the result.
@@ -1032,12 +973,6 @@ declare namespace LocalJSX {
         "imagePlacement"?: 'left' | 'right';
         "item"?: SearchClientResponseItem | undefined;
         "searchResultMappings"?: SearchResultMappings | undefined;
-    }
-    /**
-     * A single list item rendered in a searchcraft-popover-list-view.
-     */
-    interface SearchcraftBaseSearchResultAd {
-        "adClientResponseItem"?: AdClientResponseItem;
     }
     /**
      * This web component is responsible for displaying the results of a search query.
@@ -1094,10 +1029,6 @@ declare namespace LocalJSX {
         "customStylesForResults"?: | string
     | Record<string, Record<string, string>>
     | undefined;
-        /**
-          * When no results are returned.
-         */
-        "onNoResults"?: (event: SearchcraftBaseSearchResultsCustomEvent<void>) => void;
         /**
           * The placement of the image for each result.
          */
@@ -1211,14 +1142,6 @@ declare namespace LocalJSX {
      * ```js
      * // index.js
      * const searchInputForm = document.querySelector('searchcraft-input-form');
-     * searchInputForm.config = {
-     *   index: [],
-     *   readKey: '',
-     *   endpointUrl: '',
-     * };
-     * searchForm.addEventListener('querySubmit', (event) => {
-     *   console.log('Query submitted', event.detail);
-     * });
      * ```
      */
     interface SearchcraftInputForm {
@@ -1234,10 +1157,7 @@ declare namespace LocalJSX {
           * Where to place the search button.
          */
         "buttonPlacement"?: 'left' | 'right' | 'none';
-        /**
-          * The Searchcraft config object.
-         */
-        "config"?: SearchcraftConfig | undefined;
+        "core"?: SearchcraftCore;
         /**
           * A custom styles object to be applied to the input element.
          */
@@ -1251,10 +1171,6 @@ declare namespace LocalJSX {
          */
         "onInputBlur"?: (event: SearchcraftInputFormCustomEvent<void>) => void;
         /**
-          * When the input is cleared.
-         */
-        "onInputCleared"?: (event: SearchcraftInputFormCustomEvent<void>) => void;
-        /**
           * When the input becomes focused.
          */
         "onInputFocus"?: (event: SearchcraftInputFormCustomEvent<void>) => void;
@@ -1262,14 +1178,6 @@ declare namespace LocalJSX {
           * Event emitted when input initializes.
          */
         "onInputInit"?: (event: SearchcraftInputFormCustomEvent<void>) => void;
-        /**
-          * When no results are returned.
-         */
-        "onNoResultsReceived"?: (event: SearchcraftInputFormCustomEvent<void>) => void;
-        /**
-          * Event emitted when a query has been submitted.
-         */
-        "onQuerySubmit"?: (event: SearchcraftInputFormCustomEvent<string>) => void;
         /**
           * The input element's placeholder value.
          */
@@ -1324,11 +1232,6 @@ declare namespace LocalJSX {
      * ```js
      * // index.js
      * const popoverForm = document.querySelector('searchcraft-popover-form');
-     * popoverForm.config = {
-     *   index: [index_name_from_vektron],
-     *   readKey: 'read_key_from_vektron',
-     *   endpointUrl: 'enpoint_url_from_vektron',
-     * };
      * popoverForm.popoverResultMappings = {
      *  containerHref: {
      *   fieldNames: [
@@ -1341,10 +1244,6 @@ declare namespace LocalJSX {
      * ```
      */
     interface SearchcraftPopoverForm {
-        /**
-          * The Searchcraft config object.
-         */
-        "config"?: SearchcraftConfig | undefined;
         /**
           * The hotkey that activates the popover.
          */
@@ -1372,12 +1271,6 @@ declare namespace LocalJSX {
         "documentPosition"?: number;
         "item"?: SearchClientResponseItem | undefined;
         "popoverResultMappings"?: PopoverResultMappings | undefined;
-    }
-    /**
-     * A single list item rendered in a searchcraft-popover-list-view.
-     */
-    interface SearchcraftPopoverListItemAd {
-        "adClientResponseItem"?: AdClientResponseItem;
     }
     /**
      * This web component is designed to display a list of results within a popover interface.
@@ -1562,8 +1455,8 @@ declare namespace LocalJSX {
         "subLabel"?: string | undefined;
     }
     interface IntrinsicElements {
+        "searchcraft-ad": SearchcraftAd;
         "searchcraft-base-search-result": SearchcraftBaseSearchResult;
-        "searchcraft-base-search-result-ad": SearchcraftBaseSearchResultAd;
         "searchcraft-base-search-results": SearchcraftBaseSearchResults;
         "searchcraft-button": SearchcraftButton;
         "searchcraft-error-message": SearchcraftErrorMessage;
@@ -1575,7 +1468,6 @@ declare namespace LocalJSX {
         "searchcraft-popover-button": SearchcraftPopoverButton;
         "searchcraft-popover-form": SearchcraftPopoverForm;
         "searchcraft-popover-list-item": SearchcraftPopoverListItem;
-        "searchcraft-popover-list-item-ad": SearchcraftPopoverListItemAd;
         "searchcraft-popover-list-view": SearchcraftPopoverListView;
         "searchcraft-results-info": SearchcraftResultsInfo;
         "searchcraft-search-results-per-page": SearchcraftSearchResultsPerPage;
@@ -1590,15 +1482,15 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             /**
+             * An inline ad meant to be rendered in a list of search results.
+             */
+            "searchcraft-ad": LocalJSX.SearchcraftAd & JSXBase.HTMLAttributes<HTMLSearchcraftAdElement>;
+            /**
              * This web component is designed to display detailed information for a single search result.
              * Once a query is submitted, the component formats and presents the result.
              * It is consumed within the `searchcraft-base-search-results` component.
              */
             "searchcraft-base-search-result": LocalJSX.SearchcraftBaseSearchResult & JSXBase.HTMLAttributes<HTMLSearchcraftBaseSearchResultElement>;
-            /**
-             * A single list item rendered in a searchcraft-popover-list-view.
-             */
-            "searchcraft-base-search-result-ad": LocalJSX.SearchcraftBaseSearchResultAd & JSXBase.HTMLAttributes<HTMLSearchcraftBaseSearchResultAdElement>;
             /**
              * This web component is responsible for displaying the results of a search query.
              * Once a query is submitted, the component formats and presents an ordered list of the results.
@@ -1680,14 +1572,6 @@ declare module "@stencil/core" {
              * ```js
              * // index.js
              * const searchInputForm = document.querySelector('searchcraft-input-form');
-             * searchInputForm.config = {
-             *   index: [],
-             *   readKey: '',
-             *   endpointUrl: '',
-             * };
-             * searchForm.addEventListener('querySubmit', (event) => {
-             *   console.log('Query submitted', event.detail);
-             * });
              * ```
              */
             "searchcraft-input-form": LocalJSX.SearchcraftInputForm & JSXBase.HTMLAttributes<HTMLSearchcraftInputFormElement>;
@@ -1724,11 +1608,6 @@ declare module "@stencil/core" {
              * ```js
              * // index.js
              * const popoverForm = document.querySelector('searchcraft-popover-form');
-             * popoverForm.config = {
-             *   index: [index_name_from_vektron],
-             *   readKey: 'read_key_from_vektron',
-             *   endpointUrl: 'enpoint_url_from_vektron',
-             * };
              * popoverForm.popoverResultMappings = {
              *  containerHref: {
              *   fieldNames: [
@@ -1745,10 +1624,6 @@ declare module "@stencil/core" {
              * A single list item rendered in a searchcraft-popover-list-view.
              */
             "searchcraft-popover-list-item": LocalJSX.SearchcraftPopoverListItem & JSXBase.HTMLAttributes<HTMLSearchcraftPopoverListItemElement>;
-            /**
-             * A single list item rendered in a searchcraft-popover-list-view.
-             */
-            "searchcraft-popover-list-item-ad": LocalJSX.SearchcraftPopoverListItemAd & JSXBase.HTMLAttributes<HTMLSearchcraftPopoverListItemAdElement>;
             /**
              * This web component is designed to display a list of results within a popover interface.
              * It is consumed within the `searchcraft-popover-form` component.

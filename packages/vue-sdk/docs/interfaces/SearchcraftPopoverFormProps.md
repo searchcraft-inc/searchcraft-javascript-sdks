@@ -14,18 +14,6 @@ The Props for the SearchcraftPopoverForm.
 
 ## Properties
 
-### config
-
-> **config**: `SearchcraftConfig`
-
-The Searchcraft config object.
-
-#### Inherited from
-
-`Components.SearchcraftPopoverForm.config`
-
-***
-
 ### hotkey
 
 > **hotkey**: `string`

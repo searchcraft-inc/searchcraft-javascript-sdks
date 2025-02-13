@@ -16,14 +16,6 @@ It abstracts the complexities of index-based searching, making it accessible to 
 ```js
 // index.js
 const searchInputForm = document.querySelector('searchcraft-input-form');
-searchInputForm.config = {
-  index: [],
-  readKey: '',
-  endpointUrl: '',
-};
-searchForm.addEventListener('querySubmit', (event) => {
-  console.log('Query submitted', event.detail);
-});
 ```
 
 ## Properties
@@ -52,11 +44,9 @@ Where to place the search button.
 
 ***
 
-### config?
+### core?
 
-> `optional` **config**: [`SearchcraftConfig`](/reference/sdk/js-vanilla/interfaces/SearchcraftConfig.md)
-
-The Searchcraft config object.
+> `optional` **core**: [`SearchcraftCore`](/reference/sdk/js-vanilla/classes/SearchcraftCore.md)
 
 ***
 
@@ -81,24 +71,6 @@ The label rendered above the input.
 > `optional` **onInputBlur**: (`event`) => `void`
 
 When the input becomes unfocused.
-
-#### Parameters
-
-##### event
-
-[`SearchcraftInputFormCustomEvent`](/reference/sdk/js-vanilla/interfaces/SearchcraftInputFormCustomEvent.md)\<`void`\>
-
-#### Returns
-
-`void`
-
-***
-
-### onInputCleared()?
-
-> `optional` **onInputCleared**: (`event`) => `void`
-
-When the input is cleared.
 
 #### Parameters
 
@@ -141,42 +113,6 @@ Event emitted when input initializes.
 ##### event
 
 [`SearchcraftInputFormCustomEvent`](/reference/sdk/js-vanilla/interfaces/SearchcraftInputFormCustomEvent.md)\<`void`\>
-
-#### Returns
-
-`void`
-
-***
-
-### onNoResultsReceived()?
-
-> `optional` **onNoResultsReceived**: (`event`) => `void`
-
-When no results are returned.
-
-#### Parameters
-
-##### event
-
-[`SearchcraftInputFormCustomEvent`](/reference/sdk/js-vanilla/interfaces/SearchcraftInputFormCustomEvent.md)\<`void`\>
-
-#### Returns
-
-`void`
-
-***
-
-### onQuerySubmit()?
-
-> `optional` **onQuerySubmit**: (`event`) => `void`
-
-Event emitted when a query has been submitted.
-
-#### Parameters
-
-##### event
-
-[`SearchcraftInputFormCustomEvent`](/reference/sdk/js-vanilla/interfaces/SearchcraftInputFormCustomEvent.md)\<`string`\>
 
 #### Returns
 

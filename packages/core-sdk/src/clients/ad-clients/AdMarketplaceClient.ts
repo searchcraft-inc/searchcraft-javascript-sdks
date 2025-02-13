@@ -1,6 +1,7 @@
 import { nanoid } from 'nanoid';
 import type {
   AdClientResponseItem,
+  ADMClientResponseItem,
   ADMResponse,
   SearchParams,
 } from '../../types';
@@ -33,23 +34,24 @@ export class AdMarketplaceClient extends AdClient {
     const response = await fetch(path, { method: 'GET' });
     const admResponse = (await response.json()) as ADMResponse;
 
-    // Map ADM Response -> AdClientResponseItem[]
-    const items: AdClientResponseItem[] = new Array()
-      .concat(
-        admResponse.product_ads.map((ad) => ({
-          adId: nanoid(),
-          type: 'adm-product-ad',
-          admAd: ad,
-        })),
-      )
-      .concat(
-        admResponse.text_ads.map((ad) => ({
-          adId: nanoid(),
-          type: 'adm-text-ad',
-          admAd: ad,
-        })),
-      );
+    const productAds: ADMClientResponseItem[] = admResponse.product_ads.map(
+      (ad) => ({
+        id: nanoid(),
+        adSource: 'adMarketplace',
+        admAdType: 'adm-product-ad',
+        admAd: ad,
+      }),
+    );
 
-    return items;
+    const textAds: ADMClientResponseItem[] = admResponse.text_ads.map((ad) => ({
+      id: nanoid(),
+      adSource: 'adMarketplace',
+      admAdType: 'adm-text-ad',
+      admAd: ad,
+    }));
+
+    const allAds = productAds.concat(textAds);
+
+    return allAds;
   }
 }

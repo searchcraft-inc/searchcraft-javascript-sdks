@@ -1,7 +1,7 @@
 import { Component, h, State, Prop } from '@stencil/core';
 import classNames from 'classnames';
 
-import { useSearchcraftStore } from '@provider/store';
+import { searchcraftStore } from '@store';
 
 import { formatNumberWithCommas, parseCustomStyles } from '@utils';
 
@@ -58,7 +58,7 @@ export class SearchcraftResultsInfo {
   unsubscribe: () => void = () => {};
 
   connectedCallback() {
-    this.unsubscribe = useSearchcraftStore.subscribe((state) => {
+    this.unsubscribe = searchcraftStore.subscribe((state) => {
       // store vars
       this.searchTerm = state.searchTerm;
       this.searchResultsPage = state.searchResultsPage;

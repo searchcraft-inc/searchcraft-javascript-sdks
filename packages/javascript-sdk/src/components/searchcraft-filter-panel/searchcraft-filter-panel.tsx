@@ -6,7 +6,7 @@ import type {
   ExactMatchToggleFilterItem,
   FacetsFilterItem,
 } from '@searchcraft/core';
-import { useSearchcraftStore } from '@provider/store';
+import { searchcraftStore } from '@store';
 import { getMillis } from '@utils';
 
 /**
@@ -31,10 +31,10 @@ export class SearchcraftFilterPanel {
   @State() unsubscribe: (() => void) | undefined;
   @State() lastSearchTerm: string | undefined;
 
-  private searchStore = useSearchcraftStore.getState();
+  private searchStore = searchcraftStore.getState();
 
   componentDidLoad() {
-    this.unsubscribe = useSearchcraftStore.subscribe((state) => {
+    this.unsubscribe = searchcraftStore.subscribe((state) => {
       if (this.lastSearchTerm !== state.searchTerm) {
         // A place to put actions to do when the query changes
       }

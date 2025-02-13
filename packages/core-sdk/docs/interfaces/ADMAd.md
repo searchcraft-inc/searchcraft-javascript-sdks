@@ -6,11 +6,6 @@
 
 # Interface: ADMAd
 
-## Extended by
-
-- [`ADMTextAd`](/reference/sdk/core/interfaces/ADMTextAd.md)
-- [`ADMProductAd`](/reference/sdk/core/interfaces/ADMProductAd.md)
-
 ## Properties
 
 ### adv\_id?
@@ -31,9 +26,33 @@
 
 ***
 
+### image\_url?
+
+> `optional` **image\_url**: `string`
+
+***
+
 ### impression\_url?
 
 > `optional` **impression\_url**: `string`
+
+***
+
+### price?
+
+> `optional` **price**: `number`
+
+***
+
+### price\_currency?
+
+> `optional` **price\_currency**: `string`
+
+***
+
+### sale\_price?
+
+> `optional` **sale\_price**: `number`
 
 ***
 

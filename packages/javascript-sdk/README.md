@@ -21,17 +21,19 @@ $ npm install @searchcraft/javascript-sdk
 ### HTML
 Add the web components to your html. They should be placed with the rest of your page content where you'd like them to render in the layout. These are the web components available to use:
 ```html
-  <searchcraft-input-form />
+  <searchcraft-input-form></searchcraft-input-form>
   ..
-  <searchcraft-popover-form />
+  <searchcraft-popover-form></searchcraft-popover-form>
   ...
-  <searchcraft-filter-panel />
+  <searchcraft-filter-panel></searchcraft-filter-panel>
   ...
-  <searchcraft-results-info />
+  <searchcraft-results-info /></searchcraft-results-info>
   ...
-  <searchcraft-base-search-results />
+  <searchcraft-base-search-results></searchcraft-base-search-results>
   ...
-  <searchcraft-theme /> (Required to apply theme to components)
+  <searchcraft-theme></searchcraft-theme>
+  ...
+  <searchcraft-pagination></searchcraft-pagination>
 
 ```
 To see more about the specific attributes required for each component, refer to their individual documentation pages.
@@ -42,39 +44,31 @@ To see more about the specific attributes required for each component, refer to 
 
 
 ### Javascript
-Before anything else, the web components must be initialized. Import and Initialize the SDK and call `defineCustomElements()` to set up the web components.
+As early as possible in your app's lifecycle, initialize searchcraft, passing in config values that correspond with your Searchcraft environment.
 
 ```js
+import { Searchcraft } from '@searchcraft/javascript-sdk';
 
-import { defineCustomElements } from '@searchcraft/javascript-sdk/components';
-defineCustomElements();
-
-```
-
-Create a configuration object that your web components can use.
-```jsx
-const config = {
+const searchcraft = new Searchcraft({
   index: ['your_index_from_vektron'],
   readKey: 'your_read_key_from_vektron',
   endpointURL: 'your_searchcraft_endpoint_url',
   searchDebounceDelay: 50, // The amount of debounce, in millis, to add to search requests (optional)
-};
+})
 ```
+
 When the DOM content is loaded:
-- Provide the input form (or popover form) with your `config` object. 
 - If you are using a filter panel, provide the filter panel with the filter panel item configuration.
 - Provide the search results with the search result mapping configuration.
 
 ```js
 
 document.addEventListener('DOMContentLoaded', () => {
-  const inputForm = document.querySelector('searchcraft-input-form');
   const filterPanel = document.querySelector('searchcraft-filter-panel');
   const searchResults = document.querySelector(
     'searchcraft-base-search-results',
   );
 
-  inputForm.config = config;
   filterPanel.items = filterPanelItems;
   searchResults.searchResultMappings = searchResultsMappings;
 });
@@ -170,32 +164,26 @@ export const searchResultsMappings = {
 };
 ```
 
-### Event Handling
-Optionally, if you need to perform other actions, such as modifying page layout, when various searchcraft events are emitted, you can add the following listeners:
+### Event Subscriptions
+You can subscribe to various events within Searchcraft:
 
 ```jsx
 
-  inputForm.addEventListener('querySubmit', (event) => {
-    // Perform an action
+  const searchcraft = new Searchcraft({
+    index: ['your_index_from_vektron'],
+    readKey: 'your_read_key_from_vektron',
+    endpointURL: 'your_searchcraft_endpoint_url',
   });
 
-  inputForm.addEventListener('inputCleared', () => {
-    // Perform an action
+  const unsubscribeCallback = searchcraft.subscribe('query_submitted', (event) => {
+    // Do something in your application when a query has been submitted
   });
 
-  inputForm.addEventListener('inputFocus', () => {
-    // Perform an action
+
+  const unsubscribeCallback = searchcraft.subscribe('ad_container_rendered', (event) => {
+    // Do something when a new ad container has been rendered
   });
 
-  inputForm.addEventListener('inputBlur', () => {
-    // Perform an action
-  });
-
-  inputForm.addEventListener('inputInit', () => {
-    // Perform an action
-  });
-
-  searchResults.addEventListener('noResults', () => {
-    // Perform an action
-  });
   ```
+
+  For a complete listing of subscription events, refer to the api reference.

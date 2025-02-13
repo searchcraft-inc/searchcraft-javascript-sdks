@@ -8,6 +8,12 @@ import type { JSX } from '@searchcraft/javascript-sdk';
 
 
 
+export const SearchcraftAd = /*@__PURE__*/ defineContainer<JSX.SearchcraftAd>('searchcraft-ad', undefined, [
+  'adSource',
+  'adClientResponseItem'
+]);
+
+
 export const SearchcraftBaseSearchResult = /*@__PURE__*/ defineContainer<JSX.SearchcraftBaseSearchResult>('searchcraft-base-search-result', undefined, [
   'item',
   'searchResultMappings',
@@ -21,11 +27,6 @@ export const SearchcraftBaseSearchResult = /*@__PURE__*/ defineContainer<JSX.Sea
 ]);
 
 
-export const SearchcraftBaseSearchResultAd = /*@__PURE__*/ defineContainer<JSX.SearchcraftBaseSearchResultAd>('searchcraft-base-search-result-ad', undefined, [
-  'adClientResponseItem'
-]);
-
-
 export const SearchcraftBaseSearchResults = /*@__PURE__*/ defineContainer<JSX.SearchcraftBaseSearchResults>('searchcraft-base-search-results', undefined, [
   'customStylesForResults',
   'searchResultMappings',
@@ -34,10 +35,7 @@ export const SearchcraftBaseSearchResults = /*@__PURE__*/ defineContainer<JSX.Se
   'buttonTarget',
   'buttonRel',
   'containerTarget',
-  'containerRel',
-  'noResults'
-], [
-  'noResults'
+  'containerRel'
 ]);
 
 
@@ -74,7 +72,6 @@ export const SearchcraftFilterPanel = /*@__PURE__*/ defineContainer<JSX.Searchcr
 
 
 export const SearchcraftInputForm = /*@__PURE__*/ defineContainer<JSX.SearchcraftInputForm>('searchcraft-input-form', undefined, [
-  'config',
   'autoSearch',
   'buttonPlacement',
   'buttonLabel',
@@ -82,19 +79,14 @@ export const SearchcraftInputForm = /*@__PURE__*/ defineContainer<JSX.Searchcraf
   'customStyles',
   'placeholderValue',
   'searchTerm',
-  'inputCleared',
-  'noResultsReceived',
+  'core',
   'inputFocus',
   'inputBlur',
-  'inputInit',
-  'querySubmit'
+  'inputInit'
 ], [
-  'inputCleared',
-  'noResultsReceived',
   'inputFocus',
   'inputBlur',
-  'inputInit',
-  'querySubmit'
+  'inputInit'
 ]);
 
 
@@ -113,7 +105,6 @@ export const SearchcraftPopoverButton = /*@__PURE__*/ defineContainer<JSX.Search
 
 
 export const SearchcraftPopoverForm = /*@__PURE__*/ defineContainer<JSX.SearchcraftPopoverForm>('searchcraft-popover-form', undefined, [
-  'config',
   'type',
   'popoverResultMappings',
   'hotkey',
@@ -125,11 +116,6 @@ export const SearchcraftPopoverListItem = /*@__PURE__*/ defineContainer<JSX.Sear
   'item',
   'popoverResultMappings',
   'documentPosition'
-]);
-
-
-export const SearchcraftPopoverListItemAd = /*@__PURE__*/ defineContainer<JSX.SearchcraftPopoverListItemAd>('searchcraft-popover-list-item-ad', undefined, [
-  'adClientResponseItem'
 ]);
 
 

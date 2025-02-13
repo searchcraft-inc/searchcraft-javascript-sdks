@@ -11,6 +11,7 @@ import {
   SearchcraftInputForm,
   SearchcraftFilterPanel,
   SearchcraftTheme,
+  Searchcraft,
 } from '@searchcraft/react-sdk';
 
 import { config } from '../../../utils/DefaultSearchcraftConfig';
@@ -102,12 +103,9 @@ export const Default: StoryObj<ComponentProps> = {
   decorators: [
     (Story) => {
       useEffect(() => {
-        const searchForm = document.querySelector('searchcraft-input-form');
+        new Searchcraft(config);
         const filterPanel = document.querySelector('searchcraft-filter-panel');
 
-        if (searchForm) {
-          searchForm.config = config;
-        }
         if (filterPanel) {
           filterPanel.items = defaultProps.items;
         }
@@ -126,10 +124,8 @@ export const Default: StoryObj<ComponentProps> = {
             buttonLabel=''
             buttonPlacement='none'
             customStyles={args.customStylesForInput}
-            debounceDelay={0}
             searchTerm=''
             inputLabel=''
-            config={config}
             placeholderValue={args.placeholderValue || ''}
           />
           <div style={{ paddingTop: 20 }}>

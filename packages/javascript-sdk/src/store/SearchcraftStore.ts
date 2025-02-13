@@ -1,4 +1,4 @@
-import { create } from 'zustand';
+import { createStore } from 'zustand';
 
 import {
   Logger,
@@ -8,6 +8,7 @@ import {
   type SearchcraftResponse,
   type SearchClientResponseItem,
   type AdClientResponseItem,
+  type SearchcraftCore,
 } from '@searchcraft/core';
 import type {
   SearchcraftState,
@@ -21,6 +22,7 @@ const initialSearchcraftStateValues: SearchcraftStateValues = {
   logger: undefined,
   facetPathsForIndexFields: {},
   isPopoverVisible: false,
+  isSearchInProgress: false,
   searchTerm: '',
   rangeValueForIndexFields: {},
   searchMode: 'fuzzy',
@@ -33,7 +35,7 @@ const initialSearchcraftStateValues: SearchcraftStateValues = {
   sortType: 'asc',
 };
 
-const useSearchcraftStore = create<SearchcraftState>((set, get) => {
+const searchcraftStore = createStore<SearchcraftState>((set, get) => {
   const functions: SearchcraftStateFunctions = {
     addFacetPathsForIndexField: (data: FacetPathsForIndexField) =>
       set((state) => ({
@@ -54,7 +56,7 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
       return core;
     },
     initialize: (searchcraftInstance, debug = false) => {
-      const core = searchcraftInstance;
+      const core = searchcraftInstance as SearchcraftCore;
       const logger = debug
         ? new Logger({ logLevel: LogLevel.DEBUG })
         : undefined;
@@ -115,6 +117,8 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
         return;
       }
 
+      set({ isSearchInProgress: true });
+
       const handleSearchcraftResponse = (
         response: SearchcraftResponse,
         items: SearchClientResponseItem[],
@@ -123,6 +127,7 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
 
         set((state) => {
           return {
+            isSearchInProgress: false,
             searchClientResponseItems: items,
             searchResponseTimeTaken: response.data.time_taken || 0,
             searchResultsPage:
@@ -178,6 +183,13 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
     setSearchMode: (mode) => set({ searchMode: mode }),
     setSortType: (type) => set({ sortType: type }),
     setSearchTerm: (searchTerm) => {
+      const { core } = get();
+
+      if (core && searchTerm.length === 0) {
+        core.emitEvent('input_cleared', {
+          name: 'input_cleared',
+        });
+      }
       /**
        * When a new searchTerm is set, also reset the sort type, search mode, and facet paths.
        */
@@ -210,4 +222,4 @@ const useSearchcraftStore = create<SearchcraftState>((set, get) => {
   return stateObject;
 });
 
-export { useSearchcraftStore };
+export { searchcraftStore };

@@ -19,12 +19,6 @@ This web component is designed to display search results in a popover container 
 // index.js
 const popoverForm = document.querySelector('searchcraft-popover-form');
 
-popoverForm.config = {
-  index: [index_name_from_vektron],
-  readKey: 'read_key_from_vektron',
-  endpointUrl: 'enpoint_url_from_vektron',
-};
-
 popoverForm.popoverResultMappings = {
  containerHref: {
   fieldNames: [
@@ -40,7 +34,6 @@ popoverForm.popoverResultMappings = {
 
 | Property                | Attribute         | Description                                                                                                                                                                                                                                                                                                                                                              | Type                                                                                                                                                                                                                                            | Default     |
 | ----------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| `config`                | --                | The Searchcraft config object.                                                                                                                                                                                                                                                                                                                                           | `SearchcraftConfig \| undefined`                                                                                                                                                                                                                | `undefined` |
 | `hotkey`                | `hotkey`          | The hotkey that activates the popover.                                                                                                                                                                                                                                                                                                                                   | `string`                                                                                                                                                                                                                                        | `'k'`       |
 | `hotkeyModifier`        | `hotkey-modifier` | The hotkey modifier that activates the popover. Used together with the `hotkey` prop.                                                                                                                                                                                                                                                                                    | `"alt" \| "ctrl" \| "meta" \| "option"`                                                                                                                                                                                                         | `'meta'`    |
 | `popoverResultMappings` | --                | Formats the content rendered for each result.                                                                                                                                                                                                                                                                                                                            | `undefined \| { title?: SearchResultMapping \| undefined; subtitle?: SearchResultMapping \| undefined; imageSource?: SearchResultMapping \| undefined; imageAlt?: SearchResultMapping \| undefined; href?: SearchResultMapping \| undefined; }` | `undefined` |
@@ -66,7 +59,7 @@ graph TD;
   searchcraft-input-form --> searchcraft-button
   searchcraft-input-form --> searchcraft-input-label
   searchcraft-input-form --> searchcraft-error-message
-  searchcraft-popover-list-view --> searchcraft-popover-list-item-ad
+  searchcraft-popover-list-view --> searchcraft-ad
   searchcraft-popover-list-view --> searchcraft-popover-list-item
   style searchcraft-popover-form fill:#f9f,stroke:#333,stroke-width:4px
 ```

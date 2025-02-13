@@ -1,5 +1,6 @@
 import type { PopoverResultMappings } from '@searchcraft/javascript-sdk';
 import {
+  Searchcraft,
   SearchcraftPopoverButton,
   SearchcraftPopoverForm,
   SearchcraftTheme,
@@ -50,14 +51,14 @@ const mappings: PopoverResultMappings = {
 export const Inline: StoryFn = (args) => ({
   components: { SearchcraftPopoverForm, SearchcraftTheme },
   setup() {
-    return { args, mappings, configAlternate };
+    new Searchcraft(configAlternate);
+    return { args, mappings };
   },
   template: `
     <div style="padding: 10px 20px;">
       <SearchcraftTheme />
       <p>Story Note: This story uses the Bazaario env vars</p>
       <SearchcraftPopoverForm
-        :config="configAlternate"
         hotkey="k"
         hotkeyModifier="ctrl"
         :popoverResultMappings="mappings"
@@ -78,7 +79,8 @@ export const Modal: StoryFn = (args) => ({
     SearchcraftTheme,
   },
   setup() {
-    return { args, mappings, configAlternate };
+    new Searchcraft(configAlternate);
+    return { args, mappings };
   },
   template: `
     <div style="padding: 10px 20px;">
@@ -88,7 +90,6 @@ export const Modal: StoryFn = (args) => ({
         <span>Click me</span>
       </SearchcraftPopoverButton>
       <SearchcraftPopoverForm
-        :config="configAlternate"
         hotkey="k"
         hotkeyModifier="ctrl"
         :popoverResultMappings="mappings"
@@ -105,7 +106,8 @@ export const Fullscreen: StoryFn = (args) => ({
     SearchcraftTheme,
   },
   setup() {
-    return { args, mappings, configAlternate };
+    new Searchcraft(configAlternate);
+    return { args, mappings };
   },
   template: `
     <div style="padding: 10px 20px;">
@@ -115,7 +117,6 @@ export const Fullscreen: StoryFn = (args) => ({
         <span>Click me</span>
       </SearchcraftPopoverButton>
       <SearchcraftPopoverForm
-        :config="configAlternate"
         hotkey="k"
         hotkeyModifier="ctrl"
         :popoverResultMappings="mappings"

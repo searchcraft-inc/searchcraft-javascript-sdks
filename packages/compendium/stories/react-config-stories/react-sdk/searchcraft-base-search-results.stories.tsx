@@ -1,37 +1,20 @@
-import type { SearchResultMappings } from '@searchcraft/javascript-sdk';
+import type {
+  SearchResultMappings,
+  Components,
+} from '@searchcraft/javascript-sdk';
 import {
+  Searchcraft,
   SearchcraftBaseSearchResults,
   SearchcraftInputForm,
   SearchcraftTheme,
 } from '@searchcraft/react-sdk';
 import type { Meta, StoryObj } from '@storybook/react';
-import { useEffect } from 'react';
 import { config } from '../../../utils/DefaultSearchcraftConfig';
+import { useEffect } from 'react';
 
 const componentMeta: Meta = {
   title: 'React SDK/searchcraft-base-search-results',
   argTypes: {},
-};
-
-type ComponentProps = {
-  adInterval: number;
-  customStylesForResults: string | Record<string, Record<string, string>>;
-  searchResultMappings: SearchResultMappings;
-  placeAdAtEnd: boolean;
-  placeAdAtStart: boolean;
-  resultImagePlacement: 'left' | 'right';
-  buttonLabel: string | undefined;
-  buttonTarget: '_blank' | '_self' | '_top' | '_parent';
-  buttonRel: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
-  containerTarget: '_blank' | '_self' | '_top' | '_parent';
-  containerRel: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
-  clearInput: () => void;
-  config: string;
-  customStylesForInput: string;
-  debounceDelay: number;
-  inputCaptionValue: string;
-  labelForInput: string;
-  placeholderValue: string;
 };
 
 const mappings: SearchResultMappings = {
@@ -72,39 +55,17 @@ const mappings: SearchResultMappings = {
   },
 };
 
-const defaultProps: ComponentProps = {
-  adInterval: 4,
-  buttonRel: 'noreferrer',
-  buttonTarget: '_blank',
-  buttonLabel: 'View More',
-  containerRel: 'noreferrer',
-  containerTarget: '_blank',
-  customStylesForResults: '',
-  debounceDelay: 0,
-  placeAdAtEnd: false,
-  placeAdAtStart: false,
-  resultImagePlacement: 'right',
-  searchResultMappings: mappings,
-  clearInput: () => {},
-  config: JSON.stringify(config),
-  customStylesForInput: '{}',
-  inputCaptionValue: 'Search',
-  labelForInput: 'Search for something:',
-  placeholderValue: 'Search here...',
-};
-
-export const Default: StoryObj<ComponentProps> = {
+export const Default: StoryObj<
+  Components.SearchcraftInputForm & Components.SearchcraftBaseSearchResults
+> = {
   decorators: [
     (Story) => {
       useEffect(() => {
-        const searchForm = document.querySelector('searchcraft-input-form');
+        new Searchcraft(config);
         const searchResults = document.querySelector(
           'searchcraft-base-search-results',
         );
 
-        if (searchForm) {
-          searchForm.config = config;
-        }
         if (searchResults) {
           searchResults.searchResultMappings = mappings;
         }
@@ -122,24 +83,19 @@ export const Default: StoryObj<ComponentProps> = {
             autoSearch={true}
             buttonLabel=''
             buttonPlacement='none'
-            customStyles={args.customStylesForInput}
-            debounceDelay={args.debounceDelay}
+            customStyles={args.customStyles}
             searchTerm=''
             inputLabel=''
-            config={config}
             placeholderValue={args.placeholderValue || ''}
           />
           <div style={{ paddingTop: 20 }}>
             <SearchcraftBaseSearchResults
-              adInterval={args.adInterval}
               buttonRel={args.buttonRel}
               buttonTarget={args.buttonTarget}
               buttonLabel={args.buttonLabel}
               containerRel={args.containerRel}
               containerTarget={args.containerTarget}
               customStylesForResults={args.customStylesForResults}
-              placeAdAtEnd={args.placeAdAtEnd}
-              placeAdAtStart={args.placeAdAtStart}
               resultImagePlacement={args.resultImagePlacement}
               searchResultMappings={mappings}
             />
@@ -148,7 +104,6 @@ export const Default: StoryObj<ComponentProps> = {
       </>
     );
   },
-  args: defaultProps,
 };
 
 export default componentMeta;

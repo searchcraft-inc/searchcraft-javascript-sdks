@@ -1,3 +1,4 @@
+import type { SearchcraftCore } from '../classes';
 import type {
   QueryObject,
   SearchParams,
@@ -7,19 +8,17 @@ import type {
 import { buildQueryObject } from '../utils';
 import { sanitize } from '../utils/sanitize';
 
-import type { MeasureClient } from './MeasureClient';
-
 export class SearchClient {
-  private measureClient: MeasureClient;
   private config: SearchcraftConfig;
   private userId: string;
+  private parent: SearchcraftCore;
 
   constructor(
+    parent: SearchcraftCore,
     config: SearchcraftConfig,
     userId: string,
-    measureClient: MeasureClient,
   ) {
-    this.measureClient = measureClient;
+    this.parent = parent;
     this.config = config;
     this.userId = userId;
   }
@@ -40,8 +39,15 @@ export class SearchClient {
   ): Promise<SearchcraftResponse> => {
     const searchTerm = sanitize(searchParams.searchTerm);
 
-    this.measureClient?.sendMeasureEvent('search_requested', {
+    this.parent.measureClient?.sendMeasureEvent('search_requested', {
       search_term: searchTerm,
+    });
+
+    this.parent.emitEvent('query_submitted', {
+      name: 'query_submitted',
+      data: {
+        searchTerm,
+      },
     });
 
     try {
@@ -90,7 +96,7 @@ export class SearchClient {
       const searchcraftResponse =
         (await response.json()) as SearchcraftResponse;
 
-      this.measureClient?.sendMeasureEvent('search_response_received', {
+      this.parent.measureClient?.sendMeasureEvent('search_response_received', {
         search_term: searchTerm,
         number_of_documents: searchcraftResponse.data.count,
       });

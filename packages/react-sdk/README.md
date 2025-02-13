@@ -24,29 +24,37 @@ The React SDK provides the following prebuilt components for use in your applica
 
 ```jsx
 
-<SearchInputForm />
-<SearchPopoverForm />
-<FilterPanel />
-<ResultsInfo />
-<BaseSearchResults />
+<SearchcraftInputForm />
+<SearchcraftPopoverForm />
+<SearchcraftFilterPanel />
+<SearchcraftResultsInfo />
+<SearchcraftBaseSearchResults />
+<SearchcraftPagination />
 
 ```
 
 These components can be rendered directly in your app and customized with configurations as needed.
 
-Example Setup
+#### Example Setup
+
+As early as possible in the app lifecycle, initialize the Searchcraft object:
+```jsx
+import { Searchcraft } from '@searchcraft/react-sdk';
+
+const searchcraft = new Searchcraft({
+  index: ['your_index_from_vektron'],
+  readKey: 'your_read_key_from_vektron',
+  endpointURL: 'your_searchcraft_endpoint_url',
+})
+
+```
+
+Add components to your application:
 
 ```jsx
 
 import React from 'react';
-import { SearchInputForm, FilterPanel, BaseSearchResults } from '@searchcraft/react-sdk/components';
-
-const config = {
-  index: ['your_index_from_vektron'],
-  readKey: 'your_read_key_from_vektron',
-  endpointURL: 'your_searchcraft_endpoint_url',
-  searchDebounceDelay: 50, // Optional debounce delay in milliseconds
-};
+import { SearchInputForm, FilterPanel, BaseSearchResults } from '@searchcraft/react-sdk';
 
 const filterPanelItems = [
   {
@@ -68,7 +76,7 @@ const filterPanelItems = [
 const App = () => {
   return (
     <>
-      <SearchInputForm config={config} />
+      <SearchInputForm />
       <FilterPanel items={filterPanelItems} />
       <BaseSearchResults />
     </>
@@ -173,31 +181,29 @@ export const searchResultMappings = {
 
 ```
 
-Event Handling
-
-The React SDK components support event handling for common actions such as query submission, input focus, or search results.
+#### Event Handling
+You can subscribe to various events within Searchcraft:
 
 ```jsx
 
-<SearchInputForm
-  onQuerySubmit={(event) => {
-    console.log('Query submitted:', event.detail);
-  }}
-  onInputFocus={() => {
-    console.log('Input focused');
-  }}
-  onInputBlur={() => {
-    console.log('Input blurred');
-  }}
-/>
+  const searchcraft = new Searchcraft({
+    index: ['your_index_from_vektron'],
+    readKey: 'your_read_key_from_vektron',
+    endpointURL: 'your_searchcraft_endpoint_url',
+    searchDebounceDelay: 50, // The amount of debounce, in millis, to add to search requests (optional)
+  });
 
-<BaseSearchResults
-  onNoResults={() => {
-    console.log('No results found');
-  }}
-/>
+  const unsubscribeCallback = searchcraft.subscribe('query_submitted', (event) => {
+    // Do something in your application when a query has been submitted
+  });
 
+
+  const unsubscribeCallback = searchcraft.subscribe('ad_container_rendered', (event) => {
+    // Do something when a new ad container has been rendered
+  });
 ```
+
+For a complete listing of event subscriptions, refer to the api reference.
 
 Additional Information
 

@@ -2,9 +2,10 @@ import type {
   AdClientResponseItem,
   SearchClientResponseItem,
 } from '@searchcraft/core';
-import { Component, h, Prop } from '@stencil/core';
+import { Component, h, Prop, type JSX } from '@stencil/core';
 
 import type { PopoverResultMappings } from '@searchcraft/core';
+import { searchcraftStore } from '@store';
 
 /**
  * This web component is designed to display a list of results within a popover interface.
@@ -34,13 +35,16 @@ export class SearchcraftPopoverListView {
   @Prop() searchResultsPage!: number;
   @Prop() searchResultsPerPage!: number;
 
-  render() {
+  private config = searchcraftStore.getState().core?.config;
+
+  renderWithADMAds() {
     return (
       <div class='searchcraft-popover-list-view'>
         {this.adClientResponseItems?.map((item) => (
-          <searchcraft-popover-list-item-ad
+          <searchcraft-ad
             adClientResponseItem={item}
-            key={item.adId}
+            adSource='adMarketplace'
+            key={item.id}
           />
         ))}
         {this.searchClientResponseItems?.map((item, index) => (
@@ -55,5 +59,81 @@ export class SearchcraftPopoverListView {
         ))}
       </div>
     );
+  }
+
+  renderWithCustomAds() {
+    const itemsToRender: JSX.Element[] = [];
+    const interstitialInterval = this.config?.customAdInterstitialInterval || 0;
+    const interstitialQuantity = this.config?.customAdInterstitialQuantity || 1;
+    const adStartQuantity = this.config?.customAdStartQuantity || 0;
+    const adEndQuantity = this.config?.customAdEndQuantity || 0;
+    const searchItems = this.searchClientResponseItems || [];
+
+    // Renders ads at beginning
+    for (let n = 0; n < adStartQuantity; n++) {
+      itemsToRender.push(<searchcraft-ad adSource='Custom' key={`${n}-ad`} />);
+    }
+
+    // Renders search results + interstitial ads
+    searchItems.forEach((item, index) => {
+      if (
+        interstitialInterval &&
+        index % interstitialInterval === 0 &&
+        index + interstitialInterval < searchItems.length &&
+        index >= interstitialInterval
+      ) {
+        for (let n = 0; n < interstitialQuantity; n++) {
+          itemsToRender.push(
+            <searchcraft-ad adSource='Custom' key={`${item.id}-ad-${n}`} />,
+          );
+        }
+      }
+
+      itemsToRender.push(
+        <searchcraft-popover-list-item
+          item={item}
+          key={item.id}
+          popoverResultMappings={this.popoverResultMappings}
+          documentPosition={
+            this.searchResultsPerPage * (this.searchResultsPage - 1) + index
+          }
+        />,
+      );
+    });
+
+    // Renders ads at end
+    for (let n = 0; n < adEndQuantity; n++) {
+      itemsToRender.push(<searchcraft-ad adSource='Custom' key={`${n}-ad`} />);
+    }
+
+    return <div class='searchcraft-popover-list-view'>{itemsToRender}</div>;
+  }
+
+  renderWithNoAds() {
+    return (
+      <div class='searchcraft-popover-list-view'>
+        {this.searchClientResponseItems?.map((item, index) => (
+          <searchcraft-popover-list-item
+            item={item}
+            key={item.id}
+            popoverResultMappings={this.popoverResultMappings}
+            documentPosition={
+              this.searchResultsPerPage * (this.searchResultsPage - 1) + index
+            }
+          />
+        ))}
+      </div>
+    );
+  }
+
+  render() {
+    switch (this.config?.adSource || 'None') {
+      case 'adMarketplace':
+        return this.renderWithADMAds();
+      case 'Custom':
+        return this.renderWithCustomAds();
+      default:
+        return this.renderWithNoAds();
+    }
   }
 }

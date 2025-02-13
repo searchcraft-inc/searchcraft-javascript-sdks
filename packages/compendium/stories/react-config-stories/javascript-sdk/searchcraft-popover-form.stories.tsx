@@ -1,11 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import type {
-  PopoverResultMappings,
-  SearchcraftConfig,
+import {
+  type PopoverResultMappings,
+  type SearchcraftConfig,
+  Searchcraft,
+  type Components,
 } from '@searchcraft/javascript-sdk';
 import { configAlternate } from '../../../utils/AlternateSearchcraftConfig';
 import { useEffect } from 'react';
-import type { Components } from '@searchcraft/javascript-sdk';
 
 const componentMeta: Meta = {
   title: 'Javascript SDK/searchcraft-popover-form',
@@ -50,10 +51,9 @@ export const Inline: StoryObj<Components.SearchcraftPopoverForm> = {
   decorators: [
     (Story) => {
       useEffect(() => {
+        new Searchcraft(configAlternate);
         const searchForm = document.querySelector('searchcraft-popover-form');
-
         if (searchForm) {
-          searchForm.config = configAlternate;
           searchForm.popoverResultMappings = mappings;
         }
       }, []);
@@ -143,18 +143,17 @@ export const InlineWithAds: StoryObj<Components.SearchcraftPopoverForm> = {
   decorators: [
     (Story) => {
       useEffect(() => {
-        const searchForm = document.querySelector('searchcraft-popover-form');
-
         const config: SearchcraftConfig = {
           ...configAlternate,
-          adProvider: 'adMarketplace',
+          adSource: 'adMarketplace',
           admSub: 'searchbox1',
           admProductAdQuantity: 3,
           admTextAdQuantity: 3,
         };
+        new Searchcraft(config);
+        const searchForm = document.querySelector('searchcraft-popover-form');
 
         if (searchForm) {
-          searchForm.config = config;
           searchForm.popoverResultMappings = mappings;
         }
       }, []);
@@ -188,10 +187,10 @@ export const Modal: StoryObj<Components.SearchcraftPopoverForm> = {
   decorators: [
     (Story) => {
       useEffect(() => {
+        new Searchcraft(configAlternate);
         const searchForm = document.querySelector('searchcraft-popover-form');
 
         if (searchForm) {
-          searchForm.config = configAlternate;
           searchForm.popoverResultMappings = mappings;
         }
       }, []);
@@ -225,10 +224,10 @@ export const Fullscreen: StoryObj<Components.SearchcraftPopoverForm> = {
   decorators: [
     (Story) => {
       useEffect(() => {
+        new Searchcraft(configAlternate);
         const searchForm = document.querySelector('searchcraft-popover-form');
 
         if (searchForm) {
-          searchForm.config = configAlternate;
           searchForm.popoverResultMappings = mappings;
         }
       }, []);
