@@ -1,4 +1,6 @@
 import { type SearchcraftConfig, SearchcraftCore } from '@searchcraft/core';
+import { defineCustomElements } from '@searchcraft/javascript-sdk';
+
 import packageJson from '../package.json';
 
 /**
@@ -22,3 +24,8 @@ export class Searchcraft extends SearchcraftCore {
  * Exports the shared types that all SDKs need
  */
 export type * from '@searchcraft/core/dist/types/sdk-types';
+
+/**
+ * Call the javascript sdk's defineCustomElementsFunction
+ */
+defineCustomElements();
