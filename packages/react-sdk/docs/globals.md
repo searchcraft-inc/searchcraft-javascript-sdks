@@ -10,6 +10,12 @@
 
 ## Interfaces
 
+- [DateRangeFilterItem](/reference/sdk/js-react/interfaces/DateRangeFilterItem.md)
+- [ExactMatchToggleFilterItem](/reference/sdk/js-react/interfaces/ExactMatchToggleFilterItem.md)
+- [FacetsFilterItem](/reference/sdk/js-react/interfaces/FacetsFilterItem.md)
+- [FilterItem](/reference/sdk/js-react/interfaces/FilterItem.md)
+- [MostRecentToggleFilterItem](/reference/sdk/js-react/interfaces/MostRecentToggleFilterItem.md)
+- [NumericFilterItem](/reference/sdk/js-react/interfaces/NumericFilterItem.md)
 - [SearchcraftBaseSearchResultsProps](/reference/sdk/js-react/interfaces/SearchcraftBaseSearchResultsProps.md)
 - [SearchcraftFilterPanelProps](/reference/sdk/js-react/interfaces/SearchcraftFilterPanelProps.md)
 - [SearchcraftInputFormProps](/reference/sdk/js-react/interfaces/SearchcraftInputFormProps.md)
@@ -19,6 +25,13 @@
 - [SearchcraftResultsInfoProps](/reference/sdk/js-react/interfaces/SearchcraftResultsInfoProps.md)
 - [SearchcraftSearchResultsPerPageProps](/reference/sdk/js-react/interfaces/SearchcraftSearchResultsPerPageProps.md)
 - [SearchcraftThemeProps](/reference/sdk/js-react/interfaces/SearchcraftThemeProps.md)
+
+## Type Aliases
+
+- [PopoverResultMappings](/reference/sdk/js-react/type-aliases/PopoverResultMappings.md)
+- [SearchResultFieldName](/reference/sdk/js-react/type-aliases/SearchResultFieldName.md)
+- [SearchResultMapping](/reference/sdk/js-react/type-aliases/SearchResultMapping.md)
+- [SearchResultMappings](/reference/sdk/js-react/type-aliases/SearchResultMappings.md)
 
 ## Functions
 

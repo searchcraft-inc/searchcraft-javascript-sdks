@@ -16,16 +16,16 @@ It does not render anything visible, its only function is to manage the css styl
 
 ## Properties
 
-### customTheme
+### customTheme?
 
-> **customTheme**: `string`
+> `optional` **customTheme**: `string`
 
 The custom theme configuration object.
 
 ***
 
-### theme
+### theme?
 
-> **theme**: `string`
+> `optional` **theme**: `string`
 
 The name of the theme.

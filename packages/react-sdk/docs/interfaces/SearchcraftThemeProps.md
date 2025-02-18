@@ -14,9 +14,9 @@ The Props for the SearchcraftTheme component.
 
 ## Properties
 
-### customTheme
+### customTheme?
 
-> **customTheme**: `string`
+> `optional` **customTheme**: `string`
 
 The custom theme configuration object.
 
@@ -26,9 +26,9 @@ The custom theme configuration object.
 
 ***
 
-### theme
+### theme?
 
-> **theme**: `string`
+> `optional` **theme**: `string`
 
 The name of the theme.
 

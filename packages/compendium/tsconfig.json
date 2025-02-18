@@ -1,17 +1,16 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
     "jsx": "react-jsx",
-    "moduleResolution": "node",
-    "types": ["vite/client"] // Add Vite types
+    "moduleResolution": "node10",
+    "types": ["vite/client"],
+    "paths": {
+      "@stories/*": ["stories/*"],
+      "@utils": ["utils/index.ts"],
+      "@utils/*": ["utils/*"]
+    }
   },
   "exclude": ["node_modules", "dist"],
   "extends": "../../tsconfig.json",
-  "include": [
-    "./.storybook",
-    "./stories",
-    "examples",
-    "stories/utils/DefaultSearchcraftConfig.ts",
-    "stories/utils/WebComponentWrapper.tsx",
-    "utils"
-  ]
+  "include": ["./.storybook", "./stories", "./utils"]
 }

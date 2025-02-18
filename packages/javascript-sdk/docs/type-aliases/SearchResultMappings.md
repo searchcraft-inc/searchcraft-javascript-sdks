@@ -12,28 +12,28 @@
 
 ### body?
 
-> `optional` **body**: `SearchResultMapping`
+> `optional` **body**: [`SearchResultMapping`](/reference/sdk/js-vanilla/type-aliases/SearchResultMapping.md)
 
 ### buttonHref?
 
-> `optional` **buttonHref**: `SearchResultMapping`
+> `optional` **buttonHref**: [`SearchResultMapping`](/reference/sdk/js-vanilla/type-aliases/SearchResultMapping.md)
 
 ### containerHref?
 
-> `optional` **containerHref**: `SearchResultMapping`
+> `optional` **containerHref**: [`SearchResultMapping`](/reference/sdk/js-vanilla/type-aliases/SearchResultMapping.md)
 
 ### footer?
 
-> `optional` **footer**: `SearchResultMapping`
+> `optional` **footer**: [`SearchResultMapping`](/reference/sdk/js-vanilla/type-aliases/SearchResultMapping.md)
 
 ### imageSource?
 
-> `optional` **imageSource**: `SearchResultMapping`
+> `optional` **imageSource**: [`SearchResultMapping`](/reference/sdk/js-vanilla/type-aliases/SearchResultMapping.md)
 
 ### subtitle?
 
-> `optional` **subtitle**: `SearchResultMapping`
+> `optional` **subtitle**: [`SearchResultMapping`](/reference/sdk/js-vanilla/type-aliases/SearchResultMapping.md)
 
 ### title?
 
-> `optional` **title**: `SearchResultMapping`
+> `optional` **title**: [`SearchResultMapping`](/reference/sdk/js-vanilla/type-aliases/SearchResultMapping.md)

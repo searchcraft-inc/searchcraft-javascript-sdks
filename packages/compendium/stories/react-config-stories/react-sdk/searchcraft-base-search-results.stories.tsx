@@ -9,7 +9,7 @@ import {
   SearchcraftTheme,
 } from '@searchcraft/react-sdk';
 import type { Meta, StoryObj } from '@storybook/react';
-import { config } from '../../../utils/DefaultSearchcraftConfig';
+import { config } from '@utils/DefaultSearchcraftConfig';
 import { useEffect } from 'react';
 
 const componentMeta: Meta = {

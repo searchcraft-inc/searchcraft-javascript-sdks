@@ -17,3 +17,8 @@ export class Searchcraft extends SearchcraftCore {
     });
   }
 }
+
+/**
+ * Exports the shared types that all SDKs need
+ */
+export type * from '@searchcraft/core/dist/types/sdk-types';

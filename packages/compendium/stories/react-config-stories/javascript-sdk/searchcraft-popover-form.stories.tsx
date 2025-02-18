@@ -5,7 +5,7 @@ import {
   Searchcraft,
   type Components,
 } from '@searchcraft/javascript-sdk';
-import { configAlternate } from '../../../utils/AlternateSearchcraftConfig';
+import { configAlternate } from '@utils/AlternateSearchcraftConfig';
 import { useEffect } from 'react';
 
 const componentMeta: Meta = {

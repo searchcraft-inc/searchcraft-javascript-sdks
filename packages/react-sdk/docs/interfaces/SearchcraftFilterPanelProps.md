@@ -16,7 +16,7 @@ The props for the SearchcraftFilterPanel.
 
 ### items
 
-> **items**: `FilterItem`[]
+> **items**: [`FilterItem`](/reference/sdk/js-react/interfaces/FilterItem.md)[]
 
 The items to filter.
 

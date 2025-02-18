@@ -17,8 +17,8 @@ import type { SearchResultMappings } from '@searchcraft/core';
   shadow: false,
 })
 export class SearchcraftBaseSearchResult {
-  @Prop() item: SearchClientResponseItem | undefined;
-  @Prop() searchResultMappings: SearchResultMappings | undefined;
+  @Prop() item?: SearchClientResponseItem;
+  @Prop() searchResultMappings?: SearchResultMappings;
   /**
    * Where to open the link for the containing element.
    */
@@ -26,7 +26,7 @@ export class SearchcraftBaseSearchResult {
   /**
    * The relationship between the current document and the link for the containing element.
    */
-  @Prop() containerRel: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
+  @Prop() containerRel?: 'noreferrer' | 'noopener' | 'nofollow';
   /**
    * Where to open the link for the button rendered when containerHref is not present.
    */
@@ -34,7 +34,7 @@ export class SearchcraftBaseSearchResult {
   /**
    * The relationship between the current document and the link for the button rendered when containerHref is not present.
    */
-  @Prop() buttonRel: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
+  @Prop() buttonRel?: 'noreferrer' | 'noopener' | 'nofollow';
   /**
    * The placement of the image.
    */
@@ -42,7 +42,7 @@ export class SearchcraftBaseSearchResult {
   /**
    * A custom styles object.
    */
-  @Prop() customStyles: string | undefined;
+  @Prop() customStyles?: string;
   /**
    * The position in the document. Used with the "document_clicked" measure event.
    */

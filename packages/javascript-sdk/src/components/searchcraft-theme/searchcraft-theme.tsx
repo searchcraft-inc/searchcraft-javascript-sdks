@@ -19,11 +19,11 @@ export class SearchcraftTheme {
   /**
    * The name of the theme.
    */
-  @Prop() theme = 'light';
+  @Prop() theme?: string;
   /**
    * The custom theme configuration object.
    */
-  @Prop() customTheme = '[]';
+  @Prop() customTheme?: string;
 
   private camelToKebab = (string) => {
     return string
@@ -50,10 +50,10 @@ export class SearchcraftTheme {
     }
 
     // Add theme name to body
-    document.body.dataset.theme = this.theme;
+    document.body.dataset.theme = this.theme || 'light';
 
     // Add CSS variables from customTheme configuration to document
-    Object.entries(JSON.parse(this.customTheme)).map(([key, value]) => {
+    Object.entries(JSON.parse(this.customTheme || '[]')).map(([key, value]) => {
       document.documentElement.style.setProperty(
         `--${this.camelToKebab(key)}`,
         `${value}`,
