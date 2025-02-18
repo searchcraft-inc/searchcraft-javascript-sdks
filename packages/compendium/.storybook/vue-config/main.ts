@@ -1,4 +1,4 @@
-import { resolve } from 'node:path';
+import path, { resolve } from 'node:path';
 import type { StorybookConfig } from '@storybook/vue3-vite';
 import vue from '@vitejs/plugin-vue';
 
@@ -22,6 +22,7 @@ const config: StorybookConfig = {
       alias: {
         ...(config.resolve?.alias || {}),
         vue: resolve('./node_modules/vue'), // Forces Storybook and SDK to use the same Vue instance
+        '@utils': path.resolve(__dirname, '../../utils'),
       },
     };
     return config;
