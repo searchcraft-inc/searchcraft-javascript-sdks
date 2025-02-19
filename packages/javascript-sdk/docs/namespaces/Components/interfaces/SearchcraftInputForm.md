@@ -28,9 +28,9 @@ Whether or not to automatically submit the search term when the input changes.
 
 ***
 
-### buttonLabel
+### buttonLabel?
 
-> **buttonLabel**: `undefined` \| `string`
+> `optional` **buttonLabel**: `string`
 
 The label for the submit button.
 
@@ -58,9 +58,9 @@ A custom styles object to be applied to the input element.
 
 ***
 
-### inputLabel
+### inputLabel?
 
-> **inputLabel**: `undefined` \| `string`
+> `optional` **inputLabel**: `string`
 
 The label rendered above the input.
 

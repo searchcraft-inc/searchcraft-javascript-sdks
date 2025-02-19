@@ -46,11 +46,11 @@ export class SearchcraftInput {
   /**
    * The label for the submit button.
    */
-  @Prop() buttonLabel: string | undefined;
+  @Prop() buttonLabel?: string;
   /**
    * The label rendered above the input.
    */
-  @Prop() inputLabel: string | undefined;
+  @Prop() inputLabel?: string;
   /**
    * A custom styles object to be applied to the input element.
    */

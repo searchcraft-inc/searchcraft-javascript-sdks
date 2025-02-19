@@ -51,14 +51,13 @@ export class SearchcraftBaseSearchResults {
   /**
    * A custom styles object.
    */
-  @Prop() customStylesForResults:
+  @Prop() customStylesForResults?:
     | string
-    | Record<string, Record<string, string>>
-    | undefined;
+    | Record<string, Record<string, string>>;
   /**
    * Formats the content rendered for each result.
    */
-  @Prop() searchResultMappings: SearchResultMappings | undefined;
+  @Prop() searchResultMappings?: SearchResultMappings;
   /**
    * The placement of the image for each result.
    */
@@ -66,7 +65,7 @@ export class SearchcraftBaseSearchResults {
   /**
    * The label for the button rendered when containerHref is not present for each result.
    */
-  @Prop() buttonLabel: string | undefined;
+  @Prop() buttonLabel?: string;
   /**
    * Where to open the link for the button rendered when containerHref is not present for each result.
    */
@@ -74,7 +73,7 @@ export class SearchcraftBaseSearchResults {
   /**
    * The relationship between the current document and the link for the button rendered when containerHref is not present for each result.
    */
-  @Prop() buttonRel: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
+  @Prop() buttonRel?: 'noreferrer' | 'noopener' | 'nofollow';
   /**
    * Where to open the link for the containing element for each result.
    */
@@ -82,7 +81,7 @@ export class SearchcraftBaseSearchResults {
   /**
    * The relationship between the current document and the link for the containing element for each result.
    */
-  @Prop() containerRel: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
+  @Prop() containerRel?: 'noreferrer' | 'noopener' | 'nofollow';
 
   @State() searchTerm = '';
   @State() searchClientResponseItems: SearchClientResponseItem[] = [];

@@ -10,8 +10,8 @@ import {
 
 import type { Meta, StoryFn } from '@storybook/vue3';
 
-import { config } from '../../../utils/DefaultSearchcraftConfig';
-import type { SearchResultMappings } from 'packages/javascript-sdk/dist/types';
+import { config } from '@utils/DefaultSearchcraftConfig';
+import type { SearchResultMappings } from '@searchcraft/javascript-sdk';
 
 const searchResultMappings: SearchResultMappings = {
   containerHref: {

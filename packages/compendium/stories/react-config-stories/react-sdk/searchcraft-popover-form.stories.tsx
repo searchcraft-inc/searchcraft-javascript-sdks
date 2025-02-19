@@ -6,7 +6,7 @@ import {
   SearchcraftTheme,
 } from '@searchcraft/react-sdk';
 import type { Meta, StoryObj } from '@storybook/react';
-import { configAlternate } from '../../../utils/AlternateSearchcraftConfig';
+import { configAlternate } from '@utils/AlternateSearchcraftConfig';
 import { useEffect } from 'react';
 
 const componentMeta: Meta = {

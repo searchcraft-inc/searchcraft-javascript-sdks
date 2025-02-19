@@ -129,7 +129,11 @@ if (targetPackageInfo) {
   }
 } else {
   Object.values(packages).forEach((packageInfo) => {
-    if (!mandatoryPackagesToBuild.includes(packageInfo.name)) {
+    if (
+      !mandatoryPackagesToBuild
+        .map((item) => item.name)
+        .includes(packageInfo.name)
+    ) {
       buildPackage(packageInfo);
     }
   });

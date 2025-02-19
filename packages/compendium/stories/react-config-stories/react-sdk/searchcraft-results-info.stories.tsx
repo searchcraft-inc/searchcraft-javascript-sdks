@@ -5,7 +5,7 @@ import {
   SearchcraftTheme,
   type SearchcraftResultsInfoProps,
 } from '@searchcraft/react-sdk';
-import { config } from '../../../utils/DefaultSearchcraftConfig';
+import { config } from '@utils/DefaultSearchcraftConfig';
 import { useEffect } from 'react';
 
 const componentMeta: Meta = {

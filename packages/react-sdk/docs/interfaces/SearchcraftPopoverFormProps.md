@@ -38,9 +38,9 @@ The hotkey modifier that activates the popover. Used together with the `hotkey` 
 
 ***
 
-### popoverResultMappings
+### popoverResultMappings?
 
-> **popoverResultMappings**: `undefined` \| `PopoverResultMappings`
+> `optional` **popoverResultMappings**: [`PopoverResultMappings`](/reference/sdk/js-react/type-aliases/PopoverResultMappings.md)
 
 Formats the content rendered for each result.
 

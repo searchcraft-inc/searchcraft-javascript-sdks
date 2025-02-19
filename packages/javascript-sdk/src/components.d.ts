@@ -26,7 +26,7 @@ export namespace Components {
         /**
           * The relationship between the current document and the link for the button rendered when containerHref is not present.
          */
-        "buttonRel": 'noreferrer' | 'noopener' | 'nofollow' | undefined;
+        "buttonRel"?: 'noreferrer' | 'noopener' | 'nofollow';
         /**
           * Where to open the link for the button rendered when containerHref is not present.
          */
@@ -34,7 +34,7 @@ export namespace Components {
         /**
           * The relationship between the current document and the link for the containing element.
          */
-        "containerRel": 'noreferrer' | 'noopener' | 'nofollow' | undefined;
+        "containerRel"?: 'noreferrer' | 'noopener' | 'nofollow';
         /**
           * Where to open the link for the containing element.
          */
@@ -42,7 +42,7 @@ export namespace Components {
         /**
           * A custom styles object.
          */
-        "customStyles": string | undefined;
+        "customStyles"?: string;
         /**
           * The position in the document. Used with the "document_clicked" measure event.
          */
@@ -51,8 +51,8 @@ export namespace Components {
           * The placement of the image.
          */
         "imagePlacement": 'left' | 'right';
-        "item": SearchClientResponseItem | undefined;
-        "searchResultMappings": SearchResultMappings | undefined;
+        "item"?: SearchClientResponseItem;
+        "searchResultMappings"?: SearchResultMappings;
     }
     /**
      * This web component is responsible for displaying the results of a search query.
@@ -86,11 +86,11 @@ export namespace Components {
         /**
           * The label for the button rendered when containerHref is not present for each result.
          */
-        "buttonLabel": string | undefined;
+        "buttonLabel"?: string;
         /**
           * The relationship between the current document and the link for the button rendered when containerHref is not present for each result.
          */
-        "buttonRel": 'noreferrer' | 'noopener' | 'nofollow' | undefined;
+        "buttonRel"?: 'noreferrer' | 'noopener' | 'nofollow';
         /**
           * Where to open the link for the button rendered when containerHref is not present for each result.
          */
@@ -98,7 +98,7 @@ export namespace Components {
         /**
           * The relationship between the current document and the link for the containing element for each result.
          */
-        "containerRel": 'noreferrer' | 'noopener' | 'nofollow' | undefined;
+        "containerRel"?: 'noreferrer' | 'noopener' | 'nofollow';
         /**
           * Where to open the link for the containing element for each result.
          */
@@ -106,9 +106,8 @@ export namespace Components {
         /**
           * A custom styles object.
          */
-        "customStylesForResults": | string
-    | Record<string, Record<string, string>>
-    | undefined;
+        "customStylesForResults"?: | string
+    | Record<string, Record<string, string>>;
         /**
           * The placement of the image for each result.
          */
@@ -116,7 +115,7 @@ export namespace Components {
         /**
           * Formats the content rendered for each result.
          */
-        "searchResultMappings": SearchResultMappings | undefined;
+        "searchResultMappings"?: SearchResultMappings;
     }
     /**
      * This web component represents a button to be consumed within the `search-input-form` component.
@@ -224,7 +223,7 @@ export namespace Components {
         /**
           * The label for the submit button.
          */
-        "buttonLabel": string | undefined;
+        "buttonLabel"?: string;
         /**
           * Where to place the search button.
          */
@@ -237,7 +236,7 @@ export namespace Components {
         /**
           * The label rendered above the input.
          */
-        "inputLabel": string | undefined;
+        "inputLabel"?: string;
         /**
           * The input element's placeholder value.
          */
@@ -315,7 +314,7 @@ export namespace Components {
         /**
           * Formats the content rendered for each result.
          */
-        "popoverResultMappings": PopoverResultMappings | undefined;
+        "popoverResultMappings"?: PopoverResultMappings;
         /**
           * The type of popover form to render.  - `inline` - Renders inline with the rest of the content on the page. The search results pop over the page content. - `fullscreen` - Renders in fullscreen view. Used together with the `searchcraft-popover-button` component. - `modal` - Renders in a modal view. Used together with the `searchcraft-popover-button` component.
          */
@@ -482,11 +481,11 @@ export namespace Components {
         /**
           * The custom theme configuration object.
          */
-        "customTheme": string;
+        "customTheme"?: string;
         /**
           * The name of the theme.
          */
-        "theme": string;
+        "theme"?: string;
     }
     /**
      * This web component simulates a light switch functionality, providing a simple and intuitive toggle between two states—on and off.
@@ -946,7 +945,7 @@ declare namespace LocalJSX {
         /**
           * The relationship between the current document and the link for the button rendered when containerHref is not present.
          */
-        "buttonRel"?: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
+        "buttonRel"?: 'noreferrer' | 'noopener' | 'nofollow';
         /**
           * Where to open the link for the button rendered when containerHref is not present.
          */
@@ -954,7 +953,7 @@ declare namespace LocalJSX {
         /**
           * The relationship between the current document and the link for the containing element.
          */
-        "containerRel"?: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
+        "containerRel"?: 'noreferrer' | 'noopener' | 'nofollow';
         /**
           * Where to open the link for the containing element.
          */
@@ -962,7 +961,7 @@ declare namespace LocalJSX {
         /**
           * A custom styles object.
          */
-        "customStyles"?: string | undefined;
+        "customStyles"?: string;
         /**
           * The position in the document. Used with the "document_clicked" measure event.
          */
@@ -971,8 +970,8 @@ declare namespace LocalJSX {
           * The placement of the image.
          */
         "imagePlacement"?: 'left' | 'right';
-        "item"?: SearchClientResponseItem | undefined;
-        "searchResultMappings"?: SearchResultMappings | undefined;
+        "item"?: SearchClientResponseItem;
+        "searchResultMappings"?: SearchResultMappings;
     }
     /**
      * This web component is responsible for displaying the results of a search query.
@@ -1006,11 +1005,11 @@ declare namespace LocalJSX {
         /**
           * The label for the button rendered when containerHref is not present for each result.
          */
-        "buttonLabel"?: string | undefined;
+        "buttonLabel"?: string;
         /**
           * The relationship between the current document and the link for the button rendered when containerHref is not present for each result.
          */
-        "buttonRel"?: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
+        "buttonRel"?: 'noreferrer' | 'noopener' | 'nofollow';
         /**
           * Where to open the link for the button rendered when containerHref is not present for each result.
          */
@@ -1018,7 +1017,7 @@ declare namespace LocalJSX {
         /**
           * The relationship between the current document and the link for the containing element for each result.
          */
-        "containerRel"?: 'noreferrer' | 'noopener' | 'nofollow' | undefined;
+        "containerRel"?: 'noreferrer' | 'noopener' | 'nofollow';
         /**
           * Where to open the link for the containing element for each result.
          */
@@ -1027,8 +1026,7 @@ declare namespace LocalJSX {
           * A custom styles object.
          */
         "customStylesForResults"?: | string
-    | Record<string, Record<string, string>>
-    | undefined;
+    | Record<string, Record<string, string>>;
         /**
           * The placement of the image for each result.
          */
@@ -1036,7 +1034,7 @@ declare namespace LocalJSX {
         /**
           * Formats the content rendered for each result.
          */
-        "searchResultMappings"?: SearchResultMappings | undefined;
+        "searchResultMappings"?: SearchResultMappings;
     }
     /**
      * This web component represents a button to be consumed within the `search-input-form` component.
@@ -1152,7 +1150,7 @@ declare namespace LocalJSX {
         /**
           * The label for the submit button.
          */
-        "buttonLabel"?: string | undefined;
+        "buttonLabel"?: string;
         /**
           * Where to place the search button.
          */
@@ -1165,7 +1163,7 @@ declare namespace LocalJSX {
         /**
           * The label rendered above the input.
          */
-        "inputLabel"?: string | undefined;
+        "inputLabel"?: string;
         /**
           * When the input becomes unfocused.
          */
@@ -1255,7 +1253,7 @@ declare namespace LocalJSX {
         /**
           * Formats the content rendered for each result.
          */
-        "popoverResultMappings"?: PopoverResultMappings | undefined;
+        "popoverResultMappings"?: PopoverResultMappings;
         /**
           * The type of popover form to render.  - `inline` - Renders inline with the rest of the content on the page. The search results pop over the page content. - `fullscreen` - Renders in fullscreen view. Used together with the `searchcraft-popover-button` component. - `modal` - Renders in a modal view. Used together with the `searchcraft-popover-button` component.
          */
