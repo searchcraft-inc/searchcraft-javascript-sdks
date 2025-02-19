@@ -47,8 +47,8 @@ export class SearchcraftFilterPanel {
   }
 
   handleDateRangeChanged(fieldName: string, min: number, max: number) {
-    const start = new Date(min);
-    const end = new Date(max);
+    const start = new Date(new Date(min).getFullYear(), 0, 1);
+    const end = new Date(new Date(max).getFullYear() + 1, 0, 0);
     this.searchStore.addRangeValueForIndexField({
       fieldName,
       value: `${fieldName}:[${start.toISOString()} TO ${end.toISOString()}]`,
