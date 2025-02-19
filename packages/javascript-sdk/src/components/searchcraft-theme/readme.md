@@ -18,10 +18,10 @@ It does not render anything visible, its only function is to manage the css styl
 
 ## Properties
 
-| Property      | Attribute      | Description                            | Type     | Default   |
-| ------------- | -------------- | -------------------------------------- | -------- | --------- |
-| `customTheme` | `custom-theme` | The custom theme configuration object. | `string` | `'[]'`    |
-| `theme`       | `theme`        | The name of the theme.                 | `string` | `'light'` |
+| Property      | Attribute      | Description                            | Type                  | Default     |
+| ------------- | -------------- | -------------------------------------- | --------------------- | ----------- |
+| `customTheme` | `custom-theme` | The custom theme configuration object. | `string \| undefined` | `undefined` |
+| `theme`       | `theme`        | The name of the theme.                 | `string \| undefined` | `undefined` |
 
 
 ----------------------------------------------

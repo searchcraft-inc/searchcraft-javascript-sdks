@@ -48,7 +48,7 @@ export class SearchcraftPopoverForm {
   /**
    * Formats the content rendered for each result.
    */
-  @Prop() popoverResultMappings: PopoverResultMappings | undefined;
+  @Prop() popoverResultMappings?: PopoverResultMappings;
   /**
    * The hotkey that activates the popover.
    */

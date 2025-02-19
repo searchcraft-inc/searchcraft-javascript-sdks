@@ -1,6 +1,7 @@
 import type { StorybookConfig } from '@storybook/react-vite';
 
-import { dirname, join } from 'node:path';
+import path, { dirname, join } from 'node:path';
+import { mergeConfig } from 'vite';
 
 function getAbsolutePath(value: string) {
   return dirname(require.resolve(join(value, 'package.json')));
@@ -20,6 +21,15 @@ const config: StorybookConfig = {
   framework: {
     name: getAbsolutePath('@storybook/react-vite'),
     options: {},
+  },
+  async viteFinal(config) {
+    return mergeConfig(config, {
+      resolve: {
+        alias: {
+          '@utils': path.resolve(__dirname, '../../utils'),
+        },
+      },
+    });
   },
 };
 export default config;

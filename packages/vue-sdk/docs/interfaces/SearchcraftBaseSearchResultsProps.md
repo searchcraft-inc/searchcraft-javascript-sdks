@@ -14,9 +14,9 @@ The Props Used by the `SearchcraftBaseSearchResults` Component.
 
 ## Properties
 
-### buttonLabel
+### buttonLabel?
 
-> **buttonLabel**: `string`
+> `optional` **buttonLabel**: `string`
 
 The label for the button rendered when containerHref is not present for each result.
 
@@ -26,9 +26,9 @@ The label for the button rendered when containerHref is not present for each res
 
 ***
 
-### buttonRel
+### buttonRel?
 
-> **buttonRel**: `"noreferrer"` \| `"noopener"` \| `"nofollow"`
+> `optional` **buttonRel**: `"noreferrer"` \| `"noopener"` \| `"nofollow"`
 
 The relationship between the current document and the link for the button rendered when containerHref is not present for each result.
 
@@ -50,9 +50,9 @@ Where to open the link for the button rendered when containerHref is not present
 
 ***
 
-### containerRel
+### containerRel?
 
-> **containerRel**: `"noreferrer"` \| `"noopener"` \| `"nofollow"`
+> `optional` **containerRel**: `"noreferrer"` \| `"noopener"` \| `"nofollow"`
 
 The relationship between the current document and the link for the containing element for each result.
 
@@ -74,9 +74,9 @@ Where to open the link for the containing element for each result.
 
 ***
 
-### customStylesForResults
+### customStylesForResults?
 
-> **customStylesForResults**: `string` \| `Record`\<`string`, `Record`\<`string`, `string`\>\>
+> `optional` **customStylesForResults**: `string` \| `Record`\<`string`, `Record`\<`string`, `string`\>\>
 
 A custom styles object.
 
@@ -98,9 +98,9 @@ The placement of the image for each result.
 
 ***
 
-### searchResultMappings
+### searchResultMappings?
 
-> **searchResultMappings**: `SearchResultMappings`
+> `optional` **searchResultMappings**: [`SearchResultMappings`](/reference/sdk/js-vue/type-aliases/SearchResultMappings.md)
 
 Formats the content rendered for each result.
 

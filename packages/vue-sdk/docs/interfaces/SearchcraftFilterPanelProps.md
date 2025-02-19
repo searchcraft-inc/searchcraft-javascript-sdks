@@ -16,7 +16,7 @@ The props used by the SearchcraftFilterPanel.
 
 ### items
 
-> **items**: `FilterItem`[]
+> **items**: [`FilterItem`](/reference/sdk/js-vue/interfaces/FilterItem.md)[]
 
 The items to filter.
 

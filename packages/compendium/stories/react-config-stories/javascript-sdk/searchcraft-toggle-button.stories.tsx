@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import WebComponentWrapper from '../../../utils/WebComponentWrapper';
+import WebComponentWrapper from '@utils/WebComponentWrapper';
 
 import { Searchcraft, type Components } from '@searchcraft/javascript-sdk';
-import { config } from '../../../utils/DefaultSearchcraftConfig';
+import { config } from '@utils/DefaultSearchcraftConfig';
 import { useEffect } from 'react';
 
 const componentName = 'searchcraft-toggle-button';

@@ -6,7 +6,7 @@ import {
   SearchcraftTheme,
 } from '@searchcraft/vue-sdk';
 import type { Meta, StoryFn } from '@storybook/vue3';
-import { configAlternate } from '../../../utils/AlternateSearchcraftConfig';
+import { configAlternate } from '@utils/AlternateSearchcraftConfig';
 
 export default {
   title: 'Vue SDK/searchcraft-popover-form',

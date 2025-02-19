@@ -12,9 +12,9 @@ It is consumed within the `searchcraft-base-search-results` component.
 
 ## Properties
 
-### buttonRel
+### buttonRel?
 
-> **buttonRel**: `undefined` \| `"noreferrer"` \| `"noopener"` \| `"nofollow"`
+> `optional` **buttonRel**: `"noreferrer"` \| `"noopener"` \| `"nofollow"`
 
 The relationship between the current document and the link for the button rendered when containerHref is not present.
 
@@ -28,9 +28,9 @@ Where to open the link for the button rendered when containerHref is not present
 
 ***
 
-### containerRel
+### containerRel?
 
-> **containerRel**: `undefined` \| `"noreferrer"` \| `"noopener"` \| `"nofollow"`
+> `optional` **containerRel**: `"noreferrer"` \| `"noopener"` \| `"nofollow"`
 
 The relationship between the current document and the link for the containing element.
 
@@ -44,9 +44,9 @@ Where to open the link for the containing element.
 
 ***
 
-### customStyles
+### customStyles?
 
-> **customStyles**: `undefined` \| `string`
+> `optional` **customStyles**: `string`
 
 A custom styles object.
 
@@ -68,12 +68,12 @@ The placement of the image.
 
 ***
 
-### item
+### item?
 
-> **item**: `undefined` \| [`SearchClientResponseItem`](/reference/sdk/js-vanilla/interfaces/SearchClientResponseItem.md)
+> `optional` **item**: [`SearchClientResponseItem`](/reference/sdk/js-vanilla/interfaces/SearchClientResponseItem.md)
 
 ***
 
-### searchResultMappings
+### searchResultMappings?
 
-> **searchResultMappings**: `undefined` \| [`SearchResultMappings`](/reference/sdk/js-vanilla/type-aliases/SearchResultMappings.md)
+> `optional` **searchResultMappings**: [`SearchResultMappings`](/reference/sdk/js-vanilla/type-aliases/SearchResultMappings.md)

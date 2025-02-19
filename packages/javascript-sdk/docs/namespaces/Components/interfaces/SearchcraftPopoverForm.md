@@ -44,9 +44,9 @@ The hotkey modifier that activates the popover. Used together with the `hotkey` 
 
 ***
 
-### popoverResultMappings
+### popoverResultMappings?
 
-> **popoverResultMappings**: `undefined` \| [`PopoverResultMappings`](/reference/sdk/js-vanilla/type-aliases/PopoverResultMappings.md)
+> `optional` **popoverResultMappings**: [`PopoverResultMappings`](/reference/sdk/js-vanilla/type-aliases/PopoverResultMappings.md)
 
 Formats the content rendered for each result.
 

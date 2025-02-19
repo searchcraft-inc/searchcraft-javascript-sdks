@@ -5,7 +5,7 @@ import {
   type SearchResultMappings,
 } from '@searchcraft/javascript-sdk';
 
-import { config } from '../../../utils/DefaultSearchcraftConfig';
+import { config } from '@utils/DefaultSearchcraftConfig';
 import { useEffect } from 'react';
 
 const searchResultMappings: SearchResultMappings = {
