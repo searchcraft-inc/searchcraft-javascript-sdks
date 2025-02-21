@@ -2,7 +2,7 @@
   "name": "@searchcraft/core",
   "private": true,
   "description": "The core functionality shared by SearchCraft's SDKs.",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -18,7 +18,7 @@
     "test": "vitest --watch=false"
   },
   "devDependencies": {
-    "@searchcraft/javascript-sdk": "^0.9.1",
+    "@searchcraft/javascript-sdk": "^0.9.2",
     "@types/node": "^22.5.0"
   },
   "dependencies": {
