@@ -169,7 +169,7 @@ export class SearchcraftBaseSearchResults {
             button-rel={this.buttonRel}
             button-target={this.buttonTarget}
             document-position={
-              this.searchResultsPerPage * this.searchResultsPage + index
+              this.searchResultsPerPage * (this.searchResultsPage - 1) + index
             }
             searchResultMappings={this.searchResultMappings}
             item={item}
@@ -217,7 +217,7 @@ export class SearchcraftBaseSearchResults {
           button-rel={this.buttonRel}
           button-target={this.buttonTarget}
           document-position={
-            this.searchResultsPerPage * this.searchResultsPage + index
+            this.searchResultsPerPage * (this.searchResultsPage - 1) + index
           }
           searchResultMappings={this.searchResultMappings}
           item={item}
@@ -249,7 +249,7 @@ export class SearchcraftBaseSearchResults {
             button-rel={this.buttonRel}
             button-target={this.buttonTarget}
             document-position={
-              this.searchResultsPerPage * this.searchResultsPage + index
+              this.searchResultsPerPage * (this.searchResultsPage - 1) + index
             }
             searchResultMappings={this.searchResultMappings}
             item={item}
