@@ -1,12 +1,17 @@
 /**
- * Javascript SDK Build Script
+ * SDK Yarn workspace build script
+ *
+ * Master build script for all the packages in this yarn workspace.
+ * Some packages here depend on each other or have various post- or pre- install actions,
+ * so build order is important. This script enforces the correct build order and build
+ * actions for each package.
  *
  * Usage:
  *   node build.mjs [package-alias] [--watch] [--yalc]
  *
  * Arguments:
- *   package-alias   Alias for the package to build (see aliases below).
- *                   Defaults to building all non-core packages if omitted.
+ *   build-variant   Alias for the which build steps to perform (see aliases below).
+ *                   Defaults to performing all build steps if no variant specified.
  *
  * Flags:
  *   --watch         Rebuild on file changes (uses nodemon).
@@ -28,68 +33,139 @@
  */
 import { execSync, spawnSync } from 'node:child_process';
 
-const packages = {
-  core: {
-    name: '@searchcraft/core',
-    path: './packages/core',
-  },
-  hologram: {
-    name: '@searchcraft/hologram',
-    path: './packages/hologram',
-  },
-  js: {
-    name: '@searchcraft/javascript-sdk',
-    path: './packages/javascript-sdk',
-  },
-  react: { name: '@searchcraft/react-sdk', path: './packages/react-sdk' },
-  vue: { name: '@searchcraft/vue-sdk', path: './packages/vue-sdk' },
-};
-
 const args = process.argv.slice(2);
 const shouldWatch = args.includes('--watch');
 const shouldPublishToYalc = args.includes('--yalc');
 const isVerbose = args.includes('--verbose');
-const packageAlias = args.find((arg) => !arg.includes('--'));
-const targetPackageInfo = packages[packageAlias];
+const buildVariant = args.find((arg) => !arg.includes('--'));
 
-/**
- * Builds an individual package.
- */
-const buildPackage = (packageInfo) => {
-  // Build the package
-  console.log(`Building package ${packageInfo.name} ...`);
-  execSync(`yarn workspace ${packageInfo.name} build`, {
-    stdio: isVerbose ? 'inherit' : 'ignore',
-  });
-  console.log(`Package ${packageInfo.name} built successfully.`);
-
-  // Post-build step (for javascript-sdk)
-  if (packageInfo.name === '@searchcraft/javascript-sdk') {
-    console.log('Running post-build script for @searchcraft/javascript-sdk...');
-    execSync('cd packages/javascript-sdk && node post-build.js');
-    console.log('Post-build script complete for javascript-sdk.');
-  }
-
-  // Yalc publishing
-  if (shouldPublishToYalc && packageInfo.path) {
-    console.log(`Publishing ${packageInfo.name} to yalc...`);
-    execSync(`cd ${packageInfo.path} && yalc publish && yalc push`, {
-      stdio: isVerbose ? 'inherit' : 'ignore',
-    });
-    console.log(`Package ${packageInfo.name} published to yalc.`);
-  }
+const buildVariants = {
+  core: ['core-build'],
+  hologram: ['hologram-build'],
+  js: ['core-build', 'hologram-build', 'javascript-sdk-build'],
+  react: [
+    'core-build',
+    'hologram-build',
+    'javascript-sdk-build',
+    'react-sdk-build',
+  ],
+  vue: [
+    'core-build',
+    'hologram-build',
+    'javascript-sdk-build',
+    'vue-sdk-build',
+  ],
 };
 
-/**
- * Starts nodemon when --watch arg is present
- */
-const startWatching = () => {
+const buildSteps = [
+  {
+    label: 'core-build',
+    action: () => {
+      execSync('yarn workspace @searchcraft/core build', {
+        stdio: isVerbose ? 'inherit' : 'ignore',
+      });
+    },
+  },
+  {
+    label: 'hologram-build',
+    action: () => {
+      execSync('yarn workspace @searchcraft/core build', {
+        stdio: isVerbose ? 'inherit' : 'ignore',
+      });
+    },
+  },
+  {
+    label: 'javascript-sdk-build',
+    action: () => {
+      execSync('yarn workspace @searchcraft/javascript-sdk build', {
+        stdio: isVerbose ? 'inherit' : 'ignore',
+      });
+      spawnSync(
+        'yarn',
+        [
+          'dts-bundle-generator',
+          '-o',
+          'packages/javascript-sdk/dist/components/bundled.types.d.ts',
+          'packages/javascript-sdk/src/index.ts',
+          '--inline-declare-global',
+          '--inline-declare-externals',
+        ],
+        {
+          stdio: isVerbose ? 'inherit' : 'ignore',
+        },
+      );
+      // Invokes the post-build javascript-sdk script
+      execSync('cd packages/javascript-sdk && node post-build.js');
+      if (shouldPublishToYalc) {
+        execSync('cd ./packages/javascript-sdk && yalc publish && yalc push', {
+          stdio: isVerbose ? 'inherit' : 'ignore',
+        });
+      }
+    },
+  },
+  {
+    label: 'react-sdk-build',
+    action: () => {
+      execSync('yarn workspace @searchcraft/react-sdk build', {
+        stdio: isVerbose ? 'inherit' : 'ignore',
+      });
+      spawnSync(
+        'yarn',
+        [
+          'dts-bundle-generator',
+          '-o',
+          'packages/react-sdk/dist/index.d.ts',
+          'packages/react-sdk/src/index.ts',
+          '--inline-declare-global',
+          '--inline-declare-externals',
+        ],
+        {
+          stdio: isVerbose ? 'inherit' : 'ignore',
+        },
+      );
+      if (shouldPublishToYalc) {
+        execSync('cd ./packages/react-sdk && yalc publish && yalc push', {
+          stdio: isVerbose ? 'inherit' : 'ignore',
+        });
+      }
+    },
+  },
+  {
+    label: 'vue-sdk-build',
+    action: () => {
+      execSync('yarn workspace @searchcraft/vue-sdk build', {
+        stdio: isVerbose ? 'inherit' : 'ignore',
+      });
+      spawnSync(
+        'yarn',
+        [
+          'dts-bundle-generator',
+          '-o',
+          'packages/vue-sdk/dist/index.d.ts',
+          'packages/vue-sdk/src/index.ts',
+          '--inline-declare-global',
+          '--inline-declare-externals',
+        ],
+        {
+          stdio: isVerbose ? 'inherit' : 'ignore',
+        },
+      );
+      if (shouldPublishToYalc) {
+        execSync('cd ./packages/vue-sdk && yalc publish && yalc push', {
+          stdio: isVerbose ? 'inherit' : 'ignore',
+        });
+      }
+    },
+  },
+];
+
+if (shouldWatch) {
   spawnSync(
     'npx',
     [
       'nodemon',
       '--exec',
-      `node ${process.argv[1]} ${packageAlias || ''} ${
+      `node ${process.argv[1]} ${buildVariant || ''} ${
         shouldPublishToYalc ? '--yalc' : ''
       }  ${isVerbose ? '--verbose' : ''}`.trim(),
     ],
@@ -97,46 +173,14 @@ const startWatching = () => {
       stdio: 'inherit',
     },
   );
-};
-
-// Exit when an unknown package alias was specified
-if (packageAlias && !targetPackageInfo) {
-  console.error(`Unknown package alias: ${packageAlias}`);
-  console.error('Available package aliases:', Object.keys(packages).join(', '));
-  process.exit(1);
 }
 
-if (shouldWatch) {
-  startWatching();
-}
-
-// Builds the packages that need to be built every time no matter what
-const mandatoryPackagesToBuild = [
-  { name: '@searchcraft/core', path: './packages/core-sdk' },
-  { name: '@searchcraft/hologram', path: './packages/hologram' },
-  { name: '@searchcraft/javascript-sdk', path: './packages/javascript-sdk' },
-];
-mandatoryPackagesToBuild.forEach((item) => buildPackage(item));
-
-// Build the remaining target package OR all the remaining packages
-if (targetPackageInfo) {
-  if (
-    !mandatoryPackagesToBuild
-      .map((item) => item.name)
-      .includes(targetPackageInfo.name)
-  ) {
-    buildPackage(targetPackageInfo);
+buildSteps.forEach((step) => {
+  if (!buildVariant || buildVariants[buildVariant]?.includes(step.label)) {
+    console.log(`Performing build step: ${step.label}...`);
+    step.action();
+    console.log(`Build step ${step.label} complete.`);
   }
-} else {
-  Object.values(packages).forEach((packageInfo) => {
-    if (
-      !mandatoryPackagesToBuild
-        .map((item) => item.name)
-        .includes(packageInfo.name)
-    ) {
-      buildPackage(packageInfo);
-    }
-  });
-}
+});
 
-console.log('Build process completed successfully!');
+console.log('Build complete!');

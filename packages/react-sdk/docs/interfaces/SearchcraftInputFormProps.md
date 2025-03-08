@@ -40,7 +40,7 @@ The label for the submit button.
 
 ### buttonPlacement
 
-> **buttonPlacement**: `"left"` \| `"right"` \| `"none"`
+> **buttonPlacement**: `"none"` \| `"left"` \| `"right"`
 
 Where to place the search button.
 

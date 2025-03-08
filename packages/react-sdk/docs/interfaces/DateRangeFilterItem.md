@@ -34,7 +34,7 @@
 
 #### granularity
 
-> **granularity**: `"year"` \| `"month"` \| `"day"` \| `"hour"`
+> **granularity**: `"day"` \| `"hour"` \| `"month"` \| `"year"`
 
 #### maxDate
 

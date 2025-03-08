@@ -6,9 +6,7 @@
   "description": "Searchcraft React SDK.",
   "type": "module",
   "license": "Apache-2.0",
-  "keywords": [
-    "searchcraft"
-  ],
+  "keywords": ["searchcraft"],
   "scripts": {
     "build": "tsc && vite build && yarn docs",
     "docs": "typedoc --options typedoc.json",
@@ -27,9 +25,7 @@
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": [
-    "dist/**/*"
-  ],
+  "files": ["dist/**/*"],
   "exports": {
     ".": {
       "import": "./dist/index.js",
@@ -37,7 +33,8 @@
     }
   },
   "dependencies": {
-    "classnames": "^2.3.2"
+    "classnames": "^2.3.2",
+    "@searchcraft/javascript-sdk": "^0.9.3"
   },
   "peerDependencies": {
     "react": "^18.3.1",
@@ -45,8 +42,6 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.1",
-    "@searchcraft/core": "^0.9.3",
-    "@searchcraft/javascript-sdk": "^0.9.3",
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.1",
     "@types/node": "^20.11.25",

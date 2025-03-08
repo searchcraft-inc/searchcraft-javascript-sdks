@@ -80,7 +80,21 @@ const buildSteps = [
       execSync('yarn workspace @searchcraft/javascript-sdk build', {
         stdio: isVerbose ? 'inherit' : 'ignore',
       });
-      // invokes the post-build javascript-sdk script
+      spawnSync(
+        'yarn',
+        [
+          'dts-bundle-generator',
+          '-o',
+          'packages/javascript-sdk/dist/components/bundled.types.d.ts',
+          'packages/javascript-sdk/src/index.ts',
+          '--inline-declare-global',
+          '--inline-declare-externals',
+        ],
+        {
+          stdio: isVerbose ? 'inherit' : 'ignore',
+        },
+      );
+      // Invokes the post-build javascript-sdk script
       execSync('cd packages/javascript-sdk && node post-build.js');
       if (shouldPublishToYalc) {
         execSync('cd ./packages/javascript-sdk && yalc publish && yalc push', {
@@ -95,6 +109,20 @@ const buildSteps = [
       execSync('yarn workspace @searchcraft/react-sdk build', {
         stdio: isVerbose ? 'inherit' : 'ignore',
       });
+      spawnSync(
+        'yarn',
+        [
+          'dts-bundle-generator',
+          '-o',
+          'packages/react-sdk/dist/index.d.ts',
+          'packages/react-sdk/src/index.ts',
+          '--inline-declare-global',
+          '--inline-declare-externals',
+        ],
+        {
+          stdio: isVerbose ? 'inherit' : 'ignore',
+        },
+      );
       if (shouldPublishToYalc) {
         execSync('cd ./packages/react-sdk && yalc publish && yalc push', {
           stdio: isVerbose ? 'inherit' : 'ignore',
@@ -108,6 +136,20 @@ const buildSteps = [
       execSync('yarn workspace @searchcraft/vue-sdk build', {
         stdio: isVerbose ? 'inherit' : 'ignore',
       });
+      spawnSync(
+        'yarn',
+        [
+          'dts-bundle-generator',
+          '-o',
+          'packages/vue-sdk/dist/index.d.ts',
+          'packages/vue-sdk/src/index.ts',
+          '--inline-declare-global',
+          '--inline-declare-externals',
+        ],
+        {
+          stdio: isVerbose ? 'inherit' : 'ignore',
+        },
+      );
       if (shouldPublishToYalc) {
         execSync('cd ./packages/vue-sdk && yalc publish && yalc push', {
           stdio: isVerbose ? 'inherit' : 'ignore',

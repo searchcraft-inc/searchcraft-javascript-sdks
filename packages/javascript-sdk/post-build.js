@@ -1,7 +1,12 @@
 /**
  * Post-build script for @searchcraft/javascript-sdk.
- * The purpose of this script is to Create and run a `defineCustomElements()` function.
- * `defineCustomElements` does not automatically exist when building with stencil's `single-output-target` option, which we need to use.
+ *
+ * The purpose of this script is to:
+ *
+ * - Create and run a `defineCustomElements()` function.
+ * `defineCustomElements` does not automatically exist when building with stencil's `single-output-target` option.
+ *
+ * - Update the vue-sdk's output target file so that it does not produce typescript errors.
  */
 const { join } = require('node:path');
 const {
@@ -90,3 +95,8 @@ if (existsSync(INDEX_DTS_FILE)) {
     );
   }
 }
+
+// Modify the generated vue output target file to not throw typescript errors
+const VUE_FILE = '../vue-sdk/src/stencil-web-components.ts';
+const vueFileContent = readFileSync(VUE_FILE, 'utf-8');
+writeFileSync(VUE_FILE, vueFileContent.replace(/undefined/g, '() => {}'));
