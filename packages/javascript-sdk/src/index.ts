@@ -11,7 +11,6 @@ import packageJson from '../package.json';
  * DO NOT use this file to export your components. Instead, use the recommended approaches
  * to consume components of this package as outlined in the `README.md`.
  */
-export type * from './components';
 export type { SearchcraftConfig };
 export { searchcraftStore };
 
@@ -20,7 +19,7 @@ export {
   serializeStyles,
 } from './utils';
 
-export type { Components } from './components';
+export type { Components, JSX } from './components';
 
 /**
  * The consumer-facing `Searchcraft` class.

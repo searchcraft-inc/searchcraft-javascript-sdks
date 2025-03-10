@@ -40,7 +40,7 @@ The relationship between the current document and the link for the button render
 
 ### buttonTarget
 
-> **buttonTarget**: `"_blank"` \| `"_self"` \| `"_top"` \| `"_parent"`
+> **buttonTarget**: `"_self"` \| `"_blank"` \| `"_parent"` \| `"_top"`
 
 Where to open the link for the button rendered when containerHref is not present for each result.
 
@@ -64,7 +64,7 @@ The relationship between the current document and the link for the containing el
 
 ### containerTarget
 
-> **containerTarget**: `"_blank"` \| `"_self"` \| `"_top"` \| `"_parent"`
+> **containerTarget**: `"_self"` \| `"_blank"` \| `"_parent"` \| `"_top"`
 
 Where to open the link for the containing element for each result.
 

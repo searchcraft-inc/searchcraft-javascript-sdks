@@ -21,6 +21,7 @@
   "devDependencies": {
     "@biomejs/biome": "^1.8.1",
     "@vitejs/plugin-react-swc": "^3.5.0",
+    "dts-bundle-generator": "^9.5.1",
     "lerna": "^8.1.9",
     "nodemon": "^3.1.9",
     "typedoc": "^0.27.6",

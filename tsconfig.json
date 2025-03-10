@@ -20,7 +20,7 @@
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": false,
     "resolveJsonModule": true,
-    "skipLibCheck": true,
+    "skipLibCheck": false,
     "sourceMap": true,
     "strict": true,
     "target": "es2022",

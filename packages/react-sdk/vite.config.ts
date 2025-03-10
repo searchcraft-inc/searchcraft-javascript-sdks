@@ -1,7 +1,6 @@
 // <reference types="vitest" />
 import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
-import dts from 'vite-plugin-dts';
 import react from '@vitejs/plugin-react-swc';
 
 export default defineConfig({
@@ -17,18 +16,8 @@ export default defineConfig({
     },
     sourcemap: true,
   },
-  plugins: [react(), dts({ rollupTypes: true, insertTypesEntry: true })],
-  css: {
-    preprocessorOptions: {
-      scss: {
-        silenceDeprecations: ['legacy-js-api'],
-      },
-    },
-  },
+  plugins: [react()],
   resolve: {
-    alias: {
-      '@': resolve(__dirname, './src'),
-      '@components': resolve(__dirname, './src/components'),
-    },
+    alias: {},
   },
 });
