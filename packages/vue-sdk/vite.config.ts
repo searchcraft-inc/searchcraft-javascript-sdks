@@ -2,7 +2,6 @@ import { resolve } from 'node:path';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import { defineConfig } from 'vite';
-import dts from 'vite-plugin-dts';
 
 export default defineConfig({
   plugins: [
@@ -14,11 +13,6 @@ export default defineConfig({
       },
     }),
     vueJsx(),
-    dts({
-      entryRoot: './src',
-      outDir: './dist',
-      exclude: ['vite.config.ts'],
-    }),
   ],
   build: {
     sourcemap: true,

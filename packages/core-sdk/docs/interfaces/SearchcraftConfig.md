@@ -18,9 +18,9 @@ The maximum number of product ads to show for a single search term.
 
 ***
 
-### admSub
+### admSub?
 
-> **admSub**: `string`
+> `optional` **admSub**: `string`
 
 The adm sub value.
 

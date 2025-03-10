@@ -1,26 +1,11 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "jsx": "preserve",
     "jsxImportSource": "vue",
     "moduleResolution": "bundler",
-    "paths": {
-      "#/*": ["./src/*"]
-    },
     "types": ["vite/client"]
   },
-  "exclude": ["node_modules", "dist", "vite.config.ts", "tsconfig.node.json"],
   "extends": "../../tsconfig.json",
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.d.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "src/index.ts"
-  ],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    }
-  ]
+  "include": ["src"]
 }

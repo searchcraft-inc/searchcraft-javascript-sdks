@@ -8,13 +8,13 @@ import type { JSX } from '@searchcraft/javascript-sdk';
 
 
 
-export const SearchcraftAd = /*@__PURE__*/ defineContainer<JSX.SearchcraftAd>('searchcraft-ad', undefined, [
+export const SearchcraftAd = /*@__PURE__*/ defineContainer<JSX.SearchcraftAd>('searchcraft-ad', () => {}, [
   'adSource',
   'adClientResponseItem'
 ]);
 
 
-export const SearchcraftBaseSearchResult = /*@__PURE__*/ defineContainer<JSX.SearchcraftBaseSearchResult>('searchcraft-base-search-result', undefined, [
+export const SearchcraftBaseSearchResult = /*@__PURE__*/ defineContainer<JSX.SearchcraftBaseSearchResult>('searchcraft-base-search-result', () => {}, [
   'item',
   'searchResultMappings',
   'containerTarget',
@@ -27,7 +27,7 @@ export const SearchcraftBaseSearchResult = /*@__PURE__*/ defineContainer<JSX.Sea
 ]);
 
 
-export const SearchcraftBaseSearchResults = /*@__PURE__*/ defineContainer<JSX.SearchcraftBaseSearchResults>('searchcraft-base-search-results', undefined, [
+export const SearchcraftBaseSearchResults = /*@__PURE__*/ defineContainer<JSX.SearchcraftBaseSearchResults>('searchcraft-base-search-results', () => {}, [
   'customStylesForResults',
   'searchResultMappings',
   'resultImagePlacement',
@@ -39,7 +39,7 @@ export const SearchcraftBaseSearchResults = /*@__PURE__*/ defineContainer<JSX.Se
 ]);
 
 
-export const SearchcraftButton = /*@__PURE__*/ defineContainer<JSX.SearchcraftButton>('searchcraft-button', undefined, [
+export const SearchcraftButton = /*@__PURE__*/ defineContainer<JSX.SearchcraftButton>('searchcraft-button', () => {}, [
   'hierarchy',
   'disabled',
   'icon',
@@ -53,12 +53,12 @@ export const SearchcraftButton = /*@__PURE__*/ defineContainer<JSX.SearchcraftBu
 ]);
 
 
-export const SearchcraftErrorMessage = /*@__PURE__*/ defineContainer<JSX.SearchcraftErrorMessage>('searchcraft-error-message', undefined, [
+export const SearchcraftErrorMessage = /*@__PURE__*/ defineContainer<JSX.SearchcraftErrorMessage>('searchcraft-error-message', () => {}, [
   'errorMessage'
 ]);
 
 
-export const SearchcraftFacetList = /*@__PURE__*/ defineContainer<JSX.SearchcraftFacetList>('searchcraft-facet-list', undefined, [
+export const SearchcraftFacetList = /*@__PURE__*/ defineContainer<JSX.SearchcraftFacetList>('searchcraft-facet-list', () => {}, [
   'fieldName',
   'facetSelectionUpdated'
 ], [
@@ -66,12 +66,12 @@ export const SearchcraftFacetList = /*@__PURE__*/ defineContainer<JSX.Searchcraf
 ]);
 
 
-export const SearchcraftFilterPanel = /*@__PURE__*/ defineContainer<JSX.SearchcraftFilterPanel>('searchcraft-filter-panel', undefined, [
+export const SearchcraftFilterPanel = /*@__PURE__*/ defineContainer<JSX.SearchcraftFilterPanel>('searchcraft-filter-panel', () => {}, [
   'items'
 ]);
 
 
-export const SearchcraftInputForm = /*@__PURE__*/ defineContainer<JSX.SearchcraftInputForm>('searchcraft-input-form', undefined, [
+export const SearchcraftInputForm = /*@__PURE__*/ defineContainer<JSX.SearchcraftInputForm>('searchcraft-input-form', () => {}, [
   'autoSearch',
   'buttonPlacement',
   'buttonLabel',
@@ -90,21 +90,21 @@ export const SearchcraftInputForm = /*@__PURE__*/ defineContainer<JSX.Searchcraf
 ]);
 
 
-export const SearchcraftInputLabel = /*@__PURE__*/ defineContainer<JSX.SearchcraftInputLabel>('searchcraft-input-label', undefined, [
+export const SearchcraftInputLabel = /*@__PURE__*/ defineContainer<JSX.SearchcraftInputLabel>('searchcraft-input-label', () => {}, [
   'inputLabelClassName',
   'label'
 ]);
 
 
-export const SearchcraftPagination = /*@__PURE__*/ defineContainer<JSX.SearchcraftPagination>('searchcraft-pagination', undefined, [
+export const SearchcraftPagination = /*@__PURE__*/ defineContainer<JSX.SearchcraftPagination>('searchcraft-pagination', () => {}, [
   'customStyles'
 ]);
 
 
-export const SearchcraftPopoverButton = /*@__PURE__*/ defineContainer<JSX.SearchcraftPopoverButton>('searchcraft-popover-button', undefined);
+export const SearchcraftPopoverButton = /*@__PURE__*/ defineContainer<JSX.SearchcraftPopoverButton>('searchcraft-popover-button', () => {});
 
 
-export const SearchcraftPopoverForm = /*@__PURE__*/ defineContainer<JSX.SearchcraftPopoverForm>('searchcraft-popover-form', undefined, [
+export const SearchcraftPopoverForm = /*@__PURE__*/ defineContainer<JSX.SearchcraftPopoverForm>('searchcraft-popover-form', () => {}, [
   'type',
   'popoverResultMappings',
   'hotkey',
@@ -112,14 +112,14 @@ export const SearchcraftPopoverForm = /*@__PURE__*/ defineContainer<JSX.Searchcr
 ]);
 
 
-export const SearchcraftPopoverListItem = /*@__PURE__*/ defineContainer<JSX.SearchcraftPopoverListItem>('searchcraft-popover-list-item', undefined, [
+export const SearchcraftPopoverListItem = /*@__PURE__*/ defineContainer<JSX.SearchcraftPopoverListItem>('searchcraft-popover-list-item', () => {}, [
   'item',
   'popoverResultMappings',
   'documentPosition'
 ]);
 
 
-export const SearchcraftPopoverListView = /*@__PURE__*/ defineContainer<JSX.SearchcraftPopoverListView>('searchcraft-popover-list-view', undefined, [
+export const SearchcraftPopoverListView = /*@__PURE__*/ defineContainer<JSX.SearchcraftPopoverListView>('searchcraft-popover-list-view', () => {}, [
   'popoverResultMappings',
   'searchClientResponseItems',
   'adClientResponseItems',
@@ -128,19 +128,19 @@ export const SearchcraftPopoverListView = /*@__PURE__*/ defineContainer<JSX.Sear
 ]);
 
 
-export const SearchcraftResultsInfo = /*@__PURE__*/ defineContainer<JSX.SearchcraftResultsInfo>('searchcraft-results-info', undefined, [
+export const SearchcraftResultsInfo = /*@__PURE__*/ defineContainer<JSX.SearchcraftResultsInfo>('searchcraft-results-info', () => {}, [
   'customFormatter',
   'customStyles'
 ]);
 
 
-export const SearchcraftSearchResultsPerPage = /*@__PURE__*/ defineContainer<JSX.SearchcraftSearchResultsPerPage>('searchcraft-search-results-per-page', undefined, [
+export const SearchcraftSearchResultsPerPage = /*@__PURE__*/ defineContainer<JSX.SearchcraftSearchResultsPerPage>('searchcraft-search-results-per-page', () => {}, [
   'increment',
   'customStyles'
 ]);
 
 
-export const SearchcraftSelect = /*@__PURE__*/ defineContainer<JSX.SearchcraftSelect>('searchcraft-select', undefined, [
+export const SearchcraftSelect = /*@__PURE__*/ defineContainer<JSX.SearchcraftSelect>('searchcraft-select', () => {}, [
   'caption',
   'disabled',
   'inputId',
@@ -155,7 +155,7 @@ export const SearchcraftSelect = /*@__PURE__*/ defineContainer<JSX.SearchcraftSe
 ]);
 
 
-export const SearchcraftSlider = /*@__PURE__*/ defineContainer<JSX.SearchcraftSlider>('searchcraft-slider', undefined, [
+export const SearchcraftSlider = /*@__PURE__*/ defineContainer<JSX.SearchcraftSlider>('searchcraft-slider', () => {}, [
   'max',
   'min',
   'granularity',
@@ -166,13 +166,13 @@ export const SearchcraftSlider = /*@__PURE__*/ defineContainer<JSX.SearchcraftSl
 ]);
 
 
-export const SearchcraftTheme = /*@__PURE__*/ defineContainer<JSX.SearchcraftTheme>('searchcraft-theme', undefined, [
+export const SearchcraftTheme = /*@__PURE__*/ defineContainer<JSX.SearchcraftTheme>('searchcraft-theme', () => {}, [
   'theme',
   'customTheme'
 ]);
 
 
-export const SearchcraftToggleButton = /*@__PURE__*/ defineContainer<JSX.SearchcraftToggleButton>('searchcraft-toggle-button', undefined, [
+export const SearchcraftToggleButton = /*@__PURE__*/ defineContainer<JSX.SearchcraftToggleButton>('searchcraft-toggle-button', () => {}, [
   'label',
   'subLabel',
   'toggleUpdated'
