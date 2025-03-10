@@ -50,7 +50,7 @@ export interface SearchcraftConfig {
   /**
    * The adm sub value.
    */
-  admSub: string;
+  admSub?: string;
 
   /**
    * The number of custom ads to render at the start of the search results page.
