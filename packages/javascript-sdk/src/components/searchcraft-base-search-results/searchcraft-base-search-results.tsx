@@ -237,6 +237,8 @@ export class SearchcraftBaseSearchResults {
 
   renderWithNativoAds() {
     const itemsToRender: JSX.Element[] = [];
+    const interstitialStartIndex =
+      this.config?.nativoAdInterstialStartIndex || 0;
     const interstitialInterval = this.config?.nativoAdInterstitialInterval || 0;
     const interstitialQuantity = this.config?.nativoAdInterstitialQuantity || 1;
     const adStartQuantity = this.config?.nativoAdStartQuantity || 0;
@@ -252,7 +254,7 @@ export class SearchcraftBaseSearchResults {
     searchItems.forEach((item, index) => {
       if (
         interstitialInterval &&
-        index % interstitialInterval === 0 &&
+        (index + interstitialStartIndex) % interstitialInterval === 0 &&
         index + interstitialInterval < searchItems.length &&
         index >= interstitialInterval
       ) {

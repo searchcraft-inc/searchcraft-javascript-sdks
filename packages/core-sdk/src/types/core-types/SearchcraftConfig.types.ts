@@ -103,6 +103,11 @@ export interface SearchcraftConfig {
   nativoAdInterstitialInterval?: number;
 
   /**
+   * Specify how many normal search results to render before rendering the first interstitial ad grouping.
+   */
+  nativoAdInterstialStartIndex?: number;
+
+  /**
    * Specifies the number of ads to be rendered in each interstitial in between search results.
    */
   nativoAdInterstitialQuantity?: number;

@@ -114,6 +114,14 @@ The number of custom ads to render at the end of the search results page.
 
 ***
 
+### nativoAdInterstialStartIndex?
+
+> `optional` **nativoAdInterstialStartIndex**: `number`
+
+Specify how many normal search results to render before rendering the first interstitial ad grouping.
+
+***
+
 ### nativoAdInterstitialInterval?
 
 > `optional` **nativoAdInterstitialInterval**: `number`
