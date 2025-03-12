@@ -20,6 +20,8 @@ import type {
   SubscriptionEventName,
   SubscriptionEventCallback,
   SubscriptionEventMap,
+  SearchcraftAdSource,
+  ADMClientResponseItem,
 } from '../types';
 import { removeTrailingSlashFromEndpointURL } from '../utils';
 
@@ -152,6 +154,44 @@ export class SearchcraftCore {
   }
 
   /**
+   * Called when a `<searchcraft-ad>` component is rendered
+   */
+  handleAdContainerRendered(data: {
+    adClientResponseItem?: AdClientResponseItem;
+    adContainerId: string;
+    adSource: SearchcraftAdSource;
+    searchTerm: string;
+  }) {
+    // Sends impression request if its an adm ad.
+    if (data.adSource === 'adMarketplace') {
+      const item = data.adClientResponseItem as ADMClientResponseItem;
+      if (item.admAd?.impression_url) {
+        fetch(item.admAd.impression_url);
+      }
+    }
+
+    // Emits ad_container_rendered event.
+    this.emitEvent('ad_container_rendered', {
+      name: 'ad_container_rendered',
+      data: {
+        adContainerId: data.adContainerId,
+        adSource: data.adSource,
+        searchTerm: data.searchTerm,
+      },
+    });
+  }
+
+  /**
+   * Perform various actions when the input is cleared
+   */
+  handleInputCleared() {
+    this.emitEvent('input_cleared', {
+      name: 'input_cleared',
+    });
+    this.adClient?.onInputCleared();
+  }
+
+  /**
    * Gets items from the SearchClient and the AdClient.
    */
   getItems = (
@@ -184,12 +224,6 @@ export class SearchcraftCore {
             id: nanoid(),
             document,
           })); // SearchDocument[] -> SearchClientResponseItem
-
-        if (searchItems.length === 0) {
-          this.emitEvent('no_results_returned', {
-            name: 'no_results_returned',
-          });
-        }
 
         itemsCallback(searchResponse, searchItems);
       })();

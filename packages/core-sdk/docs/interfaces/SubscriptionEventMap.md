@@ -26,6 +26,12 @@
 
 ***
 
+### query\_fetched
+
+> **query\_fetched**: [`QueryFetchedEvent`](/reference/sdk/core/interfaces/QueryFetchedEvent.md)
+
+***
+
 ### query\_submitted
 
 > **query\_submitted**: [`QuerySubmittedEvent`](/reference/sdk/core/interfaces/QuerySubmittedEvent.md)

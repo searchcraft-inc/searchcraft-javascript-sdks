@@ -235,6 +235,62 @@ export class SearchcraftBaseSearchResults {
     );
   }
 
+  renderWithNativoAds() {
+    const itemsToRender: JSX.Element[] = [];
+    const interstitialInterval = this.config?.nativoAdInterstitialInterval || 0;
+    const interstitialQuantity = this.config?.nativoAdInterstitialQuantity || 1;
+    const adStartQuantity = this.config?.nativoAdStartQuantity || 0;
+    const adEndQuantity = this.config?.nativoAdEndQuantity || 0;
+    const searchItems = this.searchClientResponseItems || [];
+
+    // Renders ads at beginning
+    for (let n = 0; n < adStartQuantity; n++) {
+      itemsToRender.push(<searchcraft-ad adSource='Nativo' key={`${n}-ad`} />);
+    }
+
+    // Renders search results + interstitial ads
+    searchItems.forEach((item, index) => {
+      if (
+        interstitialInterval &&
+        index % interstitialInterval === 0 &&
+        index + interstitialInterval < searchItems.length &&
+        index >= interstitialInterval
+      ) {
+        for (let n = 0; n < interstitialQuantity; n++) {
+          itemsToRender.push(
+            <searchcraft-ad adSource='Nativo' key={`${item.id}-ad-${n}`} />,
+          );
+        }
+      }
+      itemsToRender.push(
+        <searchcraft-base-search-result
+          key={item.id}
+          custom-styles={this.serializedStyles}
+          image-placement={this.resultImagePlacement}
+          container-rel={this.containerRel}
+          container-target={this.containerTarget}
+          button-label={this.buttonLabel || 'View more'}
+          button-rel={this.buttonRel}
+          button-target={this.buttonTarget}
+          document-position={
+            this.searchResultsPerPage * (this.searchResultsPage - 1) + index
+          }
+          searchResultMappings={this.searchResultMappings}
+          item={item}
+        />,
+      );
+    });
+
+    // Renders ads at end
+    for (let n = 0; n < adEndQuantity; n++) {
+      itemsToRender.push(<searchcraft-ad adSource='Nativo' key={`${n}-ad`} />);
+    }
+
+    return (
+      <div class='searchcraft-search-results-container'>{itemsToRender}</div>
+    );
+  }
+
   renderWithNoAds() {
     return (
       <div class='searchcraft-search-results-container'>
@@ -277,6 +333,8 @@ export class SearchcraftBaseSearchResults {
         return this.renderWithADMAds();
       case 'Custom':
         return this.renderWithCustomAds();
+      case 'Nativo':
+        return this.renderWithNativoAds();
       default:
         return this.renderWithNoAds();
     }

@@ -98,6 +98,54 @@ Name or names of search indices configured using Vektron. Given as an array of s
 
 ***
 
+### nativoAdClassName?
+
+> `optional` **nativoAdClassName**: `string`
+
+The class name for nativo ad containers.
+
+***
+
+### nativoAdEndQuantity?
+
+> `optional` **nativoAdEndQuantity**: `number`
+
+The number of custom ads to render at the end of the search results page.
+
+***
+
+### nativoAdInterstitialInterval?
+
+> `optional` **nativoAdInterstitialInterval**: `number`
+
+Renders a custom ad in between search results, at the specified interval.
+
+***
+
+### nativoAdInterstitialQuantity?
+
+> `optional` **nativoAdInterstitialQuantity**: `number`
+
+Specifies the number of ads to be rendered in each interstitial in between search results.
+
+***
+
+### nativoAdStartQuantity?
+
+> `optional` **nativoAdStartQuantity**: `number`
+
+The number of custom ads to render at the start of the search results page.
+
+***
+
+### nativoPlacementId?
+
+> `optional` **nativoPlacementId**: `number`
+
+The placement id to use for Nativo ads.
+
+***
+
 ### readKey
 
 > **readKey**: `string`

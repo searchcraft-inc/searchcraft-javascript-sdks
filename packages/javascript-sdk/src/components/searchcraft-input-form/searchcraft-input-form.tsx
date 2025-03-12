@@ -60,10 +60,6 @@ export class SearchcraftInput {
    */
   @Prop() placeholderValue = 'Enter Search';
   /**
-   * The starting value of the input element.
-   */
-  @Prop() searchTerm = '';
-  /**
    * When the input becomes focused.
    */
   @Event() inputFocus?: EventEmitter<void>;
@@ -76,7 +72,8 @@ export class SearchcraftInput {
    */
   @Event() inputInit?: EventEmitter<void>;
 
-  @State() inputValue = this.searchTerm;
+  @State() inputValue = '';
+  @State() searchTerm = '';
   @State() error = false;
 
   @Prop() core?: SearchcraftCore;

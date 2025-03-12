@@ -109,6 +109,54 @@ export class SearchcraftPopoverListView {
     return <div class='searchcraft-popover-list-view'>{itemsToRender}</div>;
   }
 
+  renderWithNativoAds() {
+    const itemsToRender: JSX.Element[] = [];
+    const interstitialInterval = this.config?.nativoAdInterstitialInterval || 0;
+    const interstitialQuantity = this.config?.nativoAdInterstitialQuantity || 1;
+    const adStartQuantity = this.config?.nativoAdStartQuantity || 0;
+    const adEndQuantity = this.config?.nativoAdEndQuantity || 0;
+    const searchItems = this.searchClientResponseItems || [];
+
+    // Renders ads at beginning
+    for (let n = 0; n < adStartQuantity; n++) {
+      itemsToRender.push(<searchcraft-ad adSource='Nativo' key={`${n}-ad`} />);
+    }
+
+    // Renders search results + interstitial ads
+    searchItems.forEach((item, index) => {
+      if (
+        interstitialInterval &&
+        index % interstitialInterval === 0 &&
+        index + interstitialInterval < searchItems.length &&
+        index >= interstitialInterval
+      ) {
+        for (let n = 0; n < interstitialQuantity; n++) {
+          itemsToRender.push(
+            <searchcraft-ad adSource='Nativo' key={`${item.id}-ad-${n}`} />,
+          );
+        }
+      }
+
+      itemsToRender.push(
+        <searchcraft-popover-list-item
+          item={item}
+          key={item.id}
+          popoverResultMappings={this.popoverResultMappings}
+          documentPosition={
+            this.searchResultsPerPage * (this.searchResultsPage - 1) + index
+          }
+        />,
+      );
+    });
+
+    // Renders ads at end
+    for (let n = 0; n < adEndQuantity; n++) {
+      itemsToRender.push(<searchcraft-ad adSource='Nativo' key={`${n}-ad`} />);
+    }
+
+    return <div class='searchcraft-popover-list-view'>{itemsToRender}</div>;
+  }
+
   renderWithNoAds() {
     return (
       <div class='searchcraft-popover-list-view'>
@@ -132,6 +180,8 @@ export class SearchcraftPopoverListView {
         return this.renderWithADMAds();
       case 'Custom':
         return this.renderWithCustomAds();
+      case 'Nativo':
+        return this.renderWithNativoAds();
       default:
         return this.renderWithNoAds();
     }

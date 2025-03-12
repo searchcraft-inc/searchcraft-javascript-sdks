@@ -36,22 +36,11 @@ export class SearchcraftPopoverListItemAd {
       this.searchTerm = state.searchTerm;
     });
 
-    // Sends impression request if its an adm ad.
-    if (this.adClientResponseItem?.adSource === 'adMarketplace') {
-      const item = this.adClientResponseItem as ADMClientResponseItem;
-      if (item.admAd?.impression_url) {
-        fetch(item.admAd.impression_url);
-      }
-    }
-
-    // Emits ad_container_rendered event.
-    this.core?.emitEvent('ad_container_rendered', {
-      name: 'ad_container_rendered',
-      data: {
-        adContainerId: this.adContainerId,
-        adSource: this.adSource,
-        searchTerm: this.searchTerm,
-      },
+    this.core?.handleAdContainerRendered({
+      adClientResponseItem: this.adClientResponseItem,
+      adContainerId: this.adContainerId,
+      adSource: this.adSource,
+      searchTerm: this.searchTerm,
     });
   }
 
@@ -111,7 +100,8 @@ export class SearchcraftPopoverListItemAd {
   }
 
   renderNativoAd() {
-    return <div class='searchcraft-nativo-ad' />;
+    const nativoClassName = this.core?.config.nativoAdClassName || 'ntv-item';
+    return <div class={nativoClassName} />;
   }
 
   render() {

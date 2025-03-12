@@ -50,6 +50,8 @@ export class SearchClient {
       },
     });
 
+    this.parent.adClient?.onQuerySubmitted(searchParams);
+
     try {
       // Build the request body
       const requestBody: {
@@ -100,6 +102,21 @@ export class SearchClient {
         search_term: searchTerm,
         number_of_documents: searchcraftResponse.data.count,
       });
+
+      this.parent.emitEvent('query_fetched', {
+        name: 'query_fetched',
+        data: {
+          searchTerm,
+        },
+      });
+
+      if ((searchcraftResponse.data.hits?.length || 0) === 0) {
+        this.parent.emitEvent('no_results_returned', {
+          name: 'no_results_returned',
+        });
+      }
+
+      this.parent.adClient?.onQueryFetched(searchParams, searchcraftResponse);
 
       return searchcraftResponse;
     } catch (error) {
