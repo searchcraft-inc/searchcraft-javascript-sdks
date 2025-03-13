@@ -88,7 +88,7 @@ export class SearchcraftBaseSearchResults {
   @State() adClientResponseItems: AdClientResponseItem[] = [];
   @State() searchResultsPerPage;
   @State() searchResultsPage;
-  @State() isSearchInProgress = false;
+  @State() isSearchInProgress = true;
   @State() config?: SearchcraftConfig;
 
   private unsubscribe: () => void = () => {};
@@ -109,6 +109,7 @@ export class SearchcraftBaseSearchResults {
       this.handleStateChange(state),
     );
     const currentState = searchcraftStore.getState();
+    this.handleStateChange(currentState);
     this.searchClientResponseItems = currentState.searchClientResponseItems;
     this.searchTerm = currentState.searchTerm;
     this.config = currentState.core?.config;
