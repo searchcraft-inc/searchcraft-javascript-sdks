@@ -35,6 +35,7 @@
 - [MostRecentToggleFilterItem](/reference/sdk/core/interfaces/MostRecentToggleFilterItem.md)
 - [NoResultsReturnedEvent](/reference/sdk/core/interfaces/NoResultsReturnedEvent.md)
 - [NumericFilterItem](/reference/sdk/core/interfaces/NumericFilterItem.md)
+- [QueryFetchedEvent](/reference/sdk/core/interfaces/QueryFetchedEvent.md)
 - [QueryItem](/reference/sdk/core/interfaces/QueryItem.md)
 - [QuerySubmittedEvent](/reference/sdk/core/interfaces/QuerySubmittedEvent.md)
 - [SDKDebuggerOptions](/reference/sdk/core/interfaces/SDKDebuggerOptions.md)

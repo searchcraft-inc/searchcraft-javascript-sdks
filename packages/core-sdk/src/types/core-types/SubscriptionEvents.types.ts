@@ -2,6 +2,7 @@ import type { SearchcraftAdSource } from './SearchcraftConfig.types';
 
 export interface SubscriptionEventMap {
   ad_container_rendered: AdContainerSubscriptionEvent;
+  query_fetched: QueryFetchedEvent;
   query_submitted: QuerySubmittedEvent;
   input_cleared: InputClearedEvent;
   no_results_returned: NoResultsReturnedEvent;
@@ -18,6 +19,13 @@ export interface AdContainerSubscriptionEvent extends SubscriptionEvent {
 
 export interface QuerySubmittedEvent extends SubscriptionEvent {
   name: 'query_submitted';
+  data: {
+    searchTerm: string;
+  };
+}
+
+export interface QueryFetchedEvent extends SubscriptionEvent {
+  name: 'query_fetched';
   data: {
     searchTerm: string;
   };

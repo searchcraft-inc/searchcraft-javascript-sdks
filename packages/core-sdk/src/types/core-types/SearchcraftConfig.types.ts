@@ -76,6 +76,41 @@ export interface SearchcraftConfig {
    * A callback function responsible for rendering the custom ad containers.
    */
   customAdTemplate?: CustomAdTemplateRenderFunction;
+
+  /**
+   * The placement id to use for Nativo ads.
+   */
+  nativoPlacementId?: number;
+
+  /**
+   * The class name for nativo ad containers.
+   */
+  nativoAdClassName?: string;
+
+  /**
+   * The number of custom ads to render at the start of the search results page.
+   */
+  nativoAdStartQuantity?: number;
+
+  /**
+   * The number of custom ads to render at the end of the search results page.
+   */
+  nativoAdEndQuantity?: number;
+
+  /**
+   * Renders a custom ad in between search results, at the specified interval.
+   */
+  nativoAdInterstitialInterval?: number;
+
+  /**
+   * Specify how many normal search results to render before rendering the first interstitial ad grouping.
+   */
+  nativoAdInterstialStartIndex?: number;
+
+  /**
+   * Specifies the number of ads to be rendered in each interstitial in between search results.
+   */
+  nativoAdInterstitialQuantity?: number;
 }
 
 export type SearchcraftAdSource =

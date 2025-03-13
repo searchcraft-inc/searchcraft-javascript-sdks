@@ -167,3 +167,55 @@ Gets items from the SearchClient and the AdClient.
 #### Inherited from
 
 `SearchcraftCore.subscribe`
+
+***
+
+### handleAdContainerRendered()
+
+> **handleAdContainerRendered**(`data`): `void`
+
+Called when a `<searchcraft-ad>` component is rendered
+
+#### Parameters
+
+##### data
+
+###### adClientResponseItem
+
+`AdClientResponseItem`
+
+###### adContainerId
+
+`string`
+
+###### adSource
+
+`SearchcraftAdSource`
+
+###### searchTerm
+
+`string`
+
+#### Returns
+
+`void`
+
+#### Inherited from
+
+`SearchcraftCore.handleAdContainerRendered`
+
+***
+
+### handleInputCleared()
+
+> **handleInputCleared**(): `void`
+
+Perform various actions when the input is cleared
+
+#### Returns
+
+`void`
+
+#### Inherited from
+
+`SearchcraftCore.handleInputCleared`

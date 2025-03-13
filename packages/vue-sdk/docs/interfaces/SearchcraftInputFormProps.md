@@ -93,15 +93,3 @@ The input element's placeholder value.
 #### Inherited from
 
 `Components.SearchcraftInputForm.placeholderValue`
-
-***
-
-### searchTerm
-
-> **searchTerm**: `string`
-
-The starting value of the input element.
-
-#### Inherited from
-
-`Components.SearchcraftInputForm.searchTerm`

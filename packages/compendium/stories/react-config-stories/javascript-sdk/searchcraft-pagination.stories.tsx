@@ -194,4 +194,78 @@ export const WithCustomAds: StoryObj = {
   args: defaultProps,
 };
 
+export const WithNativoAds: StoryObj = {
+  decorators: [
+    (Story) => {
+      useEffect(() => {
+        const callbacks: (() => void)[] = [];
+
+        const searchcraft = new Searchcraft({
+          ...config,
+          adSource: 'Nativo',
+          nativoAdStartQuantity: 2,
+          nativoAdInterstitialInterval: 4,
+          nativoAdInterstitialQuantity: 3,
+          nativoAdEndQuantity: 4,
+          nativoAdClassName: 'nativo_1',
+          nativoPlacementId: 1593037,
+        });
+
+        callbacks.push(
+          searchcraft.subscribe('query_submitted', (event) => {
+            console.log('QUERY SUBMITTED! ', event.data.searchTerm);
+          }),
+        );
+
+        callbacks.push(
+          searchcraft.subscribe('input_cleared', (event) => {
+            console.log('INPUT CLEARED ', event);
+          }),
+        );
+
+        callbacks.push(
+          searchcraft.subscribe('ad_container_rendered', (event) => {
+            console.log(
+              'Ad container rendered!',
+              event.data.adContainerId,
+              event.data.searchTerm,
+            );
+          }),
+        );
+
+        const baseSearchResults = document.querySelector(
+          'searchcraft-base-search-results',
+        );
+        const resultsInfo = document.querySelector('searchcraft-results-info');
+
+        if (baseSearchResults) {
+          baseSearchResults.searchResultMappings = searchResultMappings;
+        }
+
+        if (resultsInfo) {
+          resultsInfo.customFormatter = (range, count, responseTime) =>
+            `${range[0]}-${range[1]} of ${count} results in ${responseTime}ms`;
+        }
+
+        return () => {
+          callbacks.forEach((cb) => cb());
+        };
+      }, []);
+
+      return <Story />;
+    },
+  ],
+  render: () => (
+    <>
+      <searchcraft-theme />
+      <searchcraft-results-info />
+      <searchcraft-pagination />
+      <searchcraft-search-results-per-page />
+      <searchcraft-input-form />
+      <searchcraft-base-search-results />
+    </>
+  ),
+  args: defaultProps,
+};
+
 export default componentMeta;

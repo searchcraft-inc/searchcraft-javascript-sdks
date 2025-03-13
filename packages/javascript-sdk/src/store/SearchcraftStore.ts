@@ -185,10 +185,8 @@ const searchcraftStore = createStore<SearchcraftState>((set, get) => {
     setSearchTerm: (searchTerm) => {
       const { core } = get();
 
-      if (core && searchTerm.length === 0) {
-        core.emitEvent('input_cleared', {
-          name: 'input_cleared',
-        });
+      if (searchTerm.length === 0) {
+        core?.handleInputCleared();
       }
       /**
        * When a new searchTerm is set, also reset the sort type, search mode, and facet paths.
