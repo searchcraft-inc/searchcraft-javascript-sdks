@@ -241,10 +241,6 @@ export namespace Components {
           * The input element's placeholder value.
          */
         "placeholderValue": string;
-        /**
-          * The starting value of the input element.
-         */
-        "searchTerm": string;
     }
     /**
      * This web component serves as the input label for the searchcraft-input-form component.
@@ -1180,10 +1176,6 @@ declare namespace LocalJSX {
           * The input element's placeholder value.
          */
         "placeholderValue"?: string;
-        /**
-          * The starting value of the input element.
-         */
-        "searchTerm"?: string;
     }
     /**
      * This web component serves as the input label for the searchcraft-input-form component.

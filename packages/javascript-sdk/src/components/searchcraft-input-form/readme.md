@@ -33,7 +33,6 @@ const searchInputForm = document.querySelector('searchcraft-input-form');
 | `customStyles`     | `custom-styles`     | A custom styles object to be applied to the input element.                     | `string \| { [x: string]: string; }` | `{}`             |
 | `inputLabel`       | `input-label`       | The label rendered above the input.                                            | `string \| undefined`                | `undefined`      |
 | `placeholderValue` | `placeholder-value` | The input element's placeholder value.                                         | `string`                             | `'Enter Search'` |
-| `searchTerm`       | `search-term`       | The starting value of the input element.                                       | `string`                             | `''`             |
 
 
 ## Events

@@ -10,6 +10,7 @@
 
 - [`AdContainerSubscriptionEvent`](/reference/sdk/core/interfaces/AdContainerSubscriptionEvent.md)
 - [`QuerySubmittedEvent`](/reference/sdk/core/interfaces/QuerySubmittedEvent.md)
+- [`QueryFetchedEvent`](/reference/sdk/core/interfaces/QueryFetchedEvent.md)
 - [`InputClearedEvent`](/reference/sdk/core/interfaces/InputClearedEvent.md)
 - [`NoResultsReturnedEvent`](/reference/sdk/core/interfaces/NoResultsReturnedEvent.md)
 

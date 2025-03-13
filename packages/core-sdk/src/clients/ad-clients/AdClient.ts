@@ -1,6 +1,7 @@
 import type {
   AdClientResponseItem,
   SearchcraftConfig,
+  SearchcraftResponse,
   SearchParams,
 } from '../../types';
 
@@ -16,4 +17,10 @@ export class AdClient {
   ): Promise<AdClientResponseItem[]> {
     return [];
   }
+
+  async onQuerySubmitted(_params: SearchParams) {}
+
+  async onQueryFetched(_params: SearchParams, _response: SearchcraftResponse) {}
+
+  async onInputCleared() {}
 }
