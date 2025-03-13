@@ -69,7 +69,7 @@ const buildSteps = [
   {
     label: 'hologram-build',
     action: () => {
-      execSync('yarn workspace @searchcraft/core build', {
+      execSync('yarn workspace @searchcraft/hologram build', {
         stdio: isVerbose ? 'inherit' : 'ignore',
       });
     },
