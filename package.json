@@ -33,6 +33,7 @@
   },
   "scripts": {
     "build": "node build.mjs",
+    "bump-version": "yarn lerna version",
     "storybook:react": "yarn workspace compendium storybook:react",
     "storybook:vue": "yarn workspace compendium storybook:vue",
     "test:all": "yarn test:core && yarn test:react-sdk && yarn test:javascript-sdk && yarn test:vue-sdk",
@@ -40,7 +41,7 @@
     "test:sdk-react": "yarn workspace @searchcraft/react-sdk test",
     "test:sdk-javascript": "yarn workspace @searchcraft/javascript-sdk test",
     "test:sdk-vue": "yarn workspace @searchcraft/vue-sdk test",
-    "version:sdks": "yarn lerna version"
+    "update-changelog": "node update-changelog.mjs"
   },
   "bugs": {
     "url": "https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/issues"
