@@ -27,14 +27,6 @@ The caption displayed below the select input.
 
 ***
 
-### customStyles?
-
-> `optional` **customStyles**: `string`
-
-A custom styles object.
-
-***
-
 ### disabled?
 
 > `optional` **disabled**: `boolean`

@@ -17,11 +17,3 @@ Once a query is submitted, calculates the number for pages.
 ## Extended by
 
 - [`SearchcraftPaginationProps`](/reference/sdk/js-vue/interfaces/SearchcraftPaginationProps.md)
-
-## Properties
-
-### customStyles?
-
-> `optional` **customStyles**: `string`
-
-The custom styles object.

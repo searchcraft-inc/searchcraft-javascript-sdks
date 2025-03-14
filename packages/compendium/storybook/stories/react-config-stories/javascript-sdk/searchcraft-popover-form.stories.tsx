@@ -1,49 +1,19 @@
+import { useEffect } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
+
 import {
-  type PopoverResultMappings,
   type SearchcraftConfig,
   Searchcraft,
   type Components,
 } from '@searchcraft/javascript-sdk';
-import { useEffect } from 'react';
+
+import { popoverResultMappings } from '../../../../common/index.js';
+
+import '../../../../common/searchcraft-popover-form/popover-form-with-content.scss';
 
 const componentMeta: Meta = {
   title: 'Javascript SDK/searchcraft-popover-form',
   argTypes: {},
-};
-
-const mappings: PopoverResultMappings = {
-  href: {
-    fieldNames: [
-      {
-        fieldName: 'link',
-        dataType: 'text',
-      },
-    ],
-  },
-  title: {
-    fieldNames: [{ fieldName: 'title', dataType: 'text' }],
-  },
-  subtitle: {
-    fieldNames: [
-      {
-        fieldName: 'price',
-        dataType: 'number',
-        numberFormatLocale: 'en-US',
-        numberFormatOptions: {
-          style: 'currency',
-          currency: 'USD',
-        },
-        numberScale: 1.0,
-      },
-    ],
-  },
-  imageSource: {
-    fieldNames: [{ fieldName: 'image', dataType: 'text' }],
-  },
-  imageAlt: {
-    fieldNames: [{ fieldName: 'price', dataType: 'text' }],
-  },
 };
 
 export const Inline: StoryObj<Components.SearchcraftPopoverForm> = {
@@ -55,9 +25,10 @@ export const Inline: StoryObj<Components.SearchcraftPopoverForm> = {
           endpointURL: import.meta.env.VITE_KOBOL_ENDPOINT_URL,
           index: [import.meta.env.VITE_KOBOL_INDEX],
         });
-        const searchForm = document.querySelector('searchcraft-popover-form');
-        if (searchForm) {
-          searchForm.popoverResultMappings = mappings;
+        const popoverForm = document.querySelector('searchcraft-popover-form');
+
+        if (popoverForm) {
+          popoverForm.popoverResultMappings = popoverResultMappings;
         }
       }, []);
 
@@ -68,70 +39,14 @@ export const Inline: StoryObj<Components.SearchcraftPopoverForm> = {
     return (
       <>
         <searchcraft-theme />
-        <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
+        <div className='searchcraft-popover-form-with-content'>
           <p>Story Note: This story uses the Bazaario env vars</p>
           <searchcraft-popover-form
             type='inline'
             hotkey='k'
             hotkey-modifier='ctrl'
           />
-          <p style={{ marginBottom: 100 }}>
-            Here's some content that shows up underneath the popover. The
-            popover should render above this content when it is active.
-          </p>
-          <p style={{ marginBottom: 100 }}>
-            Here's some content that shows up underneath the popover. The
-            popover should render above this content when it is active.
-          </p>
-          <p style={{ marginBottom: 100 }}>
-            Here's some content that shows up underneath the popover. The
-            popover should render above this content when it is active.
-          </p>
-          <p style={{ marginBottom: 100 }}>
-            Here's some content that shows up underneath the popover. The
-            popover should render above this content when it is active.
-          </p>
-          <p style={{ marginBottom: 100 }}>
-            Here's some content that shows up underneath the popover. The
-            popover should render above this content when it is active.
-          </p>
-          <p style={{ marginBottom: 100 }}>
-            Here's some content that shows up underneath the popover. The
-            popover should render above this content when it is active.
-          </p>
-          <p style={{ marginBottom: 100 }}>
-            Here's some content that shows up underneath the popover. The
-            popover should render above this content when it is active.
-          </p>
-          <p style={{ marginBottom: 100 }}>
-            Here's some content that shows up underneath the popover. The
-            popover should render above this content when it is active.
-          </p>
-          <p style={{ marginBottom: 100 }}>
-            Here's some content that shows up underneath the popover. The
-            popover should render above this content when it is active.
-          </p>
-          <p style={{ marginBottom: 100 }}>
-            Here's some content that shows up underneath the popover. The
-            popover should render above this content when it is active.
-          </p>
-          <p style={{ marginBottom: 100 }}>
-            Here's some content that shows up underneath the popover. The
-            popover should render above this content when it is active.
-          </p>
-          <p style={{ marginBottom: 100 }}>
-            Here's some content that shows up underneath the popover. The
-            popover should render above this content when it is active.
-          </p>
-          <p style={{ marginBottom: 100 }}>
-            Here's some content that shows up underneath the popover. The
-            popover should render above this content when it is active.
-          </p>
-          <p style={{ marginBottom: 100 }}>
-            Here's some content that shows up underneath the popover. The
-            popover should render above this content when it is active.
-          </p>
-          <p style={{ marginBottom: 100 }}>
+          <p>
             Here's some content that shows up underneath the popover. The
             popover should render above this content when it is active.
           </p>
@@ -156,10 +71,10 @@ export const InlineWithAds: StoryObj<Components.SearchcraftPopoverForm> = {
           admTextAdQuantity: 3,
         };
         new Searchcraft(config);
-        const searchForm = document.querySelector('searchcraft-popover-form');
+        const popoverForm = document.querySelector('searchcraft-popover-form');
 
-        if (searchForm) {
-          searchForm.popoverResultMappings = mappings;
+        if (popoverForm) {
+          popoverForm.popoverResultMappings = popoverResultMappings;
         }
       }, []);
 
@@ -170,14 +85,14 @@ export const InlineWithAds: StoryObj<Components.SearchcraftPopoverForm> = {
     return (
       <>
         <searchcraft-theme />
-        <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
+        <div className='searchcraft-popover-form-with-content'>
           <p>Story Note: This story uses the Bazaario env vars</p>
           <searchcraft-popover-form
             type='inline'
             hotkey='k'
             hotkey-modifier='ctrl'
           />
-          <p style={{ marginBottom: 100 }}>
+          <p>
             Here's some content that shows up underneath the popover. The
             popover should render above this content when it is active.
           </p>
@@ -197,10 +112,10 @@ export const Modal: StoryObj<Components.SearchcraftPopoverForm> = {
           endpointURL: import.meta.env.VITE_KOBOL_ENDPOINT_URL,
           index: [import.meta.env.VITE_KOBOL_INDEX],
         });
-        const searchForm = document.querySelector('searchcraft-popover-form');
+        const popoverForm = document.querySelector('searchcraft-popover-form');
 
-        if (searchForm) {
-          searchForm.popoverResultMappings = mappings;
+        if (popoverForm) {
+          popoverForm.popoverResultMappings = popoverResultMappings;
         }
       }, []);
 
@@ -211,12 +126,11 @@ export const Modal: StoryObj<Components.SearchcraftPopoverForm> = {
     return (
       <>
         <searchcraft-theme />
-        <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
+        <div className='searchcraft-popover-form-with-content'>
           <p>Story Note: This story uses the Bazaario env vars</p>
           <searchcraft-popover-button>
             <span>Click me</span>
           </searchcraft-popover-button>
-
           <searchcraft-popover-form
             type='modal'
             hotkey='k'
@@ -238,10 +152,10 @@ export const Fullscreen: StoryObj<Components.SearchcraftPopoverForm> = {
           endpointURL: import.meta.env.VITE_KOBOL_ENDPOINT_URL,
           index: [import.meta.env.VITE_KOBOL_INDEX],
         });
-        const searchForm = document.querySelector('searchcraft-popover-form');
+        const popoverForm = document.querySelector('searchcraft-popover-form');
 
-        if (searchForm) {
-          searchForm.popoverResultMappings = mappings;
+        if (popoverForm) {
+          popoverForm.popoverResultMappings = popoverResultMappings;
         }
       }, []);
 
@@ -252,13 +166,11 @@ export const Fullscreen: StoryObj<Components.SearchcraftPopoverForm> = {
     return (
       <>
         <searchcraft-theme />
-        <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
+        <div className='searchcraft-popover-form-with-content'>
           <p>Story Note: This story uses the Bazaario env vars</p>
-
           <searchcraft-popover-button>
             <span>Click me</span>
           </searchcraft-popover-button>
-
           <searchcraft-popover-form
             type='fullscreen'
             hotkey='k'

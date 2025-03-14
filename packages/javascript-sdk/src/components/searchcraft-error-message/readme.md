@@ -12,28 +12,23 @@ This web component is designed to display a user-friendly error message when a s
 ## Usage
 ```html
 <!-- index.html -->
-<searchcraft-error-message error-message="No search results found for query" />
+<searchcraft-error-message>
+  No search results found for query
+</searchcraft-error-message>
 ```
-
-## Properties
-
-| Property       | Attribute       | Description        | Type                  | Default     |
-| -------------- | --------------- | ------------------ | --------------------- | ----------- |
-| `errorMessage` | `error-message` | The error message. | `string \| undefined` | `undefined` |
-
 
 ## Dependencies
 
 ### Used by
 
- - [searchcraft-base-search-results](../searchcraft-base-search-results)
  - [searchcraft-input-form](../searchcraft-input-form)
+ - [searchcraft-search-results](../searchcraft-search-results)
 
 ### Graph
 ```mermaid
 graph TD;
-  searchcraft-base-search-results --> searchcraft-error-message
   searchcraft-input-form --> searchcraft-error-message
+  searchcraft-search-results --> searchcraft-error-message
   style searchcraft-error-message fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

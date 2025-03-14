@@ -1,51 +1,21 @@
-import type { PopoverResultMappings } from '@searchcraft/javascript-sdk';
+import type { Meta, StoryFn } from '@storybook/vue3';
+
 import {
   Searchcraft,
   SearchcraftPopoverButton,
   SearchcraftPopoverForm,
   SearchcraftTheme,
 } from '@searchcraft/vue-sdk';
-import type { Meta, StoryFn } from '@storybook/vue3';
+
+import { popoverResultMappings } from '../../../../common/index.js';
+
+import '../../../../common/searchcraft-popover-form/popover-form-with-content.scss';
 
 export default {
   title: 'Vue SDK/searchcraft-popover-form',
   components: { SearchcraftPopoverForm, SearchcraftPopoverButton },
   argTypes: {},
 } as Meta;
-
-const mappings: PopoverResultMappings = {
-  href: {
-    fieldNames: [
-      {
-        fieldName: 'link',
-        dataType: 'text',
-      },
-    ],
-  },
-  title: {
-    fieldNames: [{ fieldName: 'title', dataType: 'text' }],
-  },
-  subtitle: {
-    fieldNames: [
-      {
-        fieldName: 'price',
-        dataType: 'number',
-        numberFormatLocale: 'en-US',
-        numberFormatOptions: {
-          style: 'currency',
-          currency: 'USD',
-        },
-        numberScale: 1.0,
-      },
-    ],
-  },
-  imageSource: {
-    fieldNames: [{ fieldName: 'image', dataType: 'text' }],
-  },
-  imageAlt: {
-    fieldNames: [{ fieldName: 'price', dataType: 'text' }],
-  },
-};
 
 export const Inline: StoryFn = (args) => ({
   components: { SearchcraftPopoverForm, SearchcraftTheme },
@@ -55,19 +25,19 @@ export const Inline: StoryFn = (args) => ({
       endpointURL: import.meta.env.VITE_KOBOL_ENDPOINT_URL,
       index: [import.meta.env.VITE_KOBOL_INDEX],
     });
-    return { args, mappings };
+    return { args, popoverResultMappings };
   },
   template: `
-    <div style="padding: 10px 20px;">
+    <div class="searchcraft-popover-form-with-content">
       <SearchcraftTheme />
       <p>Story Note: This story uses the Bazaario env vars</p>
       <SearchcraftPopoverForm
         hotkey="k"
         hotkeyModifier="ctrl"
-        :popoverResultMappings="mappings"
+        :popoverResultMappings="popoverResultMappings"
         type="inline"
       />
-      <p style="margin-bottom: 100px;">
+      <p>
         Here's some content that shows up underneath the popover. The popover
         should render above this content when it is active.
       </p>
@@ -87,10 +57,10 @@ export const Modal: StoryFn = (args) => ({
       endpointURL: import.meta.env.VITE_KOBOL_ENDPOINT_URL,
       index: [import.meta.env.VITE_KOBOL_INDEX],
     });
-    return { args, mappings };
+    return { args, popoverResultMappings };
   },
   template: `
-    <div style="padding: 10px 20px;">
+    <div class="searchcraft-popover-form-with-content">
       <SearchcraftTheme />
       <p>Story Note: This story uses the Bazaario env vars</p>
       <SearchcraftPopoverButton>
@@ -99,7 +69,7 @@ export const Modal: StoryFn = (args) => ({
       <SearchcraftPopoverForm
         hotkey="k"
         hotkeyModifier="ctrl"
-        :popoverResultMappings="mappings"
+        :popoverResultMappings="popoverResultMappings"
         type="modal"
       />
     </div>
@@ -118,10 +88,10 @@ export const Fullscreen: StoryFn = (args) => ({
       endpointURL: import.meta.env.VITE_KOBOL_ENDPOINT_URL,
       index: [import.meta.env.VITE_KOBOL_INDEX],
     });
-    return { args, mappings };
+    return { args, popoverResultMappings };
   },
   template: `
-    <div style="padding: 10px 20px;">
+    <div class="searchcraft-popover-form-with-content">
       <SearchcraftTheme />
       <p>Story Note: This story uses the Bazaario env vars</p>
       <SearchcraftPopoverButton>
@@ -130,7 +100,7 @@ export const Fullscreen: StoryFn = (args) => ({
       <SearchcraftPopoverForm
         hotkey="k"
         hotkeyModifier="ctrl"
-        :popoverResultMappings="mappings"
+        :popoverResultMappings="popoverResultMappings"
         type="fullscreen"
       />
     </div>

@@ -1,4 +1,4 @@
-import { Component, Prop, h } from '@stencil/core';
+import { Component, h } from '@stencil/core';
 
 /**
  * This web component is designed to display a user-friendly error message when a search query fails, providing clear feedback to users and enhancing their experience when an issue arises during the search process.
@@ -6,7 +6,9 @@ import { Component, Prop, h } from '@stencil/core';
  * ## Usage
  * ```html
  * <!-- index.html -->
- * <searchcraft-error-message error-message="No search results found for query" />
+ * <searchcraft-error-message>
+ *   No search results found for query
+ * </searchcraft-error-message>
  * ```
  */
 @Component({
@@ -14,16 +16,11 @@ import { Component, Prop, h } from '@stencil/core';
   shadow: false,
 })
 export class SearchcraftErrorMessage {
-  /**
-   * The error message.
-   */
-  @Prop() errorMessage?: string;
-
   render() {
     return (
-      <p class='searchcraft-error-message'>
-        {this.errorMessage || 'Search term is required.'}
-      </p>
+      <div class='searchcraft-error-message'>
+        <slot>Search term is required.</slot>
+      </div>
     );
   }
 }

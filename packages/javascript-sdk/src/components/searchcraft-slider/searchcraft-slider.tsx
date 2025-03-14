@@ -102,8 +102,8 @@ export class SearchcraftSlider {
         : new Date(this.endValue).getFullYear();
 
     return (
-      <div class='searchcraft-slider-container'>
-        <div class='searchcraft-slider-range-container'>
+      <div class='searchcraft-slider'>
+        <div class='searchcraft-slider-range'>
           <div
             class='searchcraft-slider-active-range'
             style={{
@@ -138,9 +138,9 @@ export class SearchcraftSlider {
             value={this.endValue}
           />
         </div>
-        <div class='searchcraft-slider-label-container'>
-          <span class='searchcraft-slider-label'>{startLabel}</span>
-          <span class='searchcraft-slider-label'>{endLabel}</span>
+        <div class='searchcraft-slider-label'>
+          <span class='searchcraft-slider-start-label'>{startLabel}</span>
+          <span class='searchcraft-slider-end-label'>{endLabel}</span>
         </div>
       </div>
     );

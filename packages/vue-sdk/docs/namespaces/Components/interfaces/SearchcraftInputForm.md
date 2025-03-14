@@ -13,10 +13,6 @@ It abstracts the complexities of index-based searching, making it accessible to 
 <!-- index.html -->
 <searchcraft-input-form placeholder-value="Search here" />
 ```
-```js
-// index.js
-const searchInputForm = document.querySelector('searchcraft-input-form');
-```
 
 ## Extended by
 
@@ -24,9 +20,9 @@ const searchInputForm = document.querySelector('searchcraft-input-form');
 
 ## Properties
 
-### autoSearch
+### autoSearch?
 
-> **autoSearch**: `boolean`
+> `optional` **autoSearch**: `boolean`
 
 Whether or not to automatically submit the search term when the input changes.
 
@@ -40,9 +36,9 @@ The label for the submit button.
 
 ***
 
-### buttonPlacement
+### buttonPlacement?
 
-> **buttonPlacement**: `"left"` \| `"right"` \| `"none"`
+> `optional` **buttonPlacement**: `"left"` \| `"right"` \| `"none"`
 
 Where to place the search button.
 
@@ -54,14 +50,6 @@ Where to place the search button.
 
 ***
 
-### customStyles
-
-> **customStyles**: `string` \| `Record`\<`string`, `string`\>
-
-A custom styles object to be applied to the input element.
-
-***
-
 ### inputLabel?
 
 > `optional` **inputLabel**: `string`
@@ -70,8 +58,8 @@ The label rendered above the input.
 
 ***
 
-### placeholderValue
+### placeholderValue?
 
-> **placeholderValue**: `string`
+> `optional` **placeholderValue**: `string`
 
 The input element's placeholder value.

@@ -7,7 +7,6 @@ import {
   type EventEmitter,
   Fragment,
 } from '@stencil/core';
-import classNames from 'classnames';
 
 import type { FacetChild, FacetRoot } from '@searchcraft/core';
 
@@ -186,14 +185,9 @@ export class SearchcraftFacetList {
     const firstFacet = this.facetRoot?.[this.fieldName];
 
     return (
-      <div
-        class={classNames(
-          'filtersListContainer',
-          'searchcraft-filters-list-container',
-        )}
-      >
+      <div class='searchcraft-facet-list'>
         {!firstFacet && (
-          <p class='searchcraft-facet-message'>
+          <p class='searchcraft-facet-list-message'>
             Enter a search to view facets.
           </p>
         )}
@@ -205,17 +199,10 @@ export class SearchcraftFacetList {
             : false;
 
           return (
-            <div
-              key={facetChild.path}
-              class={classNames('searchcraft-filters-list-item')}
-            >
-              <label
-                class={classNames(
-                  'filterCheckboxLabel',
-                  'searchcraft-filters-list-checkbox-label',
-                )}
-              >
+            <div key={facetChild.path} class='searchcraft-facet-list-item'>
+              <label class='searchcraft-facet-list-checkbox-label'>
                 <input
+                  class='searchcraft-facet-list-checkbox-input'
                   checked={this.selectedPaths[facetChild.path]}
                   onChange={(_event: Event) =>
                     this.handleCheckboxChange(facetChild.path)
@@ -223,14 +210,9 @@ export class SearchcraftFacetList {
                   type='checkbox'
                 />
                 {isChildSelected ? (
-                  <div
-                    class={classNames(
-                      'dashContainer',
-                      'searchcraft-filter-list-dash-container',
-                    )}
-                  >
+                  <div class='searchcraft-facet-list-checkbox-input-dash-icon'>
                     <svg width='14' height='3' viewBox='0 0 14 3' fill='none'>
-                      <title>Checkbox Dash</title>
+                      <title>Checkbox dash</title>
                       <line
                         x1='1.5'
                         y1='1.5'
@@ -243,14 +225,9 @@ export class SearchcraftFacetList {
                     </svg>
                   </div>
                 ) : (
-                  <div
-                    class={classNames(
-                      'checkContainer',
-                      'searchcraft-filter-list-check-container',
-                    )}
-                  >
+                  <div class='searchcraft-facet-list-checkbox-input-check-icon'>
                     <svg width='16' height='16' viewBox='0 0 16 16' fill='none'>
-                      <title>Checkbox Check</title>
+                      <title>Checkbox check</title>
                       <path
                         d='M13.9999 2L5.74988 10L1.99988 6.36364'
                         stroke='white'
@@ -268,10 +245,7 @@ export class SearchcraftFacetList {
                   {facetChild.children.map((grandchild) => (
                     <label
                       key={grandchild.path}
-                      class={classNames(
-                        'childFilterCheckboxLabel',
-                        'searchcraft-child-filter-checkbox-label',
-                      )}
+                      class='searchcraft-facet-list-checkbox-label searchcraft-facet-list-child-checkbox-label'
                       style={{
                         display: this.selectedPaths[facetChild.path]
                           ? 'flex'
@@ -279,25 +253,21 @@ export class SearchcraftFacetList {
                       }}
                     >
                       <input
+                        class='searchcraft-facet-list-checkbox-input searchcraft-facet-list-child-checkbox-input'
                         checked={this.selectedPaths[grandchild.path]}
                         onChange={(_event: Event) => {
                           this.handleCheckboxChange(grandchild.path);
                         }}
                         type='checkbox'
                       />
-                      <div
-                        class={classNames(
-                          'checkContainer',
-                          'searchcraft-filter-list-check-container',
-                        )}
-                      >
+                      <div class='searchcraft-facet-list-checkbox-input-check-icon searchcraft-facet-list-child-checkbox-input-check-icon'>
                         <svg
                           width='16'
                           height='16'
                           viewBox='0 0 16 16'
                           fill='none'
                         >
-                          <title>Checkbox Check</title>
+                          <title>Checkbox check</title>
                           <path
                             d='M13.9999 2L5.74988 10L1.99988 6.36364'
                             stroke='white'

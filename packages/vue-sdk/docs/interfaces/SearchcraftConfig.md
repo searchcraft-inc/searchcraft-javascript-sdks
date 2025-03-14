@@ -132,7 +132,7 @@ Specifies the number of ads to be rendered in each interstitial in between searc
 
 ### customAdTemplate?
 
-> `optional` **customAdTemplate**: [`CustomAdTemplateRenderFunction`](/reference/sdk/js-vue/type-aliases/CustomAdTemplateRenderFunction.md)
+> `optional` **customAdTemplate**: [`CustomAdTemplate`](/reference/sdk/js-vue/type-aliases/CustomAdTemplate.md)
 
 A callback function responsible for rendering the custom ad containers.
 

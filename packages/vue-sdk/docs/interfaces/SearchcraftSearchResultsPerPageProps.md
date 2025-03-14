@@ -14,18 +14,6 @@ The Props for the SearchcraftSearchResultsPerPage component.
 
 ## Properties
 
-### customStyles?
-
-> `optional` **customStyles**: `string`
-
-The custom styles object.
-
-#### Inherited from
-
-[`SearchcraftSearchResultsPerPage`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftSearchResultsPerPage.md).[`customStyles`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftSearchResultsPerPage.md#customstyles)
-
-***
-
 ### increment
 
 > **increment**: `string` \| `number`

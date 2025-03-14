@@ -60,7 +60,11 @@ export class SearchcraftToggleButton {
 
   render() {
     return (
-      <div class='searchcraft-toggle-button-container'>
+      <div
+        class={classNames('searchcraft-toggle-button', {
+          'searchcraft-toggle-button-active': this.isActive,
+        })}
+      >
         <div>
           <p class='searchcraft-toggle-button-label'>{this.label}</p>
           {this.subLabel && (
@@ -68,17 +72,11 @@ export class SearchcraftToggleButton {
           )}
         </div>
         <button
-          class={classNames('searchcraft-toggle-button-background', {
-            active: this.isActive,
-          })}
+          class='searchcraft-toggle-button-background'
           onClick={this.handleToggle}
           type='button'
         >
-          <div
-            class={classNames('searchcraft-toggle-button-handle', {
-              active: this.isActive,
-            })}
-          />
+          <div class='searchcraft-toggle-button-handle' />
         </button>
       </div>
     );

@@ -6,9 +6,6 @@ import {
   type EventEmitter,
   Event,
 } from '@stencil/core';
-import classNames from 'classnames';
-
-import { parseCustomStyles } from '@utils';
 
 export type SearchcraftSelectOption = {
   label: string;
@@ -63,10 +60,6 @@ export class SearchcraftSelect {
    */
   @Prop() options: SearchcraftSelectOption[] | string = [];
   /**
-   * A custom styles object.
-   */
-  @Prop() customStyles?: string;
-  /**
    * The event fired when the select is changed.
    */
   @Event() selectChange!: EventEmitter<string>;
@@ -86,12 +79,7 @@ export class SearchcraftSelect {
 
   render() {
     return (
-      <div
-        class={classNames(
-          'searchcraft-select',
-          parseCustomStyles(this.customStyles || {}),
-        )}
-      >
+      <div class='searchcraft-select'>
         {this.label && (
           <label
             class='searchcraft-select-label'

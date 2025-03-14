@@ -1,4 +1,4 @@
-export * from './SearchcraftBaseSearchResults';
+export * from './SearchcraftSearchResults';
 export * from './SearchcraftFilterPanel';
 export * from './SearchcraftInputForm';
 export * from './SearchcraftPopoverButton';

@@ -14,44 +14,14 @@ The Props for the SearchcraftResultsInfo component.
 
 ## Properties
 
-### customFormatter()?
+### template?
 
-> `optional` **customFormatter**: (`range`, `count`, `responseTime`) => `void`
+> `optional` **template**: [`ResultsInfoTemplate`](/reference/sdk/js-vue/type-aliases/ResultsInfoTemplate.md)
 
-The custom formatter for the resulting string.
-
-#### Parameters
-
-##### range
-
-\[`string`, `string`\]
-
-##### count
-
-`string`
-
-##### responseTime
-
-`string`
-
-#### Returns
-
-`void`
+A callback function responsible for rendering the results info.
 
 #### Example
 
 #### Inherited from
 
-[`SearchcraftResultsInfo`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftResultsInfo.md).[`customFormatter`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftResultsInfo.md#customformatter)
-
-***
-
-### customStyles?
-
-> `optional` **customStyles**: `string`
-
-The custom styles object.
-
-#### Inherited from
-
-[`SearchcraftResultsInfo`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftResultsInfo.md).[`customStyles`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftResultsInfo.md#customstyles)
+[`SearchcraftResultsInfo`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftResultsInfo.md).[`template`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftResultsInfo.md#template)

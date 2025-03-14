@@ -13,11 +13,3 @@ Once a query is submitted, calculates the number for pages.
 <!-- index.html -->
 <searchcraft-pagination />
 ```
-
-## Properties
-
-### customStyles?
-
-> `optional` **customStyles**: `string`
-
-The custom styles object.

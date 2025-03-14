@@ -1,56 +1,17 @@
+import { useEffect } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import {
   SearchcraftInputForm,
   SearchcraftResultsInfo,
   SearchcraftTheme,
-  SearchcraftBaseSearchResults,
+  SearchcraftSearchResults,
   SearchcraftPagination,
   SearchcraftSearchResultsPerPage,
   Searchcraft,
 } from '@searchcraft/react-sdk';
 
-import type { SearchResultMappings } from '@searchcraft/javascript-sdk';
-
-import { useEffect } from 'react';
-
-const searchResultMappings: SearchResultMappings = {
-  containerHref: {
-    fieldNames: [
-      {
-        fieldName: 'canonical_link',
-        dataType: 'text',
-      },
-    ],
-  },
-  footer: {
-    fieldNames: [
-      {
-        fieldName: 'date_published',
-        dataType: 'date',
-      },
-      {
-        fieldName: 'author_name',
-        dataType: 'text',
-      },
-    ],
-    delimiter: ' • ',
-  },
-  imageSource: {
-    fieldNames: [
-      {
-        fieldName: 'medium_image',
-        dataType: 'text',
-      },
-    ],
-  },
-  body: {
-    fieldNames: [{ fieldName: 'sub_headline', dataType: 'text' }],
-  },
-  title: {
-    fieldNames: [{ fieldName: 'headline', dataType: 'text' }],
-  },
-};
+import { searchResultTemplate } from '../../../../common/index.js';
 
 const componentMeta: Meta = {
   title: 'React SDK/searchcraft-pagination',
@@ -75,25 +36,26 @@ export const Default: StoryObj = {
   render: () => (
     <>
       <SearchcraftTheme />
-      <SearchcraftResultsInfo
-        customFormatter={(range, count, responseTime) =>
-          `${range[0]}-${range[1]} of ${count} results in ${responseTime}ms`
-        }
-      />
-      <SearchcraftPagination />
-      <SearchcraftSearchResultsPerPage increment={20} />
-      <SearchcraftInputForm
-        autoSearch
-        buttonPlacement='left'
-        customStyles={{}}
-        placeholderValue=''
-      />
-      <SearchcraftBaseSearchResults
-        buttonTarget='_blank'
-        containerTarget='_blank'
-        resultImagePlacement='right'
-        searchResultMappings={searchResultMappings}
-      />
+      <div style={{ marginBottom: 20 }}>
+        <SearchcraftInputForm autoSearch />
+      </div>
+      <div style={{ marginBottom: 20 }}>
+        <SearchcraftResultsInfo />
+      </div>
+      <div style={{ marginBottom: 20 }}>
+        <SearchcraftSearchResults template={searchResultTemplate} />
+      </div>
+      <div
+        style={{
+          alignItems: 'center',
+          display: 'flex',
+          justifyContent: 'space-between',
+          gap: 16,
+        }}
+      >
+        <SearchcraftSearchResultsPerPage increment={20} />
+        <SearchcraftPagination />
+      </div>
     </>
   ),
   args: defaultProps,

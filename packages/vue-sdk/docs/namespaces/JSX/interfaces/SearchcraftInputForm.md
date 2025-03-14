@@ -13,10 +13,6 @@ It abstracts the complexities of index-based searching, making it accessible to 
 <!-- index.html -->
 <searchcraft-input-form placeholder-value="Search here" />
 ```
-```js
-// index.js
-const searchInputForm = document.querySelector('searchcraft-input-form');
-```
 
 ## Properties
 
@@ -47,14 +43,6 @@ Where to place the search button.
 ### core?
 
 > `optional` **core**: [`SearchcraftCore`](/reference/sdk/js-vue/classes/SearchcraftCore.md)
-
-***
-
-### customStyles?
-
-> `optional` **customStyles**: `string` \| `Record`\<`string`, `string`\>
-
-A custom styles object to be applied to the input element.
 
 ***
 

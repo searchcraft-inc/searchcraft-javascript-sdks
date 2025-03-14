@@ -23,10 +23,9 @@ This web component is designed to display the number of results returned from a 
 
 ## Properties
 
-| Property          | Attribute       | Description                                    | Type                                                                                    | Default     |
-| ----------------- | --------------- | ---------------------------------------------- | --------------------------------------------------------------------------------------- | ----------- |
-| `customFormatter` | --              | The custom formatter for the resulting string. | `((range: [string, string], count: string, responseTime: string) => void) \| undefined` | `undefined` |
-| `customStyles`    | `custom-styles` | The custom styles object.                      | `string \| undefined`                                                                   | `undefined` |
+| Property   | Attribute | Description                                                     | Type                                                                                                                                 | Default     |
+| ---------- | --------- | --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ----------- |
+| `template` | --        | A callback function responsible for rendering the results info. | `((data: { range: [number, number]; count: number; responseTime: string; }, utils: { html: TemplateHtml; }) => string) \| undefined` | `undefined` |
 
 
 ----------------------------------------------

@@ -1,9 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import WebComponentWrapper from '../../../utils/WebComponentWrapper';
-import { Searchcraft, type Components } from '@searchcraft/javascript-sdk';
 import { useEffect } from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
 
-const componentName = 'searchcraft-button';
+import { Searchcraft, type Components } from '@searchcraft/javascript-sdk';
 
 const componentMeta: Meta = {
   title: 'Javascript SDK/searchcraft-button',
@@ -22,11 +20,6 @@ const componentMeta: Meta = {
       description: 'Position of the icon relative to the label.',
     },
     label: { control: 'text', description: 'The text label for the button.' },
-    theme: {
-      control: 'select',
-      options: ['light', 'dark'],
-      description: 'The theme of the button (light or dark).',
-    },
   },
 };
 
@@ -53,7 +46,7 @@ export const Default: StoryObj<Components.SearchcraftButton> = {
   render: (args) => (
     <>
       <searchcraft-theme />
-      <WebComponentWrapper args={args} componentName={componentName} />
+      <searchcraft-button {...args} />
     </>
   ),
   args: defaultProps,

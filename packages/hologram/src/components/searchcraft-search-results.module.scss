@@ -1,0 +1,14 @@
+.searchcraft-search-results {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+}
+
+.searchcraft-search-results-empty-state {
+  text-align: center;
+}
+
+.searchcraft-search-results-error-message {
+  text-align: center;
+}

@@ -5,9 +5,11 @@ import type {
   SearchcraftAdSource,
 } from '@searchcraft/core';
 import { Component, Element, h, Prop, State } from '@stencil/core';
-import { searchcraftStore } from '@store';
-import DOMPurify from 'dompurify';
 import { nanoid } from 'nanoid';
+
+import { searchcraftStore } from '@store';
+
+import { html } from '@utils';
 
 /**
  * An inline ad meant to be rendered in a list of search results.
@@ -112,10 +114,13 @@ export class SearchcraftPopoverListItemAd {
     let containerInnerHTML = '<p>Custom Ad Placeholder</p>';
 
     if (templateRenderFunction) {
-      containerInnerHTML = templateRenderFunction({
-        searchTerm: this.searchTerm || '',
-        adContainerId: this.adContainerId,
-      });
+      containerInnerHTML = templateRenderFunction(
+        {
+          searchTerm: this.searchTerm || '',
+          adContainerId: this.adContainerId,
+        },
+        { html },
+      );
     }
 
     return (
@@ -123,7 +128,7 @@ export class SearchcraftPopoverListItemAd {
         class='searchcraft-custom-ad'
         id={containerId}
         data-searchcraft-ad-container-id={this.adContainerId}
-        innerHTML={DOMPurify.sanitize(containerInnerHTML)}
+        innerHTML={containerInnerHTML}
       />
     );
   }

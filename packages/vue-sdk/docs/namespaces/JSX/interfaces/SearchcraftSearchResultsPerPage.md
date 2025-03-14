@@ -15,14 +15,6 @@ This web component is designed to choose the number of search results displayed.
 
 ## Properties
 
-### customStyles?
-
-> `optional` **customStyles**: `string`
-
-The custom styles object.
-
-***
-
 ### increment?
 
 > `optional` **increment**: `string` \| `number`
