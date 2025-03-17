@@ -1,8 +1,10 @@
 ## Version 0.9.5 - 2025-03-13
 
-Adds support for rendering Nativo ads -Adds implementations to NativoClient to render nativo ads correctly -Adds render methods to searchcraft-ad, base-search-results, and popover-list-view for Nativo ads. -Adds new SubscriptionEvent, query_fetched. -Removes searchTerm required prop from input-form
+Adds render methods to searchcraft-ad, base-search-results, and popover-list-view. 
 
-Adds nativoAdInterstialStartIndex config prop
+Adds new SubscriptionEvent, query_fetched. 
+
+Removes searchTerm required prop from input-form
 
 Fixes hologram build step
 
@@ -32,7 +34,7 @@ Update Hologram styling documentation
 
 ## Version 0.9.1 - 2025-02-19
 
-Fixes JSX issues and other misc issues with compedium
+Fixes JSX issues and other misc issues with compendium
 
 Adds definitions for stencil components so they can be recognized by compendium.
 
@@ -155,6 +157,7 @@ Update SearchcraftConfig jsdoc comment
 Add docs and auto gen script to react SDK
 
 Update vue readme
+
 Updates compendium config, directory structure & npm scripts
 
 Updates storybook config import and env.example
@@ -300,8 +303,6 @@ Update react build script to include building the js sdk
 Creates searchcraft-input-form to replace auto-search-form and base-search-form.
 
 Combines the functionality of base-search-form, auto-search-form, and searchcraft-input, into a new single component, searchcraft-input-form. searchcraft-input-form is capable of rendering all the different input layouts and functionality previously that was previously split across those three components.
-
-This is to prepare for the popover form component, that also needs to use an instance of searchcraft-input-form. We needed a single component so that we don't needlessly replicate/repeat functionality across multiple components.
 
 Updates storybook stories for input-form and remove unused components
 
