@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { configAlternate } from '@utils/AlternateSearchcraftConfig';
-
 import './searchcraft-colors.scss';
-import type { PopoverResultMappings } from '@searchcraft/javascript-sdk';
+import {
+  Searchcraft,
+  type PopoverResultMappings,
+} from '@searchcraft/javascript-sdk';
 
 const mappings: PopoverResultMappings = {
   href: {
@@ -107,10 +108,14 @@ export const Colors: StoryObj<{
   decorators: [
     (Story) => {
       useEffect(() => {
+        new Searchcraft({
+          readKey: import.meta.env.VITE_KOBOL_READ_KEY,
+          endpointURL: import.meta.env.VITE_KOBOL_ENDPOINT_URL,
+          index: [import.meta.env.VITE_KOBOL_INDEX],
+        });
         const searchForm = document.querySelector('searchcraft-popover-form');
 
         if (searchForm) {
-          searchForm.config = configAlternate;
           searchForm.popoverResultMappings = mappings;
         }
       }, []);
@@ -121,7 +126,7 @@ export const Colors: StoryObj<{
   render: (args) => {
     return (
       <>
-        <searchcraft-theme customTheme={JSON.stringify(args.customTheme)} />
+        <searchcraft-theme custom-theme={JSON.stringify(args.customTheme)} />
         <style
           // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
           dangerouslySetInnerHTML={{

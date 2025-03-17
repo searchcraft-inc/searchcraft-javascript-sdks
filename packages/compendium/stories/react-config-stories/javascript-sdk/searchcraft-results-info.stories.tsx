@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 import WebComponentWrapper from '@utils/WebComponentWrapper';
 
 import { Searchcraft, type Components } from '@searchcraft/javascript-sdk';
-import { config } from '@utils/DefaultSearchcraftConfig';
 import { useEffect } from 'react';
 
 const componentName = 'searchcraft-results-info';
@@ -30,7 +29,11 @@ export const Default: StoryObj<Components.SearchcraftResultsInfo> = {
   decorators: [
     (Story) => {
       useEffect(() => {
-        new Searchcraft(config);
+        new Searchcraft({
+          readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
+          endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
+          index: [import.meta.env.VITE_RUNEGARD_INDEX],
+        });
       }, []);
       return <Story />;
     },

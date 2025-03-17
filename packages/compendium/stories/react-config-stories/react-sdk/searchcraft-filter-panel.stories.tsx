@@ -1,20 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import type {
-  DateRangeFilterItem,
-  ExactMatchToggleFilterItem,
-  FacetsFilterItem,
-  FilterItem,
-  MostRecentToggleFilterItem,
-  NumericFilterItem,
-} from '@searchcraft/javascript-sdk';
 import {
   SearchcraftInputForm,
   SearchcraftFilterPanel,
   SearchcraftTheme,
   Searchcraft,
+  type ExactMatchToggleFilterItem,
+  type MostRecentToggleFilterItem,
+  type DateRangeFilterItem,
+  type FilterItem,
+  type NumericFilterItem,
+  type FacetsFilterItem,
 } from '@searchcraft/react-sdk';
 
-import { config } from '@utils/DefaultSearchcraftConfig';
 import { useEffect } from 'react';
 
 const componentMeta: Meta = {
@@ -92,7 +89,11 @@ const defaultProps: ComponentProps = {
     facetItem,
   ],
   clearInput: () => {},
-  config: JSON.stringify(config),
+  config: JSON.stringify({
+    readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
+    endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
+    index: [import.meta.env.VITE_RUNEGARD_INDEX],
+  }),
   customStylesForInput: '{}',
   inputCaptionValue: 'Search',
   labelForInput: 'Search for something:',
@@ -103,7 +104,11 @@ export const Default: StoryObj<ComponentProps> = {
   decorators: [
     (Story) => {
       useEffect(() => {
-        new Searchcraft(config);
+        new Searchcraft({
+          readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
+          endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
+          index: [import.meta.env.VITE_RUNEGARD_INDEX],
+        });
         const filterPanel = document.querySelector('searchcraft-filter-panel');
 
         if (filterPanel) {
@@ -124,7 +129,6 @@ export const Default: StoryObj<ComponentProps> = {
             buttonLabel=''
             buttonPlacement='none'
             customStyles={args.customStylesForInput}
-            searchTerm=''
             inputLabel=''
             placeholderValue={args.placeholderValue || ''}
           />

@@ -10,7 +10,6 @@ import {
 
 import type { Meta, StoryFn } from '@storybook/vue3';
 
-import { config } from '@utils/DefaultSearchcraftConfig';
 import type { SearchResultMappings } from '@searchcraft/javascript-sdk';
 
 const searchResultMappings: SearchResultMappings = {
@@ -72,7 +71,11 @@ export const Default: StoryFn = () => ({
     SearchcraftSearchResultsPerPage,
   },
   setup() {
-    new Searchcraft(config);
+    new Searchcraft({
+      readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
+      endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
+      index: [import.meta.env.VITE_RUNEGARD_INDEX],
+    });
     return { customFormatter, searchResultMappings };
   },
   template: `

@@ -1,7 +1,10 @@
-import { SearchcraftInputForm, SearchcraftTheme } from '@searchcraft/vue-sdk';
+import {
+  Searchcraft,
+  SearchcraftInputForm,
+  SearchcraftTheme,
+} from '@searchcraft/vue-sdk';
 
 import type { Meta, StoryFn } from '@storybook/vue3';
-import { config } from '@utils/DefaultSearchcraftConfig';
 
 export default {
   title: 'Vue SDK/searchcraft-input-form',
@@ -50,7 +53,6 @@ export default {
 } as Meta;
 
 const defaultProps = {
-  config: config,
   autoSearch: true,
   buttonPlacement: 'none',
   buttonLabel: undefined,
@@ -64,6 +66,11 @@ const defaultProps = {
 export const Default: StoryFn = (args) => ({
   components: { SearchcraftInputForm, SearchcraftTheme },
   setup() {
+    new Searchcraft({
+      readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
+      endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
+      index: [import.meta.env.VITE_RUNEGARD_INDEX],
+    });
     return { args };
   },
   template: `

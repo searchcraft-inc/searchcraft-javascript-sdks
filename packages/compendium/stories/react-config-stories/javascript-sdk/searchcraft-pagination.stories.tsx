@@ -5,7 +5,6 @@ import {
   type SearchResultMappings,
 } from '@searchcraft/javascript-sdk';
 
-import { config } from '@utils/DefaultSearchcraftConfig';
 import { useEffect } from 'react';
 
 const searchResultMappings: SearchResultMappings = {
@@ -57,7 +56,11 @@ export const Default: StoryObj = {
   decorators: [
     (Story) => {
       useEffect(() => {
-        const searchcraft = new Searchcraft(config);
+        const searchcraft = new Searchcraft({
+          readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
+          endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
+          index: [import.meta.env.VITE_RUNEGARD_INDEX],
+        });
         const callbacks: (() => void)[] = [];
 
         callbacks.push(
@@ -124,7 +127,9 @@ export const WithCustomAds: StoryObj = {
         const callbacks: (() => void)[] = [];
 
         const searchcraft = new Searchcraft({
-          ...config,
+          readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
+          endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
+          index: [import.meta.env.VITE_RUNEGARD_INDEX],
           adSource: 'Custom',
           customAdStartQuantity: 2,
           customAdInterstitialInterval: 4,
@@ -201,7 +206,9 @@ export const WithNativoAds: StoryObj = {
         const callbacks: (() => void)[] = [];
 
         const searchcraft = new Searchcraft({
-          ...config,
+          readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
+          endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
+          index: [import.meta.env.VITE_RUNEGARD_INDEX],
           adSource: 'Nativo',
           nativoAdStartQuantity: 2,
           nativoAdInterstitialInterval: 4,

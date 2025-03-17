@@ -8,8 +8,6 @@ import {
   type NumericFilterItem,
 } from '@searchcraft/javascript-sdk';
 
-import { config } from '@utils/DefaultSearchcraftConfig';
-
 import type { Components } from '@searchcraft/javascript-sdk';
 import { useEffect } from 'react';
 
@@ -83,7 +81,11 @@ export const Default: StoryObj<Components.SearchcraftFilterPanel> = {
   decorators: [
     (Story) => {
       useEffect(() => {
-        new Searchcraft(config);
+        new Searchcraft({
+          readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
+          endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
+          index: [import.meta.env.VITE_RUNEGARD_INDEX],
+        });
         const filterPanel = document.querySelector('searchcraft-filter-panel');
 
         if (filterPanel) {
@@ -118,7 +120,11 @@ export const WithDebounceDelay300: StoryObj<Components.SearchcraftFilterPanel> =
       },
       (Story) => {
         useEffect(() => {
-          new Searchcraft(config);
+          new Searchcraft({
+            readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
+            endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
+            index: [import.meta.env.VITE_RUNEGARD_INDEX],
+          });
           const filterPanel = document.querySelector(
             'searchcraft-filter-panel',
           );

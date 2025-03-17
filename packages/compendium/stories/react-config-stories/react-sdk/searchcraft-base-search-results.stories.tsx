@@ -1,15 +1,13 @@
-import type {
-  SearchResultMappings,
-  Components,
-} from '@searchcraft/javascript-sdk';
 import {
   Searchcraft,
   SearchcraftBaseSearchResults,
+  type SearchcraftBaseSearchResultsProps,
   SearchcraftInputForm,
+  type SearchcraftInputFormProps,
   SearchcraftTheme,
+  type SearchResultMappings,
 } from '@searchcraft/react-sdk';
 import type { Meta, StoryObj } from '@storybook/react';
-import { config } from '@utils/DefaultSearchcraftConfig';
 import { useEffect } from 'react';
 
 const componentMeta: Meta = {
@@ -56,12 +54,16 @@ const mappings: SearchResultMappings = {
 };
 
 export const Default: StoryObj<
-  Components.SearchcraftInputForm & Components.SearchcraftBaseSearchResults
+  SearchcraftInputFormProps & SearchcraftBaseSearchResultsProps
 > = {
   decorators: [
     (Story) => {
       useEffect(() => {
-        new Searchcraft(config);
+        new Searchcraft({
+          readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
+          endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
+          index: [import.meta.env.VITE_RUNEGARD_INDEX],
+        });
         const searchResults = document.querySelector(
           'searchcraft-base-search-results',
         );
@@ -84,7 +86,6 @@ export const Default: StoryObj<
             buttonLabel=''
             buttonPlacement='none'
             customStyles={args.customStyles}
-            searchTerm=''
             inputLabel=''
             placeholderValue={args.placeholderValue || ''}
           />

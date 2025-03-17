@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import WebComponentWrapper from '@utils/WebComponentWrapper';
 import { Searchcraft, type Components } from '@searchcraft/javascript-sdk';
-import { config } from '@utils/DefaultSearchcraftConfig';
 import { useEffect } from 'react';
 
 const componentName = 'searchcraft-popover-list-item';
@@ -33,19 +32,20 @@ const componentMeta: Meta = {
 };
 
 const defaultProps: Components.SearchcraftPopoverListItem = {
-  titleContent: 'Example Title',
-  subtitleContent: 'Example Subtitle',
-  imageAlt: 'An example image',
-  imageSrc: 'https://via.placeholder.com/150',
-  href: 'https://example.com',
   documentPosition: 1,
+  item: undefined,
+  popoverResultMappings: undefined,
 };
 
 export const Default: StoryObj<Components.SearchcraftBaseSearchResult> = {
   decorators: [
     (Story) => {
       useEffect(() => {
-        new Searchcraft(config);
+        new Searchcraft({
+          readKey: import.meta.env.VITE_KOBOL_READ_KEY,
+          endpointURL: import.meta.env.VITE_KOBOL_ENDPOINT_URL,
+          index: [import.meta.env.VITE_KOBOL_INDEX],
+        });
       }, []);
       return <Story />;
     },

@@ -6,7 +6,6 @@ import {
   SearchcraftTheme,
 } from '@searchcraft/vue-sdk';
 import type { Meta, StoryFn } from '@storybook/vue3';
-import { configAlternate } from '@utils/AlternateSearchcraftConfig';
 
 export default {
   title: 'Vue SDK/searchcraft-popover-form',
@@ -51,7 +50,11 @@ const mappings: PopoverResultMappings = {
 export const Inline: StoryFn = (args) => ({
   components: { SearchcraftPopoverForm, SearchcraftTheme },
   setup() {
-    new Searchcraft(configAlternate);
+    new Searchcraft({
+      readKey: import.meta.env.VITE_KOBOL_READ_KEY,
+      endpointURL: import.meta.env.VITE_KOBOL_ENDPOINT_URL,
+      index: [import.meta.env.VITE_KOBOL_INDEX],
+    });
     return { args, mappings };
   },
   template: `
@@ -79,7 +82,11 @@ export const Modal: StoryFn = (args) => ({
     SearchcraftTheme,
   },
   setup() {
-    new Searchcraft(configAlternate);
+    new Searchcraft({
+      readKey: import.meta.env.VITE_KOBOL_READ_KEY,
+      endpointURL: import.meta.env.VITE_KOBOL_ENDPOINT_URL,
+      index: [import.meta.env.VITE_KOBOL_INDEX],
+    });
     return { args, mappings };
   },
   template: `
@@ -106,7 +113,11 @@ export const Fullscreen: StoryFn = (args) => ({
     SearchcraftTheme,
   },
   setup() {
-    new Searchcraft(configAlternate);
+    new Searchcraft({
+      readKey: import.meta.env.VITE_KOBOL_READ_KEY,
+      endpointURL: import.meta.env.VITE_KOBOL_ENDPOINT_URL,
+      index: [import.meta.env.VITE_KOBOL_INDEX],
+    });
     return { args, mappings };
   },
   template: `

@@ -11,11 +11,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const defaultProps: SearchcraftResultsInfoProps = {
-  resultsCount: 12345,
-  responseTime: '200.35',
-  query: 'example query',
-};
+const defaultProps: SearchcraftResultsInfoProps = {};
 
 export const Default: StoryFn = (args) => ({
   components: { SearchcraftResultsInfo, SearchcraftTheme },
