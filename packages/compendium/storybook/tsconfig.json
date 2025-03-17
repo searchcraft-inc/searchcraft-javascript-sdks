@@ -6,11 +6,11 @@
     "types": ["vite/client"],
     "paths": {
       "@stories/*": ["stories/*"],
-      "@utils": ["utils/index.ts"],
-      "@utils/*": ["utils/*"]
+      "@utils": ["storybook/utils/index.ts"],
+      "@utils/*": ["storybook/utils/*"]
     }
   },
   "exclude": ["node_modules", "dist"],
-  "extends": "../../tsconfig.json",
-  "include": ["./.storybook", "./stories", "./utils"]
+  "extends": "../../../tsconfig.json",
+  "include": ["./storybook", "./next"]
 }
