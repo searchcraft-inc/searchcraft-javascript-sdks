@@ -17,7 +17,7 @@ export interface SearchcraftThemeProps extends Components.SearchcraftTheme {}
  * </script>
  *
  * <template>
- *   <SearchcraftTheme theme="light" :customTheme="[]" />
+ *   <SearchcraftTheme />
  * </template>
  * ```
  */

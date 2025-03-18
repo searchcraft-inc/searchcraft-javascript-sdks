@@ -16,14 +16,6 @@ It does not render anything visible, its only function is to manage the css styl
 <searchcraft-theme theme="light" custom-theme="{}" />
 ```
 
-## Properties
-
-| Property      | Attribute      | Description                            | Type                  | Default     |
-| ------------- | -------------- | -------------------------------------- | --------------------- | ----------- |
-| `customTheme` | `custom-theme` | The custom theme configuration object. | `string \| undefined` | `undefined` |
-| `theme`       | `theme`        | The name of the theme.                 | `string \| undefined` | `undefined` |
-
-
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

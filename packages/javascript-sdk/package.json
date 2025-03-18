@@ -18,15 +18,18 @@
     "./dist/components/*": {
       "import": "./dist/components/*",
       "types": "./dist/components/*"
+    },
+    "./hydrate": {
+      "require": "./index.js",
+      "import": "./hydrate/index.mjs",
+      "types": "./hydrate/index.d.ts"
     }
   },
   "repository": {
     "type": "git",
     "url": "https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/"
   },
-  "files": [
-    "dist/"
-  ],
+  "files": ["dist/"],
   "scripts": {
     "build": "stencil build",
     "docs": "typedoc --options typedoc.json",

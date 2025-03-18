@@ -7,6 +7,7 @@ import {
   SearchcraftTheme,
   type SearchResultMappings,
 } from '@searchcraft/react-sdk';
+
 import type { Meta, StoryObj } from '@storybook/react';
 import { useEffect } from 'react';
 

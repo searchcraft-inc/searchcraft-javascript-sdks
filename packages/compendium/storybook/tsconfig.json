@@ -2,7 +2,8 @@
   "compilerOptions": {
     "baseUrl": "./",
     "jsx": "react-jsx",
-    "moduleResolution": "node10",
+    "module": "Node16",
+    "moduleResolution": "node16",
     "types": ["vite/client"],
     "paths": {
       "@stories/*": ["stories/*"],
