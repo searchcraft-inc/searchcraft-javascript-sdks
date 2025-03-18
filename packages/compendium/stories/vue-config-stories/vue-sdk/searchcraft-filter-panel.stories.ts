@@ -1,19 +1,16 @@
-import type {
-  DateRangeFilterItem,
-  ExactMatchToggleFilterItem,
-  FacetsFilterItem,
-  FilterItem,
-  MostRecentToggleFilterItem,
-  NumericFilterItem,
-} from '@searchcraft/javascript-sdk';
 import {
+  Searchcraft,
   SearchcraftFilterPanel,
   SearchcraftInputForm,
   SearchcraftTheme,
+  type DateRangeFilterItem,
+  type ExactMatchToggleFilterItem,
+  type FacetsFilterItem,
+  type FilterItem,
+  type MostRecentToggleFilterItem,
+  type NumericFilterItem,
 } from '@searchcraft/vue-sdk';
 import type { Meta, StoryFn } from '@storybook/vue3';
-
-import { config } from '@utils/DefaultSearchcraftConfig';
 
 export default {
   title: 'Vue SDK/searchcraft-filter-panel',
@@ -24,7 +21,6 @@ export default {
 type ComponentProps = {
   items: FilterItem[];
   clearInput: () => void;
-  config: string;
   customStylesForInput: string;
   inputCaptionValue: string;
   labelForInput: string;
@@ -91,7 +87,6 @@ const defaultProps: ComponentProps = {
     facetItem,
   ],
   clearInput: () => {},
-  config: JSON.stringify(config),
   customStylesForInput: '{}',
   inputCaptionValue: 'Search',
   labelForInput: 'Search for something:',
@@ -105,7 +100,12 @@ export const Default: StoryFn = (args) => ({
     SearchcraftTheme,
   },
   setup() {
-    return { args, config };
+    new Searchcraft({
+      readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
+      endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
+      index: [import.meta.env.VITE_RUNEGARD_INDEX],
+    });
+    return { args };
   },
   template: `
     <div style="padding: 10px 20px;">

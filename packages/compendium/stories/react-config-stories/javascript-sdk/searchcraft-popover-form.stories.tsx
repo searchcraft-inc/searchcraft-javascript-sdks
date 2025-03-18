@@ -5,7 +5,6 @@ import {
   Searchcraft,
   type Components,
 } from '@searchcraft/javascript-sdk';
-import { configAlternate } from '@utils/AlternateSearchcraftConfig';
 import { useEffect } from 'react';
 
 const componentMeta: Meta = {
@@ -51,7 +50,11 @@ export const Inline: StoryObj<Components.SearchcraftPopoverForm> = {
   decorators: [
     (Story) => {
       useEffect(() => {
-        new Searchcraft(configAlternate);
+        new Searchcraft({
+          readKey: import.meta.env.VITE_KOBOL_READ_KEY,
+          endpointURL: import.meta.env.VITE_KOBOL_ENDPOINT_URL,
+          index: [import.meta.env.VITE_KOBOL_INDEX],
+        });
         const searchForm = document.querySelector('searchcraft-popover-form');
         if (searchForm) {
           searchForm.popoverResultMappings = mappings;
@@ -144,7 +147,9 @@ export const InlineWithAds: StoryObj<Components.SearchcraftPopoverForm> = {
     (Story) => {
       useEffect(() => {
         const config: SearchcraftConfig = {
-          ...configAlternate,
+          readKey: import.meta.env.VITE_KOBOL_READ_KEY,
+          endpointURL: import.meta.env.VITE_KOBOL_ENDPOINT_URL,
+          index: [import.meta.env.VITE_KOBOL_INDEX],
           adSource: 'adMarketplace',
           admSub: 'searchbox1',
           admProductAdQuantity: 3,
@@ -187,7 +192,11 @@ export const Modal: StoryObj<Components.SearchcraftPopoverForm> = {
   decorators: [
     (Story) => {
       useEffect(() => {
-        new Searchcraft(configAlternate);
+        new Searchcraft({
+          readKey: import.meta.env.VITE_KOBOL_READ_KEY,
+          endpointURL: import.meta.env.VITE_KOBOL_ENDPOINT_URL,
+          index: [import.meta.env.VITE_KOBOL_INDEX],
+        });
         const searchForm = document.querySelector('searchcraft-popover-form');
 
         if (searchForm) {
@@ -224,7 +233,11 @@ export const Fullscreen: StoryObj<Components.SearchcraftPopoverForm> = {
   decorators: [
     (Story) => {
       useEffect(() => {
-        new Searchcraft(configAlternate);
+        new Searchcraft({
+          readKey: import.meta.env.VITE_KOBOL_READ_KEY,
+          endpointURL: import.meta.env.VITE_KOBOL_ENDPOINT_URL,
+          index: [import.meta.env.VITE_KOBOL_INDEX],
+        });
         const searchForm = document.querySelector('searchcraft-popover-form');
 
         if (searchForm) {

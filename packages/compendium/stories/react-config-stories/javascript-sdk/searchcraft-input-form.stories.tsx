@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import WebComponentWrapper from '@utils/WebComponentWrapper';
-import { config } from '@utils/DefaultSearchcraftConfig';
 
 import { Searchcraft, type Components } from '@searchcraft/javascript-sdk';
 import { useEffect } from 'react';
@@ -55,43 +54,41 @@ const componentMeta: Meta = {
 export default componentMeta;
 
 const defaultProps: Components.SearchcraftInputForm = {
-  config: config,
   autoSearch: false,
   buttonPlacement: 'left',
   buttonLabel: undefined,
   inputLabel: 'Search here',
   customStyles: {},
   placeholderValue: 'Enter Search',
-  searchTerm: '',
 };
 
 const buttonRightProps: Components.SearchcraftInputForm = {
-  config: config,
   autoSearch: false,
   buttonPlacement: 'right',
   buttonLabel: 'Search',
   inputLabel: 'Search here',
   customStyles: {},
   placeholderValue: 'Enter Search',
-  searchTerm: '',
 };
 
 const autoSearchProps: Components.SearchcraftInputForm = {
-  config: config,
   autoSearch: true,
   buttonPlacement: 'none',
   buttonLabel: undefined,
   inputLabel: 'Start typing to auto search',
   customStyles: {},
   placeholderValue: 'Enter Search',
-  searchTerm: '',
 };
 
 export const Default: StoryObj<Components.SearchcraftInputForm> = {
   decorators: [
     (Story) => {
       useEffect(() => {
-        new Searchcraft(config);
+        new Searchcraft({
+          readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
+          endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
+          index: [import.meta.env.VITE_RUNEGARD_INDEX],
+        });
       }, []);
       return <Story />;
     },
@@ -109,7 +106,11 @@ export const ButtonRight: StoryObj<Components.SearchcraftInputForm> = {
   decorators: [
     (Story) => {
       useEffect(() => {
-        new Searchcraft(config);
+        new Searchcraft({
+          readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
+          endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
+          index: [import.meta.env.VITE_RUNEGARD_INDEX],
+        });
       }, []);
       return <Story />;
     },
@@ -127,7 +128,11 @@ export const AutoSearch: StoryObj<Components.SearchcraftInputForm> = {
   decorators: [
     (Story) => {
       useEffect(() => {
-        new Searchcraft(config);
+        new Searchcraft({
+          readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
+          endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
+          index: [import.meta.env.VITE_RUNEGARD_INDEX],
+        });
       }, []);
       return <Story />;
     },

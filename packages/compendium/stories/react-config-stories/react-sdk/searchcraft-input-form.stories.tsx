@@ -5,7 +5,6 @@ import {
   type SearchcraftInputFormProps,
   SearchcraftTheme,
 } from '@searchcraft/react-sdk';
-import { config } from '@utils/DefaultSearchcraftConfig';
 import { useEffect } from 'react';
 
 const componentMeta: Meta = {
@@ -60,14 +59,17 @@ const defaultProps: SearchcraftInputFormProps = {
   inputLabel: 'Search here',
   customStyles: {},
   placeholderValue: 'Enter Search',
-  searchTerm: '',
 };
 
 export const Default: StoryObj<SearchcraftInputFormProps> = {
   decorators: [
     (Story) => {
       useEffect(() => {
-        new Searchcraft(config);
+        new Searchcraft({
+          readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
+          endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
+          index: [import.meta.env.VITE_RUNEGARD_INDEX],
+        });
       }, []);
       return <Story />;
     },

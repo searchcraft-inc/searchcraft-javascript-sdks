@@ -4,7 +4,6 @@ import {
   type SearchcraftConfig,
   type SearchResultMappings,
 } from '@searchcraft/javascript-sdk';
-import { config } from '@utils/DefaultSearchcraftConfig';
 import type { Components } from '@searchcraft/javascript-sdk';
 import { useEffect } from 'react';
 
@@ -55,7 +54,11 @@ export const Default: StoryObj<Components.SearchcraftBaseSearchResults> = {
   decorators: [
     (Story) => {
       useEffect(() => {
-        new Searchcraft(config);
+        new Searchcraft({
+          readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
+          endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
+          index: [import.meta.env.VITE_RUNEGARD_INDEX],
+        });
         const searchResults = document.querySelector(
           'searchcraft-base-search-results',
         );
@@ -96,7 +99,9 @@ export const WithAdMarketplaceAds: StoryObj<Components.SearchcraftBaseSearchResu
       (Story) => {
         useEffect(() => {
           const adConfig: SearchcraftConfig = {
-            ...config,
+            readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
+            endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
+            index: [import.meta.env.VITE_RUNEGARD_INDEX],
             adSource: 'adMarketplace',
             admSub: 'searchbox1',
             admProductAdQuantity: 2,
@@ -142,7 +147,9 @@ export const WithCustomAds: StoryObj<Components.SearchcraftBaseSearchResults> =
       (Story) => {
         useEffect(() => {
           const searchcraft = new Searchcraft({
-            ...config,
+            readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
+            endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
+            index: [import.meta.env.VITE_RUNEGARD_INDEX],
             adSource: 'Custom',
             customAdStartQuantity: 2,
             customAdInterstitialInterval: 4,
@@ -173,6 +180,8 @@ export const WithCustomAds: StoryObj<Components.SearchcraftBaseSearchResults> =
           if (searchResults) {
             searchResults.searchResultMappings = mappings;
           }
+
+          return unsubscribe();
         }, []);
 
         return <Story />;

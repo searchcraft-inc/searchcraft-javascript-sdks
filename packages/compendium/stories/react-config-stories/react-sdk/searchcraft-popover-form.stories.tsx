@@ -6,7 +6,6 @@ import {
   SearchcraftTheme,
 } from '@searchcraft/react-sdk';
 import type { Meta, StoryObj } from '@storybook/react';
-import { configAlternate } from '@utils/AlternateSearchcraftConfig';
 import { useEffect } from 'react';
 
 const componentMeta: Meta = {
@@ -52,7 +51,11 @@ export const Inline: StoryObj = {
   decorators: [
     (Story) => {
       useEffect(() => {
-        new Searchcraft(configAlternate);
+        new Searchcraft({
+          readKey: import.meta.env.VITE_KOBOL_READ_KEY,
+          endpointURL: import.meta.env.VITE_KOBOL_ENDPOINT_URL,
+          index: [import.meta.env.VITE_KOBOL_INDEX],
+        });
       }, []);
       return <Story />;
     },
@@ -63,7 +66,6 @@ export const Inline: StoryObj = {
       <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
         <p>Story Note: This story uses the Bazaario env vars</p>
         <SearchcraftPopoverForm
-          config={configAlternate}
           hotkey='k'
           hotkeyModifier='ctrl'
           popoverResultMappings={mappings}
@@ -83,7 +85,11 @@ export const Modal: StoryObj = {
   decorators: [
     (Story) => {
       useEffect(() => {
-        new Searchcraft(configAlternate);
+        new Searchcraft({
+          readKey: import.meta.env.VITE_KOBOL_READ_KEY,
+          endpointURL: import.meta.env.VITE_KOBOL_ENDPOINT_URL,
+          index: [import.meta.env.VITE_KOBOL_INDEX],
+        });
       }, []);
       return <Story />;
     },
@@ -112,7 +118,11 @@ export const Fullscreen: StoryObj = {
   decorators: [
     (Story) => {
       useEffect(() => {
-        new Searchcraft(configAlternate);
+        new Searchcraft({
+          readKey: import.meta.env.VITE_KOBOL_READ_KEY,
+          endpointURL: import.meta.env.VITE_KOBOL_ENDPOINT_URL,
+          index: [import.meta.env.VITE_KOBOL_INDEX],
+        });
       }, []);
       return <Story />;
     },

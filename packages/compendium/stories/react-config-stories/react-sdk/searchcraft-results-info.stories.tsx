@@ -5,7 +5,6 @@ import {
   SearchcraftTheme,
   type SearchcraftResultsInfoProps,
 } from '@searchcraft/react-sdk';
-import { config } from '@utils/DefaultSearchcraftConfig';
 import { useEffect } from 'react';
 
 const componentMeta: Meta = {
@@ -27,17 +26,17 @@ const componentMeta: Meta = {
   },
 };
 
-const defaultProps: SearchcraftResultsInfoProps = {
-  resultsCount: 12345,
-  responseTime: '200.35',
-  query: 'example query',
-};
+const defaultProps: SearchcraftResultsInfoProps = {};
 
 export const Default: StoryObj = {
   decorators: [
     (Story) => {
       useEffect(() => {
-        new Searchcraft(config);
+        new Searchcraft({
+          readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
+          endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
+          index: [import.meta.env.VITE_RUNEGARD_INDEX],
+        });
       }, []);
       return <Story />;
     },
