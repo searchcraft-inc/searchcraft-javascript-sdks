@@ -3001,18 +3001,18 @@ Object.keys(react).forEach(function (k) {
 });
 }(zustand));
 
-var L = Object.defineProperty;
-var q = (n, e, r) => e in n ? L(n, e, { enumerable: !0, configurable: !0, writable: !0, value: r }) : n[e] = r;
-var h = (n, e, r) => q(n, typeof e != "symbol" ? e + "" : e, r);
-var P = /* @__PURE__ */ ((n) => (n[n.DEBUG = 0] = "DEBUG", n[n.INFO = 1] = "INFO", n[n.WARN = 2] = "WARN", n[n.ERROR = 3] = "ERROR", n))(P || {});
-class pe {
+var B = Object.defineProperty;
+var q = (r, e, n) => e in r ? B(r, e, { enumerable: !0, configurable: !0, writable: !0, value: n }) : r[e] = n;
+var h = (r, e, n) => q(r, typeof e != "symbol" ? e + "" : e, n);
+var P = /* @__PURE__ */ ((r) => (r[r.DEBUG = 0] = "DEBUG", r[r.INFO = 1] = "INFO", r[r.WARN = 2] = "WARN", r[r.ERROR = 3] = "ERROR", r))(P || {});
+class ve {
   constructor(e) {
     h(this, "logLevel");
     h(this, "logFormatter");
     this.logLevel = e.logLevel || 1, this.logFormatter = e.logFormatter || this.defaultFormatter;
   }
-  defaultFormatter(e, r) {
-    return `[${P[e]}] ${( new Date()).toISOString()}: ${r}`;
+  defaultFormatter(e, n) {
+    return `[${P[e]}] ${( new Date()).toISOString()}: ${n}`;
   }
   debug(e) {
     this.logLevel <= 0 && console.log(this.logFormatter(0, e));
@@ -3026,25 +3026,25 @@ class pe {
   error(e) {
     this.logLevel <= 3 && console.error(this.logFormatter(3, e));
   }
-  log(e, r) {
+  log(e, n) {
     switch (e) {
       case 0:
-        this.debug(r);
+        this.debug(n);
         break;
       case 1:
-        this.info(r);
+        this.info(n);
         break;
       case 2:
-        this.warn(r);
+        this.warn(n);
         break;
       case 3:
-        this.error(r);
+        this.error(n);
         break;
     }
   }
 }
-function w(n, e, r, o) {
-  return new (r || (r = Promise))(function(i, a) {
+function w(r, e, n, o) {
+  return new (n || (n = Promise))(function(i, a) {
     function t(c) {
       try {
         l(o.next(c));
@@ -3061,15 +3061,15 @@ function w(n, e, r, o) {
     }
     function l(c) {
       var s;
-      c.done ? i(c.value) : (s = c.value, s instanceof r ? s : new r(function(f) {
+      c.done ? i(c.value) : (s = c.value, s instanceof n ? s : new n(function(f) {
         f(s);
       })).then(t, u);
     }
-    l((o = o.apply(n, [])).next());
+    l((o = o.apply(r, [])).next());
   });
 }
-function y(n, e) {
-  var r, o, i, a, t = { label: 0, sent: function() {
+function y(r, e) {
+  var n, o, i, a, t = { label: 0, sent: function() {
     if (1 & i[0]) throw i[1];
     return i[1];
   }, trys: [], ops: [] };
@@ -3079,9 +3079,9 @@ function y(n, e) {
   function u(l) {
     return function(c) {
       return function(s) {
-        if (r) throw new TypeError("Generator is already executing.");
+        if (n) throw new TypeError("Generator is already executing.");
         for (; a && (a = 0, s[0] && (t = 0)), t; ) try {
-          if (r = 1, o && (i = 2 & s[0] ? o.return : s[0] ? o.throw || ((i = o.return) && i.call(o), 0) : o.next) && !(i = i.call(o, s[1])).done) return i;
+          if (n = 1, o && (i = 2 & s[0] ? o.return : s[0] ? o.throw || ((i = o.return) && i.call(o), 0) : o.next) && !(i = i.call(o, s[1])).done) return i;
           switch (o = 0, i && (s = [2 & s[0], i.value]), s[0]) {
             case 0:
             case 1:
@@ -3115,11 +3115,11 @@ function y(n, e) {
               i[2] && t.ops.pop(), t.trys.pop();
               continue;
           }
-          s = e.call(n, t);
+          s = e.call(r, t);
         } catch (f) {
           s = [6, f], o = 0;
         } finally {
-          r = i = 0;
+          n = i = 0;
         }
         if (5 & s[0]) throw s[1];
         return { value: s[0] ? s[1] : void 0, done: !0 };
@@ -3127,26 +3127,26 @@ function y(n, e) {
     };
   }
 }
-var b = { exclude: [] }, D = {}, v = function(n, e) {
-  typeof window < "u" && (D[n] = e);
+var b = { exclude: [] }, D = {}, v = function(r, e) {
+  typeof window < "u" && (D[r] = e);
 };
-function C(n) {
-  return n ^= n >>> 16, n = Math.imul(n, 2246822507), n ^= n >>> 13, n = Math.imul(n, 3266489909), (n ^= n >>> 16) >>> 0;
+function C(r) {
+  return r ^= r >>> 16, r = Math.imul(r, 2246822507), r ^= r >>> 13, r = Math.imul(r, 3266489909), (r ^= r >>> 16) >>> 0;
 }
 var m = new Uint32Array([597399067, 2869860233, 951274213, 2716044179]);
-function g(n, e) {
-  return n << e | n >>> 32 - e;
+function g(r, e) {
+  return r << e | r >>> 32 - e;
 }
-function T(n, e) {
-  var r;
-  if (e === void 0 && (e = 0), e = e ? 0 | e : 0, typeof n == "string" && (r = n, n = new TextEncoder().encode(r).buffer), !(n instanceof ArrayBuffer)) throw new TypeError("Expected key to be ArrayBuffer or string");
+function M(r, e) {
+  var n;
+  if (e === void 0 && (e = 0), e = e ? 0 | e : 0, typeof r == "string" && (n = r, r = new TextEncoder().encode(n).buffer), !(r instanceof ArrayBuffer)) throw new TypeError("Expected key to be ArrayBuffer or string");
   var o = new Uint32Array([e, e, e, e]);
   (((function(a, t) {
     for (var u = a.byteLength / 16 | 0, l = new Uint32Array(a, 0, 4 * u), c = 0; c < u; c++) {
       var s = l.subarray(4 * c, 4 * (c + 1));
       s[0] = Math.imul(s[0], m[0]), s[0] = g(s[0], 15), s[0] = Math.imul(s[0], m[1]), t[0] = t[0] ^ s[0], t[0] = g(t[0], 19), t[0] = t[0] + t[1], t[0] = Math.imul(t[0], 5) + 1444728091, s[1] = Math.imul(s[1], m[1]), s[1] = g(s[1], 16), s[1] = Math.imul(s[1], m[2]), t[1] = t[1] ^ s[1], t[1] = g(t[1], 17), t[1] = t[1] + t[2], t[1] = Math.imul(t[1], 5) + 197830471, s[2] = Math.imul(s[2], m[2]), s[2] = g(s[2], 17), s[2] = Math.imul(s[2], m[3]), t[2] = t[2] ^ s[2], t[2] = g(t[2], 15), t[2] = t[2] + t[3], t[2] = Math.imul(t[2], 5) + 2530024501, s[3] = Math.imul(s[3], m[3]), s[3] = g(s[3], 18), s[3] = Math.imul(s[3], m[0]), t[3] = t[3] ^ s[3], t[3] = g(t[3], 13), t[3] = t[3] + t[0], t[3] = Math.imul(t[3], 5) + 850148119;
     }
-  })))(n, o), function(a, t) {
+  })))(r, o), function(a, t) {
     var u = a.byteLength / 16 | 0, l = a.byteLength % 16, c = new Uint32Array(4), s = new Uint8Array(a, 16 * u, l);
     switch (l) {
       case 15:
@@ -3180,46 +3180,46 @@ function T(n, e) {
       case 1:
         c[0] = c[0] ^ s[0] << 0, c[0] = Math.imul(c[0], m[0]), c[0] = g(c[0], 15), c[0] = Math.imul(c[0], m[1]), t[0] = t[0] ^ c[0];
     }
-  }(n, o), function(a, t) {
+  }(r, o), function(a, t) {
     t[0] = t[0] ^ a.byteLength, t[1] = t[1] ^ a.byteLength, t[2] = t[2] ^ a.byteLength, t[3] = t[3] ^ a.byteLength, t[0] = t[0] + t[1] | 0, t[0] = t[0] + t[2] | 0, t[0] = t[0] + t[3] | 0, t[1] = t[1] + t[0] | 0, t[2] = t[2] + t[0] | 0, t[3] = t[3] + t[0] | 0, t[0] = C(t[0]), t[1] = C(t[1]), t[2] = C(t[2]), t[3] = C(t[3]), t[0] = t[0] + t[1] | 0, t[0] = t[0] + t[2] | 0, t[0] = t[0] + t[3] | 0, t[1] = t[1] + t[0] | 0, t[2] = t[2] + t[0] | 0, t[3] = t[3] + t[0] | 0;
-  }(n, o);
+  }(r, o);
   var i = new Uint8Array(o.buffer);
   return Array.from(i).map(function(a) {
     return a.toString(16).padStart(2, "0");
   }).join("");
 }
-function H(n) {
-  for (var e = 0, r = 0; r < n.length; ++r) e += Math.abs(n[r]);
+function H(r) {
+  for (var e = 0, n = 0; n < r.length; ++n) e += Math.abs(r[n]);
   return e;
 }
-function U(n, e, r) {
-  for (var o = [], i = 0; i < n[0].data.length; i++) {
-    for (var a = [], t = 0; t < n.length; t++) a.push(n[t].data[i]);
+function U(r, e, n) {
+  for (var o = [], i = 0; i < r[0].data.length; i++) {
+    for (var a = [], t = 0; t < r.length; t++) a.push(r[t].data[i]);
     o.push(Q(a));
   }
   var u = new Uint8ClampedArray(o);
-  return new ImageData(u, e, r);
+  return new ImageData(u, e, n);
 }
-function Q(n) {
-  if (n.length === 0) return 0;
-  for (var e = {}, r = 0, o = n; r < o.length; r++)
-    e[a = o[r]] = (e[a] || 0) + 1;
-  var i = n[0];
+function Q(r) {
+  if (r.length === 0) return 0;
+  for (var e = {}, n = 0, o = r; n < o.length; n++)
+    e[a = o[n]] = (e[a] || 0) + 1;
+  var i = r[0];
   for (var a in e) e[a] > e[i] && (i = parseInt(a, 10));
   return i;
 }
 function E() {
   if (typeof navigator > "u") return { name: "unknown", version: "unknown" };
-  for (var n = navigator.userAgent, e = { Edg: "Edge", OPR: "Opera" }, r = 0, o = [/(?<name>Edge|Edg)\/(?<version>\d+(?:\.\d+)?)/, /(?<name>(?:Chrome|Chromium|OPR|Opera|Vivaldi|Brave))\/(?<version>\d+(?:\.\d+)?)/, /(?<name>(?:Firefox|Waterfox|Iceweasel|IceCat))\/(?<version>\d+(?:\.\d+)?)/, /(?<name>Safari)\/(?<version>\d+(?:\.\d+)?)/, /(?<name>MSIE|Trident|IEMobile).+?(?<version>\d+(?:\.\d+)?)/, /(?<name>[A-Za-z]+)\/(?<version>\d+(?:\.\d+)?)/, /(?<name>SamsungBrowser)\/(?<version>\d+(?:\.\d+)?)/]; r < o.length; r++) {
-    var i = o[r], a = n.match(i);
+  for (var r = navigator.userAgent, e = { Edg: "Edge", OPR: "Opera" }, n = 0, o = [/(?<name>Edge|Edg)\/(?<version>\d+(?:\.\d+)?)/, /(?<name>(?:Chrome|Chromium|OPR|Opera|Vivaldi|Brave))\/(?<version>\d+(?:\.\d+)?)/, /(?<name>(?:Firefox|Waterfox|Iceweasel|IceCat))\/(?<version>\d+(?:\.\d+)?)/, /(?<name>Safari)\/(?<version>\d+(?:\.\d+)?)/, /(?<name>MSIE|Trident|IEMobile).+?(?<version>\d+(?:\.\d+)?)/, /(?<name>[A-Za-z]+)\/(?<version>\d+(?:\.\d+)?)/, /(?<name>SamsungBrowser)\/(?<version>\d+(?:\.\d+)?)/]; n < o.length; n++) {
+    var i = o[n], a = r.match(i);
     if (a && a.groups) return { name: e[a.groups.name] || a.groups.name, version: a.groups.version };
   }
   return { name: "unknown", version: "unknown" };
 }
 v("audio", function() {
   return w(this, void 0, void 0, function() {
-    return y(this, function(n) {
-      return [2, new Promise(function(e, r) {
+    return y(this, function(r) {
+      return [2, new Promise(function(e, n) {
         try {
           var o = new (window.OfflineAudioContext || window.webkitOfflineAudioContext)(1, 5e3, 44100), i = o.createBufferSource(), a = o.createOscillator();
           a.frequency.value = 1e3;
@@ -3228,44 +3228,44 @@ v("audio", function() {
             t = l.renderedBuffer.getChannelData(0), e({ sampleHash: H(t), oscillator: a.type, maxChannels: o.destination.maxChannelCount, channelCountMode: i.channelCountMode });
           }, o.startRendering();
         } catch (l) {
-          console.error("Error creating audio fingerprint:", l), r(l);
+          console.error("Error creating audio fingerprint:", l), n(l);
         }
       })];
     });
   });
 });
-var z = E().name !== "SamsungBrowser" ? 1 : 3, x = 280, k = 20;
+var z = E().name !== "SamsungBrowser" ? 1 : 3, x = 280, F = 20;
 E().name != "Firefox" && v("canvas", function() {
-  return document.createElement("canvas").getContext("2d"), new Promise(function(n) {
+  return document.createElement("canvas").getContext("2d"), new Promise(function(r) {
     var e = Array.from({ length: z }, function() {
       return function() {
-        var r = document.createElement("canvas"), o = r.getContext("2d");
+        var n = document.createElement("canvas"), o = n.getContext("2d");
         if (!o) return new ImageData(1, 1);
-        r.width = x, r.height = k;
-        var i = o.createLinearGradient(0, 0, r.width, r.height);
-        i.addColorStop(0, "red"), i.addColorStop(0.16666666666666666, "orange"), i.addColorStop(0.3333333333333333, "yellow"), i.addColorStop(0.5, "green"), i.addColorStop(0.6666666666666666, "blue"), i.addColorStop(0.8333333333333334, "indigo"), i.addColorStop(1, "violet"), o.fillStyle = i, o.fillRect(0, 0, r.width, r.height);
+        n.width = x, n.height = F;
+        var i = o.createLinearGradient(0, 0, n.width, n.height);
+        i.addColorStop(0, "red"), i.addColorStop(0.16666666666666666, "orange"), i.addColorStop(0.3333333333333333, "yellow"), i.addColorStop(0.5, "green"), i.addColorStop(0.6666666666666666, "blue"), i.addColorStop(0.8333333333333334, "indigo"), i.addColorStop(1, "violet"), o.fillStyle = i, o.fillRect(0, 0, n.width, n.height);
         var a = "Random Text WMwmil10Oo";
-        o.font = "23.123px Arial", o.fillStyle = "black", o.fillText(a, -5, 15), o.fillStyle = "rgba(0, 0, 255, 0.5)", o.fillText(a, -3.3, 17.7), o.beginPath(), o.moveTo(0, 0), o.lineTo(2 * r.width / 7, r.height), o.strokeStyle = "white", o.lineWidth = 2, o.stroke();
-        var t = o.getImageData(0, 0, r.width, r.height);
+        o.font = "23.123px Arial", o.fillStyle = "black", o.fillText(a, -5, 15), o.fillStyle = "rgba(0, 0, 255, 0.5)", o.fillText(a, -3.3, 17.7), o.beginPath(), o.moveTo(0, 0), o.lineTo(2 * n.width / 7, n.height), o.strokeStyle = "white", o.lineWidth = 2, o.stroke();
+        var t = o.getImageData(0, 0, n.width, n.height);
         return t;
       }();
     });
-    n({ commonImageDataHash: T(U(e, x, k).data.toString()).toString() });
+    r({ commonImageDataHash: M(U(e, x, F).data.toString()).toString() });
   });
 });
-var A, K = ["Arial", "Arial Black", "Arial Narrow", "Arial Rounded MT", "Arimo", "Archivo", "Barlow", "Bebas Neue", "Bitter", "Bookman", "Calibri", "Cabin", "Candara", "Century", "Century Gothic", "Comic Sans MS", "Constantia", "Courier", "Courier New", "Crimson Text", "DM Mono", "DM Sans", "DM Serif Display", "DM Serif Text", "Dosis", "Droid Sans", "Exo", "Fira Code", "Fira Sans", "Franklin Gothic Medium", "Garamond", "Geneva", "Georgia", "Gill Sans", "Helvetica", "Impact", "Inconsolata", "Indie Flower", "Inter", "Josefin Sans", "Karla", "Lato", "Lexend", "Lucida Bright", "Lucida Console", "Lucida Sans Unicode", "Manrope", "Merriweather", "Merriweather Sans", "Montserrat", "Myriad", "Noto Sans", "Nunito", "Nunito Sans", "Open Sans", "Optima", "Orbitron", "Oswald", "Pacifico", "Palatino", "Perpetua", "PT Sans", "PT Serif", "Poppins", "Prompt", "Public Sans", "Quicksand", "Rajdhani", "Recursive", "Roboto", "Roboto Condensed", "Rockwell", "Rubik", "Segoe Print", "Segoe Script", "Segoe UI", "Sora", "Source Sans Pro", "Space Mono", "Tahoma", "Taviraj", "Times", "Times New Roman", "Titillium Web", "Trebuchet MS", "Ubuntu", "Varela Round", "Verdana", "Work Sans"], J = ["monospace", "sans-serif", "serif"];
-function F(n, e) {
-  if (!n) throw new Error("Canvas context not supported");
-  return n.font = "72px ".concat(e), n.measureText("WwMmLli0Oo").width;
+var T, K = ["Arial", "Arial Black", "Arial Narrow", "Arial Rounded MT", "Arimo", "Archivo", "Barlow", "Bebas Neue", "Bitter", "Bookman", "Calibri", "Cabin", "Candara", "Century", "Century Gothic", "Comic Sans MS", "Constantia", "Courier", "Courier New", "Crimson Text", "DM Mono", "DM Sans", "DM Serif Display", "DM Serif Text", "Dosis", "Droid Sans", "Exo", "Fira Code", "Fira Sans", "Franklin Gothic Medium", "Garamond", "Geneva", "Georgia", "Gill Sans", "Helvetica", "Impact", "Inconsolata", "Indie Flower", "Inter", "Josefin Sans", "Karla", "Lato", "Lexend", "Lucida Bright", "Lucida Console", "Lucida Sans Unicode", "Manrope", "Merriweather", "Merriweather Sans", "Montserrat", "Myriad", "Noto Sans", "Nunito", "Nunito Sans", "Open Sans", "Optima", "Orbitron", "Oswald", "Pacifico", "Palatino", "Perpetua", "PT Sans", "PT Serif", "Poppins", "Prompt", "Public Sans", "Quicksand", "Rajdhani", "Recursive", "Roboto", "Roboto Condensed", "Rockwell", "Rubik", "Segoe Print", "Segoe Script", "Segoe UI", "Sora", "Source Sans Pro", "Space Mono", "Tahoma", "Taviraj", "Times", "Times New Roman", "Titillium Web", "Trebuchet MS", "Ubuntu", "Varela Round", "Verdana", "Work Sans"], Y = ["monospace", "sans-serif", "serif"];
+function k(r, e) {
+  if (!r) throw new Error("Canvas context not supported");
+  return r.font = "72px ".concat(e), r.measureText("WwMmLli0Oo").width;
 }
-function Y() {
-  var n, e = document.createElement("canvas"), r = (n = e.getContext("webgl")) !== null && n !== void 0 ? n : e.getContext("experimental-webgl");
-  if (r && "getParameter" in r) try {
-    var o = (r.getParameter(r.VENDOR) || "").toString(), i = (r.getParameter(r.RENDERER) || "").toString(), a = { vendor: o, renderer: i, version: (r.getParameter(r.VERSION) || "").toString(), shadingLanguageVersion: (r.getParameter(r.SHADING_LANGUAGE_VERSION) || "").toString() };
+function J() {
+  var r, e = document.createElement("canvas"), n = (r = e.getContext("webgl")) !== null && r !== void 0 ? r : e.getContext("experimental-webgl");
+  if (n && "getParameter" in n) try {
+    var o = (n.getParameter(n.VENDOR) || "").toString(), i = (n.getParameter(n.RENDERER) || "").toString(), a = { vendor: o, renderer: i, version: (n.getParameter(n.VERSION) || "").toString(), shadingLanguageVersion: (n.getParameter(n.SHADING_LANGUAGE_VERSION) || "").toString() };
     if (!i.length || !o.length) {
-      var t = r.getExtension("WEBGL_debug_renderer_info");
+      var t = n.getExtension("WEBGL_debug_renderer_info");
       if (t) {
-        var u = (r.getParameter(t.UNMASKED_VENDOR_WEBGL) || "").toString(), l = (r.getParameter(t.UNMASKED_RENDERER_WEBGL) || "").toString();
+        var u = (n.getParameter(t.UNMASKED_VENDOR_WEBGL) || "").toString(), l = (n.getParameter(t.UNMASKED_RENDERER_WEBGL) || "").toString();
         u && (a.vendorUnmasked = u), l && (a.rendererUnmasked = l);
       }
     }
@@ -3275,11 +3275,11 @@ function Y() {
   return "undefined";
 }
 function X() {
-  var n = new Float32Array(1), e = new Uint8Array(n.buffer);
-  return n[0] = 1 / 0, n[0] = n[0] - n[0], e[3];
+  var r = new Float32Array(1), e = new Uint8Array(r.buffer);
+  return r[0] = 1 / 0, r[0] = r[0] - r[0], e[3];
 }
-function Z(n, e) {
-  var r = {};
+function Z(r, e) {
+  var n = {};
   return e.forEach(function(o) {
     var i = function(a) {
       if (a.length === 0) return null;
@@ -3292,33 +3292,33 @@ function Z(n, e) {
       return Object.keys(t).forEach(function(c) {
         t[c] > l && (u = c, l = t[c]);
       }), u;
-    }(n.map(function(a) {
+    }(r.map(function(a) {
       return o in a ? a[o] : void 0;
     }).filter(function(a) {
       return a !== void 0;
     }));
-    i && (r[o] = i);
-  }), r;
+    i && (n[o] = i);
+  }), n;
 }
 function ee() {
-  var n = [], e = { "prefers-contrast": ["high", "more", "low", "less", "forced", "no-preference"], "any-hover": ["hover", "none"], "any-pointer": ["none", "coarse", "fine"], pointer: ["none", "coarse", "fine"], hover: ["hover", "none"], update: ["fast", "slow"], "inverted-colors": ["inverted", "none"], "prefers-reduced-motion": ["reduce", "no-preference"], "prefers-reduced-transparency": ["reduce", "no-preference"], scripting: ["none", "initial-only", "enabled"], "forced-colors": ["active", "none"] };
-  return Object.keys(e).forEach(function(r) {
-    e[r].forEach(function(o) {
-      matchMedia("(".concat(r, ": ").concat(o, ")")).matches && n.push("".concat(r, ": ").concat(o));
+  var r = [], e = { "prefers-contrast": ["high", "more", "low", "less", "forced", "no-preference"], "any-hover": ["hover", "none"], "any-pointer": ["none", "coarse", "fine"], pointer: ["none", "coarse", "fine"], hover: ["hover", "none"], update: ["fast", "slow"], "inverted-colors": ["inverted", "none"], "prefers-reduced-motion": ["reduce", "no-preference"], "prefers-reduced-transparency": ["reduce", "no-preference"], scripting: ["none", "initial-only", "enabled"], "forced-colors": ["active", "none"] };
+  return Object.keys(e).forEach(function(n) {
+    e[n].forEach(function(o) {
+      matchMedia("(".concat(n, ": ").concat(o, ")")).matches && r.push("".concat(n, ": ").concat(o));
     });
-  }), n;
+  }), r;
 }
 function te() {
   if (window.location.protocol === "https:" && typeof window.ApplePaySession == "function") try {
-    for (var n = window.ApplePaySession.supportsVersion, e = 15; e > 0; e--) if (n(e)) return e;
+    for (var r = window.ApplePaySession.supportsVersion, e = 15; e > 0; e--) if (r(e)) return e;
   } catch {
     return 0;
   }
   return 0;
 }
 E().name != "Firefox" && v("fonts", function() {
-  var n = this;
-  return new Promise(function(e, r) {
+  var r = this;
+  return new Promise(function(e, n) {
     try {
       (function(o) {
         var i;
@@ -3343,97 +3343,97 @@ E().name != "Firefox" && v("fonts", function() {
         });
       })(function(o) {
         var i = o.iframe;
-        return w(n, void 0, void 0, function() {
+        return w(r, void 0, void 0, function() {
           var a, t, u, l;
           return y(this, function(c) {
-            return a = i.createElement("canvas"), t = a.getContext("2d"), u = J.map(function(s) {
-              return F(t, s);
+            return a = i.createElement("canvas"), t = a.getContext("2d"), u = Y.map(function(s) {
+              return k(t, s);
             }), l = {}, K.forEach(function(s) {
-              var f = F(t, s);
+              var f = k(t, s);
               u.includes(f) || (l[s] = f);
             }), e(l), [2];
           });
         });
       });
     } catch {
-      r({ error: "unsupported" });
+      n({ error: "unsupported" });
     }
   });
 }), v("hardware", function() {
-  return new Promise(function(n, e) {
-    var r = navigator.deviceMemory !== void 0 ? navigator.deviceMemory : 0, o = window.performance && window.performance.memory ? window.performance.memory : 0;
-    n({ videocard: Y(), architecture: X(), deviceMemory: r.toString() || "undefined", jsHeapSizeLimit: o.jsHeapSizeLimit || 0 });
+  return new Promise(function(r, e) {
+    var n = navigator.deviceMemory !== void 0 ? navigator.deviceMemory : 0, o = window.performance && window.performance.memory ? window.performance.memory : 0;
+    r({ videocard: J(), architecture: X(), deviceMemory: n.toString() || "undefined", jsHeapSizeLimit: o.jsHeapSizeLimit || 0 });
   });
 }), v("locales", function() {
-  return new Promise(function(n) {
-    n({ languages: navigator.language, timezone: Intl.DateTimeFormat().resolvedOptions().timeZone });
+  return new Promise(function(r) {
+    r({ languages: navigator.language, timezone: Intl.DateTimeFormat().resolvedOptions().timeZone });
   });
 }), v("permissions", function() {
   return w(this, void 0, void 0, function() {
-    var n;
+    var r;
     return y(this, function(e) {
-      return A = (b == null ? void 0 : b.permissions_to_check) || ["accelerometer", "accessibility", "accessibility-events", "ambient-light-sensor", "background-fetch", "background-sync", "bluetooth", "camera", "clipboard-read", "clipboard-write", "device-info", "display-capture", "gyroscope", "geolocation", "local-fonts", "magnetometer", "microphone", "midi", "nfc", "notifications", "payment-handler", "persistent-storage", "push", "speaker", "storage-access", "top-level-storage-access", "window-management", "query"], n = Array.from({ length: (b == null ? void 0 : b.retries) || 3 }, function() {
+      return T = (b == null ? void 0 : b.permissions_to_check) || ["accelerometer", "accessibility", "accessibility-events", "ambient-light-sensor", "background-fetch", "background-sync", "bluetooth", "camera", "clipboard-read", "clipboard-write", "device-info", "display-capture", "gyroscope", "geolocation", "local-fonts", "magnetometer", "microphone", "midi", "nfc", "notifications", "payment-handler", "persistent-storage", "push", "speaker", "storage-access", "top-level-storage-access", "window-management", "query"], r = Array.from({ length: (b == null ? void 0 : b.retries) || 3 }, function() {
         return function() {
           return w(this, void 0, void 0, function() {
-            var r, o, i, a, t;
+            var n, o, i, a, t;
             return y(this, function(u) {
               switch (u.label) {
                 case 0:
-                  r = {}, o = 0, i = A, u.label = 1;
+                  n = {}, o = 0, i = T, u.label = 1;
                 case 1:
                   if (!(o < i.length)) return [3, 6];
                   a = i[o], u.label = 2;
                 case 2:
                   return u.trys.push([2, 4, , 5]), [4, navigator.permissions.query({ name: a })];
                 case 3:
-                  return t = u.sent(), r[a] = t.state.toString(), [3, 5];
+                  return t = u.sent(), n[a] = t.state.toString(), [3, 5];
                 case 4:
                   return u.sent(), [3, 5];
                 case 5:
                   return o++, [3, 1];
                 case 6:
-                  return [2, r];
+                  return [2, n];
               }
             });
           });
         }();
-      }), [2, Promise.all(n).then(function(r) {
-        return Z(r, A);
+      }), [2, Promise.all(r).then(function(n) {
+        return Z(n, T);
       })];
     });
   });
 }), v("plugins", function() {
-  var n = [];
+  var r = [];
   if (navigator.plugins) for (var e = 0; e < navigator.plugins.length; e++) {
-    var r = navigator.plugins[e];
-    n.push([r.name, r.filename, r.description].join("|"));
+    var n = navigator.plugins[e];
+    r.push([n.name, n.filename, n.description].join("|"));
   }
   return new Promise(function(o) {
-    o({ plugins: n });
+    o({ plugins: r });
   });
 }), v("screen", function() {
-  return new Promise(function(n) {
-    n({ is_touchscreen: navigator.maxTouchPoints > 0, maxTouchPoints: navigator.maxTouchPoints, colorDepth: screen.colorDepth, mediaMatches: ee() });
+  return new Promise(function(r) {
+    r({ is_touchscreen: navigator.maxTouchPoints > 0, maxTouchPoints: navigator.maxTouchPoints, colorDepth: screen.colorDepth, mediaMatches: ee() });
   });
 }), v("system", function() {
-  return new Promise(function(n) {
+  return new Promise(function(r) {
     var e = E();
-    n({ platform: window.navigator.platform, cookieEnabled: window.navigator.cookieEnabled, productSub: navigator.productSub, product: navigator.product, useragent: navigator.userAgent, hardwareConcurrency: navigator.hardwareConcurrency, browser: { name: e.name, version: e.version }, applePayVersion: te() });
+    r({ platform: window.navigator.platform, cookieEnabled: window.navigator.cookieEnabled, productSub: navigator.productSub, product: navigator.product, useragent: navigator.userAgent, hardwareConcurrency: navigator.hardwareConcurrency, browser: { name: e.name, version: e.version }, applePayVersion: te() });
   });
 });
 var p, ne = E().name !== "SamsungBrowser" ? 1 : 3, d = null;
 v("webgl", function() {
   return w(this, void 0, void 0, function() {
-    var n;
+    var r;
     return y(this, function(e) {
       typeof document < "u" && ((p = document.createElement("canvas")).width = 200, p.height = 100, d = p.getContext("webgl"));
       try {
         if (!d) throw new Error("WebGL not supported");
-        return n = Array.from({ length: ne }, function() {
+        return r = Array.from({ length: ne }, function() {
           return function() {
             try {
               if (!d) throw new Error("WebGL not supported");
-              var r = `
+              var n = `
           attribute vec2 position;
           void main() {
               gl_Position = vec4(position, 0.0, 1.0);
@@ -3445,7 +3445,7 @@ v("webgl", function() {
           }
       `, i = d.createShader(d.VERTEX_SHADER), a = d.createShader(d.FRAGMENT_SHADER);
               if (!i || !a) throw new Error("Failed to create shaders");
-              if (d.shaderSource(i, r), d.shaderSource(a, o), d.compileShader(i), !d.getShaderParameter(i, d.COMPILE_STATUS)) throw new Error("Vertex shader compilation failed: " + d.getShaderInfoLog(i));
+              if (d.shaderSource(i, n), d.shaderSource(a, o), d.compileShader(i), !d.getShaderParameter(i, d.COMPILE_STATUS)) throw new Error("Vertex shader compilation failed: " + d.getShaderInfoLog(i));
               if (d.compileShader(a), !d.getShaderParameter(a, d.COMPILE_STATUS)) throw new Error("Fragment shader compilation failed: " + d.getShaderInfoLog(a));
               var t = d.createProgram();
               if (!t) throw new Error("Failed to create shader program");
@@ -3455,19 +3455,19 @@ v("webgl", function() {
                 var f = s * c;
                 l[4 * s] = 0, l[4 * s + 1] = 0, l[4 * s + 2] = Math.cos(f) * (p.width / 2), l[4 * s + 3] = Math.sin(f) * (p.height / 2);
               }
-              var B = d.createBuffer();
-              d.bindBuffer(d.ARRAY_BUFFER, B), d.bufferData(d.ARRAY_BUFFER, l, d.STATIC_DRAW);
-              var R = d.getAttribLocation(t, "position");
-              d.enableVertexAttribArray(R), d.vertexAttribPointer(R, 2, d.FLOAT, !1, 0, 0), d.viewport(0, 0, p.width, p.height), d.clearColor(0, 0, 0, 1), d.clear(d.COLOR_BUFFER_BIT), d.drawArrays(d.LINES, 0, 2 * u);
-              var _ = new Uint8ClampedArray(p.width * p.height * 4);
-              return d.readPixels(0, 0, p.width, p.height, d.RGBA, d.UNSIGNED_BYTE, _), new ImageData(_, p.width, p.height);
+              var L = d.createBuffer();
+              d.bindBuffer(d.ARRAY_BUFFER, L), d.bufferData(d.ARRAY_BUFFER, l, d.STATIC_DRAW);
+              var I = d.getAttribLocation(t, "position");
+              d.enableVertexAttribArray(I), d.vertexAttribPointer(I, 2, d.FLOAT, !1, 0, 0), d.viewport(0, 0, p.width, p.height), d.clearColor(0, 0, 0, 1), d.clear(d.COLOR_BUFFER_BIT), d.drawArrays(d.LINES, 0, 2 * u);
+              var R = new Uint8ClampedArray(p.width * p.height * 4);
+              return d.readPixels(0, 0, p.width, p.height, d.RGBA, d.UNSIGNED_BYTE, R), new ImageData(R, p.width, p.height);
             } catch {
               return new ImageData(1, 1);
             } finally {
               d && (d.bindBuffer(d.ARRAY_BUFFER, null), d.useProgram(null), d.viewport(0, 0, d.drawingBufferWidth, d.drawingBufferHeight), d.clearColor(0, 0, 0, 0));
             }
           }();
-        }), [2, { commonImageHash: T(U(n, p.width, p.height).data.toString()).toString() }];
+        }), [2, { commonImageHash: M(U(r, p.width, p.height).data.toString()).toString() }];
       } catch {
         return [2, { webgl: "unsupported" }];
       }
@@ -3475,14 +3475,14 @@ v("webgl", function() {
     });
   });
 });
-var S = function(n, e, r, o) {
-  for (var i = (r - e) / o, a = 0, t = 0; t < o; t++)
-    a += n(e + (t + 0.5) * i);
+var S = function(r, e, n, o) {
+  for (var i = (n - e) / o, a = 0, t = 0; t < o; t++)
+    a += r(e + (t + 0.5) * i);
   return a * i;
 };
 v("math", function() {
   return w(void 0, void 0, void 0, function() {
-    return y(this, function(n) {
+    return y(this, function(r) {
       return [2, { acos: Math.acos(0.5), asin: S(Math.asin, -1, 1, 97), atan: S(Math.atan, -1, 1, 97), cos: S(Math.cos, 0, Math.PI, 97), cosh: Math.cosh(9 / 7), e: Math.E, largeCos: Math.cos(1e20), largeSin: Math.sin(1e20), largeTan: Math.tan(1e20), log: Math.log(1e3), pi: Math.PI, sin: S(Math.sin, -Math.PI, Math.PI, 97), sinh: S(Math.sinh, -9 / 7, 7 / 9, 97), sqrt: Math.sqrt(2), tan: S(Math.tan, 0, 2 * Math.PI, 97), tanh: S(Math.tanh, -9 / 7, 7 / 9, 97) }];
     });
   });
@@ -3527,7 +3527,7 @@ const searchcraftStore = zustand.createStore((set, get) => {
         initialize: (searchcraftInstance, debug = false) => {
             const core = searchcraftInstance;
             const logger = debug
-                ? new pe({ logLevel: P.DEBUG })
+                ? new ve({ logLevel: P.DEBUG })
                 : undefined;
             set({
                 core,
@@ -4080,7 +4080,7 @@ class SearchcraftBaseSearchResults {
      */
     containerRel;
     searchTerm = '';
-    searchClientResponseItems = [];
+    searchClientResponseItems;
     adClientResponseItems = [];
     searchResultsPerPage;
     searchResultsPage;
@@ -4193,7 +4193,7 @@ class SearchcraftBaseSearchResults {
             return this.renderEmptyState();
         }
         if (this.searchTerm.length > 0 &&
-            this.searchClientResponseItems.length === 0 &&
+            (this.searchClientResponseItems || []).length === 0 &&
             !this.isSearchInProgress) {
             return this.renderNoResultsFoundState();
         }
@@ -6733,17 +6733,27 @@ class SearchcraftPopoverListItemAd {
     adSource = 'Custom';
     adClientResponseItem;
     searchTerm;
-    unsubscribe = () => { };
+    isSearchInProgress = false;
+    get hostElement() { return getElement(this); }
     core;
     adContainerId = nanoid();
+    intersectionObserver;
+    storeUnsubscribe;
     connectedCallback() {
         const currentState = searchcraftStore.getState();
         this.core = currentState.core;
         this.searchTerm = currentState.searchTerm;
+        this.isSearchInProgress = currentState.isSearchInProgress;
         // Subscribes to store changes (for search term).
-        this.unsubscribe = searchcraftStore.subscribe((state) => {
+        this.storeUnsubscribe = searchcraftStore.subscribe((state) => {
             this.searchTerm = state.searchTerm;
+            this.isSearchInProgress = state.isSearchInProgress;
         });
+        /**
+         * Handles when an ad container is first rendered.
+         * Core emits an ad_container_rendered event and performs ad client side effects
+         *
+         */
         this.core?.handleAdContainerRendered({
             adClientResponseItem: this.adClientResponseItem,
             adContainerId: this.adContainerId,
@@ -6751,8 +6761,29 @@ class SearchcraftPopoverListItemAd {
             searchTerm: this.searchTerm,
         });
     }
+    componentDidLoad() {
+        /**
+         * Handles when an ad container is viewable within the document,
+         * Core emits an ad_container_viewed event and performs ad client side effects
+         */
+        if (this.hostElement) {
+            this.intersectionObserver = new IntersectionObserver(([entry]) => {
+                if (entry?.isIntersecting && !this.isSearchInProgress) {
+                    this.core?.handleAdContainerViewed({
+                        adClientResponseItem: this.adClientResponseItem,
+                        adContainerId: this.adContainerId,
+                        adSource: this.adSource,
+                        searchTerm: this.searchTerm || '',
+                    });
+                }
+            }, { threshold: 0 });
+            this.intersectionObserver.observe(this.hostElement);
+        }
+    }
     disconnectedCallback() {
-        this.unsubscribe();
+        console.log('disconnectedCallback()', this.adContainerId);
+        this.storeUnsubscribe?.();
+        this.intersectionObserver?.disconnect();
     }
     renderADMAd() {
         const item = this.adClientResponseItem;
@@ -6767,7 +6798,7 @@ class SearchcraftPopoverListItemAd {
         let containerInnerHTML = '<p>Custom Ad Placeholder</p>';
         if (templateRenderFunction) {
             containerInnerHTML = templateRenderFunction({
-                searchTerm: this.searchTerm,
+                searchTerm: this.searchTerm || '',
                 adContainerId: this.adContainerId,
             });
         }
@@ -6778,6 +6809,10 @@ class SearchcraftPopoverListItemAd {
         return hAsync("div", { class: nativoClassName });
     }
     render() {
+        // Don't render ads while search is in progress
+        if (this.isSearchInProgress) {
+            return;
+        }
         switch (this.adSource) {
             case 'adMarketplace':
                 return this.renderADMAd();
@@ -6795,7 +6830,8 @@ class SearchcraftPopoverListItemAd {
         "$members$": {
             "adSource": [1, "ad-source"],
             "adClientResponseItem": [16],
-            "searchTerm": [32]
+            "searchTerm": [32],
+            "isSearchInProgress": [32]
         },
         "$listeners$": undefined,
         "$lazyBundleId$": "-",

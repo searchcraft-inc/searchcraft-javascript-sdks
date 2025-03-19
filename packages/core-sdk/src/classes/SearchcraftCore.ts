@@ -21,7 +21,6 @@ import type {
   SubscriptionEventCallback,
   SubscriptionEventMap,
   SearchcraftAdSource,
-  ADMClientResponseItem,
 } from '../types';
 import { removeTrailingSlashFromEndpointURL } from '../utils';
 
@@ -162,17 +161,33 @@ export class SearchcraftCore {
     adSource: SearchcraftAdSource;
     searchTerm: string;
   }) {
-    // Sends impression request if its an adm ad.
-    if (data.adSource === 'adMarketplace') {
-      const item = data.adClientResponseItem as ADMClientResponseItem;
-      if (item.admAd?.impression_url) {
-        fetch(item.admAd.impression_url);
-      }
-    }
+    this.adClient?.onAdContainerRendered(data);
 
     // Emits ad_container_rendered event.
     this.emitEvent('ad_container_rendered', {
       name: 'ad_container_rendered',
+      data: {
+        adContainerId: data.adContainerId,
+        adSource: data.adSource,
+        searchTerm: data.searchTerm,
+      },
+    });
+  }
+
+  /**
+   * Called when a `<searchcraft-ad>` is viewed
+   */
+  handleAdContainerViewed(data: {
+    adClientResponseItem?: AdClientResponseItem;
+    adContainerId: string;
+    adSource: SearchcraftAdSource;
+    searchTerm: string;
+  }) {
+    this.adClient?.onAdContainerViewed(data);
+
+    // Emits ad_container_rendered event.
+    this.emitEvent('ad_container_viewed', {
+      name: 'ad_container_viewed',
       data: {
         adContainerId: data.adContainerId,
         adSource: data.adSource,

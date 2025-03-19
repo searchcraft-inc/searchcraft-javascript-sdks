@@ -3,6 +3,7 @@ import type {
   AdClientResponseItem,
   ADMClientResponseItem,
   ADMResponse,
+  SearchcraftAdSource,
   SearchParams,
 } from '../../types';
 import { AdClient } from './AdClient';
@@ -53,5 +54,18 @@ export class AdMarketplaceClient extends AdClient {
     const allAds = productAds.concat(textAds);
 
     return allAds;
+  }
+
+  async onAdContainerViewed(data: {
+    adClientResponseItem?: AdClientResponseItem;
+    adContainerId: string;
+    adSource: SearchcraftAdSource;
+    searchTerm: string;
+  }): Promise<void> {
+    // Calls fetch on the impression url, to record an impression for adMarketplace
+    const item = data.adClientResponseItem as ADMClientResponseItem;
+    if (item.admAd?.impression_url) {
+      fetch(item.admAd.impression_url);
+    }
   }
 }

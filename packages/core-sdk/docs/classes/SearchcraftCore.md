@@ -142,6 +142,38 @@ Called when a `<searchcraft-ad>` component is rendered
 
 ***
 
+### handleAdContainerViewed()
+
+> **handleAdContainerViewed**(`data`): `void`
+
+Called when a `<searchcraft-ad>` is viewed
+
+#### Parameters
+
+##### data
+
+###### adClientResponseItem
+
+[`AdClientResponseItem`](/reference/sdk/core/interfaces/AdClientResponseItem.md)
+
+###### adContainerId
+
+`string`
+
+###### adSource
+
+[`SearchcraftAdSource`](/reference/sdk/core/type-aliases/SearchcraftAdSource.md)
+
+###### searchTerm
+
+`string`
+
+#### Returns
+
+`void`
+
+***
+
 ### handleInputCleared()
 
 > **handleInputCleared**(): `void`

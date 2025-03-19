@@ -1,15 +1,26 @@
 import type { SearchcraftAdSource } from './SearchcraftConfig.types';
 
 export interface SubscriptionEventMap {
-  ad_container_rendered: AdContainerSubscriptionEvent;
+  ad_container_rendered: AdContainerRenderedSubscriptionEvent;
+  ad_container_viewed: AdContainerViewedSubscriptionEvent;
   query_fetched: QueryFetchedEvent;
   query_submitted: QuerySubmittedEvent;
   input_cleared: InputClearedEvent;
   no_results_returned: NoResultsReturnedEvent;
 }
 
-export interface AdContainerSubscriptionEvent extends SubscriptionEvent {
+export interface AdContainerRenderedSubscriptionEvent
+  extends SubscriptionEvent {
   name: 'ad_container_rendered';
+  data: {
+    adContainerId: string;
+    adSource: SearchcraftAdSource;
+    searchTerm: string;
+  };
+}
+
+export interface AdContainerViewedSubscriptionEvent extends SubscriptionEvent {
+  name: 'ad_container_viewed';
   data: {
     adContainerId: string;
     adSource: SearchcraftAdSource;

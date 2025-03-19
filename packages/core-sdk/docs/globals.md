@@ -16,7 +16,8 @@
 ## Interfaces
 
 - [AdClientResponseItem](/reference/sdk/core/interfaces/AdClientResponseItem.md)
-- [AdContainerSubscriptionEvent](/reference/sdk/core/interfaces/AdContainerSubscriptionEvent.md)
+- [AdContainerRenderedSubscriptionEvent](/reference/sdk/core/interfaces/AdContainerRenderedSubscriptionEvent.md)
+- [AdContainerViewedSubscriptionEvent](/reference/sdk/core/interfaces/AdContainerViewedSubscriptionEvent.md)
 - [ADMAd](/reference/sdk/core/interfaces/ADMAd.md)
 - [ADMClientResponseItem](/reference/sdk/core/interfaces/ADMClientResponseItem.md)
 - [ADMResponse](/reference/sdk/core/interfaces/ADMResponse.md)

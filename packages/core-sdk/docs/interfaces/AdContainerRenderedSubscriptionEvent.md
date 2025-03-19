@@ -2,9 +2,9 @@
 
 ***
 
-[@searchcraft/core](/reference/sdk/core/globals.md) / AdContainerSubscriptionEvent
+[@searchcraft/core](/reference/sdk/core/globals.md) / AdContainerRenderedSubscriptionEvent
 
-# Interface: AdContainerSubscriptionEvent
+# Interface: AdContainerRenderedSubscriptionEvent
 
 ## Extends
 
