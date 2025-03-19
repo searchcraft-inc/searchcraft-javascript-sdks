@@ -1,3 +1,7 @@
+## 0.9.6 - 0.9.6
+
+This release includes bugfixes, a new subscription event called `ad_container_viewed`, and prep work towards upcoming features.
+
 ## Version 0.9.5 - 2025-03-13
 
 Adds render methods to searchcraft-ad, base-search-results, and popover-list-view. 
