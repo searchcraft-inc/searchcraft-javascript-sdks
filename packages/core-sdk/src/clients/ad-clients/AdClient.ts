@@ -1,5 +1,6 @@
 import type {
   AdClientResponseItem,
+  SearchcraftAdSource,
   SearchcraftConfig,
   SearchcraftResponse,
   SearchParams,
@@ -23,4 +24,18 @@ export class AdClient {
   async onQueryFetched(_params: SearchParams, _response: SearchcraftResponse) {}
 
   async onInputCleared() {}
+
+  async onAdContainerRendered(_data: {
+    adClientResponseItem?: AdClientResponseItem;
+    adContainerId: string;
+    adSource: SearchcraftAdSource;
+    searchTerm: string;
+  }) {}
+
+  async onAdContainerViewed(_data: {
+    adClientResponseItem?: AdClientResponseItem;
+    adContainerId: string;
+    adSource: SearchcraftAdSource;
+    searchTerm: string;
+  }) {}
 }

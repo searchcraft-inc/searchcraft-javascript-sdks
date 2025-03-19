@@ -1,12 +1,18 @@
 import type {
   AdClientResponseItem,
+  SearchcraftAdSource,
   SearchcraftConfig,
   SearchcraftResponse,
   SearchParams,
 } from '../../types';
 import { AdClient } from './AdClient';
 
+const AD_CALL_AFTER_FETCH_DELAY = 200;
+const AD_CALL_AFTER_CONTAINER_VIEWED_DELAY = 100;
+
 export class NativoClient extends AdClient {
+  adCallTimeout?: NodeJS.Timeout;
+
   constructor(config: SearchcraftConfig) {
     super(config);
     this.addScriptTagToDocument();
@@ -25,17 +31,37 @@ export class NativoClient extends AdClient {
       return;
     }
 
-    this.addScriptTagToDocument();
-    try {
-      // @ts-ignore
-      PostRelease?.Start({ ptd: [this.config.nativoPlacementId] });
-    } catch (error) {
-      console.error(error);
-    }
+    this.performAdCall(AD_CALL_AFTER_FETCH_DELAY);
+  }
+
+  async onAdContainerViewed(_data: {
+    adClientResponseItem?: AdClientResponseItem;
+    adContainerId: string;
+    adSource: SearchcraftAdSource;
+    searchTerm: string;
+  }): Promise<void> {
+    this.performAdCall(AD_CALL_AFTER_CONTAINER_VIEWED_DELAY);
   }
 
   async onInputCleared() {
     this.removeScriptTagFromDocument();
+  }
+
+  performAdCall(delay: number) {
+    if (this.adCallTimeout) {
+      clearTimeout(this.adCallTimeout);
+    }
+
+    this.adCallTimeout = setTimeout(() => {
+      this.addScriptTagToDocument();
+      try {
+        // @ts-ignore
+        PostRelease?.Start({ ptd: [this.config.nativoPlacementId] });
+      } catch (error) {
+        console.error(error);
+      }
+      // console.log('Performing ad call');
+    }, delay);
   }
 
   async getAdsForSearchParams(

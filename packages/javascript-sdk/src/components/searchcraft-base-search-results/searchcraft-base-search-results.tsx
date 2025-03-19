@@ -84,7 +84,7 @@ export class SearchcraftBaseSearchResults {
   @Prop() containerRel?: 'noreferrer' | 'noopener' | 'nofollow';
 
   @State() searchTerm = '';
-  @State() searchClientResponseItems: SearchClientResponseItem[] = [];
+  @State() searchClientResponseItems?: SearchClientResponseItem[];
   @State() adClientResponseItems: AdClientResponseItem[] = [];
   @State() searchResultsPerPage;
   @State() searchResultsPage;
@@ -325,7 +325,7 @@ export class SearchcraftBaseSearchResults {
 
     if (
       this.searchTerm.length > 0 &&
-      this.searchClientResponseItems.length === 0 &&
+      (this.searchClientResponseItems || []).length === 0 &&
       !this.isSearchInProgress
     ) {
       return this.renderNoResultsFoundState();
