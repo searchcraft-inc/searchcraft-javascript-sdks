@@ -1,7 +1,7 @@
 {
   "name": "@searchcraft/hologram",
   "private": true,
-  "version": "0.9.5",
+  "version": "0.9.6",
   "type": "module",
   "scripts": {
     "build": "sass --style=compressed ./src/index.scss ../javascript-sdk/src/themes/hologram.css"

@@ -4,7 +4,7 @@ import type {
   SearchcraftCore,
   SearchcraftAdSource,
 } from '@searchcraft/core';
-import { Component, h, Prop, State } from '@stencil/core';
+import { Component, Element, h, Prop, State } from '@stencil/core';
 import { searchcraftStore } from '@store';
 import DOMPurify from 'dompurify';
 import { nanoid } from 'nanoid';
@@ -20,22 +20,34 @@ export class SearchcraftPopoverListItemAd {
   @Prop() adSource: SearchcraftAdSource = 'Custom';
   @Prop() adClientResponseItem?: AdClientResponseItem;
 
-  @State() searchTerm;
-  private unsubscribe = () => {};
+  @State() searchTerm?: string;
+  @State() isSearchInProgress = false;
+  @Element() hostElement?: HTMLElement;
+
   private core?: SearchcraftCore;
   private adContainerId: string = nanoid();
+
+  private intersectionObserver?: IntersectionObserver;
+  private storeUnsubscribe?: () => void;
 
   connectedCallback() {
     const currentState = searchcraftStore.getState();
 
     this.core = currentState.core;
     this.searchTerm = currentState.searchTerm;
+    this.isSearchInProgress = currentState.isSearchInProgress;
 
     // Subscribes to store changes (for search term).
-    this.unsubscribe = searchcraftStore.subscribe((state) => {
+    this.storeUnsubscribe = searchcraftStore.subscribe((state) => {
       this.searchTerm = state.searchTerm;
+      this.isSearchInProgress = state.isSearchInProgress;
     });
 
+    /**
+     * Handles when an ad container is first rendered.
+     * Core emits an ad_container_rendered event and performs ad client side effects
+     *
+     */
     this.core?.handleAdContainerRendered({
       adClientResponseItem: this.adClientResponseItem,
       adContainerId: this.adContainerId,
@@ -44,8 +56,34 @@ export class SearchcraftPopoverListItemAd {
     });
   }
 
+  componentDidLoad() {
+    /**
+     * Handles when an ad container is viewable within the document,
+     * Core emits an ad_container_viewed event and performs ad client side effects
+     */
+    if (this.hostElement) {
+      this.intersectionObserver = new IntersectionObserver(
+        ([entry]) => {
+          if (entry?.isIntersecting && !this.isSearchInProgress) {
+            this.core?.handleAdContainerViewed({
+              adClientResponseItem: this.adClientResponseItem,
+              adContainerId: this.adContainerId,
+              adSource: this.adSource,
+              searchTerm: this.searchTerm || '',
+            });
+          }
+        },
+        { threshold: 0 },
+      );
+
+      this.intersectionObserver.observe(this.hostElement);
+    }
+  }
+
   disconnectedCallback() {
-    this.unsubscribe();
+    console.log('disconnectedCallback()', this.adContainerId);
+    this.storeUnsubscribe?.();
+    this.intersectionObserver?.disconnect();
   }
 
   renderADMAd() {
@@ -84,7 +122,7 @@ export class SearchcraftPopoverListItemAd {
 
     if (templateRenderFunction) {
       containerInnerHTML = templateRenderFunction({
-        searchTerm: this.searchTerm,
+        searchTerm: this.searchTerm || '',
         adContainerId: this.adContainerId,
       });
     }
@@ -105,6 +143,11 @@ export class SearchcraftPopoverListItemAd {
   }
 
   render() {
+    // Don't render ads while search is in progress
+    if (this.isSearchInProgress) {
+      return;
+    }
+
     switch (this.adSource) {
       case 'adMarketplace':
         return this.renderADMAd();

@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "jsx": "react-jsx",
+    "moduleResolution": "node10",
+    "types": ["vite/client"],
+    "paths": {
+      "@stories/*": ["stories/*"],
+      "@utils": ["storybook/utils/index.ts"],
+      "@utils/*": ["storybook/utils/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist"],
+  "extends": "../../../tsconfig.json",
+  "include": ["./storybook", "./next"]
+}

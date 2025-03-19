@@ -10,7 +10,13 @@
 
 ### ad\_container\_rendered
 
-> **ad\_container\_rendered**: [`AdContainerSubscriptionEvent`](/reference/sdk/core/interfaces/AdContainerSubscriptionEvent.md)
+> **ad\_container\_rendered**: [`AdContainerRenderedSubscriptionEvent`](/reference/sdk/core/interfaces/AdContainerRenderedSubscriptionEvent.md)
+
+***
+
+### ad\_container\_viewed
+
+> **ad\_container\_viewed**: [`AdContainerViewedSubscriptionEvent`](/reference/sdk/core/interfaces/AdContainerViewedSubscriptionEvent.md)
 
 ***
 
