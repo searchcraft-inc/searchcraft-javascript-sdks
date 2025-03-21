@@ -10,6 +10,14 @@ The SearchcraftConfig object is used to initialize Searchcraft in your applicati
 
 ## Properties
 
+### adContainerRenderedDebounceDelay?
+
+> `optional` **adContainerRenderedDebounceDelay**: `number`
+
+The amount of debounce delay to add before calling the ad_container_rendered event
+
+***
+
 ### admProductAdQuantity?
 
 > `optional` **admProductAdQuantity**: `number`

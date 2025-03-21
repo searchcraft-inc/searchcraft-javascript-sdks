@@ -3,6 +3,7 @@ import type {
   SearchClientResponseItem,
 } from '@searchcraft/core';
 import { Component, h, Prop, type JSX } from '@stencil/core';
+import { nanoid } from 'nanoid';
 
 import type { PopoverResultMappings } from '@searchcraft/core';
 import { searchcraftStore } from '@store';
@@ -43,6 +44,7 @@ export class SearchcraftPopoverListView {
         {this.adClientResponseItems?.map((item) => (
           <searchcraft-ad
             adClientResponseItem={item}
+            adContainerId={nanoid()}
             adSource='adMarketplace'
             key={item.id}
           />
@@ -71,7 +73,13 @@ export class SearchcraftPopoverListView {
 
     // Renders ads at beginning
     for (let n = 0; n < adStartQuantity; n++) {
-      itemsToRender.push(<searchcraft-ad adSource='Custom' key={`${n}-ad`} />);
+      itemsToRender.push(
+        <searchcraft-ad
+          adSource='Custom'
+          adContainerId={nanoid()}
+          key={`${n}-ad`}
+        />,
+      );
     }
 
     // Renders search results + interstitial ads
@@ -84,7 +92,11 @@ export class SearchcraftPopoverListView {
       ) {
         for (let n = 0; n < interstitialQuantity; n++) {
           itemsToRender.push(
-            <searchcraft-ad adSource='Custom' key={`${item.id}-ad-${n}`} />,
+            <searchcraft-ad
+              adSource='Custom'
+              adContainerId={nanoid()}
+              key={`${item.id}-ad-${n}`}
+            />,
           );
         }
       }
@@ -103,7 +115,13 @@ export class SearchcraftPopoverListView {
 
     // Renders ads at end
     for (let n = 0; n < adEndQuantity; n++) {
-      itemsToRender.push(<searchcraft-ad adSource='Custom' key={`${n}-ad`} />);
+      itemsToRender.push(
+        <searchcraft-ad
+          adSource='Custom'
+          adContainerId={nanoid()}
+          key={`${n}-ad`}
+        />,
+      );
     }
 
     return <div class='searchcraft-popover-list-view'>{itemsToRender}</div>;
@@ -121,7 +139,13 @@ export class SearchcraftPopoverListView {
 
     // Renders ads at beginning
     for (let n = 0; n < adStartQuantity; n++) {
-      itemsToRender.push(<searchcraft-ad adSource='Nativo' key={`${n}-ad`} />);
+      itemsToRender.push(
+        <searchcraft-ad
+          adSource='Nativo'
+          adContainerId={nanoid()}
+          key={`${n}-ad`}
+        />,
+      );
     }
 
     // Renders search results + interstitial ads
@@ -134,7 +158,11 @@ export class SearchcraftPopoverListView {
       ) {
         for (let n = 0; n < interstitialQuantity; n++) {
           itemsToRender.push(
-            <searchcraft-ad adSource='Nativo' key={`${item.id}-ad-${n}`} />,
+            <searchcraft-ad
+              adSource='Nativo'
+              adContainerId={nanoid()}
+              key={`${item.id}-ad-${n}`}
+            />,
           );
         }
       }
@@ -153,7 +181,13 @@ export class SearchcraftPopoverListView {
 
     // Renders ads at end
     for (let n = 0; n < adEndQuantity; n++) {
-      itemsToRender.push(<searchcraft-ad adSource='Nativo' key={`${n}-ad`} />);
+      itemsToRender.push(
+        <searchcraft-ad
+          adSource='Nativo'
+          adContainerId={nanoid()}
+          key={`${n}-ad`}
+        />,
+      );
     }
 
     return <div class='searchcraft-popover-list-view'>{itemsToRender}</div>;

@@ -53,6 +53,11 @@ export interface SearchcraftConfig {
   admSub?: string;
 
   /**
+   * The amount of debounce delay to add before calling the ad_container_rendered event
+   */
+  adContainerRenderedDebounceDelay?: number;
+
+  /**
    * The number of custom ads to render at the start of the search results page.
    */
   customAdStartQuantity?: number;
