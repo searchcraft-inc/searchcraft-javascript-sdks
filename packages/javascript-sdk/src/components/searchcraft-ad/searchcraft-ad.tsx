@@ -81,7 +81,6 @@ export class SearchcraftPopoverListItemAd {
   }
 
   disconnectedCallback() {
-    console.log('disconnectedCallback()', this.adContainerId);
     this.storeUnsubscribe?.();
     this.intersectionObserver?.disconnect();
   }

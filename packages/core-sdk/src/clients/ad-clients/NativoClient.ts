@@ -1,14 +1,12 @@
 import type {
   AdClientResponseItem,
-  SearchcraftAdSource,
   SearchcraftConfig,
   SearchcraftResponse,
   SearchParams,
 } from '../../types';
 import { AdClient } from './AdClient';
 
-const AD_CALL_AFTER_FETCH_DELAY = 200;
-const AD_CALL_AFTER_CONTAINER_VIEWED_DELAY = 100;
+const AD_CALL_AFTER_FETCH_DELAY = 1000;
 
 export class NativoClient extends AdClient {
   adCallTimeout?: NodeJS.Timeout;
@@ -32,15 +30,6 @@ export class NativoClient extends AdClient {
     }
 
     this.performAdCall(AD_CALL_AFTER_FETCH_DELAY);
-  }
-
-  async onAdContainerViewed(_data: {
-    adClientResponseItem?: AdClientResponseItem;
-    adContainerId: string;
-    adSource: SearchcraftAdSource;
-    searchTerm: string;
-  }): Promise<void> {
-    this.performAdCall(AD_CALL_AFTER_CONTAINER_VIEWED_DELAY);
   }
 
   async onInputCleared() {
