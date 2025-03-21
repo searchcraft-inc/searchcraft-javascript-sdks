@@ -15,6 +15,7 @@ export namespace Components {
      */
     interface SearchcraftAd {
         "adClientResponseItem"?: AdClientResponseItem;
+        "adContainerId": string;
         "adSource": SearchcraftAdSource;
     }
     /**
@@ -930,6 +931,7 @@ declare namespace LocalJSX {
      */
     interface SearchcraftAd {
         "adClientResponseItem"?: AdClientResponseItem;
+        "adContainerId"?: string;
         "adSource"?: SearchcraftAdSource;
     }
     /**

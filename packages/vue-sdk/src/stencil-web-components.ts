@@ -10,7 +10,8 @@ import type { JSX } from '@searchcraft/javascript-sdk';
 
 export const SearchcraftAd = /*@__PURE__*/ defineContainer<JSX.SearchcraftAd>('searchcraft-ad', () => {}, [
   'adSource',
-  'adClientResponseItem'
+  'adClientResponseItem',
+  'adContainerId'
 ]);
 
 

@@ -11,10 +11,11 @@ An inline ad meant to be rendered in a list of search results.
 
 ## Properties
 
-| Property               | Attribute   | Description | Type                                                | Default     |
-| ---------------------- | ----------- | ----------- | --------------------------------------------------- | ----------- |
-| `adClientResponseItem` | --          |             | `AdClientResponseItem \| undefined`                 | `undefined` |
-| `adSource`             | `ad-source` |             | `"Custom" \| "Nativo" \| "None" \| "adMarketplace"` | `'Custom'`  |
+| Property               | Attribute         | Description | Type                                                | Default     |
+| ---------------------- | ----------------- | ----------- | --------------------------------------------------- | ----------- |
+| `adClientResponseItem` | --                |             | `AdClientResponseItem \| undefined`                 | `undefined` |
+| `adContainerId`        | `ad-container-id` |             | `string`                                            | `nanoid()`  |
+| `adSource`             | `ad-source`       |             | `"Custom" \| "Nativo" \| "None" \| "adMarketplace"` | `'Custom'`  |
 
 
 ## Dependencies

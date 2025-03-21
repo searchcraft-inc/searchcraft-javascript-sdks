@@ -19,16 +19,18 @@ import { nanoid } from 'nanoid';
 export class SearchcraftPopoverListItemAd {
   @Prop() adSource: SearchcraftAdSource = 'Custom';
   @Prop() adClientResponseItem?: AdClientResponseItem;
+  @Prop() adContainerId: string = nanoid();
 
   @State() searchTerm?: string;
   @State() isSearchInProgress = false;
   @Element() hostElement?: HTMLElement;
 
   private core?: SearchcraftCore;
-  private adContainerId: string = nanoid();
 
   private intersectionObserver?: IntersectionObserver;
   private storeUnsubscribe?: () => void;
+  private adContainerRenderedTimeout?: NodeJS.Timeout;
+  private isComponentConnected = true;
 
   connectedCallback() {
     const currentState = searchcraftStore.getState();
@@ -41,18 +43,6 @@ export class SearchcraftPopoverListItemAd {
     this.storeUnsubscribe = searchcraftStore.subscribe((state) => {
       this.searchTerm = state.searchTerm;
       this.isSearchInProgress = state.isSearchInProgress;
-    });
-
-    /**
-     * Handles when an ad container is first rendered.
-     * Core emits an ad_container_rendered event and performs ad client side effects
-     *
-     */
-    this.core?.handleAdContainerRendered({
-      adClientResponseItem: this.adClientResponseItem,
-      adContainerId: this.adContainerId,
-      adSource: this.adSource,
-      searchTerm: this.searchTerm,
     });
   }
 
@@ -81,9 +71,10 @@ export class SearchcraftPopoverListItemAd {
   }
 
   disconnectedCallback() {
-    console.log('disconnectedCallback()', this.adContainerId);
     this.storeUnsubscribe?.();
     this.intersectionObserver?.disconnect();
+    this.isComponentConnected = false;
+    clearTimeout(this.adContainerRenderedTimeout);
   }
 
   renderADMAd() {
@@ -146,6 +137,24 @@ export class SearchcraftPopoverListItemAd {
     // Don't render ads while search is in progress
     if (this.isSearchInProgress) {
       return;
+    }
+
+    /**
+     * Handles when an ad container is first rendered.
+     * Core emits an ad_container_rendered event and performs ad client side effects
+     *
+     */
+
+    if (this.isComponentConnected) {
+      clearTimeout(this.adContainerRenderedTimeout);
+      this.adContainerRenderedTimeout = setTimeout(() => {
+        this.core?.handleAdContainerRendered({
+          adClientResponseItem: this.adClientResponseItem,
+          adContainerId: this.adContainerId,
+          adSource: this.adSource,
+          searchTerm: this.searchTerm || '',
+        });
+      }, this.core?.config?.adContainerRenderedDebounceDelay || 500);
     }
 
     switch (this.adSource) {

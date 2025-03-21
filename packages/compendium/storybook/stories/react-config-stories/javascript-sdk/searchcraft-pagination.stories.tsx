@@ -131,10 +131,11 @@ export const WithCustomAds: StoryObj = {
           endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
           index: [import.meta.env.VITE_RUNEGARD_INDEX],
           adSource: 'Custom',
-          customAdStartQuantity: 2,
-          customAdInterstitialInterval: 4,
-          customAdInterstitialQuantity: 3,
-          customAdEndQuantity: 4,
+          adContainerRenderedDebounceDelay: 1000,
+          customAdStartQuantity: 1,
+          customAdInterstitialInterval: 3,
+          customAdInterstitialQuantity: 1,
+          customAdEndQuantity: 1,
           customAdTemplate(data) {
             return `
             <p>pagination world ${data.adContainerId} ${data.searchTerm}</p>

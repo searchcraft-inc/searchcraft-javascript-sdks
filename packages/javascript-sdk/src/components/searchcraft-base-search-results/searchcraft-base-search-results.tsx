@@ -1,4 +1,5 @@
 import { Component, h, Prop, State, type JSX } from '@stencil/core';
+import { nanoid } from 'nanoid';
 
 import type {
   AdClientResponseItem,
@@ -156,6 +157,7 @@ export class SearchcraftBaseSearchResults {
           <searchcraft-ad
             adSource='adMarketplace'
             adClientResponseItem={item}
+            adContainerId={nanoid()}
             key={item.id}
           />
         ))}
@@ -190,7 +192,13 @@ export class SearchcraftBaseSearchResults {
 
     // Renders ads at beginning
     for (let n = 0; n < adStartQuantity; n++) {
-      itemsToRender.push(<searchcraft-ad adSource='Custom' key={`${n}-ad`} />);
+      itemsToRender.push(
+        <searchcraft-ad
+          adSource='Custom'
+          adContainerId={nanoid()}
+          key={`${n}-ad`}
+        />,
+      );
     }
 
     // Renders search results + interstitial ads
@@ -203,7 +211,11 @@ export class SearchcraftBaseSearchResults {
       ) {
         for (let n = 0; n < interstitialQuantity; n++) {
           itemsToRender.push(
-            <searchcraft-ad adSource='Custom' key={`${item.id}-ad-${n}`} />,
+            <searchcraft-ad
+              adSource='Custom'
+              adContainerId={nanoid()}
+              key={`${item.id}-ad-${n}`}
+            />,
           );
         }
       }
@@ -228,7 +240,13 @@ export class SearchcraftBaseSearchResults {
 
     // Renders ads at end
     for (let n = 0; n < adEndQuantity; n++) {
-      itemsToRender.push(<searchcraft-ad adSource='Custom' key={`${n}-ad`} />);
+      itemsToRender.push(
+        <searchcraft-ad
+          adSource='Custom'
+          adContainerId={nanoid()}
+          key={`${n}-ad`}
+        />,
+      );
     }
 
     return (
@@ -248,7 +266,13 @@ export class SearchcraftBaseSearchResults {
 
     // Renders ads at beginning
     for (let n = 0; n < adStartQuantity; n++) {
-      itemsToRender.push(<searchcraft-ad adSource='Nativo' key={`${n}-ad`} />);
+      itemsToRender.push(
+        <searchcraft-ad
+          adSource='Nativo'
+          adContainerId={nanoid()}
+          key={`${n}-ad`}
+        />,
+      );
     }
 
     // Renders search results + interstitial ads
@@ -261,7 +285,11 @@ export class SearchcraftBaseSearchResults {
       ) {
         for (let n = 0; n < interstitialQuantity; n++) {
           itemsToRender.push(
-            <searchcraft-ad adSource='Nativo' key={`${item.id}-ad-${n}`} />,
+            <searchcraft-ad
+              adSource='Nativo'
+              adContainerId={nanoid()}
+              key={`${item.id}-ad-${n}`}
+            />,
           );
         }
       }
@@ -286,7 +314,13 @@ export class SearchcraftBaseSearchResults {
 
     // Renders ads at end
     for (let n = 0; n < adEndQuantity; n++) {
-      itemsToRender.push(<searchcraft-ad adSource='Nativo' key={`${n}-ad`} />);
+      itemsToRender.push(
+        <searchcraft-ad
+          adSource='Nativo'
+          adContainerId={nanoid()}
+          key={`${n}-ad`}
+        />,
+      );
     }
 
     return (
