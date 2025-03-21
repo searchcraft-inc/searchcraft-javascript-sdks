@@ -12,5 +12,5 @@
   },
   "exclude": ["node_modules", "dist"],
   "extends": "../../../tsconfig.json",
-  "include": ["./storybook", "./next"]
+  "include": ["stories", "config", "utils"]
 }

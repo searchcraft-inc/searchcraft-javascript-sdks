@@ -1,12 +1,20 @@
-## 0.9.6 - 0.9.6
+## 0.9.7 - 2025-03-21
+
+This release includes:
+- Bugfixes for ad rendering.
+- Icon fill color rendering.
+- Adding a configurable delay to ad_container_render events.
+- Misc project configuration updates.
+
+## 0.9.6 - 2025-03-19
 
 This release includes bugfixes, a new subscription event called `ad_container_viewed`, and prep work towards upcoming features.
 
 ## Version 0.9.5 - 2025-03-13
 
-Adds render methods to searchcraft-ad, base-search-results, and popover-list-view. 
+Adds render methods to searchcraft-ad, base-search-results, and popover-list-view.
 
-Adds new SubscriptionEvent, query_fetched. 
+Adds new SubscriptionEvent, query_fetched.
 
 Removes searchTerm required prop from input-form
 
