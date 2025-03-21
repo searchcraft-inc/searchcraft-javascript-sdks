@@ -155,10 +155,11 @@
 }
 
 .searchcraft-input-search-icon {
+  color: var(--sc-content-neutral-secondary);
+  fill: none;
+  height: var(--sc-input-search-icon-size);
   pointer-events: none;
   width: var(--sc-input-search-icon-size);
-  height: var(--sc-input-search-icon-size);
-  color: var(--sc-content-neutral-secondary);
 }
 
 .searchcraft-input-clear-button {
@@ -177,7 +178,8 @@
 }
 
 .searchcraft-input-clear-icon {
-  width: var(--sc-input-clear-icon-size);
-  height: var(--sc-input-clear-icon-size);
   color: var(--sc-content-brand);
+  fill: none;
+  height: var(--sc-input-clear-icon-size);
+  width: var(--sc-input-clear-icon-size);
 }
