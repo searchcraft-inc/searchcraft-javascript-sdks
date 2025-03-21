@@ -190,6 +190,7 @@ export class SearchcraftPagination {
             iconPosition='left'
             icon={
               <svg
+                class='searchcraft-button-icon'
                 width='20'
                 height='20'
                 viewBox='0 0 20 20'
@@ -236,6 +237,7 @@ export class SearchcraftPagination {
             iconPosition='right'
             icon={
               <svg
+                class='searchcraft-button-icon'
                 width='20'
                 height='20'
                 viewBox='0 0 20 20'
