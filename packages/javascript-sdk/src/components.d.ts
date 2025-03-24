@@ -475,14 +475,6 @@ export namespace Components {
      * ```
      */
     interface SearchcraftTheme {
-        /**
-          * The custom theme configuration object.
-         */
-        "customTheme"?: string;
-        /**
-          * The name of the theme.
-         */
-        "theme"?: string;
     }
     /**
      * This web component simulates a light switch functionality, providing a simple and intuitive toggle between two states—on and off.
@@ -1419,14 +1411,6 @@ declare namespace LocalJSX {
      * ```
      */
     interface SearchcraftTheme {
-        /**
-          * The custom theme configuration object.
-         */
-        "customTheme"?: string;
-        /**
-          * The name of the theme.
-         */
-        "theme"?: string;
     }
     /**
      * This web component simulates a light switch functionality, providing a simple and intuitive toggle between two states—on and off.

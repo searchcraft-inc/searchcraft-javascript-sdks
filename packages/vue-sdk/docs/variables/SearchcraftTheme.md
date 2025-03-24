@@ -19,6 +19,6 @@ import SearchcraftTheme from '@searchcraft/vue-sdk';
 </script>
 
 <template>
-  <SearchcraftTheme theme="light" :customTheme="[]" />
+  <SearchcraftTheme />
 </template>
 ```

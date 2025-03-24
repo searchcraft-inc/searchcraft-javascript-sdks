@@ -19,8 +19,12 @@ export const config: Config = {
   plugins: [loadRawAsStringPlugin],
   validatePrimaryPackageOutputTarget: true,
   outputTargets: [
+    {
+      type: 'dist-hydrate-script',
+      dir: 'dist/hydrate',
+    },
     reactOutputTarget({
-      outDir: '../react-sdk/src/stencil-web-components/',
+      outDir: '../react-sdk/src/stencil-output/',
       stencilPackageName: '@searchcraft/javascript-sdk',
     }),
     vueOutputTarget({
@@ -35,9 +39,6 @@ export const config: Config = {
       customElementsExportBehavior: 'single-export-module',
       externalRuntime: false,
       isPrimaryPackageOutputTarget: true,
-    },
-    {
-      type: 'dist-hydrate-script',
     },
     {
       type: 'docs-readme',

@@ -46,10 +46,12 @@ export const defineCustomElements = () => {
   ${functionString}
 };
 
-// Call defineCustomElements as soon as it's available
-defineCustomElements();
+// Register the function with globalThis so that core can call it
+globalThis.__scDefineCustomElements__ = defineCustomElements;
 
 `.trim();
+
+globalThis.__my_monorepo_generated_fn__ = () => 'Hello from B';
 
 // Write the generated file
 writeFileSync(GENERATED_JS_FILE, jsContent);
