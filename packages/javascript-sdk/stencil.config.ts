@@ -21,6 +21,7 @@ export const config: Config = {
   outputTargets: [
     {
       type: 'dist-hydrate-script',
+      dir: 'dist/hydrate',
     },
     reactOutputTarget({
       outDir: '../react-sdk/src/stencil-output/',

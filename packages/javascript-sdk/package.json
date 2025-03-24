@@ -20,9 +20,9 @@
       "types": "./dist/components/*"
     },
     "./hydrate": {
-      "require": "./index.js",
-      "import": "./hydrate/index.mjs",
-      "types": "./hydrate/index.d.ts"
+      "require": "./dist/hydrate/index.js",
+      "import": "./dist/hydrate/index.mjs",
+      "types": "./dist/hydrate/index.d.ts"
     }
   },
   "repository": {
