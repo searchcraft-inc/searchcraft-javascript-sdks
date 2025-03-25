@@ -3,10 +3,7 @@ import { useEffect } from 'react';
 
 import { Searchcraft } from '@searchcraft/javascript-sdk';
 
-import {
-  searchResultTemplate,
-  customAdTemplate,
-} from '../../../../common/index.js';
+import { searchResultTemplate, customAdTemplate } from '@common/index.js';
 
 const componentMeta: Meta = {
   title: 'Javascript SDK/searchcraft-pagination',

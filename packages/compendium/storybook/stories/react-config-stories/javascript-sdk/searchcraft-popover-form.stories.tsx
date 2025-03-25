@@ -7,9 +7,9 @@ import {
   type Components,
 } from '@searchcraft/javascript-sdk';
 
-import { popoverResultMappings } from '../../../../common/index.js';
+import { popoverResultMappings } from '@common/index.js';
 
-import '../../../../common/searchcraft-popover-form/popover-form-with-content.scss';
+import '@common/searchcraft-popover-form/popover-form-with-content.scss';
 
 const componentMeta: Meta = {
   title: 'Javascript SDK/searchcraft-popover-form',

@@ -7,7 +7,7 @@ import {
   hydrateSearchcraftComponents,
 } from '@searchcraft/react-sdk/server';
 
-import { searchResultTemplate } from '../../../common/index';
+import { searchResultTemplate } from '@common/index';
 
 export const SearchcraftInit = () => {
   useEffect(() => {

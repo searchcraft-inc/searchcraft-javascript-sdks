@@ -8,7 +8,8 @@
     "paths": {
       "@stories/*": ["stories/*"],
       "@utils": ["storybook/utils/index.ts"],
-      "@utils/*": ["storybook/utils/*"]
+      "@utils/*": ["storybook/utils/*"],
+      "@common/*": ["../common/*"]
     }
   },
   "exclude": ["node_modules", "dist"],

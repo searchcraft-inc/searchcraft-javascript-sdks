@@ -8,9 +8,9 @@ import {
   SearchcraftTheme,
 } from '@searchcraft/react-sdk';
 
-import { popoverResultMappings } from '../../../../common/index.js';
+import { popoverResultMappings } from '@common/index.js';
 
-import '../../../../common/searchcraft-popover-form/popover-form-with-content.scss';
+import '@common/searchcraft-popover-form/popover-form-with-content.scss';
 
 const componentMeta: Meta = {
   title: 'React SDK/searchcraft-popover-form',

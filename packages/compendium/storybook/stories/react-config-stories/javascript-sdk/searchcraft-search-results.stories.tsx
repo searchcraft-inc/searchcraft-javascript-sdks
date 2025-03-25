@@ -7,10 +7,7 @@ import {
   type Components,
 } from '@searchcraft/javascript-sdk';
 
-import {
-  searchResultTemplate,
-  customAdTemplate,
-} from '../../../../common/index.js';
+import { searchResultTemplate, customAdTemplate } from '@common/index.js';
 
 const componentMeta: Meta = {
   title: 'Javascript SDK/searchcraft-search-results',

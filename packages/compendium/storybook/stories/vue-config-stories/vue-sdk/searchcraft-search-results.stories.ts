@@ -7,7 +7,7 @@ import {
   SearchcraftTheme,
 } from '@searchcraft/vue-sdk';
 
-import { searchResultTemplate } from '../../../../common/index.js';
+import { searchResultTemplate } from '@common/index.js';
 
 export default {
   title: 'Vue SDK/searchcraft-search-results',

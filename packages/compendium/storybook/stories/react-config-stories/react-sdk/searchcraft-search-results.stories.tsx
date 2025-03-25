@@ -10,7 +10,7 @@ import {
   SearchcraftTheme,
 } from '@searchcraft/react-sdk';
 
-import { searchResultTemplate } from '../../../../common/index.js';
+import { searchResultTemplate } from '@common/index.js';
 
 const componentMeta: Meta = {
   title: 'React SDK/searchcraft-search-results',
