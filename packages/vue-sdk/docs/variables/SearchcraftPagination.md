@@ -6,7 +6,7 @@
 
 # Variable: SearchcraftPagination
 
-> `const` **SearchcraftPagination**: `DefineSetupFnComponent`\<`SearchcraftPagination` & `InputProps`\<`string` \| `number` \| `boolean`\>, \{\}, \{\}, `SearchcraftPagination` & `InputProps`\<`string` \| `number` \| `boolean`\>, `PublicProps`\> = `Component`
+> `const` **SearchcraftPagination**: `DefineSetupFnComponent`\<[`SearchcraftPagination`](/reference/sdk/js-vue/namespaces/JSX/interfaces/SearchcraftPagination.md) & `InputProps`\<`string` \| `number` \| `boolean`\>, \{\}, \{\}, [`SearchcraftPagination`](/reference/sdk/js-vue/namespaces/JSX/interfaces/SearchcraftPagination.md) & `InputProps`\<`string` \| `number` \| `boolean`\>, `PublicProps`\> = `Component`
 
 This React component is designed to facilitate pagination of search results.
 Once a query is submitted, calculates the number for pages.

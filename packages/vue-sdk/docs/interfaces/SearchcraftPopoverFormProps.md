@@ -10,7 +10,7 @@ The Props for the SearchcraftPopoverForm.
 
 ## Extends
 
-- `SearchcraftPopoverForm`
+- [`SearchcraftPopoverForm`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftPopoverForm.md)
 
 ## Properties
 
@@ -22,7 +22,7 @@ The hotkey that activates the popover.
 
 #### Inherited from
 
-`Components.SearchcraftPopoverForm.hotkey`
+[`SearchcraftPopoverForm`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftPopoverForm.md).[`hotkey`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftPopoverForm.md#hotkey)
 
 ***
 
@@ -34,7 +34,7 @@ The hotkey modifier that activates the popover. Used together with the `hotkey` 
 
 #### Inherited from
 
-`Components.SearchcraftPopoverForm.hotkeyModifier`
+[`SearchcraftPopoverForm`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftPopoverForm.md).[`hotkeyModifier`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftPopoverForm.md#hotkeymodifier)
 
 ***
 
@@ -46,7 +46,7 @@ Formats the content rendered for each result.
 
 #### Inherited from
 
-`Components.SearchcraftPopoverForm.popoverResultMappings`
+[`SearchcraftPopoverForm`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftPopoverForm.md).[`popoverResultMappings`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftPopoverForm.md#popoverresultmappings)
 
 ***
 
@@ -58,4 +58,4 @@ The type of popover form to render.  - `inline` - Renders inline with the rest o
 
 #### Inherited from
 
-`Components.SearchcraftPopoverForm.type`
+[`SearchcraftPopoverForm`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftPopoverForm.md).[`type`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftPopoverForm.md#type)

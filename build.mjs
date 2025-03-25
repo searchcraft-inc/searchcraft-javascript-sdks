@@ -85,7 +85,7 @@ const buildSteps = [
         [
           'dts-bundle-generator',
           '-o',
-          'packages/javascript-sdk/dist/components/bundled.types.d.ts',
+          'packages/javascript-sdk/dist/components/index.d.ts',
           'packages/javascript-sdk/src/index.ts',
           '--inline-declare-global',
           '--inline-declare-externals',
@@ -109,21 +109,6 @@ const buildSteps = [
       execSync('yarn workspace @searchcraft/react-sdk build', {
         stdio: isVerbose ? 'inherit' : 'ignore',
       });
-
-      spawnSync(
-        'yarn',
-        [
-          'dts-bundle-generator',
-          '-o',
-          'packages/react-sdk/dist/client/index.d.ts',
-          'packages/react-sdk/src/client/index.ts',
-          '--inline-declare-global',
-          '--inline-declare-externals',
-        ],
-        {
-          stdio: isVerbose ? 'inherit' : 'ignore',
-        },
-      );
 
       spawnSync(
         'yarn',

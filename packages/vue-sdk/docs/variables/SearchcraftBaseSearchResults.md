@@ -6,7 +6,7 @@
 
 # Variable: SearchcraftBaseSearchResults
 
-> `const` **SearchcraftBaseSearchResults**: `DefineSetupFnComponent`\<`SearchcraftBaseSearchResults` & `InputProps`\<`string` \| `number` \| `boolean`\>, \{\}, \{\}, `SearchcraftBaseSearchResults` & `InputProps`\<`string` \| `number` \| `boolean`\>, `PublicProps`\> = `Component`
+> `const` **SearchcraftBaseSearchResults**: `DefineSetupFnComponent`\<[`SearchcraftBaseSearchResults`](/reference/sdk/js-vue/namespaces/JSX/interfaces/SearchcraftBaseSearchResults.md) & `InputProps`\<`string` \| `number` \| `boolean`\>, \{\}, \{\}, [`SearchcraftBaseSearchResults`](/reference/sdk/js-vue/namespaces/JSX/interfaces/SearchcraftBaseSearchResults.md) & `InputProps`\<`string` \| `number` \| `boolean`\>, `PublicProps`\> = `Component`
 
 A component that renders a list of search results with customizable styles, layout, and link behavior.
 

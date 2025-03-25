@@ -6,7 +6,7 @@
 
 # Variable: SearchcraftPopoverForm
 
-> `const` **SearchcraftPopoverForm**: `DefineSetupFnComponent`\<`SearchcraftPopoverForm` & `InputProps`\<`string` \| `number` \| `boolean`\>, \{\}, \{\}, `SearchcraftPopoverForm` & `InputProps`\<`string` \| `number` \| `boolean`\>, `PublicProps`\> = `Component`
+> `const` **SearchcraftPopoverForm**: `DefineSetupFnComponent`\<[`SearchcraftPopoverForm`](/reference/sdk/js-vue/namespaces/JSX/interfaces/SearchcraftPopoverForm.md) & `InputProps`\<`string` \| `number` \| `boolean`\>, \{\}, \{\}, [`SearchcraftPopoverForm`](/reference/sdk/js-vue/namespaces/JSX/interfaces/SearchcraftPopoverForm.md) & `InputProps`\<`string` \| `number` \| `boolean`\>, `PublicProps`\> = `Component`
 
 A component that displays search results in a popover container that dynamically appears
 when the user interacts with a search input field, or when a Popover Button has been clicked.

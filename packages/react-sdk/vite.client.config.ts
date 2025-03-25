@@ -2,6 +2,7 @@
 import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
+import dtsPlugin from 'vite-plugin-dts';
 
 export default defineConfig({
   build: {
@@ -32,7 +33,7 @@ export default defineConfig({
     },
     sourcemap: true,
   },
-  plugins: [react()],
+  plugins: [react(), dtsPlugin({ rollupTypes: true, insertTypesEntry: false })],
   resolve: {
     alias: {},
   },

@@ -10,7 +10,7 @@ The Props Used by the `SearchcraftBaseSearchResults` Component.
 
 ## Extends
 
-- `SearchcraftBaseSearchResults`
+- [`SearchcraftBaseSearchResults`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftBaseSearchResults.md)
 
 ## Properties
 
@@ -22,7 +22,7 @@ The label for the button rendered when containerHref is not present for each res
 
 #### Inherited from
 
-`Components.SearchcraftBaseSearchResults.buttonLabel`
+[`SearchcraftBaseSearchResults`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftBaseSearchResults.md).[`buttonLabel`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftBaseSearchResults.md#buttonlabel)
 
 ***
 
@@ -34,7 +34,7 @@ The relationship between the current document and the link for the button render
 
 #### Inherited from
 
-`Components.SearchcraftBaseSearchResults.buttonRel`
+[`SearchcraftBaseSearchResults`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftBaseSearchResults.md).[`buttonRel`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftBaseSearchResults.md#buttonrel)
 
 ***
 
@@ -46,7 +46,7 @@ Where to open the link for the button rendered when containerHref is not present
 
 #### Inherited from
 
-`Components.SearchcraftBaseSearchResults.buttonTarget`
+[`SearchcraftBaseSearchResults`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftBaseSearchResults.md).[`buttonTarget`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftBaseSearchResults.md#buttontarget)
 
 ***
 
@@ -58,7 +58,7 @@ The relationship between the current document and the link for the containing el
 
 #### Inherited from
 
-`Components.SearchcraftBaseSearchResults.containerRel`
+[`SearchcraftBaseSearchResults`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftBaseSearchResults.md).[`containerRel`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftBaseSearchResults.md#containerrel)
 
 ***
 
@@ -70,7 +70,7 @@ Where to open the link for the containing element for each result.
 
 #### Inherited from
 
-`Components.SearchcraftBaseSearchResults.containerTarget`
+[`SearchcraftBaseSearchResults`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftBaseSearchResults.md).[`containerTarget`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftBaseSearchResults.md#containertarget)
 
 ***
 
@@ -82,7 +82,7 @@ A custom styles object.
 
 #### Inherited from
 
-`Components.SearchcraftBaseSearchResults.customStylesForResults`
+[`SearchcraftBaseSearchResults`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftBaseSearchResults.md).[`customStylesForResults`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftBaseSearchResults.md#customstylesforresults)
 
 ***
 
@@ -94,7 +94,7 @@ The placement of the image for each result.
 
 #### Inherited from
 
-`Components.SearchcraftBaseSearchResults.resultImagePlacement`
+[`SearchcraftBaseSearchResults`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftBaseSearchResults.md).[`resultImagePlacement`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftBaseSearchResults.md#resultimageplacement)
 
 ***
 
@@ -106,4 +106,4 @@ Formats the content rendered for each result.
 
 #### Inherited from
 
-`Components.SearchcraftBaseSearchResults.searchResultMappings`
+[`SearchcraftBaseSearchResults`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftBaseSearchResults.md).[`searchResultMappings`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftBaseSearchResults.md#searchresultmappings)

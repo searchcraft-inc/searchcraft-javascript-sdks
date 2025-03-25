@@ -1,7 +1,7 @@
 {
   "name": "@searchcraft/react-sdk",
   "private": false,
-  "author": "Searchcraft",
+  "author": "Searchcraft Inc.",
   "version": "0.9.7",
   "description": "Searchcraft React SDK.",
   "type": "module",
@@ -22,9 +22,9 @@
     "node": ">=18.0.0",
     "npm": ">=10.0.0"
   },
-  "main": "dist/index.js",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/client/index.js",
+  "module": "dist/client/index.js",
+  "types": "dist/client/index.d.ts",
   "files": ["dist/**/*"],
   "exports": {
     ".": {
