@@ -21,16 +21,15 @@ This web component is designed to allow users to select between a group of optio
 
 ## Properties
 
-| Property               | Attribute       | Description                                   | Type                                  | Default     |
-| ---------------------- | --------------- | --------------------------------------------- | ------------------------------------- | ----------- |
-| `caption`              | `caption`       | The caption displayed below the select input. | `string \| undefined`                 | `undefined` |
-| `customStyles`         | `custom-styles` | A custom styles object.                       | `string \| undefined`                 | `undefined` |
-| `disabled`             | `disabled`      | Whether the select input is disabled.         | `boolean \| undefined`                | `false`     |
-| `inputId` _(required)_ | `input-id`      | The ID for the select input.                  | `string`                              | `undefined` |
-| `label`                | `label`         | The label of the select input.                | `string \| undefined`                 | `undefined` |
-| `labelId`              | `label-id`      | The ID for the label of the select input.     | `string \| undefined`                 | `undefined` |
-| `name` _(required)_    | `name`          | The name of the select input.                 | `string`                              | `undefined` |
-| `options`              | `options`       | The options for the select input.             | `SearchcraftSelectOption[] \| string` | `[]`        |
+| Property               | Attribute  | Description                                   | Type                                  | Default     |
+| ---------------------- | ---------- | --------------------------------------------- | ------------------------------------- | ----------- |
+| `caption`              | `caption`  | The caption displayed below the select input. | `string \| undefined`                 | `undefined` |
+| `disabled`             | `disabled` | Whether the select input is disabled.         | `boolean \| undefined`                | `false`     |
+| `inputId` _(required)_ | `input-id` | The ID for the select input.                  | `string`                              | `undefined` |
+| `label`                | `label`    | The label of the select input.                | `string \| undefined`                 | `undefined` |
+| `labelId`              | `label-id` | The ID for the label of the select input.     | `string \| undefined`                 | `undefined` |
+| `name` _(required)_    | `name`     | The name of the select input.                 | `string`                              | `undefined` |
+| `options`              | `options`  | The options for the select input.             | `SearchcraftSelectOption[] \| string` | `[]`        |
 
 
 ## Events

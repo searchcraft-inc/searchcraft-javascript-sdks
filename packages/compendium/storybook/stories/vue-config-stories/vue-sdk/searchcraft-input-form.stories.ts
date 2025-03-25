@@ -10,10 +10,6 @@ export default {
   title: 'Vue SDK/searchcraft-input-form',
   component: SearchcraftInputForm,
   argTypes: {
-    config: {
-      control: 'object',
-      description: 'Searchcraft configuration object',
-    },
     autoSearch: {
       control: 'boolean',
       description:
@@ -32,17 +28,9 @@ export default {
       control: 'text',
       description: 'Label rendered above the input',
     },
-    customStyles: {
-      control: 'object',
-      description: 'Custom styles applied to the input element',
-    },
     placeholderValue: {
       control: 'text',
       description: 'Placeholder text shown in the input field',
-    },
-    searchTerm: {
-      control: 'text',
-      description: 'Initial value of the input field',
     },
     debounceDelay: {
       control: 'number',
@@ -57,9 +45,7 @@ const defaultProps = {
   buttonPlacement: 'none',
   buttonLabel: undefined,
   inputLabel: 'Search here',
-  customStyles: {},
   placeholderValue: 'Enter Search',
-  searchTerm: '',
   debounceDelay: 0,
 };
 
@@ -74,7 +60,7 @@ export const Default: StoryFn = (args) => ({
     return { args };
   },
   template: `
-    <div style="display: flex;">
+    <div>
       <SearchcraftTheme />
       <SearchcraftInputForm v-bind="args" />
     </div>

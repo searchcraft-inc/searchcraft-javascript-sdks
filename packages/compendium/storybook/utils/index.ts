@@ -1,1 +1,1 @@
-export * from './WebComponentWrapper';
+export * from './ReactJSXDeclarations';

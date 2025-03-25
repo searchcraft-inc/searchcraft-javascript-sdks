@@ -1,49 +1,13 @@
 'use client';
 
+import { useEffect } from 'react';
+
 import {
   Searchcraft,
   hydrateSearchcraftComponents,
-  type SearchResultMappings,
 } from '@searchcraft/react-sdk/server';
-import { useEffect } from 'react';
 
-const searchResultMappings: SearchResultMappings = {
-  containerHref: {
-    fieldNames: [
-      {
-        fieldName: 'canonical_link',
-        dataType: 'text',
-      },
-    ],
-  },
-  footer: {
-    fieldNames: [
-      {
-        fieldName: 'date_published',
-        dataType: 'date',
-      },
-      {
-        fieldName: 'author_name',
-        dataType: 'text',
-      },
-    ],
-    delimiter: ' • ',
-  },
-  imageSource: {
-    fieldNames: [
-      {
-        fieldName: 'medium_image',
-        dataType: 'text',
-      },
-    ],
-  },
-  body: {
-    fieldNames: [{ fieldName: 'sub_headline', dataType: 'text' }],
-  },
-  title: {
-    fieldNames: [{ fieldName: 'headline', dataType: 'text' }],
-  },
-};
+import { searchResultTemplate } from '@common/index';
 
 export const SearchcraftInit = () => {
   useEffect(() => {
@@ -55,12 +19,10 @@ export const SearchcraftInit = () => {
 
     hydrateSearchcraftComponents();
 
-    const baseSearchResults = document.querySelector(
-      'searchcraft-base-search-results',
-    );
+    const searchResults = document.querySelector('searchcraft-search-results');
 
-    if (baseSearchResults) {
-      baseSearchResults.searchResultMappings = searchResultMappings;
+    if (searchResults) {
+      searchResults.template = searchResultTemplate;
     }
   }, []);
   return null;

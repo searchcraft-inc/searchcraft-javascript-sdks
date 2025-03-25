@@ -10,13 +10,7 @@ This web component is designed to display a user-friendly error message when a s
 ## Usage
 ```html
 <!-- index.html -->
-<searchcraft-error-message error-message="No search results found for query" />
+<searchcraft-error-message>
+  No search results found for query
+</searchcraft-error-message>
 ```
-
-## Properties
-
-### errorMessage?
-
-> `optional` **errorMessage**: `string`
-
-The error message.

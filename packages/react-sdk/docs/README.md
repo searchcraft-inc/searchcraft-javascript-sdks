@@ -32,7 +32,7 @@ The React SDK provides the following prebuilt components for use in your applica
 <SearchcraftPopoverForm />
 <SearchcraftFilterPanel />
 <SearchcraftResultsInfo />
-<SearchcraftBaseSearchResults />
+<SearchcraftSearchResults />
 <SearchcraftPagination />
 
 ```

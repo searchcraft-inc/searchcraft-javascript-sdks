@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import {
   Searchcraft,
+  SearchcraftInputForm,
   SearchcraftResultsInfo,
   SearchcraftTheme,
   type SearchcraftResultsInfoProps,
@@ -9,21 +10,6 @@ import { useEffect } from 'react';
 
 const componentMeta: Meta = {
   title: 'React SDK/searchcraft-results-info',
-  argTypes: {
-    resultsCount: {
-      control: 'number',
-      description: 'The number of results returned by the search.',
-    },
-    responseTime: {
-      control: 'text',
-      description:
-        'The time it took for the search to respond (in milliseconds).',
-    },
-    query: {
-      control: 'text',
-      description: 'The search query used to fetch results.',
-    },
-  },
 };
 
 const defaultProps: SearchcraftResultsInfoProps = {};
@@ -44,6 +30,9 @@ export const Default: StoryObj = {
   render: () => (
     <>
       <SearchcraftTheme />
+      <div style={{ marginBottom: 20 }}>
+        <SearchcraftInputForm />
+      </div>
       <SearchcraftResultsInfo />
     </>
   ),

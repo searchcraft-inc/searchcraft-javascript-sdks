@@ -1,50 +1,20 @@
-import type { PopoverResultMappings } from '@searchcraft/javascript-sdk';
+import { useEffect } from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
+
 import {
   Searchcraft,
   SearchcraftPopoverButton,
   SearchcraftPopoverForm,
   SearchcraftTheme,
 } from '@searchcraft/react-sdk';
-import type { Meta, StoryObj } from '@storybook/react';
-import { useEffect } from 'react';
+
+import { popoverResultMappings } from '@common/index.js';
+
+import '@common/searchcraft-popover-form/popover-form-with-content.scss';
 
 const componentMeta: Meta = {
   title: 'React SDK/searchcraft-popover-form',
   argTypes: {},
-};
-
-const mappings: PopoverResultMappings = {
-  href: {
-    fieldNames: [
-      {
-        fieldName: 'link',
-        dataType: 'text',
-      },
-    ],
-  },
-  title: {
-    fieldNames: [{ fieldName: 'title', dataType: 'text' }],
-  },
-  subtitle: {
-    fieldNames: [
-      {
-        fieldName: 'price',
-        dataType: 'number',
-        numberFormatLocale: 'en-US',
-        numberFormatOptions: {
-          style: 'currency',
-          currency: 'USD',
-        },
-        numberScale: 1.0,
-      },
-    ],
-  },
-  imageSource: {
-    fieldNames: [{ fieldName: 'image', dataType: 'text' }],
-  },
-  imageAlt: {
-    fieldNames: [{ fieldName: 'price', dataType: 'text' }],
-  },
 };
 
 export const Inline: StoryObj = {
@@ -63,12 +33,12 @@ export const Inline: StoryObj = {
   render: () => (
     <>
       <SearchcraftTheme />
-      <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
+      <div className='searchcraft-popover-form-with-content'>
         <p>Story Note: This story uses the Bazaario env vars</p>
         <SearchcraftPopoverForm
           hotkey='k'
           hotkeyModifier='ctrl'
-          popoverResultMappings={mappings}
+          popoverResultMappings={popoverResultMappings}
           type='inline'
         />
         <p style={{ marginBottom: 100 }}>
@@ -97,7 +67,7 @@ export const Modal: StoryObj = {
   render: () => (
     <>
       <SearchcraftTheme />
-      <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
+      <div className='searchcraft-popover-form-with-content'>
         <p>Story Note: This story uses the Bazaario env vars</p>
         <SearchcraftPopoverButton>
           <span>Click me</span>
@@ -105,7 +75,7 @@ export const Modal: StoryObj = {
         <SearchcraftPopoverForm
           hotkey='k'
           hotkeyModifier='ctrl'
-          popoverResultMappings={mappings}
+          popoverResultMappings={popoverResultMappings}
           type='modal'
         />
       </div>
@@ -130,7 +100,7 @@ export const Fullscreen: StoryObj = {
   render: () => (
     <>
       <SearchcraftTheme />
-      <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
+      <div className='searchcraft-popover-form-with-content'>
         <p>Story Note: This story uses the Bazaario env vars</p>
         <SearchcraftPopoverButton>
           <span>Click me</span>
@@ -138,7 +108,7 @@ export const Fullscreen: StoryObj = {
         <SearchcraftPopoverForm
           hotkey='k'
           hotkeyModifier='ctrl'
-          popoverResultMappings={mappings}
+          popoverResultMappings={popoverResultMappings}
           type='fullscreen'
         />
       </div>

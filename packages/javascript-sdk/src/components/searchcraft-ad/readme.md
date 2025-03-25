@@ -22,14 +22,14 @@ An inline ad meant to be rendered in a list of search results.
 
 ### Used by
 
- - [searchcraft-base-search-results](../searchcraft-base-search-results)
  - [searchcraft-popover-list-view](../searchcraft-popover-list-view)
+ - [searchcraft-search-results](../searchcraft-search-results)
 
 ### Graph
 ```mermaid
 graph TD;
-  searchcraft-base-search-results --> searchcraft-ad
   searchcraft-popover-list-view --> searchcraft-ad
+  searchcraft-search-results --> searchcraft-ad
   style searchcraft-ad fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

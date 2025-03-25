@@ -9,8 +9,6 @@
 ## Interfaces
 
 - [SearchcraftAd](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftAd.md)
-- [SearchcraftBaseSearchResult](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftBaseSearchResult.md)
-- [SearchcraftBaseSearchResults](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftBaseSearchResults.md)
 - [SearchcraftButton](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftButton.md)
 - [SearchcraftErrorMessage](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftErrorMessage.md)
 - [SearchcraftFacetList](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftFacetList.md)
@@ -23,6 +21,8 @@
 - [SearchcraftPopoverListItem](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftPopoverListItem.md)
 - [SearchcraftPopoverListView](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftPopoverListView.md)
 - [SearchcraftResultsInfo](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftResultsInfo.md)
+- [SearchcraftSearchResult](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftSearchResult.md)
+- [SearchcraftSearchResults](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftSearchResults.md)
 - [SearchcraftSearchResultsPerPage](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftSearchResultsPerPage.md)
 - [SearchcraftSelect](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftSelect.md)
 - [SearchcraftSlider](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftSlider.md)

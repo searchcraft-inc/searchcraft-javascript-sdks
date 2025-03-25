@@ -20,36 +20,10 @@ This web component is designed to display the number of results returned from a 
 
 ## Properties
 
-### customFormatter()?
+### template?
 
-> `optional` **customFormatter**: (`range`, `count`, `responseTime`) => `void`
+> `optional` **template**: [`ResultsInfoTemplate`](/reference/sdk/js-vue/type-aliases/ResultsInfoTemplate.md)
 
-The custom formatter for the resulting string.
-
-#### Parameters
-
-##### range
-
-\[`string`, `string`\]
-
-##### count
-
-`string`
-
-##### responseTime
-
-`string`
-
-#### Returns
-
-`void`
+A callback function responsible for rendering the results info.
 
 #### Example
-
-***
-
-### customStyles?
-
-> `optional` **customStyles**: `string`
-
-The custom styles object.

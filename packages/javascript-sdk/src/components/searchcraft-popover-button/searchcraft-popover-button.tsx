@@ -15,7 +15,11 @@ export class SearchcraftPopoverButton {
 
   render() {
     return (
-      <button type='button' onClick={this.handleOnClick.bind(this)}>
+      <button
+        class='searchcraft-popover-button'
+        onClick={this.handleOnClick.bind(this)}
+        type='button'
+      >
         <slot />
       </button>
     );

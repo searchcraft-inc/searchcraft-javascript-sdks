@@ -1,18 +1,11 @@
+import { useEffect } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import WebComponentWrapper from '@utils/WebComponentWrapper';
 
 import { Searchcraft, type Components } from '@searchcraft/javascript-sdk';
-import { useEffect } from 'react';
-
-const componentName = 'searchcraft-input-form';
 
 const componentMeta: Meta = {
   title: 'Javascript SDK/searchcraft-input-form',
   argTypes: {
-    config: {
-      control: 'object',
-      description: 'Searchcraft configuration object',
-    },
     autoSearch: {
       control: 'boolean',
       description:
@@ -31,17 +24,9 @@ const componentMeta: Meta = {
       control: 'text',
       description: 'Label rendered above the input',
     },
-    customStyles: {
-      control: 'object',
-      description: 'Custom styles applied to the input element',
-    },
     placeholderValue: {
       control: 'text',
       description: 'Placeholder text shown in the input field',
-    },
-    searchTerm: {
-      control: 'text',
-      description: 'Initial value of the input field',
     },
     debounceDelay: {
       control: 'number',
@@ -56,9 +41,8 @@ export default componentMeta;
 const defaultProps: Components.SearchcraftInputForm = {
   autoSearch: false,
   buttonPlacement: 'left',
-  buttonLabel: undefined,
+  buttonLabel: 'Search',
   inputLabel: 'Search here',
-  customStyles: {},
   placeholderValue: 'Enter Search',
 };
 
@@ -67,16 +51,14 @@ const buttonRightProps: Components.SearchcraftInputForm = {
   buttonPlacement: 'right',
   buttonLabel: 'Search',
   inputLabel: 'Search here',
-  customStyles: {},
   placeholderValue: 'Enter Search',
 };
 
 const autoSearchProps: Components.SearchcraftInputForm = {
   autoSearch: true,
   buttonPlacement: 'none',
-  buttonLabel: undefined,
+  buttonLabel: 'Search',
   inputLabel: 'Start typing to auto search',
-  customStyles: {},
   placeholderValue: 'Enter Search',
 };
 
@@ -96,7 +78,7 @@ export const Default: StoryObj<Components.SearchcraftInputForm> = {
   render: (args) => (
     <>
       <searchcraft-theme />
-      <WebComponentWrapper args={args} componentName={componentName} />
+      <searchcraft-input-form {...args} />
     </>
   ),
   args: defaultProps,
@@ -118,7 +100,7 @@ export const ButtonRight: StoryObj<Components.SearchcraftInputForm> = {
   render: (args) => (
     <>
       <searchcraft-theme />
-      <WebComponentWrapper args={args} componentName={componentName} />
+      <searchcraft-input-form {...args} />
     </>
   ),
   args: buttonRightProps,
@@ -140,7 +122,7 @@ export const AutoSearch: StoryObj<Components.SearchcraftInputForm> = {
   render: (args) => (
     <>
       <searchcraft-theme />
-      <WebComponentWrapper args={args} componentName={componentName} />
+      <searchcraft-input-form {...args} />
     </>
   ),
   args: autoSearchProps,

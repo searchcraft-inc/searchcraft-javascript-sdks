@@ -14,18 +14,6 @@
 
 ***
 
-### searchcraft-base-search-result
-
-> **searchcraft-base-search-result**: [`SearchcraftBaseSearchResult`](/reference/sdk/js-vue/namespaces/JSX/interfaces/SearchcraftBaseSearchResult.md)
-
-***
-
-### searchcraft-base-search-results
-
-> **searchcraft-base-search-results**: [`SearchcraftBaseSearchResults`](/reference/sdk/js-vue/namespaces/JSX/interfaces/SearchcraftBaseSearchResults.md)
-
-***
-
 ### searchcraft-button
 
 > **searchcraft-button**: [`SearchcraftButton`](/reference/sdk/js-vue/namespaces/JSX/interfaces/SearchcraftButton.md)
@@ -95,6 +83,18 @@
 ### searchcraft-results-info
 
 > **searchcraft-results-info**: [`SearchcraftResultsInfo`](/reference/sdk/js-vue/namespaces/JSX/interfaces/SearchcraftResultsInfo.md)
+
+***
+
+### searchcraft-search-result
+
+> **searchcraft-search-result**: [`SearchcraftSearchResult`](/reference/sdk/js-vue/namespaces/JSX/interfaces/SearchcraftSearchResult.md)
+
+***
+
+### searchcraft-search-results
+
+> **searchcraft-search-results**: [`SearchcraftSearchResults`](/reference/sdk/js-vue/namespaces/JSX/interfaces/SearchcraftSearchResults.md)
 
 ***
 

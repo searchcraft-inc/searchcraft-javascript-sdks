@@ -16,13 +16,6 @@ Once a query is submitted, calculates the number for pages.
 <searchcraft-pagination />
 ```
 
-## Properties
-
-| Property       | Attribute       | Description               | Type                  | Default     |
-| -------------- | --------------- | ------------------------- | --------------------- | ----------- |
-| `customStyles` | `custom-styles` | The custom styles object. | `string \| undefined` | `undefined` |
-
-
 ## Dependencies
 
 ### Depends on

@@ -1,10 +1,7 @@
+import { useEffect } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import WebComponentWrapper from '@utils/WebComponentWrapper';
 
 import { Searchcraft, type Components } from '@searchcraft/javascript-sdk';
-import { useEffect } from 'react';
-
-const componentName = 'searchcraft-toggle-button';
 
 const componentMeta: Meta = {
   title: 'Javascript SDK/searchcraft-toggle-button',
@@ -19,8 +16,8 @@ const componentMeta: Meta = {
 };
 
 const defaultProps: Components.SearchcraftToggleButton = {
-  label: 'My Toggle Label',
-  subLabel: 'This is a sublabel that goes underneath the label.',
+  label: 'Exact Match',
+  subLabel: 'Specify to use exact matching or fuzzy matching.',
 };
 
 export const Default: StoryObj<Components.SearchcraftToggleButton> = {
@@ -39,9 +36,7 @@ export const Default: StoryObj<Components.SearchcraftToggleButton> = {
   render: (args) => (
     <>
       <searchcraft-theme />
-      <div style={{ paddingLeft: 100, paddingRight: 100, paddingTop: 20 }}>
-        <WebComponentWrapper args={args} componentName={componentName} />
-      </div>
+      <searchcraft-toggle-button {...args} />
     </>
   ),
   args: defaultProps,

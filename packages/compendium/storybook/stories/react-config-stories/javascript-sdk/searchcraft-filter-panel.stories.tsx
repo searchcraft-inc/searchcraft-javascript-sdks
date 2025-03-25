@@ -24,7 +24,7 @@ const exactMatchItem: ExactMatchToggleFilterItem = {
   type: 'exactMatchToggle',
   label: 'Exact Match',
   options: {
-    subLabel: 'Specify to use exact matching or fuzzy matching',
+    subLabel: 'Specify to use exact matching or fuzzy matching.',
   },
 };
 
@@ -100,12 +100,10 @@ export const Default: StoryObj<Components.SearchcraftFilterPanel> = {
     return (
       <>
         <searchcraft-theme />
-        <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
+        <div style={{ marginBottom: 20 }}>
           <searchcraft-input-form />
-          <div style={{ paddingTop: 20 }}>
-            <searchcraft-filter-panel />
-          </div>
         </div>
+        <searchcraft-filter-panel />
       </>
     );
   },
@@ -128,6 +126,7 @@ export const WithDebounceDelay300: StoryObj<Components.SearchcraftFilterPanel> =
           const filterPanel = document.querySelector(
             'searchcraft-filter-panel',
           );
+
           if (filterPanel) {
             filterPanel.items = defaultProps.items;
           }
@@ -140,12 +139,10 @@ export const WithDebounceDelay300: StoryObj<Components.SearchcraftFilterPanel> =
       return (
         <>
           <searchcraft-theme />
-          <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
+          <div style={{ marginBottom: 20 }}>
             <searchcraft-input-form />
-            <div style={{ paddingTop: 20 }}>
-              <searchcraft-filter-panel />
-            </div>
           </div>
+          <searchcraft-filter-panel />
         </>
       );
     },

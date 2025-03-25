@@ -15,31 +15,6 @@ export const SearchcraftAd = /*@__PURE__*/ defineContainer<JSX.SearchcraftAd>('s
 ]);
 
 
-export const SearchcraftBaseSearchResult = /*@__PURE__*/ defineContainer<JSX.SearchcraftBaseSearchResult>('searchcraft-base-search-result', () => {}, [
-  'item',
-  'searchResultMappings',
-  'containerTarget',
-  'containerRel',
-  'buttonTarget',
-  'buttonRel',
-  'imagePlacement',
-  'customStyles',
-  'documentPosition'
-]);
-
-
-export const SearchcraftBaseSearchResults = /*@__PURE__*/ defineContainer<JSX.SearchcraftBaseSearchResults>('searchcraft-base-search-results', () => {}, [
-  'customStylesForResults',
-  'searchResultMappings',
-  'resultImagePlacement',
-  'buttonLabel',
-  'buttonTarget',
-  'buttonRel',
-  'containerTarget',
-  'containerRel'
-]);
-
-
 export const SearchcraftButton = /*@__PURE__*/ defineContainer<JSX.SearchcraftButton>('searchcraft-button', () => {}, [
   'hierarchy',
   'disabled',
@@ -54,9 +29,7 @@ export const SearchcraftButton = /*@__PURE__*/ defineContainer<JSX.SearchcraftBu
 ]);
 
 
-export const SearchcraftErrorMessage = /*@__PURE__*/ defineContainer<JSX.SearchcraftErrorMessage>('searchcraft-error-message', () => {}, [
-  'errorMessage'
-]);
+export const SearchcraftErrorMessage = /*@__PURE__*/ defineContainer<JSX.SearchcraftErrorMessage>('searchcraft-error-message', () => {});
 
 
 export const SearchcraftFacetList = /*@__PURE__*/ defineContainer<JSX.SearchcraftFacetList>('searchcraft-facet-list', () => {}, [
@@ -77,7 +50,6 @@ export const SearchcraftInputForm = /*@__PURE__*/ defineContainer<JSX.Searchcraf
   'buttonPlacement',
   'buttonLabel',
   'inputLabel',
-  'customStyles',
   'placeholderValue',
   'core',
   'inputFocus',
@@ -96,9 +68,7 @@ export const SearchcraftInputLabel = /*@__PURE__*/ defineContainer<JSX.Searchcra
 ]);
 
 
-export const SearchcraftPagination = /*@__PURE__*/ defineContainer<JSX.SearchcraftPagination>('searchcraft-pagination', () => {}, [
-  'customStyles'
-]);
+export const SearchcraftPagination = /*@__PURE__*/ defineContainer<JSX.SearchcraftPagination>('searchcraft-pagination', () => {});
 
 
 export const SearchcraftPopoverButton = /*@__PURE__*/ defineContainer<JSX.SearchcraftPopoverButton>('searchcraft-popover-button', () => {});
@@ -129,14 +99,25 @@ export const SearchcraftPopoverListView = /*@__PURE__*/ defineContainer<JSX.Sear
 
 
 export const SearchcraftResultsInfo = /*@__PURE__*/ defineContainer<JSX.SearchcraftResultsInfo>('searchcraft-results-info', () => {}, [
-  'customFormatter',
-  'customStyles'
+  'template'
+]);
+
+
+export const SearchcraftSearchResult = /*@__PURE__*/ defineContainer<JSX.SearchcraftSearchResult>('searchcraft-search-result', () => {}, [
+  'item',
+  'index',
+  'documentPosition',
+  'template'
+]);
+
+
+export const SearchcraftSearchResults = /*@__PURE__*/ defineContainer<JSX.SearchcraftSearchResults>('searchcraft-search-results', () => {}, [
+  'template'
 ]);
 
 
 export const SearchcraftSearchResultsPerPage = /*@__PURE__*/ defineContainer<JSX.SearchcraftSearchResultsPerPage>('searchcraft-search-results-per-page', () => {}, [
-  'increment',
-  'customStyles'
+  'increment'
 ]);
 
 
@@ -148,7 +129,6 @@ export const SearchcraftSelect = /*@__PURE__*/ defineContainer<JSX.SearchcraftSe
   'labelId',
   'name',
   'options',
-  'customStyles',
   'selectChange'
 ], [
   'selectChange'

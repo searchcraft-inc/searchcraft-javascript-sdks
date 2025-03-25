@@ -10,10 +10,6 @@ import { useEffect } from 'react';
 const componentMeta: Meta = {
   title: 'React SDK/searchcraft-input-form',
   argTypes: {
-    config: {
-      control: 'object',
-      description: 'Searchcraft configuration object',
-    },
     autoSearch: {
       control: 'boolean',
       description:
@@ -32,17 +28,9 @@ const componentMeta: Meta = {
       control: 'text',
       description: 'Label rendered above the input',
     },
-    customStyles: {
-      control: 'object',
-      description: 'Custom styles applied to the input element',
-    },
     placeholderValue: {
       control: 'text',
       description: 'Placeholder text shown in the input field',
-    },
-    searchTerm: {
-      control: 'text',
-      description: 'Initial value of the input field',
     },
     debounceDelay: {
       control: 'number',
@@ -57,7 +45,6 @@ const defaultProps: SearchcraftInputFormProps = {
   buttonPlacement: 'left',
   buttonLabel: undefined,
   inputLabel: 'Search here',
-  customStyles: {},
   placeholderValue: 'Enter Search',
 };
 
@@ -77,9 +64,7 @@ export const Default: StoryObj<SearchcraftInputFormProps> = {
   render: (args) => (
     <>
       <SearchcraftTheme />
-      <div style={{ display: 'flex' }}>
-        <SearchcraftInputForm {...args} />
-      </div>
+      <SearchcraftInputForm {...args} />
     </>
   ),
   args: defaultProps,

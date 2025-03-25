@@ -84,7 +84,7 @@ The number of custom ads to render at the start of the search results page.
 
 ### customAdTemplate?
 
-> `optional` **customAdTemplate**: [`CustomAdTemplateRenderFunction`](/reference/sdk/core/type-aliases/CustomAdTemplateRenderFunction.md)
+> `optional` **customAdTemplate**: [`CustomAdTemplate`](/reference/sdk/core/type-aliases/CustomAdTemplate.md)
 
 A callback function responsible for rendering the custom ad containers.
 

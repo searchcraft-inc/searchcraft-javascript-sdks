@@ -1,8 +1,6 @@
 import { searchcraftStore } from '@store';
-import { Component, h, State, Prop } from '@stencil/core';
+import { Component, h, State } from '@stencil/core';
 import classNames from 'classnames';
-
-import { parseCustomStyles } from '@utils';
 
 /**
  * This web component is designed to facilitate pagination of search results.
@@ -19,11 +17,6 @@ import { parseCustomStyles } from '@utils';
   shadow: false,
 })
 export class SearchcraftPagination {
-  /**
-   * The custom styles object.
-   */
-  @Prop() customStyles?: string;
-
   // store vars
   @State() searchTerm;
   @State() searchResultsPerPage;
@@ -173,12 +166,7 @@ export class SearchcraftPagination {
     }
 
     return (
-      <div
-        class={classNames(
-          'searchcraft-pagination',
-          parseCustomStyles(this.customStyles || {}),
-        )}
-      >
+      <div class='searchcraft-pagination'>
         <div class='searchcraft-pagination-control'>
           <searchcraft-button
             disabled={this.searchResultsPage === 1}

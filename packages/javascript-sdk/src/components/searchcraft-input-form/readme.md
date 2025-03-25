@@ -16,23 +16,16 @@ It abstracts the complexities of index-based searching, making it accessible to 
 <searchcraft-input-form placeholder-value="Search here" />
 ```
 
-```js
-// index.js
-const searchInputForm = document.querySelector('searchcraft-input-form');
-
-```
-
 ## Properties
 
-| Property           | Attribute           | Description                                                                    | Type                                 | Default          |
-| ------------------ | ------------------- | ------------------------------------------------------------------------------ | ------------------------------------ | ---------------- |
-| `autoSearch`       | `auto-search`       | Whether or not to automatically submit the search term when the input changes. | `boolean`                            | `true`           |
-| `buttonLabel`      | `button-label`      | The label for the submit button.                                               | `string \| undefined`                | `undefined`      |
-| `buttonPlacement`  | `button-placement`  | Where to place the search button.                                              | `"left" \| "none" \| "right"`        | `'none'`         |
-| `core`             | --                  |                                                                                | `SearchcraftCore \| undefined`       | `undefined`      |
-| `customStyles`     | `custom-styles`     | A custom styles object to be applied to the input element.                     | `string \| { [x: string]: string; }` | `{}`             |
-| `inputLabel`       | `input-label`       | The label rendered above the input.                                            | `string \| undefined`                | `undefined`      |
-| `placeholderValue` | `placeholder-value` | The input element's placeholder value.                                         | `string`                             | `'Enter Search'` |
+| Property           | Attribute           | Description                                                                    | Type                                       | Default          |
+| ------------------ | ------------------- | ------------------------------------------------------------------------------ | ------------------------------------------ | ---------------- |
+| `autoSearch`       | `auto-search`       | Whether or not to automatically submit the search term when the input changes. | `boolean \| undefined`                     | `true`           |
+| `buttonLabel`      | `button-label`      | The label for the submit button.                                               | `string \| undefined`                      | `undefined`      |
+| `buttonPlacement`  | `button-placement`  | Where to place the search button.                                              | `"left" \| "none" \| "right" \| undefined` | `'none'`         |
+| `core`             | --                  |                                                                                | `SearchcraftCore \| undefined`             | `undefined`      |
+| `inputLabel`       | `input-label`       | The label rendered above the input.                                            | `string \| undefined`                      | `undefined`      |
+| `placeholderValue` | `placeholder-value` | The input element's placeholder value.                                         | `string \| undefined`                      | `'Enter Search'` |
 
 
 ## Events

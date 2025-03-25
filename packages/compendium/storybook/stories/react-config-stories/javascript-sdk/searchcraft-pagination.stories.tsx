@@ -1,49 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-
-import {
-  Searchcraft,
-  type SearchResultMappings,
-} from '@searchcraft/javascript-sdk';
-
 import { useEffect } from 'react';
 
-const searchResultMappings: SearchResultMappings = {
-  containerHref: {
-    fieldNames: [
-      {
-        fieldName: 'canonical_link',
-        dataType: 'text',
-      },
-    ],
-  },
-  footer: {
-    fieldNames: [
-      {
-        fieldName: 'date_published',
-        dataType: 'date',
-      },
-      {
-        fieldName: 'author_name',
-        dataType: 'text',
-      },
-    ],
-    delimiter: ' • ',
-  },
-  imageSource: {
-    fieldNames: [
-      {
-        fieldName: 'medium_image',
-        dataType: 'text',
-      },
-    ],
-  },
-  body: {
-    fieldNames: [{ fieldName: 'sub_headline', dataType: 'text' }],
-  },
-  title: {
-    fieldNames: [{ fieldName: 'headline', dataType: 'text' }],
-  },
-};
+import { Searchcraft } from '@searchcraft/javascript-sdk';
+
+import { searchResultTemplate, customAdTemplate } from '@common/index.js';
 
 const componentMeta: Meta = {
   title: 'Javascript SDK/searchcraft-pagination',
@@ -85,18 +45,20 @@ export const Default: StoryObj = {
           }),
         );
 
-        const baseSearchResults = document.querySelector(
-          'searchcraft-base-search-results',
+        const searchResults = document.querySelector(
+          'searchcraft-search-results',
         );
-        const resultsInfo = document.querySelector('searchcraft-results-info');
 
-        if (baseSearchResults) {
-          baseSearchResults.searchResultMappings = searchResultMappings;
+        if (searchResults) {
+          searchResults.template = searchResultTemplate;
         }
 
+        const resultsInfo = document.querySelector('searchcraft-results-info');
+
         if (resultsInfo) {
-          resultsInfo.customFormatter = (range, count, responseTime) =>
-            `${range[0]}-${range[1]} of ${count} results in ${responseTime}ms`;
+          resultsInfo.template = (info, { html }) => html`
+            ${info.range[0]}-${info.range[1]} of ${info.count} results in ${info.responseTime}ms
+          `;
         }
 
         return () => {
@@ -110,11 +72,26 @@ export const Default: StoryObj = {
   render: () => (
     <>
       <searchcraft-theme />
-      <searchcraft-results-info />
-      <searchcraft-pagination />
-      <searchcraft-search-results-per-page />
-      <searchcraft-input-form />
-      <searchcraft-base-search-results />
+      <div style={{ marginBottom: 20 }}>
+        <searchcraft-input-form />
+      </div>
+      <div style={{ marginBottom: 20 }}>
+        <searchcraft-results-info />
+      </div>
+      <div style={{ marginBottom: 20 }}>
+        <searchcraft-search-results />
+      </div>
+      <div
+        style={{
+          alignItems: 'center',
+          display: 'flex',
+          justifyContent: 'space-between',
+          gap: 16,
+        }}
+      >
+        <searchcraft-search-results-per-page />
+        <searchcraft-pagination />
+      </div>
     </>
   ),
   args: defaultProps,
@@ -136,11 +113,7 @@ export const WithCustomAds: StoryObj = {
           customAdInterstitialInterval: 3,
           customAdInterstitialQuantity: 1,
           customAdEndQuantity: 1,
-          customAdTemplate(data) {
-            return `
-            <p>pagination world ${data.adContainerId} ${data.searchTerm}</p>
-          `;
-          },
+          customAdTemplate: customAdTemplate,
         });
 
         callbacks.push(
@@ -165,18 +138,20 @@ export const WithCustomAds: StoryObj = {
           }),
         );
 
-        const baseSearchResults = document.querySelector(
-          'searchcraft-base-search-results',
+        const searchResults = document.querySelector(
+          'searchcraft-search-results',
         );
-        const resultsInfo = document.querySelector('searchcraft-results-info');
 
-        if (baseSearchResults) {
-          baseSearchResults.searchResultMappings = searchResultMappings;
+        if (searchResults) {
+          searchResults.template = searchResultTemplate;
         }
 
+        const resultsInfo = document.querySelector('searchcraft-results-info');
+
         if (resultsInfo) {
-          resultsInfo.customFormatter = (range, count, responseTime) =>
-            `${range[0]}-${range[1]} of ${count} results in ${responseTime}ms`;
+          resultsInfo.template = (info, { html }) => html`
+            ${info.range[0]}-${info.range[1]} of ${info.count} results in ${info.responseTime}ms
+          `;
         }
 
         return () => {
@@ -190,11 +165,26 @@ export const WithCustomAds: StoryObj = {
   render: () => (
     <>
       <searchcraft-theme />
-      <searchcraft-results-info />
-      <searchcraft-pagination />
-      <searchcraft-search-results-per-page />
-      <searchcraft-input-form />
-      <searchcraft-base-search-results />
+      <div style={{ marginBottom: 20 }}>
+        <searchcraft-input-form />
+      </div>
+      <div style={{ marginBottom: 20 }}>
+        <searchcraft-results-info />
+      </div>
+      <div style={{ marginBottom: 20 }}>
+        <searchcraft-search-results template={searchResultTemplate} />
+      </div>
+      <div
+        style={{
+          alignItems: 'center',
+          display: 'flex',
+          justifyContent: 'space-between',
+          gap: 16,
+        }}
+      >
+        <searchcraft-search-results-per-page />
+        <searchcraft-pagination />
+      </div>
     </>
   ),
   args: defaultProps,
@@ -241,18 +231,20 @@ export const WithNativoAds: StoryObj = {
           }),
         );
 
-        const baseSearchResults = document.querySelector(
-          'searchcraft-base-search-results',
+        const searchResults = document.querySelector(
+          'searchcraft-search-results',
         );
-        const resultsInfo = document.querySelector('searchcraft-results-info');
 
-        if (baseSearchResults) {
-          baseSearchResults.searchResultMappings = searchResultMappings;
+        if (searchResults) {
+          searchResults.template = searchResultTemplate;
         }
 
+        const resultsInfo = document.querySelector('searchcraft-results-info');
+
         if (resultsInfo) {
-          resultsInfo.customFormatter = (range, count, responseTime) =>
-            `${range[0]}-${range[1]} of ${count} results in ${responseTime}ms`;
+          resultsInfo.template = (info, { html }) => html`
+            ${info.range[0]}-${info.range[1]} of ${info.count} results in ${info.responseTime}ms
+          `;
         }
 
         return () => {
@@ -266,11 +258,26 @@ export const WithNativoAds: StoryObj = {
   render: () => (
     <>
       <searchcraft-theme />
-      <searchcraft-results-info />
-      <searchcraft-pagination />
-      <searchcraft-search-results-per-page />
-      <searchcraft-input-form />
-      <searchcraft-base-search-results />
+      <div style={{ marginBottom: 20 }}>
+        <searchcraft-input-form />
+      </div>
+      <div style={{ marginBottom: 20 }}>
+        <searchcraft-results-info />
+      </div>
+      <div style={{ marginBottom: 20 }}>
+        <searchcraft-search-results template={searchResultTemplate} />
+      </div>
+      <div
+        style={{
+          alignItems: 'center',
+          display: 'flex',
+          justifyContent: 'space-between',
+          gap: 16,
+        }}
+      >
+        <searchcraft-search-results-per-page />
+        <searchcraft-pagination />
+      </div>
     </>
   ),
   args: defaultProps,
