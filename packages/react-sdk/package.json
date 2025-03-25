@@ -1,7 +1,7 @@
 {
   "name": "@searchcraft/react-sdk",
   "private": false,
-  "author": "Searchcraft",
+  "author": "Searchcraft Inc.",
   "version": "0.9.7",
   "description": "Searchcraft React SDK.",
   "type": "module",
