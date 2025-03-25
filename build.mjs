@@ -85,7 +85,7 @@ const buildSteps = [
         [
           'dts-bundle-generator',
           '-o',
-          'packages/javascript-sdk/dist/components/bundled.types.d.ts',
+          'packages/javascript-sdk/dist/components/index.d.ts',
           'packages/javascript-sdk/src/index.ts',
           '--inline-declare-global',
           '--inline-declare-externals',
