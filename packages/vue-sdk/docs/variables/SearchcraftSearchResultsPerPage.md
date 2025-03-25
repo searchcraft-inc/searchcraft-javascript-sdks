@@ -6,7 +6,7 @@
 
 # Variable: SearchcraftSearchResultsPerPage
 
-> `const` **SearchcraftSearchResultsPerPage**: `DefineSetupFnComponent`\<`SearchcraftSearchResultsPerPage` & `InputProps`\<`string` \| `number` \| `boolean`\>, \{\}, \{\}, `SearchcraftSearchResultsPerPage` & `InputProps`\<`string` \| `number` \| `boolean`\>, `PublicProps`\> = `Component`
+> `const` **SearchcraftSearchResultsPerPage**: `DefineSetupFnComponent`\<[`SearchcraftSearchResultsPerPage`](/reference/sdk/js-vue/namespaces/JSX/interfaces/SearchcraftSearchResultsPerPage.md) & `InputProps`\<`string` \| `number` \| `boolean`\>, \{\}, \{\}, [`SearchcraftSearchResultsPerPage`](/reference/sdk/js-vue/namespaces/JSX/interfaces/SearchcraftSearchResultsPerPage.md) & `InputProps`\<`string` \| `number` \| `boolean`\>, `PublicProps`\> = `Component`
 
 This Vue component is designed to choose the number of search results displayed.
 

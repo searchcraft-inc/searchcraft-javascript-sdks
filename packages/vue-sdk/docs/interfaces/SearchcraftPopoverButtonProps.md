@@ -10,4 +10,4 @@ The Props for the SearchcraftPopoverButton.
 
 ## Extends
 
-- `SearchcraftPopoverButton`
+- [`SearchcraftPopoverButton`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftPopoverButton.md)

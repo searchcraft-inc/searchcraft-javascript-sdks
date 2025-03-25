@@ -10,7 +10,7 @@ The Props for the SearchcraftInputForm component.
 
 ## Extends
 
-- `SearchcraftInputForm`
+- [`SearchcraftInputForm`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftInputForm.md)
 
 ## Properties
 
@@ -22,7 +22,7 @@ Whether or not to automatically submit the search term when the input changes.
 
 #### Inherited from
 
-`Components.SearchcraftInputForm.autoSearch`
+[`SearchcraftInputForm`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftInputForm.md).[`autoSearch`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftInputForm.md#autosearch)
 
 ***
 
@@ -34,7 +34,7 @@ The label for the submit button.
 
 #### Inherited from
 
-`Components.SearchcraftInputForm.buttonLabel`
+[`SearchcraftInputForm`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftInputForm.md).[`buttonLabel`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftInputForm.md#buttonlabel)
 
 ***
 
@@ -46,17 +46,17 @@ Where to place the search button.
 
 #### Inherited from
 
-`Components.SearchcraftInputForm.buttonPlacement`
+[`SearchcraftInputForm`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftInputForm.md).[`buttonPlacement`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftInputForm.md#buttonplacement)
 
 ***
 
 ### core?
 
-> `optional` **core**: `SearchcraftCore`
+> `optional` **core**: [`SearchcraftCore`](/reference/sdk/js-vue/classes/SearchcraftCore.md)
 
 #### Inherited from
 
-`Components.SearchcraftInputForm.core`
+[`SearchcraftInputForm`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftInputForm.md).[`core`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftInputForm.md#core)
 
 ***
 
@@ -68,7 +68,7 @@ A custom styles object to be applied to the input element.
 
 #### Inherited from
 
-`Components.SearchcraftInputForm.customStyles`
+[`SearchcraftInputForm`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftInputForm.md).[`customStyles`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftInputForm.md#customstyles)
 
 ***
 
@@ -80,7 +80,7 @@ The label rendered above the input.
 
 #### Inherited from
 
-`Components.SearchcraftInputForm.inputLabel`
+[`SearchcraftInputForm`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftInputForm.md).[`inputLabel`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftInputForm.md#inputlabel)
 
 ***
 
@@ -92,4 +92,4 @@ The input element's placeholder value.
 
 #### Inherited from
 
-`Components.SearchcraftInputForm.placeholderValue`
+[`SearchcraftInputForm`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftInputForm.md).[`placeholderValue`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftInputForm.md#placeholdervalue)

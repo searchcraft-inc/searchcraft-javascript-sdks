@@ -10,7 +10,7 @@ The Props for the SearchcraftSearchResultsPerPage component.
 
 ## Extends
 
-- `SearchcraftSearchResultsPerPage`
+- [`SearchcraftSearchResultsPerPage`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftSearchResultsPerPage.md)
 
 ## Properties
 
@@ -22,7 +22,7 @@ The custom styles object.
 
 #### Inherited from
 
-`Components.SearchcraftSearchResultsPerPage.customStyles`
+[`SearchcraftSearchResultsPerPage`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftSearchResultsPerPage.md).[`customStyles`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftSearchResultsPerPage.md#customstyles)
 
 ***
 
@@ -34,4 +34,4 @@ The amount the options will increase (e.g. 20 = [20, 40, 60, 80, 100]). The base
 
 #### Inherited from
 
-`Components.SearchcraftSearchResultsPerPage.increment`
+[`SearchcraftSearchResultsPerPage`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftSearchResultsPerPage.md).[`increment`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftSearchResultsPerPage.md#increment)

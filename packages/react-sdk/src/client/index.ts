@@ -1,11 +1,14 @@
-import { type SearchcraftConfig, SearchcraftCore } from '@searchcraft/core';
+import {
+  type SearchcraftConfig,
+  SearchcraftCore,
+} from '@searchcraft/javascript-sdk';
 
 import packageJson from '../../package.json';
 
 /**
  * Exports the shared types that all SDKs need
  */
-export type * from '@searchcraft/core/dist/types/sdk-types';
+export type * from '@searchcraft/javascript-sdk';
 
 import { defineCustomElements } from '@searchcraft/javascript-sdk';
 

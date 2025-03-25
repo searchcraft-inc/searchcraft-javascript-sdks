@@ -10,7 +10,7 @@ The Props for the SearchcraftResultsInfo component.
 
 ## Extends
 
-- `SearchcraftResultsInfo`
+- [`SearchcraftResultsInfo`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftResultsInfo.md)
 
 ## Properties
 
@@ -42,7 +42,7 @@ The custom formatter for the resulting string.
 
 #### Inherited from
 
-`Components.SearchcraftResultsInfo.customFormatter`
+[`SearchcraftResultsInfo`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftResultsInfo.md).[`customFormatter`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftResultsInfo.md#customformatter)
 
 ***
 
@@ -54,4 +54,4 @@ The custom styles object.
 
 #### Inherited from
 
-`Components.SearchcraftResultsInfo.customStyles`
+[`SearchcraftResultsInfo`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftResultsInfo.md).[`customStyles`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftResultsInfo.md#customstyles)

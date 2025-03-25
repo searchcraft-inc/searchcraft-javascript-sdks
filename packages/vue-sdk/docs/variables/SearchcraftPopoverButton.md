@@ -6,7 +6,7 @@
 
 # Variable: SearchcraftPopoverButton
 
-> `const` **SearchcraftPopoverButton**: `DefineSetupFnComponent`\<`SearchcraftPopoverButton` & `InputProps`\<`string` \| `number` \| `boolean`\>, \{\}, \{\}, `SearchcraftPopoverButton` & `InputProps`\<`string` \| `number` \| `boolean`\>, `PublicProps`\> = `Component`
+> `const` **SearchcraftPopoverButton**: `DefineSetupFnComponent`\<[`SearchcraftPopoverButton`](/reference/sdk/js-vue/namespaces/JSX/interfaces/SearchcraftPopoverButton.md) & `InputProps`\<`string` \| `number` \| `boolean`\>, \{\}, \{\}, [`SearchcraftPopoverButton`](/reference/sdk/js-vue/namespaces/JSX/interfaces/SearchcraftPopoverButton.md) & `InputProps`\<`string` \| `number` \| `boolean`\>, `PublicProps`\> = `Component`
 
 A button component that, when clicked, toggles the visibility of a popover.
 

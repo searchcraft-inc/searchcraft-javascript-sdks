@@ -10,4 +10,4 @@ The Props for the SearchcraftTheme component.
 
 ## Extends
 
-- `SearchcraftTheme`
+- [`SearchcraftTheme`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftTheme.md)

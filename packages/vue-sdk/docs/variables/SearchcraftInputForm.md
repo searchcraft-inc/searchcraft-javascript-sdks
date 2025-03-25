@@ -6,7 +6,7 @@
 
 # Variable: SearchcraftInputForm
 
-> `const` **SearchcraftInputForm**: `DefineSetupFnComponent`\<`SearchcraftInputForm` & `InputProps`\<`string` \| `number` \| `boolean`\>, \{\}, \{\}, `SearchcraftInputForm` & `InputProps`\<`string` \| `number` \| `boolean`\>, `PublicProps`\> = `Component`
+> `const` **SearchcraftInputForm**: `DefineSetupFnComponent`\<[`SearchcraftInputForm`](/reference/sdk/js-vue/namespaces/JSX/interfaces/SearchcraftInputForm.md) & `InputProps`\<`string` \| `number` \| `boolean`\>, \{\}, \{\}, [`SearchcraftInputForm`](/reference/sdk/js-vue/namespaces/JSX/interfaces/SearchcraftInputForm.md) & `InputProps`\<`string` \| `number` \| `boolean`\>, `PublicProps`\> = `Component`
 
 A component that provides a user-friendly interface for querying an indexed dataset,
 enabling users to easily search large collections of data. It abstracts the complexities

@@ -115,21 +115,6 @@ const buildSteps = [
         [
           'dts-bundle-generator',
           '-o',
-          'packages/react-sdk/dist/client/index.d.ts',
-          'packages/react-sdk/src/client/index.ts',
-          '--inline-declare-global',
-          '--inline-declare-externals',
-        ],
-        {
-          stdio: isVerbose ? 'inherit' : 'ignore',
-        },
-      );
-
-      spawnSync(
-        'yarn',
-        [
-          'dts-bundle-generator',
-          '-o',
           'packages/react-sdk/dist/server/index.d.ts',
           'packages/react-sdk/src/server/index.ts',
           '--inline-declare-global',

@@ -6,7 +6,7 @@
 
 # Variable: SearchcraftResultsInfo
 
-> `const` **SearchcraftResultsInfo**: `DefineSetupFnComponent`\<`SearchcraftResultsInfo` & `InputProps`\<`string` \| `number` \| `boolean`\>, \{\}, \{\}, `SearchcraftResultsInfo` & `InputProps`\<`string` \| `number` \| `boolean`\>, `PublicProps`\> = `Component`
+> `const` **SearchcraftResultsInfo**: `DefineSetupFnComponent`\<[`SearchcraftResultsInfo`](/reference/sdk/js-vue/namespaces/JSX/interfaces/SearchcraftResultsInfo.md) & `InputProps`\<`string` \| `number` \| `boolean`\>, \{\}, \{\}, [`SearchcraftResultsInfo`](/reference/sdk/js-vue/namespaces/JSX/interfaces/SearchcraftResultsInfo.md) & `InputProps`\<`string` \| `number` \| `boolean`\>, `PublicProps`\> = `Component`
 
 This Vue component is designed to display the number of results returned from a search query.
 

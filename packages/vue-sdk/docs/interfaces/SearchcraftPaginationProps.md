@@ -10,7 +10,7 @@ The Props for the SearchcraftPagination component.
 
 ## Extends
 
-- `SearchcraftPagination`
+- [`SearchcraftPagination`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftPagination.md)
 
 ## Properties
 
@@ -22,4 +22,4 @@ The custom styles object.
 
 #### Inherited from
 
-`Components.SearchcraftPagination.customStyles`
+[`SearchcraftPagination`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftPagination.md).[`customStyles`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftPagination.md#customstyles)

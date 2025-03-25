@@ -10,7 +10,7 @@ The consumer-facing Searchcraft class.
 
 ## Extends
 
-- `SearchcraftCore`
+- [`SearchcraftCore`](/reference/sdk/js-vue/classes/SearchcraftCore.md)
 
 ## Constructors
 
@@ -22,7 +22,7 @@ The consumer-facing Searchcraft class.
 
 ##### config
 
-`SearchcraftConfig`
+[`SearchcraftConfig`](/reference/sdk/js-vue/interfaces/SearchcraftConfig.md)
 
 #### Returns
 
@@ -30,17 +30,17 @@ The consumer-facing Searchcraft class.
 
 #### Overrides
 
-`SearchcraftCore.constructor`
+[`SearchcraftCore`](/reference/sdk/js-vue/classes/SearchcraftCore.md).[`constructor`](/reference/sdk/js-vue/classes/SearchcraftCore.md#constructors)
 
 ## Properties
 
 ### config
 
-> **config**: `SearchcraftConfig`
+> **config**: [`SearchcraftConfig`](/reference/sdk/js-vue/interfaces/SearchcraftConfig.md)
 
 #### Inherited from
 
-`SearchcraftCore.config`
+[`SearchcraftCore`](/reference/sdk/js-vue/classes/SearchcraftCore.md).[`config`](/reference/sdk/js-vue/classes/SearchcraftCore.md#config-1)
 
 ***
 
@@ -50,7 +50,7 @@ The consumer-facing Searchcraft class.
 
 #### Inherited from
 
-`SearchcraftCore.measureClient`
+[`SearchcraftCore`](/reference/sdk/js-vue/classes/SearchcraftCore.md).[`measureClient`](/reference/sdk/js-vue/classes/SearchcraftCore.md#measureclient)
 
 ***
 
@@ -60,7 +60,7 @@ The consumer-facing Searchcraft class.
 
 #### Inherited from
 
-`SearchcraftCore.searchClient`
+[`SearchcraftCore`](/reference/sdk/js-vue/classes/SearchcraftCore.md).[`searchClient`](/reference/sdk/js-vue/classes/SearchcraftCore.md#searchclient)
 
 ***
 
@@ -70,7 +70,7 @@ The consumer-facing Searchcraft class.
 
 #### Inherited from
 
-`SearchcraftCore.adClient`
+[`SearchcraftCore`](/reference/sdk/js-vue/classes/SearchcraftCore.md).[`adClient`](/reference/sdk/js-vue/classes/SearchcraftCore.md#adclient)
 
 ***
 
@@ -80,7 +80,7 @@ The consumer-facing Searchcraft class.
 
 #### Inherited from
 
-`SearchcraftCore.userId`
+[`SearchcraftCore`](/reference/sdk/js-vue/classes/SearchcraftCore.md).[`userId`](/reference/sdk/js-vue/classes/SearchcraftCore.md#userid)
 
 ***
 
@@ -94,7 +94,7 @@ Gets items from the SearchClient and the AdClient.
 
 ##### searchParams
 
-`SearchParams`
+[`SearchParams`](/reference/sdk/js-vue/type-aliases/SearchParams.md)
 
 ##### itemsCallback
 
@@ -110,7 +110,7 @@ Gets items from the SearchClient and the AdClient.
 
 #### Inherited from
 
-`SearchcraftCore.getItems`
+[`SearchcraftCore`](/reference/sdk/js-vue/classes/SearchcraftCore.md).[`getItems`](/reference/sdk/js-vue/classes/SearchcraftCore.md#getitems)
 
 ## Methods
 
@@ -120,7 +120,7 @@ Gets items from the SearchClient and the AdClient.
 
 #### Type Parameters
 
-• **T** *extends* keyof `SubscriptionEventMap`
+• **T** *extends* keyof [`SubscriptionEventMap`](/reference/sdk/js-vue/interfaces/SubscriptionEventMap.md)
 
 #### Parameters
 
@@ -130,7 +130,7 @@ Gets items from the SearchClient and the AdClient.
 
 ##### event
 
-`SubscriptionEventMap`\[`T`\]
+[`SubscriptionEventMap`](/reference/sdk/js-vue/interfaces/SubscriptionEventMap.md)\[`T`\]
 
 #### Returns
 
@@ -138,17 +138,17 @@ Gets items from the SearchClient and the AdClient.
 
 #### Inherited from
 
-`SearchcraftCore.emitEvent`
+[`SearchcraftCore`](/reference/sdk/js-vue/classes/SearchcraftCore.md).[`emitEvent`](/reference/sdk/js-vue/classes/SearchcraftCore.md#emitevent)
 
 ***
 
 ### subscribe()
 
-> **subscribe**\<`T`\>(`eventName`, `callback`): `UnsubscribeFunction`
+> **subscribe**\<`T`\>(`eventName`, `callback`): [`UnsubscribeFunction`](/reference/sdk/js-vue/type-aliases/UnsubscribeFunction.md)
 
 #### Type Parameters
 
-• **T** *extends* keyof `SubscriptionEventMap`
+• **T** *extends* keyof [`SubscriptionEventMap`](/reference/sdk/js-vue/interfaces/SubscriptionEventMap.md)
 
 #### Parameters
 
@@ -158,15 +158,15 @@ Gets items from the SearchClient and the AdClient.
 
 ##### callback
 
-`SubscriptionEventCallback`\<`T`\>
+[`SubscriptionEventCallback`](/reference/sdk/js-vue/type-aliases/SubscriptionEventCallback.md)\<`T`\>
 
 #### Returns
 
-`UnsubscribeFunction`
+[`UnsubscribeFunction`](/reference/sdk/js-vue/type-aliases/UnsubscribeFunction.md)
 
 #### Inherited from
 
-`SearchcraftCore.subscribe`
+[`SearchcraftCore`](/reference/sdk/js-vue/classes/SearchcraftCore.md).[`subscribe`](/reference/sdk/js-vue/classes/SearchcraftCore.md#subscribe)
 
 ***
 
@@ -182,7 +182,7 @@ Called when a `<searchcraft-ad>` component is rendered
 
 ###### adClientResponseItem
 
-`AdClientResponseItem`
+[`AdClientResponseItem`](/reference/sdk/js-vue/interfaces/AdClientResponseItem.md)
 
 ###### adContainerId
 
@@ -190,7 +190,7 @@ Called when a `<searchcraft-ad>` component is rendered
 
 ###### adSource
 
-`SearchcraftAdSource`
+[`SearchcraftAdSource`](/reference/sdk/js-vue/type-aliases/SearchcraftAdSource.md)
 
 ###### searchTerm
 
@@ -202,7 +202,7 @@ Called when a `<searchcraft-ad>` component is rendered
 
 #### Inherited from
 
-`SearchcraftCore.handleAdContainerRendered`
+[`SearchcraftCore`](/reference/sdk/js-vue/classes/SearchcraftCore.md).[`handleAdContainerRendered`](/reference/sdk/js-vue/classes/SearchcraftCore.md#handleadcontainerrendered)
 
 ***
 
@@ -218,7 +218,7 @@ Called when a `<searchcraft-ad>` is viewed
 
 ###### adClientResponseItem
 
-`AdClientResponseItem`
+[`AdClientResponseItem`](/reference/sdk/js-vue/interfaces/AdClientResponseItem.md)
 
 ###### adContainerId
 
@@ -226,7 +226,7 @@ Called when a `<searchcraft-ad>` is viewed
 
 ###### adSource
 
-`SearchcraftAdSource`
+[`SearchcraftAdSource`](/reference/sdk/js-vue/type-aliases/SearchcraftAdSource.md)
 
 ###### searchTerm
 
@@ -238,7 +238,7 @@ Called when a `<searchcraft-ad>` is viewed
 
 #### Inherited from
 
-`SearchcraftCore.handleAdContainerViewed`
+[`SearchcraftCore`](/reference/sdk/js-vue/classes/SearchcraftCore.md).[`handleAdContainerViewed`](/reference/sdk/js-vue/classes/SearchcraftCore.md#handleadcontainerviewed)
 
 ***
 
@@ -254,4 +254,4 @@ Perform various actions when the input is cleared
 
 #### Inherited from
 
-`SearchcraftCore.handleInputCleared`
+[`SearchcraftCore`](/reference/sdk/js-vue/classes/SearchcraftCore.md).[`handleInputCleared`](/reference/sdk/js-vue/classes/SearchcraftCore.md#handleinputcleared)

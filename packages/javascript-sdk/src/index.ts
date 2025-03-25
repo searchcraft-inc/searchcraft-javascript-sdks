@@ -11,15 +11,6 @@ import packageJson from '../package.json';
  * DO NOT use this file to export your components. Instead, use the recommended approaches
  * to consume components of this package as outlined in the `README.md`.
  */
-export type { SearchcraftConfig };
-export { searchcraftStore };
-
-export {
-  parseCustomStyles,
-  serializeStyles,
-} from './utils';
-
-export type { Components, JSX } from './components';
 
 /**
  * The consumer-facing `Searchcraft` class.
@@ -36,4 +27,12 @@ export class Searchcraft extends SearchcraftCore {
 /**
  * Exports the shared types that all SDKs need
  */
+export {
+  parseCustomStyles,
+  serializeStyles,
+} from './utils';
+export type { SearchcraftConfig };
+export { searchcraftStore };
+export type { Components, JSX } from './components';
+export { SearchcraftCore };
 export type * from '@searchcraft/core/dist/types/sdk-types';

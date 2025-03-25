@@ -10,7 +10,7 @@ The props used by the SearchcraftFilterPanel.
 
 ## Extends
 
-- `SearchcraftFilterPanel`
+- [`SearchcraftFilterPanel`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftFilterPanel.md)
 
 ## Properties
 
@@ -22,4 +22,4 @@ The items to filter.
 
 #### Inherited from
 
-`Components.SearchcraftFilterPanel.items`
+[`SearchcraftFilterPanel`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftFilterPanel.md).[`items`](/reference/sdk/js-vue/namespaces/Components/interfaces/SearchcraftFilterPanel.md#items)
