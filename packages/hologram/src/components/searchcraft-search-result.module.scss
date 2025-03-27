@@ -1,0 +1,15 @@
+@use "../typography.scss";
+
+.searchcraft-search-result {
+  @include typography.body();
+}
+
+.searchcraft-search-result-no-template {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.875rem;
+
+  & > p {
+    margin: 0;
+  }
+}

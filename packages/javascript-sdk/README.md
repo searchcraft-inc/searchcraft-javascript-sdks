@@ -29,7 +29,7 @@ Add the web components to your html. They should be placed with the rest of your
   ...
   <searchcraft-results-info /></searchcraft-results-info>
   ...
-  <searchcraft-base-search-results></searchcraft-base-search-results>
+  <searchcraft-search-results></searchcraft-search-results>
   ...
   <searchcraft-theme></searchcraft-theme>
   ...
@@ -66,7 +66,7 @@ When the DOM content is loaded:
 document.addEventListener('DOMContentLoaded', () => {
   const filterPanel = document.querySelector('searchcraft-filter-panel');
   const searchResults = document.querySelector(
-    'searchcraft-base-search-results',
+    'searchcraft-search-results',
   );
 
   filterPanel.items = filterPanelItems;

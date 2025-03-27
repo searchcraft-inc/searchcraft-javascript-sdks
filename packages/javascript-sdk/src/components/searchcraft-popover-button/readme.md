@@ -1,14 +1,43 @@
 # searchcraft-popover-button
 
-
-
-<!-- Auto Generated Below -->
-
-
-## Overview
-
 Renders a button which, when clicked, turns on popover visibility.
 
-----------------------------------------------
+## Import
 
-*Built with [StencilJS](https://stenciljs.com/)*
+```jsx
+// react
+import { SearchcraftPopoverButton } from "@searchcraft/react-sdk";
+
+// vue
+import { SearchcraftPopoverButton } from "@searchcraft/vue-sdk";
+```
+
+
+## Usage
+
+**JavaScript:**
+
+```html
+<searchcraft-popover-button>
+  Open popover
+</searchcraft-popover-button>
+```
+
+
+**React:**
+
+```jsx
+<SearchcraftPopoverButton>
+  Open popover
+</SearchcraftPopoverButton>
+```
+
+
+**Vue:**
+
+```jsx
+<SearchcraftPopoverButton>
+  Open popover
+</SearchcraftPopoverButton>
+```
+

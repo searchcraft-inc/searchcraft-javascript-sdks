@@ -4,121 +4,118 @@
   /**
    * Border radius of the input form element.
    */
-  --sc-input-border-radius: var(--sc-border-radius);
+  --sc-input-form-border-radius: var(--sc-border-radius);
   /**
    * Icon size of the "magnifying glass" icon rendered in the input form.
    */
-  --sc-input-search-icon-size: 20px;
+  --sc-input-form-search-icon-size: 20px;
   /**
    * Icon size of the `x` button rendered in the input form.
    */
-  --sc-input-clear-icon-size: 20px;
+  --sc-input-form-clear-icon-size: 20px;
   /**
    * Padding on the left side of the input form.
    */
-  --sc-input-padding-left: 44px;
+  --sc-input-form-padding-left: 44px;
   /**
    * Padding on the right side of the input form.
    */
-  --sc-input-padding-right: 44px;
+  --sc-input-form-padding-right: 44px;
 }
 
-.searchcraft-input-grid {
+.searchcraft-input-form-grid {
   display: grid;
   gap: 4px 8px;
 }
 
-.searchcraft-input-grid-buttonLeft {
+.searchcraft-input-form-grid-button-left {
   grid-template-rows: repeat(3, auto);
   grid-template-columns: auto 1fr;
 
-  & .searchcraft-input-button-wrapper {
+  & .searchcraft-input-form-button {
     grid-column: 1 / span 1;
     grid-row: 2 / span 1;
   }
 
-  & .searchcraft-input-label-wrapper {
+  & .searchcraft-input-form-label {
     grid-column: 2 / span 1;
     grid-row: 1 / span 1;
   }
 
-  & .searchcraft-input-error-wrapper {
+  & .searchcraft-input-form-error-message {
     grid-column: 2 / span 1;
     grid-row: 3 / span 1;
   }
 
-  & .searchcraft-input-wrapper {
+  & .searchcraft-input-form-input-wrapper {
     grid-column: 2 / span 1;
     grid-row: 2 / span 1;
   }
 }
 
-.searchcraft-input-grid-buttonRight {
+.searchcraft-input-form-grid-button-right {
   grid-template-rows: repeat(3, auto);
   grid-template-columns: 1fr auto;
 
-  & .searchcraft-input-button-wrapper {
+  & .searchcraft-input-form-button {
     grid-column: 2 / span 1;
     grid-row: 2 / span 1;
   }
 
-  & .searchcraft-input-label-wrapper {
+  & .searchcraft-input-form-label {
     grid-column: 1 / span 1;
     grid-row: 1 / span 1;
   }
 
-  & .searchcraft-input-error-wrapper {
+  & .searchcraft-input-form-error-message {
     grid-column: 1 / span 1;
     grid-row: 3 / span 1;
   }
 
-  & .searchcraft-input-wrapper {
+  & .searchcraft-input-form-input-wrapper {
     grid-column: 1 / span 1;
     grid-row: 2 / span 1;
   }
 }
 
-.searchcraft-input-grid-buttonNone {
+.searchcraft-input-form-grid-button-none {
   grid-template-rows: repeat(3, auto);
   grid-template-columns: auto;
 
-  & .searchcraft-input-button-wrapper {
+  & .searchcraft-input-form-button {
     display: none;
   }
 
-  & .searchcraft-input-label-wrapper {
+  & .searchcraft-input-form-label {
     grid-column: 1 / span 1;
     grid-row: 1 / span 1;
   }
 
-  & .searchcraft-input-error-wrapper {
+  & .searchcraft-input-form-error-message {
     grid-column: 1 / span 1;
     grid-row: 3 / span 1;
   }
 
-  & .searchcraft-input-wrapper {
+  & .searchcraft-input-form-input-wrapper {
     grid-column: 1 / span 1;
     grid-row: 2 / span 1;
   }
 }
 
-.searchcraft-input-wrapper {
-  position: relative;
+.searchcraft-input-form-input-wrapper {
   display: flex;
+  position: relative;
 }
 
-.searchcraft-input {
+.searchcraft-input-form-input {
   @include typography.body();
   background-color: var(--sc-surface-neutral-secondary);
-  border-radius: var(--sc-input-border-radius);
+  border-radius: var(--sc-input-form-border-radius);
   border: none;
   color: var(--sc-content-neutral-primary);
-  outline: none;
-  padding-left: var(--sc-input-padding-left);
-  padding-right: var(--sc-input-padding-right);
-  padding-top: 12px;
-  padding-bottom: 12px;
   flex: 1;
+  outline: none;
+  padding: 12px var(--sc-input-form-padding-left);
 
   &::placeholder {
     color: var(--sc-content-disabled);
@@ -133,7 +130,7 @@
   }
 }
 
-.searchcraft-input.error {
+.searchcraft-input-form-error {
   color: var(--sc-content-danger);
   outline: var(--sc-border-danger) solid 2px;
 
@@ -142,44 +139,44 @@
   }
 }
 
-.searchcraft-input-search-icon-wrapper {
+.searchcraft-input-form-input-icon {
   align-items: center;
-  justify-content: center;
+  bottom: 0;
   display: flex;
+  justify-content: center;
+  left: 0;
   position: absolute;
   pointer-events: none;
-  bottom: 0;
-  left: 0;
   top: 0;
-  width: var(--sc-input-padding-left);
+  width: var(--sc-input-form-padding-left);
 }
 
-.searchcraft-input-search-icon {
+.searchcraft-input-form-input-search-icon {
   color: var(--sc-content-neutral-secondary);
   fill: none;
-  height: var(--sc-input-search-icon-size);
+  height: var(--sc-input-form-search-icon-size);
   pointer-events: none;
-  width: var(--sc-input-search-icon-size);
+  width: var(--sc-input-form-search-icon-size);
 }
 
-.searchcraft-input-clear-button {
+.searchcraft-input-form-clear-button {
   all: unset;
   align-items: center;
-  justify-content: center;
+  bottom: 0;
+  border: none;
   cursor: pointer;
   display: flex;
-  position: absolute;
-  border: none;
+  justify-content: center;
   outline: none;
-  bottom: 0;
+  position: absolute;
   right: 0;
   top: 0;
-  width: var(--sc-input-padding-right);
+  width: var(--sc-input-form-padding-right);
 }
 
-.searchcraft-input-clear-icon {
+.searchcraft-input-form-clear-button-icon {
   color: var(--sc-content-brand);
   fill: none;
-  height: var(--sc-input-clear-icon-size);
-  width: var(--sc-input-clear-icon-size);
+  height: var(--sc-input-form-clear-icon-size);
+  width: var(--sc-input-form-clear-icon-size);
 }

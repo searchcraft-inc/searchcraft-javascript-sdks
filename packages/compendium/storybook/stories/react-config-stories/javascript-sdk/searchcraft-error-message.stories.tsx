@@ -1,28 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import WebComponentWrapper from '@utils/WebComponentWrapper';
-import { Searchcraft, type Components } from '@searchcraft/javascript-sdk';
 import { useEffect } from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
 
-const componentName = 'searchcraft-error-message';
+import { Searchcraft, type Components } from '@searchcraft/javascript-sdk';
 
 const componentMeta: Meta = {
   title: 'Javascript SDK/searchcraft-error-message',
-  argTypes: {
-    errorMessage: {
-      control: 'text',
-      description: 'The error message text to display.',
-    },
-    theme: {
-      control: 'select',
-      options: ['light', 'dark'],
-      description: 'The theme of the error message (light or dark).',
-    },
-  },
 };
 
-const defaultProps: Components.SearchcraftErrorMessage = {
-  errorMessage: 'An error occurred while processing your request.',
-};
+const defaultProps = {};
 
 export const Default: StoryObj<Components.SearchcraftErrorMessage> = {
   decorators: [
@@ -37,10 +22,10 @@ export const Default: StoryObj<Components.SearchcraftErrorMessage> = {
       return <Story />;
     },
   ],
-  render: (args) => (
+  render: () => (
     <>
       <searchcraft-theme />
-      <WebComponentWrapper args={args} componentName={componentName} />
+      <searchcraft-error-message />
     </>
   ),
   args: defaultProps,

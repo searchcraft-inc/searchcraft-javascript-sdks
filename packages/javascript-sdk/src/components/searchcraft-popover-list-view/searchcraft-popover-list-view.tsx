@@ -12,11 +12,12 @@ import { searchcraftStore } from '@store';
  * This web component is designed to display a list of results within a popover interface.
  * It is consumed within the `searchcraft-popover-form` component.
  *
- * ## Usage
+ * @js-example
  * ```html
- * <!-- index.html -->
  * <searchcraft-popover-list-view />
  * ```
+ *
+ * @internal
  */
 @Component({
   tag: 'searchcraft-popover-list-view',

@@ -1,8 +1,8 @@
 {
   "name": "@searchcraft/react-sdk",
   "private": false,
-  "author": "Searchcraft",
-  "version": "0.9.7",
+  "author": "Searchcraft Inc.",
+  "version": "0.10.0",
   "description": "Searchcraft React SDK.",
   "type": "module",
   "license": "Apache-2.0",
@@ -10,7 +10,7 @@
     "searchcraft"
   ],
   "scripts": {
-    "build": "tsc && vite build && yarn docs",
+    "build": "rm -rf dist && vite build --config vite.client.config.ts && vite build --config vite.server.config.ts",
     "docs": "typedoc --options typedoc.json",
     "lint": "biome format lint ./src",
     "test": "vitest --watch=false",
@@ -24,20 +24,24 @@
     "node": ">=18.0.0",
     "npm": ">=10.0.0"
   },
-  "main": "dist/index.js",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/client/index.js",
+  "module": "dist/client/index.js",
+  "types": "dist/client/index.d.ts",
   "files": [
     "dist/**/*"
   ],
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "import": "./dist/client/index.js",
+      "types": "./dist/client/index.d.ts"
+    },
+    "./server": {
+      "import": "./dist/server/index.js",
+      "types": "./dist/server/index.d.ts"
     }
   },
   "dependencies": {
-    "@searchcraft/javascript-sdk": "^0.9.7",
+    "@searchcraft/javascript-sdk": "^0.10.0",
     "classnames": "^2.3.2"
   },
   "peerDependencies": {

@@ -1,17 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import WebComponentWrapper from '@utils/WebComponentWrapper';
-import { Searchcraft, type Components } from '@searchcraft/javascript-sdk';
 import { useEffect } from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
 
-const componentName = 'searchcraft-input-label';
+import { Searchcraft, type Components } from '@searchcraft/javascript-sdk';
 
 const componentMeta: Meta = {
   title: 'Javascript SDK/searchcraft-input-label',
   argTypes: {
-    inputLabelClassName: {
-      control: 'text',
-      description: 'Custom class name for the label.',
-    },
     label: {
       control: 'text',
       description: 'The text content for the input label.',
@@ -40,7 +34,7 @@ export const Default: StoryObj<Components.SearchcraftInputLabel> = {
   render: (args) => (
     <>
       <searchcraft-theme />
-      <WebComponentWrapper args={args} componentName={componentName} />
+      <searchcraft-input-label {...args} />
     </>
   ),
   args: defaultProps,

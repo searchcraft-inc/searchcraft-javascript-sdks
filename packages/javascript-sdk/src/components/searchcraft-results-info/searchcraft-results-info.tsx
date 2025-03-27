@@ -1,24 +1,53 @@
 import { Component, h, State, Prop } from '@stencil/core';
-import classNames from 'classnames';
+
+import type { ResultsInfoTemplate } from '@searchcraft/core';
 
 import { searchcraftStore } from '@store';
 
-import { formatNumberWithCommas, parseCustomStyles } from '@utils';
+import { formatNumberWithCommas, html } from '@utils';
 
 /**
  * This web component is designed to display the number of results returned from a search query.
  *
- * ## Usage
+ * @import
+ * ```jsx
+ * // react
+ * import { SearchcraftResultsInfo } from "@searchcraft/react-sdk";
+ *
+ * // vue
+ * import { SearchcraftResultsInfo } from "@searchcraft/vue-sdk";
+ * ```
+ *
+ * @js-example
  * ```html
  * <!-- index.html -->
- * <script>
- *  const resultsInfo = document.querySelector('searchcraft-results-info');
- *  resultsInfo.customFormatter = (range, count, responseTime) =>
- *    `${range[0]}-${range[1]} of ${count} results in ${responseTime}ms`;
- * </script>
- *
  * <searchcraft-results-info />
  * ```
+ *
+ * ```js
+ * // index.js
+ * const resultsInfo = document.querySelector('searchcraft-results-info');
+ *
+ * resultsInfo.template = (info, { html }) => html`
+ *   ${info.range[0]}-${info.range[1]} of ${info.count} results in ${info.responseTime}ms
+ * `;
+ * ```
+ *
+ * @react-example
+ * ```jsx
+ * <SearchcraftResultsInfo
+ *   template={(info, { html }) => html`
+ *     ${info.range[0]}-${info.range[1]} of ${info.count} results in ${info.responseTime}ms
+ *   `}
+ * />
+ *
+ * @vue-example
+ * ```jsx
+ * <SearchcraftResultsInfo
+ *   :template={(info, { html }) => html`
+ *     ${info.range[0]}-${info.range[1]} of ${info.count} results in ${info.responseTime}ms
+ *   `}
+ * />
  */
 @Component({
   tag: 'searchcraft-results-info',
@@ -26,23 +55,16 @@ import { formatNumberWithCommas, parseCustomStyles } from '@utils';
 })
 export class SearchcraftResultsInfo {
   /**
-   * The custom formatter for the resulting string.
+   * A callback function responsible for rendering the results info.
    *
    * @example
    * ```ts
-   *  resultsInfo.customFormatter = (range, count, responseTime) =>
-   *    `${range[0]}-${range[1]} of ${count} results in ${responseTime}ms`;
+   *  resultsInfo.template = html`
+   *    ${range[0]}-${range[1]} of ${count} results in ${responseTime}ms
+   *  `;
    * ```
    */
-  @Prop() customFormatter?: (
-    range: [string, string],
-    count: string,
-    responseTime: string,
-  ) => void;
-  /**
-   * The custom styles object.
-   */
-  @Prop() customStyles?: string;
+  @Prop() template?: ResultsInfoTemplate;
 
   // store vars
   @State() searchTerm;
@@ -94,22 +116,17 @@ export class SearchcraftResultsInfo {
     }
 
     return (
-      <p
-        class={classNames(
-          'searchcraft-results-info',
-          parseCustomStyles(this.customStyles || {}),
-        )}
-      >
-        {this.customFormatter
-          ? this.customFormatter(
-              [
-                formatNumberWithCommas(this.range[0]),
-                formatNumberWithCommas(this.range[1]),
-              ],
-              formatNumberWithCommas(this.count),
-              this.responseTime,
+      <p class='searchcraft-results-info'>
+        {typeof this.template !== 'undefined'
+          ? this.template(
+              {
+                range: [Number(this.range[0]), Number(this.range[1])],
+                count: this.count,
+                responseTime: this.responseTime,
+              },
+              { html },
             )
-          : `${this.count} results found in ${this.responseTime}ms`}
+          : `${formatNumberWithCommas(this.count)} results found in ${this.responseTime}ms`}
       </p>
     );
   }

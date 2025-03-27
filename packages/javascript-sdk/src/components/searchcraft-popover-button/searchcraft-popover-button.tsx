@@ -3,6 +3,36 @@ import { Component, h } from '@stencil/core';
 
 /**
  * Renders a button which, when clicked, turns on popover visibility.
+ *
+ * @import
+ * ```jsx
+ * // react
+ * import { SearchcraftPopoverButton } from "@searchcraft/react-sdk";
+ *
+ * // vue
+ * import { SearchcraftPopoverButton } from "@searchcraft/vue-sdk";
+ * ```
+ *
+ * @js-example
+ * ```html
+ * <searchcraft-popover-button>
+ *   Open popover
+ * </searchcraft-popover-button>
+ * ```
+ *
+ * @react-example
+ * ```jsx
+ * <SearchcraftPopoverButton>
+ *   Open popover
+ * </SearchcraftPopoverButton>
+ * ```
+ *
+ * @vue-example
+ * ```jsx
+ * <SearchcraftPopoverButton>
+ *   Open popover
+ * </SearchcraftPopoverButton>
+ * ```
  */
 @Component({
   tag: 'searchcraft-popover-button',
@@ -15,7 +45,11 @@ export class SearchcraftPopoverButton {
 
   render() {
     return (
-      <button type='button' onClick={this.handleOnClick.bind(this)}>
+      <button
+        class='searchcraft-popover-button'
+        onClick={this.handleOnClick.bind(this)}
+        type='button'
+      >
         <slot />
       </button>
     );

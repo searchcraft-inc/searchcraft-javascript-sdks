@@ -1,41 +1,37 @@
 # searchcraft-pagination
 
+This web component is designed to facilitate pagination of search results. Once a query is submitted, calculates the number for pages.
 
+## Import
 
-<!-- Auto Generated Below -->
+```jsx
+// react
+import { SearchcraftPagination } from "@searchcraft/react-sdk";
 
+// vue
+import { SearchcraftPagination } from "@searchcraft/vue-sdk";
+```
 
-## Overview
-
-This web component is designed to facilitate pagination of search results.
-Once a query is submitted, calculates the number for pages.
 
 ## Usage
+
+**JavaScript:**
+
 ```html
-<!-- index.html -->
 <searchcraft-pagination />
 ```
 
-## Properties
 
-| Property       | Attribute       | Description               | Type                  | Default     |
-| -------------- | --------------- | ------------------------- | --------------------- | ----------- |
-| `customStyles` | `custom-styles` | The custom styles object. | `string \| undefined` | `undefined` |
+**React:**
 
-
-## Dependencies
-
-### Depends on
-
-- [searchcraft-button](../searchcraft-button)
-
-### Graph
-```mermaid
-graph TD;
-  searchcraft-pagination --> searchcraft-button
-  style searchcraft-pagination fill:#f9f,stroke:#333,stroke-width:4px
+```jsx
+<SearchcraftPagination />
 ```
 
-----------------------------------------------
 
-*Built with [StencilJS](https://stenciljs.com/)*
+**Vue:**
+
+```jsx
+<SearchcraftPagination />
+```
+

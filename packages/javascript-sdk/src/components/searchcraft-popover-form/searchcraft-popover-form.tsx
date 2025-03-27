@@ -11,26 +11,38 @@ import { searchcraftStore } from '@store';
 /**
  * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field, or when a popover-button is pressed.
  *
- * ## Usage
+ * @import
+ * ```jsx
+ * // react
+ * import { SearchcraftPopoverForm } from "@searchcraft/react-sdk";
+ *
+ * // vue
+ * import { SearchcraftPopoverForm } from "@searchcraft/vue-sdk";
+ * ```
+ *
+ * @js-example
  * ```html
  * <!-- index.html -->
- * <searchcraft-popover-form type="fullscreen" />
+ * <searchcraft-popover-form type="inline" />
  * ```
  *
  * ```js
  * // index.js
  * const popoverForm = document.querySelector('searchcraft-popover-form');
  *
- * popoverForm.popoverResultMappings = {
- *  containerHref: {
- *   fieldNames: [
- *    {
- *      fieldName: 'canonical_link',
- *      dataType: 'text',
- *    },
- *  ],
- *  };
+ * popoverForm.popoverResultMappings = {};
  * ```
+ *
+ * @react-example
+ * ```jsx
+ * <SearchcraftPopoverForm type="inline" popoverResultMappings={[]} />
+ * ```
+ *
+ * @vue-example
+ * ```jsx
+ * <SearchcraftPopoverForm type="inline" :popoverResultMappings="[]"" />
+ * ```
+ *
  */
 @Component({
   tag: 'searchcraft-popover-form',
@@ -39,12 +51,11 @@ import { searchcraftStore } from '@store';
 export class SearchcraftPopoverForm {
   /**
    * The type of popover form to render.
-   *
    * - `inline` - Renders inline with the rest of the content on the page. The search results pop over the page content.
    * - `fullscreen` - Renders in fullscreen view. Used together with the `searchcraft-popover-button` component.
    * - `modal` - Renders in a modal view. Used together with the `searchcraft-popover-button` component.
    */
-  @Prop() type: 'inline' | 'fullscreen' | 'modal' = 'inline';
+  @Prop() type?: 'inline' | 'fullscreen' | 'modal' = 'inline';
   /**
    * Formats the content rendered for each result.
    */
@@ -52,11 +63,11 @@ export class SearchcraftPopoverForm {
   /**
    * The hotkey that activates the popover.
    */
-  @Prop() hotkey = 'k';
+  @Prop() hotkey?: string = 'k';
   /**
    * The hotkey modifier that activates the popover. Used together with the `hotkey` prop.
    */
-  @Prop() hotkeyModifier: 'ctrl' | 'meta' | 'alt' | 'option' = 'meta';
+  @Prop() hotkeyModifier?: 'ctrl' | 'meta' | 'alt' | 'option' = 'meta';
 
   @State() isPopoverVisibleInState = false;
   @State() unsubscribe: (() => void) | undefined;
@@ -204,7 +215,7 @@ export class SearchcraftPopoverForm {
       event.preventDefault();
       if (this.type === 'inline' && !this.isPopoverVisibleInState) {
         const hostElementInput = this.hostElement.querySelector(
-          '.searchcraft-input',
+          '.searchcraft-input-form-input',
         ) as HTMLInputElement | undefined;
         hostElementInput?.focus();
       } else {
@@ -228,7 +239,7 @@ export class SearchcraftPopoverForm {
   focusOnNextListItem(direction: 'ArrowDown' | 'ArrowUp') {
     const listItems = Array.from(
       document.querySelectorAll<HTMLAnchorElement>(
-        'a.searchcraft-popover-list-item',
+        'a.searchcraft-popover-form-list-item',
       ),
     ).filter((el) => !el.hasAttribute('disabled') && el.offsetParent !== null);
 
@@ -242,7 +253,7 @@ export class SearchcraftPopoverForm {
       if (currentIndex >= 1) {
         listItems[currentIndex - 1]?.focus();
       } else {
-        const input = document.querySelector('.searchcraft-input') as
+        const input = document.querySelector('.searchcraft-input-form-input') as
           | HTMLInputElement
           | undefined;
 
@@ -281,8 +292,8 @@ export class SearchcraftPopoverForm {
           onInputFocus={this.handleInputFocus.bind(this)}
         />
         {isListViewVisible && (
-          <div class='searchcraft-popover-inline-wrapper-outer'>
-            <div class='searchcraft-popover-inline-wrapper-inner'>
+          <div class='searchcraft-popover-form-inline-wrapper-outer'>
+            <div class='searchcraft-popover-form-inline-wrapper-inner'>
               <searchcraft-popover-list-view
                 popoverResultMappings={this.popoverResultMappings}
                 searchClientResponseItems={this.searchClientResponseItems}
@@ -312,14 +323,14 @@ export class SearchcraftPopoverForm {
           />
           <div class='searchcraft-popover-form-modal-inner'>
             <div class={popoverFormClassNames}>
-              <div class='searchcraft-popover-form-input-wrapper'>
+              <div class='searchcraft-popover-form-input-wrapper searchcraft-popover-form-modal-input-wrapper'>
                 <searchcraft-input-form
                   onInputFocus={this.handleInputFocus.bind(this)}
                   onInputInit={this.handleInputInit.bind(this)}
                 />
                 <button
                   type='button'
-                  class='searchcraft-popover-form-cancel-button'
+                  class='searchcraft-popover-form-button searchcraft-popover-form-modal-button'
                   onClick={this.handleCancelButtonClick.bind(this)}
                 >
                   Cancel
@@ -346,14 +357,14 @@ export class SearchcraftPopoverForm {
       return (
         <div class='searchcraft-popover-form-fullscreen'>
           <div class='searchcraft-popover-form'>
-            <div class='searchcraft-popover-form-input-wrapper'>
+            <div class='searchcraft-popover-form-input-wrapper searchcraft-popover-form-fullscreen-input-wrapper'>
               <searchcraft-input-form
                 onInputFocus={this.handleInputFocus.bind(this)}
                 onInputInit={this.handleInputInit.bind(this)}
               />
               <button
                 type='button'
-                class='searchcraft-popover-form-cancel-button'
+                class='searchcraft-popover-form-button searchcraft-popover-form-fullscreen-button'
                 onClick={this.handleCancelButtonClick.bind(this)}
               >
                 Cancel

@@ -1,17 +1,32 @@
 import { searchcraftStore } from '@store';
-import { Component, h, State, Prop } from '@stencil/core';
+import { Component, h, State } from '@stencil/core';
 import classNames from 'classnames';
 
-import { parseCustomStyles } from '@utils';
-
 /**
- * This web component is designed to facilitate pagination of search results.
- * Once a query is submitted, calculates the number for pages.
+ * This web component is designed to facilitate pagination of search results. Once a query is submitted, calculates the number for pages.
  *
- * ## Usage
+ * @import
+ * ```jsx
+ * // react
+ * import { SearchcraftPagination } from "@searchcraft/react-sdk";
+ *
+ * // vue
+ * import { SearchcraftPagination } from "@searchcraft/vue-sdk";
+ * ```
+ *
+ * @js-example
  * ```html
- * <!-- index.html -->
  * <searchcraft-pagination />
+ * ```
+ *
+ * @react-example
+ * ```jsx
+ * <SearchcraftPagination />
+ * ```
+ *
+ * @vue-example
+ * ```jsx
+ * <SearchcraftPagination />
  * ```
  */
 @Component({
@@ -19,11 +34,6 @@ import { parseCustomStyles } from '@utils';
   shadow: false,
 })
 export class SearchcraftPagination {
-  /**
-   * The custom styles object.
-   */
-  @Prop() customStyles?: string;
-
   // store vars
   @State() searchTerm;
   @State() searchResultsPerPage;
@@ -173,12 +183,7 @@ export class SearchcraftPagination {
     }
 
     return (
-      <div
-        class={classNames(
-          'searchcraft-pagination',
-          parseCustomStyles(this.customStyles || {}),
-        )}
-      >
+      <div class='searchcraft-pagination'>
         <div class='searchcraft-pagination-control'>
           <searchcraft-button
             disabled={this.searchResultsPage === 1}

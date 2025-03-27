@@ -10,9 +10,9 @@ import { getMillis } from '@utils';
 import classNames from 'classnames';
 
 /**
- * This web component is designed to allow users to select a value from a range defined by a minimum and maximum value.
- * The component renders a slider interface, which can be used to visually choose a value between two boundaries.
- * It is consumed by the `searchcraft-filter-panel` component.
+ * This web component is designed to allow users to select a value from a range defined by a minimum and maximum value. The component renders a slider interface, which can be used to visually choose a value between two boundaries.
+ *
+ * @internal
  */
 @Component({
   tag: 'searchcraft-slider',
@@ -102,8 +102,8 @@ export class SearchcraftSlider {
         : new Date(this.endValue).getFullYear();
 
     return (
-      <div class='searchcraft-slider-container'>
-        <div class='searchcraft-slider-range-container'>
+      <div class='searchcraft-slider'>
+        <div class='searchcraft-slider-range'>
           <div
             class='searchcraft-slider-active-range'
             style={{
@@ -138,9 +138,9 @@ export class SearchcraftSlider {
             value={this.endValue}
           />
         </div>
-        <div class='searchcraft-slider-label-container'>
-          <span class='searchcraft-slider-label'>{startLabel}</span>
-          <span class='searchcraft-slider-label'>{endLabel}</span>
+        <div class='searchcraft-slider-label'>
+          <span class='searchcraft-slider-start-label'>{startLabel}</span>
+          <span class='searchcraft-slider-end-label'>{endLabel}</span>
         </div>
       </div>
     );

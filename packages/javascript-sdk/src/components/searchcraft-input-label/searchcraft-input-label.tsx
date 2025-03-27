@@ -4,11 +4,12 @@ import classNames from 'classnames';
 /**
  * This web component serves as the input label for the searchcraft-input-form component.
  *
- * ## Usage
+ * @js-example
  * ```html
- * <!-- index.html -->
  * <searchcraft-input-label label="Search" />
  * ```
+ *
+ * @internal
  */
 @Component({
   tag: 'searchcraft-input-label',

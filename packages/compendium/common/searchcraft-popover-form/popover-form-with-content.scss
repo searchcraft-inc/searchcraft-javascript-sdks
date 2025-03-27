@@ -1,0 +1,31 @@
+@use "../../../hologram/src/typography.scss";
+
+.searchcraft-popover-form-with-content {
+  @include typography.body();
+}
+
+.searchcraft-popover-button {
+  @include typography.body();
+  background-color: var(--sc-surface-brand-primary);
+  border: 2px solid transparent;
+  border-radius: var(--sc-border-radius);
+  color: var(--sc-content-brand-on-primary);
+  cursor: pointer;
+  display: flex;
+  font-weight: var(--sc-font-bold);
+  gap: 4px;
+  padding: 12px;
+  position: relative;
+
+  &:hover {
+    background-color: var(--sc-surface-brand-primary-hover);
+  }
+
+  &:focus {
+    border-color: var(--sc-border-primary);
+  }
+
+  &:active {
+    background-color: var(--sc-surface-brand-primary-active);
+  }
+}

@@ -1,16 +1,32 @@
 import { searchcraftStore } from '@store';
 import { Component, h, State, Prop } from '@stencil/core';
-import classNames from 'classnames';
-
-import { parseCustomStyles } from '@utils';
 
 /**
  * This web component is designed to choose the number of search results displayed.
  *
- * ## Usage
+ * @import
+ * ```jsx
+ * // react
+ * import { SearchcraftSearchResultsPerPage } from "@searchcraft/react-sdk";
+ *
+ * // vue
+ * import { SearchcraftSearchResultsPerPage } from "@searchcraft/vue-sdk";
+ * ```
+ *
+ * @js-example
  * ```html
  * <!-- index.html -->
  * <searchcraft-search-results-per-page increment="20" />
+ * ```
+ *
+ * @react-example
+ * ```jsx
+ * <SearchcraftSearchResultsPerPage increment={20} />
+ * ```
+ *
+ * @vue-example
+ * ```jsx
+ * <SearchcraftSearchResultsPerPage increment="20" />
  * ```
  */
 @Component({
@@ -23,10 +39,6 @@ export class SearchcraftSearchResultsPerPage {
    * The base value is defined by the `searchResultsPerPage` option in the configuration.
    */
   @Prop() increment: string | number = 20;
-  /**
-   * The custom styles object.
-   */
-  @Prop() customStyles?: string;
 
   // store vars
   @State() searchTerm;
@@ -77,12 +89,7 @@ export class SearchcraftSearchResultsPerPage {
     }
 
     return (
-      <div
-        class={classNames(
-          'searchcraft-search-results-per-page',
-          parseCustomStyles(this.customStyles || {}),
-        )}
-      >
+      <div class='searchcraft-search-results-per-page'>
         <div class='searchcraft-search-results-per-page-select'>
           <label
             class='searchcraft-search-results-per-page-select-label'

@@ -1,29 +1,37 @@
 # searchcraft-theme
 
+This web component adds Searchcraft's built-in css theme to your page. It does not render anything visible, its only function is to manage the css styles on the page.'
 
+## Import
 
-<!-- Auto Generated Below -->
+```jsx
+// react
+import { SearchcraftTheme } from "@searchcraft/react-sdk";
 
-
-## Overview
-
-This web component adds Searchcraft's built-in css theme to your page's <head> tag.
-It does not render anything visible, its only function is to manage the css styles on the page.
-
-## Usage
-```html
-<!-- index.html -->
-<searchcraft-theme theme="light" custom-theme="{}" />
+// vue
+import { SearchcraftTheme } from "@searchcraft/vue-sdk";
 ```
 
-## Properties
 
-| Property      | Attribute      | Description                            | Type                  | Default     |
-| ------------- | -------------- | -------------------------------------- | --------------------- | ----------- |
-| `customTheme` | `custom-theme` | The custom theme configuration object. | `string \| undefined` | `undefined` |
-| `theme`       | `theme`        | The name of the theme.                 | `string \| undefined` | `undefined` |
+## Usage
+
+**JavaScript:**
+
+```html
+<searchcraft-theme />
+```
 
 
-----------------------------------------------
+**React:**
 
-*Built with [StencilJS](https://stenciljs.com/)*
+```jsx
+<SearchcraftTheme />
+```
+
+
+**Vue:**
+
+```jsx
+<SearchcraftTheme />
+```
+

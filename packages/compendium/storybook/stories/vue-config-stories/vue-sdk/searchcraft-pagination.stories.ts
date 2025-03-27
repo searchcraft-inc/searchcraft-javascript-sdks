@@ -1,57 +1,16 @@
+import type { Meta, StoryFn } from '@storybook/vue3';
+
 import {
   SearchcraftInputForm,
   SearchcraftResultsInfo,
   SearchcraftTheme,
-  SearchcraftBaseSearchResults,
+  SearchcraftSearchResults,
   SearchcraftPagination,
   SearchcraftSearchResultsPerPage,
   Searchcraft,
 } from '@searchcraft/vue-sdk';
 
-import type { Meta, StoryFn } from '@storybook/vue3';
-
-import type { SearchResultMappings } from '@searchcraft/javascript-sdk';
-
-const searchResultMappings: SearchResultMappings = {
-  containerHref: {
-    fieldNames: [
-      {
-        fieldName: 'canonical_link',
-        dataType: 'text',
-      },
-    ],
-  },
-  footer: {
-    fieldNames: [
-      {
-        fieldName: 'date_published',
-        dataType: 'date',
-      },
-      {
-        fieldName: 'author_name',
-        dataType: 'text',
-      },
-    ],
-    delimiter: ' • ',
-  },
-  imageSource: {
-    fieldNames: [
-      {
-        fieldName: 'medium_image',
-        dataType: 'text',
-      },
-    ],
-  },
-  body: {
-    fieldNames: [{ fieldName: 'sub_headline', dataType: 'text' }],
-  },
-  title: {
-    fieldNames: [{ fieldName: 'headline', dataType: 'text' }],
-  },
-};
-
-const customFormatter = (range, count, responseTime) =>
-  `${range[0]}-${range[1]} of ${count} results in ${responseTime}ms`;
+import { searchResultTemplate } from '@common/index.js';
 
 export default {
   title: 'Vue SDK/searchcraft-pagination',
@@ -66,7 +25,7 @@ export const Default: StoryFn = () => ({
     SearchcraftInputForm,
     SearchcraftResultsInfo,
     SearchcraftTheme,
-    SearchcraftBaseSearchResults,
+    SearchcraftSearchResults,
     SearchcraftPagination,
     SearchcraftSearchResultsPerPage,
   },
@@ -76,22 +35,30 @@ export const Default: StoryFn = () => ({
       endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
       index: [import.meta.env.VITE_RUNEGARD_INDEX],
     });
-    return { customFormatter, searchResultMappings };
+    return { searchResultTemplate };
   },
   template: `
     <div>
       <SearchcraftTheme />
-      <SearchcraftResultsInfo
-        :customFormatter="customFormatter"
-      />
-      <SearchcraftPagination />
-      <SearchcraftSearchResultsPerPage />
-      <SearchcraftInputForm />
-      <SearchcraftBaseSearchResults
-        v-bind="{
-          searchResultMappings: searchResultMappings
-        }"
-      />
+      <div style="margin-bottom: 20px;">
+        <SearchcraftInputForm />
+      </div>
+      <div style="margin-bottom: 20px;">
+        <SearchcraftResultsInfo />
+      </div>
+        <div style="margin-bottom: 20px;">
+        <SearchcraftSearchResults
+          v-bind="{
+            template: searchResultTemplate
+          }"
+        />
+      </div>
+      <div
+        style="align-items: center; display: flex; justify-content: space-between; gap: 16px;"
+      >
+        <SearchcraftSearchResultsPerPage />
+        <SearchcraftPagination />
+      </div>
     </div>
   `,
 });

@@ -6,9 +6,9 @@ import {
   type DateRangeFilterItem,
   type ExactMatchToggleFilterItem,
   type FacetsFilterItem,
-  type FilterItem,
   type MostRecentToggleFilterItem,
   type NumericFilterItem,
+  type SearchcraftFilterPanelProps,
 } from '@searchcraft/vue-sdk';
 import type { Meta, StoryFn } from '@storybook/vue3';
 
@@ -17,15 +17,6 @@ export default {
   components: { SearchcraftInputForm, SearchcraftFilterPanel },
   argTypes: {},
 } as Meta;
-
-type ComponentProps = {
-  items: FilterItem[];
-  clearInput: () => void;
-  customStylesForInput: string;
-  inputCaptionValue: string;
-  labelForInput: string;
-  placeholderValue: string;
-};
 
 const today = new Date();
 const pastDate = new Date(today);
@@ -78,7 +69,7 @@ const facetItem: FacetsFilterItem = {
   },
 };
 
-const defaultProps: ComponentProps = {
+const defaultProps: SearchcraftFilterPanelProps = {
   items: [
     exactMatchItem,
     mostRecentItem,
@@ -86,11 +77,6 @@ const defaultProps: ComponentProps = {
     numericItem,
     facetItem,
   ],
-  clearInput: () => {},
-  customStylesForInput: '{}',
-  inputCaptionValue: 'Search',
-  labelForInput: 'Search for something:',
-  placeholderValue: 'Search here...',
 };
 
 export const Default: StoryFn = (args) => ({
@@ -108,22 +94,14 @@ export const Default: StoryFn = (args) => ({
     return { args };
   },
   template: `
-    <div style="padding: 10px 20px;">
+    <div>
       <SearchcraftTheme />
-      <SearchcraftInputForm
-        autoSearch
-        buttonLabel=""
-        buttonPlacement="none"
-        :customStyles="args.customStylesForInput"
-        debounceDelay="0"
-        searchTerm=""
-        inputLabel=""
-        :config="config"
-        :placeholderValue="args.placeholderValue || ''"
-      />
-      <div style="padding-top: 20px;">
-        <SearchcraftFilterPanel :items="args.items" />
+      <div style="margin-bottom: 20px;">
+        <SearchcraftInputForm
+          autoSearch
+        />
       </div>
+      <SearchcraftFilterPanel :items="args.items" />
     </div>
   `,
 });

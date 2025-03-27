@@ -2,15 +2,17 @@
   "compilerOptions": {
     "baseUrl": "./",
     "jsx": "react-jsx",
-    "moduleResolution": "node10",
+    "module": "Node16",
+    "moduleResolution": "node16",
     "types": ["vite/client"],
     "paths": {
       "@stories/*": ["stories/*"],
       "@utils": ["storybook/utils/index.ts"],
-      "@utils/*": ["storybook/utils/*"]
+      "@utils/*": ["storybook/utils/*"],
+      "@common/*": ["../common/*"]
     }
   },
   "exclude": ["node_modules", "dist"],
   "extends": "../../../tsconfig.json",
-  "include": ["stories", "config", "utils"]
+  "include": ["stories", "config", "utils", "../common/**/*.ts"]
 }

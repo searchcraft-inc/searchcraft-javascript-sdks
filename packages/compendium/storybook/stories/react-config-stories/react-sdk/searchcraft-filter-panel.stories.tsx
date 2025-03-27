@@ -10,6 +10,7 @@ import {
   type FilterItem,
   type NumericFilterItem,
   type FacetsFilterItem,
+  type SearchcraftFilterPanelProps,
 } from '@searchcraft/react-sdk';
 
 import { useEffect } from 'react';
@@ -17,16 +18,6 @@ import { useEffect } from 'react';
 const componentMeta: Meta = {
   title: 'React SDK/searchcraft-filter-panel',
   argTypes: {},
-};
-
-type ComponentProps = {
-  items: FilterItem[];
-  clearInput: () => void;
-  config: string;
-  customStylesForInput: string;
-  inputCaptionValue: string;
-  labelForInput: string;
-  placeholderValue: string;
 };
 
 const today = new Date();
@@ -37,7 +28,7 @@ const exactMatchItem: ExactMatchToggleFilterItem = {
   type: 'exactMatchToggle',
   label: 'Exact Match',
   options: {
-    subLabel: 'Specify to use exact matching or fuzzy matching',
+    subLabel: 'Specify to use exact matching or fuzzy matching.',
   },
 };
 
@@ -80,7 +71,7 @@ const facetItem: FacetsFilterItem = {
   },
 };
 
-const defaultProps: ComponentProps = {
+const defaultProps: SearchcraftFilterPanelProps = {
   items: [
     exactMatchItem,
     mostRecentItem,
@@ -88,19 +79,9 @@ const defaultProps: ComponentProps = {
     numericItem,
     facetItem,
   ],
-  clearInput: () => {},
-  config: JSON.stringify({
-    readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
-    endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
-    index: [import.meta.env.VITE_RUNEGARD_INDEX],
-  }),
-  customStylesForInput: '{}',
-  inputCaptionValue: 'Search',
-  labelForInput: 'Search for something:',
-  placeholderValue: 'Search here...',
 };
 
-export const Default: StoryObj<ComponentProps> = {
+export const Default: StoryObj<SearchcraftFilterPanelProps> = {
   decorators: [
     (Story) => {
       useEffect(() => {
@@ -123,19 +104,10 @@ export const Default: StoryObj<ComponentProps> = {
     return (
       <>
         <SearchcraftTheme />
-        <div style={{ paddingTop: 10, paddingLeft: 20, paddingRight: 20 }}>
-          <SearchcraftInputForm
-            autoSearch={true}
-            buttonLabel=''
-            buttonPlacement='none'
-            customStyles={args.customStylesForInput}
-            inputLabel=''
-            placeholderValue={args.placeholderValue || ''}
-          />
-          <div style={{ paddingTop: 20 }}>
-            <SearchcraftFilterPanel items={args.items} />
-          </div>
+        <div style={{ marginBottom: 20 }}>
+          <SearchcraftInputForm autoSearch={true} />
         </div>
+        <SearchcraftFilterPanel items={args.items} />
       </>
     );
   },

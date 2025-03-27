@@ -1,25 +1,26 @@
 {
   "name": "compendium",
   "private": true,
-  "version": "0.9.7",
+  "version": "0.10.0",
   "type": "module",
   "scripts": {
-    "next": "cd next && next dev --turbopack",
+    "next": "cd next && next dev",
+    "next:start": "cd next && next build && next start",
     "storybook:react": "storybook dev -p 6006 --config-dir storybook/configs/react-config",
     "storybook:vue": "storybook dev -p 6006 --config-dir storybook/configs/vue-config",
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "next": "15.2.2",
+    "next": "15.2.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "vue": "^3.5.13"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.4",
-    "@searchcraft/javascript-sdk": "^0.9.7",
-    "@searchcraft/react-sdk": "^0.9.7",
-    "@searchcraft/vue-sdk": "^0.9.7",
+    "@searchcraft/javascript-sdk": "^0.10.0",
+    "@searchcraft/react-sdk": "^0.10.0",
+    "@searchcraft/vue-sdk": "^0.10.0",
     "@storybook/addon-backgrounds": "^8.6.7",
     "@storybook/addon-docs": "^8.6.7",
     "@storybook/addon-essentials": "^8.6.7",

@@ -1,3 +1,5 @@
+import type { CustomAdTemplate } from '../sdk-types';
+
 /**
  * The SearchcraftConfig object is used to initialize Searchcraft in your application.
  */
@@ -80,7 +82,7 @@ export interface SearchcraftConfig {
   /**
    * A callback function responsible for rendering the custom ad containers.
    */
-  customAdTemplate?: CustomAdTemplateRenderFunction;
+  customAdTemplate?: CustomAdTemplate;
 
   /**
    * The placement id to use for Nativo ads.
@@ -131,12 +133,3 @@ export interface SearchcraftSDKInfo {
   sdkName: string;
   sdkVersion: string;
 }
-
-export interface CustomAdTemplateRenderData {
-  adContainerId: string;
-  searchTerm: string;
-}
-
-export type CustomAdTemplateRenderFunction = (
-  data: CustomAdTemplateRenderData,
-) => string;

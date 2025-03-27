@@ -14,8 +14,8 @@ declare global {
   namespace JSX {
     interface IntrinsicElements {
       'searchcraft-ad': StencilFriendlyKeys<Components.SearchcraftAd>;
-      'searchcraft-base-search-result': StencilFriendlyKeys<Components.SearchcraftBaseSearchResult>;
-      'searchcraft-base-search-results': StencilFriendlyKeys<Components.SearchcraftBaseSearchResults>;
+      'searchcraft-search-result': StencilFriendlyKeys<Components.SearchcraftSearchResults>;
+      'searchcraft-search-results': StencilFriendlyKeys<Components.SearchcraftSearchResults>;
       'searchcraft-button': StencilFriendlyKeys<Components.SearchcraftButton>;
       'searchcraft-error-message': StencilFriendlyKeys<Components.SearchcraftErrorMessage>;
       'searchcraft-facet-list': StencilFriendlyKeys<Components.SearchcraftFacetList>;

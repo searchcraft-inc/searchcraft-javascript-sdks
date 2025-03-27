@@ -34,8 +34,9 @@
   "scripts": {
     "build": "node build.mjs",
     "bump-version": "yarn lerna version",
-    "storybook:react": "yarn workspace compendium storybook:react",
-    "storybook:vue": "yarn workspace compendium storybook:vue",
+    "compendium:react": "yarn workspace compendium storybook:react",
+    "compendium:vue": "yarn workspace compendium storybook:vue",
+    "compendium:next": "cd packages/compendium && yarn next",
     "test:all": "yarn test:core && yarn test:react-sdk && yarn test:javascript-sdk && yarn test:vue-sdk",
     "test:core": "yarn workspace @searchcraft/core test",
     "test:sdk-react": "yarn workspace @searchcraft/react-sdk test",

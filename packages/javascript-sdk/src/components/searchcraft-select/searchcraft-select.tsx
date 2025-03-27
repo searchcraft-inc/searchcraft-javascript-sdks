@@ -6,9 +6,6 @@ import {
   type EventEmitter,
   Event,
 } from '@stencil/core';
-import classNames from 'classnames';
-
-import { parseCustomStyles } from '@utils';
 
 export type SearchcraftSelectOption = {
   label: string;
@@ -19,7 +16,7 @@ export type SearchcraftSelectOption = {
 /**
  * This web component is designed to allow users to select between a group of options.
  *
- * ## Usage
+ * @js-example
  * ```html
  * <!-- index.html -->
  * <searchcraft-select
@@ -28,6 +25,8 @@ export type SearchcraftSelectOption = {
  *  options="[{ label: 'label', value: 'value' }]"
  * />
  * ```
+ *
+ * @internal
  */
 @Component({
   tag: 'searchcraft-select',
@@ -63,10 +62,6 @@ export class SearchcraftSelect {
    */
   @Prop() options: SearchcraftSelectOption[] | string = [];
   /**
-   * A custom styles object.
-   */
-  @Prop() customStyles?: string;
-  /**
    * The event fired when the select is changed.
    */
   @Event() selectChange!: EventEmitter<string>;
@@ -86,12 +81,7 @@ export class SearchcraftSelect {
 
   render() {
     return (
-      <div
-        class={classNames(
-          'searchcraft-select',
-          parseCustomStyles(this.customStyles || {}),
-        )}
-      >
+      <div class='searchcraft-select'>
         {this.label && (
           <label
             class='searchcraft-select-label'

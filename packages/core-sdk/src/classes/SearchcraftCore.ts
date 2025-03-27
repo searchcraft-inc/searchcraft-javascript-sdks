@@ -53,9 +53,20 @@ export class SearchcraftCore {
     };
     this.userId = '';
 
-    this.initClients(this.config, sdkInfo);
-    this.initInputForms();
-    this.startObservingMutations();
+    if (
+      typeof window !== 'undefined' &&
+      typeof customElements !== 'undefined' &&
+      sdkInfo.sdkName === '@searchcraft/javascript-sdk' &&
+      globalThis.__scDefineCustomElements__
+    ) {
+      globalThis.__scDefineCustomElements__();
+    }
+
+    if (typeof window !== 'undefined') {
+      this.initClients(this.config, sdkInfo);
+      this.initInputForms();
+      this.startObservingMutations();
+    }
   }
 
   private initInputForms() {

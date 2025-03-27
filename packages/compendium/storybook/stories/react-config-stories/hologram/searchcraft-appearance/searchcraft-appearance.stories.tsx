@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-
 import './searchcraft-appearance.scss';
+import { useEffect } from 'react';
+import { Searchcraft } from '@searchcraft/javascript-sdk';
 
 const componentMeta: Meta = {
   title: 'Hologram/searchcraft-theme',
@@ -22,6 +23,18 @@ const defaultProps = {
 export const Appearance: StoryObj<{
   borderRadius: number;
 }> = {
+  decorators: [
+    (Story) => {
+      useEffect(() => {
+        new Searchcraft({
+          readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
+          endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
+          index: [import.meta.env.VITE_RUNEGARD_INDEX],
+        });
+      }, []);
+      return <Story />;
+    },
+  ],
   render: (args) => {
     return (
       <>

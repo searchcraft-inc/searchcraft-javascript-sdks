@@ -22,7 +22,8 @@ const config: StorybookConfig = {
       alias: {
         ...(config.resolve?.alias || {}),
         vue: resolve('./node_modules/vue'), // Forces Storybook and SDK to use the same Vue instance
-        '@stories/utils': path.resolve(__dirname, '../../utils'),
+        '@utils': path.resolve(__dirname, '../../utils'),
+        '@common': path.resolve(__dirname, '../../../common'),
       },
     };
     return config;

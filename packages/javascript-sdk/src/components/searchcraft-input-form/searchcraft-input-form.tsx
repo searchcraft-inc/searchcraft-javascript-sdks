@@ -11,38 +11,49 @@ import classNames from 'classnames';
 
 import type { SearchcraftCore } from '@searchcraft/core';
 
-import { parseCustomStyles } from '@utils';
 import { searchcraftStore } from '@store';
 
 /**
  * This web component provides a user-friendly interface for querying an indexed dataset, enabling users to easily search large collections of data.
  * It abstracts the complexities of index-based searching, making it accessible to users of all technical levels.
  *
- * ## Usage
- * ```html
- * <!-- index.html -->
- * <searchcraft-input-form placeholder-value="Search here" />
+ * @import
+ * ```jsx
+ * // react
+ * import { SearchcraftInputForm } from "@searchcraft/react-sdk";
+ *
+ * // vue
+ * import { SearchcraftInputForm } from "@searchcraft/vue-sdk";
  * ```
  *
- * ```js
- * // index.js
- * const searchInputForm = document.querySelector('searchcraft-input-form');
+ * @js-example
+ * ```html
+ * <searchcraft-input-form auto-search />
+ * ```
  *
+ * @react-example
+ * ```jsx
+ * <SearchcraftInputForm autoSearch />
+ * ```
+ *
+ * @vue-example
+ * ```jsx
+ * <SearchcraftInputForm autoSearch />
  * ```
  */
 @Component({
   tag: 'searchcraft-input-form',
   shadow: false,
 })
-export class SearchcraftInput {
+export class SearchcraftInputForm {
   /**
    * Whether or not to automatically submit the search term when the input changes.
    */
-  @Prop() autoSearch = true;
+  @Prop() autoSearch?: boolean = true;
   /**
    * Where to place the search button.
    */
-  @Prop() buttonPlacement: 'left' | 'right' | 'none' = 'none';
+  @Prop() buttonPlacement?: 'left' | 'right' | 'none' = 'none';
   /**
    * The label for the submit button.
    */
@@ -52,13 +63,9 @@ export class SearchcraftInput {
    */
   @Prop() inputLabel?: string;
   /**
-   * A custom styles object to be applied to the input element.
-   */
-  @Prop() customStyles: string | Record<string, string> = {};
-  /**
    * The input element's placeholder value.
    */
-  @Prop() placeholderValue = 'Enter Search';
+  @Prop() placeholderValue?: string = 'Enter Search';
   /**
    * When the input becomes focused.
    */
@@ -138,16 +145,15 @@ export class SearchcraftInput {
   };
 
   render() {
-    const validatedCustomStyles = parseCustomStyles(this.customStyles);
-
     const isShowingClearButton = this.inputValue.length > 0;
-
-    const inputGridClassNames = classNames('searchcraft-input-grid', {
-      'searchcraft-input-grid-buttonLeft': this.buttonPlacement === 'left',
-      'searchcraft-input-grid-buttonRight': this.buttonPlacement === 'right',
-      'searchcraft-input-grid-buttonNone': this.buttonPlacement === 'none',
+    const inputGridClassNames = classNames('searchcraft-input-form-grid', {
+      'searchcraft-input-form-grid-button-left':
+        this.buttonPlacement === 'left',
+      'searchcraft-input-form-grid-button-right':
+        this.buttonPlacement === 'right',
+      'searchcraft-input-form-grid-button-none':
+        this.buttonPlacement === 'none',
     });
-
     const shouldHaveVerticalGap = this.inputLabel || this.error;
     const inputGridStyles = {
       gap: shouldHaveVerticalGap ? '4px 8px' : '0px 8px',
@@ -156,47 +162,46 @@ export class SearchcraftInput {
     return (
       <form class='searchcraft-input-form' onSubmit={this.handleFormSubmit}>
         <div class={inputGridClassNames} style={inputGridStyles}>
-          <div class='searchcraft-input-button-wrapper'>
+          <div class='searchcraft-input-form-button'>
             <searchcraft-button
               onButtonClick={this.handleFormSubmit}
               label={this.buttonLabel}
             />
           </div>
           {this.inputLabel && (
-            <div class='searchcraft-input-label-wrapper'>
+            <div class='searchcraft-input-form-label'>
               <searchcraft-input-label label={this.inputLabel} />
             </div>
           )}
           {this.error && (
-            <div class='searchcraft-input-error-wrapper'>
-              <searchcraft-error-message errorMessage='Something went wrong.' />
+            <div class='searchcraft-input-form-error-message'>
+              <searchcraft-error-message>
+                Something went wrong.
+              </searchcraft-error-message>
             </div>
           )}
-          <div class='searchcraft-input-wrapper'>
+          <div class='searchcraft-input-form-input-wrapper'>
             <input
               autoComplete='off'
-              class='searchcraft-input'
+              class='searchcraft-input-form-input'
               onFocus={() => this.inputFocus?.emit()}
               onBlur={() => this.inputBlur?.emit()}
               onInput={(event) => {
                 this.handleOnInput(event);
               }}
               placeholder={this.placeholderValue}
-              style={validatedCustomStyles}
               type='text'
               value={this.inputValue}
             />
-            <div class='searchcraft-input-search-icon-wrapper'>
+            <div class='searchcraft-input-form-input-icon'>
               <svg
-                class='searchcraft-input-search-icon'
+                class='searchcraft-input-form-input-search-icon'
                 viewBox='0 0 20 20'
                 fill='none'
                 xmlns='http://www.w3.org/2000/svg'
                 aria-labelledby='searchcraft-title'
               >
-                <title id='searchcraft-title'>
-                  Searchcraft Search Icon Light
-                </title>
+                <title>Search icon</title>
                 <path
                   d='M17.5 17.5L13.875 13.875M15.8333 9.16667C15.8333 12.8486 12.8486 15.8333 9.16667 15.8333C5.48477 15.8333 2.5 12.8486 2.5 9.16667C2.5 5.48477 5.48477 2.5 9.16667 2.5C12.8486 2.5 15.8333 5.48477 15.8333 9.16667Z'
                   stroke='currentColor'
@@ -209,19 +214,17 @@ export class SearchcraftInput {
             {isShowingClearButton && (
               <button
                 type='button'
-                class='searchcraft-input-clear-button'
+                class='searchcraft-input-form-clear-button'
                 onClick={this.handleClearInput}
               >
                 <svg
-                  class='searchcraft-input-clear-icon'
+                  class='searchcraft-input-form-clear-button-icon'
                   viewBox='0 0 22 22'
                   fill='none'
                   xmlns='http://www.w3.org/2000/svg'
                   aria-labelledby='icon-title'
                 >
-                  <title id='icon-title'>
-                    Searchcraft Clear Input Icon Light
-                  </title>
+                  <title>Clear icon</title>
                   <path
                     d='M14 8L8 14M8 8L14 14M21 11C21 16.5228 16.5228 21 11 21C5.47715 21 1 16.5228 1 11C1 5.47715 5.47715 1 11 1C16.5228 1 21 5.47715 21 11Z'
                     stroke='currentColor'
