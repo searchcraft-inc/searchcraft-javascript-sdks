@@ -166,7 +166,7 @@ export namespace Components {
      * @react-example ```jsx
      * <SearchcraftPagination />
      * ```
-     * @vue-example ```vue
+     * @vue-example ```jsx
      * <SearchcraftPagination />
      * ```
      */
@@ -639,7 +639,7 @@ declare global {
      * @react-example ```jsx
      * <SearchcraftPagination />
      * ```
-     * @vue-example ```vue
+     * @vue-example ```jsx
      * <SearchcraftPagination />
      * ```
      */
@@ -1106,7 +1106,7 @@ declare namespace LocalJSX {
      * @react-example ```jsx
      * <SearchcraftPagination />
      * ```
-     * @vue-example ```vue
+     * @vue-example ```jsx
      * <SearchcraftPagination />
      * ```
      */
@@ -1522,7 +1522,7 @@ declare module "@stencil/core" {
              * @react-example ```jsx
              * <SearchcraftPagination />
              * ```
-             * @vue-example ```vue
+             * @vue-example ```jsx
              * <SearchcraftPagination />
              * ```
              */

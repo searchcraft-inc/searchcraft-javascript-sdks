@@ -22,7 +22,7 @@ This web component is designed to facilitate pagination of search results. Once 
 
 ### Vue
 
-```vue
+```jsx
 <SearchcraftPagination />
 ```
 

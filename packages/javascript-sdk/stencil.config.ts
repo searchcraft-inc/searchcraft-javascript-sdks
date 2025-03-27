@@ -231,8 +231,8 @@ const createTableRow = (row: string[]) => {
 // Value utilities
 const escapeTableMarkdown = (str: string) => {
   let escapedStr = str;
-  escapedStr = str.replace(/\r?\n/g, ' ');
-  escapedStr = str.replace(/\|/g, '\\|');
+  escapedStr = str.replace(/\r?\n/g, ' '); // new lines
+  escapedStr = str.replace(/\|/g, '\\|'); // pipes
   return escapedStr;
 };
 
@@ -245,7 +245,13 @@ const getAttributeValue = (prop: JsonDocsProp) =>
   escapeTableMarkdown(prop.attr ? `\`${prop.attr}\`` : '--');
 
 const getDocsValue = (propOrEvent: JsonDocsProp | JsonDocsEvent) =>
-  escapeTableMarkdown(propOrEvent.docs ? `\`${propOrEvent.docs}\`` : '--');
+  escapeTableMarkdown(
+    `${
+      propOrEvent.deprecation !== undefined
+        ? `<span style="color:red">**[DEPRECATED]**</span> ${propOrEvent.deprecation}<br/><br/>`
+        : ''
+    }${propOrEvent.docs}`,
+  );
 
 const getTypeValue = (prop: JsonDocsProp) =>
   escapeTableMarkdown(

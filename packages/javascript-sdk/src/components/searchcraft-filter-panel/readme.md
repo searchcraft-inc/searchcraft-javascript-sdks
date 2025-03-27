@@ -41,5 +41,5 @@ if (filterPanel) {
 
 | Property | Attribute | Description | Type | Default |
 | -------- | --------- | ----------- | ---- | ------- |
-| `items` | -- | `The items to filter.` | `FilterItem[]` | `[]` |
+| `items` | -- | The items to filter. | `FilterItem[]` | `[]` |
 

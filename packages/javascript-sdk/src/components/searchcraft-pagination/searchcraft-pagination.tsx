@@ -16,7 +16,7 @@ import classNames from 'classnames';
  * ```
  *
  * @vue-example
- * ```vue
+ * ```jsx
  * <SearchcraftPagination />
  * ```
  */

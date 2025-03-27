@@ -59,8 +59,7 @@ import { type SearchcraftState, searchcraftStore } from '@store';
 })
 export class SearchcraftSearchResults {
   /**
-   * A callback function responsible for rendering a result.
-   * Passed to `searchcraft-search-result`.
+   * A callback function responsible for rendering a result. Passed to `searchcraft-search-result`.
    */
   @Prop() template?: SearchResultTemplate<SearchResultTemplateData>;
 

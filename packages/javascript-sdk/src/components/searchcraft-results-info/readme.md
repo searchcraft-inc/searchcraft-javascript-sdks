@@ -47,5 +47,5 @@ resultsInfo.template = (info, { html }) => html`
 
 | Property | Attribute | Description | Type | Default |
 | -------- | --------- | ----------- | ---- | ------- |
-| `template` | -- | `A callback function responsible for rendering the results info.` | `((data: { range: [number, number]; count: number; responseTime: string; }, utils: { html: TemplateHtml; }) => string) \| undefined` | `undefined` |
+| `template` | -- | A callback function responsible for rendering the results info. | `((data: { range: [number, number]; count: number; responseTime: string; }, utils: { html: TemplateHtml; }) => string) \| undefined` | `undefined` |
 

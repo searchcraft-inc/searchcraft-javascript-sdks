@@ -13,7 +13,7 @@ This web component is designed to facilitate pagination of search results. Once 
 @react-example ```jsx
 <SearchcraftPagination />
 ```
-@vue-example ```vue
+@vue-example ```jsx
 <SearchcraftPagination />
 ```
 

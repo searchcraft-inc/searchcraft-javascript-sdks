@@ -56,6 +56,5 @@ searchResults.template = (item, index, { html }) => html`
 
 | Property | Attribute | Description | Type | Default |
 | -------- | --------- | ----------- | ---- | ------- |
-| `template` | -- | `A callback function responsible for rendering a result.
-Passed to `searchcraft-search-result`.` | `((data: any, index: number, utils: { html: TemplateHtml; }) => string) \| undefined` | `undefined` |
+| `template` | -- | A callback function responsible for rendering a result. Passed to `searchcraft-search-result`. | `((data: any, index: number, utils: { html: TemplateHtml; }) => string) \| undefined` | `undefined` |
 
