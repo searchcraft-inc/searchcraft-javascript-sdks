@@ -16,6 +16,10 @@
   -webkit-font-smoothing: antialiased;
 }
 
+.searchcraft-facet-list-checkbox-input-wrapper {
+  position: relative;
+}
+
 .searchcraft-facet-list-checkbox-input {
   align-items: center;
   appearance: none;
@@ -53,18 +57,21 @@
 .searchcraft-facet-list-checkbox-input-check-icon {
   display: none;
   height: 16px;
-  left: 8px;
+  left: 50%;
   position: absolute;
-  top: 9px;
+  margin-top: 2px;
+  top: 50%;
+  transform: translate(-50%, -50%);
   width: 16px;
 }
 
 .searchcraft-facet-list-checkbox-input-dash-icon {
   display: none;
   height: 3px;
-  left: 9px;
+  left: 50%;
   position: absolute;
-  top: 3px;
+  top: 50%;
+  transform: translate(-50%, -50%);
   width: 14px;
 }
 
