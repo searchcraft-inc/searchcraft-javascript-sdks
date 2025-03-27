@@ -1,8 +1,19 @@
 # searchcraft-theme
 
-This web component adds Searchcraft's built-in css theme to your page. It does not render anything visible, its only function is to manage the css styles on the page.
+This web component adds Searchcraft's built-in css theme to your page. It does not render anything visible, its only function is to manage the css styles on the page.'
 
-## Examples
+## Import
+
+```jsx
+// react
+import { SearchcraftTheme } from "@searchcraft/react-sdk";
+
+// vue
+import { SearchcraftTheme } from "@searchcraft/vue-sdk";
+```
+
+
+## Usage
 
 **JavaScript:**
 

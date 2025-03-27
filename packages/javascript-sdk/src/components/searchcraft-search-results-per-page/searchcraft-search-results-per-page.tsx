@@ -4,6 +4,15 @@ import { Component, h, State, Prop } from '@stencil/core';
 /**
  * This web component is designed to choose the number of search results displayed.
  *
+ * @import
+ * ```jsx
+ * // react
+ * import { SearchcraftSearchResultsPerPage } from "@searchcraft/react-sdk";
+ *
+ * // vue
+ * import { SearchcraftSearchResultsPerPage } from "@searchcraft/vue-sdk";
+ * ```
+ *
  * @js-example
  * ```html
  * <!-- index.html -->

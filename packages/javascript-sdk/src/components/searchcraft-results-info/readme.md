@@ -2,7 +2,18 @@
 
 This web component is designed to display the number of results returned from a search query.
 
-## Examples
+## Import
+
+```jsx
+// react
+import { SearchcraftResultsInfo } from "@searchcraft/react-sdk";
+
+// vue
+import { SearchcraftResultsInfo } from "@searchcraft/vue-sdk";
+```
+
+
+## Usage
 
 **JavaScript:**
 

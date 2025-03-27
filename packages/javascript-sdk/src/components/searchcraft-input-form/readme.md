@@ -3,7 +3,18 @@
 This web component provides a user-friendly interface for querying an indexed dataset, enabling users to easily search large collections of data.
 It abstracts the complexities of index-based searching, making it accessible to users of all technical levels.
 
-## Examples
+## Import
+
+```jsx
+// react
+import { SearchcraftInputForm } from "@searchcraft/react-sdk";
+
+// vue
+import { SearchcraftInputForm } from "@searchcraft/vue-sdk";
+```
+
+
+## Usage
 
 **JavaScript:**
 

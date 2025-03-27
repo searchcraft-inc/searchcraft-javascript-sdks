@@ -11,6 +11,15 @@ import { searchcraftStore } from '@store';
 /**
  * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field, or when a popover-button is pressed.
  *
+ * @import
+ * ```jsx
+ * // react
+ * import { SearchcraftPopoverForm } from "@searchcraft/react-sdk";
+ *
+ * // vue
+ * import { SearchcraftPopoverForm } from "@searchcraft/vue-sdk";
+ * ```
+ *
  * @js-example
  * ```html
  * <!-- index.html -->
@@ -34,8 +43,6 @@ import { searchcraftStore } from '@store';
  * <SearchcraftPopoverForm type="inline" :popoverResultMappings="[]"" />
  * ```
  *
- * @impost
- * import { something } from 'somethign
  */
 @Component({
   tag: 'searchcraft-popover-form',
@@ -43,7 +50,8 @@ import { searchcraftStore } from '@store';
 })
 export class SearchcraftPopoverForm {
   /**
-   * The type of popover form to render.  - `inline` - Renders inline with the rest of the content on the page. The search results pop over the page content.
+   * The type of popover form to render.
+   * - `inline` - Renders inline with the rest of the content on the page. The search results pop over the page content.
    * - `fullscreen` - Renders in fullscreen view. Used together with the `searchcraft-popover-button` component.
    * - `modal` - Renders in a modal view. Used together with the `searchcraft-popover-button` component.
    */

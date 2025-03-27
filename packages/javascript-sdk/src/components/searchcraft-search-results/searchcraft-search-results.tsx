@@ -14,6 +14,16 @@ import { type SearchcraftState, searchcraftStore } from '@store';
 /**
  * This web component is responsible for displaying the results of a search query. Once a query is submitted, the component formats and presents an ordered list of the results.
  *
+ *
+ * @import
+ * ```jsx
+ * // react
+ * import { SearchcraftSearchResults } from "@searchcraft/react-sdk";
+ *
+ * // vue
+ * import { SearchcraftSearchResults } from "@searchcraft/vue-sdk";
+ * ```
+ *
  * @js-example
  * ```html
  * <!-- index.html -->
@@ -59,7 +69,7 @@ import { type SearchcraftState, searchcraftStore } from '@store';
 })
 export class SearchcraftSearchResults {
   /**
-   * A callback function responsible for rendering a result. Passed to \`searchcraft-search-result\`.
+   * A callback function responsible for rendering a result. Passed to `searchcraft-search-result`.
    */
   @Prop() template?: SearchResultTemplate<SearchResultTemplateData>;
 

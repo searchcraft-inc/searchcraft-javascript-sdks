@@ -85,6 +85,12 @@ export namespace Components {
     }
     /**
      * This web component represents a series of filters that allows users to refine and control their search queries by applying various filter criteria.
+     * @import ```jsx
+     * // react
+     * import { SearchcraftFilterPanel } from "@searchcraft/react-sdk";
+     * // vue
+     * import { SearchcraftFilterPanel } from "@searchcraft/vue-sdk";
+     * ```
      * @js-example ```html
      * <!-- index.html -->
      * <searchcraft-filter-panel />
@@ -112,6 +118,12 @@ export namespace Components {
     /**
      * This web component provides a user-friendly interface for querying an indexed dataset, enabling users to easily search large collections of data.
      * It abstracts the complexities of index-based searching, making it accessible to users of all technical levels.
+     * @import ```jsx
+     * // react
+     * import { SearchcraftInputForm } from "@searchcraft/react-sdk";
+     * // vue
+     * import { SearchcraftInputForm } from "@searchcraft/vue-sdk";
+     * ```
      * @js-example ```html
      * <searchcraft-input-form auto-search />
      * ```
@@ -160,6 +172,12 @@ export namespace Components {
     }
     /**
      * This web component is designed to facilitate pagination of search results. Once a query is submitted, calculates the number for pages.
+     * @import ```jsx
+     * // react
+     * import { SearchcraftPagination } from "@searchcraft/react-sdk";
+     * // vue
+     * import { SearchcraftPagination } from "@searchcraft/vue-sdk";
+     * ```
      * @js-example ```html
      * <searchcraft-pagination />
      * ```
@@ -174,6 +192,12 @@ export namespace Components {
     }
     /**
      * Renders a button which, when clicked, turns on popover visibility.
+     * @import ```jsx
+     * // react
+     * import { SearchcraftPopoverButton } from "@searchcraft/react-sdk";
+     * // vue
+     * import { SearchcraftPopoverButton } from "@searchcraft/vue-sdk";
+     * ```
      * @js-example ```html
      * <searchcraft-popover-button>
      *   Open popover
@@ -194,6 +218,12 @@ export namespace Components {
     }
     /**
      * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field, or when a popover-button is pressed.
+     * @import ```jsx
+     * // react
+     * import { SearchcraftPopoverForm } from "@searchcraft/react-sdk";
+     * // vue
+     * import { SearchcraftPopoverForm } from "@searchcraft/vue-sdk";
+     * ```
      * @js-example ```html
      * <!-- index.html -->
      * <searchcraft-popover-form type="inline" />
@@ -209,7 +239,6 @@ export namespace Components {
      * @vue-example ```jsx
      * <SearchcraftPopoverForm type="inline" :popoverResultMappings="[]"" />
      * ```
-     * @impost import { something } from 'somethign
      */
     interface SearchcraftPopoverForm {
         /**
@@ -225,7 +254,7 @@ export namespace Components {
          */
         "popoverResultMappings"?: PopoverResultMappings;
         /**
-          * The type of popover form to render.  - `inline` - Renders inline with the rest of the content on the page. The search results pop over the page content. - `fullscreen` - Renders in fullscreen view. Used together with the `searchcraft-popover-button` component. - `modal` - Renders in a modal view. Used together with the `searchcraft-popover-button` component.
+          * The type of popover form to render. - `inline` - Renders inline with the rest of the content on the page. The search results pop over the page content. - `fullscreen` - Renders in fullscreen view. Used together with the `searchcraft-popover-button` component. - `modal` - Renders in a modal view. Used together with the `searchcraft-popover-button` component.
          */
         "type"?: 'inline' | 'fullscreen' | 'modal';
     }
@@ -262,6 +291,12 @@ export namespace Components {
     }
     /**
      * This web component is designed to display the number of results returned from a search query.
+     * @import ```jsx
+     * // react
+     * import { SearchcraftResultsInfo } from "@searchcraft/react-sdk";
+     * // vue
+     * import { SearchcraftResultsInfo } from "@searchcraft/vue-sdk";
+     * ```
      * @js-example ```html
      * <!-- index.html -->
      * <searchcraft-results-info />
@@ -313,6 +348,12 @@ export namespace Components {
     }
     /**
      * This web component is responsible for displaying the results of a search query. Once a query is submitted, the component formats and presents an ordered list of the results.
+     * @import ```jsx
+     * // react
+     * import { SearchcraftSearchResults } from "@searchcraft/react-sdk";
+     * // vue
+     * import { SearchcraftSearchResults } from "@searchcraft/vue-sdk";
+     * ```
      * @js-example ```html
      * <!-- index.html -->
      * <searchcraft-search-results
@@ -348,12 +389,18 @@ export namespace Components {
      */
     interface SearchcraftSearchResults {
         /**
-          * A callback function responsible for rendering a result. Passed to \`searchcraft-search-result\`.
+          * A callback function responsible for rendering a result. Passed to `searchcraft-search-result`.
          */
         "template"?: SearchResultTemplate<SearchResultTemplateData>;
     }
     /**
      * This web component is designed to choose the number of search results displayed.
+     * @import ```jsx
+     * // react
+     * import { SearchcraftSearchResultsPerPage } from "@searchcraft/react-sdk";
+     * // vue
+     * import { SearchcraftSearchResultsPerPage } from "@searchcraft/vue-sdk";
+     * ```
      * @js-example ```html
      * <!-- index.html -->
      * <searchcraft-search-results-per-page increment="20" />
@@ -434,7 +481,13 @@ export namespace Components {
         "min": number;
     }
     /**
-     * This web component adds Searchcraft's built-in css theme to your page. It does not render anything visible, its only function is to manage the css styles on the page.
+     * This web component adds Searchcraft's built-in css theme to your page. It does not render anything visible, its only function is to manage the css styles on the page.'
+     * @import ```jsx
+     * // react
+     * import { SearchcraftTheme } from "@searchcraft/react-sdk";
+     * // vue
+     * import { SearchcraftTheme } from "@searchcraft/vue-sdk";
+     * ```
      * @js-example ```html
      * <searchcraft-theme />
      * ```
@@ -564,6 +617,12 @@ declare global {
     };
     /**
      * This web component represents a series of filters that allows users to refine and control their search queries by applying various filter criteria.
+     * @import ```jsx
+     * // react
+     * import { SearchcraftFilterPanel } from "@searchcraft/react-sdk";
+     * // vue
+     * import { SearchcraftFilterPanel } from "@searchcraft/vue-sdk";
+     * ```
      * @js-example ```html
      * <!-- index.html -->
      * <searchcraft-filter-panel />
@@ -596,6 +655,12 @@ declare global {
     /**
      * This web component provides a user-friendly interface for querying an indexed dataset, enabling users to easily search large collections of data.
      * It abstracts the complexities of index-based searching, making it accessible to users of all technical levels.
+     * @import ```jsx
+     * // react
+     * import { SearchcraftInputForm } from "@searchcraft/react-sdk";
+     * // vue
+     * import { SearchcraftInputForm } from "@searchcraft/vue-sdk";
+     * ```
      * @js-example ```html
      * <searchcraft-input-form auto-search />
      * ```
@@ -634,6 +699,12 @@ declare global {
     };
     /**
      * This web component is designed to facilitate pagination of search results. Once a query is submitted, calculates the number for pages.
+     * @import ```jsx
+     * // react
+     * import { SearchcraftPagination } from "@searchcraft/react-sdk";
+     * // vue
+     * import { SearchcraftPagination } from "@searchcraft/vue-sdk";
+     * ```
      * @js-example ```html
      * <searchcraft-pagination />
      * ```
@@ -652,6 +723,12 @@ declare global {
     };
     /**
      * Renders a button which, when clicked, turns on popover visibility.
+     * @import ```jsx
+     * // react
+     * import { SearchcraftPopoverButton } from "@searchcraft/react-sdk";
+     * // vue
+     * import { SearchcraftPopoverButton } from "@searchcraft/vue-sdk";
+     * ```
      * @js-example ```html
      * <searchcraft-popover-button>
      *   Open popover
@@ -676,6 +753,12 @@ declare global {
     };
     /**
      * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field, or when a popover-button is pressed.
+     * @import ```jsx
+     * // react
+     * import { SearchcraftPopoverForm } from "@searchcraft/react-sdk";
+     * // vue
+     * import { SearchcraftPopoverForm } from "@searchcraft/vue-sdk";
+     * ```
      * @js-example ```html
      * <!-- index.html -->
      * <searchcraft-popover-form type="inline" />
@@ -691,7 +774,6 @@ declare global {
      * @vue-example ```jsx
      * <SearchcraftPopoverForm type="inline" :popoverResultMappings="[]"" />
      * ```
-     * @impost import { something } from 'somethign
      */
     interface HTMLSearchcraftPopoverFormElement extends Components.SearchcraftPopoverForm, HTMLStencilElement {
     }
@@ -723,6 +805,12 @@ declare global {
     };
     /**
      * This web component is designed to display the number of results returned from a search query.
+     * @import ```jsx
+     * // react
+     * import { SearchcraftResultsInfo } from "@searchcraft/react-sdk";
+     * // vue
+     * import { SearchcraftResultsInfo } from "@searchcraft/vue-sdk";
+     * ```
      * @js-example ```html
      * <!-- index.html -->
      * <searchcraft-results-info />
@@ -764,6 +852,12 @@ declare global {
     };
     /**
      * This web component is responsible for displaying the results of a search query. Once a query is submitted, the component formats and presents an ordered list of the results.
+     * @import ```jsx
+     * // react
+     * import { SearchcraftSearchResults } from "@searchcraft/react-sdk";
+     * // vue
+     * import { SearchcraftSearchResults } from "@searchcraft/vue-sdk";
+     * ```
      * @js-example ```html
      * <!-- index.html -->
      * <searchcraft-search-results
@@ -805,6 +899,12 @@ declare global {
     };
     /**
      * This web component is designed to choose the number of search results displayed.
+     * @import ```jsx
+     * // react
+     * import { SearchcraftSearchResultsPerPage } from "@searchcraft/react-sdk";
+     * // vue
+     * import { SearchcraftSearchResultsPerPage } from "@searchcraft/vue-sdk";
+     * ```
      * @js-example ```html
      * <!-- index.html -->
      * <searchcraft-search-results-per-page increment="20" />
@@ -871,7 +971,13 @@ declare global {
         new (): HTMLSearchcraftSliderElement;
     };
     /**
-     * This web component adds Searchcraft's built-in css theme to your page. It does not render anything visible, its only function is to manage the css styles on the page.
+     * This web component adds Searchcraft's built-in css theme to your page. It does not render anything visible, its only function is to manage the css styles on the page.'
+     * @import ```jsx
+     * // react
+     * import { SearchcraftTheme } from "@searchcraft/react-sdk";
+     * // vue
+     * import { SearchcraftTheme } from "@searchcraft/vue-sdk";
+     * ```
      * @js-example ```html
      * <searchcraft-theme />
      * ```
@@ -1015,6 +1121,12 @@ declare namespace LocalJSX {
     }
     /**
      * This web component represents a series of filters that allows users to refine and control their search queries by applying various filter criteria.
+     * @import ```jsx
+     * // react
+     * import { SearchcraftFilterPanel } from "@searchcraft/react-sdk";
+     * // vue
+     * import { SearchcraftFilterPanel } from "@searchcraft/vue-sdk";
+     * ```
      * @js-example ```html
      * <!-- index.html -->
      * <searchcraft-filter-panel />
@@ -1042,6 +1154,12 @@ declare namespace LocalJSX {
     /**
      * This web component provides a user-friendly interface for querying an indexed dataset, enabling users to easily search large collections of data.
      * It abstracts the complexities of index-based searching, making it accessible to users of all technical levels.
+     * @import ```jsx
+     * // react
+     * import { SearchcraftInputForm } from "@searchcraft/react-sdk";
+     * // vue
+     * import { SearchcraftInputForm } from "@searchcraft/vue-sdk";
+     * ```
      * @js-example ```html
      * <searchcraft-input-form auto-search />
      * ```
@@ -1102,6 +1220,12 @@ declare namespace LocalJSX {
     }
     /**
      * This web component is designed to facilitate pagination of search results. Once a query is submitted, calculates the number for pages.
+     * @import ```jsx
+     * // react
+     * import { SearchcraftPagination } from "@searchcraft/react-sdk";
+     * // vue
+     * import { SearchcraftPagination } from "@searchcraft/vue-sdk";
+     * ```
      * @js-example ```html
      * <searchcraft-pagination />
      * ```
@@ -1116,6 +1240,12 @@ declare namespace LocalJSX {
     }
     /**
      * Renders a button which, when clicked, turns on popover visibility.
+     * @import ```jsx
+     * // react
+     * import { SearchcraftPopoverButton } from "@searchcraft/react-sdk";
+     * // vue
+     * import { SearchcraftPopoverButton } from "@searchcraft/vue-sdk";
+     * ```
      * @js-example ```html
      * <searchcraft-popover-button>
      *   Open popover
@@ -1136,6 +1266,12 @@ declare namespace LocalJSX {
     }
     /**
      * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field, or when a popover-button is pressed.
+     * @import ```jsx
+     * // react
+     * import { SearchcraftPopoverForm } from "@searchcraft/react-sdk";
+     * // vue
+     * import { SearchcraftPopoverForm } from "@searchcraft/vue-sdk";
+     * ```
      * @js-example ```html
      * <!-- index.html -->
      * <searchcraft-popover-form type="inline" />
@@ -1151,7 +1287,6 @@ declare namespace LocalJSX {
      * @vue-example ```jsx
      * <SearchcraftPopoverForm type="inline" :popoverResultMappings="[]"" />
      * ```
-     * @impost import { something } from 'somethign
      */
     interface SearchcraftPopoverForm {
         /**
@@ -1167,7 +1302,7 @@ declare namespace LocalJSX {
          */
         "popoverResultMappings"?: PopoverResultMappings;
         /**
-          * The type of popover form to render.  - `inline` - Renders inline with the rest of the content on the page. The search results pop over the page content. - `fullscreen` - Renders in fullscreen view. Used together with the `searchcraft-popover-button` component. - `modal` - Renders in a modal view. Used together with the `searchcraft-popover-button` component.
+          * The type of popover form to render. - `inline` - Renders inline with the rest of the content on the page. The search results pop over the page content. - `fullscreen` - Renders in fullscreen view. Used together with the `searchcraft-popover-button` component. - `modal` - Renders in a modal view. Used together with the `searchcraft-popover-button` component.
          */
         "type"?: 'inline' | 'fullscreen' | 'modal';
     }
@@ -1204,6 +1339,12 @@ declare namespace LocalJSX {
     }
     /**
      * This web component is designed to display the number of results returned from a search query.
+     * @import ```jsx
+     * // react
+     * import { SearchcraftResultsInfo } from "@searchcraft/react-sdk";
+     * // vue
+     * import { SearchcraftResultsInfo } from "@searchcraft/vue-sdk";
+     * ```
      * @js-example ```html
      * <!-- index.html -->
      * <searchcraft-results-info />
@@ -1255,6 +1396,12 @@ declare namespace LocalJSX {
     }
     /**
      * This web component is responsible for displaying the results of a search query. Once a query is submitted, the component formats and presents an ordered list of the results.
+     * @import ```jsx
+     * // react
+     * import { SearchcraftSearchResults } from "@searchcraft/react-sdk";
+     * // vue
+     * import { SearchcraftSearchResults } from "@searchcraft/vue-sdk";
+     * ```
      * @js-example ```html
      * <!-- index.html -->
      * <searchcraft-search-results
@@ -1290,12 +1437,18 @@ declare namespace LocalJSX {
      */
     interface SearchcraftSearchResults {
         /**
-          * A callback function responsible for rendering a result. Passed to \`searchcraft-search-result\`.
+          * A callback function responsible for rendering a result. Passed to `searchcraft-search-result`.
          */
         "template"?: SearchResultTemplate<SearchResultTemplateData>;
     }
     /**
      * This web component is designed to choose the number of search results displayed.
+     * @import ```jsx
+     * // react
+     * import { SearchcraftSearchResultsPerPage } from "@searchcraft/react-sdk";
+     * // vue
+     * import { SearchcraftSearchResultsPerPage } from "@searchcraft/vue-sdk";
+     * ```
      * @js-example ```html
      * <!-- index.html -->
      * <searchcraft-search-results-per-page increment="20" />
@@ -1384,7 +1537,13 @@ declare namespace LocalJSX {
         "onRangeChanged"?: (event: SearchcraftSliderCustomEvent<any>) => void;
     }
     /**
-     * This web component adds Searchcraft's built-in css theme to your page. It does not render anything visible, its only function is to manage the css styles on the page.
+     * This web component adds Searchcraft's built-in css theme to your page. It does not render anything visible, its only function is to manage the css styles on the page.'
+     * @import ```jsx
+     * // react
+     * import { SearchcraftTheme } from "@searchcraft/react-sdk";
+     * // vue
+     * import { SearchcraftTheme } from "@searchcraft/vue-sdk";
+     * ```
      * @js-example ```html
      * <searchcraft-theme />
      * ```
@@ -1477,6 +1636,12 @@ declare module "@stencil/core" {
             "searchcraft-facet-list": LocalJSX.SearchcraftFacetList & JSXBase.HTMLAttributes<HTMLSearchcraftFacetListElement>;
             /**
              * This web component represents a series of filters that allows users to refine and control their search queries by applying various filter criteria.
+             * @import ```jsx
+             * // react
+             * import { SearchcraftFilterPanel } from "@searchcraft/react-sdk";
+             * // vue
+             * import { SearchcraftFilterPanel } from "@searchcraft/vue-sdk";
+             * ```
              * @js-example ```html
              * <!-- index.html -->
              * <searchcraft-filter-panel />
@@ -1499,6 +1664,12 @@ declare module "@stencil/core" {
             /**
              * This web component provides a user-friendly interface for querying an indexed dataset, enabling users to easily search large collections of data.
              * It abstracts the complexities of index-based searching, making it accessible to users of all technical levels.
+             * @import ```jsx
+             * // react
+             * import { SearchcraftInputForm } from "@searchcraft/react-sdk";
+             * // vue
+             * import { SearchcraftInputForm } from "@searchcraft/vue-sdk";
+             * ```
              * @js-example ```html
              * <searchcraft-input-form auto-search />
              * ```
@@ -1519,6 +1690,12 @@ declare module "@stencil/core" {
             "searchcraft-input-label": LocalJSX.SearchcraftInputLabel & JSXBase.HTMLAttributes<HTMLSearchcraftInputLabelElement>;
             /**
              * This web component is designed to facilitate pagination of search results. Once a query is submitted, calculates the number for pages.
+             * @import ```jsx
+             * // react
+             * import { SearchcraftPagination } from "@searchcraft/react-sdk";
+             * // vue
+             * import { SearchcraftPagination } from "@searchcraft/vue-sdk";
+             * ```
              * @js-example ```html
              * <searchcraft-pagination />
              * ```
@@ -1532,6 +1709,12 @@ declare module "@stencil/core" {
             "searchcraft-pagination": LocalJSX.SearchcraftPagination & JSXBase.HTMLAttributes<HTMLSearchcraftPaginationElement>;
             /**
              * Renders a button which, when clicked, turns on popover visibility.
+             * @import ```jsx
+             * // react
+             * import { SearchcraftPopoverButton } from "@searchcraft/react-sdk";
+             * // vue
+             * import { SearchcraftPopoverButton } from "@searchcraft/vue-sdk";
+             * ```
              * @js-example ```html
              * <searchcraft-popover-button>
              *   Open popover
@@ -1551,6 +1734,12 @@ declare module "@stencil/core" {
             "searchcraft-popover-button": LocalJSX.SearchcraftPopoverButton & JSXBase.HTMLAttributes<HTMLSearchcraftPopoverButtonElement>;
             /**
              * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field, or when a popover-button is pressed.
+             * @import ```jsx
+             * // react
+             * import { SearchcraftPopoverForm } from "@searchcraft/react-sdk";
+             * // vue
+             * import { SearchcraftPopoverForm } from "@searchcraft/vue-sdk";
+             * ```
              * @js-example ```html
              * <!-- index.html -->
              * <searchcraft-popover-form type="inline" />
@@ -1566,7 +1755,6 @@ declare module "@stencil/core" {
              * @vue-example ```jsx
              * <SearchcraftPopoverForm type="inline" :popoverResultMappings="[]"" />
              * ```
-             * @impost import { something } from 'somethign
              */
             "searchcraft-popover-form": LocalJSX.SearchcraftPopoverForm & JSXBase.HTMLAttributes<HTMLSearchcraftPopoverFormElement>;
             /**
@@ -1583,6 +1771,12 @@ declare module "@stencil/core" {
             "searchcraft-popover-list-view": LocalJSX.SearchcraftPopoverListView & JSXBase.HTMLAttributes<HTMLSearchcraftPopoverListViewElement>;
             /**
              * This web component is designed to display the number of results returned from a search query.
+             * @import ```jsx
+             * // react
+             * import { SearchcraftResultsInfo } from "@searchcraft/react-sdk";
+             * // vue
+             * import { SearchcraftResultsInfo } from "@searchcraft/vue-sdk";
+             * ```
              * @js-example ```html
              * <!-- index.html -->
              * <searchcraft-results-info />
@@ -1614,6 +1808,12 @@ declare module "@stencil/core" {
             "searchcraft-search-result": LocalJSX.SearchcraftSearchResult & JSXBase.HTMLAttributes<HTMLSearchcraftSearchResultElement>;
             /**
              * This web component is responsible for displaying the results of a search query. Once a query is submitted, the component formats and presents an ordered list of the results.
+             * @import ```jsx
+             * // react
+             * import { SearchcraftSearchResults } from "@searchcraft/react-sdk";
+             * // vue
+             * import { SearchcraftSearchResults } from "@searchcraft/vue-sdk";
+             * ```
              * @js-example ```html
              * <!-- index.html -->
              * <searchcraft-search-results
@@ -1650,6 +1850,12 @@ declare module "@stencil/core" {
             "searchcraft-search-results": LocalJSX.SearchcraftSearchResults & JSXBase.HTMLAttributes<HTMLSearchcraftSearchResultsElement>;
             /**
              * This web component is designed to choose the number of search results displayed.
+             * @import ```jsx
+             * // react
+             * import { SearchcraftSearchResultsPerPage } from "@searchcraft/react-sdk";
+             * // vue
+             * import { SearchcraftSearchResultsPerPage } from "@searchcraft/vue-sdk";
+             * ```
              * @js-example ```html
              * <!-- index.html -->
              * <searchcraft-search-results-per-page increment="20" />
@@ -1679,7 +1885,13 @@ declare module "@stencil/core" {
              */
             "searchcraft-slider": LocalJSX.SearchcraftSlider & JSXBase.HTMLAttributes<HTMLSearchcraftSliderElement>;
             /**
-             * This web component adds Searchcraft's built-in css theme to your page. It does not render anything visible, its only function is to manage the css styles on the page.
+             * This web component adds Searchcraft's built-in css theme to your page. It does not render anything visible, its only function is to manage the css styles on the page.'
+             * @import ```jsx
+             * // react
+             * import { SearchcraftTheme } from "@searchcraft/react-sdk";
+             * // vue
+             * import { SearchcraftTheme } from "@searchcraft/vue-sdk";
+             * ```
              * @js-example ```html
              * <searchcraft-theme />
              * ```

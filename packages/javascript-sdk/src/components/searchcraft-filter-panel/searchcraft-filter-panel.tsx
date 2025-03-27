@@ -12,6 +12,15 @@ import { getMillis } from '@utils';
 /**
  * This web component represents a series of filters that allows users to refine and control their search queries by applying various filter criteria.
  *
+ * @import
+ * ```jsx
+ * // react
+ * import { SearchcraftFilterPanel } from "@searchcraft/react-sdk";
+ *
+ * // vue
+ * import { SearchcraftFilterPanel } from "@searchcraft/vue-sdk";
+ * ```
+ *
  * @js-example
  * ```html
  * <!-- index.html -->

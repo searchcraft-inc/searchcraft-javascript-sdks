@@ -6,17 +6,6 @@
 
 # Interface: SearchcraftTheme
 
-This web component adds Searchcraft's built-in css theme to your page. It does not render anything visible, its only function is to manage the css styles on the page.
-@js-example ```html
-<searchcraft-theme />
-```
-@react-example ```jsx
-<SearchcraftTheme />
-```
-@vue-example ```jsx
-<SearchcraftTheme />
-```
-
 ## Extended by
 
 - [`SearchcraftThemeProps`](/reference/sdk/js-vue/interfaces/SearchcraftThemeProps.md)

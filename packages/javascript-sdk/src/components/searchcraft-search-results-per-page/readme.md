@@ -2,7 +2,18 @@
 
 This web component is designed to choose the number of search results displayed.
 
-## Examples
+## Import
+
+```jsx
+// react
+import { SearchcraftSearchResultsPerPage } from "@searchcraft/react-sdk";
+
+// vue
+import { SearchcraftSearchResultsPerPage } from "@searchcraft/vue-sdk";
+```
+
+
+## Usage
 
 **JavaScript:**
 

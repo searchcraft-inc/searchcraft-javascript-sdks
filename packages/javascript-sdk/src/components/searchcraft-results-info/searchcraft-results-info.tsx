@@ -9,6 +9,15 @@ import { formatNumberWithCommas, html } from '@utils';
 /**
  * This web component is designed to display the number of results returned from a search query.
  *
+ * @import
+ * ```jsx
+ * // react
+ * import { SearchcraftResultsInfo } from "@searchcraft/react-sdk";
+ *
+ * // vue
+ * import { SearchcraftResultsInfo } from "@searchcraft/vue-sdk";
+ * ```
+ *
  * @js-example
  * ```html
  * <!-- index.html -->

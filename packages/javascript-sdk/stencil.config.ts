@@ -57,6 +57,7 @@ export const config: Config = {
               `# ${component.tag}`,
               '',
               ...overviewToMarkdown(component.overview),
+              ...importsToMarkdown(component.docsTags),
               ...examplesToMarkdown(component.docsTags),
               ...propsToMarkdown(component.props),
               ...eventsToMarkdown(component.events),
@@ -87,6 +88,34 @@ export const overviewToMarkdown = (overview?: string): string[] => {
   return content;
 };
 
+// Imports
+export const importsToMarkdown = (docsTags: JsonDocsTag[]): string[] => {
+  const content: string[] = [];
+
+  if (docsTags.length === 0) {
+    return content;
+  }
+
+  const filteredDocsTags = docsTags.filter((docsTag) =>
+    ['import'].includes(docsTag.name),
+  );
+
+  if (filteredDocsTags.length === 0) {
+    return content;
+  }
+
+  content.push('## Import');
+  content.push('');
+
+  filteredDocsTags.forEach((docsTag) => {
+    content.push(`${docsTag.text}`);
+    content.push('');
+    content.push('');
+  });
+
+  return content;
+};
+
 // Examples
 export const examplesToMarkdown = (docsTags: JsonDocsTag[]): string[] => {
   const content: string[] = [];
@@ -95,20 +124,24 @@ export const examplesToMarkdown = (docsTags: JsonDocsTag[]): string[] => {
     return content;
   }
 
-  content.push('## Examples');
+  const filteredDocsTags = docsTags.filter((docsTag) =>
+    ['js-example', 'react-example', 'vue-example'].includes(docsTag.name),
+  );
+
+  if (filteredDocsTags.length === 0) {
+    return content;
+  }
+
+  content.push('## Usage');
   content.push('');
 
-  docsTags
-    .filter((docsTag) =>
-      ['js-example', 'react-example', 'vue-example'].includes(docsTag.name),
-    )
-    .forEach((docsTag) => {
-      content.push(`**${getDocsTagName(docsTag.name)}:**`);
-      content.push('');
-      content.push(`${docsTag.text}`);
-      content.push('');
-      content.push('');
-    });
+  filteredDocsTags.forEach((docsTag) => {
+    content.push(`**${getDocsTagName(docsTag.name)}:**`);
+    content.push('');
+    content.push(`${docsTag.text}`);
+    content.push('');
+    content.push('');
+  });
 
   return content;
 };
@@ -223,7 +256,6 @@ const createTableRow = (row: string[]) => {
 // Value utilities
 const escapeTableMarkdown = (str: string) => {
   let escapedStr = str;
-  console.log('STRING', str);
   escapedStr = str.replace(/\r?\n/g, ' '); // New lines
   escapedStr = str.replace(/\|/g, '\\|'); // Pipes
   return escapedStr;

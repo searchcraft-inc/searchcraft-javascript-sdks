@@ -5,6 +5,15 @@ import classNames from 'classnames';
 /**
  * This web component is designed to facilitate pagination of search results. Once a query is submitted, calculates the number for pages.
  *
+ * @import
+ * ```jsx
+ * // react
+ * import { SearchcraftPagination } from "@searchcraft/react-sdk";
+ *
+ * // vue
+ * import { SearchcraftPagination } from "@searchcraft/vue-sdk";
+ * ```
+ *
  * @js-example
  * ```html
  * <searchcraft-pagination />

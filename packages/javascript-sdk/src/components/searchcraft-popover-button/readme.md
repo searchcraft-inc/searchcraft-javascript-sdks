@@ -2,7 +2,18 @@
 
 Renders a button which, when clicked, turns on popover visibility.
 
-## Examples
+## Import
+
+```jsx
+// react
+import { SearchcraftPopoverButton } from "@searchcraft/react-sdk";
+
+// vue
+import { SearchcraftPopoverButton } from "@searchcraft/vue-sdk";
+```
+
+
+## Usage
 
 **JavaScript:**
 

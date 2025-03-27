@@ -6,31 +6,6 @@
 
 # Interface: SearchcraftResultsInfo
 
-This web component is designed to display the number of results returned from a search query.
-@js-example ```html
-<!-- index.html -->
-<searchcraft-results-info />
-```
-```js
-// index.js
-const resultsInfo = document.querySelector('searchcraft-results-info');
-resultsInfo.template = (info, { html }) => html`
-  ${info.range[0]}-${info.range[1]} of ${info.count} results in ${info.responseTime}ms
-`;
-```
-@react-example ```jsx
-<SearchcraftResultsInfo
-  template={(info, { html }) => html`
-    ${info.range[0]}-${info.range[1]} of ${info.count} results in ${info.responseTime}ms
-  `}
-/>
-@vue-example ```jsx
-<SearchcraftResultsInfo
-  :template={(info, { html }) => html`
-    ${info.range[0]}-${info.range[1]} of ${info.count} results in ${info.responseTime}ms
-  `}
-/>
-
 ## Extended by
 
 - [`SearchcraftResultsInfoProps`](/reference/sdk/js-vue/interfaces/SearchcraftResultsInfoProps.md)
