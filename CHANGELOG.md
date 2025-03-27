@@ -1,3 +1,16 @@
+## 0.10.0 -2025-03-27
+
+This release includes:
+- Adds NextJS/SSR support.
+- Fixes issue where types where not exporting properly from the javascript-sdk.
+- Renames storybook scripts to compendium.
+- Documentation generation changes.
+- Removes typedoc docs for react-sdk and vue-sdk.
+- Adds template strategy to searchcraft-base-search-results, SearchcraftCore.customAdTemplate, and searchcraft-results-info.
+- Renames searchcraft-base-search-results to searchcraft-search-results.
+- Updates to searchcraft-results-info.customFormatter and SearchcraftCore.customAdTemplate functionality.
+- Misc. project configuration updates.
+
 ## 0.9.7 - 2025-03-21
 
 This release includes:
