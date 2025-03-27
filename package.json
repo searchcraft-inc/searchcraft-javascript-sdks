@@ -33,6 +33,7 @@
   },
   "scripts": {
     "build": "node build.mjs",
+    "bump-version": "yarn lerna version",
     "compendium:react": "yarn workspace compendium storybook:react",
     "compendium:vue": "yarn workspace compendium storybook:vue",
     "compendium:next": "cd packages/compendium && yarn next",
