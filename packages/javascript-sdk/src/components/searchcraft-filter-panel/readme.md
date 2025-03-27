@@ -1,7 +1,5 @@
 # searchcraft-filter-panel
 
-## Overview
-
 This web component represents a series of filters that allows users to refine and control their search queries by applying various filter criteria.
 
 ## Examples

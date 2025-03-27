@@ -1,7 +1,5 @@
 # searchcraft-results-info
 
-## Overview
-
 This web component is designed to display the number of results returned from a search query.
 
 ## Examples

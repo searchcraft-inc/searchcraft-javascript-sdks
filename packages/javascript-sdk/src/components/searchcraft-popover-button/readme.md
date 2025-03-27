@@ -1,7 +1,5 @@
 # searchcraft-popover-button
 
-## Overview
-
 Renders a button which, when clicked, turns on popover visibility.
 
 ## Examples

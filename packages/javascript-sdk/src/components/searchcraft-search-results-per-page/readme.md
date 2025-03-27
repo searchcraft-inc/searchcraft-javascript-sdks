@@ -1,7 +1,5 @@
 # searchcraft-search-results-per-page
 
-## Overview
-
 This web component is designed to choose the number of search results displayed.
 
 ## Examples
