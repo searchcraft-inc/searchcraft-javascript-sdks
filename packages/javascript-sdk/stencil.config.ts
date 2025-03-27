@@ -83,8 +83,6 @@ export const overviewToMarkdown = (overview?: string): string[] => {
     return content;
   }
 
-  content.push('## Overview');
-  content.push('');
   content.push(`${overview.trim()}`);
   content.push('');
 
