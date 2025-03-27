@@ -6,9 +6,8 @@
 
 # Interface: SearchcraftButton
 
-This web component represents a button to be consumed within the `search-input-form` component.
+This web component represents a button.
 It provides a clear, interactive way for users to submit search queries or trigger actions in a search interface.
-It is consumed within the `searchcraft-input-form` component.
 
 ## Properties
 

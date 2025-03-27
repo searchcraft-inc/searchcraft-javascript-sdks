@@ -3,13 +3,21 @@ import { Component, h, State } from '@stencil/core';
 import classNames from 'classnames';
 
 /**
- * This web component is designed to facilitate pagination of search results.
- * Once a query is submitted, calculates the number for pages.
+ * This web component is designed to facilitate pagination of search results. Once a query is submitted, calculates the number for pages.
  *
- * ## Usage
+ * @js-example
  * ```html
- * <!-- index.html -->
  * <searchcraft-pagination />
+ * ```
+ *
+ * @react-example
+ * ```jsx
+ * <SearchcraftPagination />
+ * ```
+ *
+ * @vue-example
+ * ```vue
+ * <SearchcraftPagination />
  * ```
  */
 @Component({

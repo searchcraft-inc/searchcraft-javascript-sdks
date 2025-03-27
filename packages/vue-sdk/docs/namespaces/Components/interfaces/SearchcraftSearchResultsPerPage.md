@@ -7,10 +7,15 @@
 # Interface: SearchcraftSearchResultsPerPage
 
 This web component is designed to choose the number of search results displayed.
-## Usage
-```html
+@js-example ```html
 <!-- index.html -->
 <searchcraft-search-results-per-page increment="20" />
+```
+@react-example ```jsx
+<SearchcraftSearchResultsPerPage increment={20} />
+```
+@vue-example ```jsx
+<SearchcraftSearchResultsPerPage increment="20" />
 ```
 
 ## Extended by

@@ -6,14 +6,12 @@
 
 # Interface: SearchcraftSearchResults
 
-This web component is responsible for displaying the results of a search query.
-Once a query is submitted, the component formats and presents an ordered list of the results.
-## Usage
-```html
+This web component is responsible for displaying the results of a search query. Once a query is submitted, the component formats and presents an ordered list of the results.
+@js-example ```html
 <!-- index.html -->
 <searchcraft-search-results
   ad-interval="4"
-  place-ad-at-start="false"
+  place-ad-at-start="true"
 />
 ```
 ```js
@@ -22,9 +20,24 @@ const searchResults = document.querySelector('searchcraft-search-results');
 searchResults.template = (item, index, { html }) => html`
  <h2>${item.title}</h2>
 `;
-searchResults.addEventListener('noResults', () => {
-  console.log('No search results found');
-});
+```
+@react-example ```jsx
+<SearchcraftSearchResults
+  adInterval={4}
+  placeAdAtState={true}
+  template={(item, index, { html }) => html`
+    <h2>${item.title}</h2>
+  `}
+/>
+```
+@vue-example ```jsx
+<SearchcraftSearchResults
+  adInterval={4}
+  placeAdAtState={true}
+  :template={(item, index, { html }) => html`
+    <h2>${item.title}</h2>
+  `}
+/>
 ```
 
 ## Properties

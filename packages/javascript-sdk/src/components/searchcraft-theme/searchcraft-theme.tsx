@@ -2,13 +2,21 @@ import { Component, h } from '@stencil/core';
 import styles from '../../themes/hologram.css?raw';
 
 /**
- * This web component adds Searchcraft's built-in css theme to your page's <head> tag.
- * It does not render anything visible, its only function is to manage the css styles on the page.
+ * This web component adds Searchcraft's built-in css theme to your page. It does not render anything visible, its only function is to manage the css styles on the page.
  *
- * ## Usage
+ * @js-example
  * ```html
- * <!-- index.html -->
- * <searchcraft-theme theme="light" custom-theme="{}" />
+ * <searchcraft-theme />
+ * ```
+ *
+ * @react-example
+ * ```jsx
+ * <SearchcraftTheme />
+ * ```
+ *
+ * @vue-example
+ * ```jsx
+ * <SearchcraftTheme />
  * ```
  */
 @Component({

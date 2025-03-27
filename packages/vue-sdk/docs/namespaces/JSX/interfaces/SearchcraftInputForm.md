@@ -8,10 +8,14 @@
 
 This web component provides a user-friendly interface for querying an indexed dataset, enabling users to easily search large collections of data.
 It abstracts the complexities of index-based searching, making it accessible to users of all technical levels.
-## Usage
-```html
-<!-- index.html -->
-<searchcraft-input-form placeholder-value="Search here" />
+@js-example ```html
+<searchcraft-input-form auto-search />
+```
+@react-example ```jsx
+<SearchcraftInputForm autoSearch />
+```
+@vue-example ```jsx
+<SearchcraftInputForm autoSearch />
 ```
 
 ## Properties

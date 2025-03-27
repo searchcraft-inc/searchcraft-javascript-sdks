@@ -6,9 +6,7 @@
 
 # Interface: SearchcraftSlider
 
-This web component is designed to allow users to select a value from a range defined by a minimum and maximum value.
-The component renders a slider interface, which can be used to visually choose a value between two boundaries.
-It is consumed by the `searchcraft-filter-panel` component.
+This web component is designed to allow users to select a value from a range defined by a minimum and maximum value. The component renders a slider interface, which can be used to visually choose a value between two boundaries.
 
 ## Properties
 

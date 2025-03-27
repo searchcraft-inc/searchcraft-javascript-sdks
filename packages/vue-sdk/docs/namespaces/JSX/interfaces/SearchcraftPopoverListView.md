@@ -8,9 +8,7 @@
 
 This web component is designed to display a list of results within a popover interface.
 It is consumed within the `searchcraft-popover-form` component.
-## Usage
-```html
-<!-- index.html -->
+@js-example ```html
 <searchcraft-popover-list-view />
 ```
 

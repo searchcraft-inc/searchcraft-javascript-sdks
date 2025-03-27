@@ -8,8 +8,7 @@
 
 This web component is designed to display facets in a search interface, allowing users to refine their search results by applying filters based on various attributes.
 It is consumed within the `searchcraft-filter-panel`.
-## Usage
-```html
+@js-example ```html
 <!-- index.html -->
 <searchcraft-facet-list field-name="title" />
 ```

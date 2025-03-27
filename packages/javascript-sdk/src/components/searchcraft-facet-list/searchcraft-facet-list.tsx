@@ -17,7 +17,7 @@ import { mergeFacetRoots, removeSubstringMatches } from '@utils';
  * This web component is designed to display facets in a search interface, allowing users to refine their search results by applying filters based on various attributes.
  * It is consumed within the `searchcraft-filter-panel`.
  *
- * ## Usage
+ * @js-example
  * ```html
  * <!-- index.html -->
  * <searchcraft-facet-list field-name="title" />
@@ -31,6 +31,8 @@ import { mergeFacetRoots, removeSubstringMatches } from '@utils';
  *   console.log('Facet selection updated');
  * });
  * ```
+ *
+ * @internal
  */
 @Component({
   tag: 'searchcraft-facet-list',

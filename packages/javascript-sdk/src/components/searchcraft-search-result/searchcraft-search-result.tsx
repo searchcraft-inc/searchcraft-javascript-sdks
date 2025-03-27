@@ -8,9 +8,9 @@ import { Component, h, Prop, State } from '@stencil/core';
 import { html } from '@utils';
 
 /**
- * This web component is designed to display detailed information for a single search result.
- * Once a query is submitted, the component formats and presents the result.
- * It is consumed within the `searchcraft-search-results` component.
+ * This web component is designed to display detailed information for a single search result. Once a query is submitted, the component formats and presents the result.
+ *
+ * @internal
  */
 @Component({
   tag: 'searchcraft-search-result',

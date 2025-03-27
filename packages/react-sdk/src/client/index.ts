@@ -26,7 +26,6 @@ export class Searchcraft extends SearchcraftCore {
 
 export { defineCustomElements };
 
-export * from './SearchcraftBaseSearchResults';
 export * from './SearchcraftFilterPanel';
 export * from './SearchcraftInputForm';
 export * from './SearchcraftPopoverButton';

@@ -7,3 +7,18 @@
 # Interface: SearchcraftPopoverButton
 
 Renders a button which, when clicked, turns on popover visibility.
+@js-example ```html
+<searchcraft-popover-button>
+  Open popover
+</searchcraft-popover-button>
+```
+@react-example ```jsx
+<SearchcraftPopoverButton>
+  Open popover
+</SearchcraftPopoverButton>
+```
+@vue-example ```jsx
+<SearchcraftPopoverButton>
+  Open popover
+</SearchcraftPopoverButton>
+```

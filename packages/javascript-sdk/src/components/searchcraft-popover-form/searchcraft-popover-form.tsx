@@ -11,25 +11,27 @@ import { searchcraftStore } from '@store';
 /**
  * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field, or when a popover-button is pressed.
  *
- * ## Usage
+ * @js-example
  * ```html
  * <!-- index.html -->
- * <searchcraft-popover-form type="fullscreen" />
+ * <searchcraft-popover-form type="inline" />
  * ```
  *
  * ```js
  * // index.js
  * const popoverForm = document.querySelector('searchcraft-popover-form');
  *
- * popoverForm.popoverResultMappings = {
- *  containerHref: {
- *   fieldNames: [
- *    {
- *      fieldName: 'canonical_link',
- *      dataType: 'text',
- *    },
- *  ],
- *  };
+ * popoverForm.popoverResultMappings = {};
+ * ```
+ *
+ * @react-example
+ * ```jsx
+ * <SearchcraftPopoverForm type="inline" popoverResultMappings={[]} />
+ * ```
+ *
+ * @vue-example
+ * ```jsx
+ * <SearchcraftPopoverForm type="inline" :popoverResultMappings="[]"" />
  * ```
  */
 @Component({

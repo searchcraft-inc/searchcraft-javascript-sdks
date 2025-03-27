@@ -7,8 +7,7 @@
 # Interface: SearchcraftSelect
 
 This web component is designed to allow users to select between a group of options.
-## Usage
-```html
+@js-example ```html
 <!-- index.html -->
 <searchcraft-select
  inputId="searchcraft-select"

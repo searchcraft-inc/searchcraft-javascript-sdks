@@ -9,6 +9,8 @@ import { getDocumentValueFromSearchResultMapping } from '@utils';
 
 /**
  * A single list item rendered in a searchcraft-popover-list-view.
+ *
+ * @internal
  */
 @Component({
   tag: 'searchcraft-popover-list-item',

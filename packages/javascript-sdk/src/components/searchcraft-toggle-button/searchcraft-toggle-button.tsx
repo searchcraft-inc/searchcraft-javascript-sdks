@@ -11,7 +11,8 @@ import classNames from 'classnames';
 
 /**
  * This web component simulates a light switch functionality, providing a simple and intuitive toggle between two states—on and off.
- * It is consumed within the `searchcraft-filter-panel` component.
+ *
+ * @internal
  */
 @Component({
   tag: 'searchcraft-toggle-button',

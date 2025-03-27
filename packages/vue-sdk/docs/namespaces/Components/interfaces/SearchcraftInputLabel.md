@@ -7,9 +7,7 @@
 # Interface: SearchcraftInputLabel
 
 This web component serves as the input label for the searchcraft-input-form component.
-## Usage
-```html
-<!-- index.html -->
+@js-example ```html
 <searchcraft-input-label label="Search" />
 ```
 
