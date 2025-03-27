@@ -1,7 +1,7 @@
 {
   "name": "@searchcraft/javascript-sdk",
   "private": false,
-  "version": "0.9.7",
+  "version": "0.10.0",
   "description": "Searchcraft Javascript SDK",
   "author": "Searchcraft Inc.",
   "license": "Apache-2.0",
@@ -26,7 +26,9 @@
     "type": "git",
     "url": "https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/"
   },
-  "files": ["dist/"],
+  "files": [
+    "dist/"
+  ],
   "scripts": {
     "build": "stencil build",
     "docs": "typedoc --options typedoc.json",
@@ -41,7 +43,7 @@
     "nanoid": "^5.0.9"
   },
   "devDependencies": {
-    "@searchcraft/core": "^0.9.7",
+    "@searchcraft/core": "^0.10.0",
     "@stencil/core": "^4.7.0",
     "@stencil/react-output-target": "^0.8.2",
     "@stencil/sass": "^3.0.12",
