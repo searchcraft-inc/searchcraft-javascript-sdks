@@ -23,6 +23,10 @@ popoverForm.popoverResultMappings = {};
 <SearchcraftPopoverForm type="inline" :popoverResultMappings="[]"" />
 ```
 
+## Impost
+
+import { something } from 'somethign
+
 ## Extended by
 
 - [`SearchcraftPopoverFormProps`](/reference/sdk/js-vue/interfaces/SearchcraftPopoverFormProps.md)

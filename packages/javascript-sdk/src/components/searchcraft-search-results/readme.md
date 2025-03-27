@@ -4,7 +4,7 @@ This web component is responsible for displaying the results of a search query. 
 
 ## Examples
 
-### JavaScript
+**JavaScript:**
 
 ```html
 <!-- index.html -->
@@ -24,7 +24,7 @@ searchResults.template = (item, index, { html }) => html`
 ```
 
 
-### React
+**React:**
 
 ```jsx
 <SearchcraftSearchResults
@@ -37,7 +37,7 @@ searchResults.template = (item, index, { html }) => html`
 ```
 
 
-### Vue
+**Vue:**
 
 ```jsx
 <SearchcraftSearchResults

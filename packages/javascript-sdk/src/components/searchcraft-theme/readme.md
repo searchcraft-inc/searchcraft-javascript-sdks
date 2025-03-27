@@ -4,21 +4,21 @@ This web component adds Searchcraft's built-in css theme to your page. It does n
 
 ## Examples
 
-### JavaScript
+**JavaScript:**
 
 ```html
 <searchcraft-theme />
 ```
 
 
-### React
+**React:**
 
 ```jsx
 <SearchcraftTheme />
 ```
 
 
-### Vue
+**Vue:**
 
 ```jsx
 <SearchcraftTheme />

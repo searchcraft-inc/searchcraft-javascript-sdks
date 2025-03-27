@@ -4,7 +4,7 @@ This web component represents a series of filters that allows users to refine an
 
 ## Examples
 
-### JavaScript
+**JavaScript:**
 
 ```html
 <!-- index.html -->
@@ -21,14 +21,14 @@ if (filterPanel) {
 ```
 
 
-### React
+**React:**
 
 ```jsx
 <SearchcraftFilterPanel items={[]} />
 ```
 
 
-### Vue
+**Vue:**
 
 ```jsx
 <SearchcraftFilterPanel :items="[]" />

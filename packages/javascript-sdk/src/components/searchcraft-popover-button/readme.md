@@ -4,7 +4,7 @@ Renders a button which, when clicked, turns on popover visibility.
 
 ## Examples
 
-### JavaScript
+**JavaScript:**
 
 ```html
 <searchcraft-popover-button>
@@ -13,7 +13,7 @@ Renders a button which, when clicked, turns on popover visibility.
 ```
 
 
-### React
+**React:**
 
 ```jsx
 <SearchcraftPopoverButton>
@@ -22,7 +22,7 @@ Renders a button which, when clicked, turns on popover visibility.
 ```
 
 
-### Vue
+**Vue:**
 
 ```jsx
 <SearchcraftPopoverButton>

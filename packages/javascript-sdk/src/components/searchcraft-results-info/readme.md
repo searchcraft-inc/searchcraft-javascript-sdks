@@ -4,7 +4,7 @@ This web component is designed to display the number of results returned from a 
 
 ## Examples
 
-### JavaScript
+**JavaScript:**
 
 ```html
 <!-- index.html -->
@@ -21,7 +21,7 @@ resultsInfo.template = (info, { html }) => html`
 ```
 
 
-### React
+**React:**
 
 ```jsx
 <SearchcraftResultsInfo
@@ -31,7 +31,7 @@ resultsInfo.template = (info, { html }) => html`
 />
 
 
-### Vue
+**Vue:**
 
 ```jsx
 <SearchcraftResultsInfo

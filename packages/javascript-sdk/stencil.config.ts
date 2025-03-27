@@ -50,7 +50,6 @@ export const config: Config = {
       type: 'docs-custom',
       generator: async (docs: JsonDocs) => {
         docs.components.forEach(async (component) => {
-          // if (component.tag === 'searchcraft-ad') {
           if (
             !component.docsTags.some((docTag) => docTag.name === 'internal')
           ) {
@@ -65,7 +64,6 @@ export const config: Config = {
 
             await fs.writeFile(`${component.dirPath}/readme.md`, markdown);
           }
-          // }
         });
       },
     },
@@ -105,7 +103,7 @@ export const examplesToMarkdown = (docsTags: JsonDocsTag[]): string[] => {
       ['js-example', 'react-example', 'vue-example'].includes(docsTag.name),
     )
     .forEach((docsTag) => {
-      content.push(`### ${getDocsTagName(docsTag.name)}`);
+      content.push(`**${getDocsTagName(docsTag.name)}:**`);
       content.push('');
       content.push(`${docsTag.text}`);
       content.push('');
@@ -138,7 +136,6 @@ export const propsToMarkdown = (props: JsonDocsProp[]) => {
 
   content.push('## Properties');
   content.push('');
-
   const headers = ['Property', 'Attribute', 'Description', 'Type', 'Default'];
   const rows: string[][] = [];
 
@@ -153,7 +150,6 @@ export const propsToMarkdown = (props: JsonDocsProp[]) => {
   });
 
   const table = createTable(headers, rows);
-
   content.push(...table);
   content.push('');
   content.push('');
@@ -171,7 +167,6 @@ export const eventsToMarkdown = (events: JsonDocsEvent[]) => {
 
   content.push('## Events');
   content.push('');
-
   const headers = ['Event', 'Description', 'Type'];
   const rows: string[][] = [];
 
@@ -184,7 +179,6 @@ export const eventsToMarkdown = (events: JsonDocsEvent[]) => {
   });
 
   const table = createTable(headers, rows);
-
   content.push(...table);
   content.push('');
   content.push('');
@@ -229,8 +223,9 @@ const createTableRow = (row: string[]) => {
 // Value utilities
 const escapeTableMarkdown = (str: string) => {
   let escapedStr = str;
-  escapedStr = str.replace(/\r?\n/g, ' '); // new lines
-  escapedStr = str.replace(/\|/g, '\\|'); // pipes
+  console.log('STRING', str);
+  escapedStr = str.replace(/\r?\n/g, ' '); // New lines
+  escapedStr = str.replace(/\|/g, '\\|'); // Pipes
   return escapedStr;
 };
 
@@ -248,7 +243,7 @@ const getDocsValue = (propOrEvent: JsonDocsProp | JsonDocsEvent) =>
       propOrEvent.deprecation !== undefined
         ? `<span style="color:red">**[DEPRECATED]**</span> ${propOrEvent.deprecation}<br/><br/>`
         : ''
-    }${propOrEvent.docs}`,
+    }${propOrEvent.docs.replace(/\r?\n/g, ' ')}`, // New lines must be removed here as well
   );
 
 const getTypeValue = (prop: JsonDocsProp) =>

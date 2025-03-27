@@ -209,6 +209,7 @@ export namespace Components {
      * @vue-example ```jsx
      * <SearchcraftPopoverForm type="inline" :popoverResultMappings="[]"" />
      * ```
+     * @impost import { something } from 'somethign
      */
     interface SearchcraftPopoverForm {
         /**
@@ -690,6 +691,7 @@ declare global {
      * @vue-example ```jsx
      * <SearchcraftPopoverForm type="inline" :popoverResultMappings="[]"" />
      * ```
+     * @impost import { something } from 'somethign
      */
     interface HTMLSearchcraftPopoverFormElement extends Components.SearchcraftPopoverForm, HTMLStencilElement {
     }
@@ -1149,6 +1151,7 @@ declare namespace LocalJSX {
      * @vue-example ```jsx
      * <SearchcraftPopoverForm type="inline" :popoverResultMappings="[]"" />
      * ```
+     * @impost import { something } from 'somethign
      */
     interface SearchcraftPopoverForm {
         /**
@@ -1563,6 +1566,7 @@ declare module "@stencil/core" {
              * @vue-example ```jsx
              * <SearchcraftPopoverForm type="inline" :popoverResultMappings="[]"" />
              * ```
+             * @impost import { something } from 'somethign
              */
             "searchcraft-popover-form": LocalJSX.SearchcraftPopoverForm & JSXBase.HTMLAttributes<HTMLSearchcraftPopoverFormElement>;
             /**

@@ -4,21 +4,21 @@ This web component is designed to facilitate pagination of search results. Once 
 
 ## Examples
 
-### JavaScript
+**JavaScript:**
 
 ```html
 <searchcraft-pagination />
 ```
 
 
-### React
+**React:**
 
 ```jsx
 <SearchcraftPagination />
 ```
 
 
-### Vue
+**Vue:**
 
 ```jsx
 <SearchcraftPagination />

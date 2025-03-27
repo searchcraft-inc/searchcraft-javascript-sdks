@@ -23,6 +23,10 @@ popoverForm.popoverResultMappings = {};
 <SearchcraftPopoverForm type="inline" :popoverResultMappings="[]"" />
 ```
 
+## Impost
+
+import { something } from 'somethign
+
 ## Properties
 
 ### hotkey?

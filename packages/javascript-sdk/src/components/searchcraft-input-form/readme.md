@@ -5,21 +5,21 @@ It abstracts the complexities of index-based searching, making it accessible to 
 
 ## Examples
 
-### JavaScript
+**JavaScript:**
 
 ```html
 <searchcraft-input-form auto-search />
 ```
 
 
-### React
+**React:**
 
 ```jsx
 <SearchcraftInputForm autoSearch />
 ```
 
 
-### Vue
+**Vue:**
 
 ```jsx
 <SearchcraftInputForm autoSearch />
