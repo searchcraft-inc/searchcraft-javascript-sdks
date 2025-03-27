@@ -13,6 +13,8 @@ import { html } from '@utils';
 
 /**
  * An inline ad meant to be rendered in a list of search results.
+ *
+ * @internal
  */
 @Component({
   tag: 'searchcraft-ad',

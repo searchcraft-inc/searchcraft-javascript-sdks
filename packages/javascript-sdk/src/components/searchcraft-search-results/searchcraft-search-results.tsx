@@ -12,15 +12,24 @@ import type {
 import { type SearchcraftState, searchcraftStore } from '@store';
 
 /**
- * This web component is responsible for displaying the results of a search query.
- * Once a query is submitted, the component formats and presents an ordered list of the results.
+ * This web component is responsible for displaying the results of a search query. Once a query is submitted, the component formats and presents an ordered list of the results.
  *
- * ## Usage
+ *
+ * @import
+ * ```jsx
+ * // react
+ * import { SearchcraftSearchResults } from "@searchcraft/react-sdk";
+ *
+ * // vue
+ * import { SearchcraftSearchResults } from "@searchcraft/vue-sdk";
+ * ```
+ *
+ * @js-example
  * ```html
  * <!-- index.html -->
  * <searchcraft-search-results
  *   ad-interval="4"
- *   place-ad-at-start="false"
+ *   place-ad-at-start="true"
  * />
  * ```
  *
@@ -31,10 +40,28 @@ import { type SearchcraftState, searchcraftStore } from '@store';
  * searchResults.template = (item, index, { html }) => html`
  *  <h2>${item.title}</h2>
  * `;
+ * ```
  *
- * searchResults.addEventListener('noResults', () => {
- *   console.log('No search results found');
- * });
+ * @react-example
+ * ```jsx
+ * <SearchcraftSearchResults
+ *   adInterval={4}
+ *   placeAdAtState={true}
+ *   template={(item, index, { html }) => html`
+ *     <h2>${item.title}</h2>
+ *   `}
+ * />
+ * ```
+ *
+ *  @vue-example
+ * ```jsx
+ * <SearchcraftSearchResults
+ *   adInterval={4}
+ *   placeAdAtState={true}
+ *   :template={(item, index, { html }) => html`
+ *     <h2>${item.title}</h2>
+ *   `}
+ * />
  * ```
  */
 @Component({
@@ -42,8 +69,7 @@ import { type SearchcraftState, searchcraftStore } from '@store';
 })
 export class SearchcraftSearchResults {
   /**
-   * A callback function responsible for rendering a result.
-   * Passed to `searchcraft-search-result`.
+   * A callback function responsible for rendering a result. Passed to `searchcraft-search-result`.
    */
   @Prop() template?: SearchResultTemplate<SearchResultTemplateData>;
 

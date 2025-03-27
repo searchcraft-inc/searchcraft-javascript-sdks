@@ -16,7 +16,7 @@ export type SearchcraftSelectOption = {
 /**
  * This web component is designed to allow users to select between a group of options.
  *
- * ## Usage
+ * @js-example
  * ```html
  * <!-- index.html -->
  * <searchcraft-select
@@ -25,6 +25,8 @@ export type SearchcraftSelectOption = {
  *  options="[{ label: 'label', value: 'value' }]"
  * />
  * ```
+ *
+ * @internal
  */
 @Component({
   tag: 'searchcraft-select',

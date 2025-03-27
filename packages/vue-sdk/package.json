@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "vite",
     "clean": "rm -rf dist",
-    "build": "yarn clean && vite build && yarn docs",
+    "build": "yarn clean && vite build",
     "docs": "typedoc --options typedoc.json",
     "preview": "vite preview",
     "build-only": "vite build",
