@@ -1,3 +1,5 @@
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
 # searchcraft-input-form
 
 This web component provides a user-friendly interface for querying an indexed dataset, enabling users to easily search large collections of data.
@@ -5,36 +7,39 @@ It abstracts the complexities of index-based searching, making it accessible to 
 
 ## Import
 
+<Tabs>
+<TabItem label="React">
 ```jsx
-// react
 import { SearchcraftInputForm } from "@searchcraft/react-sdk";
-
-// vue
+```
+</TabItem>
+<TabItem label="Vue">
+```jsx
 import { SearchcraftInputForm } from "@searchcraft/vue-sdk";
 ```
+</TabItem>
+</Tabs>
 
 
 ## Usage
 
-**JavaScript:**
-
+<Tabs>
+<TabItem label="JS">
 ```html
 <searchcraft-input-form auto-search />
 ```
-
-
-**React:**
-
+</TabItem>
+<TabItem label="React">
 ```jsx
 <SearchcraftInputForm autoSearch />
 ```
-
-
-**Vue:**
-
+</TabItem>
+<TabItem label="Vue">
 ```jsx
 <SearchcraftInputForm autoSearch />
 ```
+</TabItem>
+</Tabs>
 
 
 ## Properties

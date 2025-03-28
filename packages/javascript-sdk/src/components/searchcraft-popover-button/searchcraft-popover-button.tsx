@@ -4,12 +4,13 @@ import { Component, h } from '@stencil/core';
 /**
  * Renders a button which, when clicked, turns on popover visibility.
  *
- * @import
+ * @react-import
  * ```jsx
- * // react
  * import { SearchcraftPopoverButton } from "@searchcraft/react-sdk";
+ * ````
  *
- * // vue
+ * @vue-import
+ * ```jsx
  * import { SearchcraftPopoverButton } from "@searchcraft/vue-sdk";
  * ```
  *
