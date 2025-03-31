@@ -6,9 +6,7 @@
   "description": "Searchcraft Vue SDK.",
   "type": "module",
   "license": "Apache-2.0",
-  "keywords": [
-    "searchcraft"
-  ],
+  "keywords": ["searchcraft"],
   "scripts": {
     "dev": "vite",
     "clean": "rm -rf dist",
@@ -36,11 +34,12 @@
       "require": "./dist/index.umd.js"
     },
     "./components": "./dist/components/index.d.ts",
-    "./plugin": "./dist/plugin.d.ts"
+    "./plugin": "./dist/plugin.d.ts",
+    "./hologram.css": {
+      "style": "./dist/hologram.css"
+    }
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "peerDependencies": {
     "vue": "^3.5.13"
   },
@@ -53,8 +52,6 @@
     "@vue/runtime-dom": "^3.5.13",
     "@vue/tsconfig": "^0.7.0",
     "npm-run-all2": "^7.0.2",
-    "vite": "^6.0.11",
-    "vite-plugin-dts": "^4.5.0",
     "vite-plugin-vue-devtools": "^7.7.0",
     "vue-docgen-web-types": "^0.1.8",
     "vue-tsc": "^2.2.0"

@@ -20,15 +20,16 @@
       "require": "./dist/hydrate/index.js",
       "import": "./dist/hydrate/index.mjs",
       "types": "./dist/hydrate/index.d.ts"
+    },
+    "./hologram.css": {
+      "style": "./dist/hologram.css"
     }
   },
   "repository": {
     "type": "git",
     "url": "https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/"
   },
-  "files": [
-    "dist/"
-  ],
+  "files": ["dist/"],
   "scripts": {
     "build": "stencil build",
     "docs": "typedoc --options typedoc.json",

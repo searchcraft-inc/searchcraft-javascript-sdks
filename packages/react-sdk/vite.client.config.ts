@@ -3,6 +3,7 @@ import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import dtsPlugin from 'vite-plugin-dts';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 export default defineConfig({
   build: {
@@ -33,7 +34,18 @@ export default defineConfig({
     },
     sourcemap: true,
   },
-  plugins: [react(), dtsPlugin({ rollupTypes: true, insertTypesEntry: false })],
+  plugins: [
+    react(),
+    dtsPlugin({ rollupTypes: true, insertTypesEntry: false }),
+    viteStaticCopy({
+      targets: [
+        {
+          src: '../javascript-sdk/dist/hologram.{css,css.map}',
+          dest: '.',
+        },
+      ],
+    }),
+  ],
   resolve: {
     alias: {},
   },
