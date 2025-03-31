@@ -38,7 +38,7 @@
   flex-direction: column;
 }
 
-.searchcraft-popover-form-input-wrapper {
+.searchcraft-popover-form-input {
   background-color: var(--sc-surface-neutral-secondary);
   display: flex;
   flex-direction: row;
@@ -46,7 +46,7 @@
   padding: 12px;
 }
 
-.searchcraft-popover-form-input-wrapper > searchcraft-input-form {
+.searchcraft-popover-form-input > searchcraft-input-form {
   flex: 1;
 }
 
@@ -89,11 +89,11 @@
   border-top-right-radius: var(--sc-popover-form-border-radius);
 }
 
-.searchcraft-popover-form-inline-wrapper-outer {
+.searchcraft-popover-form-inline-outer {
   position: relative;
 }
 
-.searchcraft-popover-form-inline-wrapper-inner {
+.searchcraft-popover-form-inline-inner {
   height: var(--sc-popover-list-view-height);
   position: absolute;
   width: 100%;
@@ -113,13 +113,19 @@
 /**
  * Styles applied to `modal` popover forms.
  */
-.searchcraft-popover-form-modal {
+.searchcraft-popover-form-modal-outer {
   --sc-popover0-form-border-radius: var(--sc-border-radius-lg);
+  @include appearance.offset-border-radius(
+    --sc-popover-form-border-radius,
+    -12px
+  );
   align-items: flex-start;
   background-color: var(--sc-surface-neutral-secondary);
   display: flex;
   inset: 0;
   justify-content: center;
+  outline-width: 1px;
+  outline-color: var(--sc-border-neutral);
   padding: 0;
   position: fixed;
   z-index: 1000;
@@ -151,15 +157,6 @@
   }
 }
 
-.searchcraft-popover-form-modal {
-  @include appearance.offset-border-radius(
-    --sc-popover-form-border-radius,
-    -12px
-  );
-  outline-width: 1px;
-  outline-color: var(--sc-border-neutral);
-}
-
 .searchcraft-popover-form-modal-backdrop {
   background-color: rgba(0, 0, 0, 0.5);
   display: none;
@@ -189,7 +186,7 @@
   }
 }
 
-.searchcraft-popover-form-modal-input-wrapper .searchcraft-input-form-input {
+.searchcraft-popover-form-modal-input .searchcraft-input-form-input {
   @include appearance.offset-border-radius(
     --sc-popover-form-border-radius,
     -12px
@@ -223,8 +220,7 @@
   }
 }
 
-.searchcraft-popover-form-fullscreen-input-wrapper
-  .searchcraft-input-form-input {
+.searchcraft-popover-form-fullscreen-input .searchcraft-input-form-input {
   border-radius: var(--sc-popover-form-border-radius);
   outline-width: 1px;
   outline-color: var(--sc-border-neutral);
