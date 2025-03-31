@@ -15,12 +15,13 @@ import { type SearchcraftState, searchcraftStore } from '@store';
  * This web component is responsible for displaying the results of a search query. Once a query is submitted, the component formats and presents an ordered list of the results.
  *
  *
- * @import
+ * @react-import
  * ```jsx
- * // react
  * import { SearchcraftSearchResults } from "@searchcraft/react-sdk";
+ * ```
  *
- * // vue
+ * @vue-import
+ * ```jsx
  * import { SearchcraftSearchResults } from "@searchcraft/vue-sdk";
  * ```
  *
@@ -53,7 +54,7 @@ import { type SearchcraftState, searchcraftStore } from '@store';
  * />
  * ```
  *
- *  @vue-example
+ * @vue-example
  * ```jsx
  * <SearchcraftSearchResults
  *   adInterval={4}

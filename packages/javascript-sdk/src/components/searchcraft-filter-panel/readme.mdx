@@ -1,22 +1,29 @@
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
 # searchcraft-filter-panel
 
 This web component represents a series of filters that allows users to refine and control their search queries by applying various filter criteria.
 
 ## Import
 
+<Tabs>
+<TabItem label="React">
 ```jsx
-// react
 import { SearchcraftFilterPanel } from "@searchcraft/react-sdk";
-
-// vue
+```
+</TabItem>
+<TabItem label="Vue">
+```jsx
 import { SearchcraftFilterPanel } from "@searchcraft/vue-sdk";
 ```
+</TabItem>
+</Tabs>
 
 
 ## Usage
 
-**JavaScript:**
-
+<Tabs>
+<TabItem label="JS">
 ```html
 <!-- index.html -->
 <searchcraft-filter-panel />
@@ -30,20 +37,18 @@ if (filterPanel) {
   filterPanel.items = [];
 }
 ```
-
-
-**React:**
-
+</TabItem>
+<TabItem label="React">
 ```jsx
 <SearchcraftFilterPanel items={[]} />
 ```
-
-
-**Vue:**
-
+</TabItem>
+<TabItem label="Vue">
 ```jsx
 <SearchcraftFilterPanel :items="[]" />
 ```
+</TabItem>
+</Tabs>
 
 
 ## Properties

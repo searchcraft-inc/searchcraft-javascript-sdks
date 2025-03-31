@@ -11,12 +11,13 @@ import { searchcraftStore } from '@store';
 /**
  * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field, or when a popover-button is pressed.
  *
- * @import
+ * @react-import
  * ```jsx
- * // react
  * import { SearchcraftPopoverForm } from "@searchcraft/react-sdk";
+ * ```
  *
- * // vue
+ * @vue-import
+ * ```jsx
  * import { SearchcraftPopoverForm } from "@searchcraft/vue-sdk";
  * ```
  *

@@ -1,37 +1,42 @@
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
 # searchcraft-pagination
 
 This web component is designed to facilitate pagination of search results. Once a query is submitted, calculates the number for pages.
 
 ## Import
 
+<Tabs>
+<TabItem label="React">
 ```jsx
-// react
 import { SearchcraftPagination } from "@searchcraft/react-sdk";
-
-// vue
+```
+</TabItem>
+<TabItem label="Vue">
+```jsx
 import { SearchcraftPagination } from "@searchcraft/vue-sdk";
 ```
+</TabItem>
+</Tabs>
 
 
 ## Usage
 
-**JavaScript:**
-
+<Tabs>
+<TabItem label="JS">
 ```html
 <searchcraft-pagination />
 ```
-
-
-**React:**
-
+</TabItem>
+<TabItem label="React">
 ```jsx
 <SearchcraftPagination />
 ```
-
-
-**Vue:**
-
+</TabItem>
+<TabItem label="Vue">
 ```jsx
 <SearchcraftPagination />
 ```
+</TabItem>
+</Tabs>
 

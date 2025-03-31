@@ -54,6 +54,8 @@ export const config: Config = {
             !component.docsTags.some((docTag) => docTag.name === 'internal')
           ) {
             const markdown = [
+              "import { Tabs, TabItem } from '@astrojs/starlight/components';",
+              '',
               `# ${component.tag}`,
               '',
               ...overviewToMarkdown(component.overview),
@@ -63,7 +65,7 @@ export const config: Config = {
               ...eventsToMarkdown(component.events),
             ].join('\n');
 
-            await fs.writeFile(`${component.dirPath}/readme.md`, markdown);
+            await fs.writeFile(`${component.dirPath}/readme.mdx`, markdown);
           }
         });
       },
@@ -97,7 +99,7 @@ export const importsToMarkdown = (docsTags: JsonDocsTag[]): string[] => {
   }
 
   const filteredDocsTags = docsTags.filter((docsTag) =>
-    ['import'].includes(docsTag.name),
+    ['js-import', 'react-import', 'vue-import'].includes(docsTag.name),
   );
 
   if (filteredDocsTags.length === 0) {
@@ -106,12 +108,17 @@ export const importsToMarkdown = (docsTags: JsonDocsTag[]): string[] => {
 
   content.push('## Import');
   content.push('');
+  content.push('<Tabs>');
 
   filteredDocsTags.forEach((docsTag) => {
+    content.push(`<TabItem label="${getDocsTagName(docsTag.name)}">`);
     content.push(`${docsTag.text}`);
-    content.push('');
-    content.push('');
+    content.push('</TabItem>');
   });
+
+  content.push('</Tabs>');
+  content.push('');
+  content.push('');
 
   return content;
 };
@@ -134,25 +141,28 @@ export const examplesToMarkdown = (docsTags: JsonDocsTag[]): string[] => {
 
   content.push('## Usage');
   content.push('');
+  content.push('<Tabs>');
 
   filteredDocsTags.forEach((docsTag) => {
-    content.push(`**${getDocsTagName(docsTag.name)}:**`);
-    content.push('');
+    content.push(`<TabItem label="${getDocsTagName(docsTag.name)}">`);
     content.push(`${docsTag.text}`);
-    content.push('');
-    content.push('');
+    content.push('</TabItem>');
   });
+
+  content.push('</Tabs>');
+  content.push('');
+  content.push('');
 
   return content;
 };
 
 const getDocsTagName = (docsTagName: string) => {
-  switch (docsTagName) {
-    case 'js-example':
-      return 'JavaScript';
-    case 'react-example':
+  switch (true) {
+    case docsTagName.includes('js-'):
+      return 'JS';
+    case docsTagName.includes('react-'):
       return 'React';
-    case 'vue-example':
+    case docsTagName.includes('vue-'):
       return 'Vue';
     default:
       return '';
