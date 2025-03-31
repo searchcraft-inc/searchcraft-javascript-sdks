@@ -25,7 +25,6 @@ export const Typography: StoryObj<{
   render: (args) => {
     return (
       <>
-        <searchcraft-theme />
         <style
           // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
           dangerouslySetInnerHTML={{

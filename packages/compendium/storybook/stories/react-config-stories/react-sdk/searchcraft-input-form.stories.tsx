@@ -3,7 +3,6 @@ import {
   Searchcraft,
   SearchcraftInputForm,
   type SearchcraftInputFormProps,
-  SearchcraftTheme,
 } from '@searchcraft/react-sdk';
 import { useEffect } from 'react';
 
@@ -61,12 +60,7 @@ export const Default: StoryObj<SearchcraftInputFormProps> = {
       return <Story />;
     },
   ],
-  render: (args) => (
-    <>
-      <SearchcraftTheme />
-      <SearchcraftInputForm {...args} />
-    </>
-  ),
+  render: (args) => <SearchcraftInputForm {...args} />,
   args: defaultProps,
 };
 

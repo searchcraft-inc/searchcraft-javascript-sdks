@@ -93,7 +93,6 @@ const defaultProps = {
   successColor: '',
   cautionColor: '',
   dangerColor: '',
-  customTheme: {},
 };
 
 export const Colors: StoryObj<{
@@ -103,7 +102,6 @@ export const Colors: StoryObj<{
   successColor: string;
   cautionColor: string;
   dangerColor: string;
-  customTheme: Record<string, string>;
 }> = {
   decorators: [
     (Story) => {
@@ -126,7 +124,6 @@ export const Colors: StoryObj<{
   render: (args) => {
     return (
       <>
-        <searchcraft-theme custom-theme={JSON.stringify(args.customTheme)} />
         <style
           // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
           dangerouslySetInnerHTML={{

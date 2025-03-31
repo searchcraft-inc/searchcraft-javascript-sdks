@@ -22,7 +22,6 @@ export const Default: StoryObj<Components.SearchcraftResultsInfo> = {
   ],
   render: () => (
     <>
-      <searchcraft-theme />
       <div style={{ marginBottom: 20 }}>
         <searchcraft-input-form />
       </div>

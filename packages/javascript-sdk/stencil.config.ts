@@ -45,13 +45,7 @@ export const config: Config = {
       customElementsExportBehavior: 'single-export-module',
       externalRuntime: false,
       isPrimaryPackageOutputTarget: true,
-      copy: [
-        { src: 'themes/hologram.css', dest: 'dist/hologram.css' },
-        {
-          src: 'themes/hologram.css.map',
-          dest: 'dist/hologram.css.map',
-        },
-      ],
+      copy: [{ src: 'themes/*.{css,css.map}', dest: 'dist/themes' }],
     },
     {
       type: 'docs-custom',

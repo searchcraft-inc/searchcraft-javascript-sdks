@@ -3,7 +3,6 @@ import type { Meta, StoryFn } from '@storybook/vue3';
 import {
   SearchcraftResultsInfo,
   SearchcraftInputForm,
-  SearchcraftTheme,
   type SearchcraftResultsInfoProps,
   Searchcraft,
 } from '@searchcraft/vue-sdk';
@@ -19,7 +18,6 @@ const defaultProps: SearchcraftResultsInfoProps = {};
 export const Default: StoryFn = (args) => ({
   components: {
     SearchcraftResultsInfo,
-    SearchcraftTheme,
     SearchcraftInputForm,
   },
   setup() {
@@ -32,7 +30,6 @@ export const Default: StoryFn = (args) => ({
   },
   template: `
     <div>
-      <SearchcraftTheme />
       <div style="margin-bottom: 20px">
         <SearchcraftInputForm />
       </div>

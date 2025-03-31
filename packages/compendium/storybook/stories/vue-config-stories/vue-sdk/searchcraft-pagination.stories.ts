@@ -3,7 +3,6 @@ import type { Meta, StoryFn } from '@storybook/vue3';
 import {
   SearchcraftInputForm,
   SearchcraftResultsInfo,
-  SearchcraftTheme,
   SearchcraftSearchResults,
   SearchcraftPagination,
   SearchcraftSearchResultsPerPage,
@@ -24,7 +23,6 @@ export const Default: StoryFn = () => ({
   components: {
     SearchcraftInputForm,
     SearchcraftResultsInfo,
-    SearchcraftTheme,
     SearchcraftSearchResults,
     SearchcraftPagination,
     SearchcraftSearchResultsPerPage,
@@ -39,7 +37,6 @@ export const Default: StoryFn = () => ({
   },
   template: `
     <div>
-      <SearchcraftTheme />
       <div style="margin-bottom: 20px;">
         <SearchcraftInputForm />
       </div>

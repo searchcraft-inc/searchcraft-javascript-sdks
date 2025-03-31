@@ -71,7 +71,6 @@ export const Default: StoryObj = {
   ],
   render: () => (
     <>
-      <searchcraft-theme />
       <div style={{ marginBottom: 20 }}>
         <searchcraft-input-form />
       </div>
@@ -164,7 +163,6 @@ export const WithCustomAds: StoryObj = {
   ],
   render: () => (
     <>
-      <searchcraft-theme />
       <div style={{ marginBottom: 20 }}>
         <searchcraft-input-form />
       </div>
@@ -257,7 +255,6 @@ export const WithNativoAds: StoryObj = {
   ],
   render: () => (
     <>
-      <searchcraft-theme />
       <div style={{ marginBottom: 20 }}>
         <searchcraft-input-form />
       </div>

@@ -35,8 +35,9 @@
     },
     "./components": "./dist/components/index.d.ts",
     "./plugin": "./dist/plugin.d.ts",
-    "./hologram.css": {
-      "style": "./dist/hologram.css"
+    "./themes/*.css": {
+      "import": "./dist/themes/*.css",
+      "require": "./dist/themes/*.css"
     }
   },
   "files": ["dist"],

@@ -38,12 +38,7 @@ export const Default: StoryObj<Components.SearchcraftSlider> = {
       return <Story />;
     },
   ],
-  render: (args) => (
-    <>
-      <searchcraft-theme />
-      <searchcraft-slider {...args} />
-    </>
-  ),
+  render: (args) => <searchcraft-slider {...args} />,
   args: defaultProps,
 };
 

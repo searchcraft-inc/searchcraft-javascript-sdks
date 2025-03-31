@@ -21,8 +21,9 @@
       "import": "./dist/hydrate/index.mjs",
       "types": "./dist/hydrate/index.d.ts"
     },
-    "./hologram.css": {
-      "style": "./dist/hologram.css"
+    "./themes/*.css": {
+      "import": "./dist/themes/*.css",
+      "require": "./dist/themes/*.css"
     }
   },
   "repository": {
