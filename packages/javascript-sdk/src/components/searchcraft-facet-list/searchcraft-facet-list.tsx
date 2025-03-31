@@ -5,7 +5,6 @@ import {
   Prop,
   Event,
   type EventEmitter,
-  Fragment,
 } from '@stencil/core';
 
 import type { FacetChild, FacetRoot } from '@searchcraft/core';
@@ -250,27 +249,27 @@ export class SearchcraftFacetList {
                 {this.formatLabel(facetChild)}
               </label>
               {facetChild.children && facetChild.children.length > 0 && (
-                <Fragment>
+                <div class='searchcraft-facet-child-list'>
                   {facetChild.children.map((grandchild) => (
                     <label
                       key={grandchild.path}
-                      class='searchcraft-facet-list-checkbox-label searchcraft-facet-list-child-checkbox-label'
+                      class='searchcraft-facet-list-checkbox-label searchcraft-facet-child-list-checkbox-label'
                       style={{
                         display: this.selectedPaths[facetChild.path]
                           ? 'flex'
                           : 'none',
                       }}
                     >
-                      <div class='searchcraft-facet-list-checkbox-input-wrapper searchcraft-facet-list-child-checkbox-input-wrapper'>
+                      <div class='searchcraft-facet-list-checkbox-input-wrapper searchcraft-facet-child-list-checkbox-input-wrapper'>
                         <input
-                          class='searchcraft-facet-list-checkbox-input searchcraft-facet-list-child-checkbox-input'
+                          class='searchcraft-facet-list-checkbox-input searchcraft-facet-child-list-checkbox-input'
                           checked={this.selectedPaths[grandchild.path]}
                           onChange={(_event: Event) => {
                             this.handleCheckboxChange(grandchild.path);
                           }}
                           type='checkbox'
                         />
-                        <div class='searchcraft-facet-list-checkbox-input-check-icon searchcraft-facet-list-child-checkbox-input-check-icon'>
+                        <div class='searchcraft-facet-list-checkbox-input-check-icon searchcraft-facet-child-list-checkbox-input-check-icon'>
                           <svg
                             width='16'
                             height='16'
@@ -291,7 +290,7 @@ export class SearchcraftFacetList {
                       {this.formatSubLabel(grandchild, facetChild)}
                     </label>
                   ))}
-                </Fragment>
+                </div>
               )}
             </div>
           );

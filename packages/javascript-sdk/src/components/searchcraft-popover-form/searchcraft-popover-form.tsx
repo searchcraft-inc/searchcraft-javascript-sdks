@@ -278,7 +278,6 @@ export class SearchcraftPopoverForm {
 
   renderInlinePopover() {
     const isListViewVisible = this.hasResultsToShow && this.isFocused;
-
     const popoverFormClassNames = classNames(
       'searchcraft-popover-form searchcraft-popover-form-inline',
       {
@@ -292,8 +291,8 @@ export class SearchcraftPopoverForm {
           onInputFocus={this.handleInputFocus.bind(this)}
         />
         {isListViewVisible && (
-          <div class='searchcraft-popover-form-inline-wrapper-outer'>
-            <div class='searchcraft-popover-form-inline-wrapper-inner'>
+          <div class='searchcraft-popover-form-inline-outer'>
+            <div class='searchcraft-popover-form-inline-inner'>
               <searchcraft-popover-list-view
                 popoverResultMappings={this.popoverResultMappings}
                 searchClientResponseItems={this.searchClientResponseItems}
@@ -310,12 +309,15 @@ export class SearchcraftPopoverForm {
 
   renderModalPopover() {
     if (this.isPopoverVisibleInState) {
-      const popoverFormClassNames = classNames('searchcraft-popover-form', {
-        'searchcraft-popover-form-active': this.hasResultsToShow,
-      });
+      const popoverFormClassNames = classNames(
+        'searchcraft-popover-form searchcraft-popover-form-modal',
+        {
+          'searchcraft-popover-form-active': this.hasResultsToShow,
+        },
+      );
 
       return (
-        <div class='searchcraft-popover-form-modal'>
+        <div class='searchcraft-popover-form-modal-outer'>
           {/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
           <div
             class='searchcraft-popover-form-modal-backdrop'
@@ -323,7 +325,7 @@ export class SearchcraftPopoverForm {
           />
           <div class='searchcraft-popover-form-modal-inner'>
             <div class={popoverFormClassNames}>
-              <div class='searchcraft-popover-form-input-wrapper searchcraft-popover-form-modal-input-wrapper'>
+              <div class='searchcraft-popover-form-input searchcraft-popover-form-modal-input'>
                 <searchcraft-input-form
                   onInputFocus={this.handleInputFocus.bind(this)}
                   onInputInit={this.handleInputInit.bind(this)}
@@ -357,7 +359,7 @@ export class SearchcraftPopoverForm {
       return (
         <div class='searchcraft-popover-form-fullscreen'>
           <div class='searchcraft-popover-form'>
-            <div class='searchcraft-popover-form-input-wrapper searchcraft-popover-form-fullscreen-input-wrapper'>
+            <div class='searchcraft-popover-form-input searchcraft-popover-form-fullscreen-input'>
               <searchcraft-input-form
                 onInputFocus={this.handleInputFocus.bind(this)}
                 onInputInit={this.handleInputInit.bind(this)}

@@ -1,6 +1,9 @@
 @use "../typography.scss";
 
 .searchcraft-facet-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
   width: 100%;
 }
 
@@ -31,6 +34,7 @@
   height: 24px;
   justify-content: center;
   width: 24px;
+  margin: 0;
 
   &:focus {
     outline: 2px solid var(--sc-surface-brand-primary);
@@ -50,8 +54,18 @@
   }
 }
 
-.searchcraft-facet-list-child-checkbox-label {
+.searchcraft-facet-child-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.searchcraft-facet-child-list-checkbox-label {
   margin-left: 24px;
+
+  &:first-child {
+    margin-top: 6px;
+  }
 }
 
 .searchcraft-facet-list-checkbox-input-check-icon {
