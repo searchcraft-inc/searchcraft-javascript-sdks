@@ -17,7 +17,7 @@ export default defineConfig({
     viteStaticCopy({
       targets: [
         {
-          src: '../javascript-sdk/dist/hologram.{css,css.map}',
+          src: '../javascript-sdk/src/themes/hologram.{css,css.map}',
           dest: '.',
         },
       ],
