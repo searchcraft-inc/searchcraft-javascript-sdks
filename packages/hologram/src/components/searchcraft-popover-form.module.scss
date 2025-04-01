@@ -157,6 +157,13 @@
 .searchcraft-popover-form-modal-wrapper {
   background-color: var(--sc-surface-neutral-primary);
   border-radius: var(--sc-border-radius-2xl);
+  box-shadow:
+    1px 2px rgb(from var(--sc-content-neutral-primary) r g b / 7%),
+    0 2px 4px rgb(from var(--sc-content-neutral-primary) r g b / 7%),
+    0 4px 8px rgb(from var(--sc-content-neutral-primary) r g b / 7%),
+    0 8px 16px rgb(from var(--sc-content-neutral-primary) r g b / 7%),
+    0 16px 32px rgb(from var(--sc-content-neutral-primary) r g b / 7%),
+    0 32px 64px rgb(from var(--sc-content-neutral-primary) r g b / 7%);
   display: flex;
   flex-direction: column;
   inset: 0;

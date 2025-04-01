@@ -127,7 +127,9 @@ export const Modal: StoryObj<Components.SearchcraftPopoverForm> = {
       <>
         <searchcraft-theme />
         <div className='searchcraft-popover-form-with-content'>
-          <p>Story Note: This story uses the Bazaario env vars</p>
+          <div style={{ marginBottom: 20 }}>
+            <p>Story Note: This story uses the Bazaario env vars</p>
+          </div>
           <searchcraft-popover-button>
             <span>Click me</span>
           </searchcraft-popover-button>
@@ -167,7 +169,9 @@ export const Fullscreen: StoryObj<Components.SearchcraftPopoverForm> = {
       <>
         <searchcraft-theme />
         <div className='searchcraft-popover-form-with-content'>
-          <p>Story Note: This story uses the Bazaario env vars</p>
+          <div style={{ marginBottom: 20 }}>
+            <p>Story Note: This story uses the Bazaario env vars</p>
+          </div>
           <searchcraft-popover-button>
             <span>Click me</span>
           </searchcraft-popover-button>

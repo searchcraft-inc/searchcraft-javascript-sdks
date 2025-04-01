@@ -2,6 +2,14 @@
 @use "../breakpoints.scss";
 @use "../appearance.scss";
 
+:root {
+  --sc-popover-button-border-radius: var(--sc-border-radius);
+
+  @media (min-width: breakpoints.$breakpoint-md) {
+    --sc-popover-button-border-radius: var(--sc-border-radius-lg);
+  }
+}
+
 .searchcraft-popover-button {
   @include typography.body();
   cursor: pointer;
@@ -20,17 +28,16 @@
 
   & .searchcraft-popover-button-wrapper {
     border: 1px solid var(--sc-border-neutral);
-    border-radius: 14px;
+    border-radius: var(--sc-popover-button-border-radius);
     box-shadow:
       0 1px 1px rgb(from var(--sc-content-neutral-primary) r g b / 10%) inset,
-      0 2px 2px rgb(from var(--sc-content-neutral-primary) r g b / 5%) inset,
-      0 4px 4px rgb(from var(--sc-content-neutral-primary) r g b / 5%) nset;
+      0 2px 4px rgb(from var(--sc-content-neutral-primary) r g b / 5%) inset;
     display: flex;
     gap: 24px;
     height: 40px;
     justify-content: space-between;
     line-height: 1;
-    padding: 8px 10px 8px 16px;
+    padding: 4px 5px 4px 10px;
     background: linear-gradient(
       0deg,
       var(--sc-surface-neutral-primary) 0%,
@@ -38,36 +45,64 @@
     );
 
     @media (min-width: breakpoints.$breakpoint-md) {
+      box-shadow:
+        0 1px 1px rgb(from var(--sc-content-neutral-primary) r g b / 10%) inset,
+        0 2px 2px rgb(from var(--sc-content-neutral-primary) r g b / 5%) inset,
+        0 4px 4px rgb(from var(--sc-content-neutral-primary) r g b / 5%) inset;
       height: 63px;
+      padding: 8px 10px 8px 16px;
     }
   }
 
   & .searchcraft-popover-button-input {
     align-items: center;
     display: flex;
-    gap: 8px;
+    gap: 4px;
+
+    @media (min-width: breakpoints.$breakpoint-md) {
+      gap: 8px;
+    }
   }
 
   & .searchcraft-popover-button-keycaps {
     color: var(--sc-content-neutral-secondary);
     display: flex;
-    gap: 8px;
+    gap: 4px;
     font-size: 20px;
     font-weight: 500;
+
+    @media (min-width: breakpoints.$breakpoint-md) {
+      gap: 8px;
+    }
   }
 
   & .searchcraft-popover-button-keycaps-keycap {
-    @include appearance.offset-border-radius(14px, -4px);
+    @include appearance.offset-border-radius(
+      var(--sc-popover-button-border-radius),
+      -3px
+    );
     background-color: var(--sc-surface-neutral-primary);
     box-shadow:
-      0 4px hsl(from var(--sc-surface-neutral-primary) h s calc(l - 12)),
-      0 1px 2px rgb(from var(--sc-content-neutral-primary) r g b / 15%),
-      0 6px 1px rgb(from var(--sc-content-neutral-primary) r g b / 20%),
-      0 7px 2px rgb(from var(--sc-content-neutral-primary) r g b / 15%),
-      0 9px 4px rgb(from var(--sc-content-neutral-primary) r g b / 10%),
-      0 13px 8px rgb(from var(--sc-content-neutral-primary) r g b / 5%);
-    height: calc(100% - 6px);
+      0 3px hsl(from var(--sc-surface-neutral-primary) h s calc(l - 12)),
+      0 1px 2px rgb(from var(--sc-content-neutral-primary) r g b / 10%),
+      0 6px 4px rgb(from var(--sc-content-neutral-primary) r g b / 5%);
+    height: calc(100% - 2px);
     position: relative;
+
+    @media (min-width: breakpoints.$breakpoint-md) {
+      @include appearance.offset-border-radius(
+        var(--sc-popover-button-border-radius),
+        -8px
+      );
+      box-shadow:
+        0 4px hsl(from var(--sc-surface-neutral-primary) h s calc(l - 12)),
+        0 1px 2px rgb(from var(--sc-content-neutral-primary) r g b / 15%),
+        0 6px 1px rgb(from var(--sc-content-neutral-primary) r g b / 20%),
+        0 7px 2px rgb(from var(--sc-content-neutral-primary) r g b / 15%),
+        0 9px 4px rgb(from var(--sc-content-neutral-primary) r g b / 10%),
+        0 13px 8px rgb(from var(--sc-content-neutral-primary) r g b / 5%);
+      height: calc(100% - 5px);
+    }
 
     &::before,
     &::after {
@@ -76,14 +111,25 @@
     }
 
     &::before {
-      @include appearance.offset-border-radius(10px, -4px);
+      @include appearance.offset-border-radius(
+        var(--sc-popover-button-border-radius),
+        -4px
+      );
       background: linear-gradient(
         340deg,
         var(--sc-surface-neutral-primary) 0%,
         hsl(from var(--sc-surface-neutral-primary) h s calc(l - 8)) 100%
       );
-      inset: 4px;
+      inset: 2px;
       position: absolute;
+
+      @media (min-width: breakpoints.$breakpoint-md) {
+        @include appearance.offset-border-radius(
+          var(--sc-popover-button-border-radius),
+          -12px
+        );
+        inset: 4px;
+      }
     }
 
     &::after {
@@ -103,7 +149,11 @@
   }
 
   & .searchcraft-popover-button-input-search-icon {
-    height: 50%;
+    height: 60%;
     width: auto;
+
+    @media (min-width: breakpoints.$breakpoint-md) {
+      height: 50%;
+    }
   }
 }
