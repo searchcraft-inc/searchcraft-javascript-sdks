@@ -1,5 +1,4 @@
 @use "../typography.scss";
-@use "../appearance.scss";
 
 :root {
   /**
@@ -14,8 +13,11 @@
   padding: 12px 0;
 }
 
+searchcraft-popover-list-item:last-child .searchcraft-popover-list-item {
+  border-bottom: none;
+}
+
 .searchcraft-popover-list-item-link {
-  @include appearance.offset-border-radius(--sc-border-radius-xl, -20px);
   align-items: flex-start;
   color: var(--sc-content-neutral-primary);
   display: flex;

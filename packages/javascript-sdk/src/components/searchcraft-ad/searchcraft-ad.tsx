@@ -89,23 +89,27 @@ export class SearchcraftPopoverListItemAd {
     }
 
     return (
-      <a class='searchcraft-adm-ad' href={item.admAd.click_url}>
-        {item.admAd.image_url && (
-          <div class='searchcraft-adm-ad-image-wrapper'>
-            <img
-              alt={item.admAd.term || 'image'}
-              src={item.admAd.image_url}
-              class='searchcraft-adm-ad-image'
-            />
-          </div>
-        )}
-        <div class='searchcraft-adm-ad-info-wrapper'>
-          <p class='searchcraft-adm-ad-title'>{item.admAd.term}</p>
-          {item.admAd.price && (
-            <p class='searchcraft-adm-ad-subtitle'>{item.admAd.price}</p>
+      <div class='searchcraft-adm-ad'>
+        <a class='searchcraft-adm-ad-link' href={item.admAd.click_url}>
+          {item.admAd.image_url && (
+            <div class='searchcraft-adm-ad-image-wrapper'>
+              <img
+                alt={item.admAd.term || 'image'}
+                src={item.admAd.image_url}
+                class='searchcraft-adm-ad-image'
+              />
+            </div>
           )}
-        </div>
-      </a>
+          <div class='searchcraft-adm-ad-content'>
+            <p class='searchcraft-adm-ad-content-title'>{item.admAd.term}</p>
+            {item.admAd.price && (
+              <p class='searchcraft-adm-ad-content-subtitle'>
+                {item.admAd.price}
+              </p>
+            )}
+          </div>
+        </a>
+      </div>
     );
   }
 

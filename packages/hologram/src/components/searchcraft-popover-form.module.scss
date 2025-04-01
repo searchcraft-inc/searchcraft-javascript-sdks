@@ -26,6 +26,20 @@
   & searchcraft-popover-footer {
     width: 100%;
   }
+
+  &.searchcraft-popover-form-active {
+    & .searchcraft-popover-form-input {
+      padding-bottom: 1px;
+    }
+  }
+
+  & searchcraft-popover-list-view {
+    flex-shrink: 1;
+    height: 100%;
+    min-height: 0;
+    overflow: auto;
+    padding: 0 24px;
+  }
 }
 
 .searchcraft-popover-form-input {
@@ -53,63 +67,55 @@
 /**
  * Styles shared by multiple types.
  */
-.searchcraft-popover-form-modal,
-.searchcraft-popover-form-fullscreen {
-  &.searchcraft-popover-form-active {
-    & .searchcraft-popover-form-input {
-      padding-bottom: 12px;
-    }
 
-    & searchcraft-popover-list-view {
-      flex-shrink: 1;
-      min-height: 0;
-      overflow: auto;
-      padding: 0 24px;
-    }
-  }
-
-  .searchcraft-popover-form-modal-input,
-  .searchcraft-popover-form-fullscreen-input {
-    padding: 24px;
-  }
+.searchcraft-popover-form-modal-input,
+.searchcraft-popover-form-fullscreen-input {
+  padding: 24px;
 }
 
 /**
  * Styles applied to `inline` popover forms.
  */
 .searchcraft-popover-form-inline {
-  &.searchcraft-popover-form-active .searchcraft-input-form-input {
-    // border-bottom-left-radius: 0;
-    // border-bottom-right-radius: 0;
-    // border-top-left-radius: var(--sc-border-radius-xl);
-    // border-top-right-radius: var(--sc-border-radius-xl);
-  }
-
-  & .searchcraft-input-form-input {
-    // border-radius: var(--sc-border-radius-xl);
-    // border: none;
-    // outline: none;
-  }
-
-  & .searchcraft-popover-list-view {
-    // border-bottom-left-radius: var(--sc-border-radius-xl);
-    // border-bottom-right-radius: var(--sc-border-radius-xl);
-    // display: flex;
-    // flex-direction: column;
-    // max-height: var(--sc-popover-list-view-height);
-    // overflow: auto;
-  }
-}
-
-.searchcraft-popover-form-inline-outer {
+  background-color: var(--sc-surface-neutral-primary);
+  border: 1px solid transparent;
+  border-radius: var(--sc-border-radius-xl);
+  padding: 12px;
   position: relative;
+
+  &.searchcraft-popover-form-active {
+    border: 1px solid var(--sc-border-neutral);
+    border-bottom: none;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    padding-bottom: 1px;
+  }
+
+  & searchcraft-popover-list-view {
+    padding: 0 12px;
+  }
+
+  & .searchcraft-input-form-input,
+  & .searchcraft-popover-list-item-link,
+  & .searchcraft-adm-ad-link {
+    @include appearance.offset-border-radius(--sc-border-radius-xl, -12px);
+  }
 }
 
-.searchcraft-popover-form-inline-inner {
-  height: var(--sc-popover-list-view-height);
+.searchcraft-popover-form-inline-wrapper {
+  background-color: var(--sc-surface-neutral-primary);
+  border: 1px solid var(--sc-border-neutral);
+  border-top: none;
+  border-bottom-left-radius: var(--sc-border-radius-xl);
+  border-bottom-right-radius: var(--sc-border-radius-xl);
+  display: flex;
+  flex-direction: column;
+  left: -1px;
+  max-height: var(--sc-popover-list-view-height);
+  overflow: hidden;
   position: absolute;
-  width: 100%;
-  z-index: 1000;
+  right: -1px;
+  top: 100%;
 }
 
 /**
@@ -130,14 +136,10 @@
     padding: 0 24px;
   }
 
-  & .searchcraft-input-form-input {
-    @include appearance.offset-border-radius(--sc-border-radius-xl, -20px);
-    // background-color: var(--sc-surface-neutral-primary);
-    // border: 1px solid var(--sc-border-neutral);
-    // box-shadow:
-    //   0 1px 1px rgb(from var(--sc-content-neutral-primary) r g b / 10%) inset,
-    //   0 2px 2px rgb(from var(--sc-content-neutral-primary) r g b / 5%) inset,
-    //   0 4px 4px rgb(from var(--sc-content-neutral-primary) r g b / 5%) inset;
+  & .searchcraft-input-form-input,
+  & .searchcraft-popover-list-item-link,
+  & .searchcraft-adm-ad-link {
+    @include appearance.offset-border-radius(--sc-border-radius-2xl, -20px);
   }
 }
 
@@ -154,7 +156,7 @@
 
 .searchcraft-popover-form-modal-wrapper {
   background-color: var(--sc-surface-neutral-primary);
-  border-radius: var(--sc-border-radius-xl);
+  border-radius: var(--sc-border-radius-2xl);
   display: flex;
   flex-direction: column;
   inset: 0;
@@ -174,7 +176,7 @@
 }
 
 .searchcraft-popover-form-modal-input-cancel-button {
-  @include appearance.offset-border-radius(--sc-border-radius-xl, -20px);
+  @include appearance.offset-border-radius(--sc-border-radius-2xl, -20px);
   padding: 8px 12px;
 }
 
@@ -190,15 +192,9 @@
   position: fixed;
   z-index: 1000;
 
-  & .searchcraft-popover-form {
-    // inset: 0;
-    // position: absolute;
-  }
-
-  & .searchcraft-input-form-input {
-    // border-radius: var(--sc-border-radius-xl);
-    // outline-width: 1px;
-    // outline-color: var(--sc-border-neutral);
+  & .searchcraft-popover-list-item-link,
+  & .searchcraft-adm-ad-link {
+    border-radius: var(--sc-border-radius-lg);
   }
 }
 

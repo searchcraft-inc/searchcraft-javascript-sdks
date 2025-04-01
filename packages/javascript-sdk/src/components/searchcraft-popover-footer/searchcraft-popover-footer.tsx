@@ -17,11 +17,9 @@ export class SearchcraftPopoverFooter {
 
   private unsubscribe: () => void = () => {};
 
-  handleOnClick() {
-    searchcraftStore.getState().setPopoverVisibility(true);
-  }
-
   componentDidLoad() {
+    this.searchResultsCount = searchcraftStore.getState().searchResultsCount;
+
     this.unsubscribe = searchcraftStore.subscribe((state) => {
       this.searchResultsCount = state.searchResultsCount;
     });

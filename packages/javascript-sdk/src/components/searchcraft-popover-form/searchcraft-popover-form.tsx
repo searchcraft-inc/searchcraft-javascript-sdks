@@ -300,17 +300,16 @@ export class SearchcraftPopoverForm {
           />
         </div>
         {isListViewVisible && (
-          // <div class='searchcraft-popover-form-inline-outer'>
-          //   <div class='searchcraft-popover-form-inline-inner'>
-          <searchcraft-popover-list-view
-            popoverResultMappings={this.popoverResultMappings}
-            searchClientResponseItems={this.searchClientResponseItems}
-            adClientResponseItems={this.adClientResponseItems}
-            searchResultsPage={this.searchResultsPage}
-            searchResultsPerPage={this.searchResultsPerPage}
-          />
-          //   </div>
-          // </div>
+          <div class='searchcraft-popover-form-inline-wrapper'>
+            <searchcraft-popover-list-view
+              popoverResultMappings={this.popoverResultMappings}
+              searchClientResponseItems={this.searchClientResponseItems}
+              adClientResponseItems={this.adClientResponseItems}
+              searchResultsPage={this.searchResultsPage}
+              searchResultsPerPage={this.searchResultsPerPage}
+            />
+            <searchcraft-popover-footer />
+          </div>
         )}
       </div>
     );
