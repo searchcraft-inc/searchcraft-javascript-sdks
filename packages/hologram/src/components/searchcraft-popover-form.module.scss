@@ -33,6 +33,7 @@
  * Styles applied to all popover form variants.
  */
 .searchcraft-popover-form {
+  @include typography.body();
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -50,23 +51,10 @@
   flex: 1;
 }
 
-.searchcraft-popover-form-button {
-  @include typography.body();
-  border: 0;
-  border-radius: var(--sc-popover-form-border-radius);
+.searchcraft-popover-form-input-cancel-button {
   background: none;
+  border: none;
   cursor: pointer;
-  flex-shrink: 0;
-  outline: 0;
-  padding: 0 12px;
-
-  &:hover {
-    background-color: var(--sc-surface-brand-secondary-hover);
-  }
-
-  &:focus {
-    background-color: var(--sc-surface-brand-secondary-active);
-  }
 }
 
 /**
@@ -194,7 +182,7 @@
   border: 1px solid var(--sc-border-neutral);
 }
 
-.searchcraft-popover-form-modal-button {
+.searchcraft-popover-form-modal-input-cancel-button {
   @include appearance.offset-border-radius(
     --sc-popover-form-border-radius,
     -12px
@@ -226,6 +214,6 @@
   outline-color: var(--sc-border-neutral);
 }
 
-.searchcraft-popover-form-fullscreen-button {
+.searchcraft-popover-form-fullscreen-input-cancel-button {
   border-radius: var(--sc-popover-form-border-radius);
 }

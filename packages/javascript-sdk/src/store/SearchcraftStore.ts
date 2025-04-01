@@ -19,6 +19,8 @@ import type {
 const initialSearchcraftStateValues: SearchcraftStateValues = {
   adClientResponseItems: [],
   core: undefined,
+  hotkey: 'k',
+  hotkeyModifier: 'meta',
   logger: undefined,
   facetPathsForIndexFields: {},
   isPopoverVisible: false,
@@ -175,7 +177,7 @@ const searchcraftStore = createStore<SearchcraftState>((set, get) => {
         handleAdResponse,
       );
     },
-    setPopoverVisibility: (isVisible: boolean) => {
+    setPopoverVisibility: (isVisible) => {
       set({
         isPopoverVisible: isVisible,
       });
@@ -209,6 +211,14 @@ const searchcraftStore = createStore<SearchcraftState>((set, get) => {
     setSearchResultsPerPage: async (perPage) => {
       set({ searchResultsPerPage: perPage });
       await functions.search();
+    },
+    setHotKeyAndHotKeyModifier: (hotkey, hotkeyModifier) => {
+      const { hotkey: initialHotkey, hotkeyModifier: initialHotkeyModifier } =
+        initialSearchcraftStateValues;
+      set({
+        hotkey: hotkey || initialHotkey,
+        hotkeyModifier: hotkeyModifier || initialHotkeyModifier,
+      });
     },
   };
 

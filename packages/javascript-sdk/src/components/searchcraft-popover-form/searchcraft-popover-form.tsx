@@ -117,6 +117,11 @@ export class SearchcraftPopoverForm {
       this.searchResultsPage = state.searchResultsPage;
       this.searchResultsPerPage = state.searchResultsPerPage;
     });
+
+    // Set hotkey and hotkeyModifier in state.
+    searchcraftStore
+      .getState()
+      .setHotKeyAndHotKeyModifier(this.hotkey, this.hotkeyModifier);
   }
 
   disconnectedCallback() {
@@ -333,7 +338,7 @@ export class SearchcraftPopoverForm {
                 />
                 <button
                   type='button'
-                  class='searchcraft-popover-form-button searchcraft-popover-form-modal-button'
+                  class='searchcraft-popover-form-input-cancel-button searchcraft-popover-form-modal-input-cancel-button'
                   onClick={this.handleCancelButtonClick.bind(this)}
                 >
                   Cancel
@@ -367,7 +372,7 @@ export class SearchcraftPopoverForm {
               />
               <button
                 type='button'
-                class='searchcraft-popover-form-button searchcraft-popover-form-fullscreen-button'
+                class='searchcraft-popover-form-input-cancel-button searchcraft-popover-form-fullscreen-input-cancel-button'
                 onClick={this.handleCancelButtonClick.bind(this)}
               >
                 Cancel

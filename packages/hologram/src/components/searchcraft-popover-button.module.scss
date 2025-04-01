@@ -1,0 +1,99 @@
+@use "../typography.scss";
+@use "../breakpoints.scss";
+@use "../appearance.scss";
+
+.searchcraft-popover-button {
+  @include typography.body();
+}
+
+/**
+ * Styles applied to `keycap` popover buttons.
+ */
+.searchcraft-popover-button-keycap {
+  appearance: none;
+  background: none;
+  border: none;
+  color: #314158;
+  display: block;
+  width: 100%;
+
+  & .searchcraft-popover-button-wrapper {
+    border: 1px solid #d5dadd;
+    border-radius: 14px;
+    box-shadow:
+      0 1px 1px rgba(50, 86, 102, 0.1) inset,
+      0 2px 2px rgba(50, 86, 102, 0.05) inset,
+      0 4px 4px rgba(50, 86, 102, 0.05) inset;
+    display: flex;
+    gap: 24px;
+    height: 40px;
+    justify-content: space-between;
+    line-height: 1;
+    padding: 8px 10px 8px 16px;
+    background: linear-gradient(0deg, #fff 1%, #f8fafb 100%);
+
+    @media (min-width: breakpoints.$breakpoint-md) {
+      height: 63px;
+    }
+  }
+
+  & .searchcraft-popover-button-input {
+    align-items: center;
+    display: flex;
+    gap: 8px;
+  }
+
+  & .searchcraft-popover-button-keycaps {
+    color: #758d9a;
+    display: flex;
+    gap: 8px;
+    font-size: 20px;
+  }
+
+  & .searchcraft-popover-button-keycaps-keycap {
+    @include appearance.offset-border-radius(14px, -4px);
+    background-color: #fff;
+    box-shadow:
+      0 4px #d7e1e5,
+      0 1px 2px rgba(50, 86, 102, 0.15),
+      0 6px 1px rgba(50, 86, 102, 0.2),
+      0 7px 2px rgba(50, 86, 102, 0.15),
+      0 9px 4px rgba(50, 86, 102, 0.1),
+      0 13px 8px rgba(50, 86, 102, 0.05);
+    height: calc(100% - 6px);
+    position: relative;
+
+    &::before,
+    &::after {
+      content: "";
+      display: block;
+    }
+
+    &::before {
+      @include appearance.offset-border-radius(10px, -4px);
+      background: linear-gradient(340deg, #fff 1%, #e4edf1 100%);
+      inset: 4px;
+      position: absolute;
+    }
+
+    &::after {
+      aspect-ratio: 1/1;
+      height: 100%;
+    }
+
+    & > span {
+      display: flex;
+      line-height: 1;
+      left: 50%;
+      margin-top: 2%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  & .searchcraft-popover-button-input-search-icon {
+    height: 50%;
+    width: auto;
+  }
+}

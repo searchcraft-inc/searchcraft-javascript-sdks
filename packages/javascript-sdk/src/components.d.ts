@@ -215,6 +215,10 @@ export namespace Components {
      * ```
      */
     interface SearchcraftPopoverButton {
+        /**
+          * The type of popover button to render.
+         */
+        "type"?: 'keycap';
     }
     /**
      * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field, or when a popover-button is pressed.
@@ -1265,6 +1269,10 @@ declare namespace LocalJSX {
      * ```
      */
     interface SearchcraftPopoverButton {
+        /**
+          * The type of popover button to render.
+         */
+        "type"?: 'keycap';
     }
     /**
      * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field, or when a popover-button is pressed.
