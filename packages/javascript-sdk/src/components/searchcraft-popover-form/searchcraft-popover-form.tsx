@@ -174,9 +174,9 @@ export class SearchcraftPopoverForm {
   };
 
   handleInputInit = () => {
-    const input = this.hostElement.querySelector('.searchcraft-input') as
-      | HTMLInputElement
-      | undefined;
+    const input = this.hostElement.querySelector(
+      '.searchcraft-input-form-input',
+    ) as HTMLInputElement | undefined;
     input?.focus();
   };
 
@@ -245,7 +245,7 @@ export class SearchcraftPopoverForm {
   focusOnNextListItem(direction: 'ArrowDown' | 'ArrowUp') {
     const listItems = Array.from(
       document.querySelectorAll<HTMLAnchorElement>(
-        'a.searchcraft-popover-form-list-item',
+        '.searchcraft-popover-list-item-link',
       ),
     ).filter((el) => !el.hasAttribute('disabled') && el.offsetParent !== null);
 
@@ -284,30 +284,33 @@ export class SearchcraftPopoverForm {
 
   renderInlinePopover() {
     const isListViewVisible = this.hasResultsToShow && this.isFocused;
-    const popoverFormClassNames = classNames(
-      'searchcraft-popover-form searchcraft-popover-form-inline',
-      {
-        'searchcraft-popover-form-active': isListViewVisible,
-      },
-    );
 
     return (
-      <div class={popoverFormClassNames}>
-        <searchcraft-input-form
-          onInputFocus={this.handleInputFocus.bind(this)}
-        />
+      <div
+        class={classNames(
+          'searchcraft-popover-form searchcraft-popover-form-inline',
+          {
+            'searchcraft-popover-form-active': isListViewVisible,
+          },
+        )}
+      >
+        <div class='searchcraft-popover-form-input searchcraft-popover-form-inline-input'>
+          <searchcraft-input-form
+            onInputFocus={this.handleInputFocus.bind(this)}
+          />
+        </div>
         {isListViewVisible && (
-          <div class='searchcraft-popover-form-inline-outer'>
-            <div class='searchcraft-popover-form-inline-inner'>
-              <searchcraft-popover-list-view
-                popoverResultMappings={this.popoverResultMappings}
-                searchClientResponseItems={this.searchClientResponseItems}
-                adClientResponseItems={this.adClientResponseItems}
-                searchResultsPage={this.searchResultsPage}
-                searchResultsPerPage={this.searchResultsPerPage}
-              />
-            </div>
-          </div>
+          // <div class='searchcraft-popover-form-inline-outer'>
+          //   <div class='searchcraft-popover-form-inline-inner'>
+          <searchcraft-popover-list-view
+            popoverResultMappings={this.popoverResultMappings}
+            searchClientResponseItems={this.searchClientResponseItems}
+            adClientResponseItems={this.adClientResponseItems}
+            searchResultsPage={this.searchResultsPage}
+            searchResultsPerPage={this.searchResultsPerPage}
+          />
+          //   </div>
+          // </div>
         )}
       </div>
     );
@@ -315,64 +318,29 @@ export class SearchcraftPopoverForm {
 
   renderModalPopover() {
     if (this.isPopoverVisibleInState) {
-      const popoverFormClassNames = classNames(
-        'searchcraft-popover-form searchcraft-popover-form-modal',
-        {
-          'searchcraft-popover-form-active': this.hasResultsToShow,
-        },
-      );
-
       return (
-        <div class='searchcraft-popover-form-modal-outer'>
+        <div
+          class={classNames(
+            'searchcraft-popover-form searchcraft-popover-form-modal',
+            {
+              'searchcraft-popover-form-active': this.hasResultsToShow,
+            },
+          )}
+        >
           {/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
           <div
             class='searchcraft-popover-form-modal-backdrop'
             onClick={this.handleModalBackdropClick}
           />
-          <div class='searchcraft-popover-form-modal-inner'>
-            <div class={popoverFormClassNames}>
-              <div class='searchcraft-popover-form-input searchcraft-popover-form-modal-input'>
-                <searchcraft-input-form
-                  onInputFocus={this.handleInputFocus.bind(this)}
-                  onInputInit={this.handleInputInit.bind(this)}
-                />
-                <button
-                  type='button'
-                  class='searchcraft-popover-form-input-cancel-button searchcraft-popover-form-modal-input-cancel-button'
-                  onClick={this.handleCancelButtonClick.bind(this)}
-                >
-                  Cancel
-                </button>
-              </div>
-              {this.hasResultsToShow && (
-                <searchcraft-popover-list-view
-                  popoverResultMappings={this.popoverResultMappings}
-                  searchClientResponseItems={this.searchClientResponseItems}
-                  adClientResponseItems={this.adClientResponseItems}
-                  searchResultsPage={this.searchResultsPage}
-                  searchResultsPerPage={this.searchResultsPerPage}
-                />
-              )}
-            </div>
-          </div>
-        </div>
-      );
-    }
-  }
-
-  renderFullscreenPopover() {
-    if (this.isPopoverVisibleInState) {
-      return (
-        <div class='searchcraft-popover-form-fullscreen'>
-          <div class='searchcraft-popover-form'>
-            <div class='searchcraft-popover-form-input searchcraft-popover-form-fullscreen-input'>
+          <div class='searchcraft-popover-form-modal-wrapper'>
+            <div class='searchcraft-popover-form-input searchcraft-popover-form-modal-input'>
               <searchcraft-input-form
                 onInputFocus={this.handleInputFocus.bind(this)}
                 onInputInit={this.handleInputInit.bind(this)}
               />
               <button
                 type='button'
-                class='searchcraft-popover-form-input-cancel-button searchcraft-popover-form-fullscreen-input-cancel-button'
+                class='searchcraft-popover-form-input-cancel-button searchcraft-popover-form-modal-input-cancel-button'
                 onClick={this.handleCancelButtonClick.bind(this)}
               >
                 Cancel
@@ -387,7 +355,47 @@ export class SearchcraftPopoverForm {
                 searchResultsPerPage={this.searchResultsPerPage}
               />
             )}
+            <searchcraft-popover-footer />
           </div>
+        </div>
+      );
+    }
+  }
+
+  renderFullscreenPopover() {
+    if (this.isPopoverVisibleInState) {
+      return (
+        <div
+          class={classNames(
+            'searchcraft-popover-form searchcraft-popover-form-fullscreen',
+            {
+              'searchcraft-popover-form-active': this.hasResultsToShow,
+            },
+          )}
+        >
+          <div class='searchcraft-popover-form-input searchcraft-popover-form-fullscreen-input'>
+            <searchcraft-input-form
+              onInputFocus={this.handleInputFocus.bind(this)}
+              onInputInit={this.handleInputInit.bind(this)}
+            />
+            <button
+              type='button'
+              class='searchcraft-popover-form-input-cancel-button searchcraft-popover-form-fullscreen-input-cancel-button'
+              onClick={this.handleCancelButtonClick.bind(this)}
+            >
+              Cancel
+            </button>
+          </div>
+          {this.hasResultsToShow && (
+            <searchcraft-popover-list-view
+              popoverResultMappings={this.popoverResultMappings}
+              searchClientResponseItems={this.searchClientResponseItems}
+              adClientResponseItems={this.adClientResponseItems}
+              searchResultsPage={this.searchResultsPage}
+              searchResultsPerPage={this.searchResultsPerPage}
+            />
+          )}
+          <searchcraft-popover-footer />
         </div>
       );
     }

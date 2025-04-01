@@ -8,7 +8,7 @@ const componentMeta: Meta = {
   argTypes: {},
 };
 
-export const WithSlot: StoryObj<Components.SearchcraftPopoverButton> = {
+export const Default: StoryObj<Components.SearchcraftPopoverButton> = {
   decorators: [
     (Story) => {
       useEffect(() => {
@@ -35,7 +35,7 @@ export const WithSlot: StoryObj<Components.SearchcraftPopoverButton> = {
   args: {},
 };
 
-export const WithoutSlot: StoryObj<Components.SearchcraftPopoverButton> = {
+export const Skeuomorphic: StoryObj<Components.SearchcraftPopoverButton> = {
   decorators: [
     (Story) => {
       useEffect(() => {
@@ -53,7 +53,7 @@ export const WithoutSlot: StoryObj<Components.SearchcraftPopoverButton> = {
     return (
       <>
         <searchcraft-theme />
-        <searchcraft-popover-button type='keycap' />
+        <searchcraft-popover-button type='skeuomorphic' />
       </>
     );
   },

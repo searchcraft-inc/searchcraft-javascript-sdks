@@ -218,7 +218,12 @@ export namespace Components {
         /**
           * The type of popover button to render.
          */
-        "type"?: 'keycap';
+        "type"?: 'skeuomorphic';
+    }
+    /**
+     * Renders the footer for the searchcraft-popover-form.
+     */
+    interface SearchcraftPopoverFooter {
     }
     /**
      * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field, or when a popover-button is pressed.
@@ -757,6 +762,15 @@ declare global {
         new (): HTMLSearchcraftPopoverButtonElement;
     };
     /**
+     * Renders the footer for the searchcraft-popover-form.
+     */
+    interface HTMLSearchcraftPopoverFooterElement extends Components.SearchcraftPopoverFooter, HTMLStencilElement {
+    }
+    var HTMLSearchcraftPopoverFooterElement: {
+        prototype: HTMLSearchcraftPopoverFooterElement;
+        new (): HTMLSearchcraftPopoverFooterElement;
+    };
+    /**
      * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field, or when a popover-button is pressed.
      * @react-import ```jsx
      * import { SearchcraftPopoverForm } from "@searchcraft/react-sdk";
@@ -1030,6 +1044,7 @@ declare global {
         "searchcraft-input-label": HTMLSearchcraftInputLabelElement;
         "searchcraft-pagination": HTMLSearchcraftPaginationElement;
         "searchcraft-popover-button": HTMLSearchcraftPopoverButtonElement;
+        "searchcraft-popover-footer": HTMLSearchcraftPopoverFooterElement;
         "searchcraft-popover-form": HTMLSearchcraftPopoverFormElement;
         "searchcraft-popover-list-item": HTMLSearchcraftPopoverListItemElement;
         "searchcraft-popover-list-view": HTMLSearchcraftPopoverListViewElement;
@@ -1272,7 +1287,12 @@ declare namespace LocalJSX {
         /**
           * The type of popover button to render.
          */
-        "type"?: 'keycap';
+        "type"?: 'skeuomorphic';
+    }
+    /**
+     * Renders the footer for the searchcraft-popover-form.
+     */
+    interface SearchcraftPopoverFooter {
     }
     /**
      * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field, or when a popover-button is pressed.
@@ -1594,6 +1614,7 @@ declare namespace LocalJSX {
         "searchcraft-input-label": SearchcraftInputLabel;
         "searchcraft-pagination": SearchcraftPagination;
         "searchcraft-popover-button": SearchcraftPopoverButton;
+        "searchcraft-popover-footer": SearchcraftPopoverFooter;
         "searchcraft-popover-form": SearchcraftPopoverForm;
         "searchcraft-popover-list-item": SearchcraftPopoverListItem;
         "searchcraft-popover-list-view": SearchcraftPopoverListView;
@@ -1743,6 +1764,10 @@ declare module "@stencil/core" {
              * ```
              */
             "searchcraft-popover-button": LocalJSX.SearchcraftPopoverButton & JSXBase.HTMLAttributes<HTMLSearchcraftPopoverButtonElement>;
+            /**
+             * Renders the footer for the searchcraft-popover-form.
+             */
+            "searchcraft-popover-footer": LocalJSX.SearchcraftPopoverFooter & JSXBase.HTMLAttributes<HTMLSearchcraftPopoverFooterElement>;
             /**
              * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field, or when a popover-button is pressed.
              * @react-import ```jsx

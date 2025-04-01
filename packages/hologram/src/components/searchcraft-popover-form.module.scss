@@ -4,29 +4,13 @@
 
 :root {
   /**
-   * Border radius applied to popover form containers.
-   */
-  --sc-popover-form-border-radius: var(--sc-border-radius);
-  /**
    * Height of the list view/results container portion of the popover form.
    */
-  --sc-popover-list-view-height: 400px;
-  /**
-   * Size of images of list view items in the popover list view.
-   */
-  --sc-popover-list-item-image-size: 60px;
-  /**
-   * Horizontal padding of popover list items.
-   */
-  --sc-popover-list-item-padding-horizontal: 8px;
-  /**
-   * Vertical padding of popover list items.
-   */
-  --sc-popover-list-item-padding-vertical: 8px;
+  --sc-popover-list-view-height: 600px;
   /**
    * Maximum width of popover forms of type `modal`.
    */
-  --sc-popover-modal-max-width: 570px;
+  --sc-popover-modal-max-width: 800px;
 }
 
 /**
@@ -37,18 +21,27 @@
   display: flex;
   flex: 1;
   flex-direction: column;
+
+  & searchcraft-input-form,
+  & searchcraft-popover-footer {
+    width: 100%;
+  }
 }
 
 .searchcraft-popover-form-input {
-  background-color: var(--sc-surface-neutral-secondary);
   display: flex;
   flex-direction: row;
-  gap: 4px;
-  padding: 12px;
-}
+  gap: 12px;
 
-.searchcraft-popover-form-input > searchcraft-input-form {
-  flex: 1;
+  & .searchcraft-input-form-input {
+    background-color: var(--sc-surface-neutral-primary);
+    border: 1px solid var(--sc-border-neutral);
+    border-radius: var(--sc-border-radius-lg);
+    box-shadow:
+      0 1px 1px rgb(from var(--sc-content-neutral-primary) r g b / 10%) inset,
+      0 2px 2px rgb(from var(--sc-content-neutral-primary) r g b / 5%) inset,
+      0 4px 4px rgb(from var(--sc-content-neutral-primary) r g b / 5%) inset;
+  }
 }
 
 .searchcraft-popover-form-input-cancel-button {
@@ -58,23 +51,54 @@
 }
 
 /**
- * Styles applied to `inline` popover forms.
+ * Styles shared by multiple types.
  */
-.searchcraft-popover-form-inline .searchcraft-input-form-input {
-  border-top-left-radius: var(--sc-popover-form-border-radius);
-  border-bottom-left-radius: var(--sc-popover-form-border-radius);
-  border-bottom-right-radius: var(--sc-popover-form-border-radius);
-  border-top-right-radius: var(--sc-popover-form-border-radius);
-  border: none;
-  outline: none;
+.searchcraft-popover-form-modal,
+.searchcraft-popover-form-fullscreen {
+  &.searchcraft-popover-form-active {
+    & .searchcraft-popover-form-input {
+      padding-bottom: 12px;
+    }
+
+    & searchcraft-popover-list-view {
+      flex-shrink: 1;
+      min-height: 0;
+      overflow: auto;
+      padding: 0 24px;
+    }
+  }
+
+  .searchcraft-popover-form-modal-input,
+  .searchcraft-popover-form-fullscreen-input {
+    padding: 24px;
+  }
 }
 
-.searchcraft-popover-form-inline.searchcraft-popover-form-active
-  .searchcraft-input-form-input {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  border-top-left-radius: var(--sc-popover-form-border-radius);
-  border-top-right-radius: var(--sc-popover-form-border-radius);
+/**
+ * Styles applied to `inline` popover forms.
+ */
+.searchcraft-popover-form-inline {
+  &.searchcraft-popover-form-active .searchcraft-input-form-input {
+    // border-bottom-left-radius: 0;
+    // border-bottom-right-radius: 0;
+    // border-top-left-radius: var(--sc-border-radius-xl);
+    // border-top-right-radius: var(--sc-border-radius-xl);
+  }
+
+  & .searchcraft-input-form-input {
+    // border-radius: var(--sc-border-radius-xl);
+    // border: none;
+    // outline: none;
+  }
+
+  & .searchcraft-popover-list-view {
+    // border-bottom-left-radius: var(--sc-border-radius-xl);
+    // border-bottom-right-radius: var(--sc-border-radius-xl);
+    // display: flex;
+    // flex-direction: column;
+    // max-height: var(--sc-popover-list-view-height);
+    // overflow: auto;
+  }
 }
 
 .searchcraft-popover-form-inline-outer {
@@ -88,132 +112,96 @@
   z-index: 1000;
 }
 
-.searchcraft-popover-form-inline .searchcraft-popover-list-view {
-  background-color: var(--sc-surface-neutral-secondary);
-  border-bottom-left-radius: var(--sc-popover-form-border-radius);
-  border-bottom-right-radius: var(--sc-popover-form-border-radius);
-  display: flex;
-  flex-direction: column;
-  max-height: var(--sc-popover-list-view-height);
-  overflow: auto;
-}
-
 /**
  * Styles applied to `modal` popover forms.
  */
-.searchcraft-popover-form-modal-outer {
-  --sc-popover0-form-border-radius: var(--sc-border-radius-lg);
-  @include appearance.offset-border-radius(
-    --sc-popover-form-border-radius,
-    -12px
-  );
-  align-items: flex-start;
+.searchcraft-popover-form-modal {
+  align-items: center;
   background-color: var(--sc-surface-neutral-secondary);
   display: flex;
   inset: 0;
-  justify-content: center;
-  outline-width: 1px;
-  outline-color: var(--sc-border-neutral);
-  padding: 0;
   position: fixed;
   z-index: 1000;
 
-  @media (min-width: breakpoints.$breakpoint-sm) {
-    background-color: transparent;
-    padding: 16px;
-  }
-
-  & .searchcraft-popover-list-view {
-    background-color: var(--sc-surface-neutral-secondary);
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-    display: flex;
-    flex-direction: column;
+  & searchcraft-popover-list-view {
+    flex-shrink: 1;
+    min-height: 0;
     overflow: auto;
-
-    @media (min-width: breakpoints.$breakpoint-sm) {
-      max-height: var(--sc-popover-list-view-height);
-    }
+    padding: 0 24px;
   }
 
-  & .searchcraft-popover-list-view {
-    overflow: scroll;
-
-    @media (min-width: breakpoints.$breakpoint-sm) {
-      overflow: auto;
-    }
+  & .searchcraft-input-form-input {
+    @include appearance.offset-border-radius(--sc-border-radius-xl, -20px);
+    // background-color: var(--sc-surface-neutral-primary);
+    // border: 1px solid var(--sc-border-neutral);
+    // box-shadow:
+    //   0 1px 1px rgb(from var(--sc-content-neutral-primary) r g b / 10%) inset,
+    //   0 2px 2px rgb(from var(--sc-content-neutral-primary) r g b / 5%) inset,
+    //   0 4px 4px rgb(from var(--sc-content-neutral-primary) r g b / 5%) inset;
   }
 }
 
 .searchcraft-popover-form-modal-backdrop {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgb(from var(--sc-content-neutral-primary) r g b / 50%);
   display: none;
   inset: 0;
-  position: absolute;
+  position: fixed;
 
   @media (min-width: breakpoints.$breakpoint-sm) {
     display: block;
   }
 }
 
-.searchcraft-popover-form-modal-inner {
-  border-radius: var(--sc-popover-form-border-radius);
+.searchcraft-popover-form-modal-wrapper {
+  background-color: var(--sc-surface-neutral-primary);
+  border-radius: var(--sc-border-radius-xl);
   display: flex;
+  flex-direction: column;
   inset: 0;
-  margin-top: 0px;
+  max-width: var(--sc-popover-modal-max-width);
   overflow: hidden;
   position: absolute;
-  z-index: 1002;
+  width: 100%;
+  z-index: 1001;
 
   @media (min-width: breakpoints.$breakpoint-sm) {
-    inset: auto;
+    inset: 0;
     margin-top: 100px;
+    max-height: var(--sc-popover-list-view-height);
     max-width: var(--sc-popover-modal-max-width);
     position: relative;
-    width: 100%;
   }
 }
 
-.searchcraft-popover-form-modal-input .searchcraft-input-form-input {
-  @include appearance.offset-border-radius(
-    --sc-popover-form-border-radius,
-    -12px
-  );
-  border: 1px solid var(--sc-border-neutral);
-}
-
 .searchcraft-popover-form-modal-input-cancel-button {
-  @include appearance.offset-border-radius(
-    --sc-popover-form-border-radius,
-    -12px
-  );
+  @include appearance.offset-border-radius(--sc-border-radius-xl, -20px);
+  padding: 8px 12px;
 }
 
 /**
  * Styles applied to `fullscreen` popover forms.
  */
 .searchcraft-popover-form-fullscreen {
-  position: fixed;
+  background-color: var(--sc-surface-neutral-primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   inset: 0;
+  position: fixed;
   z-index: 1000;
-  background-color: var(--sc-surface-neutral-secondary);
 
   & .searchcraft-popover-form {
-    position: absolute;
-    inset: 0;
+    // inset: 0;
+    // position: absolute;
   }
 
-  & .searchcraft-popover-list-view {
-    overflow: scroll;
+  & .searchcraft-input-form-input {
+    // border-radius: var(--sc-border-radius-xl);
+    // outline-width: 1px;
+    // outline-color: var(--sc-border-neutral);
   }
-}
-
-.searchcraft-popover-form-fullscreen-input .searchcraft-input-form-input {
-  border-radius: var(--sc-popover-form-border-radius);
-  outline-width: 1px;
-  outline-color: var(--sc-border-neutral);
 }
 
 .searchcraft-popover-form-fullscreen-input-cancel-button {
-  border-radius: var(--sc-popover-form-border-radius);
+  border-radius: var(--sc-border-radius-lg);
 }

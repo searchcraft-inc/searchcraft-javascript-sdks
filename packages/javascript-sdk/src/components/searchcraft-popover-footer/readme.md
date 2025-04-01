@@ -1,50 +1,45 @@
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-
 # searchcraft-popover-button
 
 Renders a button which, when clicked, turns on popover visibility.
 
 ## Import
 
-<Tabs>
-<TabItem label="React">
 ```jsx
+// react
 import { SearchcraftPopoverButton } from "@searchcraft/react-sdk";
-````
-</TabItem>
-<TabItem label="Vue">
-```jsx
+
+// vue
 import { SearchcraftPopoverButton } from "@searchcraft/vue-sdk";
 ```
-</TabItem>
-</Tabs>
 
 
 ## Usage
 
-<Tabs>
-<TabItem label="JS">
+**JavaScript:**
+
 ```html
 <searchcraft-popover-button>
   Open popover
 </searchcraft-popover-button>
 ```
-</TabItem>
-<TabItem label="React">
+
+
+**React:**
+
 ```jsx
 <SearchcraftPopoverButton>
   Open popover
 </SearchcraftPopoverButton>
 ```
-</TabItem>
-<TabItem label="Vue">
+
+
+**Vue:**
+
 ```jsx
 <SearchcraftPopoverButton>
   Open popover
 </SearchcraftPopoverButton>
 ```
-</TabItem>
-</Tabs>
 
 
 ## Properties
