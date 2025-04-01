@@ -5,7 +5,7 @@
 :root {
   --sc-popover-button-border-radius: var(--sc-border-radius);
 
-  @media (min-width: breakpoints.$breakpoint-md) {
+  @media (min-width: breakpoints.$breakpoint-sm) {
     --sc-popover-button-border-radius: var(--sc-border-radius-lg);
   }
 }
@@ -44,7 +44,7 @@
       hsl(from var(--sc-surface-neutral-primary) h s calc(l - 3)) 100%
     );
 
-    @media (min-width: breakpoints.$breakpoint-md) {
+    @media (min-width: breakpoints.$breakpoint-sm) {
       box-shadow:
         0 1px 1px rgb(from var(--sc-content-neutral-primary) r g b / 10%) inset,
         0 2px 2px rgb(from var(--sc-content-neutral-primary) r g b / 5%) inset,
@@ -59,7 +59,7 @@
     display: flex;
     gap: 4px;
 
-    @media (min-width: breakpoints.$breakpoint-md) {
+    @media (min-width: breakpoints.$breakpoint-sm) {
       gap: 8px;
     }
   }
@@ -71,7 +71,7 @@
     font-size: 20px;
     font-weight: 500;
 
-    @media (min-width: breakpoints.$breakpoint-md) {
+    @media (min-width: breakpoints.$breakpoint-sm) {
       gap: 8px;
     }
   }
@@ -89,7 +89,7 @@
     height: calc(100% - 2px);
     position: relative;
 
-    @media (min-width: breakpoints.$breakpoint-md) {
+    @media (min-width: breakpoints.$breakpoint-sm) {
       @include appearance.offset-border-radius(
         var(--sc-popover-button-border-radius),
         -8px
@@ -123,7 +123,7 @@
       inset: 2px;
       position: absolute;
 
-      @media (min-width: breakpoints.$breakpoint-md) {
+      @media (min-width: breakpoints.$breakpoint-sm) {
         @include appearance.offset-border-radius(
           var(--sc-popover-button-border-radius),
           -12px
@@ -152,7 +152,7 @@
     height: 60%;
     width: auto;
 
-    @media (min-width: breakpoints.$breakpoint-md) {
+    @media (min-width: breakpoints.$breakpoint-sm) {
       height: 50%;
     }
   }
