@@ -105,17 +105,15 @@ export class MeasureClient {
           keepalive: true,
         });
 
+        this.measureRequestsBatched = [];
         if (!response.ok) {
           throw new Error(
             `Failed to send request: ${response.status} ${response.statusText}`,
           );
         }
-
-        this.measureRequestsBatched = [];
-
-        return;
       } catch (error) {
         console.error('Error sending MeasureRequest:', error);
+        this.measureRequestsBatched = [];
         throw error;
       }
     }, MEASURE_REQUEST_DEBOUNCE);
