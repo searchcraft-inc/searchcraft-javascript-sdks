@@ -8,7 +8,7 @@ import type {
   SearchcraftSDKInfo,
 } from '../types';
 
-const MEASURE_REQUEST_DEBOUNCE = 500;
+const MEASURE_REQUEST_DEBOUNCE = 600;
 
 export class MeasureClient {
   private measureRequestTimeout: NodeJS.Timeout | undefined;
