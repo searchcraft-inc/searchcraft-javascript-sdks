@@ -2,7 +2,6 @@ import { resolve } from 'node:path';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import { defineConfig } from 'vite';
-import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 export default defineConfig({
   plugins: [
@@ -14,14 +13,6 @@ export default defineConfig({
       },
     }),
     vueJsx(),
-    viteStaticCopy({
-      targets: [
-        {
-          src: '../javascript-sdk/src/themes/*.{css,css.map}',
-          dest: './themes',
-        },
-      ],
-    }),
   ],
   build: {
     sourcemap: true,

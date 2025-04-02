@@ -109,7 +109,6 @@ const buildSteps = [
       execSync('yarn workspace @searchcraft/react-sdk build', {
         stdio: isVerbose ? 'inherit' : 'ignore',
       });
-
       spawnSync(
         'yarn',
         [
@@ -120,6 +119,12 @@ const buildSteps = [
           '--inline-declare-global',
           '--inline-declare-externals',
         ],
+        {
+          stdio: isVerbose ? 'inherit' : 'ignore',
+        },
+      );
+      execSync(
+        'mkdir -p packages/react-sdk/dist/client/themes && cp packages/javascript-sdk/src/themes/*.{css,css.map} packages/react-sdk/dist/client/themes/',
         {
           stdio: isVerbose ? 'inherit' : 'ignore',
         },
@@ -147,6 +152,12 @@ const buildSteps = [
           '--inline-declare-global',
           '--inline-declare-externals',
         ],
+        {
+          stdio: isVerbose ? 'inherit' : 'ignore',
+        },
+      );
+      execSync(
+        'mkdir -p packages/vue-sdk/dist/themes && cp packages/javascript-sdk/src/themes/*.{css,css.map} packages/vue-sdk/dist/themes/',
         {
           stdio: isVerbose ? 'inherit' : 'ignore',
         },
