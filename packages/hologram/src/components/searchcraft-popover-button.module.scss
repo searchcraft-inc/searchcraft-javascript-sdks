@@ -30,8 +30,8 @@
     border: 1px solid var(--sc-border-neutral);
     border-radius: var(--sc-popover-button-border-radius);
     box-shadow:
-      0 1px 1px rgb(from var(--sc-content-neutral-primary) r g b / 10%) inset,
-      0 2px 4px rgb(from var(--sc-content-neutral-primary) r g b / 5%) inset;
+      0 1px 1px rgb(from var(--sc-content-neutral-secondary) r g b / 10%) inset,
+      0 2px 4px rgb(from var(--sc-content-neutral-secondary) r g b / 5%) inset;
     display: flex;
     gap: 24px;
     height: 40px;
@@ -40,15 +40,16 @@
     padding: 4px 5px 4px 10px;
     background: linear-gradient(
       0deg,
-      var(--sc-surface-neutral-primary) 0%,
-      hsl(from var(--sc-surface-neutral-primary) h s calc(l - 3)) 100%
+      rgb(from var(--sc-surface-neutral-secondary) r g b / 0%) 0%,
+      rgb(from var(--sc-surface-neutral-secondary) r g b / 20%) 100%
     );
 
     @media (min-width: breakpoints.$breakpoint-sm) {
       box-shadow:
-        0 1px 1px rgb(from var(--sc-content-neutral-primary) r g b / 10%) inset,
-        0 2px 2px rgb(from var(--sc-content-neutral-primary) r g b / 5%) inset,
-        0 4px 4px rgb(from var(--sc-content-neutral-primary) r g b / 5%) inset;
+        0 1px 1px rgb(from var(--sc-content-neutral-secondary) r g b / 10%)
+          inset,
+        0 2px 2px rgb(from var(--sc-content-neutral-secondary) r g b / 5%) inset,
+        0 4px 4px rgb(from var(--sc-content-neutral-secondary) r g b / 5%) inset;
       height: 63px;
       padding: 8px 10px 8px 16px;
     }
@@ -83,9 +84,9 @@
     );
     background-color: var(--sc-surface-neutral-primary);
     box-shadow:
-      0 3px hsl(from var(--sc-surface-neutral-primary) h s calc(l - 12)),
-      0 1px 2px rgb(from var(--sc-content-neutral-primary) r g b / 10%),
-      0 6px 4px rgb(from var(--sc-content-neutral-primary) r g b / 5%);
+      0 3px hsl(from var(--sc-surface-neutral-secondary) h s calc(l - 5)),
+      0 1px 2px rgb(from var(--sc-content-neutral-secondary) r g b / 10%),
+      0 6px 4px rgb(from var(--sc-content-neutral-secondary) r g b / 5%);
     height: calc(100% - 2px);
     position: relative;
 
@@ -95,12 +96,12 @@
         -8px
       );
       box-shadow:
-        0 4px hsl(from var(--sc-surface-neutral-primary) h s calc(l - 12)),
-        0 1px 2px rgb(from var(--sc-content-neutral-primary) r g b / 15%),
-        0 6px 1px rgb(from var(--sc-content-neutral-primary) r g b / 20%),
-        0 7px 2px rgb(from var(--sc-content-neutral-primary) r g b / 15%),
-        0 9px 4px rgb(from var(--sc-content-neutral-primary) r g b / 10%),
-        0 13px 8px rgb(from var(--sc-content-neutral-primary) r g b / 5%);
+        0 4px hsl(from var(--sc-surface-neutral-secondary) h s calc(l - 5)),
+        0 1px 2px rgb(from var(--sc-content-neutral-secondary) r g b / 15%),
+        0 6px 1px rgb(from var(--sc-content-neutral-secondary) r g b / 20%),
+        0 7px 2px rgb(from var(--sc-content-neutral-secondary) r g b / 15%),
+        0 9px 4px rgb(from var(--sc-content-neutral-secondary) r g b / 10%),
+        0 13px 8px rgb(from var(--sc-content-neutral-secondary) r g b / 5%);
       height: calc(100% - 5px);
     }
 
@@ -117,8 +118,8 @@
       );
       background: linear-gradient(
         340deg,
-        var(--sc-surface-neutral-primary) 0%,
-        hsl(from var(--sc-surface-neutral-primary) h s calc(l - 8)) 100%
+        rgb(from var(--sc-surface-neutral-secondary) r g b / 2%) 0%,
+        var(--sc-surface-neutral-secondary) 100%
       );
       inset: 2px;
       position: absolute;

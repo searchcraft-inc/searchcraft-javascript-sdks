@@ -2,17 +2,20 @@
   /** ------------ NEUTRAL ------------- */
   --sc-surface-neutral-primary: var(--sc-color-background, #ffffff);
 
-  --sc-color-background-hover: hsl(
+  --sc-color-background-hover-computed: hsl(
     from var(--sc-color-background) h s clamp(10, calc(l + 5), 95)
   );
-  --sc-surface-neutral-primary-hover: var(--sc-color-background-hover, #fafafa);
+  --sc-surface-neutral-primary-hover: var(
+    --sc-color-background-hover,
+    var(--sc-color-background-hover-computed, #fafafa)
+  );
 
-  --sc-color-background-active: hsl(
+  --sc-color-background-active-computed: hsl(
     from var(--sc-color-background) h s clamp(5, calc(l - 5), 90)
   );
   --sc-surface-neutral-primary-active: var(
     --sc-color-background-active,
-    #f7f7f7
+    var(--sc-color-background-active-computed, #f7f7f7)
   );
 
   // secondary
@@ -21,14 +24,20 @@
     var(--sc-color-background, #f3f3f3)
   );
 
+  --sc-color-background-secondary-hover-computed: hsl(
+    from var(--sc-color-background-secondary) h s clamp(10, calc(l + 5), 95)
+  );
   --sc-surface-neutral-secondary-hover: var(
-    --sc-color-background-secondary-hover,
-    var(--sc-color-background-hover, #e6e6e6)
+    --sc-color-background-hover,
+    var(--sc-color-background-hover-computed, #e6e6e6)
   );
 
+  --sc-color-background-secondary-active-computed: hsl(
+    from var(--sc-color-background-secondary) h s clamp(5, calc(l - 5), 90)
+  );
   --sc-surface-neutral-secondary-active: var(
     --sc-color-background-secondary-active,
-    var(--sc-color-background-active, #e0e0e0)
+    var(--sc-color-background-active-computed, #e0e0e0)
   );
 
   // light
@@ -37,27 +46,36 @@
   // content
   --sc-content-neutral-primary: var(--sc-color-foreground, #292929);
 
-  --sc-color-foreground-secondary: hsl(
+  --sc-color-foreground-secondary-computed: hsl(
     from var(--sc-color-foreground) h s clamp(10, calc(l + 5), 90)
   );
-  --sc-content-neutral-secondary: var(--sc-color-foreground-secondary, #404040);
+  --sc-content-neutral-secondary: var(
+    --sc-color-foreground-secondary,
+    var(--sc-color-foreground-secondary-computed, #404040)
+  );
 
   // border
-  --sc-border-neutral: rgba(0, 0, 0, 0.1);
+  --sc-border-neutral: var(--sc-color-border, rgba(0, 0, 0, 0.1));
 
   /** ------------ BRAND ------------- */
   // primary
   --sc-surface-brand-primary: var(--sc-color-brand, #000000);
 
-  --sc-color-brand-hover: hsl(
+  --sc-color-brand-hover-computed: hsl(
     from var(--sc-color-brand) h s clamp(20, calc(l + 5), 95)
   );
-  --sc-surface-brand-primary-hover: var(--sc-color-brand-hover, #2e2e2e);
+  --sc-surface-brand-primary-hover: var(
+    --sc-color-brand-hover,
+    var(--sc-color-brand-hover-computed, #2e2e2e)
+  );
 
-  --sc-color-brand-active: hsl(
+  --sc-color-brand-active-computed: hsl(
     from var(--sc-color-brand) h s clamp(10, calc(l - 5), 85)
   );
-  --sc-surface-brand-primary-active: var(--sc-color-brand-active, #292929);
+  --sc-surface-brand-primary-active: var(
+    --sc-color-brand-active,
+    var(--sc-color-brand-active-computed, #292929)
+  );
 
   // secondary
   --sc-surface-brand-secondary: var(
@@ -65,14 +83,20 @@
     var(--sc-color-brand, #e6e6e6)
   );
 
+  --sc-color-brand-secondary-hover-computed: hsl(
+    from var(--sc-color-brand-secondary) h s clamp(10, calc(l + 5), 95)
+  );
   --sc-surface-brand-secondary-hover: var(
-    --sc-color-brand-secondary-hover,
-    var(--sc-color-brand-hover, #ebebeb)
+    --sc-color-background-hover,
+    var(--sc-color-background-hover-computed, #ebebeb)
   );
 
+  --sc-color-brand-secondary-active-computed: hsl(
+    from var(--sc-color-brand-secondary) h s clamp(5, calc(l - 5), 90)
+  );
   --sc-surface-brand-secondary-active: var(
     --sc-color-brand-secondary-active,
-    var(--sc-color-brand-active, #e0e0e0)
+    var(--sc-color-brand-active-computed, #e0e0e0)
   );
 
   // content
@@ -89,36 +113,45 @@
   // primary
   --sc-surface-success-primary: var(--sc-color-success, #008000);
 
-  --sc-color-success-primary-hover: hsl(from var(--sc-color-success) h s 30);
+  --sc-color-success-primary-hover-computed: hsl(
+    from var(--sc-color-success) h s 30
+  );
   --sc-surface-success-primary-hover: var(
     --sc-color-success-primary-hover,
-    #009900
+    var(--sc-color-success-primary-hover-computed, #009900)
   );
 
-  --sc-color-success-primary-active: hsl(from var(--sc-color-success) h s 20);
+  --sc-color-success-primary-active-computed: hsl(
+    from var(--sc-color-success) h s 20
+  );
   --sc-surface-success-primary-active: var(
     --sc-color-success-primary-active,
-    #006600
+    var(--sc-color-success-primary-active-computed, #006600)
   );
 
   // secondary
-  --sc-color-success-secondary: hsl(from var(--sc-color-success) h s 90);
-  --sc-surface-success-secondary: var(--sc-color-success-secondary, #ccffcc);
+  --sc-color-success-secondary-computed: hsl(
+    from var(--sc-color-success) h s 90
+  );
+  --sc-surface-success-secondary: var(
+    --sc-color-success-secondary,
+    var(--sc-color-success-secondary-computed, #ccffcc)
+  );
 
-  --sc-color-success-secondary-hover: hsl(
+  --sc-color-success-secondary-hover-computed: hsl(
     from var(--sc-color-success-secondary) h s 95
   );
   --sc-surface-success-secondary-hover: var(
     --sc-color-success-secondary-hover,
-    #e6ffe6
+    var(--sc-color-success-secondary-hover-computed, #e6ffe6)
   );
 
-  --sc-color-success-secondary-active: hsl(
+  --sc-color-success-secondary-active-computed: hsl(
     from var(--sc-color-success-secondary) h s 85
   );
   --sc-surface-success-secondary-active: var(
     --sc-color-success-secondary-active,
-    #b2ffb2
+    var(--sc-color-success-secondary-active-computed, #b2ffb2)
   );
 
   // content
@@ -135,36 +168,45 @@
   // primary
   --sc-surface-caution-primary: var(--sc-color-caution, #cc6600);
 
-  --sc-color-caution-primary-hover: hsl(from var(--sc-color-caution) h s 30);
+  --sc-color-caution-primary-hover-computed: hsl(
+    from var(--sc-color-caution) h s 30
+  );
   --sc-surface-caution-primary-hover: var(
     --sc-color-caution-primary-hover,
-    #e57300
+    var(--sc-color-caution-primary-hover-computed, #e57300)
   );
 
-  --sc-color-caution-primary-active: hsl(from var(--sc-color-caution) h s 20);
+  --sc-color-caution-primary-active-computed: hsl(
+    from var(--sc-color-caution) h s 20
+  );
   --sc-surface-caution-primary-active: var(
     --sc-color-caution-primary-active,
-    #b25a00
+    var(--sc-color-caution-primary-active-computed, #b25a00)
   );
 
   // secondary
-  --sc-color-caution-secondary: hsl(from var(--sc-color-caution) h s 90);
-  --sc-surface-caution-secondary: var(--sc-color-caution-secondary, #ffd9b3);
+  --sc-color-caution-secondary-computed: hsl(
+    from var(--sc-color-caution) h s 90
+  );
+  --sc-surface-caution-secondary: var(
+    --sc-color-caution-secondary,
+    var(--sc-color-caution-secondary-computed, #ffd9b3)
+  );
 
-  --sc-color-caution-secondary-hover: hsl(
+  --sc-color-caution-secondary-hover-computed: hsl(
     from var(--sc-color-caution-secondary) h s 95
   );
   --sc-surface-caution-secondary-hover: var(
     --sc-color-caution-secondary-hover,
-    #ffe5cc
+    var(--sc-color-caution-secondary-hover-computed, #ffe5cc)
   );
 
-  --sc-color-caution-secondary-active: hsl(
+  --sc-color-caution-secondary-active-computed: hsl(
     from var(--sc-color-caution-secondary) h s 85
   );
   --sc-surface-caution-secondary-active: var(
     --sc-color-caution-secondary-active,
-    #ffcc99
+    var(--sc-color-caution-secondary-active-computed, #ffcc99)
   );
 
   // content
@@ -181,36 +223,43 @@
   // primary
   --sc-surface-danger-primary: var(--sc-color-danger, #cc0000);
 
-  --sc-color-danger-primary-hover: hsl(from var(--sc-color-danger) h s 30);
+  --sc-color-danger-primary-hover-computed: hsl(
+    from var(--sc-color-danger) h s 30
+  );
   --sc-surface-danger-primary-hover: var(
     --sc-color-danger-primary-hover,
-    #e50000
+    var(--sc-color-danger-primary-hover-computed, #e50000)
   );
 
-  --sc-color-danger-primary-active: hsl(from var(--sc-color-danger) h s 20);
+  --sc-color-danger-primary-active-computed: hsl(
+    from var(--sc-color-danger) h s 20
+  );
   --sc-surface-danger-primary-active: var(
     --sc-color-danger-primary-active,
-    #b30000
+    var(--sc-color-danger-primary-active-computed, #b30000)
   );
 
   // secondary
-  --sc-color-danger-secondary: hsl(from var(--sc-color-danger) h s 90);
-  --sc-surface-danger-secondary: var(--sc-color-danger-secondary, #ffcccc);
+  --sc-color-danger-secondary-computed: hsl(from var(--sc-color-danger) h s 90);
+  --sc-surface-danger-secondary: var(
+    --sc-color-danger-secondary,
+    var(--sc-color-danger-secondary-computed, #ffcccc)
+  );
 
-  --sc-color-danger-secondary-hover: hsl(
+  --sc-color-danger-secondary-hover-computed: hsl(
     from var(--sc-color-danger-secondary) h s 95
   );
   --sc-surface-danger-secondary-hover: var(
     --sc-color-danger-secondary-hover,
-    #ffe7e7
+    var(--sc-color-danger-secondary-hover-computed, #ffe7e7)
   );
 
-  --sc-color-danger-secondary-active: hsl(
+  --sc-color-danger-secondary-active-computed: hsl(
     from var(--sc-color-danger-secondary) h s 85
   );
   --sc-surface-danger-secondary-active: var(
     --sc-color-danger-secondary-active,
-    #ffb3b3
+    var(--sc-color-danger-secondary-active-computed, #ffb3b3)
   );
 
   // content
@@ -243,44 +292,48 @@
     /** ------------ NEUTRAL ------------- */
 
     // primary
-    --sc-color-background-hover: hsl(
+    --sc-color-background-hover-computed: hsl(
       from var(--sc-color-background) h s clamp(10%, calc(l + 5%), 95%)
     );
-    --sc-color-background-active: hsl(
+    --sc-color-background-active-computed: hsl(
       from var(--sc-color-background) h s clamp(5%, calc(l - 5%), 90%)
     );
 
     // content
-    --sc-color-foreground-secondary: hsl(
+    --sc-color-foreground-secondary-computed: hsl(
       from var(--sc-color-foreground) h s clamp(10%, calc(l + 5%), 90%)
     );
 
     /** ------------ BRAND ------------- */
     // primary
-    --sc-color-brand-hover: hsl(
+    --sc-color-brand-hover-computed: hsl(
       from var(--sc-color-brand) h s clamp(20%, calc(l + 5%), 95%)
     );
 
-    --sc-color-brand-active: hsl(
+    --sc-color-brand-active-computed: hsl(
       from var(--sc-color-brand) h s clamp(10%, calc(l - 5%), 85%)
     );
 
     /** ------------ SUCCESS ------------- */
     // primary
-    --sc-color-success-primary-hover: hsl(from var(--sc-color-success) h s 30%);
+    --sc-color-success-primary-hover-computed: hsl(
+      from var(--sc-color-success) h s 30%
+    );
 
-    --sc-color-success-primary-active: hsl(
+    --sc-color-success-primary-active-computed: hsl(
       from var(--sc-color-success) h s 20%
     );
 
     // secondary
-    --sc-color-success-secondary: hsl(from var(--sc-color-success) h s 90%);
+    --sc-color-success-secondary-computed: hsl(
+      from var(--sc-color-success) h s 90%
+    );
 
-    --sc-color-success-secondary-hover: hsl(
+    --sc-color-success-secondary-hover-computed: hsl(
       from var(--sc-color-success-secondary) h s 95%
     );
 
-    --sc-color-success-secondary-active: hsl(
+    --sc-color-success-secondary-active-computed: hsl(
       from var(--sc-color-success-secondary) h s 85%
     );
 
@@ -292,20 +345,24 @@
 
     /** ------------ CAUTION ------------- */
     // primary
-    --sc-color-caution-primary-hover: hsl(from var(--sc-color-caution) h s 30%);
+    --sc-color-caution-primary-hover-computed: hsl(
+      from var(--sc-color-caution) h s 30%
+    );
 
-    --sc-color-caution-primary-active: hsl(
+    --sc-color-caution-primary-active-computed: hsl(
       from var(--sc-color-caution) h s 20%
     );
 
     // secondary
-    --sc-color-caution-secondary: hsl(from var(--sc-color-caution) h s 90%);
+    --sc-color-caution-secondary-computed: hsl(
+      from var(--sc-color-caution) h s 90%
+    );
 
-    --sc-color-caution-secondary-hover: hsl(
+    --sc-color-caution-secondary-hover-computed: hsl(
       from var(--sc-color-caution-secondary) h s 95%
     );
 
-    --sc-color-caution-secondary-active: hsl(
+    --sc-color-caution-secondary-active-computed: hsl(
       from var(--sc-color-caution-secondary) h s 85%
     );
 
@@ -317,18 +374,24 @@
 
     /** ------------ DANGER ------------- */
     // primary
-    --sc-color-danger-primary-hover: hsl(from var(--sc-color-danger) h s 30%);
+    --sc-color-danger-primary-hover-computed: hsl(
+      from var(--sc-color-danger) h s 30%
+    );
 
-    --sc-color-danger-primary-active: hsl(from var(--sc-color-danger) h s 20%);
+    --sc-color-danger-primary-active-computed: hsl(
+      from var(--sc-color-danger) h s 20%
+    );
 
     // secondary
-    --sc-color-danger-secondary: hsl(from var(--sc-color-danger) h s 90%);
+    --sc-color-danger-secondary-computed: hsl(
+      from var(--sc-color-danger) h s 90%
+    );
 
-    --sc-color-danger-secondary-hover: hsl(
+    --sc-color-danger-secondary-hover-computed: hsl(
       from var(--sc-color-danger-secondary) h s 95%
     );
 
-    --sc-color-danger-secondary-active: hsl(
+    --sc-color-danger-secondary-active-computed: hsl(
       from var(--sc-color-danger-secondary) h s 85%
     );
 
