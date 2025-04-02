@@ -65,7 +65,7 @@ export class MeasureClient {
    * @param {Partial<MeasureRequestProperties>} properties - Additional properties to send with the event.
    * @param {Partial<MeasureRequestUser>} user - Additional user properites to send with the event.
    */
-  sendMeasureEvent = (
+  sendMeasureEvent = async (
     eventName: MeasureEventName,
     properties: Partial<MeasureRequestProperties> = {},
     user: Partial<MeasureRequestUser> = {},
@@ -86,12 +86,10 @@ export class MeasureClient {
       },
     };
 
-    this.measureRequestsBatched.push(request);
-    clearTimeout(this.measureRequestTimeout);
-
-    this.measureRequestTimeout = setTimeout(async () => {
-      const payload = JSON.stringify({ items: this.measureRequestsBatched });
-      const url = `${this.baseMeasureUrl}/batch`;
+    // Send document_clicked events immediately
+    if (eventName === 'document_clicked') {
+      const body = JSON.stringify(request);
+      const url = `${this.baseMeasureUrl}/event`;
 
       try {
         const response = await fetch(url, {
@@ -101,11 +99,10 @@ export class MeasureClient {
             Authorization: this.config.readKey,
             'X-Sc-User-Id': this.userId,
           },
-          body: payload,
+          body,
           keepalive: true,
         });
 
-        this.measureRequestsBatched = [];
         if (!response.ok) {
           throw new Error(
             `Failed to send request: ${response.status} ${response.statusText}`,
@@ -113,9 +110,42 @@ export class MeasureClient {
         }
       } catch (error) {
         console.error('Error sending MeasureRequest:', error);
-        this.measureRequestsBatched = [];
         throw error;
       }
-    }, MEASURE_REQUEST_DEBOUNCE);
+    } else {
+      // Otherwise send in batches
+      this.measureRequestsBatched.push(request);
+      clearTimeout(this.measureRequestTimeout);
+
+      this.measureRequestTimeout = setTimeout(async () => {
+        const payload = JSON.stringify({ items: this.measureRequestsBatched });
+        const url = `${this.baseMeasureUrl}/batch`;
+
+        try {
+          const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: this.config.readKey,
+              'X-Sc-User-Id': this.userId,
+            },
+            body: payload,
+            keepalive: true,
+          });
+
+          this.measureRequestsBatched = [];
+          if (!response.ok) {
+            throw new Error(
+              `Failed to send request: ${response.status} ${response.statusText}`,
+            );
+          }
+          return;
+        } catch (error) {
+          this.measureRequestsBatched = [];
+          console.error('Error sending MeasureRequest:', error);
+          throw error;
+        }
+      }, MEASURE_REQUEST_DEBOUNCE);
+    }
   };
 }
