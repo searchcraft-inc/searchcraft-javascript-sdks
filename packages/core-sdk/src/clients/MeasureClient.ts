@@ -8,7 +8,7 @@ import type {
   SearchcraftSDKInfo,
 } from '../types';
 
-const MEASURE_REQUEST_DEBOUNCE = 500;
+const MEASURE_REQUEST_DEBOUNCE = 600;
 
 export class MeasureClient {
   private measureRequestTimeout: NodeJS.Timeout | undefined;
@@ -108,7 +108,6 @@ export class MeasureClient {
             `Failed to send request: ${response.status} ${response.statusText}`,
           );
         }
-        return;
       } catch (error) {
         console.error('Error sending MeasureRequest:', error);
         throw error;
@@ -134,16 +133,15 @@ export class MeasureClient {
             keepalive: true,
           });
 
+          this.measureRequestsBatched = [];
           if (!response.ok) {
             throw new Error(
               `Failed to send request: ${response.status} ${response.statusText}`,
             );
           }
-
-          this.measureRequestsBatched = [];
-
           return;
         } catch (error) {
+          this.measureRequestsBatched = [];
           console.error('Error sending MeasureRequest:', error);
           throw error;
         }
