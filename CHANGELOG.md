@@ -1,3 +1,16 @@
+## 0.10.1 - 2025-04-03
+
+This release makes some updates and improvements to the `searchcraft-popover` component, along with some other updates and enhancements:
+
+### New Features
+- Style improvements and enhancements to the searchcraft-popover component.
+- A new popover button variant, `skeuomorphic`, has been created.
+
+### Other Updates
+- Adds a new `style` export, to allow consuming applications to work with the component library styles directly if needed.
+- CSS class name updates & miscellaneous style tweaks and fixes.
+- Updates to measure events.
+
 ## 0.10.0 - 2025-03-27
 
 This release includes:
