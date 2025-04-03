@@ -124,7 +124,7 @@ const buildSteps = [
         },
       );
       execSync(
-        'mkdir -p packages/react-sdk/dist/client/themes && cp packages/javascript-sdk/src/themes/*.{css,css.map} packages/react-sdk/dist/client/themes/',
+        'mkdir -p packages/react-sdk/dist/client/themes && cp "packages/javascript-sdk/src/themes/"*.css* packages/react-sdk/dist/client/themes/',
         {
           stdio: isVerbose ? 'inherit' : 'ignore',
         },
@@ -157,7 +157,7 @@ const buildSteps = [
         },
       );
       execSync(
-        'mkdir -p packages/vue-sdk/dist/themes && cp packages/javascript-sdk/src/themes/*.{css,css.map} packages/vue-sdk/dist/themes/',
+        'mkdir -p packages/vue-sdk/dist/themes && cp "packages/javascript-sdk/src/themes/"*.css* packages/vue-sdk/dist/themes/',
         {
           stdio: isVerbose ? 'inherit' : 'ignore',
         },
