@@ -1,12 +1,14 @@
 {
   "name": "@searchcraft/vue-sdk",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "private": false,
   "author": "Searchcraft Inc.",
   "description": "Searchcraft Vue SDK.",
   "type": "module",
   "license": "Apache-2.0",
-  "keywords": ["searchcraft"],
+  "keywords": [
+    "searchcraft"
+  ],
   "scripts": {
     "dev": "vite",
     "clean": "rm -rf dist",
@@ -40,12 +42,14 @@
       "require": "./dist/themes/*.css"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "peerDependencies": {
     "vue": "^3.5.13"
   },
   "devDependencies": {
-    "@searchcraft/javascript-sdk": "^0.10.0",
+    "@searchcraft/javascript-sdk": "^0.10.1",
     "@tsconfig/node22": "^22.0.0",
     "@types/node": "^22.10.7",
     "@vitejs/plugin-vue": "^5.2.1",
