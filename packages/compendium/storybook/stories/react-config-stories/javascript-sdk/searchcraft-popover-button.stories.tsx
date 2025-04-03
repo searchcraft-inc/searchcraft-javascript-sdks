@@ -19,12 +19,12 @@ export const Default: StoryObj<Components.SearchcraftPopoverButton> = {
           endpointURL: import.meta.env.VITE_KOBOL_ENDPOINT_URL,
           index: [import.meta.env.VITE_KOBOL_INDEX],
         });
-      }, []);
-      const popoverForm = document.querySelector('searchcraft-popover-form');
+        const popoverForm = document.querySelector('searchcraft-popover-form');
 
-      if (popoverForm) {
-        popoverForm.popoverResultMappings = popoverResultMappings;
-      }
+        if (popoverForm) {
+          popoverForm.popoverResultMappings = popoverResultMappings;
+        }
+      }, []);
 
       return <Story />;
     },
