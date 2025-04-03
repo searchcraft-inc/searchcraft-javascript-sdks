@@ -57,6 +57,7 @@
 - [FacetPrime](/reference/sdk/core/type-aliases/FacetPrime.md)
 - [FacetRoot](/reference/sdk/core/type-aliases/FacetRoot.md)
 - [MeasureEventName](/reference/sdk/core/type-aliases/MeasureEventName.md)
+- [PopoverButtonTemplate](/reference/sdk/core/type-aliases/PopoverButtonTemplate.md)
 - [PopoverResultMappings](/reference/sdk/core/type-aliases/PopoverResultMappings.md)
 - [QueryObject](/reference/sdk/core/type-aliases/QueryObject.md)
 - [RangeValueForIndexField](/reference/sdk/core/type-aliases/RangeValueForIndexField.md)

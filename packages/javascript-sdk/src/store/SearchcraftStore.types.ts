@@ -27,6 +27,10 @@ export interface SearchcraftStateFunctions {
   setSearchTerm: (searchTerm: string) => void;
   setSearchMode: (mode: 'fuzzy' | 'exact') => void;
   setSortType: (type: 'asc' | 'desc') => void;
+  setHotKeyAndHotKeyModifier: (
+    hotkey?: string,
+    hotkeyModifier?: 'ctrl' | 'meta' | 'alt' | 'option',
+  ) => void;
 }
 
 /**
@@ -35,6 +39,8 @@ export interface SearchcraftStateFunctions {
 export interface SearchcraftStateValues {
   adClientResponseItems: AdClientResponseItem[];
   core: SearchcraftCore | undefined;
+  hotkey: string;
+  hotkeyModifier: 'ctrl' | 'meta' | 'alt' | 'option';
   logger: Logger | undefined;
   facetPathsForIndexFields: Record<string, FacetPathsForIndexField>;
   isPopoverVisible: boolean;

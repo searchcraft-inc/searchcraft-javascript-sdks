@@ -65,7 +65,6 @@
 
 @mixin font-base {
   font-family: var(--sc-font-family);
-  font-weight: var(--sc-font-normal);
   line-height: 1.25; // consistent for all variants
   -webkit-font-smoothing: antialiased;
 }
@@ -109,9 +108,11 @@
 @mixin body {
   @include font-base();
   font-size: var(--sc-body-font-size);
+  font-weight: var(--sc-font-normal);
 }
 
 @mixin body-small {
   @include font-base();
   font-size: var(--sc-body-small-font-size);
+  font-weight: var(--sc-font-normal);
 }

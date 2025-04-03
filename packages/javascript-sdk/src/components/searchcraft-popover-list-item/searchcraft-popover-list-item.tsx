@@ -22,18 +22,18 @@ export class SearchcraftPopoverListItem {
   /** The document position relative to the search results (For Measure) */
   @Prop() documentPosition = 0;
 
+  @State() title?: string;
+  @State() subtitle?: string;
   @State() href?: string;
-  @State() imageSrc?: string;
+  @State() imageSource?: string;
   @State() imageAlt?: string;
-  @State() titleContent?: string;
-  @State() subtitleContent?: string;
 
   mapValuesFromDocument(document: SearchDocument) {
-    this.titleContent = getDocumentValueFromSearchResultMapping(
+    this.title = getDocumentValueFromSearchResultMapping(
       document,
       this.popoverResultMappings?.title,
     );
-    this.subtitleContent = getDocumentValueFromSearchResultMapping(
+    this.subtitle = getDocumentValueFromSearchResultMapping(
       document,
       this.popoverResultMappings?.subtitle,
     );
@@ -41,7 +41,7 @@ export class SearchcraftPopoverListItem {
       document,
       this.popoverResultMappings?.href,
     );
-    this.imageSrc = getDocumentValueFromSearchResultMapping(
+    this.imageSource = getDocumentValueFromSearchResultMapping(
       document,
       this.popoverResultMappings?.imageSource,
     );
@@ -78,27 +78,35 @@ export class SearchcraftPopoverListItem {
 
   render() {
     return (
-      <a
-        class='searchcraft-popover-list-item'
-        href={this.href}
-        onClick={this.handleLinkClick.bind(this)}
-      >
-        {this.imageSrc && (
-          <div class='searchcraft-popover-list-item-image-wrapper'>
-            <img
-              alt={this.imageAlt}
-              src={this.imageSrc}
-              class='searchcraft-popover-list-item-image'
-            />
+      <div class='searchcraft-popover-list-item'>
+        <a
+          class='searchcraft-popover-list-item-link'
+          href={this.href}
+          onClick={this.handleLinkClick.bind(this)}
+        >
+          {this.imageSource && (
+            <div class='searchcraft-popover-list-item-image-wrapper'>
+              <img
+                alt={this.imageAlt}
+                src={this.imageSource}
+                class='searchcraft-popover-list-item-image'
+              />
+            </div>
+          )}
+          <div class='searchcraft-popover-list-item-content'>
+            {this.title && (
+              <p class='searchcraft-popover-list-item-content-title'>
+                {this.title}
+              </p>
+            )}
+            {this.subtitle && (
+              <p class='searchcraft-popover-list-item-content-subtitle'>
+                {this.subtitle}
+              </p>
+            )}
           </div>
-        )}
-        <div class='searchcraft-popover-list-item-info-wrapper'>
-          <p class='searchcraft-popover-list-item-title'>{this.titleContent}</p>
-          <p class='searchcraft-popover-list-item-subtitle'>
-            {this.subtitleContent}
-          </p>
-        </div>
-      </a>
+        </a>
+      </div>
     );
   }
 }

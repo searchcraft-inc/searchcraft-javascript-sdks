@@ -5,9 +5,9 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { AdClientResponseItem, FilterItem, PopoverResultMappings, ResultsInfoTemplate, SearchClientResponseItem, SearchcraftAdSource, SearchcraftCore, SearchResultTemplate, SearchResultTemplateData } from "@searchcraft/core";
+import { AdClientResponseItem, FilterItem, PopoverButtonTemplate, PopoverResultMappings, ResultsInfoTemplate, SearchClientResponseItem, SearchcraftAdSource, SearchcraftCore, SearchResultTemplate, SearchResultTemplateData } from "@searchcraft/core";
 import { SearchcraftSelectOption } from "./components/searchcraft-select/searchcraft-select";
-export { AdClientResponseItem, FilterItem, PopoverResultMappings, ResultsInfoTemplate, SearchClientResponseItem, SearchcraftAdSource, SearchcraftCore, SearchResultTemplate, SearchResultTemplateData } from "@searchcraft/core";
+export { AdClientResponseItem, FilterItem, PopoverButtonTemplate, PopoverResultMappings, ResultsInfoTemplate, SearchClientResponseItem, SearchcraftAdSource, SearchcraftCore, SearchResultTemplate, SearchResultTemplateData } from "@searchcraft/core";
 export { SearchcraftSelectOption } from "./components/searchcraft-select/searchcraft-select";
 export namespace Components {
     /**
@@ -199,22 +199,51 @@ export namespace Components {
      * import { SearchcraftPopoverButton } from "@searchcraft/vue-sdk";
      * ```
      * @js-example ```html
+     * <!-- index.html -->
      * <searchcraft-popover-button>
      *   Open popover
      * </searchcraft-popover-button>
      * ```
+     * ```js
+     * // index.js
+     * const popoverButton = document.querySelector('searchcraft-popover-button');
+     * popoverButton.template = (isPopoverVisible, { html }) => html`
+     *   <span>Click me</span>
+     * `;
+     * ```
      * @react-example ```jsx
-     * <SearchcraftPopoverButton>
+     * <SearchcraftPopoverButton
+     *   template={(isPopoverVisible, { html }) => html`
+     *     <span>Click me</span>
+     *   `}
+     * >
      *   Open popover
      * </SearchcraftPopoverButton>
      * ```
      * @vue-example ```jsx
-     * <SearchcraftPopoverButton>
+     * <SearchcraftPopoverButton
+     *   :template={(isPopoverVisible, { html }) => html`
+     *     <span>Click me</span>
+     *   `}
+     * >
      *   Open popover
      * </SearchcraftPopoverButton>
      * ```
      */
     interface SearchcraftPopoverButton {
+        /**
+          * A callback function responsible for rendering the button contents.
+         */
+        "template"?: PopoverButtonTemplate;
+        /**
+          * The type of popover button to render.
+         */
+        "type"?: 'skeuomorphic';
+    }
+    /**
+     * Renders the footer for the searchcraft-popover-form.
+     */
+    interface SearchcraftPopoverFooter {
     }
     /**
      * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field, or when a popover-button is pressed.
@@ -314,6 +343,7 @@ export namespace Components {
      *     ${info.range[0]}-${info.range[1]} of ${info.count} results in ${info.responseTime}ms
      *   `}
      * />
+     * ```
      * @vue-example ```jsx
      * <SearchcraftResultsInfo
      *   :template={(info, { html }) => html`
@@ -325,7 +355,6 @@ export namespace Components {
     interface SearchcraftResultsInfo {
         /**
           * A callback function responsible for rendering the results info.
-          * @example ```ts  resultsInfo.template = html`    ${range[0]}-${range[1]} of ${count} results in ${responseTime}ms  `; ```
          */
         "template"?: ResultsInfoTemplate;
     }
@@ -731,17 +760,33 @@ declare global {
      * import { SearchcraftPopoverButton } from "@searchcraft/vue-sdk";
      * ```
      * @js-example ```html
+     * <!-- index.html -->
      * <searchcraft-popover-button>
      *   Open popover
      * </searchcraft-popover-button>
      * ```
+     * ```js
+     * // index.js
+     * const popoverButton = document.querySelector('searchcraft-popover-button');
+     * popoverButton.template = (isPopoverVisible, { html }) => html`
+     *   <span>Click me</span>
+     * `;
+     * ```
      * @react-example ```jsx
-     * <SearchcraftPopoverButton>
+     * <SearchcraftPopoverButton
+     *   template={(isPopoverVisible, { html }) => html`
+     *     <span>Click me</span>
+     *   `}
+     * >
      *   Open popover
      * </SearchcraftPopoverButton>
      * ```
      * @vue-example ```jsx
-     * <SearchcraftPopoverButton>
+     * <SearchcraftPopoverButton
+     *   :template={(isPopoverVisible, { html }) => html`
+     *     <span>Click me</span>
+     *   `}
+     * >
      *   Open popover
      * </SearchcraftPopoverButton>
      * ```
@@ -751,6 +796,15 @@ declare global {
     var HTMLSearchcraftPopoverButtonElement: {
         prototype: HTMLSearchcraftPopoverButtonElement;
         new (): HTMLSearchcraftPopoverButtonElement;
+    };
+    /**
+     * Renders the footer for the searchcraft-popover-form.
+     */
+    interface HTMLSearchcraftPopoverFooterElement extends Components.SearchcraftPopoverFooter, HTMLStencilElement {
+    }
+    var HTMLSearchcraftPopoverFooterElement: {
+        prototype: HTMLSearchcraftPopoverFooterElement;
+        new (): HTMLSearchcraftPopoverFooterElement;
     };
     /**
      * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field, or when a popover-button is pressed.
@@ -829,6 +883,7 @@ declare global {
      *     ${info.range[0]}-${info.range[1]} of ${info.count} results in ${info.responseTime}ms
      *   `}
      * />
+     * ```
      * @vue-example ```jsx
      * <SearchcraftResultsInfo
      *   :template={(info, { html }) => html`
@@ -1026,6 +1081,7 @@ declare global {
         "searchcraft-input-label": HTMLSearchcraftInputLabelElement;
         "searchcraft-pagination": HTMLSearchcraftPaginationElement;
         "searchcraft-popover-button": HTMLSearchcraftPopoverButtonElement;
+        "searchcraft-popover-footer": HTMLSearchcraftPopoverFooterElement;
         "searchcraft-popover-form": HTMLSearchcraftPopoverFormElement;
         "searchcraft-popover-list-item": HTMLSearchcraftPopoverListItemElement;
         "searchcraft-popover-list-view": HTMLSearchcraftPopoverListViewElement;
@@ -1249,22 +1305,51 @@ declare namespace LocalJSX {
      * import { SearchcraftPopoverButton } from "@searchcraft/vue-sdk";
      * ```
      * @js-example ```html
+     * <!-- index.html -->
      * <searchcraft-popover-button>
      *   Open popover
      * </searchcraft-popover-button>
      * ```
+     * ```js
+     * // index.js
+     * const popoverButton = document.querySelector('searchcraft-popover-button');
+     * popoverButton.template = (isPopoverVisible, { html }) => html`
+     *   <span>Click me</span>
+     * `;
+     * ```
      * @react-example ```jsx
-     * <SearchcraftPopoverButton>
+     * <SearchcraftPopoverButton
+     *   template={(isPopoverVisible, { html }) => html`
+     *     <span>Click me</span>
+     *   `}
+     * >
      *   Open popover
      * </SearchcraftPopoverButton>
      * ```
      * @vue-example ```jsx
-     * <SearchcraftPopoverButton>
+     * <SearchcraftPopoverButton
+     *   :template={(isPopoverVisible, { html }) => html`
+     *     <span>Click me</span>
+     *   `}
+     * >
      *   Open popover
      * </SearchcraftPopoverButton>
      * ```
      */
     interface SearchcraftPopoverButton {
+        /**
+          * A callback function responsible for rendering the button contents.
+         */
+        "template"?: PopoverButtonTemplate;
+        /**
+          * The type of popover button to render.
+         */
+        "type"?: 'skeuomorphic';
+    }
+    /**
+     * Renders the footer for the searchcraft-popover-form.
+     */
+    interface SearchcraftPopoverFooter {
     }
     /**
      * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field, or when a popover-button is pressed.
@@ -1364,6 +1449,7 @@ declare namespace LocalJSX {
      *     ${info.range[0]}-${info.range[1]} of ${info.count} results in ${info.responseTime}ms
      *   `}
      * />
+     * ```
      * @vue-example ```jsx
      * <SearchcraftResultsInfo
      *   :template={(info, { html }) => html`
@@ -1375,7 +1461,6 @@ declare namespace LocalJSX {
     interface SearchcraftResultsInfo {
         /**
           * A callback function responsible for rendering the results info.
-          * @example ```ts  resultsInfo.template = html`    ${range[0]}-${range[1]} of ${count} results in ${responseTime}ms  `; ```
          */
         "template"?: ResultsInfoTemplate;
     }
@@ -1586,6 +1671,7 @@ declare namespace LocalJSX {
         "searchcraft-input-label": SearchcraftInputLabel;
         "searchcraft-pagination": SearchcraftPagination;
         "searchcraft-popover-button": SearchcraftPopoverButton;
+        "searchcraft-popover-footer": SearchcraftPopoverFooter;
         "searchcraft-popover-form": SearchcraftPopoverForm;
         "searchcraft-popover-list-item": SearchcraftPopoverListItem;
         "searchcraft-popover-list-view": SearchcraftPopoverListView;
@@ -1719,22 +1805,42 @@ declare module "@stencil/core" {
              * import { SearchcraftPopoverButton } from "@searchcraft/vue-sdk";
              * ```
              * @js-example ```html
+             * <!-- index.html -->
              * <searchcraft-popover-button>
              *   Open popover
              * </searchcraft-popover-button>
              * ```
+             * ```js
+             * // index.js
+             * const popoverButton = document.querySelector('searchcraft-popover-button');
+             * popoverButton.template = (isPopoverVisible, { html }) => html`
+             *   <span>Click me</span>
+             * `;
+             * ```
              * @react-example ```jsx
-             * <SearchcraftPopoverButton>
+             * <SearchcraftPopoverButton
+             *   template={(isPopoverVisible, { html }) => html`
+             *     <span>Click me</span>
+             *   `}
+             * >
              *   Open popover
              * </SearchcraftPopoverButton>
              * ```
              * @vue-example ```jsx
-             * <SearchcraftPopoverButton>
+             * <SearchcraftPopoverButton
+             *   :template={(isPopoverVisible, { html }) => html`
+             *     <span>Click me</span>
+             *   `}
+             * >
              *   Open popover
              * </SearchcraftPopoverButton>
              * ```
              */
             "searchcraft-popover-button": LocalJSX.SearchcraftPopoverButton & JSXBase.HTMLAttributes<HTMLSearchcraftPopoverButtonElement>;
+            /**
+             * Renders the footer for the searchcraft-popover-form.
+             */
+            "searchcraft-popover-footer": LocalJSX.SearchcraftPopoverFooter & JSXBase.HTMLAttributes<HTMLSearchcraftPopoverFooterElement>;
             /**
              * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field, or when a popover-button is pressed.
              * @react-import ```jsx
@@ -1797,6 +1903,7 @@ declare module "@stencil/core" {
              *     ${info.range[0]}-${info.range[1]} of ${info.count} results in ${info.responseTime}ms
              *   `}
              * />
+             * ```
              * @vue-example ```jsx
              * <SearchcraftResultsInfo
              *   :template={(info, { html }) => html`

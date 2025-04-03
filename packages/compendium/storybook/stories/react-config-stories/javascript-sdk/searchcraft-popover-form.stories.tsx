@@ -1,11 +1,7 @@
 import { useEffect } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import {
-  type SearchcraftConfig,
-  Searchcraft,
-  type Components,
-} from '@searchcraft/javascript-sdk';
+import { Searchcraft, type Components } from '@searchcraft/javascript-sdk';
 
 import { popoverResultMappings } from '@common/index.js';
 
@@ -60,7 +56,7 @@ export const InlineWithAds: StoryObj<Components.SearchcraftPopoverForm> = {
   decorators: [
     (Story) => {
       useEffect(() => {
-        const config: SearchcraftConfig = {
+        new Searchcraft({
           readKey: import.meta.env.VITE_KOBOL_READ_KEY,
           endpointURL: import.meta.env.VITE_KOBOL_ENDPOINT_URL,
           index: [import.meta.env.VITE_KOBOL_INDEX],
@@ -68,8 +64,7 @@ export const InlineWithAds: StoryObj<Components.SearchcraftPopoverForm> = {
           admSub: 'searchbox1',
           admProductAdQuantity: 3,
           admTextAdQuantity: 3,
-        };
-        new Searchcraft(config);
+        });
         const popoverForm = document.querySelector('searchcraft-popover-form');
 
         if (popoverForm) {
@@ -124,10 +119,10 @@ export const Modal: StoryObj<Components.SearchcraftPopoverForm> = {
     return (
       <>
         <div className='searchcraft-popover-form-with-content'>
-          <p>Story Note: This story uses the Bazaario env vars</p>
-          <searchcraft-popover-button>
-            <span>Click me</span>
-          </searchcraft-popover-button>
+          <div style={{ marginBottom: 20 }}>
+            <p>Story Note: This story uses the Bazaario env vars</p>
+          </div>
+          <searchcraft-popover-button />
           <searchcraft-popover-form
             type='modal'
             hotkey='k'
@@ -163,10 +158,10 @@ export const Fullscreen: StoryObj<Components.SearchcraftPopoverForm> = {
     return (
       <>
         <div className='searchcraft-popover-form-with-content'>
-          <p>Story Note: This story uses the Bazaario env vars</p>
-          <searchcraft-popover-button>
-            <span>Click me</span>
-          </searchcraft-popover-button>
+          <div style={{ marginBottom: 20 }}>
+            <p>Story Note: This story uses the Bazaario env vars</p>
+          </div>
+          <searchcraft-popover-button />
           <searchcraft-popover-form
             type='fullscreen'
             hotkey='k'

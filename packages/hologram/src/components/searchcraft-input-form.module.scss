@@ -13,14 +13,6 @@
    * Icon size of the `x` button rendered in the input form.
    */
   --sc-input-form-clear-icon-size: 20px;
-  /**
-   * Padding on the left side of the input form.
-   */
-  --sc-input-form-padding-left: 44px;
-  /**
-   * Padding on the right side of the input form.
-   */
-  --sc-input-form-padding-right: 44px;
 }
 
 .searchcraft-input-form-grid {
@@ -115,7 +107,7 @@
   color: var(--sc-content-neutral-primary);
   flex: 1;
   outline: none;
-  padding: 12px var(--sc-input-form-padding-left);
+  padding: 12px 44px;
 
   &::placeholder {
     color: var(--sc-content-disabled);
@@ -123,6 +115,7 @@
 
   &:focus {
     outline: var(--sc-border-brand) solid 2px;
+    outline-offset: -1px;
   }
 
   &:focus::placeholder {
@@ -148,7 +141,7 @@
   position: absolute;
   pointer-events: none;
   top: 0;
-  width: var(--sc-input-form-padding-left);
+  width: 44px;
 }
 
 .searchcraft-input-form-input-search-icon {
@@ -171,7 +164,7 @@
   position: absolute;
   right: 0;
   top: 0;
-  width: var(--sc-input-form-padding-right);
+  width: 44px;
 }
 
 .searchcraft-input-form-clear-icon {
