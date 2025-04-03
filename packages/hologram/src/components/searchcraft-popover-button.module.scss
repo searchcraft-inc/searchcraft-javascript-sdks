@@ -38,11 +38,7 @@
     justify-content: space-between;
     line-height: 1;
     padding: 4px 5px 4px 10px;
-    background: linear-gradient(
-      0deg,
-      rgb(from var(--sc-surface-neutral-secondary) r g b / 0%) 0%,
-      rgb(from var(--sc-surface-neutral-secondary) r g b / 20%) 100%
-    );
+    background: var(--sc-surface-neutral-primary);
 
     @media (min-width: breakpoints.$breakpoint-sm) {
       box-shadow:
