@@ -1,5 +1,10 @@
-import { searchcraftStore } from '@store';
 import { Component, h, Prop, State } from '@stencil/core';
+
+import type { PopoverButtonTemplate } from '@searchcraft/core';
+
+import { searchcraftStore } from '@store';
+
+import { html } from '@utils';
 
 /**
  * Renders a button which, when clicked, turns on popover visibility.
@@ -16,21 +21,39 @@ import { Component, h, Prop, State } from '@stencil/core';
  *
  * @js-example
  * ```html
+ * <!-- index.html -->
  * <searchcraft-popover-button>
  *   Open popover
  * </searchcraft-popover-button>
  * ```
  *
+ * ```js
+ * // index.js
+ * const popoverButton = document.querySelector('searchcraft-popover-button');
+ *
+ * popoverButton.template = (isPopoverVisible, { html }) => html`
+ *   <span>Click me</span>
+ * `;
+ * ```
+ *
  * @react-example
  * ```jsx
- * <SearchcraftPopoverButton>
+ * <SearchcraftPopoverButton
+ *   template={(isPopoverVisible, { html }) => html`
+ *     <span>Click me</span>
+ *   `}
+ * >
  *   Open popover
  * </SearchcraftPopoverButton>
  * ```
  *
  * @vue-example
  * ```jsx
- * <SearchcraftPopoverButton>
+ * <SearchcraftPopoverButton
+ *   :template={(isPopoverVisible, { html }) => html`
+ *     <span>Click me</span>
+ *   `}
+ * >
  *   Open popover
  * </SearchcraftPopoverButton>
  * ```
@@ -41,6 +64,10 @@ import { Component, h, Prop, State } from '@stencil/core';
 })
 export class SearchcraftPopoverButton {
   /**
+   * A callback function responsible for rendering the button contents.
+   */
+  @Prop() template?: PopoverButtonTemplate;
+  /**
    * The type of popover button to render.
    */
   @Prop() type?: 'skeuomorphic';
@@ -48,6 +75,7 @@ export class SearchcraftPopoverButton {
   @State() hotkey;
   @State() hotkeyModifier;
   @State() hotkeyModifierSymbol;
+  @State() isPopoverVisible;
   @State() userAgent;
 
   private unsubscribe: () => void = () => {};
@@ -57,14 +85,17 @@ export class SearchcraftPopoverButton {
   }
 
   componentDidLoad() {
-    this.hotkey = searchcraftStore.getState().hotkey.toUpperCase();
-    this.hotkeyModifier = searchcraftStore.getState().hotkeyModifier;
+    const state = searchcraftStore.getState();
+    this.hotkey = state.hotkey.toUpperCase();
+    this.hotkeyModifier = state.hotkeyModifier;
+    this.isPopoverVisible = state.isPopoverVisible;
     this.userAgent = this.setUserAgent();
     this.hotkeyModifierSymbol = this.setHotkeyModifierSymbol();
 
     this.unsubscribe = searchcraftStore.subscribe((state) => {
       this.hotkey = state.hotkey.toUpperCase();
       this.hotkeyModifier = state.hotkeyModifier;
+      this.hotkeyModifierSymbol = this.setHotkeyModifierSymbol();
     });
   }
 
@@ -190,7 +221,7 @@ export class SearchcraftPopoverButton {
             viewBox='0 0 20 20'
             fill='none'
             xmlns='http://www.w3.org/2000/svg'
-            aria-labelledby='searchcraft-title'
+            version='1.1'
           >
             <title>Search icon</title>
             <path
@@ -220,18 +251,26 @@ export class SearchcraftPopoverButton {
       case 'skeuomorphic':
         return this.renderSkeuomorphicSlot();
       default:
-        return <slot />;
+        return (
+          <div>
+            <slot />
+          </div>
+        );
     }
   }
 
   render() {
     return (
       <button
-        class={`searchcraft-popover-button${this.type ? ` searchcraft-popover-button-${this.type}` : ''}`}
+        class={`searchcraft-popover-button ${this.type ? ` searchcraft-popover-button-${this.type}` : ''}`}
         onClick={this.handleOnClick.bind(this)}
         type='button'
       >
-        {this.renderSlot()}
+        {typeof this.template !== 'undefined'
+          ? this.template(this.isPopoverVisible, { html })
+          : this.type
+            ? this.renderSlot()
+            : 'Open Popover'}
       </button>
     );
   }

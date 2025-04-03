@@ -41,6 +41,7 @@ import { formatNumberWithCommas, html } from '@utils';
  *     ${info.range[0]}-${info.range[1]} of ${info.count} results in ${info.responseTime}ms
  *   `}
  * />
+ * ```
  *
  * @vue-example
  * ```jsx
@@ -58,13 +59,6 @@ import { formatNumberWithCommas, html } from '@utils';
 export class SearchcraftResultsInfo {
   /**
    * A callback function responsible for rendering the results info.
-   *
-   * @example
-   * ```ts
-   *  resultsInfo.template = html`
-   *    ${range[0]}-${range[1]} of ${count} results in ${responseTime}ms
-   *  `;
-   * ```
    */
   @Prop() template?: ResultsInfoTemplate;
 

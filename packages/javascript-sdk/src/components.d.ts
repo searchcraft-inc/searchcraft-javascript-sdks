@@ -5,9 +5,9 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { AdClientResponseItem, FilterItem, PopoverResultMappings, ResultsInfoTemplate, SearchClientResponseItem, SearchcraftAdSource, SearchcraftCore, SearchResultTemplate, SearchResultTemplateData } from "@searchcraft/core";
+import { AdClientResponseItem, FilterItem, PopoverButtonTemplate, PopoverResultMappings, ResultsInfoTemplate, SearchClientResponseItem, SearchcraftAdSource, SearchcraftCore, SearchResultTemplate, SearchResultTemplateData } from "@searchcraft/core";
 import { SearchcraftSelectOption } from "./components/searchcraft-select/searchcraft-select";
-export { AdClientResponseItem, FilterItem, PopoverResultMappings, ResultsInfoTemplate, SearchClientResponseItem, SearchcraftAdSource, SearchcraftCore, SearchResultTemplate, SearchResultTemplateData } from "@searchcraft/core";
+export { AdClientResponseItem, FilterItem, PopoverButtonTemplate, PopoverResultMappings, ResultsInfoTemplate, SearchClientResponseItem, SearchcraftAdSource, SearchcraftCore, SearchResultTemplate, SearchResultTemplateData } from "@searchcraft/core";
 export { SearchcraftSelectOption } from "./components/searchcraft-select/searchcraft-select";
 export namespace Components {
     /**
@@ -199,22 +199,42 @@ export namespace Components {
      * import { SearchcraftPopoverButton } from "@searchcraft/vue-sdk";
      * ```
      * @js-example ```html
+     * <!-- index.html -->
      * <searchcraft-popover-button>
      *   Open popover
      * </searchcraft-popover-button>
      * ```
+     * ```js
+     * // index.js
+     * const popoverButton = document.querySelector('searchcraft-popover-button');
+     * popoverButton.template = (isPopoverVisible, { html }) => html`
+     *   <span>Click me</span>
+     * `;
+     * ```
      * @react-example ```jsx
-     * <SearchcraftPopoverButton>
+     * <SearchcraftPopoverButton
+     *   template={(isPopoverVisible, { html }) => html`
+     *     <span>Click me</span>
+     *   `}
+     * >
      *   Open popover
      * </SearchcraftPopoverButton>
      * ```
      * @vue-example ```jsx
-     * <SearchcraftPopoverButton>
+     * <SearchcraftPopoverButton
+     *   :template={(isPopoverVisible, { html }) => html`
+     *     <span>Click me</span>
+     *   `}
+     * >
      *   Open popover
      * </SearchcraftPopoverButton>
      * ```
      */
     interface SearchcraftPopoverButton {
+        /**
+          * A callback function responsible for rendering the button contents.
+         */
+        "template"?: PopoverButtonTemplate;
         /**
           * The type of popover button to render.
          */
@@ -323,6 +343,7 @@ export namespace Components {
      *     ${info.range[0]}-${info.range[1]} of ${info.count} results in ${info.responseTime}ms
      *   `}
      * />
+     * ```
      * @vue-example ```jsx
      * <SearchcraftResultsInfo
      *   :template={(info, { html }) => html`
@@ -334,7 +355,6 @@ export namespace Components {
     interface SearchcraftResultsInfo {
         /**
           * A callback function responsible for rendering the results info.
-          * @example ```ts  resultsInfo.template = html`    ${range[0]}-${range[1]} of ${count} results in ${responseTime}ms  `; ```
          */
         "template"?: ResultsInfoTemplate;
     }
@@ -740,17 +760,33 @@ declare global {
      * import { SearchcraftPopoverButton } from "@searchcraft/vue-sdk";
      * ```
      * @js-example ```html
+     * <!-- index.html -->
      * <searchcraft-popover-button>
      *   Open popover
      * </searchcraft-popover-button>
      * ```
+     * ```js
+     * // index.js
+     * const popoverButton = document.querySelector('searchcraft-popover-button');
+     * popoverButton.template = (isPopoverVisible, { html }) => html`
+     *   <span>Click me</span>
+     * `;
+     * ```
      * @react-example ```jsx
-     * <SearchcraftPopoverButton>
+     * <SearchcraftPopoverButton
+     *   template={(isPopoverVisible, { html }) => html`
+     *     <span>Click me</span>
+     *   `}
+     * >
      *   Open popover
      * </SearchcraftPopoverButton>
      * ```
      * @vue-example ```jsx
-     * <SearchcraftPopoverButton>
+     * <SearchcraftPopoverButton
+     *   :template={(isPopoverVisible, { html }) => html`
+     *     <span>Click me</span>
+     *   `}
+     * >
      *   Open popover
      * </SearchcraftPopoverButton>
      * ```
@@ -847,6 +883,7 @@ declare global {
      *     ${info.range[0]}-${info.range[1]} of ${info.count} results in ${info.responseTime}ms
      *   `}
      * />
+     * ```
      * @vue-example ```jsx
      * <SearchcraftResultsInfo
      *   :template={(info, { html }) => html`
@@ -1268,22 +1305,42 @@ declare namespace LocalJSX {
      * import { SearchcraftPopoverButton } from "@searchcraft/vue-sdk";
      * ```
      * @js-example ```html
+     * <!-- index.html -->
      * <searchcraft-popover-button>
      *   Open popover
      * </searchcraft-popover-button>
      * ```
+     * ```js
+     * // index.js
+     * const popoverButton = document.querySelector('searchcraft-popover-button');
+     * popoverButton.template = (isPopoverVisible, { html }) => html`
+     *   <span>Click me</span>
+     * `;
+     * ```
      * @react-example ```jsx
-     * <SearchcraftPopoverButton>
+     * <SearchcraftPopoverButton
+     *   template={(isPopoverVisible, { html }) => html`
+     *     <span>Click me</span>
+     *   `}
+     * >
      *   Open popover
      * </SearchcraftPopoverButton>
      * ```
      * @vue-example ```jsx
-     * <SearchcraftPopoverButton>
+     * <SearchcraftPopoverButton
+     *   :template={(isPopoverVisible, { html }) => html`
+     *     <span>Click me</span>
+     *   `}
+     * >
      *   Open popover
      * </SearchcraftPopoverButton>
      * ```
      */
     interface SearchcraftPopoverButton {
+        /**
+          * A callback function responsible for rendering the button contents.
+         */
+        "template"?: PopoverButtonTemplate;
         /**
           * The type of popover button to render.
          */
@@ -1392,6 +1449,7 @@ declare namespace LocalJSX {
      *     ${info.range[0]}-${info.range[1]} of ${info.count} results in ${info.responseTime}ms
      *   `}
      * />
+     * ```
      * @vue-example ```jsx
      * <SearchcraftResultsInfo
      *   :template={(info, { html }) => html`
@@ -1403,7 +1461,6 @@ declare namespace LocalJSX {
     interface SearchcraftResultsInfo {
         /**
           * A callback function responsible for rendering the results info.
-          * @example ```ts  resultsInfo.template = html`    ${range[0]}-${range[1]} of ${count} results in ${responseTime}ms  `; ```
          */
         "template"?: ResultsInfoTemplate;
     }
@@ -1748,17 +1805,33 @@ declare module "@stencil/core" {
              * import { SearchcraftPopoverButton } from "@searchcraft/vue-sdk";
              * ```
              * @js-example ```html
+             * <!-- index.html -->
              * <searchcraft-popover-button>
              *   Open popover
              * </searchcraft-popover-button>
              * ```
+             * ```js
+             * // index.js
+             * const popoverButton = document.querySelector('searchcraft-popover-button');
+             * popoverButton.template = (isPopoverVisible, { html }) => html`
+             *   <span>Click me</span>
+             * `;
+             * ```
              * @react-example ```jsx
-             * <SearchcraftPopoverButton>
+             * <SearchcraftPopoverButton
+             *   template={(isPopoverVisible, { html }) => html`
+             *     <span>Click me</span>
+             *   `}
+             * >
              *   Open popover
              * </SearchcraftPopoverButton>
              * ```
              * @vue-example ```jsx
-             * <SearchcraftPopoverButton>
+             * <SearchcraftPopoverButton
+             *   :template={(isPopoverVisible, { html }) => html`
+             *     <span>Click me</span>
+             *   `}
+             * >
              *   Open popover
              * </SearchcraftPopoverButton>
              * ```
@@ -1830,6 +1903,7 @@ declare module "@stencil/core" {
              *     ${info.range[0]}-${info.range[1]} of ${info.count} results in ${info.responseTime}ms
              *   `}
              * />
+             * ```
              * @vue-example ```jsx
              * <SearchcraftResultsInfo
              *   :template={(info, { html }) => html`

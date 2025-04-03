@@ -34,6 +34,7 @@ export const SearchcraftPagination = /*@__PURE__*/ defineContainer<JSX.Searchcra
 
 
 export const SearchcraftPopoverButton = /*@__PURE__*/ defineContainer<JSX.SearchcraftPopoverButton>('searchcraft-popover-button', () => {}, [
+  'template',
   'type'
 ]);
 
