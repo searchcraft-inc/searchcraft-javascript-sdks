@@ -93,8 +93,9 @@ export class SearchcraftCore {
           mutation.addedNodes.forEach((node) => {
             if (
               node.nodeType === 1 &&
-              (node as HTMLElement).className.toLowerCase() ===
-                'searchcraft-input-form'
+              (
+                (node as HTMLElement).getAttribute('class') || ''
+              ).toLowerCase() === 'searchcraft-input-form'
             ) {
               newInputFormDetected = true;
             }

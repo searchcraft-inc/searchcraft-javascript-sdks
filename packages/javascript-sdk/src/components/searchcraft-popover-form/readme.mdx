@@ -1,22 +1,29 @@
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
 # searchcraft-popover-form
 
 This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field, or when a popover-button is pressed.
 
 ## Import
 
+<Tabs>
+<TabItem label="React">
 ```jsx
-// react
 import { SearchcraftPopoverForm } from "@searchcraft/react-sdk";
-
-// vue
+```
+</TabItem>
+<TabItem label="Vue">
+```jsx
 import { SearchcraftPopoverForm } from "@searchcraft/vue-sdk";
 ```
+</TabItem>
+</Tabs>
 
 
 ## Usage
 
-**JavaScript:**
-
+<Tabs>
+<TabItem label="JS">
 ```html
 <!-- index.html -->
 <searchcraft-popover-form type="inline" />
@@ -28,20 +35,18 @@ const popoverForm = document.querySelector('searchcraft-popover-form');
 
 popoverForm.popoverResultMappings = {};
 ```
-
-
-**React:**
-
+</TabItem>
+<TabItem label="React">
 ```jsx
 <SearchcraftPopoverForm type="inline" popoverResultMappings={[]} />
 ```
-
-
-**Vue:**
-
+</TabItem>
+<TabItem label="Vue">
 ```jsx
 <SearchcraftPopoverForm type="inline" :popoverResultMappings="[]"" />
 ```
+</TabItem>
+</Tabs>
 
 
 ## Properties

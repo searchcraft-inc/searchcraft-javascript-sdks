@@ -1,22 +1,29 @@
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
 # searchcraft-search-results
 
 This web component is responsible for displaying the results of a search query. Once a query is submitted, the component formats and presents an ordered list of the results.
 
 ## Import
 
+<Tabs>
+<TabItem label="React">
 ```jsx
-// react
 import { SearchcraftSearchResults } from "@searchcraft/react-sdk";
-
-// vue
+```
+</TabItem>
+<TabItem label="Vue">
+```jsx
 import { SearchcraftSearchResults } from "@searchcraft/vue-sdk";
 ```
+</TabItem>
+</Tabs>
 
 
 ## Usage
 
-**JavaScript:**
-
+<Tabs>
+<TabItem label="JS">
 ```html
 <!-- index.html -->
 <searchcraft-search-results
@@ -33,10 +40,8 @@ searchResults.template = (item, index, { html }) => html`
  <h2>${item.title}</h2>
 `;
 ```
-
-
-**React:**
-
+</TabItem>
+<TabItem label="React">
 ```jsx
 <SearchcraftSearchResults
   adInterval={4}
@@ -46,10 +51,8 @@ searchResults.template = (item, index, { html }) => html`
   `}
 />
 ```
-
-
-**Vue:**
-
+</TabItem>
+<TabItem label="Vue">
 ```jsx
 <SearchcraftSearchResults
   adInterval={4}
@@ -59,6 +62,8 @@ searchResults.template = (item, index, { html }) => html`
   `}
 />
 ```
+</TabItem>
+</Tabs>
 
 
 ## Properties

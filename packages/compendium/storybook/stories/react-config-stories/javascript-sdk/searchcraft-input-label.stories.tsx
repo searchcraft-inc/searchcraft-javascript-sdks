@@ -31,12 +31,7 @@ export const Default: StoryObj<Components.SearchcraftInputLabel> = {
       return <Story />;
     },
   ],
-  render: (args) => (
-    <>
-      <searchcraft-theme />
-      <searchcraft-input-label {...args} />
-    </>
-  ),
+  render: (args) => <searchcraft-input-label {...args} />,
   args: defaultProps,
 };
 

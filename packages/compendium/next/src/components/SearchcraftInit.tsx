@@ -7,7 +7,10 @@ import {
   hydrateSearchcraftComponents,
 } from '@searchcraft/react-sdk/server';
 
-import { searchResultTemplate } from '@common/index';
+import {
+  searchResultTemplate,
+  popoverResultMappingsRunegard,
+} from '@common/index';
 
 export const SearchcraftInit = () => {
   useEffect(() => {
@@ -23,6 +26,12 @@ export const SearchcraftInit = () => {
 
     if (searchResults) {
       searchResults.template = searchResultTemplate;
+    }
+
+    const popoverForm = document.querySelector('searchcraft-popover-form');
+
+    if (popoverForm) {
+      popoverForm.popoverResultMappings = popoverResultMappingsRunegard;
     }
   }, []);
   return null;

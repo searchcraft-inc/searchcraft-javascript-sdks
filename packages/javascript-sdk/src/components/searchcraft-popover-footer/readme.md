@@ -41,3 +41,10 @@ import { SearchcraftPopoverButton } from "@searchcraft/vue-sdk";
 </SearchcraftPopoverButton>
 ```
 
+
+## Properties
+
+| Property | Attribute | Description | Type | Default |
+| -------- | --------- | ----------- | ---- | ------- |
+| `type` | `type` | The type of popover button to render. | `"skeuomorphic" \| undefined` | `undefined` |
+

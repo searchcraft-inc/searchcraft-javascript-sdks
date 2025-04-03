@@ -2,7 +2,6 @@ import {
   Searchcraft,
   SearchcraftFilterPanel,
   SearchcraftInputForm,
-  SearchcraftTheme,
   type DateRangeFilterItem,
   type ExactMatchToggleFilterItem,
   type FacetsFilterItem,
@@ -83,7 +82,6 @@ export const Default: StoryFn = (args) => ({
   components: {
     SearchcraftInputForm,
     SearchcraftFilterPanel,
-    SearchcraftTheme,
   },
   setup() {
     new Searchcraft({
@@ -95,7 +93,6 @@ export const Default: StoryFn = (args) => ({
   },
   template: `
     <div>
-      <SearchcraftTheme />
       <div style="margin-bottom: 20px;">
         <SearchcraftInputForm
           autoSearch

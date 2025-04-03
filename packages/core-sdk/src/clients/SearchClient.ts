@@ -8,10 +8,13 @@ import type {
 import { buildQueryObject } from '../utils';
 import { sanitize } from '../utils/sanitize';
 
+const SEARCH_COMPLETED_EVENT_DEBOUNCE = 500;
+
 export class SearchClient {
   private config: SearchcraftConfig;
   private userId: string;
   private parent: SearchcraftCore;
+  private searchCompletedEventTimeout: NodeJS.Timeout | undefined;
 
   constructor(
     parent: SearchcraftCore,
@@ -102,6 +105,14 @@ export class SearchClient {
         search_term: searchTerm,
         number_of_documents: searchcraftResponse.data.count,
       });
+
+      clearTimeout(this.searchCompletedEventTimeout);
+      this.searchCompletedEventTimeout = setTimeout(() => {
+        this.parent.measureClient?.sendMeasureEvent('search_completed', {
+          search_term: searchTerm,
+          number_of_documents: searchcraftResponse.data.count,
+        });
+      }, SEARCH_COMPLETED_EVENT_DEBOUNCE);
 
       this.parent.emitEvent('query_fetched', {
         name: 'query_fetched',

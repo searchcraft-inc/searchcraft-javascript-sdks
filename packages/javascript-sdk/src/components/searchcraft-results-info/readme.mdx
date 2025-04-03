@@ -1,22 +1,29 @@
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
 # searchcraft-results-info
 
 This web component is designed to display the number of results returned from a search query.
 
 ## Import
 
+<Tabs>
+<TabItem label="React">
 ```jsx
-// react
 import { SearchcraftResultsInfo } from "@searchcraft/react-sdk";
-
-// vue
+```
+</TabItem>
+<TabItem label="Vue">
+```jsx
 import { SearchcraftResultsInfo } from "@searchcraft/vue-sdk";
 ```
+</TabItem>
+</Tabs>
 
 
 ## Usage
 
-**JavaScript:**
-
+<Tabs>
+<TabItem label="JS">
 ```html
 <!-- index.html -->
 <searchcraft-results-info />
@@ -30,26 +37,26 @@ resultsInfo.template = (info, { html }) => html`
   ${info.range[0]}-${info.range[1]} of ${info.count} results in ${info.responseTime}ms
 `;
 ```
-
-
-**React:**
-
+</TabItem>
+<TabItem label="React">
 ```jsx
 <SearchcraftResultsInfo
   template={(info, { html }) => html`
     ${info.range[0]}-${info.range[1]} of ${info.count} results in ${info.responseTime}ms
   `}
 />
-
-
-**Vue:**
-
+```
+</TabItem>
+<TabItem label="Vue">
 ```jsx
 <SearchcraftResultsInfo
   :template={(info, { html }) => html`
     ${info.range[0]}-${info.range[1]} of ${info.count} results in ${info.responseTime}ms
   `}
 />
+```
+</TabItem>
+</Tabs>
 
 
 ## Properties

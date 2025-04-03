@@ -9,12 +9,13 @@ import { formatNumberWithCommas, html } from '@utils';
 /**
  * This web component is designed to display the number of results returned from a search query.
  *
- * @import
+ * @react-import
  * ```jsx
- * // react
  * import { SearchcraftResultsInfo } from "@searchcraft/react-sdk";
+ * ```
  *
- * // vue
+ * @vue-import
+ * ```jsx
  * import { SearchcraftResultsInfo } from "@searchcraft/vue-sdk";
  * ```
  *
@@ -40,6 +41,7 @@ import { formatNumberWithCommas, html } from '@utils';
  *     ${info.range[0]}-${info.range[1]} of ${info.count} results in ${info.responseTime}ms
  *   `}
  * />
+ * ```
  *
  * @vue-example
  * ```jsx
@@ -48,6 +50,7 @@ import { formatNumberWithCommas, html } from '@utils';
  *     ${info.range[0]}-${info.range[1]} of ${info.count} results in ${info.responseTime}ms
  *   `}
  * />
+ * ```
  */
 @Component({
   tag: 'searchcraft-results-info',
@@ -56,13 +59,6 @@ import { formatNumberWithCommas, html } from '@utils';
 export class SearchcraftResultsInfo {
   /**
    * A callback function responsible for rendering the results info.
-   *
-   * @example
-   * ```ts
-   *  resultsInfo.template = html`
-   *    ${range[0]}-${range[1]} of ${count} results in ${responseTime}ms
-   *  `;
-   * ```
    */
   @Prop() template?: ResultsInfoTemplate;
 

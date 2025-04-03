@@ -75,12 +75,7 @@ export const Default: StoryObj<Components.SearchcraftInputForm> = {
       return <Story />;
     },
   ],
-  render: (args) => (
-    <>
-      <searchcraft-theme />
-      <searchcraft-input-form {...args} />
-    </>
-  ),
+  render: (args) => <searchcraft-input-form {...args} />,
   args: defaultProps,
 };
 
@@ -97,12 +92,7 @@ export const ButtonRight: StoryObj<Components.SearchcraftInputForm> = {
       return <Story />;
     },
   ],
-  render: (args) => (
-    <>
-      <searchcraft-theme />
-      <searchcraft-input-form {...args} />
-    </>
-  ),
+  render: (args) => <searchcraft-input-form {...args} />,
   args: buttonRightProps,
 };
 
@@ -119,11 +109,6 @@ export const AutoSearch: StoryObj<Components.SearchcraftInputForm> = {
       return <Story />;
     },
   ],
-  render: (args) => (
-    <>
-      <searchcraft-theme />
-      <searchcraft-input-form {...args} />
-    </>
-  ),
+  render: (args) => <searchcraft-input-form {...args} />,
   args: autoSearchProps,
 };

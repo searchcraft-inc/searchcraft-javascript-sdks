@@ -1,0 +1,74 @@
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+# searchcraft-popover-button
+
+Renders a button which, when clicked, turns on popover visibility.
+
+## Import
+
+<Tabs>
+<TabItem label="React">
+```jsx
+import { SearchcraftPopoverButton } from "@searchcraft/react-sdk";
+````
+</TabItem>
+<TabItem label="Vue">
+```jsx
+import { SearchcraftPopoverButton } from "@searchcraft/vue-sdk";
+```
+</TabItem>
+</Tabs>
+
+
+## Usage
+
+<Tabs>
+<TabItem label="JS">
+```html
+<!-- index.html -->
+<searchcraft-popover-button>
+  Open popover
+</searchcraft-popover-button>
+```
+
+```js
+// index.js
+const popoverButton = document.querySelector('searchcraft-popover-button');
+
+popoverButton.template = (isPopoverVisible, { html }) => html`
+  <span>Click me</span>
+`;
+```
+</TabItem>
+<TabItem label="React">
+```jsx
+<SearchcraftPopoverButton
+  template={(isPopoverVisible, { html }) => html`
+    <span>Click me</span>
+  `}
+>
+  Open popover
+</SearchcraftPopoverButton>
+```
+</TabItem>
+<TabItem label="Vue">
+```jsx
+<SearchcraftPopoverButton
+  :template={(isPopoverVisible, { html }) => html`
+    <span>Click me</span>
+  `}
+>
+  Open popover
+</SearchcraftPopoverButton>
+```
+</TabItem>
+</Tabs>
+
+
+## Properties
+
+| Property | Attribute | Description | Type | Default |
+| -------- | --------- | ----------- | ---- | ------- |
+| `template` | -- | A callback function responsible for rendering the button contents. | `((data: boolean, utils: { html: TemplateHtml; }) => string) \| undefined` | `undefined` |
+| `type` | `type` | The type of popover button to render. | `"skeuomorphic" \| undefined` | `undefined` |
+

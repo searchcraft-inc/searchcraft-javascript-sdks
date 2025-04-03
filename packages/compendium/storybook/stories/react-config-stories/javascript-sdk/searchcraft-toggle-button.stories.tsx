@@ -33,12 +33,7 @@ export const Default: StoryObj<Components.SearchcraftToggleButton> = {
       return <Story />;
     },
   ],
-  render: (args) => (
-    <>
-      <searchcraft-theme />
-      <searchcraft-toggle-button {...args} />
-    </>
-  ),
+  render: (args) => <searchcraft-toggle-button {...args} />,
   args: defaultProps,
 };
 

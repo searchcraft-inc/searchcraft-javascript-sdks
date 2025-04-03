@@ -3,7 +3,6 @@ import {
   Searchcraft,
   SearchcraftInputForm,
   SearchcraftResultsInfo,
-  SearchcraftTheme,
   type SearchcraftResultsInfoProps,
 } from '@searchcraft/react-sdk';
 import { useEffect } from 'react';
@@ -29,7 +28,6 @@ export const Default: StoryObj = {
   ],
   render: () => (
     <>
-      <SearchcraftTheme />
       <div style={{ marginBottom: 20 }}>
         <SearchcraftInputForm />
       </div>

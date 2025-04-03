@@ -5,7 +5,6 @@ import {
   Searchcraft,
   SearchcraftPopoverButton,
   SearchcraftPopoverForm,
-  SearchcraftTheme,
 } from '@searchcraft/react-sdk';
 
 import { popoverResultMappings } from '@common/index.js';
@@ -32,7 +31,6 @@ export const Inline: StoryObj = {
   ],
   render: () => (
     <>
-      <SearchcraftTheme />
       <div className='searchcraft-popover-form-with-content'>
         <p>Story Note: This story uses the Bazaario env vars</p>
         <SearchcraftPopoverForm
@@ -66,7 +64,6 @@ export const Modal: StoryObj = {
   ],
   render: () => (
     <>
-      <SearchcraftTheme />
       <div className='searchcraft-popover-form-with-content'>
         <p>Story Note: This story uses the Bazaario env vars</p>
         <SearchcraftPopoverButton>
@@ -99,7 +96,6 @@ export const Fullscreen: StoryObj = {
   ],
   render: () => (
     <>
-      <SearchcraftTheme />
       <div className='searchcraft-popover-form-with-content'>
         <p>Story Note: This story uses the Bazaario env vars</p>
         <SearchcraftPopoverButton>

@@ -1,7 +1,7 @@
 {
   "name": "@searchcraft/javascript-sdk",
   "private": false,
-  "version": "0.10.0",
+  "version": "0.10.1",
   "description": "Searchcraft Javascript SDK",
   "author": "Searchcraft Inc.",
   "license": "Apache-2.0",
@@ -20,6 +20,10 @@
       "require": "./dist/hydrate/index.js",
       "import": "./dist/hydrate/index.mjs",
       "types": "./dist/hydrate/index.d.ts"
+    },
+    "./themes/*.css": {
+      "import": "./dist/themes/*.css",
+      "require": "./dist/themes/*.css"
     }
   },
   "repository": {
@@ -43,7 +47,7 @@
     "nanoid": "^5.0.9"
   },
   "devDependencies": {
-    "@searchcraft/core": "^0.10.0",
+    "@searchcraft/core": "^0.10.1",
     "@stencil/core": "^4.7.0",
     "@stencil/react-output-target": "^0.8.2",
     "@stencil/sass": "^3.0.12",

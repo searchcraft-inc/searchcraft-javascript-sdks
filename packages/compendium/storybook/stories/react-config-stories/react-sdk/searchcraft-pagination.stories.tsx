@@ -4,7 +4,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 import {
   SearchcraftInputForm,
   SearchcraftResultsInfo,
-  SearchcraftTheme,
   SearchcraftSearchResults,
   SearchcraftPagination,
   SearchcraftSearchResultsPerPage,
@@ -35,7 +34,6 @@ export const Default: StoryObj = {
   ],
   render: () => (
     <>
-      <SearchcraftTheme />
       <div style={{ marginBottom: 20 }}>
         <SearchcraftInputForm autoSearch />
       </div>

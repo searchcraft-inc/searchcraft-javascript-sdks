@@ -5,7 +5,6 @@ import {
   Prop,
   Event,
   type EventEmitter,
-  Fragment,
 } from '@stencil/core';
 
 import type { FacetChild, FacetRoot } from '@searchcraft/core';
@@ -203,86 +202,95 @@ export class SearchcraftFacetList {
           return (
             <div key={facetChild.path} class='searchcraft-facet-list-item'>
               <label class='searchcraft-facet-list-checkbox-label'>
-                <input
-                  class='searchcraft-facet-list-checkbox-input'
-                  checked={this.selectedPaths[facetChild.path]}
-                  onChange={(_event: Event) =>
-                    this.handleCheckboxChange(facetChild.path)
-                  }
-                  type='checkbox'
-                />
-                {isChildSelected ? (
-                  <div class='searchcraft-facet-list-checkbox-input-dash-icon'>
-                    <svg width='14' height='3' viewBox='0 0 14 3' fill='none'>
-                      <title>Checkbox dash</title>
-                      <line
-                        x1='1.5'
-                        y1='1.5'
-                        x2='12.5'
-                        y2='1.5'
-                        stroke='white'
-                        stroke-width='3'
-                        stroke-linecap='round'
-                      />
-                    </svg>
-                  </div>
-                ) : (
-                  <div class='searchcraft-facet-list-checkbox-input-check-icon'>
-                    <svg width='16' height='16' viewBox='0 0 16 16' fill='none'>
-                      <title>Checkbox check</title>
-                      <path
-                        d='M13.9999 2L5.74988 10L1.99988 6.36364'
-                        stroke='white'
-                        stroke-width='3'
-                        stroke-linecap='round'
-                        stroke-linejoin='round'
-                      />
-                    </svg>
-                  </div>
-                )}
+                <div class='searchcraft-facet-list-checkbox-input-wrapper'>
+                  <input
+                    class='searchcraft-facet-list-checkbox-input'
+                    checked={this.selectedPaths[facetChild.path]}
+                    onChange={(_event: Event) =>
+                      this.handleCheckboxChange(facetChild.path)
+                    }
+                    type='checkbox'
+                  />
+                  {isChildSelected ? (
+                    <div class='searchcraft-facet-list-checkbox-input-dash-icon'>
+                      <svg width='14' height='3' viewBox='0 0 14 3' fill='none'>
+                        <title>Checkbox dash</title>
+                        <line
+                          x1='1.5'
+                          y1='1.5'
+                          x2='12.5'
+                          y2='1.5'
+                          stroke='white'
+                          stroke-width='3'
+                          stroke-linecap='round'
+                        />
+                      </svg>
+                    </div>
+                  ) : (
+                    <div class='searchcraft-facet-list-checkbox-input-check-icon'>
+                      <svg
+                        width='16'
+                        height='16'
+                        viewBox='0 0 16 16'
+                        fill='none'
+                      >
+                        <title>Checkbox check</title>
+                        <path
+                          d='M13.9999 2L5.74988 10L1.99988 6.36364'
+                          stroke='white'
+                          stroke-width='3'
+                          stroke-linecap='round'
+                          stroke-linejoin='round'
+                        />
+                      </svg>
+                    </div>
+                  )}
+                </div>
                 {this.formatLabel(facetChild)}
               </label>
               {facetChild.children && facetChild.children.length > 0 && (
-                <Fragment>
+                <div class='searchcraft-facet-child-list'>
                   {facetChild.children.map((grandchild) => (
                     <label
                       key={grandchild.path}
-                      class='searchcraft-facet-list-checkbox-label searchcraft-facet-list-child-checkbox-label'
+                      class='searchcraft-facet-list-checkbox-label searchcraft-facet-child-list-checkbox-label'
                       style={{
                         display: this.selectedPaths[facetChild.path]
                           ? 'flex'
                           : 'none',
                       }}
                     >
-                      <input
-                        class='searchcraft-facet-list-checkbox-input searchcraft-facet-list-child-checkbox-input'
-                        checked={this.selectedPaths[grandchild.path]}
-                        onChange={(_event: Event) => {
-                          this.handleCheckboxChange(grandchild.path);
-                        }}
-                        type='checkbox'
-                      />
-                      <div class='searchcraft-facet-list-checkbox-input-check-icon searchcraft-facet-list-child-checkbox-input-check-icon'>
-                        <svg
-                          width='16'
-                          height='16'
-                          viewBox='0 0 16 16'
-                          fill='none'
-                        >
-                          <title>Checkbox check</title>
-                          <path
-                            d='M13.9999 2L5.74988 10L1.99988 6.36364'
-                            stroke='white'
-                            stroke-width='3'
-                            stroke-linecap='round'
-                            stroke-linejoin='round'
-                          />
-                        </svg>
+                      <div class='searchcraft-facet-list-checkbox-input-wrapper searchcraft-facet-child-list-checkbox-input-wrapper'>
+                        <input
+                          class='searchcraft-facet-list-checkbox-input searchcraft-facet-child-list-checkbox-input'
+                          checked={this.selectedPaths[grandchild.path]}
+                          onChange={(_event: Event) => {
+                            this.handleCheckboxChange(grandchild.path);
+                          }}
+                          type='checkbox'
+                        />
+                        <div class='searchcraft-facet-list-checkbox-input-check-icon searchcraft-facet-child-list-checkbox-input-check-icon'>
+                          <svg
+                            width='16'
+                            height='16'
+                            viewBox='0 0 16 16'
+                            fill='none'
+                          >
+                            <title>Checkbox check</title>
+                            <path
+                              d='M13.9999 2L5.74988 10L1.99988 6.36364'
+                              stroke='white'
+                              stroke-width='3'
+                              stroke-linecap='round'
+                              stroke-linejoin='round'
+                            />
+                          </svg>
+                        </div>
                       </div>
                       {this.formatSubLabel(grandchild, facetChild)}
                     </label>
                   ))}
-                </Fragment>
+                </div>
               )}
             </div>
           );

@@ -1,40 +1,45 @@
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
 # searchcraft-search-results-per-page
 
 This web component is designed to choose the number of search results displayed.
 
 ## Import
 
+<Tabs>
+<TabItem label="React">
 ```jsx
-// react
 import { SearchcraftSearchResultsPerPage } from "@searchcraft/react-sdk";
-
-// vue
+```
+</TabItem>
+<TabItem label="Vue">
+```jsx
 import { SearchcraftSearchResultsPerPage } from "@searchcraft/vue-sdk";
 ```
+</TabItem>
+</Tabs>
 
 
 ## Usage
 
-**JavaScript:**
-
+<Tabs>
+<TabItem label="JS">
 ```html
 <!-- index.html -->
 <searchcraft-search-results-per-page increment="20" />
 ```
-
-
-**React:**
-
+</TabItem>
+<TabItem label="React">
 ```jsx
 <SearchcraftSearchResultsPerPage increment={20} />
 ```
-
-
-**Vue:**
-
+</TabItem>
+<TabItem label="Vue">
 ```jsx
 <SearchcraftSearchResultsPerPage increment="20" />
 ```
+</TabItem>
+</Tabs>
 
 
 ## Properties

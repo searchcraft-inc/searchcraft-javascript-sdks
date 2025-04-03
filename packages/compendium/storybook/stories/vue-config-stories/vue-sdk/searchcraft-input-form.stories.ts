@@ -1,8 +1,4 @@
-import {
-  Searchcraft,
-  SearchcraftInputForm,
-  SearchcraftTheme,
-} from '@searchcraft/vue-sdk';
+import { Searchcraft, SearchcraftInputForm } from '@searchcraft/vue-sdk';
 
 import type { Meta, StoryFn } from '@storybook/vue3';
 
@@ -50,7 +46,7 @@ const defaultProps = {
 };
 
 export const Default: StoryFn = (args) => ({
-  components: { SearchcraftInputForm, SearchcraftTheme },
+  components: { SearchcraftInputForm },
   setup() {
     new Searchcraft({
       readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
@@ -61,7 +57,6 @@ export const Default: StoryFn = (args) => ({
   },
   template: `
     <div>
-      <SearchcraftTheme />
       <SearchcraftInputForm v-bind="args" />
     </div>
   `,

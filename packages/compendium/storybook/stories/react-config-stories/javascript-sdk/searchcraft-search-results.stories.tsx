@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useInsertionEffect } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import {
@@ -18,6 +18,7 @@ export const Default: StoryObj<Components.SearchcraftSearchResults> = {
   decorators: [
     (Story) => {
       useEffect(() => {
+        // import '@searchcraft/javascript-sdk/themes/hologram.css';
         new Searchcraft({
           readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
           endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
@@ -39,7 +40,6 @@ export const Default: StoryObj<Components.SearchcraftSearchResults> = {
   render: () => {
     return (
       <>
-        <searchcraft-theme />
         <div style={{ marginBottom: 20 }}>
           <searchcraft-input-form />
         </div>
@@ -81,7 +81,6 @@ export const WithAdMarketplaceAds: StoryObj<Components.SearchcraftSearchResults>
     render: () => {
       return (
         <>
-          <searchcraft-theme />
           <div style={{ marginBottom: 20 }}>
             <searchcraft-input-form />
           </div>
@@ -137,7 +136,6 @@ export const WithCustomAds: StoryObj<Components.SearchcraftSearchResults> = {
   render: () => {
     return (
       <>
-        <searchcraft-theme />
         <div style={{ marginBottom: 20 }}>
           <searchcraft-input-form />
         </div>
@@ -165,7 +163,6 @@ export const WithoutATemplate: StoryObj<Components.SearchcraftSearchResults> = {
   render: () => {
     return (
       <>
-        <searchcraft-theme />
         <div style={{ marginBottom: 20 }}>
           <searchcraft-input-form />
         </div>
