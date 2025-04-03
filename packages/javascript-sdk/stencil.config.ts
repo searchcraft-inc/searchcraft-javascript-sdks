@@ -45,6 +45,7 @@ export const config: Config = {
       customElementsExportBehavior: 'single-export-module',
       externalRuntime: false,
       isPrimaryPackageOutputTarget: true,
+      copy: [{ src: 'themes/*.{css,css.map}', dest: 'dist/themes' }],
     },
     {
       type: 'docs-custom',

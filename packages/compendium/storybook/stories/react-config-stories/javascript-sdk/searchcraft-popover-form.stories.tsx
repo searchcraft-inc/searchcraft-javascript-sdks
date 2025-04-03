@@ -38,7 +38,6 @@ export const Inline: StoryObj<Components.SearchcraftPopoverForm> = {
   render: () => {
     return (
       <>
-        <searchcraft-theme />
         <div className='searchcraft-popover-form-with-content'>
           <p>Story Note: This story uses the Bazaario env vars</p>
           <searchcraft-popover-form
@@ -84,7 +83,6 @@ export const InlineWithAds: StoryObj<Components.SearchcraftPopoverForm> = {
   render: () => {
     return (
       <>
-        <searchcraft-theme />
         <div className='searchcraft-popover-form-with-content'>
           <p>Story Note: This story uses the Bazaario env vars</p>
           <searchcraft-popover-form
@@ -125,7 +123,6 @@ export const Modal: StoryObj<Components.SearchcraftPopoverForm> = {
   render: () => {
     return (
       <>
-        <searchcraft-theme />
         <div className='searchcraft-popover-form-with-content'>
           <p>Story Note: This story uses the Bazaario env vars</p>
           <searchcraft-popover-button>
@@ -165,7 +162,6 @@ export const Fullscreen: StoryObj<Components.SearchcraftPopoverForm> = {
   render: () => {
     return (
       <>
-        <searchcraft-theme />
         <div className='searchcraft-popover-form-with-content'>
           <p>Story Note: This story uses the Bazaario env vars</p>
           <searchcraft-popover-button>
