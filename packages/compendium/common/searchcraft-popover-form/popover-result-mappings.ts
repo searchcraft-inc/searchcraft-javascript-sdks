@@ -22,3 +22,26 @@ export const popoverResultMappings: PopoverResultMappings = {
     fieldNames: [{ fieldName: 'title', dataType: 'text' }],
   },
 };
+
+export const popoverResultMappingsRunegard: PopoverResultMappings = {
+  href: {
+    fieldNames: [
+      {
+        fieldName: 'canonical_link',
+        dataType: 'text',
+      },
+    ],
+  },
+  title: {
+    fieldNames: [{ fieldName: 'headline', dataType: 'text' }],
+  },
+  subtitle: {
+    fieldNames: [{ fieldName: 'date_modified', dataType: 'date' }],
+  },
+  imageSource: {
+    fieldNames: [{ fieldName: 'medium_image', dataType: 'text' }],
+  },
+  imageAlt: {
+    fieldNames: [{ fieldName: 'headline', dataType: 'text' }],
+  },
+};

@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 
 import './globals.css';
 
+import '@searchcraft/react-sdk/themes/hologram.css';
+
 export const metadata: Metadata = {
   title: 'React SSR SDK',
 };

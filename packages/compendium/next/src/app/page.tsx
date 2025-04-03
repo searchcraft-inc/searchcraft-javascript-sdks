@@ -1,29 +1,27 @@
-import {
-  SearchcraftInputForm,
-  SearchcraftSearchResults,
-  SearchcraftPopoverButton,
-  SearchcraftPopoverForm,
-} from '@searchcraft/react-sdk/server';
+import Link from 'next/link';
 
 import '@searchcraft/javascript-sdk/themes/hologram.css';
 
-import { SearchcraftInit } from '../components';
-
-export default async function Page() {
+export default function Page() {
   return (
-    <>
-      <SearchcraftInit />
-      <div style={{ padding: 20 }}>
-        <p style={{ marginBottom: 20 }}>searchcraft-input-form</p>
-        <div style={{ marginBottom: 20 }}>
-          <SearchcraftInputForm autoSearch />
-        </div>
-        <SearchcraftSearchResults />
-        <hr style={{ marginBottom: 20 }} />
-        <p style={{ marginBottom: 20 }}>searchcraft-popover-form</p>
-        <SearchcraftPopoverButton />
-        <SearchcraftPopoverForm type='modal' />
-      </div>
-    </>
+    <div style={{ padding: 20 }}>
+      <ul style={{ listStyle: 'none' }}>
+        <li style={{ marginBottom: 10 }}>
+          <Link href='/components/searchcraft-search-results'>
+            searchcraft-search-results
+          </Link>
+        </li>
+        <li style={{ marginBottom: 10 }}>
+          <Link href='/components/searchcraft-popover-form'>
+            searchcraft-popover-form
+          </Link>
+        </li>
+        <li>
+          <Link href='/components/searchcraft-popover-form-skeuomorphic'>
+            searchcraft-popover-form (skeuomorphic)
+          </Link>
+        </li>
+      </ul>
+    </div>
   );
 }
