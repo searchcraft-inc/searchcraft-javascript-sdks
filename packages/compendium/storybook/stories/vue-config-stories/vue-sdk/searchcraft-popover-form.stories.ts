@@ -4,7 +4,6 @@ import {
   Searchcraft,
   SearchcraftPopoverButton,
   SearchcraftPopoverForm,
-  SearchcraftTheme,
 } from '@searchcraft/vue-sdk';
 
 import { popoverResultMappings } from '@common/index.js';
@@ -18,7 +17,7 @@ export default {
 } as Meta;
 
 export const Inline: StoryFn = (args) => ({
-  components: { SearchcraftPopoverForm, SearchcraftTheme },
+  components: { SearchcraftPopoverForm },
   setup() {
     new Searchcraft({
       readKey: import.meta.env.VITE_KOBOL_READ_KEY,
@@ -29,7 +28,6 @@ export const Inline: StoryFn = (args) => ({
   },
   template: `
     <div class="searchcraft-popover-form-with-content">
-      <SearchcraftTheme />
       <p>Story Note: This story uses the Bazaario env vars</p>
       <SearchcraftPopoverForm
         hotkey="k"
@@ -49,7 +47,6 @@ export const Modal: StoryFn = (args) => ({
   components: {
     SearchcraftPopoverForm,
     SearchcraftPopoverButton,
-    SearchcraftTheme,
   },
   setup() {
     new Searchcraft({
@@ -61,7 +58,6 @@ export const Modal: StoryFn = (args) => ({
   },
   template: `
     <div class="searchcraft-popover-form-with-content">
-      <SearchcraftTheme />
       <p>Story Note: This story uses the Bazaario env vars</p>
       <SearchcraftPopoverButton>
         <span>Click me</span>
@@ -80,7 +76,6 @@ export const Fullscreen: StoryFn = (args) => ({
   components: {
     SearchcraftPopoverForm,
     SearchcraftPopoverButton,
-    SearchcraftTheme,
   },
   setup() {
     new Searchcraft({
@@ -92,7 +87,6 @@ export const Fullscreen: StoryFn = (args) => ({
   },
   template: `
     <div class="searchcraft-popover-form-with-content">
-      <SearchcraftTheme />
       <p>Story Note: This story uses the Bazaario env vars</p>
       <SearchcraftPopoverButton>
         <span>Click me</span>

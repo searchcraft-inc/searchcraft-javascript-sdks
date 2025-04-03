@@ -99,7 +99,6 @@ export const Default: StoryObj<Components.SearchcraftFilterPanel> = {
   render: () => {
     return (
       <>
-        <searchcraft-theme />
         <div style={{ marginBottom: 20 }}>
           <searchcraft-input-form />
         </div>
@@ -138,7 +137,6 @@ export const WithDebounceDelay300: StoryObj<Components.SearchcraftFilterPanel> =
     render: () => {
       return (
         <>
-          <searchcraft-theme />
           <div style={{ marginBottom: 20 }}>
             <searchcraft-input-form />
           </div>

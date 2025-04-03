@@ -5,6 +5,7 @@ export type MeasureEventName =
   | 'sdk_initialized'
   | 'search_requested'
   | 'search_response_received'
+  | 'search_completed'
   | 'document_clicked';
 
 /**

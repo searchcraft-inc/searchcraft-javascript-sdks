@@ -4,7 +4,6 @@ import {
   Searchcraft,
   SearchcraftSearchResults,
   SearchcraftInputForm,
-  SearchcraftTheme,
 } from '@searchcraft/vue-sdk';
 
 import { searchResultTemplate } from '@common/index.js';
@@ -97,7 +96,6 @@ export const Default: StoryFn = (args) => ({
   components: {
     SearchcraftSearchResults,
     SearchcraftInputForm,
-    SearchcraftTheme,
   },
   setup() {
     new Searchcraft({
@@ -109,7 +107,6 @@ export const Default: StoryFn = (args) => ({
   },
   template: `
     <div style="display: flex; flex-direction: column; gap: 1rem;">
-      <SearchcraftTheme />
       <SearchcraftInputForm
         v-bind="{
           autoSearch: args.autoSearch,

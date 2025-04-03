@@ -43,12 +43,7 @@ export const Default: StoryObj<Components.SearchcraftButton> = {
       return <Story />;
     },
   ],
-  render: (args) => (
-    <>
-      <searchcraft-theme />
-      <searchcraft-button {...args} />
-    </>
-  ),
+  render: (args) => <searchcraft-button {...args} />,
   args: defaultProps,
 };
 

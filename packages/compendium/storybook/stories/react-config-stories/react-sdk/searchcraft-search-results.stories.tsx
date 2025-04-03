@@ -7,7 +7,6 @@ import {
   type SearchcraftSearchResultsProps,
   SearchcraftInputForm,
   type SearchcraftInputFormProps,
-  SearchcraftTheme,
 } from '@searchcraft/react-sdk';
 
 import { searchResultTemplate } from '@common/index.js';
@@ -36,7 +35,6 @@ export const Default: StoryObj<
   render: (args) => {
     return (
       <>
-        <SearchcraftTheme />
         <div style={{ marginBottom: 20 }}>
           <SearchcraftInputForm
             autoSearch={true}

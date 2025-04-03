@@ -2,12 +2,10 @@ import type { Meta, StoryObj } from '@storybook/react';
 import {
   SearchcraftInputForm,
   SearchcraftFilterPanel,
-  SearchcraftTheme,
   Searchcraft,
   type ExactMatchToggleFilterItem,
   type MostRecentToggleFilterItem,
   type DateRangeFilterItem,
-  type FilterItem,
   type NumericFilterItem,
   type FacetsFilterItem,
   type SearchcraftFilterPanelProps,
@@ -103,7 +101,6 @@ export const Default: StoryObj<SearchcraftFilterPanelProps> = {
   render: (args) => {
     return (
       <>
-        <SearchcraftTheme />
         <div style={{ marginBottom: 20 }}>
           <SearchcraftInputForm autoSearch={true} />
         </div>

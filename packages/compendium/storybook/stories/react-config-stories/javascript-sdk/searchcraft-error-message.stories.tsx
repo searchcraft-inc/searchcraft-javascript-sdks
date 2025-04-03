@@ -22,12 +22,7 @@ export const Default: StoryObj<Components.SearchcraftErrorMessage> = {
       return <Story />;
     },
   ],
-  render: () => (
-    <>
-      <searchcraft-theme />
-      <searchcraft-error-message />
-    </>
-  ),
+  render: () => <searchcraft-error-message />,
   args: defaultProps,
 };
 

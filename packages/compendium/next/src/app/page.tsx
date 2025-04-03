@@ -1,10 +1,11 @@
 import {
   SearchcraftInputForm,
-  SearchcraftTheme,
   SearchcraftSearchResults,
   SearchcraftPopoverButton,
   SearchcraftPopoverForm,
 } from '@searchcraft/react-sdk/server';
+
+import '@searchcraft/javascript-sdk/themes/hologram.css';
 
 import { SearchcraftInit } from '../components';
 
@@ -12,7 +13,6 @@ export default async function Page() {
   return (
     <>
       <SearchcraftInit />
-      <SearchcraftTheme />
       <div style={{ padding: 20 }}>
         <p style={{ marginBottom: 20 }}>searchcraft-input-form</p>
         <div style={{ marginBottom: 20 }}>
