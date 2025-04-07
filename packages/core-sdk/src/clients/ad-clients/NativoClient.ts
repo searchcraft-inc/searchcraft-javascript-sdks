@@ -17,12 +17,12 @@ export class NativoClient extends AdClient {
     this.addScriptTagToDocument();
   }
 
-  async onQuerySubmitted(_searchParams: SearchClientRequestProperties) {
+  async onQuerySubmitted(_properties: SearchClientRequestProperties) {
     this.addScriptTagToDocument();
   }
 
   async onQueryFetched(
-    _searchParams: SearchClientRequestProperties,
+    _properties: SearchClientRequestProperties,
     response: SearchcraftResponse,
   ) {
     if ((response.data.hits?.length || 0) === 0) {
@@ -54,8 +54,8 @@ export class NativoClient extends AdClient {
     }, delay);
   }
 
-  async getAdsForSearchParams(
-    _params: SearchClientRequestProperties,
+  async getAds(
+    _properties: SearchClientRequestProperties,
   ): Promise<AdClientResponseItem[]> {
     return [];
   }

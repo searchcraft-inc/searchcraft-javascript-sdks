@@ -5,8 +5,8 @@ import type {
 import { AdClient } from './AdClient';
 
 export class CustomAdClient extends AdClient {
-  async getAdsForSearchParams(
-    _params: SearchClientRequestProperties,
+  async getAds(
+    _properties: SearchClientRequestProperties,
   ): Promise<AdClientResponseItem[]> {
     return [];
   }

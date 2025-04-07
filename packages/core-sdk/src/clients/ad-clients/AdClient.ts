@@ -13,16 +13,16 @@ export class AdClient {
     this.config = config;
   }
 
-  async getAdsForSearchParams(
-    _params: SearchClientRequestProperties,
+  async getAds(
+    _properties: SearchClientRequestProperties,
   ): Promise<AdClientResponseItem[]> {
     return [];
   }
 
-  async onQuerySubmitted(_params: SearchClientRequestProperties) {}
+  async onQuerySubmitted(_properties: SearchClientRequestProperties) {}
 
   async onQueryFetched(
-    _params: SearchClientRequestProperties,
+    _properties: SearchClientRequestProperties,
     _response: SearchcraftResponse,
   ) {}
 

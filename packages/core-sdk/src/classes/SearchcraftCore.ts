@@ -271,9 +271,8 @@ export class SearchcraftCore {
        * Handles ad response from the ad client.
        */
       (async () => {
-        // TODO: What to do about ads here???
         if (this.adClient && typeof properties !== 'string') {
-          const items = await this.adClient.getAdsForSearchParams(properties);
+          const items = await this.adClient.getAds(properties);
           adCallback(items);
         }
       })();
