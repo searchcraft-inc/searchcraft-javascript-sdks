@@ -31,6 +31,15 @@ export const Default: StoryObj<Components.SearchcraftSearchResults> = {
 
         if (searchResults) {
           searchResults.template = searchResultTemplate;
+          searchResults.initialQuery = JSON.stringify({
+            limit: 13,
+            order_by: 'date_published',
+            query: {
+              exact: {
+                ctx: 'section_name:"Columns" OR section_name:"Prep" OR section_name:"Local" OR section_name:"Minnesota"',
+              },
+            },
+          });
         }
       }, []);
 

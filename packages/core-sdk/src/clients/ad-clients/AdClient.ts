@@ -3,7 +3,7 @@ import type {
   SearchcraftAdSource,
   SearchcraftConfig,
   SearchcraftResponse,
-  SearchParams,
+  SearchClientRequestProperties,
 } from '../../types';
 
 export class AdClient {
@@ -14,14 +14,17 @@ export class AdClient {
   }
 
   async getAdsForSearchParams(
-    _params: SearchParams,
+    _params: SearchClientRequestProperties,
   ): Promise<AdClientResponseItem[]> {
     return [];
   }
 
-  async onQuerySubmitted(_params: SearchParams) {}
+  async onQuerySubmitted(_params: SearchClientRequestProperties) {}
 
-  async onQueryFetched(_params: SearchParams, _response: SearchcraftResponse) {}
+  async onQueryFetched(
+    _params: SearchClientRequestProperties,
+    _response: SearchcraftResponse,
+  ) {}
 
   async onInputCleared() {}
 

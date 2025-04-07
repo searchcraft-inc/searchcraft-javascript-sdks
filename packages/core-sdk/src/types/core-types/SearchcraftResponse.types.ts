@@ -34,7 +34,13 @@ export interface SearchcraftResponseData {
 /**
  * Represents an entry in the search index returned as part of a search result.
  */
+// TODO: Remove this???
 export interface SearchIndexEntry {
+  doc?: SearchDocument; // The actual document data (optional)
+  document_id?: string; // Unique identifier for the document in the index (optional)
+  score?: number; // Relevance score of the document in the search (optional)
+}
+export interface SearchIndexHit {
   doc?: SearchDocument; // The actual document data (optional)
   document_id?: string; // Unique identifier for the document in the index (optional)
   score?: number; // Relevance score of the document in the search (optional)

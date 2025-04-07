@@ -1,43 +1,28 @@
-export type FacetPathsForIndexField = {
+export interface FacetPathsForIndexField {
   fieldName: string;
   value: string;
-};
+}
 
-export type RangeValueForIndexField = {
+export interface RangeValueForIndexField {
   fieldName: string;
   value: string;
-};
+}
 
-/**
- * Represents a single condition in a complex query.
- */
-export interface QueryItem {
-  occur?: string;
+export interface SearchClientQuery {
+  occur?: 'must' | 'should';
   exact?: { ctx: string };
   fuzzy?: { ctx: string };
 }
 
-/**
- * Represents a simple query structure with a mode and context string.
- */
-export type SimpleQuery = {
-  [mode: string]: { ctx: string };
+export type SearchClientRequest = {
+  limit?: number; // Limit should come from searchResultsPerPage on the config
+  offset?: number;
+  order_by?: string;
+  sort?: 'asc' | 'desc';
+  query: SearchClientQuery[];
 };
 
-/**
- * Represents a complex query structure supporting multiple conditions.
- */
-export type ComplexQuery = QueryItem[];
-
-/**
- * QueryObject type can be either a simple or complex query.
- */
-export type QueryObject = SimpleQuery | ComplexQuery;
-
-/**
- * Parameters required to make a successful Search request.
- */
-export type SearchParams = {
+export interface SearchClientRequestProperties {
   /**
    * The search mode, which can be either 'fuzzy' or 'exact'.
    */
@@ -72,6 +57,17 @@ export type SearchParams = {
    */
   sort?: 'asc' | 'desc';
 
+  /**
+   * The facet path value(s) specified by the `facets` filter items that the `searchcraft-filter-panel` renders.
+   * There may be multiple rendered within a single filter panel.
+   * Optional parameter.
+   */
   facetPathsForIndexFields?: Record<string, FacetPathsForIndexField>;
+
+  /**
+   * The date range slider value(s) specified by the `dateRange` filter items that the `searchcraft-filter-panel` renders.
+   * There may be multiple rendered within a single filter panel.
+   * Optional parameter.
+   */
   rangeValueForIndexFields?: Record<string, RangeValueForIndexField>;
-};
+}

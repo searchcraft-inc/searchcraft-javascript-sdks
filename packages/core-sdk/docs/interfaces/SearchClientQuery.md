@@ -2,11 +2,9 @@
 
 ***
 
-[@searchcraft/core](/reference/sdk/core/globals.md) / QueryItem
+[@searchcraft/core](/reference/sdk/core/globals.md) / SearchClientQuery
 
-# Interface: QueryItem
-
-Represents a single condition in a complex query.
+# Interface: SearchClientQuery
 
 ## Properties
 
@@ -32,4 +30,4 @@ Represents a single condition in a complex query.
 
 ### occur?
 
-> `optional` **occur**: `string`
+> `optional` **occur**: `"must"` \| `"should"`

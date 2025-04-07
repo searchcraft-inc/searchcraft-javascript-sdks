@@ -84,25 +84,23 @@ Javascript Class providing the functionality to interact with the Searchcraft BE
 
 ***
 
-### getItems()
+### getResponseItems()
 
-> **getItems**(`searchParams`, `itemsCallback`, `adCallback`): `void`
-
-Gets items from the SearchClient and the AdClient.
+> **getResponseItems**(`properties`, `searchCallback`, `adCallback`): `void`
 
 #### Parameters
 
-##### searchParams
+##### properties
 
-[`SearchParams`](/reference/sdk/core/type-aliases/SearchParams.md)
+`string` | [`SearchClientRequestProperties`](/reference/sdk/core/interfaces/SearchClientRequestProperties.md)
 
-##### itemsCallback
+##### searchCallback
 
 (`response`, `items`) => `void`
 
 ##### adCallback
 
-(`adClientResponseItems`) => `void`
+(`items`) => `void`
 
 #### Returns
 
@@ -179,6 +177,30 @@ Called when a `<searchcraft-ad>` is viewed
 > **handleInputCleared**(): `void`
 
 Perform various actions when the input is cleared
+
+#### Returns
+
+`void`
+
+***
+
+### onEvent()
+
+> **onEvent**\<`T`\>(`eventName`, `callback`): `void`
+
+#### Type Parameters
+
+• **T** *extends* keyof [`SubscriptionEventMap`](/reference/sdk/core/interfaces/SubscriptionEventMap.md)
+
+#### Parameters
+
+##### eventName
+
+`T`
+
+##### callback
+
+[`SubscriptionEventCallback`](/reference/sdk/core/type-aliases/SubscriptionEventCallback.md)\<`T`\>
 
 #### Returns
 

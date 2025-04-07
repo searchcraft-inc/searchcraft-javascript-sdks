@@ -4,7 +4,7 @@ import type {
   ADMClientResponseItem,
   ADMResponse,
   SearchcraftAdSource,
-  SearchParams,
+  SearchClientRequestProperties,
 } from '../../types';
 import { AdClient } from './AdClient';
 
@@ -13,7 +13,7 @@ export class AdMarketplaceClient extends AdClient {
    * Gets ads from the adMarketplace API based on the search term.
    */
   async getAdsForSearchParams(
-    params: SearchParams,
+    params: SearchClientRequestProperties,
   ): Promise<AdClientResponseItem[]> {
     if (!this.config.admSub) {
       console.error('No admSub specified in config.');

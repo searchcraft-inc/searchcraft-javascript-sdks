@@ -14,6 +14,7 @@
 - [`QueryFetchedEvent`](/reference/sdk/core/interfaces/QueryFetchedEvent.md)
 - [`InputClearedEvent`](/reference/sdk/core/interfaces/InputClearedEvent.md)
 - [`NoResultsReturnedEvent`](/reference/sdk/core/interfaces/NoResultsReturnedEvent.md)
+- [`InitializedEvent`](/reference/sdk/core/interfaces/InitializedEvent.md)
 
 ## Properties
 
