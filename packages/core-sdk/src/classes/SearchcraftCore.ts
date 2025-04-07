@@ -144,16 +144,6 @@ export class SearchcraftCore {
     }, 300);
   }
 
-  onEvent<T extends SubscriptionEventName>(
-    eventName: T,
-    callback: SubscriptionEventCallback<T>,
-  ) {
-    if (!this.subscriptionEvents[eventName]) {
-      this.subscriptionEvents[eventName] = [];
-    }
-    this.subscriptionEvents[eventName].push(callback);
-  }
-
   emitEvent<T extends SubscriptionEventName>(
     eventName: T,
     event: SubscriptionEventMap[T],

@@ -36,7 +36,6 @@ const initialSearchcraftStateValues: SearchcraftStateValues = {
   sortType: 'asc',
   // Callbacks
   afterInit: () => {},
-  afterSearch: () => {},
 };
 
 const searchcraftStore = createStore<SearchcraftState>((_set, get) => {
@@ -72,7 +71,7 @@ const searchcraftStore = createStore<SearchcraftState>((_set, get) => {
         logger,
         searchResultsPerPage: core?.config.searchResultsPerPage || 20,
       });
-      core?.onEvent('initialized', () => {
+      core?.subscribe('initialized', () => {
         if (state.afterInit) {
           state.afterInit(state);
         }
@@ -144,10 +143,6 @@ const searchcraftStore = createStore<SearchcraftState>((_set, get) => {
         functions.setSearchClientResponseItemsFromResponse,
         functions.setAdClientResponseItems,
       );
-
-      if (state.afterSearch) {
-        state.afterSearch(state.searchTerm, state.searchClientResponseItems);
-      }
     },
     setAdClientResponseItems: (items: AdClientResponseItem[]) =>
       functions.set({ adClientResponseItems: items }),

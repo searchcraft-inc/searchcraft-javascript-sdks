@@ -184,30 +184,6 @@ Perform various actions when the input is cleared
 
 ***
 
-### onEvent()
-
-> **onEvent**\<`T`\>(`eventName`, `callback`): `void`
-
-#### Type Parameters
-
-• **T** *extends* keyof [`SubscriptionEventMap`](/reference/sdk/core/interfaces/SubscriptionEventMap.md)
-
-#### Parameters
-
-##### eventName
-
-`T`
-
-##### callback
-
-[`SubscriptionEventCallback`](/reference/sdk/core/type-aliases/SubscriptionEventCallback.md)\<`T`\>
-
-#### Returns
-
-`void`
-
-***
-
 ### subscribe()
 
 > **subscribe**\<`T`\>(`eventName`, `callback`): [`UnsubscribeFunction`](/reference/sdk/core/type-aliases/UnsubscribeFunction.md)

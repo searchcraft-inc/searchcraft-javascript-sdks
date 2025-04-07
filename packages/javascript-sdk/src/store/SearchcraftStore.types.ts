@@ -76,7 +76,6 @@ export interface SearchcraftStateValues {
   sortType: 'asc' | 'desc';
   // Callbacks
   afterInit: (state: SearchcraftState) => void;
-  afterSearch: (searchTerm: string, items: SearchClientResponseItem[]) => void;
 }
 
 export interface SearchcraftState
