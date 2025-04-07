@@ -6,6 +6,8 @@
 
 # Interface: SearchIndexHit
 
+Represents an entry in the search index returned as part of a search result.
+
 ## Properties
 
 ### doc?

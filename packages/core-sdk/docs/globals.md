@@ -49,7 +49,6 @@
 - [SearchcraftResponseData](/reference/sdk/core/interfaces/SearchcraftResponseData.md)
 - [SearchcraftSDKInfo](/reference/sdk/core/interfaces/SearchcraftSDKInfo.md)
 - [SearchDocument](/reference/sdk/core/interfaces/SearchDocument.md)
-- [SearchIndexEntry](/reference/sdk/core/interfaces/SearchIndexEntry.md)
 - [SearchIndexHit](/reference/sdk/core/interfaces/SearchIndexHit.md)
 - [SubscriptionEvent](/reference/sdk/core/interfaces/SubscriptionEvent.md)
 - [SubscriptionEventMap](/reference/sdk/core/interfaces/SubscriptionEventMap.md)
