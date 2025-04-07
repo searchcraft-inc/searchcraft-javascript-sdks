@@ -128,6 +128,7 @@ const searchcraftStore = createStore<SearchcraftState>((_set, get) => {
         return;
       }
 
+      functions.set({ isSearchInProgress: true });
       state.core.getResponseItems(
         {
           searchTerm: state.searchTerm,

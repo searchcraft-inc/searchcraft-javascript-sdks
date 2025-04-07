@@ -340,16 +340,21 @@ export class SearchcraftSearchResults {
   }
 
   render() {
+    const searchClientResponseItems = this.searchClientResponseItems || [];
+    const initialSearchClientResponseItems =
+      this.initialSearchClientResponseItems || [];
+
     if (
-      this.searchTerm.trim() === '' &&
-      (this.initialSearchClientResponseItems || []).length === 0
+      this.searchTerm === '' &&
+      initialSearchClientResponseItems.length === 0 &&
+      !this.isSearchInProgress
     ) {
       return this.renderEmptyState();
     }
 
     if (
       this.searchTerm.length > 0 &&
-      (this.searchClientResponseItems || []).length === 0 &&
+      searchClientResponseItems.length === 0 &&
       !this.isSearchInProgress
     ) {
       return this.renderNoResultsFoundState();

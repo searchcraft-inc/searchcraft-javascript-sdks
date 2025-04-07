@@ -32,7 +32,6 @@ export const Default: StoryObj<Components.SearchcraftSearchResults> = {
         if (searchResults) {
           searchResults.template = searchResultTemplate;
           searchResults.initialQuery = JSON.stringify({
-            limit: 13,
             order_by: 'date_published',
             query: {
               exact: {
