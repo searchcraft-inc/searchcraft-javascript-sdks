@@ -27,19 +27,13 @@ export type SearchcraftResponseError = {
 export interface SearchcraftResponseData {
   count?: number; // Total number of results found (optional)
   facets?: FacetPrime; // The prime array of Facet root objects.
-  hits?: SearchIndexEntry[]; // Array of individual search entries (optional)
+  hits?: SearchIndexHit[]; // Array of individual search entries (optional)
   time_taken?: number; // Time taken to execute the search in milliseconds (optional)
 }
 
 /**
  * Represents an entry in the search index returned as part of a search result.
  */
-// TODO: Remove this???
-export interface SearchIndexEntry {
-  doc?: SearchDocument; // The actual document data (optional)
-  document_id?: string; // Unique identifier for the document in the index (optional)
-  score?: number; // Relevance score of the document in the search (optional)
-}
 export interface SearchIndexHit {
   doc?: SearchDocument; // The actual document data (optional)
   document_id?: string; // Unique identifier for the document in the index (optional)
