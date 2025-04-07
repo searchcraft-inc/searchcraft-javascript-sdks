@@ -339,21 +339,23 @@ export class SearchcraftPopoverForm {
               />
               <button
                 type='button'
-                class='searchcraft-popover-form-input-cancel-button searchcraft-popover-form-modal-input-cancel-button'
+                class='searchcraft-popover-form-cancel-button searchcraft-popover-form-modal-cancel-button'
                 onClick={this.handleCancelButtonClick.bind(this)}
               >
                 Cancel
               </button>
             </div>
-            {this.hasResultsToShow && (
-              <searchcraft-popover-list-view
-                popoverResultMappings={this.popoverResultMappings}
-                searchClientResponseItems={this.searchClientResponseItems}
-                adClientResponseItems={this.adClientResponseItems}
-                searchResultsPage={this.searchResultsPage}
-                searchResultsPerPage={this.searchResultsPerPage}
-              />
-            )}
+            <div class='searchcraft-popover-form-modal-popover-list-view'>
+              {this.hasResultsToShow && (
+                <searchcraft-popover-list-view
+                  popoverResultMappings={this.popoverResultMappings}
+                  searchClientResponseItems={this.searchClientResponseItems}
+                  adClientResponseItems={this.adClientResponseItems}
+                  searchResultsPage={this.searchResultsPage}
+                  searchResultsPerPage={this.searchResultsPerPage}
+                />
+              )}
+            </div>
             <searchcraft-popover-footer />
           </div>
         </div>
@@ -379,21 +381,23 @@ export class SearchcraftPopoverForm {
             />
             <button
               type='button'
-              class='searchcraft-popover-form-input-cancel-button searchcraft-popover-form-fullscreen-input-cancel-button'
+              class='searchcraft-popover-form-cancel-button searchcraft-popover-form-fullscreen-cancel-button'
               onClick={this.handleCancelButtonClick.bind(this)}
             >
               Cancel
             </button>
           </div>
-          {this.hasResultsToShow && (
-            <searchcraft-popover-list-view
-              popoverResultMappings={this.popoverResultMappings}
-              searchClientResponseItems={this.searchClientResponseItems}
-              adClientResponseItems={this.adClientResponseItems}
-              searchResultsPage={this.searchResultsPage}
-              searchResultsPerPage={this.searchResultsPerPage}
-            />
-          )}
+          <div class='searchcraft-popover-form-fullscreen-popover-list-view'>
+            {this.hasResultsToShow && (
+              <searchcraft-popover-list-view
+                popoverResultMappings={this.popoverResultMappings}
+                searchClientResponseItems={this.searchClientResponseItems}
+                adClientResponseItems={this.adClientResponseItems}
+                searchResultsPage={this.searchResultsPage}
+                searchResultsPerPage={this.searchResultsPerPage}
+              />
+            )}
+          </div>
           <searchcraft-popover-footer />
         </div>
       );
