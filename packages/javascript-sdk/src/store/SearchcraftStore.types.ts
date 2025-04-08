@@ -22,6 +22,7 @@ export interface SearchcraftStateFunctions {
   search: () => Promise<void>;
   setPopoverVisibility: (isVisible: boolean) => void;
   setSearchClientResponseItems: (results: SearchClientResponseItem[]) => void;
+  setSearchResultsCount: (count: number) => void;
   setSearchResultsPage: (page: number) => void;
   setSearchResultsPerPage: (perPage: number) => void;
   setSearchTerm: (searchTerm: string) => void;

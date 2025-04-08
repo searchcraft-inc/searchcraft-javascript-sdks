@@ -204,6 +204,7 @@ const searchcraftStore = createStore<SearchcraftState>((set, get) => {
     },
     setSearchClientResponseItems: (items) =>
       set({ searchClientResponseItems: items }),
+    setSearchResultsCount: (count) => set({ searchResultsCount: count }),
     setSearchResultsPage: async (page) => {
       set({ searchResultsPage: page });
       await functions.search();

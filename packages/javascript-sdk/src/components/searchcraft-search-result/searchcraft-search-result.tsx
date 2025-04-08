@@ -42,7 +42,7 @@ export class SearchcraftSearchResult {
           html,
         });
       } catch (error) {
-        console.error(`Invalid search result template: ${error}`);
+        console.error('Invalid search result template:', error);
       }
     }
   }

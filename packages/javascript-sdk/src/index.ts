@@ -27,10 +27,6 @@ export class Searchcraft extends SearchcraftCore {
 /**
  * Exports the shared types that all SDKs need
  */
-export {
-  parseCustomStyles,
-  serializeStyles,
-} from './utils';
 export type { SearchcraftConfig };
 export { searchcraftStore };
 export type { Components, JSX } from './components';

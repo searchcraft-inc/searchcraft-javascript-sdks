@@ -86,17 +86,14 @@ export class SearchcraftInputForm {
 
   @Prop() core?: SearchcraftCore;
 
-  private searchStore = searchcraftStore.getState();
+  private searchcraftStore = searchcraftStore.getState();
+  private unsubscribe: () => void = () => {};
 
   init() {
     if (this.core) {
-      this.searchStore.initialize(this.core);
+      this.searchcraftStore.initialize(this.core);
       this.inputInit?.emit();
     }
-  }
-
-  connectedCallback() {
-    this.init();
   }
 
   @Watch('core')
@@ -104,7 +101,23 @@ export class SearchcraftInputForm {
     this.init();
   }
 
-  handleOnInput = (event: Event) => {
+  connectedCallback() {
+    this.init();
+  }
+
+  componentDidLoad() {
+    this.unsubscribe = searchcraftStore.subscribe((state) => {
+      this.searchTerm = state.searchTerm;
+      this.inputValue = state.searchTerm;
+    });
+  }
+
+  disconnectedCallback() {
+    this.handleReset();
+    this.unsubscribe?.();
+  }
+
+  handleInput = (event: Event) => {
     const input = event.target as HTMLInputElement;
     this.inputValue = input.value;
 
@@ -112,57 +125,55 @@ export class SearchcraftInputForm {
       return;
     }
 
-    this.performSearch(input.value);
+    this.handleSearch(input.value);
   };
 
-  private performSearch = async (value: string) => {
-    if (value === searchcraftStore.getState().searchTerm) {
+  private handleSearch = async (searchTerm: string) => {
+    if (searchTerm === this.searchTerm) {
       return;
     }
 
-    this.searchTerm = value.trim();
+    this.searchcraftStore.setSearchTerm(searchTerm.trim());
     this.error = false;
-    this.searchStore.setSearchTerm(this.searchTerm);
 
     try {
-      await this.searchStore.search();
+      await this.searchcraftStore.search();
     } catch (error) {
-      console.log(error);
+      console.error(`Search for ${searchTerm} failed:`, error);
       this.error = true;
     }
   };
 
-  handleClearInput = () => {
-    this.inputValue = '';
-    this.searchTerm = '';
-    this.searchStore.setSearchTerm('');
-    this.searchStore.setSearchClientResponseItems([]);
+  private handleReset = () => {
+    this.searchcraftStore.setSearchResultsCount(0);
+    this.searchcraftStore.setSearchTerm('');
+    this.searchcraftStore.setSearchClientResponseItems([]);
     this.error = false;
+  };
+
+  handleClearInput = () => {
+    this.handleReset();
   };
 
   handleFormSubmit = async (event: Event) => {
     event.preventDefault();
-    await this.performSearch(this.searchTerm);
+    await this.handleSearch(this.inputValue);
   };
 
   render() {
-    const isShowingClearButton = this.inputValue.length > 0;
-    const inputGridClassNames = classNames('searchcraft-input-form-grid', {
-      'searchcraft-input-form-grid-button-left':
-        this.buttonPlacement === 'left',
-      'searchcraft-input-form-grid-button-right':
-        this.buttonPlacement === 'right',
-      'searchcraft-input-form-grid-button-none':
-        this.buttonPlacement === 'none',
-    });
-    const shouldHaveVerticalGap = this.inputLabel || this.error;
-    const inputGridStyles = {
-      gap: shouldHaveVerticalGap ? '4px 8px' : '0px 8px',
-    };
-
     return (
       <form class='searchcraft-input-form' onSubmit={this.handleFormSubmit}>
-        <div class={inputGridClassNames} style={inputGridStyles}>
+        <div
+          class={classNames('searchcraft-input-form-grid', {
+            'searchcraft-input-form-grid-button-left':
+              this.buttonPlacement === 'left',
+            'searchcraft-input-form-grid-button-right':
+              this.buttonPlacement === 'right',
+            'searchcraft-input-form-grid-button-none':
+              this.buttonPlacement === 'none',
+          })}
+          style={{ gap: this.inputLabel || this.error ? '4px 8px' : '0px 8px' }}
+        >
           <div class='searchcraft-input-form-button'>
             <searchcraft-button
               onButtonClick={this.handleFormSubmit}
@@ -188,7 +199,7 @@ export class SearchcraftInputForm {
               onFocus={() => this.inputFocus?.emit()}
               onBlur={() => this.inputBlur?.emit()}
               onInput={(event) => {
-                this.handleOnInput(event);
+                this.handleInput(event);
               }}
               placeholder={this.placeholderValue}
               type='text'
@@ -212,7 +223,7 @@ export class SearchcraftInputForm {
                 />
               </svg>
             </div>
-            {isShowingClearButton && (
+            {this.inputValue.length > 0 && (
               <button
                 type='button'
                 class='searchcraft-input-form-clear-button'
