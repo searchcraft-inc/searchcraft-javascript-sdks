@@ -44,17 +44,33 @@ export class SearchClient {
     properties: SearchClientRequestProperties | string,
   ) => {
     let response: SearchcraftResponse;
-    let searchTerm = '';
+    const searchTerm =
+      typeof properties === 'string' ? properties : properties.searchTerm;
 
     try {
+      this.parent.measureClient?.sendMeasureEvent('search_requested', {
+        search_term: searchTerm,
+      });
+
+      this.parent.emitEvent('query_submitted', {
+        name: 'query_submitted',
+        data: {
+          searchTerm,
+        },
+      });
+
+      this.parent.adClient?.onQuerySubmitted(
+        typeof properties === 'string'
+          ? { searchTerm, mode: 'exact' }
+          : properties,
+      );
+
       if (typeof properties === 'string') {
         response =
           await this.handleGetSearchResponseItemsWithString(properties);
-        searchTerm = properties;
       } else {
         response =
           await this.handleGetSearchResponseItemsWithObject(properties);
-        searchTerm = properties.searchTerm;
       }
 
       this.parent.measureClient?.sendMeasureEvent('search_response_received', {
@@ -86,7 +102,7 @@ export class SearchClient {
 
       this.parent.adClient?.onQueryFetched(
         typeof properties === 'string'
-          ? { searchTerm: '', mode: 'exact' }
+          ? { searchTerm, mode: 'exact' }
           : properties,
         response,
       );
