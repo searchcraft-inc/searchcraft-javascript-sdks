@@ -125,10 +125,10 @@ export class SearchcraftInputForm {
       return;
     }
 
-    this.handleSearch(input.value);
+    this.performSearch(input.value);
   };
 
-  private handleSearch = async (searchTerm: string) => {
+  private performSearch = async (searchTerm: string) => {
     if (searchTerm === this.searchTerm) {
       return;
     }
@@ -157,23 +157,26 @@ export class SearchcraftInputForm {
 
   handleFormSubmit = async (event: Event) => {
     event.preventDefault();
-    await this.handleSearch(this.inputValue);
+    await this.performSearch(this.inputValue);
   };
 
   render() {
+    const isShowingClearButton = this.inputValue.length > 0;
+    const inputGridClassNames = classNames('searchcraft-input-form-grid', {
+      'searchcraft-input-form-grid-button-left':
+        this.buttonPlacement === 'left',
+      'searchcraft-input-form-grid-button-right':
+        this.buttonPlacement === 'right',
+      'searchcraft-input-form-grid-button-none':
+        this.buttonPlacement === 'none',
+    });
+    const shouldHaveVerticalGap = this.inputLabel || this.error;
+    const inputGridStyles = {
+      gap: shouldHaveVerticalGap ? '4px 8px' : '0px 8px',
+    };
     return (
       <form class='searchcraft-input-form' onSubmit={this.handleFormSubmit}>
-        <div
-          class={classNames('searchcraft-input-form-grid', {
-            'searchcraft-input-form-grid-button-left':
-              this.buttonPlacement === 'left',
-            'searchcraft-input-form-grid-button-right':
-              this.buttonPlacement === 'right',
-            'searchcraft-input-form-grid-button-none':
-              this.buttonPlacement === 'none',
-          })}
-          style={{ gap: this.inputLabel || this.error ? '4px 8px' : '0px 8px' }}
-        >
+        <div class={inputGridClassNames} style={inputGridStyles}>
           <div class='searchcraft-input-form-button'>
             <searchcraft-button
               onButtonClick={this.handleFormSubmit}
@@ -223,7 +226,7 @@ export class SearchcraftInputForm {
                 />
               </svg>
             </div>
-            {this.inputValue.length > 0 && (
+            {isShowingClearButton && (
               <button
                 type='button'
                 class='searchcraft-input-form-clear-button'
