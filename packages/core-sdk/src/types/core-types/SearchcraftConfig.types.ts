@@ -5,12 +5,12 @@ import type { CustomAdTemplate } from '../sdk-types';
  */
 export interface SearchcraftConfig {
   /**
-   * Host IP Address and port number configured and created using Vektron
+   * Host IP Address and port number configured and created using Vektron.
    */
   endpointURL: string;
 
   /**
-   * Name or names of search indices configured using Vektron. Given as an array of strings
+   * Name or names of search indices configured using Vektron. Given as an array of strings.
    */
   index: string[];
 
@@ -33,6 +33,11 @@ export interface SearchcraftConfig {
    * The maximum number of results to return per page.
    */
   searchResultsPerPage?: number;
+
+  /**
+   * The name of the field to use for `order_by` when sorting.
+   */
+  indexFieldName?: string;
 
   /**
    * Name of the ad source to use.

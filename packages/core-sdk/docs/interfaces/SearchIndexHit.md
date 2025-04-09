@@ -2,9 +2,9 @@
 
 ***
 
-[@searchcraft/core](/reference/sdk/core/globals.md) / SearchIndexEntry
+[@searchcraft/core](/reference/sdk/core/globals.md) / SearchIndexHit
 
-# Interface: SearchIndexEntry
+# Interface: SearchIndexHit
 
 Represents an entry in the search index returned as part of a search result.
 

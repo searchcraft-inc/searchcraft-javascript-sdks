@@ -419,6 +419,10 @@ export namespace Components {
      */
     interface SearchcraftSearchResults {
         /**
+          * A query that will appears when the component initializes or the search term is ''..
+         */
+        "initialQuery"?: string;
+        /**
           * A callback function responsible for rendering a result. Passed to `searchcraft-search-result`.
          */
         "template"?: SearchResultTemplate<SearchResultTemplateData>;
@@ -1524,6 +1528,10 @@ declare namespace LocalJSX {
      * ```
      */
     interface SearchcraftSearchResults {
+        /**
+          * A query that will appears when the component initializes or the search term is ''..
+         */
+        "initialQuery"?: string;
         /**
           * A callback function responsible for rendering a result. Passed to `searchcraft-search-result`.
          */

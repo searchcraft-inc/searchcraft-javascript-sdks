@@ -91,7 +91,7 @@ export class SearchcraftInputForm {
 
   init() {
     if (this.core) {
-      this.searchcraftStore.initialize(this.core);
+      this.searchcraftStore.init(this.core);
       this.inputInit?.emit();
     }
   }

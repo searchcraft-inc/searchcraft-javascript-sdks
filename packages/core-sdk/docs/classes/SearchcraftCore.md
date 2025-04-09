@@ -84,25 +84,23 @@ Javascript Class providing the functionality to interact with the Searchcraft BE
 
 ***
 
-### getItems()
+### getResponseItems()
 
-> **getItems**(`searchParams`, `itemsCallback`, `adCallback`): `void`
-
-Gets items from the SearchClient and the AdClient.
+> **getResponseItems**(`properties`, `searchCallback`, `adCallback`): `void`
 
 #### Parameters
 
-##### searchParams
+##### properties
 
-[`SearchParams`](/reference/sdk/core/type-aliases/SearchParams.md)
+`string` | [`SearchClientRequestProperties`](/reference/sdk/core/interfaces/SearchClientRequestProperties.md)
 
-##### itemsCallback
+##### searchCallback
 
 (`response`, `items`) => `void`
 
 ##### adCallback
 
-(`adClientResponseItems`) => `void`
+(`items`) => `void`
 
 #### Returns
 
