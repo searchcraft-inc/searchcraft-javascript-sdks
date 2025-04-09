@@ -1,7 +1,5 @@
 import Link from 'next/link';
 
-import '@searchcraft/javascript-sdk/themes/hologram.css';
-
 export default function Page() {
   return (
     <div style={{ padding: 20 }}>
