@@ -263,11 +263,16 @@ export class SearchcraftPopoverButton {
     return (
       <button
         class={`searchcraft-popover-button ${this.type ? ` searchcraft-popover-button-${this.type}` : ''}`}
+        innerHTML={
+          typeof this.template !== 'undefined'
+            ? this.template(this.isPopoverVisible, { html })
+            : undefined
+        }
         onClick={this.handleOnClick.bind(this)}
         type='button'
       >
         {typeof this.template !== 'undefined'
-          ? this.template(this.isPopoverVisible, { html })
+          ? undefined
           : this.type
             ? this.renderSlot()
             : 'Open Popover'}
