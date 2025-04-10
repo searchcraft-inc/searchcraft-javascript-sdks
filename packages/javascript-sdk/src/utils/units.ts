@@ -108,22 +108,22 @@ export function formatRelativeDate(
   const oneMonthInMillis = 30 * 24 * 60 * 60 * 1000; // Approx. 1 month in ms
 
   if (diffMillis < oneMonthInMillis) {
-    const diffSeconds = Math.floor(diffMillis / 1000);
-    const diffMinutes = Math.floor(diffSeconds / 60);
-    const diffHours = Math.floor(diffMinutes / 60);
-    const diffDays = Math.floor(diffHours / 24);
+    const diffSeconds = Math.trunc(diffMillis / 1000);
+    const diffMinutes = Math.trunc(diffSeconds / 60);
+    const diffHours = Math.trunc(diffMinutes / 60);
+    const diffDays = Math.trunc(diffHours / 24);
     const relativeTimeFormat = new Intl.RelativeTimeFormat(locale, options);
 
     if (diffDays >= 1) {
-      return relativeTimeFormat.format(diffDays, 'day');
+      return relativeTimeFormat.format(-diffDays, 'day');
     }
 
     if (diffHours >= 1) {
-      return relativeTimeFormat.format(diffHours, 'hour');
+      return relativeTimeFormat.format(-diffHours, 'hour');
     }
 
     if (diffMinutes >= 1) {
-      return relativeTimeFormat.format(diffMinutes, 'minute');
+      return relativeTimeFormat.format(-diffMinutes, 'minute');
     }
 
     return relativeTimeFormat.format(0, 'second');
