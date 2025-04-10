@@ -16,11 +16,11 @@ export const searchResultTemplate: SearchResultTemplate<
   SearchResultTemplateData
 > = (data, index, { html }) => html`
   <a href="${data.canonical_link}" target="_blank" rel="noreferrer">
-    <div class="searchcraft-search-result">
-      <h3 class="searchcraft-search-result-subtitle">${data.section_name}</h3>
-      <h2 class="searchcraft-search-result-title">${data.headline}</h2>
-      <p class="searchcraft-search-result-body">${data.body}</p>
-      <footer class="searchcraft-search-result-footer">
+    <div class="search-result">
+      <h3 class="search-result-subtitle">${data.section_name}</h3>
+      <h2 class="search-result-title">${data.headline}</h2>
+      <p class="search-result-body">${data.body}</p>
+      <footer class="search-result-footer">
         <time>
           ${new Intl.DateTimeFormat('en-US', {
             day: 'numeric',
@@ -32,6 +32,6 @@ export const searchResultTemplate: SearchResultTemplate<
         <p>${data.author_name}</p>
       </footer>
     </div>
-    <img class="searchcraft-search-result-image" src="${data.medium_image}" alt="${data.headline}" />
+    <img class="search-result-image" src="${data.medium_image}" alt="${data.headline}" />
   </a>
 `;
