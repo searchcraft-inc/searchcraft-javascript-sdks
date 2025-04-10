@@ -1,6 +1,6 @@
 import type { Preview } from '@storybook/vue3';
 
-import '@searchcraft/javascript-sdk/themes/hologram.css';
+import '@searchcraft/vue-sdk/themes/hologram.css';
 
 const preview: Preview = {
   parameters: {

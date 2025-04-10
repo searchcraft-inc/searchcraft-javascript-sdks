@@ -18,7 +18,6 @@ export const Default: StoryObj<Components.SearchcraftSearchResults> = {
   decorators: [
     (Story) => {
       useEffect(() => {
-        // import '@searchcraft/javascript-sdk/themes/hologram.css';
         new Searchcraft({
           readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
           endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
