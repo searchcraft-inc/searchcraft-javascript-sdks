@@ -207,13 +207,13 @@ export namespace Components {
      * ```js
      * // index.js
      * const popoverButton = document.querySelector('searchcraft-popover-button');
-     * popoverButton.template = (isPopoverVisible, { html }) => html`
+     * popoverButton.template = ({ isPopoverVisible }, { html }) => html`
      *   <span>Click me</span>
      * `;
      * ```
      * @react-example ```jsx
      * <SearchcraftPopoverButton
-     *   template={(isPopoverVisible, { html }) => html`
+     *   template={({ isPopoverVisible }, { html }) => html`
      *     <span>Click me</span>
      *   `}
      * >
@@ -222,7 +222,7 @@ export namespace Components {
      * ```
      * @vue-example ```jsx
      * <SearchcraftPopoverButton
-     *   :template={(isPopoverVisible, { html }) => html`
+     *   :template={({ isPopoverVisible }, { html }) => html`
      *     <span>Click me</span>
      *   `}
      * >
@@ -772,13 +772,13 @@ declare global {
      * ```js
      * // index.js
      * const popoverButton = document.querySelector('searchcraft-popover-button');
-     * popoverButton.template = (isPopoverVisible, { html }) => html`
+     * popoverButton.template = ({ isPopoverVisible }, { html }) => html`
      *   <span>Click me</span>
      * `;
      * ```
      * @react-example ```jsx
      * <SearchcraftPopoverButton
-     *   template={(isPopoverVisible, { html }) => html`
+     *   template={({ isPopoverVisible }, { html }) => html`
      *     <span>Click me</span>
      *   `}
      * >
@@ -787,7 +787,7 @@ declare global {
      * ```
      * @vue-example ```jsx
      * <SearchcraftPopoverButton
-     *   :template={(isPopoverVisible, { html }) => html`
+     *   :template={({ isPopoverVisible }, { html }) => html`
      *     <span>Click me</span>
      *   `}
      * >
@@ -1317,13 +1317,13 @@ declare namespace LocalJSX {
      * ```js
      * // index.js
      * const popoverButton = document.querySelector('searchcraft-popover-button');
-     * popoverButton.template = (isPopoverVisible, { html }) => html`
+     * popoverButton.template = ({ isPopoverVisible }, { html }) => html`
      *   <span>Click me</span>
      * `;
      * ```
      * @react-example ```jsx
      * <SearchcraftPopoverButton
-     *   template={(isPopoverVisible, { html }) => html`
+     *   template={({ isPopoverVisible }, { html }) => html`
      *     <span>Click me</span>
      *   `}
      * >
@@ -1332,7 +1332,7 @@ declare namespace LocalJSX {
      * ```
      * @vue-example ```jsx
      * <SearchcraftPopoverButton
-     *   :template={(isPopoverVisible, { html }) => html`
+     *   :template={({ isPopoverVisible }, { html }) => html`
      *     <span>Click me</span>
      *   `}
      * >
@@ -1821,13 +1821,13 @@ declare module "@stencil/core" {
              * ```js
              * // index.js
              * const popoverButton = document.querySelector('searchcraft-popover-button');
-             * popoverButton.template = (isPopoverVisible, { html }) => html`
+             * popoverButton.template = ({ isPopoverVisible }, { html }) => html`
              *   <span>Click me</span>
              * `;
              * ```
              * @react-example ```jsx
              * <SearchcraftPopoverButton
-             *   template={(isPopoverVisible, { html }) => html`
+             *   template={({ isPopoverVisible }, { html }) => html`
              *     <span>Click me</span>
              *   `}
              * >
@@ -1836,7 +1836,7 @@ declare module "@stencil/core" {
              * ```
              * @vue-example ```jsx
              * <SearchcraftPopoverButton
-             *   :template={(isPopoverVisible, { html }) => html`
+             *   :template={({ isPopoverVisible }, { html }) => html`
              *     <span>Click me</span>
              *   `}
              * >

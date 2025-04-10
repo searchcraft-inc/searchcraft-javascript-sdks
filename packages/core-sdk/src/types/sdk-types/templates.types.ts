@@ -30,6 +30,8 @@ export type CustomAdTemplate = (
 ) => string;
 
 export type PopoverButtonTemplate = (
-  data: boolean,
+  data: {
+    isPopoverVisible: boolean;
+  },
   utils: { html: TemplateHtml },
 ) => string;
