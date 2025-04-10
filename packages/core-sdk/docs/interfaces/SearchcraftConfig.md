@@ -94,7 +94,7 @@ A callback function responsible for rendering the custom ad containers.
 
 > **endpointURL**: `string`
 
-Host IP Address and port number configured and created using Vektron
+Host IP Address and port number configured and created using Vektron.
 
 ***
 
@@ -102,7 +102,15 @@ Host IP Address and port number configured and created using Vektron
 
 > **index**: `string`[]
 
-Name or names of search indices configured using Vektron. Given as an array of strings
+Name or names of search indices configured using Vektron. Given as an array of strings.
+
+***
+
+### indexFieldName?
+
+> `optional` **indexFieldName**: `string`
+
+The name of the field to use for `order_by` when sorting.
 
 ***
 

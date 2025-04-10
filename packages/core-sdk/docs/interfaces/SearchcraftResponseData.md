@@ -24,7 +24,7 @@ Top-level result returned when a search is successful.
 
 ### hits?
 
-> `optional` **hits**: [`SearchIndexEntry`](/reference/sdk/core/interfaces/SearchIndexEntry.md)[]
+> `optional` **hits**: [`SearchIndexHit`](/reference/sdk/core/interfaces/SearchIndexHit.md)[]
 
 ***
 

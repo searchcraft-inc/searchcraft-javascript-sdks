@@ -1,12 +1,14 @@
 import type { SearchcraftCore } from '../classes';
+
 import type {
-  QueryObject,
-  SearchParams,
+  SearchClientQuery,
   SearchcraftConfig,
   SearchcraftResponse,
+  SearchClientRequestProperties,
+  SearchClientRequest,
 } from '../types';
-import { buildQueryObject } from '../utils';
-import { sanitize } from '../utils/sanitize';
+
+import { sanitize } from '../utils';
 
 const SEARCH_COMPLETED_EVENT_DEBOUNCE = 500;
 
@@ -34,83 +36,54 @@ export class SearchClient {
   }
 
   /**
-   * Performs a search operation.
-   * @param {SearchParams} searchParams - The parameters for the search.
+   * Make the request to get the search results.
+   * @param {properties} properties - The properties for the search.
+   * @returns
    */
-  getSearchResponse = async (
-    searchParams: SearchParams,
-  ): Promise<SearchcraftResponse> => {
-    const searchTerm = sanitize(searchParams.searchTerm);
-
-    this.parent.measureClient?.sendMeasureEvent('search_requested', {
-      search_term: searchTerm,
-    });
-
-    this.parent.emitEvent('query_submitted', {
-      name: 'query_submitted',
-      data: {
-        searchTerm,
-      },
-    });
-
-    this.parent.adClient?.onQuerySubmitted(searchParams);
+  getSearchResponseItems = async (
+    properties: SearchClientRequestProperties | string,
+  ) => {
+    let response: SearchcraftResponse;
+    const searchTerm =
+      typeof properties === 'string' ? properties : properties.searchTerm;
 
     try {
-      // Build the request body
-      const requestBody: {
-        query: QueryObject;
-        limit: number;
-        offset?: number;
-        order_by?: string;
-        sort?: 'asc' | 'desc';
-      } = {
-        query: buildQueryObject(searchParams),
-        offset: searchParams.offset || 0, // Default to 0 (first page) if not provided
-        limit: searchParams.limit || this.config.searchResultsPerPage || 20, // Default to 20 if not provided
-      };
+      this.parent.measureClient?.sendMeasureEvent('search_requested', {
+        search_term: searchTerm,
+      });
 
-      // Handles dynamic sorting and order_by logic
-      if (searchParams.order_by) {
-        requestBody.order_by = searchParams.order_by;
-
-        // Ensure sort defaults to 'asc' if not provided or given an invalid value
-        requestBody.sort =
-          searchParams.sort === 'desc' || searchParams.sort === 'asc'
-            ? searchParams.sort
-            : 'asc';
-      }
-
-      const requestOptions = {
-        method: 'POST',
-        headers: {
-          Authorization: this.config.readKey,
-          'Content-Type': 'application/json',
-          'X-Sc-User-Id': this.userId,
+      this.parent.emitEvent('query_submitted', {
+        name: 'query_submitted',
+        data: {
+          searchTerm,
         },
-        body: JSON.stringify(requestBody),
-      };
+      });
 
-      const response = await fetch(this.baseSearchUrl, requestOptions);
-      if (!response.ok) {
-        throw new Error(
-          `Error: ${response.statusText} (Status: ${response.status})`,
-        );
+      this.parent.adClient?.onQuerySubmitted(
+        typeof properties === 'string'
+          ? { searchTerm, mode: 'exact' }
+          : properties,
+      );
+
+      if (typeof properties === 'string') {
+        response =
+          await this.handleGetSearchResponseItemsWithString(properties);
+      } else {
+        response =
+          await this.handleGetSearchResponseItemsWithObject(properties);
       }
-
-      // TODO: Add schema validation here rather than optimistically cast to SearchcraftResponse.
-      const searchcraftResponse =
-        (await response.json()) as SearchcraftResponse;
 
       this.parent.measureClient?.sendMeasureEvent('search_response_received', {
         search_term: searchTerm,
-        number_of_documents: searchcraftResponse.data.count,
+        number_of_documents: response.data.count,
       });
 
       clearTimeout(this.searchCompletedEventTimeout);
+
       this.searchCompletedEventTimeout = setTimeout(() => {
         this.parent.measureClient?.sendMeasureEvent('search_completed', {
           search_term: searchTerm,
-          number_of_documents: searchcraftResponse.data.count,
+          number_of_documents: response.data.count,
         });
       }, SEARCH_COMPLETED_EVENT_DEBOUNCE);
 
@@ -121,18 +94,154 @@ export class SearchClient {
         },
       });
 
-      if ((searchcraftResponse.data.hits?.length || 0) === 0) {
+      if ((response.data.hits?.length || 0) === 0) {
         this.parent.emitEvent('no_results_returned', {
           name: 'no_results_returned',
         });
       }
 
-      this.parent.adClient?.onQueryFetched(searchParams, searchcraftResponse);
+      this.parent.adClient?.onQueryFetched(
+        typeof properties === 'string'
+          ? { searchTerm, mode: 'exact' }
+          : properties,
+        response,
+      );
 
-      return searchcraftResponse;
+      return response;
     } catch (error) {
       console.error('Error parsing response:', error);
       throw error;
     }
   };
+
+  private handleGetSearchResponseItemsWithString = async (
+    str: string,
+  ): Promise<SearchcraftResponse> => {
+    let body: SearchClientRequest;
+
+    try {
+      body = JSON.parse(str);
+      body = {
+        limit: this.config.searchResultsPerPage,
+        order_by: this.config.indexFieldName,
+        ...body,
+      };
+    } catch {
+      throw new Error('Error: Query string is not valid json.');
+    }
+
+    const response = await fetch(this.baseSearchUrl, {
+      method: 'POST',
+      headers: {
+        Authorization: this.config.readKey,
+        'Content-Type': 'application/json',
+        'X-Sc-User-Id': this.userId,
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (!response.ok) {
+      throw new Error(
+        `Error: ${response.statusText} (Status: ${response.status})`,
+      );
+    }
+
+    return (await response.json()) as SearchcraftResponse;
+  };
+
+  private handleGetSearchResponseItemsWithObject = async (
+    properties: SearchClientRequestProperties,
+  ): Promise<SearchcraftResponse> => {
+    try {
+      const body: SearchClientRequest = {
+        query: this.formatParamsForRequest(properties),
+        offset: properties.offset || 0, // Default to 0 (first page) if not provided
+        limit: properties.limit || this.config.searchResultsPerPage || 20, // Default to 20 if not provided
+        order_by: properties.order_by || this.config.indexFieldName,
+      };
+
+      // Handles dynamic sorting and order_by logic
+      if (body.order_by) {
+        // Ensure sort defaults to 'asc' if not provided or given an invalid value
+        body.sort =
+          properties.sort === 'desc' || properties.sort === 'asc'
+            ? properties.sort
+            : 'asc';
+      }
+
+      const response = await fetch(this.baseSearchUrl, {
+        method: 'POST',
+        headers: {
+          Authorization: this.config.readKey,
+          'Content-Type': 'application/json',
+          'X-Sc-User-Id': this.userId,
+        },
+        body: JSON.stringify(body),
+      });
+
+      if (!response.ok) {
+        throw new Error(
+          `Error: ${response.statusText} (Status: ${response.status})`,
+        );
+      }
+
+      return (await response.json()) as SearchcraftResponse;
+    } catch (error) {
+      console.error('Error parsing response:', error);
+      throw error;
+    }
+  };
+
+  /**
+   * Builds a query object for the SearchClient request.
+   * @param {properties} properties - The properties for the search.
+   * @returns {SearchClientQuery} - A properly formatted SearchClient query object.
+   */
+  private formatParamsForRequest(properties: SearchClientRequestProperties) {
+    const queries: SearchClientQuery[] = [];
+    let occur: 'must' | 'should' = 'should';
+
+    if (properties.facetPathsForIndexFields) {
+      Object.keys(properties.facetPathsForIndexFields).forEach((fieldName) => {
+        const item = properties.facetPathsForIndexFields?.[fieldName];
+
+        if (item) {
+          occur = 'must';
+          queries.push({
+            occur,
+            exact: {
+              ctx: sanitize(item.value),
+            },
+          });
+        }
+      });
+    }
+
+    if (properties.rangeValueForIndexFields) {
+      Object.keys(properties.rangeValueForIndexFields).forEach((fieldName) => {
+        const item = properties.rangeValueForIndexFields?.[fieldName];
+
+        if (item) {
+          occur = 'must';
+          queries.push({
+            occur,
+            exact: {
+              ctx: item.value,
+            },
+          });
+        }
+      });
+    }
+
+    const query =
+      properties.mode === 'fuzzy'
+        ? { fuzzy: { ctx: properties.searchTerm } }
+        : { exact: { ctx: properties.searchTerm } };
+    queries.push({
+      occur, // Valid, as 'occur' is a required property in SearchClientQuery
+      ...query,
+    });
+
+    return queries;
+  }
 }

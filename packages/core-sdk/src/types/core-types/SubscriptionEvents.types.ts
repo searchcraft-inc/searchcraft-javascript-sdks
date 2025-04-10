@@ -5,6 +5,7 @@ export interface SubscriptionEventMap {
   ad_container_viewed: AdContainerViewedSubscriptionEvent;
   query_fetched: QueryFetchedEvent;
   query_submitted: QuerySubmittedEvent;
+  initialized: InitializedEvent;
   input_cleared: InputClearedEvent;
   no_results_returned: NoResultsReturnedEvent;
 }
@@ -48,6 +49,10 @@ export interface InputClearedEvent extends SubscriptionEvent {
 
 export interface NoResultsReturnedEvent extends SubscriptionEvent {
   name: 'no_results_returned';
+}
+
+export interface InitializedEvent extends SubscriptionEvent {
+  name: 'initialized';
 }
 
 export type SubscriptionEventName = keyof SubscriptionEventMap;

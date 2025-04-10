@@ -1,10 +1,10 @@
 export const sanitize = (str: string) => {
   let sanitizedStr = '';
 
-  // trim whitespace
+  // Trim whitespace
   sanitizedStr = str.trim();
 
-  // replace fancy quotes
+  // Replace fancy quotes
   sanitizedStr = sanitizedStr.replace(/[‘’“”]/g, (match) => {
     const map = {
       '‘': "'",
@@ -15,7 +15,7 @@ export const sanitize = (str: string) => {
     return map[match] || match;
   });
 
-  // whether there are an equal number of quotes
+  // Whether there are an equal number of quotes
   const quoteCount = (sanitizedStr.match(/"/g) || []).length;
 
   if (quoteCount % 2 !== 0) {

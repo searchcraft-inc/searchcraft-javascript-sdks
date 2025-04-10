@@ -61,14 +61,14 @@ export class SearchcraftPopoverListItem {
 
   handleLinkClick = () => {
     const state = searchcraftStore.getState();
-    const searchcraft = state.getSearchcraftInstance();
+    const core = state.getSearchcraftCore();
 
-    if (searchcraft) {
+    if (core) {
       const document_position = this.documentPosition;
       const search_term = state.searchTerm;
       const number_of_documents = state.searchClientResponseItems.length || 0;
 
-      searchcraft.measureClient?.sendMeasureEvent('document_clicked', {
+      core.measureClient?.sendMeasureEvent('document_clicked', {
         document_position,
         number_of_documents,
         search_term,

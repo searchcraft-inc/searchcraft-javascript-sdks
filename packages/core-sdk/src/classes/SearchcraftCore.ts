@@ -1,28 +1,31 @@
 import { getFingerprint } from '@thumbmarkjs/thumbmarkjs';
 import { nanoid } from 'nanoid';
+
 import {
   type AdClient,
   AdMarketplaceClient,
   CustomAdClient,
   MeasureClient,
   NativoClient,
+  SearchClient,
 } from '../clients';
-import { SearchClient } from '../clients/SearchClient';
+
 import type {
   AdClientResponseItem,
   SearchClientResponseItem,
-  SearchIndexEntry,
-  SearchParams,
   SearchcraftConfig,
   SearchcraftResponse,
   SearchcraftSDKInfo,
-  UnsubscribeFunction,
   SubscriptionEventName,
   SubscriptionEventCallback,
+  SearchIndexHit,
   SubscriptionEventMap,
+  UnsubscribeFunction,
   SearchcraftAdSource,
+  SearchClientRequestProperties,
 } from '../types';
-import { removeTrailingSlashFromEndpointURL } from '../utils';
+
+import { removeTrailingSlashFromURL } from '../utils';
 
 /**
  * Javascript Class providing the functionality to interact with the Searchcraft BE
@@ -49,7 +52,7 @@ export class SearchcraftCore {
     this.config = {
       ...config,
       // Strips off the trailing '/' from an endpointURL if one is accidentally added
-      endpointURL: removeTrailingSlashFromEndpointURL(config.endpointURL),
+      endpointURL: removeTrailingSlashFromURL(config.endpointURL),
     };
     this.userId = '';
 
@@ -134,6 +137,10 @@ export class SearchcraftCore {
           this.adClient = new CustomAdClient(config);
           break;
       }
+
+      this.emitEvent('initialized', {
+        name: 'initialized',
+      });
     }, 300);
   }
 
@@ -218,63 +225,58 @@ export class SearchcraftCore {
     this.adClient?.onInputCleared();
   }
 
-  /**
-   * Gets items from the SearchClient and the AdClient.
-   */
-  getItems = (
-    searchParams: SearchParams,
-    itemsCallback: (
+  getResponseItems = (
+    properties: SearchClientRequestProperties | string,
+    searchCallback: (
       response: SearchcraftResponse,
       items: SearchClientResponseItem[],
     ) => void,
-    adCallback: (adClientResponseItems: AdClientResponseItem[]) => void,
+    adCallback: (items: AdClientResponseItem[]) => void,
   ) => {
-    const getItemsDebounced = async () => {
+    const getResponseItemsDebounced = async () => {
       /**
        * Handles search response from the search client.
        */
       (async () => {
-        const searchResponse =
-          await this?.searchClient?.getSearchResponse(searchParams);
+        const response =
+          await this?.searchClient?.getSearchResponseItems(properties);
 
-        if (!searchResponse) {
+        if (!response) {
           throw new Error('Search client was not initialized.');
         }
 
-        const searchItems: SearchClientResponseItem[] = (
-          searchResponse.data.hits || []
-        )
-          ?.map((entry: SearchIndexEntry) => entry.doc) // SearchcraftResponse -> (SearchDocument || undefined)[]
-          .filter((item) => !!item) // (SearchDocument || undefined)[] -> SearchDocument[]
+        const items: SearchClientResponseItem[] = (response.data.hits || [])
+          ?.map((hit: SearchIndexHit) => hit.doc) // SearchcraftResponse -> (SearchDocument || undefined)[]
+          .filter((document) => !!document) // (SearchDocument || undefined)[] -> SearchDocument[]
           .map((document) => ({
             type: 'SearchDocument',
             id: nanoid(),
             document,
           })); // SearchDocument[] -> SearchClientResponseItem
 
-        itemsCallback(searchResponse, searchItems);
+        searchCallback(response, items);
       })();
 
       /**
        * Handles ad response from the ad client.
        */
       (async () => {
-        if (this.adClient) {
-          const adItems =
-            await this.adClient.getAdsForSearchParams(searchParams);
-          adCallback(adItems);
+        if (this.adClient && typeof properties !== 'string') {
+          const items = await this.adClient.getAds(properties);
+          adCallback(items);
         }
       })();
     };
 
     clearTimeout(this.requestTimeout);
+
     if (this.config.searchDebounceDelay) {
       this.requestTimeout = setTimeout(
-        getItemsDebounced,
+        getResponseItemsDebounced,
         this.config.searchDebounceDelay,
       );
     } else {
-      getItemsDebounced();
+      getResponseItemsDebounced();
     }
   };
 }
