@@ -24,6 +24,47 @@ export const Default: StoryObj<Components.SearchcraftPopoverButton> = {
         if (popoverForm) {
           popoverForm.popoverResultMappings = popoverResultMappings;
         }
+
+        const popoverButton = document.querySelector(
+          'searchcraft-popover-button',
+        );
+
+        if (popoverButton) {
+          popoverButton.template = (_, { html }) => html`
+            <span>Search</span>
+          `;
+        }
+      }, []);
+
+      return <Story />;
+    },
+  ],
+  render: () => {
+    return (
+      <>
+        <searchcraft-theme />
+        <searchcraft-popover-button />
+        <searchcraft-popover-form type='modal' />
+      </>
+    );
+  },
+  args: {},
+};
+
+export const WithoutATemplate: StoryObj<Components.SearchcraftPopoverButton> = {
+  decorators: [
+    (Story) => {
+      useEffect(() => {
+        new Searchcraft({
+          readKey: import.meta.env.VITE_KOBOL_READ_KEY,
+          endpointURL: import.meta.env.VITE_KOBOL_ENDPOINT_URL,
+          index: [import.meta.env.VITE_KOBOL_INDEX],
+        });
+        const popoverForm = document.querySelector('searchcraft-popover-form');
+
+        if (popoverForm) {
+          popoverForm.popoverResultMappings = popoverResultMappings;
+        }
       }, []);
 
       return <Story />;
