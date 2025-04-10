@@ -123,7 +123,7 @@ export function formatRelativeDate(
     }
 
     if (diffMinutes >= 1) {
-      return relativeTimeFormat.format(diffHours, 'minute');
+      return relativeTimeFormat.format(diffMinutes, 'minute');
     }
 
     return relativeTimeFormat.format(0, 'second');
