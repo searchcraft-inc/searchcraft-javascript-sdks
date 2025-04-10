@@ -2,7 +2,6 @@ import type { SearchResultMapping } from '@searchcraft/core';
 
 /**
  * Given a document and a SearchResultMapping, return a mapped value from the document.
- *
  * Applies formatting based on the values specified in the `SearchResultFieldName` values.
  *
  * @param document
@@ -21,8 +20,11 @@ export function getDocumentValueFromSearchResultMapping(
         if (valueFound) {
           switch (fieldNameDetails.dataType) {
             case 'date': {
-              // TODO: Use fieldNameDetails.DateFormatOptions to format the date
-              valueFound = getFormattedTimeFromNow(valueFound as string);
+              valueFound = formatRelativeDate(
+                valueFound as string | Date,
+                fieldNameDetails.dateFormatLocale,
+                fieldNameDetails.dateFormatOptions,
+              );
               break;
             }
             case 'number': {
@@ -46,6 +48,12 @@ export function getDocumentValueFromSearchResultMapping(
   }
 }
 
+/**
+ * Convert different units of time to milliseconds.
+ *
+ * @param unit - The unit of time
+ * @returns {number}
+ */
 export function getMillis(unit: 'year' | 'month' | 'day' | 'hour'): number {
   const millisInHour = 60 * 60 * 1000;
   const millisInDay = 24 * millisInHour;
@@ -66,37 +74,57 @@ export function getMillis(unit: 'year' | 'month' | 'day' | 'hour'): number {
   }
 }
 
+/**
+ * Format a number with commas as thousands separators.
+ *
+ * @param number - The number to be formatted.
+ * @returns {string} - The formatted number as a string.
+ */
 export function formatNumberWithCommas(number) {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
 /**
- * Given a timestamp value, returns a formatted time string for the time
- * since now.
+ * Format a date or date string. The string is formatted relative to today's date
+ * (e.g. 2 days ago) until the date range is greater than a month.
  *
- * @param timestamp
- * @returns {string} Formatted string value
+ * @param dateInput - The date to be formatted.
+ * @param locale - The language used for formatting the date.
+ * @param options - The non-default options used for formatting the date.
+ * @returns {string} - The formatted date as a string.
  */
-export function getFormattedTimeFromNow(timestamp: string): string {
+export function formatRelativeDate(
+  dateInput: string | Date,
+  locale = 'en-US',
+  options: Intl.DateTimeFormatOptions = {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  },
+): string {
+  const date = new Date(dateInput);
   const now = new Date();
-  const inputTime = new Date(timestamp);
-  const diffInSeconds = Math.floor(
-    (now.getTime() - inputTime.getTime()) / 1000,
-  );
+  const diffMillis = now.getTime() - date.getTime();
+  const oneMonthInMillis = 30 * 24 * 60 * 60 * 1000; // Approx. 1 month in ms
 
-  const minutes = Math.floor(diffInSeconds / 60);
-  const hours = Math.floor(minutes / 60);
-  const days = Math.floor(hours / 24);
-  const years = Math.floor(days / 365);
+  if (diffMillis < oneMonthInMillis) {
+    const diffSeconds = Math.floor(diffMillis / 1000);
+    const diffMinutes = Math.floor(diffSeconds / 60);
+    const diffHours = Math.floor(diffMinutes / 60);
+    const diffDays = Math.floor(diffHours / 24);
 
-  if (minutes < 60) {
-    return `${minutes}m ago`;
+    if (diffDays >= 1) {
+      return `${diffDays} day${diffDays > 1 ? 's' : ''} ago`;
+    }
+
+    if (diffHours >= 1) {
+      return `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`;
+    }
+    if (diffMinutes >= 1) {
+      return `${diffMinutes} minute${diffMinutes > 1 ? 's' : ''} ago`;
+    }
+    return 'just now';
   }
-  if (hours < 24) {
-    return `${hours}h ago`;
-  }
-  if (days < 365) {
-    return `${days}d ago`;
-  }
-  return `${years}y ago`;
+
+  return new Intl.DateTimeFormat(locale, options).format(date);
 }
