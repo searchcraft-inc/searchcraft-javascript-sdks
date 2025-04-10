@@ -19,11 +19,18 @@ describing how to format and display the index field value.
 
 The data type to treat this index field as.
 
+### dateFormatLocale?
+
+> `optional` **dateFormatLocale**: `string`
+
+The locale to use when formatting dataType: `date`.
+
 ### dateFormatOptions?
 
-> `optional` **dateFormatOptions**: `unknown`
+> `optional` **dateFormatOptions**: `Intl.DateTimeFormatOptions`
 
-TODO: Implement DateFormatOptions, for date formatting
+If it's a date, the date format to apply.
+Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
 
 ### fieldName
 
@@ -42,7 +49,7 @@ The locale to use when formatting dataType: `number`
 > `optional` **numberFormatOptions**: `Intl.NumberFormatOptions`
 
 If it's a number, the number format to apply.
-reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat
+Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat
 
 ### numberScale?
 
