@@ -112,18 +112,21 @@ export function formatRelativeDate(
     const diffMinutes = Math.floor(diffSeconds / 60);
     const diffHours = Math.floor(diffMinutes / 60);
     const diffDays = Math.floor(diffHours / 24);
+    const relativeTimeFormat = new Intl.RelativeTimeFormat(locale, options);
 
     if (diffDays >= 1) {
-      return `${diffDays} day${diffDays > 1 ? 's' : ''} ago`;
+      return relativeTimeFormat.format(diffDays, 'day');
     }
 
     if (diffHours >= 1) {
-      return `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`;
+      return relativeTimeFormat.format(diffHours, 'hour');
     }
+
     if (diffMinutes >= 1) {
-      return `${diffMinutes} minute${diffMinutes > 1 ? 's' : ''} ago`;
+      return relativeTimeFormat.format(diffHours, 'minute');
     }
-    return 'just now';
+
+    return relativeTimeFormat.format(0, 'second');
   }
 
   return new Intl.DateTimeFormat(locale, options).format(date);
