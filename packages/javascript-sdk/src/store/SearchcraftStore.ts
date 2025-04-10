@@ -157,12 +157,9 @@ const searchcraftStore = createStore<SearchcraftState>((_set, get) => {
             // Reset to first page when response count changes
             count === state.searchResultsCount ? state.searchResultsPage : 1,
           searchResultsCount: count,
+          ...(facets && { searchResponseFacetPrime: facets }),
         };
       });
-
-      if (facets) {
-        functions.set({ searchResponseFacetPrime: facets });
-      }
 
       state.logger?.log(
         LogLevel.DEBUG,

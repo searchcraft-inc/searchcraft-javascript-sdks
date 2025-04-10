@@ -52,13 +52,11 @@ export class SearchcraftFacetList {
   @State() facetRoot: FacetRoot | undefined;
   @State() selectedPaths: Record<string, boolean> = {};
   @State() lastTimeTaken: number | undefined;
-  @State() hasNewSearchTerm = false;
-
-  @State() lastSearchTerm: string | undefined;
-  @State() lastSearchMode: string | undefined;
-  @State() lastSortType: string | undefined;
-
-  @State() unsubscribe: (() => void) | undefined;
+  hasNewSearchTerm = false;
+  lastSearchTerm: string | undefined;
+  lastSearchMode: string | undefined;
+  lastSortType: string | undefined;
+  unsubscribe: (() => void) | undefined;
 
   private searchStore = searchcraftStore.getState();
 
