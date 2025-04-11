@@ -1,3 +1,11 @@
+## 0.10.2 - 2025-04-11
+
+The main new feature in this release is the added support for being able to a specify an initial query with searchcraft-search-results components.
+
+- searchcraft-search-results initial query support.
+- Styles export now works with tailwind.
+- Bugfixes and performance improvements.
+
 ## 0.10.1 - 2025-04-03
 
 This release makes some updates and improvements to the `searchcraft-popover` component, along with some other updates and enhancements:
