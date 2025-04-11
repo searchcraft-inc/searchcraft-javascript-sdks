@@ -2,11 +2,13 @@
   "name": "@searchcraft/react-sdk",
   "private": false,
   "author": "Searchcraft Inc.",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "description": "Searchcraft React SDK.",
   "type": "module",
   "license": "Apache-2.0",
-  "keywords": ["searchcraft"],
+  "keywords": [
+    "searchcraft"
+  ],
   "scripts": {
     "build": "rm -rf dist && vite build --config vite.client.config.ts && vite build --config vite.server.config.ts",
     "docs": "typedoc --options typedoc.json",
@@ -25,7 +27,9 @@
   "main": "dist/client/index.js",
   "module": "dist/client/index.js",
   "types": "dist/client/index.d.ts",
-  "files": ["dist/**/*"],
+  "files": [
+    "dist/**/*"
+  ],
   "exports": {
     ".": {
       "import": "./dist/client/index.js",
@@ -38,7 +42,7 @@
     "./themes/*.css": "./dist/client/themes/*.css"
   },
   "dependencies": {
-    "@searchcraft/javascript-sdk": "^0.10.1",
+    "@searchcraft/javascript-sdk": "^0.10.2",
     "classnames": "^2.3.2"
   },
   "peerDependencies": {
