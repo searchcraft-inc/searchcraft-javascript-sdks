@@ -1,18 +1,20 @@
-.searchcraft-search-result > a {
+.searchcraft-ad > a {
   align-items: flex-start;
   color: unset;
   display: flex;
   gap: 16px;
   text-decoration: none;
+  width: 100%;
 }
 
-.search-result-content {
+.ad {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
   gap: 8px;
 }
 
-.search-result-content-body {
+.ad-body {
   display: -webkit-box;
   margin: 0;
   overflow: hidden;
@@ -20,37 +22,41 @@
   -webkit-line-clamp: 2;
 }
 
-.search-result-content-title {
+.ad-title {
   font-size: 1.25rem;
   margin: 0;
 }
 
-.search-result-content-subtitle {
+.ad-subtitle {
   color: var(--sc-brand-secondary);
   font-size: 0.875rem;
   margin: 0;
   text-transform: uppercase;
 }
 
-.search-result-content-footer {
+.ad-footer {
   color: var(--sc-neutral-secondary);
   display: flex;
   font-size: 0.875rem;
-  gap: 12px;
+  gap: 8px;
 }
 
-.search-result-content-footer > * {
+.ad-footer > * {
   margin: 0;
 }
 
-.search-result-image {
+.ad-image {
   aspect-ratio: 16 / 9;
   flex-shrink: 0;
   width: 20%;
 }
 
-.search-result-image > img {
+.ad-image > img {
   height: 100%;
   object-fit: contain;
   width: 100%;
+}
+
+.ad-sale-price {
+  text-decoration: line-through;
 }

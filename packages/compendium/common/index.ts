@@ -1,6 +1,7 @@
 export { searchResultTemplate } from './searchcraft-search-results/search-result-template';
-export { customAdTemplate } from './searchcraft-custom-ad/custom-ad-template';
+export { customAdTemplate } from './searchcraft-ad/custom-ad-template';
 export {
   popoverResultMappings,
   popoverResultMappingsRunegard,
 } from './searchcraft-popover-form/popover-result-mappings';
+export { admAdTemplate } from './searchcraft-ad/adm-ad-template';

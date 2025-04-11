@@ -1,4 +1,4 @@
-import { useEffect, useInsertionEffect } from 'react';
+import { useEffect } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import {
@@ -7,7 +7,11 @@ import {
   type Components,
 } from '@searchcraft/javascript-sdk';
 
-import { searchResultTemplate, customAdTemplate } from '@common/index.js';
+import {
+  searchResultTemplate,
+  customAdTemplate,
+  admAdTemplate,
+} from '@common/index.js';
 
 const componentMeta: Meta = {
   title: 'Javascript SDK/searchcraft-search-results',
@@ -70,6 +74,7 @@ export const WithAdMarketplaceAds: StoryObj<Components.SearchcraftSearchResults>
             admSub: 'searchbox1',
             admProductAdQuantity: 2,
             admTextAdQuantity: 2,
+            admAdTemplate: admAdTemplate,
           };
           new Searchcraft(adConfig);
 

@@ -35,3 +35,18 @@ export type PopoverButtonTemplate = (
   },
   utils: { html: TemplateHtml },
 ) => string;
+
+export type ADMAdTemplate = (
+  data: {
+    advId?: number;
+    advName?: string;
+    clickUrl?: string;
+    imageUrl?: string;
+    impressionUrl?: string;
+    price?: number;
+    priceCurrency?: string;
+    salePrice?: number;
+    term?: string;
+  },
+  utils: { html: TemplateHtml },
+) => string;

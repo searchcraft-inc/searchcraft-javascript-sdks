@@ -1,4 +1,4 @@
-import type { CustomAdTemplate } from '../sdk-types';
+import type { ADMAdTemplate, CustomAdTemplate } from '../sdk-types';
 
 /**
  * The SearchcraftConfig object is used to initialize Searchcraft in your application.
@@ -63,6 +63,11 @@ export interface SearchcraftConfig {
    * The amount of debounce delay to add before calling the ad_container_rendered event
    */
   adContainerRenderedDebounceDelay?: number;
+
+  /**
+   * A callback function responsible for rendering the ADM ad containers.
+   */
+  admAdTemplate?: ADMAdTemplate;
 
   /**
    * The number of custom ads to render at the start of the search results page.

@@ -1,72 +1,22 @@
 @use "../typography.scss";
 
-.searchcraft-adm-ad {
+.searchcraft-ad {
   @include typography.font-base();
-
-  border-bottom: 1px solid var(--sc-border-neutral);
-  padding: 12px 0;
 }
 
-searchcraft-ad:last-child .searchcraft-adm-ad {
-  border-bottom: none;
-}
-
-.searchcraft-adm-ad-link {
-  align-items: flex-start;
-  background-color: rgb(from blue r g b / 5%);
-  color: var(--sc-content-neutral-primary);
-  display: flex;
-  gap: 24px;
-  padding: 12px;
-  text-decoration: none;
-
-  &:focus,
-  &:active {
-    background-color: var(--sc-surface-neutral-primary-active);
-  }
-
-  &:hover {
-    background-color: var(--sc-surface-neutral-primary-hover);
-  }
-}
-
-.searchcraft-adm-ad-image-wrapper {
-  align-items: center;
-  aspect-ratio: 16 / 9;
-  display: flex;
-  flex-shrink: 0;
-  justify-content: center;
-  width: 160px;
-}
-
-.searchcraft-adm-ad-image {
-  height: 100%;
-  object-fit: var(--sc-popover-list-item-image-fit);
-  width: 100%;
-}
-
-.searchcraft-adm-ad-content {
+.searchcraft-ad-no-template {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
-  gap: 4px;
+  font-size: 0.875rem;
+
+  & > p {
+    margin: 0;
+  }
+}
+
+.searchcraft-adm-ad {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-}
-
-.searchcraft-adm-ad-content-title,
-.searchcraft-adm-ad-content-subtitle {
-  display: -webkit-box;
-  line-clamp: 2;
-  margin: 0;
-  overflow: hidden;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-}
-
-.searchcraft-adm-ad-content-title {
-  @include typography.heading-5();
-}
-
-.searchcraft-adm-ad-content-subtitle {
-  @include typography.body();
+  gap: 16px;
 }
