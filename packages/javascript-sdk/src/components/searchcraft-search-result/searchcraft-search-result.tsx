@@ -42,14 +42,14 @@ export class SearchcraftSearchResult {
           html,
         });
       } catch (error) {
-        console.error(`Invalid search result template: ${error}`);
+        console.error('Invalid search result template:', error);
       }
     }
   }
 
   handleResultContainerClick = (event: MouseEvent) => {
     const state = searchcraftStore.getState();
-    const searchcraft = state.getSearchcraftInstance();
+    const core = state.getSearchcraftCore();
 
     if (!event.target) {
       return;
@@ -61,8 +61,8 @@ export class SearchcraftSearchResult {
     if (
       !link ||
       !this.hostElement?.contains(link) ||
-      !searchcraft ||
-      !searchcraft.measureClient
+      !core ||
+      !core.measureClient
     ) {
       return;
     }
@@ -71,7 +71,7 @@ export class SearchcraftSearchResult {
     const search_term = state.searchTerm;
     const number_of_documents = state.searchClientResponseItems.length || 0;
 
-    searchcraft.measureClient.sendMeasureEvent('document_clicked', {
+    core.measureClient.sendMeasureEvent('document_clicked', {
       document_position,
       number_of_documents,
       search_term,

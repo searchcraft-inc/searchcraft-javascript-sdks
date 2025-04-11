@@ -2,8 +2,9 @@ import type {
   AdClientResponseItem,
   SearchcraftConfig,
   SearchcraftResponse,
-  SearchParams,
+  SearchClientRequestProperties,
 } from '../../types';
+
 import { AdClient } from './AdClient';
 
 const AD_CALL_AFTER_FETCH_DELAY = 1000;
@@ -16,12 +17,12 @@ export class NativoClient extends AdClient {
     this.addScriptTagToDocument();
   }
 
-  async onQuerySubmitted(_searchParams: SearchParams) {
+  async onQuerySubmitted(_properties: SearchClientRequestProperties) {
     this.addScriptTagToDocument();
   }
 
   async onQueryFetched(
-    _searchParams: SearchParams,
+    _properties: SearchClientRequestProperties,
     response: SearchcraftResponse,
   ) {
     if ((response.data.hits?.length || 0) === 0) {
@@ -53,8 +54,8 @@ export class NativoClient extends AdClient {
     }, delay);
   }
 
-  async getAdsForSearchParams(
-    _params: SearchParams,
+  async getAds(
+    _properties: SearchClientRequestProperties,
   ): Promise<AdClientResponseItem[]> {
     return [];
   }

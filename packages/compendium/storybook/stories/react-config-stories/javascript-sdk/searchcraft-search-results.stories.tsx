@@ -18,7 +18,6 @@ export const Default: StoryObj<Components.SearchcraftSearchResults> = {
   decorators: [
     (Story) => {
       useEffect(() => {
-        // import '@searchcraft/javascript-sdk/themes/hologram.css';
         new Searchcraft({
           readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
           endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
@@ -31,6 +30,14 @@ export const Default: StoryObj<Components.SearchcraftSearchResults> = {
 
         if (searchResults) {
           searchResults.template = searchResultTemplate;
+          searchResults.initialQuery = JSON.stringify({
+            order_by: 'date_published',
+            query: {
+              exact: {
+                ctx: 'section_name:"Columns" OR section_name:"Prep" OR section_name:"Local" OR section_name:"Minnesota"',
+              },
+            },
+          });
         }
       }, []);
 

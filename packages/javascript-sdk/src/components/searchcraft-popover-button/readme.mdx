@@ -35,7 +35,7 @@ import { SearchcraftPopoverButton } from "@searchcraft/vue-sdk";
 // index.js
 const popoverButton = document.querySelector('searchcraft-popover-button');
 
-popoverButton.template = (isPopoverVisible, { html }) => html`
+popoverButton.template = ({ isPopoverVisible }, { html }) => html`
   <span>Click me</span>
 `;
 ```
@@ -43,7 +43,7 @@ popoverButton.template = (isPopoverVisible, { html }) => html`
 <TabItem label="React">
 ```jsx
 <SearchcraftPopoverButton
-  template={(isPopoverVisible, { html }) => html`
+  template={({ isPopoverVisible }, { html }) => html`
     <span>Click me</span>
   `}
 >
@@ -54,7 +54,7 @@ popoverButton.template = (isPopoverVisible, { html }) => html`
 <TabItem label="Vue">
 ```jsx
 <SearchcraftPopoverButton
-  :template={(isPopoverVisible, { html }) => html`
+  :template={({ isPopoverVisible }, { html }) => html`
     <span>Click me</span>
   `}
 >
@@ -69,6 +69,6 @@ popoverButton.template = (isPopoverVisible, { html }) => html`
 
 | Property | Attribute | Description | Type | Default |
 | -------- | --------- | ----------- | ---- | ------- |
-| `template` | -- | A callback function responsible for rendering the button contents. | `((data: boolean, utils: { html: TemplateHtml; }) => string) \| undefined` | `undefined` |
+| `template` | -- | A callback function responsible for rendering the button contents. | `((data: { isPopoverVisible: boolean; }, utils: { html: TemplateHtml; }) => string) \| undefined` | `undefined` |
 | `type` | `type` | The type of popover button to render. | `"skeuomorphic" \| undefined` | `undefined` |
 

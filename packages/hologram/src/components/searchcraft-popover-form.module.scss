@@ -55,13 +55,15 @@
       0 1px 1px rgb(from var(--sc-content-neutral-primary) r g b / 10%) inset,
       0 2px 2px rgb(from var(--sc-content-neutral-primary) r g b / 5%) inset,
       0 4px 4px rgb(from var(--sc-content-neutral-primary) r g b / 5%) inset;
+    width: 0;
   }
 }
 
-.searchcraft-popover-form-input-cancel-button {
+.searchcraft-popover-form-cancel-button {
   background: none;
   border: none;
   cursor: pointer;
+  font-size: 14px;
 }
 
 /**
@@ -71,6 +73,15 @@
 .searchcraft-popover-form-modal-input,
 .searchcraft-popover-form-fullscreen-input {
   padding: 24px;
+}
+
+.searchcraft-popover-form-modal-popover-list-view,
+.searchcraft-popover-form-fullscreen-popover-list-view {
+  flex-grow: 1;
+  flex-shrink: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 0 24px;
 }
 
 /**
@@ -128,13 +139,6 @@
   position: fixed;
   z-index: 1000;
 
-  & searchcraft-popover-list-view {
-    flex-shrink: 1;
-    min-height: 0;
-    overflow: auto;
-    padding: 0 24px;
-  }
-
   & .searchcraft-input-form-input,
   & .searchcraft-popover-list-item-link,
   & .searchcraft-adm-ad-link {
@@ -155,7 +159,6 @@
 
 .searchcraft-popover-form-modal-wrapper {
   background-color: var(--sc-surface-neutral-primary);
-  border-radius: var(--sc-border-radius-2xl);
   box-shadow:
     1px 2px rgb(from var(--sc-content-neutral-primary) r g b / 7%),
     0 2px 4px rgb(from var(--sc-content-neutral-primary) r g b / 7%),
@@ -173,6 +176,7 @@
   z-index: 1001;
 
   @media (min-width: breakpoints.$breakpoint-sm) {
+    border-radius: var(--sc-border-radius-2xl);
     inset: 0;
     margin-top: 100px;
     max-height: var(--sc-popover-list-view-height);
@@ -181,9 +185,13 @@
   }
 }
 
-.searchcraft-popover-form-modal-input-cancel-button {
+.searchcraft-popover-form-modal-cancel-button {
   @include appearance.offset-border-radius(--sc-border-radius-2xl, -20px);
-  padding: 8px 12px;
+  padding: 8px;
+
+  @media (min-width: breakpoints.$breakpoint-sm) {
+    padding: 8px 12px;
+  }
 }
 
 /**
@@ -204,6 +212,11 @@
   }
 }
 
-.searchcraft-popover-form-fullscreen-input-cancel-button {
+.searchcraft-popover-form-fullscreen-cancel-button {
   border-radius: var(--sc-border-radius-lg);
+  padding: 8px;
+
+  @media (min-width: breakpoints.$breakpoint-sm) {
+    padding: 8px 12px;
+  }
 }

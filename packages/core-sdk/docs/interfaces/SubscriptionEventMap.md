@@ -20,6 +20,12 @@
 
 ***
 
+### initialized
+
+> **initialized**: [`InitializedEvent`](/reference/sdk/core/interfaces/InitializedEvent.md)
+
+***
+
 ### input\_cleared
 
 > **input\_cleared**: [`InputClearedEvent`](/reference/sdk/core/interfaces/InputClearedEvent.md)

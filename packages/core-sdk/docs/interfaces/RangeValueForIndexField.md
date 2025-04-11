@@ -4,15 +4,15 @@
 
 [@searchcraft/core](/reference/sdk/core/globals.md) / RangeValueForIndexField
 
-# Type Alias: RangeValueForIndexField
+# Interface: RangeValueForIndexField
 
-> **RangeValueForIndexField**: `object`
-
-## Type declaration
+## Properties
 
 ### fieldName
 
 > **fieldName**: `string`
+
+***
 
 ### value
 

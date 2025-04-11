@@ -4,15 +4,15 @@
 
 [@searchcraft/core](/reference/sdk/core/globals.md) / FacetPathsForIndexField
 
-# Type Alias: FacetPathsForIndexField
+# Interface: FacetPathsForIndexField
 
-> **FacetPathsForIndexField**: `object`
-
-## Type declaration
+## Properties
 
 ### fieldName
 
 > **fieldName**: `string`
+
+***
 
 ### value
 

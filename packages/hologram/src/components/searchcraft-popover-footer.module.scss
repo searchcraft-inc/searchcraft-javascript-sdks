@@ -5,15 +5,19 @@
 .searchcraft-popover-footer {
   @include typography.font-base();
   background-color: var(--sc-surface-neutral-secondary);
-  display: flex;
-  gap: 8px;
-  justify-content: space-between;
-  line-height: 1;
-  padding: 20px 32px;
   box-shadow:
     0 1px 1px rgb(from var(--sc-content-neutral-primary) r g b / 10%) inset,
     0 2px 2px rgb(from var(--sc-content-neutral-primary) r g b / 5%) inset,
     0 4px 4px rgb(from var(--sc-content-neutral-primary) r g b / 5%) inset;
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  line-height: 1;
+  padding: 20px 24px;
+
+  @media (min-width: breakpoints.$breakpoint-sm) {
+    padding: 20px 32px;
+  }
 }
 
 .searchcraft-popover-footer-results-info {

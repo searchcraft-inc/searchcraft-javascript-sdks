@@ -3,7 +3,10 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { Searchcraft, type Components } from '@searchcraft/javascript-sdk';
 
-import { popoverResultMappings } from '@common/index.js';
+import {
+  popoverResultMappings,
+  popoverResultMappingsRunegard,
+} from '@common/index.js';
 
 import '@common/searchcraft-popover-form/popover-form-with-content.scss';
 
@@ -140,14 +143,14 @@ export const Fullscreen: StoryObj<Components.SearchcraftPopoverForm> = {
     (Story) => {
       useEffect(() => {
         new Searchcraft({
-          readKey: import.meta.env.VITE_KOBOL_READ_KEY,
-          endpointURL: import.meta.env.VITE_KOBOL_ENDPOINT_URL,
-          index: [import.meta.env.VITE_KOBOL_INDEX],
+          readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
+          endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
+          index: [import.meta.env.VITE_RUNEGARD_INDEX],
         });
         const popoverForm = document.querySelector('searchcraft-popover-form');
 
         if (popoverForm) {
-          popoverForm.popoverResultMappings = popoverResultMappings;
+          popoverForm.popoverResultMappings = popoverResultMappingsRunegard;
         }
       }, []);
 
@@ -159,7 +162,7 @@ export const Fullscreen: StoryObj<Components.SearchcraftPopoverForm> = {
       <>
         <div className='searchcraft-popover-form-with-content'>
           <div style={{ marginBottom: 20 }}>
-            <p>Story Note: This story uses the Bazaario env vars</p>
+            <p>Story Note: This story uses the Echostream env vars</p>
           </div>
           <searchcraft-popover-button />
           <searchcraft-popover-form

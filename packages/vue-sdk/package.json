@@ -1,6 +1,6 @@
 {
   "name": "@searchcraft/vue-sdk",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "private": false,
   "author": "Searchcraft Inc.",
   "description": "Searchcraft Vue SDK.",
@@ -37,10 +37,7 @@
     },
     "./components": "./dist/components/index.d.ts",
     "./plugin": "./dist/plugin.d.ts",
-    "./themes/*.css": {
-      "import": "./dist/themes/*.css",
-      "require": "./dist/themes/*.css"
-    }
+    "./themes/*.css": "./dist/themes/*.css"
   },
   "files": [
     "dist"
@@ -49,7 +46,7 @@
     "vue": "^3.5.13"
   },
   "devDependencies": {
-    "@searchcraft/javascript-sdk": "^0.10.1",
+    "@searchcraft/javascript-sdk": "^0.10.2",
     "@tsconfig/node22": "^22.0.0",
     "@types/node": "^22.10.7",
     "@vitejs/plugin-vue": "^5.2.1",

@@ -5,10 +5,7 @@ import {
   LogLevel,
   type FacetPathsForIndexField,
   type RangeValueForIndexField,
-  type SearchcraftResponse,
-  type SearchClientResponseItem,
   type AdClientResponseItem,
-  type SearchcraftCore,
 } from '@searchcraft/core';
 import type {
   SearchcraftState,
@@ -23,10 +20,12 @@ const initialSearchcraftStateValues: SearchcraftStateValues = {
   hotkeyModifier: 'meta',
   logger: undefined,
   facetPathsForIndexFields: {},
+  initialQuery: '',
+  initialSearchClientResponseItems: [],
   isPopoverVisible: false,
   isSearchInProgress: false,
-  searchTerm: '',
   rangeValueForIndexFields: {},
+  searchTerm: '',
   searchMode: 'fuzzy',
   searchClientResponseItems: [],
   searchResponseTimeTaken: undefined,
@@ -35,42 +34,51 @@ const initialSearchcraftStateValues: SearchcraftStateValues = {
   searchResultsPerPage: 20,
   searchResultsPage: 1,
   sortType: 'asc',
+  // Callbacks
+  afterInit: () => {},
 };
 
-const searchcraftStore = createStore<SearchcraftState>((set, get) => {
+const searchcraftStore = createStore<SearchcraftState>((_set, get) => {
   const functions: SearchcraftStateFunctions = {
-    addFacetPathsForIndexField: (data: FacetPathsForIndexField) =>
-      set((state) => ({
+    set: (state) => {
+      _set(state);
+      return get();
+    },
+    addFacetPathsForIndexField: (facetPaths: FacetPathsForIndexField) =>
+      functions.set((state) => ({
         facetPathsForIndexFields: {
           ...state.facetPathsForIndexFields,
-          [data.fieldName]: data,
+          [facetPaths.fieldName]: facetPaths,
         },
       })),
-    addRangeValueForIndexField: (data: RangeValueForIndexField) =>
-      set((state) => ({
+    addRangeValueForIndexField: (rangeValue: RangeValueForIndexField) =>
+      functions.set((state) => ({
         rangeValueForIndexFields: {
           ...state.rangeValueForIndexFields,
-          [data.fieldName]: data,
+          [rangeValue.fieldName]: rangeValue,
         },
       })),
-    getSearchcraftInstance: () => {
+    getSearchcraftCore: () => {
       const { core } = get();
       return core;
     },
-    initialize: (searchcraftInstance, debug = false) => {
-      const core = searchcraftInstance as SearchcraftCore;
+    init: (core, debug = false) => {
       const logger = debug
         ? new Logger({ logLevel: LogLevel.DEBUG })
         : undefined;
-
-      set({
+      const state = functions.set({
         core,
         logger,
-        searchResultsPerPage: core.config.searchResultsPerPage || 20,
+        searchResultsPerPage: core?.config.searchResultsPerPage || 20,
+      });
+      core?.subscribe('initialized', () => {
+        if (state.afterInit) {
+          state.afterInit(state);
+        }
       });
     },
     removeFacetPathsForIndexField: (fieldName: string) =>
-      set((state) => {
+      functions.set((state) => {
         const currentPaths = state.facetPathsForIndexFields;
         delete currentPaths[fieldName];
         return {
@@ -80,7 +88,7 @@ const searchcraftStore = createStore<SearchcraftState>((set, get) => {
         };
       }),
     removeRangeValueForIndexField: (fieldName: string) =>
-      set((state) => {
+      functions.set((state) => {
         const currentValues = state.rangeValueForIndexFields;
         delete currentValues[fieldName];
         return {
@@ -90,7 +98,7 @@ const searchcraftStore = createStore<SearchcraftState>((set, get) => {
         };
       }),
     resetFacetPaths: () => {
-      set({
+      functions.set({
         facetPathsForIndexFields: {},
       });
     },
@@ -110,7 +118,7 @@ const searchcraftStore = createStore<SearchcraftState>((set, get) => {
           LogLevel.INFO,
           'No search request was made: search term was empty.',
         );
-        set({
+        functions.set({
           searchClientResponseItems: [],
           searchResultsCount: 0,
           searchResultsPage: 1,
@@ -119,49 +127,8 @@ const searchcraftStore = createStore<SearchcraftState>((set, get) => {
         return;
       }
 
-      set({ isSearchInProgress: true });
-
-      const handleSearchcraftResponse = (
-        response: SearchcraftResponse,
-        items: SearchClientResponseItem[],
-      ) => {
-        const facetsFromResponse = response.data.facets;
-
-        set((state) => {
-          return {
-            isSearchInProgress: false,
-            searchClientResponseItems: items,
-            searchResponseTimeTaken: response.data.time_taken || 0,
-            searchResultsPage:
-              // reset to first page when response count changes
-              response.data.count === state.searchResultsCount
-                ? state.searchResultsPage
-                : 1,
-            searchResultsCount: response.data.count || 0,
-          };
-        });
-
-        if (facetsFromResponse) {
-          set({ searchResponseFacetPrime: facetsFromResponse });
-        }
-
-        state.logger?.log(
-          LogLevel.DEBUG,
-          `Search results: ${JSON.stringify(items)}`,
-        );
-        state.logger?.log(
-          LogLevel.DEBUG,
-          `Facets from response: ${JSON.stringify(facetsFromResponse)}`,
-        );
-      };
-
-      const handleAdResponse = (
-        adClientResponseItems: AdClientResponseItem[],
-      ) => {
-        set({ adClientResponseItems });
-      };
-
-      state.core.getItems(
+      functions.set({ isSearchInProgress: true });
+      state.core.getResponseItems(
         {
           searchTerm: state.searchTerm,
           mode: state.searchMode,
@@ -173,17 +140,80 @@ const searchcraftStore = createStore<SearchcraftState>((set, get) => {
             : 0,
           limit: state.searchResultsPerPage,
         },
-        handleSearchcraftResponse,
-        handleAdResponse,
+        functions.setSearchClientResponseItemsFromResponse,
+        functions.setAdClientResponseItems,
       );
     },
-    setPopoverVisibility: (isVisible) => {
-      set({
-        isPopoverVisible: isVisible,
+    setAdClientResponseItems: (items: AdClientResponseItem[]) =>
+      functions.set({ adClientResponseItems: items }),
+    setSearchClientResponseItemsFromResponse: (response, items) => {
+      const { facets, count = 0, time_taken = 0 } = response.data;
+      const state = functions.set((state) => {
+        return {
+          isSearchInProgress: false,
+          searchClientResponseItems: items,
+          searchResponseTimeTaken: time_taken,
+          searchResultsPage:
+            // Reset to first page when response count changes
+            count === state.searchResultsCount ? state.searchResultsPage : 1,
+          searchResultsCount: count,
+          ...(facets && { searchResponseFacetPrime: facets }),
+        };
       });
+
+      state.logger?.log(
+        LogLevel.DEBUG,
+        `Search results: ${JSON.stringify(items)}`,
+      );
+      state.logger?.log(
+        LogLevel.DEBUG,
+        `Facets from response: ${JSON.stringify(facets)}`,
+      );
     },
-    setSearchMode: (mode) => set({ searchMode: mode }),
-    setSortType: (type) => set({ sortType: type }),
+    setInitialSearchClientResponseItemsFromResponse: (response, items) => {
+      const state = get();
+      const { count = 0, time_taken = 0 } = response.data;
+      functions.set((state) => {
+        return {
+          isSearchInProgress: false,
+          initialSearchClientResponseItems: items,
+          searchResponseTimeTaken: time_taken,
+          searchResultsPage:
+            // Reset to first page when response count changes
+            count === state.searchResultsCount ? state.searchResultsPage : 1,
+          searchResultsCount: count,
+        };
+      });
+
+      state.logger?.log(
+        LogLevel.DEBUG,
+        `Search results: ${JSON.stringify(items)}`,
+      );
+    },
+    setInitialQuery: async (query: string) => {
+      const state = functions.set({ initialQuery: query });
+
+      state.logger?.log(
+        LogLevel.INFO,
+        `Starting search with query: "${state.initialQuery}"`,
+      );
+
+      if (!state.core) {
+        throw new Error('Searchcraft instance is not initialized.');
+      }
+
+      await state.core.getResponseItems(
+        query,
+        functions.setInitialSearchClientResponseItemsFromResponse,
+        functions.setAdClientResponseItems,
+      );
+    },
+    setPopoverVisibility: (isVisible) =>
+      functions.set({
+        isPopoverVisible: isVisible,
+      }),
+    setSearchMode: (mode) => functions.set({ searchMode: mode }),
+    setSortType: (type) => functions.set({ sortType: type }),
     setSearchTerm: (searchTerm) => {
       const { core } = get();
 
@@ -193,7 +223,7 @@ const searchcraftStore = createStore<SearchcraftState>((set, get) => {
       /**
        * When a new searchTerm is set, also reset the sort type, search mode, and facet paths.
        */
-      set({
+      functions.set({
         searchTerm,
         facetPathsForIndexFields: {},
         ...(searchTerm.trim().length === 0 && {
@@ -203,19 +233,21 @@ const searchcraftStore = createStore<SearchcraftState>((set, get) => {
       });
     },
     setSearchClientResponseItems: (items) =>
-      set({ searchClientResponseItems: items }),
+      functions.set({ searchClientResponseItems: items }),
+    setSearchResultsCount: (count) =>
+      functions.set({ searchResultsCount: count }),
     setSearchResultsPage: async (page) => {
-      set({ searchResultsPage: page });
+      functions.set({ searchResultsPage: page });
       await functions.search();
     },
     setSearchResultsPerPage: async (perPage) => {
-      set({ searchResultsPerPage: perPage });
+      functions.set({ searchResultsPerPage: perPage });
       await functions.search();
     },
     setHotKeyAndHotKeyModifier: (hotkey, hotkeyModifier) => {
       const { hotkey: initialHotkey, hotkeyModifier: initialHotkeyModifier } =
         initialSearchcraftStateValues;
-      set({
+      functions.set({
         hotkey: hotkey || initialHotkey,
         hotkeyModifier: hotkeyModifier || initialHotkeyModifier,
       });

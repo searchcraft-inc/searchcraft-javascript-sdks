@@ -53,6 +53,7 @@ export const SearchcraftResultsInfo = /*@__PURE__*/ defineContainer<JSX.Searchcr
 
 
 export const SearchcraftSearchResults = /*@__PURE__*/ defineContainer<JSX.SearchcraftSearchResults>('searchcraft-search-results', () => {}, [
+  'initialQuery',
   'template'
 ]);
 

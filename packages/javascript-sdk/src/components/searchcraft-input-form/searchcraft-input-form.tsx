@@ -86,17 +86,14 @@ export class SearchcraftInputForm {
 
   @Prop() core?: SearchcraftCore;
 
-  private searchStore = searchcraftStore.getState();
+  private searchcraftStore = searchcraftStore.getState();
+  private unsubscribe: () => void = () => {};
 
   init() {
     if (this.core) {
-      this.searchStore.initialize(this.core);
+      this.searchcraftStore.init(this.core);
       this.inputInit?.emit();
     }
-  }
-
-  connectedCallback() {
-    this.init();
   }
 
   @Watch('core')
@@ -104,7 +101,23 @@ export class SearchcraftInputForm {
     this.init();
   }
 
-  handleOnInput = (event: Event) => {
+  connectedCallback() {
+    this.init();
+  }
+
+  componentDidLoad() {
+    this.unsubscribe = searchcraftStore.subscribe((state) => {
+      this.searchTerm = state.searchTerm;
+      this.inputValue = state.searchTerm;
+    });
+  }
+
+  disconnectedCallback() {
+    this.handleReset();
+    this.unsubscribe?.();
+  }
+
+  handleInput = (event: Event) => {
     const input = event.target as HTMLInputElement;
     this.inputValue = input.value;
 
@@ -115,34 +128,36 @@ export class SearchcraftInputForm {
     this.performSearch(input.value);
   };
 
-  private performSearch = async (value: string) => {
-    if (value === searchcraftStore.getState().searchTerm) {
+  private performSearch = async (searchTerm: string) => {
+    if (searchTerm === this.searchTerm) {
       return;
     }
 
-    this.searchTerm = value.trim();
+    this.searchcraftStore.setSearchTerm(searchTerm.trim());
     this.error = false;
-    this.searchStore.setSearchTerm(this.searchTerm);
 
     try {
-      await this.searchStore.search();
+      await this.searchcraftStore.search();
     } catch (error) {
-      console.log(error);
+      console.error(`Search for ${searchTerm} failed:`, error);
       this.error = true;
     }
   };
 
-  handleClearInput = () => {
-    this.inputValue = '';
-    this.searchTerm = '';
-    this.searchStore.setSearchTerm('');
-    this.searchStore.setSearchClientResponseItems([]);
+  private handleReset = () => {
+    this.searchcraftStore.setSearchResultsCount(0);
+    this.searchcraftStore.setSearchTerm('');
+    this.searchcraftStore.setSearchClientResponseItems([]);
     this.error = false;
+  };
+
+  handleClearInput = () => {
+    this.handleReset();
   };
 
   handleFormSubmit = async (event: Event) => {
     event.preventDefault();
-    await this.performSearch(this.searchTerm);
+    await this.performSearch(this.inputValue);
   };
 
   render() {
@@ -159,7 +174,6 @@ export class SearchcraftInputForm {
     const inputGridStyles = {
       gap: shouldHaveVerticalGap ? '4px 8px' : '0px 8px',
     };
-
     return (
       <form class='searchcraft-input-form' onSubmit={this.handleFormSubmit}>
         <div class={inputGridClassNames} style={inputGridStyles}>
@@ -188,7 +202,7 @@ export class SearchcraftInputForm {
               onFocus={() => this.inputFocus?.emit()}
               onBlur={() => this.inputBlur?.emit()}
               onInput={(event) => {
-                this.handleOnInput(event);
+                this.handleInput(event);
               }}
               placeholder={this.placeholderValue}
               type='text'

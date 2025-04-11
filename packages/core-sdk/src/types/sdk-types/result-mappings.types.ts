@@ -17,7 +17,7 @@ export type SearchResultFieldName = {
   numberFormatLocale?: string;
   /**
    * If it's a number, the number format to apply.
-   * reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat
+   * Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat
    */
   numberFormatOptions?: Intl.NumberFormatOptions;
   /**
@@ -25,9 +25,14 @@ export type SearchResultFieldName = {
    */
   numberScale?: number;
   /**
-   * TODO: Implement DateFormatOptions, for date formatting
+   * The locale to use when formatting dataType: `date`.
    */
-  dateFormatOptions?: unknown;
+  dateFormatLocale?: string;
+  /**
+   * If it's a date, the date format to apply.
+   * Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
+   */
+  dateFormatOptions?: Intl.DateTimeFormatOptions;
 };
 
 /**

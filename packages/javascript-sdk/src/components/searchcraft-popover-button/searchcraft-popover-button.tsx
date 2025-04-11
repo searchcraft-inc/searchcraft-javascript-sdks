@@ -31,7 +31,7 @@ import { html } from '@utils';
  * // index.js
  * const popoverButton = document.querySelector('searchcraft-popover-button');
  *
- * popoverButton.template = (isPopoverVisible, { html }) => html`
+ * popoverButton.template = ({ isPopoverVisible }, { html }) => html`
  *   <span>Click me</span>
  * `;
  * ```
@@ -39,7 +39,7 @@ import { html } from '@utils';
  * @react-example
  * ```jsx
  * <SearchcraftPopoverButton
- *   template={(isPopoverVisible, { html }) => html`
+ *   template={({ isPopoverVisible }, { html }) => html`
  *     <span>Click me</span>
  *   `}
  * >
@@ -50,7 +50,7 @@ import { html } from '@utils';
  * @vue-example
  * ```jsx
  * <SearchcraftPopoverButton
- *   :template={(isPopoverVisible, { html }) => html`
+ *   :template={({ isPopoverVisible }, { html }) => html`
  *     <span>Click me</span>
  *   `}
  * >
@@ -263,11 +263,19 @@ export class SearchcraftPopoverButton {
     return (
       <button
         class={`searchcraft-popover-button ${this.type ? ` searchcraft-popover-button-${this.type}` : ''}`}
+        innerHTML={
+          typeof this.template !== 'undefined'
+            ? this.template(
+                { isPopoverVisible: this.isPopoverVisible },
+                { html },
+              )
+            : undefined
+        }
         onClick={this.handleOnClick.bind(this)}
         type='button'
       >
         {typeof this.template !== 'undefined'
-          ? this.template(this.isPopoverVisible, { html })
+          ? undefined
           : this.type
             ? this.renderSlot()
             : 'Open Popover'}

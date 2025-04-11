@@ -12,6 +12,8 @@
 
 ### data
 
+#### isPopoverVisible
+
 `boolean`
 
 ### utils

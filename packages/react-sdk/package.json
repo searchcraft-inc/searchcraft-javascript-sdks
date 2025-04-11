@@ -2,7 +2,7 @@
   "name": "@searchcraft/react-sdk",
   "private": false,
   "author": "Searchcraft Inc.",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "description": "Searchcraft React SDK.",
   "type": "module",
   "license": "Apache-2.0",
@@ -39,13 +39,10 @@
       "import": "./dist/server/index.js",
       "types": "./dist/server/index.d.ts"
     },
-    "./themes/*.css": {
-      "import": "./dist/client/themes/*.css",
-      "require": "./dist/client/themes/*.css"
-    }
+    "./themes/*.css": "./dist/client/themes/*.css"
   },
   "dependencies": {
-    "@searchcraft/javascript-sdk": "^0.10.1",
+    "@searchcraft/javascript-sdk": "^0.10.2",
     "classnames": "^2.3.2"
   },
   "peerDependencies": {
