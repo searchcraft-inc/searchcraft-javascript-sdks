@@ -25,3 +25,9 @@ Represents an entry in the search index returned as part of a search result.
 ### score?
 
 > `optional` **score**: `number`
+
+***
+
+### source\_index?
+
+> `optional` **source\_index**: `string`

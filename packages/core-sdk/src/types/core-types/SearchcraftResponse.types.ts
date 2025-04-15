@@ -38,6 +38,7 @@ export interface SearchIndexHit {
   doc?: SearchDocument; // The actual document data (optional)
   document_id?: string; // Unique identifier for the document in the index (optional)
   score?: number; // Relevance score of the document in the search (optional)
+  source_index?: string; // The source index, used for federated searches
 }
 
 /**
