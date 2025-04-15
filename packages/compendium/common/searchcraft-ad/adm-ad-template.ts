@@ -14,16 +14,16 @@ const getCurrencySymbol = (currency: string) =>
     .trim();
 
 export const admAdTemplate: ADMAdTemplate = (data, { html }) => html`
- <a href="${data.clickUrl}" target="_blank" rel="noreferrer">
+ <a href="${data.click_url}" target="_blank" rel="noreferrer">
     <div class="ad">
       <h2 class="ad-title">${data.term}</h2>
       <footer class="ad-footer">
-        <span class="ad-price">${data.priceCurrency ? getCurrencySymbol(data.priceCurrency) : ''}${data.price}</span>
-        <span class="ad-sale-price">${data.salePrice}</span>
+        <span class="ad-price">${data.price_currency ? getCurrencySymbol(data.price_currency) : ''}${data.price}</span>
+        <span class="ad-sale-price">${data.sale_price}</span>
       </footer>
     </div>
     <div class="ad-image">
-      <img src="${data.imageUrl}" alt="${data.term}" />
+      <img src="${data.image_url}" alt="${data.term}" />
     </div>
   </a>
 `;

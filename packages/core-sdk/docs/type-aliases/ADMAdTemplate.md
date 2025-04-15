@@ -12,41 +12,7 @@
 
 ### data
 
-#### advId
-
-`number`
-
-#### advName
-
-`string`
-
-#### clickUrl
-
-`string`
-
-#### imageUrl
-
-`string`
-
-#### impressionUrl
-
-`string`
-
-#### price
-
-`number`
-
-#### priceCurrency
-
-`string`
-
-#### salePrice
-
-`number`
-
-#### term
-
-`string`
+[`ADMAd`](/reference/sdk/core/interfaces/ADMAd.md)
 
 ### utils
 

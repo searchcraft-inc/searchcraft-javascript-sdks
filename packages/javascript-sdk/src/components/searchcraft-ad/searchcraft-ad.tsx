@@ -92,19 +92,7 @@ export class SearchcraftPopoverListItemAd {
     let templateHtml = '<p>Ad Marketplace Ad Placeholder</p>';
 
     if (this.core?.config?.admAdTemplate) {
-      templateHtml = this.core?.config?.admAdTemplate(
-        {
-          clickUrl: item.admAd.click_url,
-          imageUrl: item.admAd.image_url,
-          advId: item.admAd.adv_id,
-          advName: item.admAd.adv_name,
-          impressionUrl: item.admAd.impression_url,
-          priceCurrency: item.admAd.price_currency,
-          salePrice: item.admAd.sale_price,
-          ...item.admAd,
-        },
-        { html },
-      );
+      templateHtml = this.core?.config?.admAdTemplate(item.admAd, { html });
     }
 
     return (
