@@ -6,7 +6,7 @@ export type TemplateHtml = (
 export type SearchResultTemplate<T> = (
   data: T,
   index: number,
-  utils: { html: TemplateHtml },
+  utils: { html: TemplateHtml; source_index?: string },
 ) => string;
 
 // biome-ignore lint/suspicious/noExplicitAny: Index fields object need to support arbitrary key/value pairs.

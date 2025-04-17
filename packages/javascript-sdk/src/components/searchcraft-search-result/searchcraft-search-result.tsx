@@ -38,13 +38,10 @@ export class SearchcraftSearchResult {
   connectedCallback() {
     if (this.item) {
       try {
-        this.templateHtml = this.template?.(
-          { ...this.item.document, source_index: this.item.source_index },
-          this.index,
-          {
-            html,
-          },
-        );
+        this.templateHtml = this.template?.(this.item.document, this.index, {
+          html,
+          source_index: this.item.source_index,
+        });
       } catch (error) {
         console.error('Invalid search result template:', error);
       }
