@@ -4,4 +4,7 @@ export {
   popoverResultMappings,
   popoverResultMappingsRunegard,
 } from './searchcraft-popover-form/popover-result-mappings';
-export { admAdTemplate } from './searchcraft-ad/adm-ad-template';
+export {
+  admAdTemplate,
+  admAdTemplatePopover,
+} from './searchcraft-ad/adm-ad-template';

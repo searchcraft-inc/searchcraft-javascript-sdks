@@ -27,3 +27,24 @@ export const admAdTemplate: ADMAdTemplate = (data, { html }) => html`
     </div>
   </a>
 `;
+
+export const admAdTemplatePopover: ADMAdTemplate = (data, { html }) => html`
+ <div class="searchcraft-popover-list-item">
+    <a
+      class="searchcraft-popover-list-item-link"
+      href="${data.click_url}"
+    >
+      <div class="searchcraft-popover-list-item-image-wrapper">
+        <img class="searchcraft-popover-list-item-image" src="${data.image_url}" alt="${data.term}" />
+      </div>
+      <div class="searchcraft-popover-list-item-content">
+        <p class="searchcraft-popover-list-item-content-title">
+          ${data.term}
+        </p>
+        <p class="searchcraft-popover-list-item-content-subtitle">
+          ${data.price_currency ? getCurrencySymbol(data.price_currency) : ''}${data.price}
+        </p>
+      </div>
+    </a>
+  </div>
+`;
