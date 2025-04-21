@@ -55,6 +55,7 @@
 
 ## Type Aliases
 
+- [ADMAdTemplate](/reference/sdk/core/type-aliases/ADMAdTemplate.md)
 - [CustomAdTemplate](/reference/sdk/core/type-aliases/CustomAdTemplate.md)
 - [FacetPrime](/reference/sdk/core/type-aliases/FacetPrime.md)
 - [FacetRoot](/reference/sdk/core/type-aliases/FacetRoot.md)

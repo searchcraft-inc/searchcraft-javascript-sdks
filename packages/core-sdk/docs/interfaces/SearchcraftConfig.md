@@ -18,6 +18,14 @@ The amount of debounce delay to add before calling the ad_container_rendered eve
 
 ***
 
+### admAdTemplate?
+
+> `optional` **admAdTemplate**: [`ADMAdTemplate`](/reference/sdk/core/type-aliases/ADMAdTemplate.md)
+
+A callback function responsible for rendering the ADM ad containers.
+
+***
+
 ### admProductAdQuantity?
 
 > `optional` **admProductAdQuantity**: `number`

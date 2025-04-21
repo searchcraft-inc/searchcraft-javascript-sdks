@@ -1,7 +1,7 @@
 @use "../typography.scss";
 
 .searchcraft-search-result {
-  @include typography.body();
+  @include typography.font-base();
 }
 
 .searchcraft-search-result-no-template {

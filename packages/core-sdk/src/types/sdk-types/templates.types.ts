@@ -1,3 +1,5 @@
+import type { ADMAd } from '..';
+
 export type TemplateHtml = (
   strings: TemplateStringsArray,
   ...values: (string | number | undefined)[]
@@ -33,5 +35,10 @@ export type PopoverButtonTemplate = (
   data: {
     isPopoverVisible: boolean;
   },
+  utils: { html: TemplateHtml },
+) => string;
+
+export type ADMAdTemplate = (
+  data: ADMAd,
   utils: { html: TemplateHtml },
 ) => string;

@@ -8,15 +8,15 @@
 
 ## Properties
 
-### adv\_id?
+### adv\_id
 
-> `optional` **adv\_id**: `number`
+> **adv\_id**: `number`
 
 ***
 
-### adv\_name?
+### adv\_name
 
-> `optional` **adv\_name**: `string`
+> **adv\_name**: `string`
 
 ***
 
@@ -56,6 +56,6 @@
 
 ***
 
-### term?
+### term
 
-> `optional` **term**: `string`
+> **term**: `string`

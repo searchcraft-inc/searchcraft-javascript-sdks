@@ -15,13 +15,13 @@ export interface ADMClientResponseItem extends AdClientResponseItem {
   admAd?: ADMAd;
 }
 export interface ADMAd {
-  term?: string;
+  adv_id: number;
+  adv_name: string;
   click_url?: string;
   image_url?: string;
   impression_url?: string;
-  adv_id?: number;
   price?: number;
   price_currency?: string;
-  adv_name?: string;
   sale_price?: number;
+  term: string;
 }
