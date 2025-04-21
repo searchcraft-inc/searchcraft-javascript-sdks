@@ -246,13 +246,13 @@ export class SearchcraftCore {
         }
 
         const items: SearchClientResponseItem[] = (response.data.hits || [])
-          ?.map((hit: SearchIndexHit) => hit.doc) // SearchcraftResponse -> (SearchDocument || undefined)[]
-          .filter((document) => !!document) // (SearchDocument || undefined)[] -> SearchDocument[]
-          .map((document) => ({
-            type: 'SearchDocument',
+          .filter((hit) => !!hit.doc)
+          .map((hit: SearchIndexHit) => ({
             id: nanoid(),
-            document,
-          })); // SearchDocument[] -> SearchClientResponseItem
+            document: hit.doc || { id: -1 },
+            source_index: hit.source_index,
+            type: 'SearchDocument',
+          }));
 
         searchCallback(response, items);
       })();
