@@ -40,6 +40,7 @@ export class SearchcraftSearchResult {
       try {
         this.templateHtml = this.template?.(this.item.document, this.index, {
           html,
+          source_index: this.item.source_index,
         });
       } catch (error) {
         console.error('Invalid search result template:', error);

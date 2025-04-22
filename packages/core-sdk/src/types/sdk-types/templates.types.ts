@@ -1,3 +1,5 @@
+import type { ADMAd } from '..';
+
 export type TemplateHtml = (
   strings: TemplateStringsArray,
   ...values: (string | number | undefined)[]
@@ -6,7 +8,7 @@ export type TemplateHtml = (
 export type SearchResultTemplate<T> = (
   data: T,
   index: number,
-  utils: { html: TemplateHtml },
+  utils: { html: TemplateHtml; source_index?: string },
 ) => string;
 
 // biome-ignore lint/suspicious/noExplicitAny: Index fields object need to support arbitrary key/value pairs.
@@ -33,5 +35,10 @@ export type PopoverButtonTemplate = (
   data: {
     isPopoverVisible: boolean;
   },
+  utils: { html: TemplateHtml },
+) => string;
+
+export type ADMAdTemplate = (
+  data: ADMAd,
   utils: { html: TemplateHtml },
 ) => string;

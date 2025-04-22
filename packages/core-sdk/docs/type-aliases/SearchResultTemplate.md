@@ -28,6 +28,10 @@
 
 [`TemplateHtml`](/reference/sdk/core/type-aliases/TemplateHtml.md)
 
+#### source_index
+
+`string`
+
 ## Returns
 
 `string`

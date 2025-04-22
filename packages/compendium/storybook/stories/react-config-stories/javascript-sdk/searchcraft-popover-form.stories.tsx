@@ -4,6 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Searchcraft, type Components } from '@searchcraft/javascript-sdk';
 
 import {
+  admAdTemplatePopover,
   popoverResultMappings,
   popoverResultMappingsRunegard,
 } from '@common/index.js';
@@ -67,6 +68,7 @@ export const InlineWithAds: StoryObj<Components.SearchcraftPopoverForm> = {
           admSub: 'searchbox1',
           admProductAdQuantity: 3,
           admTextAdQuantity: 3,
+          admAdTemplate: admAdTemplatePopover,
         });
         const popoverForm = document.querySelector('searchcraft-popover-form');
 
