@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid';
 import type { SearchcraftCore } from '../classes';
 
 import type {
@@ -136,6 +137,7 @@ export class SearchClient {
         Authorization: this.config.readKey,
         'Content-Type': 'application/json',
         'X-Sc-User-Id': this.userId,
+        'X-Sc-Session-Id': this.parent.measureClient?.sessionId || nanoid(),
       },
       body: JSON.stringify(body),
     });
@@ -175,6 +177,7 @@ export class SearchClient {
           Authorization: this.config.readKey,
           'Content-Type': 'application/json',
           'X-Sc-User-Id': this.userId,
+          'X-Sc-Session-Id': this.parent.measureClient?.sessionId || nanoid(),
         },
         body: JSON.stringify(body),
       });

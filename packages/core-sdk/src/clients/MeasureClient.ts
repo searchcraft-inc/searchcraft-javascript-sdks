@@ -16,7 +16,7 @@ export class MeasureClient {
   private config: SearchcraftConfig;
   private sdkInfo: SearchcraftSDKInfo;
   private userId: string;
-  private sessionId: string;
+  sessionId: string;
 
   constructor(
     config: SearchcraftConfig,
