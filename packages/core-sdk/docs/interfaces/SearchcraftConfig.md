@@ -114,14 +114,6 @@ Name or names of search indices configured using Vektron. Given as an array of s
 
 ***
 
-### indexFieldName?
-
-> `optional` **indexFieldName**: `string`
-
-The name of the field to use for `order_by` when sorting.
-
-***
-
 ### nativoAdClassName?
 
 > `optional` **nativoAdClassName**: `string`

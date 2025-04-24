@@ -33,7 +33,8 @@ const initialSearchcraftStateValues: SearchcraftStateValues = {
   searchResultsCount: 0,
   searchResultsPerPage: 20,
   searchResultsPage: 1,
-  sortType: 'asc',
+  sortType: undefined,
+  orderByField: undefined,
   // Callbacks
   afterInit: () => {},
 };
@@ -133,6 +134,7 @@ const searchcraftStore = createStore<SearchcraftState>((_set, get) => {
           searchTerm: state.searchTerm,
           mode: state.searchMode,
           sort: state.sortType,
+          order_by: state.orderByField,
           facetPathsForIndexFields: state.facetPathsForIndexFields,
           rangeValueForIndexFields: state.rangeValueForIndexFields,
           offset: state.searchResultsPerPage
@@ -213,7 +215,8 @@ const searchcraftStore = createStore<SearchcraftState>((_set, get) => {
         isPopoverVisible: isVisible,
       }),
     setSearchMode: (mode) => functions.set({ searchMode: mode }),
-    setSortType: (type) => functions.set({ sortType: type }),
+    setSortOrder: ({ orderByField, sortType }) =>
+      functions.set({ sortType, orderByField }),
     setSearchTerm: (searchTerm) => {
       const { core } = get();
 
@@ -228,7 +231,8 @@ const searchcraftStore = createStore<SearchcraftState>((_set, get) => {
         facetPathsForIndexFields: {},
         ...(searchTerm.trim().length === 0 && {
           searchMode: 'fuzzy',
-          sortType: 'asc',
+          sortType: null,
+          orderByField: null,
         }),
       });
     },

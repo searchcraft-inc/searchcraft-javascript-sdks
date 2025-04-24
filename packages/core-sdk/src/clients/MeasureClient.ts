@@ -16,7 +16,7 @@ export class MeasureClient {
   private config: SearchcraftConfig;
   private sdkInfo: SearchcraftSDKInfo;
   private userId: string;
-  private sessionId: string;
+  sessionId: string;
 
   constructor(
     config: SearchcraftConfig,
@@ -98,6 +98,7 @@ export class MeasureClient {
             'Content-Type': 'application/json',
             Authorization: this.config.readKey,
             'X-Sc-User-Id': this.userId,
+            'X-Sc-Session-Id': this.sessionId,
           },
           body,
           keepalive: true,
@@ -128,6 +129,7 @@ export class MeasureClient {
               'Content-Type': 'application/json',
               Authorization: this.config.readKey,
               'X-Sc-User-Id': this.userId,
+              'X-Sc-Session-Id': this.sessionId,
             },
             body: payload,
             keepalive: true,

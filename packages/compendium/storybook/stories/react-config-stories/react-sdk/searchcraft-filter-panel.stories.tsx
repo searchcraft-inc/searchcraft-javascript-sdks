@@ -31,6 +31,7 @@ const exactMatchItem: ExactMatchToggleFilterItem = {
 };
 
 const mostRecentItem: MostRecentToggleFilterItem = {
+  fieldName: 'date_published',
   type: 'mostRecentToggle',
   label: 'Most Recent',
   options: {

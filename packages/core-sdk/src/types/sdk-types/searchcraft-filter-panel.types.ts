@@ -45,6 +45,7 @@ export interface ExactMatchToggleFilterItem extends FilterItem {
 }
 
 export interface MostRecentToggleFilterItem extends FilterItem {
+  fieldName: string;
   type: 'mostRecentToggle';
   options: {
     subLabel?: string;
