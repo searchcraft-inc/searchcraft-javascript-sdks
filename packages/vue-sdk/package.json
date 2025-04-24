@@ -1,6 +1,6 @@
 {
   "name": "@searchcraft/vue-sdk",
-  "version": "0.10.2",
+  "version": "0.10.3",
   "private": false,
   "author": "Searchcraft Inc.",
   "description": "Searchcraft Vue SDK.",
@@ -46,7 +46,7 @@
     "vue": "^3.5.13"
   },
   "devDependencies": {
-    "@searchcraft/javascript-sdk": "^0.10.2",
+    "@searchcraft/javascript-sdk": "^0.10.3",
     "@tsconfig/node22": "^22.0.0",
     "@types/node": "^22.10.7",
     "@vitejs/plugin-vue": "^5.2.1",
