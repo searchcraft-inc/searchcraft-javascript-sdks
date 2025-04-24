@@ -68,6 +68,11 @@ export class SearchcraftFacetList {
       return;
     }
 
+    /** When the search term is empty, clear all facets from facetRoot */
+    if (!state.searchTerm) {
+      this.facetRoot = undefined;
+    }
+
     /** Things to do when the state's search term has changed, but before the response received */
     if (
       state.searchTerm !== this.lastSearchTerm ||
@@ -80,6 +85,7 @@ export class SearchcraftFacetList {
     /** Things to do when a new response with a new facet prime has been received */
     if (timeTaken !== this.lastTimeTaken && facetPrime) {
       this.facetRoot = undefined;
+
       const incomingFacetRoot: FacetRoot | undefined = facetPrime.find(
         (facet) => this.fieldName === Object.keys(facet)[0],
       );
@@ -97,6 +103,13 @@ export class SearchcraftFacetList {
           incomingFacetRoot,
         );
       }
+    } else if (!facetPrime && Object.keys(this.selectedPaths).length === 0) {
+      /**
+       * If there's not facetPrime returned from the search response,
+       * and no facets are currently selected.
+       * Clear all the displayed facets
+       */
+      this.facetRoot = undefined;
     }
 
     this.lastSearchTerm = state.searchTerm;
