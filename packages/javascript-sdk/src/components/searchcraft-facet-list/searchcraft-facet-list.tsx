@@ -55,7 +55,7 @@ export class SearchcraftFacetList {
   hasNewSearchTerm = false;
   lastSearchTerm: string | undefined;
   lastSearchMode: string | undefined;
-  lastSortType: string | undefined;
+  lastSortType: string | undefined | null;
   unsubscribe: (() => void) | undefined;
 
   private searchStore = searchcraftStore.getState();

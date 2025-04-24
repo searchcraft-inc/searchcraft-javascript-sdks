@@ -12,6 +12,12 @@
 
 ## Properties
 
+### fieldName
+
+> **fieldName**: `string`
+
+***
+
 ### label
 
 > **label**: `string`

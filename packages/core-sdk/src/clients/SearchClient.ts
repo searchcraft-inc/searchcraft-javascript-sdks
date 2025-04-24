@@ -123,7 +123,6 @@ export class SearchClient {
       body = JSON.parse(str);
       body = {
         limit: this.config.searchResultsPerPage,
-        order_by: this.config.indexFieldName,
         ...body,
       };
     } catch {
@@ -153,22 +152,6 @@ export class SearchClient {
     properties: SearchClientRequestProperties,
   ): Promise<SearchcraftResponse> => {
     try {
-      const body: SearchClientRequest = {
-        query: this.formatParamsForRequest(properties),
-        offset: properties.offset || 0, // Default to 0 (first page) if not provided
-        limit: properties.limit || this.config.searchResultsPerPage || 20, // Default to 20 if not provided
-        order_by: properties.order_by || this.config.indexFieldName,
-      };
-
-      // Handles dynamic sorting and order_by logic
-      if (body.order_by) {
-        // Ensure sort defaults to 'asc' if not provided or given an invalid value
-        body.sort =
-          properties.sort === 'desc' || properties.sort === 'asc'
-            ? properties.sort
-            : 'asc';
-      }
-
       const response = await fetch(this.baseSearchUrl, {
         method: 'POST',
         headers: {
@@ -176,7 +159,17 @@ export class SearchClient {
           'Content-Type': 'application/json',
           'X-Sc-User-Id': this.userId,
         },
-        body: JSON.stringify(body),
+        body: JSON.stringify({
+          query: this.formatParamsForRequest(properties),
+          offset: properties.offset || 0,
+          limit: properties.limit || this.config.searchResultsPerPage || 20,
+          ...(properties.order_by && {
+            order_by: properties.order_by,
+          }),
+          ...(properties.sort && {
+            sort: properties.sort,
+          }),
+        } satisfies SearchClientRequest),
       });
 
       if (!response.ok) {

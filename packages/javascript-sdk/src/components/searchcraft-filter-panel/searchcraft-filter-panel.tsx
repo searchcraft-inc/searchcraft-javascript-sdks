@@ -5,6 +5,7 @@ import type {
   NumericFilterItem,
   ExactMatchToggleFilterItem,
   FacetsFilterItem,
+  MostRecentToggleFilterItem,
 } from '@searchcraft/core';
 import { searchcraftStore } from '@store';
 import { getMillis } from '@utils';
@@ -111,8 +112,18 @@ export class SearchcraftFilterPanel {
     this.searchStore.search();
   }
 
-  handleMostRecentToggleUpdated(isActive: boolean) {
-    this.searchStore.setSortType(isActive ? 'desc' : 'asc');
+  handleMostRecentToggleUpdated(fieldName: string, isActive: boolean) {
+    if (isActive) {
+      this.searchStore.setSortOrder({
+        orderByField: fieldName,
+        sortType: 'desc',
+      });
+    } else {
+      this.searchStore.setSortOrder({
+        orderByField: null,
+        sortType: null,
+      });
+    }
     this.searchStore.search();
   }
 
@@ -207,13 +218,16 @@ export class SearchcraftFilterPanel {
               );
             }
             case 'mostRecentToggle': {
-              const item = filterItem as ExactMatchToggleFilterItem;
+              const item = filterItem as MostRecentToggleFilterItem;
               return (
                 <searchcraft-toggle-button
                   label={item.label}
                   subLabel={item.options.subLabel}
                   onToggleUpdated={(event) => {
-                    this.handleMostRecentToggleUpdated(event.detail);
+                    this.handleMostRecentToggleUpdated(
+                      item.fieldName,
+                      event.detail,
+                    );
                   }}
                 />
               );
