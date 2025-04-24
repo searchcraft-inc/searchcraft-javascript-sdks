@@ -234,7 +234,11 @@ export class SearchClient {
     const query =
       properties.mode === 'fuzzy'
         ? { fuzzy: { ctx: searchTerm } }
-        : { exact: { ctx: `"${searchTerm}"` } };
+        : {
+            exact: {
+              ctx: `${searchTerm.startsWith('"') ? searchTerm : `"${searchTerm}"`}`,
+            },
+          };
     queries.push({
       occur: properties.mode === 'exact' ? 'must' : 'should', // Valid, as 'occur' is a required property in SearchClientQuery
       ...query,
