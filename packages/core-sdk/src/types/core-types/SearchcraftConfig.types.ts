@@ -35,11 +35,6 @@ export interface SearchcraftConfig {
   searchResultsPerPage?: number;
 
   /**
-   * The name of the field to use for `order_by` when sorting.
-   */
-  indexFieldName?: string;
-
-  /**
    * Name of the ad source to use.
    */
   adSource?: 'adMarketplace' | 'Nativo' | 'Custom' | 'None';

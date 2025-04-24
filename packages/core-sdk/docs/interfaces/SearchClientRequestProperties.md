@@ -46,7 +46,7 @@ Optional parameter.
 
 ### order\_by?
 
-> `optional` **order\_by**: `string`
+> `optional` **order\_by**: `null` \| `string`
 
 The field to order the results by (e.g., 'date_published', 'title', etc.).
 Optional parameter.
@@ -73,7 +73,7 @@ The search term provided by the user.
 
 ### sort?
 
-> `optional` **sort**: `"desc"` \| `"asc"`
+> `optional` **sort**: `null` \| `"desc"` \| `"asc"`
 
 The sort order, which can be either 'asc' or 'desc'.
 Optional parameter.
