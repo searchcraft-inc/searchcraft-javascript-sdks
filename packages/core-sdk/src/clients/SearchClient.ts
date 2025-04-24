@@ -199,16 +199,14 @@ export class SearchClient {
    */
   private formatParamsForRequest(properties: SearchClientRequestProperties) {
     const queries: SearchClientQuery[] = [];
-    let occur: 'must' | 'should' = 'should';
 
     if (properties.facetPathsForIndexFields) {
       Object.keys(properties.facetPathsForIndexFields).forEach((fieldName) => {
         const item = properties.facetPathsForIndexFields?.[fieldName];
 
         if (item) {
-          occur = 'must';
           queries.push({
-            occur,
+            occur: 'must',
             exact: {
               ctx: sanitize(item.value),
             },
@@ -222,23 +220,23 @@ export class SearchClient {
         const item = properties.rangeValueForIndexFields?.[fieldName];
 
         if (item) {
-          occur = 'must';
           queries.push({
-            occur,
+            occur: 'must',
             exact: {
-              ctx: item.value,
+              ctx: sanitize(item.value),
             },
           });
         }
       });
     }
 
+    const searchTerm = sanitize(properties.searchTerm);
     const query =
       properties.mode === 'fuzzy'
-        ? { fuzzy: { ctx: properties.searchTerm } }
-        : { exact: { ctx: properties.searchTerm } };
+        ? { fuzzy: { ctx: searchTerm } }
+        : { exact: { ctx: `"${searchTerm}"` } };
     queries.push({
-      occur, // Valid, as 'occur' is a required property in SearchClientQuery
+      occur: properties.mode === 'exact' ? 'must' : 'should', // Valid, as 'occur' is a required property in SearchClientQuery
       ...query,
     });
 
