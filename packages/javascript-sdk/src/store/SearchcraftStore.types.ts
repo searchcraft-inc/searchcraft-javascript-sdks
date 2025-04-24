@@ -43,7 +43,10 @@ export interface SearchcraftStateFunctions {
   setSearchResultsPerPage: (perPage: number) => void;
   setSearchTerm: (searchTerm: string) => void;
   setSearchMode: (mode: 'fuzzy' | 'exact') => void;
-  setSortType: (type: 'asc' | 'desc') => void;
+  setSortOrder: (props: {
+    orderByField: string | null;
+    sortType: 'asc' | 'desc' | null;
+  }) => void;
   setHotKeyAndHotKeyModifier: (
     hotkey?: string,
     hotkeyModifier?: 'ctrl' | 'meta' | 'alt' | 'option',
@@ -73,7 +76,8 @@ export interface SearchcraftStateValues {
   searchResultsPage: number;
   searchResultsPerPage: number;
   searchTerm: string;
-  sortType: 'asc' | 'desc';
+  orderByField: string | undefined | null;
+  sortType: 'asc' | 'desc' | undefined | null;
   // Callbacks
   afterInit: (state: SearchcraftState) => void;
 }

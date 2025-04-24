@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid';
 import type { SearchcraftCore } from '../classes';
 
 import type {
@@ -123,7 +124,6 @@ export class SearchClient {
       body = JSON.parse(str);
       body = {
         limit: this.config.searchResultsPerPage,
-        order_by: this.config.indexFieldName,
         ...body,
       };
     } catch {
@@ -136,6 +136,7 @@ export class SearchClient {
         Authorization: this.config.readKey,
         'Content-Type': 'application/json',
         'X-Sc-User-Id': this.userId,
+        'X-Sc-Session-Id': this.parent.measureClient?.sessionId || nanoid(),
       },
       body: JSON.stringify(body),
     });
@@ -153,30 +154,25 @@ export class SearchClient {
     properties: SearchClientRequestProperties,
   ): Promise<SearchcraftResponse> => {
     try {
-      const body: SearchClientRequest = {
-        query: this.formatParamsForRequest(properties),
-        offset: properties.offset || 0, // Default to 0 (first page) if not provided
-        limit: properties.limit || this.config.searchResultsPerPage || 20, // Default to 20 if not provided
-        order_by: properties.order_by || this.config.indexFieldName,
-      };
-
-      // Handles dynamic sorting and order_by logic
-      if (body.order_by) {
-        // Ensure sort defaults to 'asc' if not provided or given an invalid value
-        body.sort =
-          properties.sort === 'desc' || properties.sort === 'asc'
-            ? properties.sort
-            : 'asc';
-      }
-
       const response = await fetch(this.baseSearchUrl, {
         method: 'POST',
         headers: {
           Authorization: this.config.readKey,
           'Content-Type': 'application/json',
           'X-Sc-User-Id': this.userId,
+          'X-Sc-Session-Id': this.parent.measureClient?.sessionId || nanoid(),
         },
-        body: JSON.stringify(body),
+        body: JSON.stringify({
+          query: this.formatParamsForRequest(properties),
+          offset: properties.offset || 0,
+          limit: properties.limit || this.config.searchResultsPerPage || 20,
+          ...(properties.order_by && {
+            order_by: properties.order_by,
+          }),
+          ...(properties.sort && {
+            sort: properties.sort,
+          }),
+        } satisfies SearchClientRequest),
       });
 
       if (!response.ok) {
@@ -199,16 +195,14 @@ export class SearchClient {
    */
   private formatParamsForRequest(properties: SearchClientRequestProperties) {
     const queries: SearchClientQuery[] = [];
-    let occur: 'must' | 'should' = 'should';
 
     if (properties.facetPathsForIndexFields) {
       Object.keys(properties.facetPathsForIndexFields).forEach((fieldName) => {
         const item = properties.facetPathsForIndexFields?.[fieldName];
 
         if (item) {
-          occur = 'must';
           queries.push({
-            occur,
+            occur: 'must',
             exact: {
               ctx: sanitize(item.value),
             },
@@ -222,23 +216,27 @@ export class SearchClient {
         const item = properties.rangeValueForIndexFields?.[fieldName];
 
         if (item) {
-          occur = 'must';
           queries.push({
-            occur,
+            occur: 'must',
             exact: {
-              ctx: item.value,
+              ctx: sanitize(item.value),
             },
           });
         }
       });
     }
 
+    const searchTerm = sanitize(properties.searchTerm);
     const query =
       properties.mode === 'fuzzy'
-        ? { fuzzy: { ctx: properties.searchTerm } }
-        : { exact: { ctx: properties.searchTerm } };
+        ? { fuzzy: { ctx: searchTerm } }
+        : {
+            exact: {
+              ctx: `${searchTerm.startsWith('"') ? searchTerm : `"${searchTerm}"`}`,
+            },
+          };
     queries.push({
-      occur, // Valid, as 'occur' is a required property in SearchClientQuery
+      occur: properties.mode === 'exact' ? 'must' : 'should', // Valid, as 'occur' is a required property in SearchClientQuery
       ...query,
     });
 

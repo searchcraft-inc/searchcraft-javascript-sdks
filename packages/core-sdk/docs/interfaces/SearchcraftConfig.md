@@ -18,6 +18,14 @@ The amount of debounce delay to add before calling the ad_container_rendered eve
 
 ***
 
+### admAdTemplate?
+
+> `optional` **admAdTemplate**: [`ADMAdTemplate`](/reference/sdk/core/type-aliases/ADMAdTemplate.md)
+
+A callback function responsible for rendering the ADM ad containers.
+
+***
+
 ### admProductAdQuantity?
 
 > `optional` **admProductAdQuantity**: `number`
@@ -103,14 +111,6 @@ Host IP Address and port number configured and created using Vektron.
 > **index**: `string`[]
 
 Name or names of search indices configured using Vektron. Given as an array of strings.
-
-***
-
-### indexFieldName?
-
-> `optional` **indexFieldName**: `string`
-
-The name of the field to use for `order_by` when sorting.
 
 ***
 

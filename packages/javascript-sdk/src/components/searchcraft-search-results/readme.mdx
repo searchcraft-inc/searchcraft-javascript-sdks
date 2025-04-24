@@ -71,5 +71,5 @@ searchResults.template = (item, index, { html }) => html`
 | Property | Attribute | Description | Type | Default |
 | -------- | --------- | ----------- | ---- | ------- |
 | `initialQuery` | `initial-query` | A query that will appears when the component initializes or the search term is ''.. | `string \| undefined` | `undefined` |
-| `template` | -- | A callback function responsible for rendering a result. Passed to `searchcraft-search-result`. | `((data: any, index: number, utils: { html: TemplateHtml; }) => string) \| undefined` | `undefined` |
+| `template` | -- | A callback function responsible for rendering a result. Passed to `searchcraft-search-result`. | `((data: any, index: number, utils: { html: TemplateHtml; source_index?: string \| undefined; }) => string) \| undefined` | `undefined` |
 

@@ -44,7 +44,7 @@ export interface SearchClientRequestProperties {
    * The field to order the results by (e.g., 'date_published', 'title', etc.).
    * Optional parameter.
    */
-  order_by?: string;
+  order_by?: string | null;
 
   /**
    * The search term provided by the user.
@@ -55,7 +55,7 @@ export interface SearchClientRequestProperties {
    * The sort order, which can be either 'asc' or 'desc'.
    * Optional parameter.
    */
-  sort?: 'asc' | 'desc';
+  sort?: 'asc' | 'desc' | null;
 
   /**
    * The facet path value(s) specified by the `facets` filter items that the `searchcraft-filter-panel` renders.
