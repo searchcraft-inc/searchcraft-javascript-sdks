@@ -1,3 +1,7 @@
+## 0.10.3 - 2025-04-24
+
+This release includes bugfixes and enhancements.
+
 ## 0.10.2 - 2025-04-11
 
 The main new feature in this release is the added support for being able to a specify an initial query with searchcraft-search-results components.
