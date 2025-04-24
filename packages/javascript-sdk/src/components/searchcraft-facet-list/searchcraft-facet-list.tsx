@@ -71,8 +71,7 @@ export class SearchcraftFacetList {
     /** Things to do when the state's search term has changed, but before the response received */
     if (
       state.searchTerm !== this.lastSearchTerm ||
-      state.searchMode !== this.lastSearchMode ||
-      state.sortType !== this.lastSortType
+      state.searchMode !== this.lastSearchMode
     ) {
       this.selectedPaths = {};
       this.hasNewSearchTerm = true;
