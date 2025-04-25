@@ -1,3 +1,7 @@
+## 0.10.3 - 2025-04-25
+
+This release includes bugfixes and enhancements.
+
 ## 0.10.3 - 2025-04-24
 
 This release includes bugfixes and enhancements.
