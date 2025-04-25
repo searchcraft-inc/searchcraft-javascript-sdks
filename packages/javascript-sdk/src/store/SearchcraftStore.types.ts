@@ -71,7 +71,7 @@ export interface SearchcraftStateValues {
   searchMode: 'fuzzy' | 'exact';
   searchClientResponseItems: SearchClientResponseItem[];
   searchResponseTimeTaken: number | undefined;
-  searchResponseFacetPrime: FacetPrime | undefined;
+  searchResponseFacetPrime: FacetPrime | undefined | null;
   searchResultsCount: number;
   searchResultsPage: number;
   searchResultsPerPage: number;
