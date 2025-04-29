@@ -12,4 +12,4 @@ A Facet object returned in a search response.
 
 ## Index Signature
 
-\[`key`: `string`\]: [`FacetChild`](/reference/sdk/core/interfaces/FacetChild.md)[]
+\[`key`: `string`\]: [`FacetWithChildrenArray`](/reference/sdk/core/type-aliases/FacetWithChildrenArray.md)[]

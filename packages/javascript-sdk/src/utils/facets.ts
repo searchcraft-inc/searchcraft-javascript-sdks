@@ -1,10 +1,23 @@
 import type {
-  FacetChild,
-  FacetChildObject,
-  FacetRoot,
+  Facet,
+  FacetTree,
+  FacetWithChildrenArray,
+  FacetWithChildrenObject,
 } from '@searchcraft/core';
 
-function deepMergeWithSpread(obj1, obj2) {
+const getNodeAtPath = (
+  tree: FacetTree,
+  nodePaths: string[],
+): FacetWithChildrenObject | undefined => {
+  let cursor: FacetWithChildrenObject | undefined = tree;
+  for (const nodePath of nodePaths) {
+    cursor = cursor?.children[nodePath];
+  }
+
+  return cursor;
+};
+
+const deepMergeWithSpread = (obj1, obj2) => {
   const result = { ...obj1 };
 
   for (const key in obj2) {
@@ -19,7 +32,7 @@ function deepMergeWithSpread(obj1, obj2) {
   }
 
   return result;
-}
+};
 
 /**
  * Given an array of facet paths, removes parent facet paths.
@@ -34,169 +47,110 @@ export function removeSubstringMatches(arr: string[]): string[] {
   );
 }
 
-type FacetChildFragment = {
-  count: number;
-  path: string;
-};
+/**
+ * Merges a current facet tree with an incoming facet tree.
+ *
+ * At each branch, the incoming facet tree's facets override current facet tree
+ *
+ * @param currentTree
+ * @param incomingTree
+ */
+export const mergeFacetTrees = (
+  currentTree: FacetTree,
+  incomingTree: FacetTree,
+): FacetTree => {
+  const mergedTree: FacetTree = structuredClone(currentTree);
 
-function facetToRecord(facet: FacetChild): Record<string, FacetChildFragment> {
-  const records: Record<string, FacetChildFragment> = {};
+  const merge = (
+    currentBranch: FacetWithChildrenObject,
+    nodePath: string[],
+  ): FacetWithChildrenObject => {
+    const mergedBranch = structuredClone(currentBranch);
+    const incomingBranch = getNodeAtPath(incomingTree, nodePath);
 
-  const traverseAndAddToFragments = (facetChild: FacetChild) => {
-    records[facetChild.path] = {
-      count: facetChild.count,
-      path: facetChild.path,
-    };
+    if (!incomingBranch) {
+      return mergedBranch;
+    }
 
-    facetChild.children?.forEach((child) => {
-      traverseAndAddToFragments(child);
-    });
+    for (const nodeName of Object.keys(currentBranch.children)) {
+      if (incomingBranch.children[nodeName]) {
+        mergedBranch.children[nodeName] = {
+          ...deepMergeWithSpread(
+            currentBranch.children[nodeName],
+            incomingBranch.children[nodeName],
+          ),
+          count: mergedBranch.children[nodeName]?.count || 0,
+        };
+      } else if (mergedBranch.children[nodeName]) {
+        mergedBranch.children[nodeName] = merge(
+          mergedBranch.children[nodeName],
+          [...nodePath, nodeName],
+        );
+      }
+    }
+
+    return mergedBranch;
   };
 
-  traverseAndAddToFragments(facet);
+  return merge(mergedTree, []);
+};
 
-  return records;
-}
-
-function recordToObject(
-  record: Record<string, FacetChildFragment>,
-): FacetChildObject {
-  const root: FacetChildObject = {
-    count: 0,
+/**
+ * A function that converts a FacetWithChidrenArray to a complete FacetTree object.
+ *
+ * It uses the `path` of each Facet to build the tree.
+ *
+ * @param facetWithChildArray
+ */
+export const facetWithChildrenArrayToCompleteFacetTree = (
+  rootArray: FacetWithChildrenArray,
+): FacetTree => {
+  // 1) Start with an empty tree at root "/"
+  const tree: FacetTree = {
     path: '/',
+    count: 0,
     children: {},
   };
 
-  Object.keys(record).forEach((key) => {
-    const fragment = record[key];
-    if (!fragment) {
-      return;
+  // 2) Recursively collect all nodes except the implicit "/" itself
+  const allFacets: Facet[] = [];
+  const collect = (node: FacetWithChildrenArray) => {
+    if (node.path !== '/') {
+      allFacets.push({ path: node.path, count: node.count });
     }
-
-    if (fragment.path === '/') {
-      return;
+    if (node.children) {
+      for (const child of node.children) {
+        collect(child);
+      }
     }
-    const pathParts = fragment.path.substring(1).split('/');
-    let currentRoot = root;
-    let currentPath = '';
+  };
+  collect(rootArray);
 
-    pathParts.forEach((part, index) => {
-      const nextPath = `${currentPath}/${part}`;
-      if (!currentRoot.children[nextPath]) {
-        currentRoot.children[nextPath] = {
-          count: 0,
-          path: nextPath,
+  // 3) Insert each flat node into our tree, creating missing ancestors
+  for (const { path, count } of allFacets) {
+    const segments = path.split('/').filter(Boolean); // "/sports/outdoors" -> ["sports","outdoors"]
+    let cursor: FacetWithChildrenObject = tree; // start at the root
+    for (const segment of segments) {
+      // Build the full path of this level
+      const prefixPath =
+        cursor.path === '/' ? `/${segment}` : `${cursor.path}/${segment}`;
+
+      // If this segment doesn't exist yet, create it
+      if (!cursor.children[segment]) {
+        cursor.children[segment] = {
+          path: prefixPath,
+          count: count,
           children: {},
         };
       }
 
-      if (index === pathParts.length - 1) {
-        currentRoot.children[nextPath].count = fragment.count;
-      }
+      // Descend to the next level deeper
+      cursor = cursor.children[segment];
+    }
 
-      currentPath = nextPath;
-      currentRoot = currentRoot.children[nextPath];
-    });
-  });
-
-  return root;
-}
-
-function objectToFacet(childObject: FacetChildObject): FacetChild {
-  const transformed: FacetChild = {
-    count: childObject.count,
-    path: childObject.path,
-    children: [],
-  };
-
-  if (Object.keys(childObject.children).length > 0) {
-    transformed.children = Object.values(childObject.children).map(
-      (subChildObject) => objectToFacet(subChildObject),
-    );
+    // 4) now `cursor` is the node matching `path` — assign its real count
+    cursor.count = count;
   }
 
-  return transformed;
-}
-
-/**
- * Filters records with the parent paths from record2 OUT of record1
- */
-function filterRecordByParentPaths(
-  record1: Record<string, FacetChild>,
-  record2: Record<string, FacetChild>,
-): Record<string, FacetChild> {
-  // Extract all paths (keys) both records
-  const paths1 = Object.keys(record1);
-  const paths2 = Object.keys(record2);
-
-  // Find all parent paths in record2
-  const parentPaths = new Set(
-    paths2
-      .filter((path) => path.split('/').length > 2) // Only consider paths with more than one level
-      .map((path) => path.substring(0, path.lastIndexOf('/'))),
-  );
-
-  // Filter out keys in record1 that share a parent path with any of the identified parent paths
-  const filteredRecord = Object.fromEntries(
-    paths1
-      .filter(
-        (path) => !parentPaths.has(path.substring(0, path.lastIndexOf('/'))),
-      )
-      .map((path) => [path, record1[path]]), // Reconstruct the key-value pairs
-  );
-
-  return filteredRecord as Record<string, FacetChild>;
-}
-
-export function mergeFacetRoots(
-  fieldName: string,
-  currentRoot: FacetRoot,
-  incomingRoot: FacetRoot,
-): FacetRoot {
-  const currentArray = currentRoot[fieldName];
-  const incomingArray = incomingRoot[fieldName];
-
-  const currentRootFacetChild: FacetChild = {
-    count: 0,
-    path: '/',
-    children: currentArray,
-  };
-
-  const incomingRootFacetChild: FacetChild = {
-    count: 0,
-    path: '/',
-    children: incomingArray,
-  };
-
-  // Flatten them into records
-  const currentRecord: Record<string, FacetChildFragment> = facetToRecord(
-    currentRootFacetChild,
-  );
-
-  const incomingRecord: Record<string, FacetChildFragment> = facetToRecord(
-    incomingRootFacetChild,
-  );
-
-  // Filter out the records from record1 (the current set of records)
-  // that share a parent path with record2 (the incoming records)
-  const filteredCurrentRecord = filterRecordByParentPaths(
-    currentRecord,
-    incomingRecord,
-  );
-
-  // Deep merge the records together
-  const mergedRecord: Record<string, FacetChildFragment> = deepMergeWithSpread(
-    filteredCurrentRecord,
-    incomingRecord,
-  );
-
-  // Convert into a heirarchical object
-  const mergedObject: FacetChildObject = recordToObject(mergedRecord);
-
-  // Convert the heirarchical object back to the Facet child structure
-  const mergedFacetChild = objectToFacet(mergedObject);
-
-  return {
-    [fieldName]: mergedFacetChild.children,
-  } as FacetRoot;
-}
+  return tree;
+};
