@@ -96,7 +96,7 @@ Javascript Class providing the functionality to interact with the Searchcraft BE
 
 ##### searchCallback
 
-(`response`, `items`) => `void`
+(`response`, `items`, `supplementalResponse`) => `void`
 
 ##### adCallback
 

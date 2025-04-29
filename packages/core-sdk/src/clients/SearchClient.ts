@@ -39,10 +39,12 @@ export class SearchClient {
   /**
    * Make the request to get the search results.
    * @param {properties} properties - The properties for the search.
+   * @param sendTelemetry - Whether or not to emit measure and subscription events for this search.
    * @returns
    */
   getSearchResponseItems = async (
     properties: SearchClientRequestProperties | string,
+    sendTelemetry = true,
   ) => {
     let response: SearchcraftResponse;
     const searchTerm =
@@ -74,39 +76,43 @@ export class SearchClient {
           await this.handleGetSearchResponseItemsWithObject(properties);
       }
 
-      this.parent.measureClient?.sendMeasureEvent('search_response_received', {
-        search_term: searchTerm,
-        number_of_documents: response.data.count,
-      });
+      if (sendTelemetry) {
+        this.parent.measureClient?.sendMeasureEvent(
+          'search_response_received',
+          {
+            search_term: searchTerm,
+            number_of_documents: response.data.count,
+          },
+        );
 
-      clearTimeout(this.searchCompletedEventTimeout);
+        clearTimeout(this.searchCompletedEventTimeout);
+        this.searchCompletedEventTimeout = setTimeout(() => {
+          this.parent.measureClient?.sendMeasureEvent('search_completed', {
+            search_term: searchTerm,
+            number_of_documents: response.data.count,
+          });
+        }, SEARCH_COMPLETED_EVENT_DEBOUNCE);
 
-      this.searchCompletedEventTimeout = setTimeout(() => {
-        this.parent.measureClient?.sendMeasureEvent('search_completed', {
-          search_term: searchTerm,
-          number_of_documents: response.data.count,
+        this.parent.emitEvent('query_fetched', {
+          name: 'query_fetched',
+          data: {
+            searchTerm,
+          },
         });
-      }, SEARCH_COMPLETED_EVENT_DEBOUNCE);
 
-      this.parent.emitEvent('query_fetched', {
-        name: 'query_fetched',
-        data: {
-          searchTerm,
-        },
-      });
+        if ((response.data.hits?.length || 0) === 0) {
+          this.parent.emitEvent('no_results_returned', {
+            name: 'no_results_returned',
+          });
+        }
 
-      if ((response.data.hits?.length || 0) === 0) {
-        this.parent.emitEvent('no_results_returned', {
-          name: 'no_results_returned',
-        });
+        this.parent.adClient?.onQueryFetched(
+          typeof properties === 'string'
+            ? { searchTerm, mode: 'exact' }
+            : properties,
+          response,
+        );
       }
-
-      this.parent.adClient?.onQueryFetched(
-        typeof properties === 'string'
-          ? { searchTerm, mode: 'exact' }
-          : properties,
-        response,
-      );
 
       return response;
     } catch (error) {

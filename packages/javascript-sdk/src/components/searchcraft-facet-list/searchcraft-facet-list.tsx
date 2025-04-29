@@ -56,34 +56,39 @@ export class SearchcraftFacetList {
   @Prop() fieldName = '';
 
   /**
-   * When the facets are updated.
+   * Emitted when the facets are updated.
    */
   @Event() facetSelectionUpdated?: EventEmitter<{ paths: string[] }>;
 
+  /**
+   * A Tree Representing all of the facets we know about to be rendered.
+   */
   @State() facetTree: FacetWithChildrenObject = {
     path: '/',
     count: 0,
     children: {},
   };
 
+  /**
+   * The currently selected facet paths.
+   */
   @State() selectedPaths: Record<string, boolean> = {};
-  lastTimeTaken: number | undefined;
-  hasNewSearchTerm = false;
-  lastSearchTerm: string | undefined;
-  lastSearchMode: string | undefined;
-  lastSortType: string | undefined | null;
-  lastRangeValues: string | undefined;
-  lastFacetValues: string | undefined;
-  unsubscribe: (() => void) | undefined;
 
-  private searchStore = searchcraftStore.getState();
+  // Internal vars used to track when to perform various facet actions.
+  private lastTimeTaken?: number;
+  private lastSearchTerm?: string;
+  private lastSearchMode?: string;
+  private lastSortType?: string | null;
+  private lastRangeValues?: string;
+  private lastFacetValues?: string;
+
+  private unsubscribe?: () => void;
 
   handleIncomingSearchResponse(
     state: SearchcraftState,
     actionType: HandlerActionType,
   ) {
-    console.log('New search response');
-
+    // Look at the incoming facet root from the search response, and convert it to a FacetTree
     const incomingFacetRoot: FacetRoot | undefined =
       state.searchResponseFacetPrime?.find(
         (facet) => this.fieldName === Object.keys(facet)[0],
@@ -95,15 +100,39 @@ export class SearchcraftFacetList {
       children: incomingFacetsWithChildrenArray || [],
     });
 
-    // Determine what action to take (merge vs overwrite)
+    // Determine what action to take (merge with existing FacetTree vs overwrite FacetTree)
     switch (actionType) {
       case 'NEW_SEARCH_TERM':
         this.facetTree = incomingFacetTree;
         break;
-      case 'RANGE_VALUE_UPDATE':
-        this.facetTree = incomingFacetTree;
+      case 'EXACT_MATCH_UPDATE':
+      case 'RANGE_VALUE_UPDATE': {
+        if (state.supplementalFacetPrime) {
+          const supplementalFacetRoot: FacetRoot | undefined =
+            state.supplementalFacetPrime?.find(
+              (facet) => this.fieldName === Object.keys(facet)[0],
+            );
+          const supplementalFacetsWithChildrenArray =
+            supplementalFacetRoot?.[this.fieldName];
+          const supplementalFacetTree =
+            facetWithChildrenArrayToCompleteFacetTree({
+              path: '/',
+              count: 0,
+              children: supplementalFacetsWithChildrenArray || [],
+            });
+
+          this.facetTree = mergeFacetTrees(
+            supplementalFacetTree,
+            incomingFacetTree,
+          );
+        } else {
+          this.facetTree = incomingFacetTree;
+        }
+
         break;
+      }
       case 'FACET_UPDATE':
+      case 'SORT_ORDER_UPDATE':
         this.facetTree = mergeFacetTrees(this.facetTree, incomingFacetTree);
         break;
       default:
@@ -115,6 +144,7 @@ export class SearchcraftFacetList {
   }
 
   handleStateUpdate(state: SearchcraftState) {
+    // Determine what action to take when a new search response has been received.
     if (this.lastTimeTaken !== state.searchResponseTimeTaken) {
       let actionType: HandlerActionType = 'UNKNOWN';
 
@@ -128,80 +158,27 @@ export class SearchcraftFacetList {
         this.lastFacetValues !== JSON.stringify(state.facetPathsForIndexFields)
       ) {
         actionType = 'FACET_UPDATE';
+      } else if (this.lastSortType !== state.sortType) {
+        actionType = 'SORT_ORDER_UPDATE';
+      } else if (this.lastSearchMode !== state.searchMode) {
+        actionType = 'EXACT_MATCH_UPDATE';
       }
+
+      // Handle the incoming response, using the action we have determined.
       this.handleIncomingSearchResponse(state, actionType);
 
       this.lastSearchTerm = state.searchTerm;
       this.lastRangeValues = JSON.stringify(state.rangeValueForIndexFields);
       this.lastFacetValues = JSON.stringify(state.facetPathsForIndexFields);
+      this.lastSortType = state.sortType;
+      this.lastSearchMode = state.searchMode;
     }
 
     this.lastTimeTaken = state.searchResponseTimeTaken;
-
-    // console.log(
-    //   facetWithChildrenArrayToCompleteFacetTree({
-    //     path: '/sports/northland-outdoors',
-    //     count: 10,
-    //     children: [],
-    //   }),
-    // );
-
-    // if (!this.fieldName) {
-    //   return;
-    // }
-
-    // /** When the search term is empty, clear all facets from facetRoot */
-    // if (!state.searchTerm) {
-    //   this.facetRoot = undefined;
-    // }
-
-    // /** Things to do when the state's search term has changed, but before the response received */
-    // if (
-    //   state.searchTerm !== this.lastSearchTerm ||
-    //   state.searchMode !== this.lastSearchMode
-    // ) {
-    //   this.selectedPaths = {};
-    //   this.hasNewSearchTerm = true;
-    // }
-
-    // /** Things to do when a new response with a new facet prime has been received */
-    // if (timeTaken !== this.lastTimeTaken && facetPrime) {
-    //   this.facetRoot = undefined;
-
-    //   const incomingFacetRoot: FacetRoot | undefined = facetPrime.find(
-    //     (facet) => this.fieldName === Object.keys(facet)[0],
-    //   );
-
-    //   /** Data is from a new search term: completely override our facets */
-    //   if (this.hasNewSearchTerm) {
-    //     this.baseFacetRoot = incomingFacetRoot;
-    //     this.facetRoot = incomingFacetRoot;
-    //     this.hasNewSearchTerm = false;
-    //   } else if (this.baseFacetRoot && incomingFacetRoot) {
-    //     /** Data is from an existing search term, merge the facets together */
-    //     this.facetRoot = mergeFacetRoots(
-    //       this.fieldName,
-    //       this.baseFacetRoot,
-    //       incomingFacetRoot,
-    //     );
-    //   }
-    // } else if (!facetPrime && Object.keys(this.selectedPaths).length === 0) {
-    //   /**
-    //    * If there's not facetPrime returned from the search response,
-    //    * and no facets are currently selected.
-    //    * Clear all the displayed facets
-    //    */
-    //   this.facetRoot = undefined;
-    // }
-
-    // this.lastSearchTerm = state.searchTerm;
-    // this.lastSearchMode = state.searchMode;
-    // this.lastSortType = state.sortType;
-    // this.lastTimeTaken = timeTaken;
   }
 
   connectedCallback() {
-    this.handleStateUpdate(this.searchStore);
+    this.handleStateUpdate(searchcraftStore.getState());
 
     this.unsubscribe = searchcraftStore.subscribe((state) => {
       this.handleStateUpdate(state);
@@ -256,22 +233,6 @@ export class SearchcraftFacetList {
     const label = name.replace(/^\//, '');
     return `${label.replace(/-/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase())}`;
   };
-
-  // formatSubLabel = (
-  //   facetChild: FacetChild,
-  //   facetChildAncestor: FacetChild,
-  // ): string => {
-  //   const facetChildPath = facetChild.path.substring(
-  //     facetChildAncestor.path.length,
-  //   );
-  //   const label = facetChildPath.replace(/^\//, '');
-  //   const count = facetChild.count;
-  //   return `${label.replace(/-/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase())} (${count})`;
-  // };
-
-  // render() {
-  //   return;
-  // }
 
   renderFacet(keyName: string, facet: FacetWithChildrenObject) {
     let isChildSelected = false;

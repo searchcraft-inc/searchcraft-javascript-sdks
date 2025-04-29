@@ -5,6 +5,10 @@ import type {
   FacetWithChildrenObject,
 } from '@searchcraft/core';
 
+/**
+ * Helper function for getting a Node (FacetWithChildrenObject)
+ * at a given path. Traverses the node tree to get the node.
+ */
 const getNodeAtPath = (
   tree: FacetTree,
   nodePaths: string[],
@@ -17,6 +21,10 @@ const getNodeAtPath = (
   return cursor;
 };
 
+/**
+ * Helper function to perform a deep merge.
+ * Used for merging two branches of a facet tree together.
+ */
 const deepMergeWithSpread = (obj1, obj2) => {
   const result = { ...obj1 };
 
@@ -35,7 +43,8 @@ const deepMergeWithSpread = (obj1, obj2) => {
 };
 
 /**
- * Given an array of facet paths, removes parent facet paths.
+ * Given an array of facet paths, removes parent facet paths so that only the
+ * Leaf facets are sent with the search request.
  */
 export function removeSubstringMatches(arr: string[]): string[] {
   return arr.filter(
