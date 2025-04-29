@@ -17,6 +17,7 @@ import {
 } from '@utils';
 
 type HandlerActionType =
+  | 'SEARCH_TERM_EMPTY'
   | 'NEW_SEARCH_TERM'
   | 'RANGE_VALUE_UPDATE'
   | 'EXACT_MATCH_UPDATE'
@@ -102,6 +103,13 @@ export class SearchcraftFacetList {
 
     // Determine what action to take (merge with existing FacetTree vs overwrite FacetTree)
     switch (actionType) {
+      case 'SEARCH_TERM_EMPTY':
+        this.facetTree = {
+          path: '/',
+          count: 0,
+          children: {},
+        };
+        break;
       case 'NEW_SEARCH_TERM':
         this.facetTree = incomingFacetTree;
         break;
@@ -138,14 +146,16 @@ export class SearchcraftFacetList {
       default:
         this.facetTree = mergeFacetTrees(this.facetTree, incomingFacetTree);
     }
-
-    console.log('incoming tree', incomingFacetTree);
-    console.log('merged tree', this.facetTree);
   }
 
   handleStateUpdate(state: SearchcraftState) {
-    // Determine what action to take when a new search response has been received.
-    if (this.lastTimeTaken !== state.searchResponseTimeTaken) {
+    // Determine what action to take based on the current State
+    if (
+      this.lastSearchTerm !== state.searchTerm &&
+      state.searchTerm.trim() === ''
+    ) {
+      this.handleIncomingSearchResponse(state, 'SEARCH_TERM_EMPTY');
+    } else if (this.lastTimeTaken !== state.searchResponseTimeTaken) {
       let actionType: HandlerActionType = 'UNKNOWN';
 
       if (this.lastSearchTerm !== state.searchTerm) {
@@ -166,7 +176,6 @@ export class SearchcraftFacetList {
 
       // Handle the incoming response, using the action we have determined.
       this.handleIncomingSearchResponse(state, actionType);
-
       this.lastSearchTerm = state.searchTerm;
       this.lastRangeValues = JSON.stringify(state.rangeValueForIndexFields);
       this.lastFacetValues = JSON.stringify(state.facetPathsForIndexFields);
@@ -246,6 +255,13 @@ export class SearchcraftFacetList {
       }
     }
 
+    const isSelected = Object.keys(this.selectedPaths).includes(facet.path);
+
+    const shouldRenderChildren =
+      (Object.keys(facet.children).length > 0 &&
+        (isSelected || isChildSelected)) ||
+      keyName === '@@root';
+
     return (
       <div class='searchcraft-facet-list-item'>
         {keyName !== '@@root' && (
@@ -294,12 +310,12 @@ export class SearchcraftFacetList {
             </span>
           </label>
         )}
-        {Object.keys(facet.children).length > 0 && (
+        {shouldRenderChildren && (
           <div
             class='searchcraft-facet-list'
             style={{
               paddingLeft: keyName !== '@@root' ? '24px' : '0px',
-              paddingTop: '6px',
+              paddingTop: keyName !== '@@rote' ? '6px' : '0px',
             }}
           >
             {Object.keys(facet.children).map((key) => {
@@ -316,6 +332,28 @@ export class SearchcraftFacetList {
   render() {
     if (!this.fieldName) {
       return;
+    }
+
+    if (
+      Object.keys(this.facetTree.children).length === 0 &&
+      (this.lastSearchTerm || '').trim().length === 0
+    ) {
+      return (
+        <p class='searchcraft-facet-list-message'>
+          Enter a search to view facets.
+        </p>
+      );
+    }
+
+    if (
+      Object.keys(this.facetTree.children).length === 0 &&
+      (this.lastSearchTerm || '').trim().length > 0
+    ) {
+      return (
+        <p class='searchcraft-facet-list-message'>
+          No facets are available for this search query.
+        </p>
+      );
     }
 
     return (
