@@ -46,11 +46,11 @@
   }
 
   &:checked + .searchcraft-facet-list-checkbox-input-check-icon {
-    display: block;
+    display: flex;
   }
 
   &:checked + .searchcraft-facet-list-checkbox-input-dash-icon {
-    display: block;
+    display: flex;
   }
 }
 

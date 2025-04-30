@@ -125,6 +125,7 @@ export const WithDebounceDelay300: StoryObj<Components.SearchcraftFilterPanel> =
             readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
             endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
             index: [import.meta.env.VITE_RUNEGARD_INDEX],
+            searchDebounceDelay: 300,
           });
           const filterPanel = document.querySelector(
             'searchcraft-filter-panel',

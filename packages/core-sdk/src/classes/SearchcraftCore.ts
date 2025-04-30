@@ -230,6 +230,7 @@ export class SearchcraftCore {
     searchCallback: (
       response: SearchcraftResponse,
       items: SearchClientResponseItem[],
+      supplementalResponse: SearchcraftResponse | undefined,
     ) => void,
     adCallback: (items: AdClientResponseItem[]) => void,
   ) => {
@@ -254,7 +255,32 @@ export class SearchcraftCore {
             type: 'SearchDocument',
           }));
 
-        searchCallback(response, items);
+        /**
+         * Handles sending a supplemental search request (For getting top-level facet counts)
+         */
+        let supplementalResponse: SearchcraftResponse | undefined;
+        if (typeof properties === 'object') {
+          const props = structuredClone(
+            properties as SearchClientRequestProperties,
+          );
+          if (
+            props.facetPathsForIndexFields &&
+            Object.keys(props.facetPathsForIndexFields).length > 0 &&
+            props.rangeValueForIndexFields &&
+            Object.keys(props.rangeValueForIndexFields).length > 0
+          ) {
+            props.facetPathsForIndexFields = undefined;
+
+            supplementalResponse =
+              await this?.searchClient?.getSearchResponseItems(props, false);
+
+            if (response) {
+              console.log('Supplemental response:', supplementalResponse);
+            }
+          }
+        }
+
+        searchCallback(response, items, supplementalResponse);
       })();
 
       /**

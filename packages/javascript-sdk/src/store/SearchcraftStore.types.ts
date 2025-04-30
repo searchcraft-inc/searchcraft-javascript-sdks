@@ -30,6 +30,7 @@ export interface SearchcraftStateFunctions {
   setSearchClientResponseItemsFromResponse: (
     response: SearchcraftResponse,
     items: SearchClientResponseItem[],
+    supplementalResponse: SearchcraftResponse | undefined,
   ) => void;
   setInitialSearchClientResponseItemsFromResponse: (
     response: SearchcraftResponse,
@@ -72,6 +73,7 @@ export interface SearchcraftStateValues {
   searchClientResponseItems: SearchClientResponseItem[];
   searchResponseTimeTaken: number | undefined;
   searchResponseFacetPrime: FacetPrime | undefined | null;
+  supplementalFacetPrime: FacetPrime | undefined | null;
   searchResultsCount: number;
   searchResultsPage: number;
   searchResultsPerPage: number;

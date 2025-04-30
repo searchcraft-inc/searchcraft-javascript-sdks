@@ -1177,7 +1177,7 @@ declare namespace LocalJSX {
          */
         "fieldName"?: string;
         /**
-          * When the facets are updated.
+          * Emitted when the facets are updated.
          */
         "onFacetSelectionUpdated"?: (event: SearchcraftFacetListCustomEvent<{ paths: string[] }>) => void;
     }

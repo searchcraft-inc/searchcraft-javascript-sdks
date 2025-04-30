@@ -7,10 +7,23 @@ import {
   type EventEmitter,
 } from '@stencil/core';
 
-import type { FacetChild, FacetRoot } from '@searchcraft/core';
+import type { FacetRoot, FacetWithChildrenObject } from '@searchcraft/core';
 
 import { searchcraftStore, type SearchcraftState } from '@store';
-import { mergeFacetRoots, removeSubstringMatches } from '@utils';
+import {
+  facetWithChildrenArrayToCompleteFacetTree,
+  mergeFacetTrees,
+  removeSubstringMatches,
+} from '@utils';
+
+type HandlerActionType =
+  | 'SEARCH_TERM_EMPTY'
+  | 'NEW_SEARCH_TERM'
+  | 'RANGE_VALUE_UPDATE'
+  | 'EXACT_MATCH_UPDATE'
+  | 'SORT_ORDER_UPDATE'
+  | 'FACET_UPDATE'
+  | 'UNKNOWN';
 
 /**
  * This web component is designed to display facets in a search interface, allowing users to refine their search results by applying filters based on various attributes.
@@ -44,82 +57,137 @@ export class SearchcraftFacetList {
   @Prop() fieldName = '';
 
   /**
-   * When the facets are updated.
+   * Emitted when the facets are updated.
    */
   @Event() facetSelectionUpdated?: EventEmitter<{ paths: string[] }>;
 
-  @State() baseFacetRoot: FacetRoot | undefined;
-  @State() facetRoot: FacetRoot | undefined;
+  /**
+   * A Tree Representing all of the facets we know about to be rendered.
+   */
+  @State() facetTree: FacetWithChildrenObject = {
+    path: '/',
+    count: 0,
+    children: {},
+  };
+
+  /**
+   * The currently selected facet paths.
+   */
   @State() selectedPaths: Record<string, boolean> = {};
-  @State() lastTimeTaken: number | undefined;
-  hasNewSearchTerm = false;
-  lastSearchTerm: string | undefined;
-  lastSearchMode: string | undefined;
-  lastSortType: string | undefined | null;
-  unsubscribe: (() => void) | undefined;
 
-  private searchStore = searchcraftStore.getState();
+  // Internal vars used to track when to perform various facet actions.
+  private lastTimeTaken?: number;
+  private lastSearchTerm?: string;
+  private lastSearchMode?: string;
+  private lastSortType?: string | null;
+  private lastRangeValues?: string;
+  private lastFacetValues?: string;
 
-  handleStateUpdate(state: SearchcraftState) {
-    const facetPrime = state.searchResponseFacetPrime;
-    const timeTaken = state.searchResponseTimeTaken;
+  private unsubscribe?: () => void;
 
-    if (!this.fieldName) {
-      return;
-    }
-
-    /** When the search term is empty, clear all facets from facetRoot */
-    if (!state.searchTerm) {
-      this.facetRoot = undefined;
-    }
-
-    /** Things to do when the state's search term has changed, but before the response received */
-    if (
-      state.searchTerm !== this.lastSearchTerm ||
-      state.searchMode !== this.lastSearchMode
-    ) {
-      this.selectedPaths = {};
-      this.hasNewSearchTerm = true;
-    }
-
-    /** Things to do when a new response with a new facet prime has been received */
-    if (timeTaken !== this.lastTimeTaken && facetPrime) {
-      this.facetRoot = undefined;
-
-      const incomingFacetRoot: FacetRoot | undefined = facetPrime.find(
+  handleIncomingSearchResponse(
+    state: SearchcraftState,
+    actionType: HandlerActionType,
+  ) {
+    // Look at the incoming facet root from the search response, and convert it to a FacetTree
+    const incomingFacetRoot: FacetRoot | undefined =
+      state.searchResponseFacetPrime?.find(
         (facet) => this.fieldName === Object.keys(facet)[0],
       );
+    const incomingFacetsWithChildrenArray = incomingFacetRoot?.[this.fieldName];
+    const incomingFacetTree = facetWithChildrenArrayToCompleteFacetTree({
+      path: '/',
+      count: 0,
+      children: incomingFacetsWithChildrenArray || [],
+    });
 
-      /** Data is from a new search term: completely override our facets */
-      if (this.hasNewSearchTerm) {
-        this.baseFacetRoot = incomingFacetRoot;
-        this.facetRoot = incomingFacetRoot;
-        this.hasNewSearchTerm = false;
-      } else if (this.baseFacetRoot && incomingFacetRoot) {
-        /** Data is from an existing search term, merge the facets together */
-        this.facetRoot = mergeFacetRoots(
-          this.fieldName,
-          this.baseFacetRoot,
-          incomingFacetRoot,
-        );
+    // Determine what action to take (merge with existing FacetTree vs overwrite FacetTree)
+    switch (actionType) {
+      case 'SEARCH_TERM_EMPTY':
+        this.facetTree = {
+          path: '/',
+          count: 0,
+          children: {},
+        };
+        break;
+      case 'NEW_SEARCH_TERM':
+        this.facetTree = incomingFacetTree;
+        break;
+      case 'EXACT_MATCH_UPDATE':
+      case 'RANGE_VALUE_UPDATE': {
+        if (state.supplementalFacetPrime) {
+          const supplementalFacetRoot: FacetRoot | undefined =
+            state.supplementalFacetPrime?.find(
+              (facet) => this.fieldName === Object.keys(facet)[0],
+            );
+          const supplementalFacetsWithChildrenArray =
+            supplementalFacetRoot?.[this.fieldName];
+          const supplementalFacetTree =
+            facetWithChildrenArrayToCompleteFacetTree({
+              path: '/',
+              count: 0,
+              children: supplementalFacetsWithChildrenArray || [],
+            });
+
+          this.facetTree = mergeFacetTrees(
+            supplementalFacetTree,
+            incomingFacetTree,
+          );
+        } else {
+          this.facetTree = incomingFacetTree;
+        }
+
+        break;
       }
-    } else if (!facetPrime && Object.keys(this.selectedPaths).length === 0) {
-      /**
-       * If there's not facetPrime returned from the search response,
-       * and no facets are currently selected.
-       * Clear all the displayed facets
-       */
-      this.facetRoot = undefined;
+      case 'FACET_UPDATE':
+      case 'SORT_ORDER_UPDATE':
+        this.facetTree = mergeFacetTrees(this.facetTree, incomingFacetTree);
+        break;
+      default:
+        this.facetTree = mergeFacetTrees(this.facetTree, incomingFacetTree);
+    }
+  }
+
+  handleStateUpdate(state: SearchcraftState) {
+    // Determine what action to take based on the current State
+    if (
+      this.lastSearchTerm !== state.searchTerm &&
+      state.searchTerm.trim() === ''
+    ) {
+      this.handleIncomingSearchResponse(state, 'SEARCH_TERM_EMPTY');
+    } else if (this.lastTimeTaken !== state.searchResponseTimeTaken) {
+      let actionType: HandlerActionType = 'UNKNOWN';
+
+      if (this.lastSearchTerm !== state.searchTerm) {
+        actionType = 'NEW_SEARCH_TERM';
+      } else if (
+        this.lastRangeValues !== JSON.stringify(state.rangeValueForIndexFields)
+      ) {
+        actionType = 'RANGE_VALUE_UPDATE';
+      } else if (
+        this.lastFacetValues !== JSON.stringify(state.facetPathsForIndexFields)
+      ) {
+        actionType = 'FACET_UPDATE';
+      } else if (this.lastSortType !== state.sortType) {
+        actionType = 'SORT_ORDER_UPDATE';
+      } else if (this.lastSearchMode !== state.searchMode) {
+        actionType = 'EXACT_MATCH_UPDATE';
+      }
+
+      // Handle the incoming response, using the action we have determined.
+      this.handleIncomingSearchResponse(state, actionType);
+      this.lastSearchTerm = state.searchTerm;
+      this.lastRangeValues = JSON.stringify(state.rangeValueForIndexFields);
+      this.lastFacetValues = JSON.stringify(state.facetPathsForIndexFields);
+      this.lastSortType = state.sortType;
+      this.lastSearchMode = state.searchMode;
     }
 
-    this.lastSearchTerm = state.searchTerm;
-    this.lastSearchMode = state.searchMode;
-    this.lastSortType = state.sortType;
-    this.lastTimeTaken = timeTaken;
+    this.lastTimeTaken = state.searchResponseTimeTaken;
   }
 
   connectedCallback() {
-    this.handleStateUpdate(this.searchStore);
+    this.handleStateUpdate(searchcraftStore.getState());
 
     this.unsubscribe = searchcraftStore.subscribe((state) => {
       this.handleStateUpdate(state);
@@ -170,141 +238,127 @@ export class SearchcraftFacetList {
     this.facetSelectionUpdated?.emit({ paths: pathsWithParentPathsRemoved });
   }
 
-  formatLabel = (facetChild: FacetChild): string => {
-    const label = facetChild.path.replace(/^\//, '');
-    const count = facetChild.count;
-    return `${label.replace(/-/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase())} (${count})`;
+  formatFacetName = (name: string): string => {
+    const label = name.replace(/^\//, '');
+    return `${label.replace(/-/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase())}`;
   };
 
-  formatSubLabel = (
-    facetChild: FacetChild,
-    facetChildAncestor: FacetChild,
-  ): string => {
-    const facetChildPath = facetChild.path.substring(
-      facetChildAncestor.path.length,
+  renderFacet(keyName: string, facet: FacetWithChildrenObject) {
+    let isChildSelected = false;
+    for (const path of Object.keys(this.selectedPaths)) {
+      if (
+        this.selectedPaths[path] &&
+        path.startsWith(facet.path) &&
+        path.length > facet.path.length
+      ) {
+        isChildSelected = true;
+      }
+    }
+
+    const isSelected = Object.keys(this.selectedPaths).includes(facet.path);
+
+    const shouldRenderChildren =
+      (Object.keys(facet.children).length > 0 &&
+        (isSelected || isChildSelected)) ||
+      keyName === '@@root';
+
+    return (
+      <div class='searchcraft-facet-list-item'>
+        {keyName !== '@@root' && (
+          <label class='searchcraft-facet-list-checkbox-label'>
+            <div class='searchcraft-facet-list-checkbox-input-wrapper'>
+              <input
+                class='searchcraft-facet-list-checkbox-input'
+                checked={this.selectedPaths[facet.path]}
+                onChange={(_event: Event) => {
+                  this.handleCheckboxChange(facet.path);
+                }}
+                type='checkbox'
+              />
+              {isChildSelected ? (
+                <div class='searchcraft-facet-list-checkbox-input-dash-icon'>
+                  <svg viewBox='0 0 14 3' fill='none'>
+                    <title>Checkbox dash</title>
+                    <line
+                      x1='1.5'
+                      y1='1.5'
+                      x2='12.5'
+                      y2='1.5'
+                      stroke='white'
+                      stroke-width='3'
+                      stroke-linecap='round'
+                    />
+                  </svg>
+                </div>
+              ) : (
+                <div class='searchcraft-facet-list-checkbox-input-check-icon'>
+                  <svg width='16' height='16' viewBox='0 0 16 16' fill='none'>
+                    <title>Checkbox check</title>
+                    <path
+                      d='M13.9999 2L5.74988 10L1.99988 6.36364'
+                      stroke='white'
+                      stroke-width='3'
+                      stroke-linecap='round'
+                      stroke-linejoin='round'
+                    />
+                  </svg>
+                </div>
+              )}
+            </div>
+            <span>
+              {this.formatFacetName(keyName)} ({facet.count})
+            </span>
+          </label>
+        )}
+        {shouldRenderChildren && (
+          <div
+            class='searchcraft-facet-list'
+            style={{
+              paddingLeft: keyName !== '@@root' ? '24px' : '0px',
+              paddingTop: keyName !== '@@rote' ? '6px' : '0px',
+            }}
+          >
+            {Object.keys(facet.children).map((key) => {
+              if (facet.children[key]) {
+                return this.renderFacet(key, facet.children[key]);
+              }
+            })}
+          </div>
+        )}
+      </div>
     );
-    const label = facetChildPath.replace(/^\//, '');
-    const count = facetChild.count;
-    return `${label.replace(/-/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase())} (${count})`;
-  };
+  }
 
   render() {
     if (!this.fieldName) {
       return;
     }
 
-    const firstFacet = this.facetRoot?.[this.fieldName];
+    if (
+      Object.keys(this.facetTree.children).length === 0 &&
+      (this.lastSearchTerm || '').trim().length === 0
+    ) {
+      return (
+        <p class='searchcraft-facet-list-message'>
+          Enter a search to view facets.
+        </p>
+      );
+    }
+
+    if (
+      Object.keys(this.facetTree.children).length === 0 &&
+      (this.lastSearchTerm || '').trim().length > 0
+    ) {
+      return (
+        <p class='searchcraft-facet-list-message'>
+          No facets are available for this search query.
+        </p>
+      );
+    }
 
     return (
       <div class='searchcraft-facet-list'>
-        {!firstFacet && (
-          <p class='searchcraft-facet-list-message'>
-            Enter a search to view facets.
-          </p>
-        )}
-        {firstFacet?.map((facetChild: FacetChild) => {
-          const isChildSelected = facetChild.children
-            ? facetChild.children?.some(
-                (child) => this.selectedPaths[child.path],
-              )
-            : false;
-
-          return (
-            <div key={facetChild.path} class='searchcraft-facet-list-item'>
-              <label class='searchcraft-facet-list-checkbox-label'>
-                <div class='searchcraft-facet-list-checkbox-input-wrapper'>
-                  <input
-                    class='searchcraft-facet-list-checkbox-input'
-                    checked={this.selectedPaths[facetChild.path]}
-                    onChange={(_event: Event) =>
-                      this.handleCheckboxChange(facetChild.path)
-                    }
-                    type='checkbox'
-                  />
-                  {isChildSelected ? (
-                    <div class='searchcraft-facet-list-checkbox-input-dash-icon'>
-                      <svg width='14' height='3' viewBox='0 0 14 3' fill='none'>
-                        <title>Checkbox dash</title>
-                        <line
-                          x1='1.5'
-                          y1='1.5'
-                          x2='12.5'
-                          y2='1.5'
-                          stroke='white'
-                          stroke-width='3'
-                          stroke-linecap='round'
-                        />
-                      </svg>
-                    </div>
-                  ) : (
-                    <div class='searchcraft-facet-list-checkbox-input-check-icon'>
-                      <svg
-                        width='16'
-                        height='16'
-                        viewBox='0 0 16 16'
-                        fill='none'
-                      >
-                        <title>Checkbox check</title>
-                        <path
-                          d='M13.9999 2L5.74988 10L1.99988 6.36364'
-                          stroke='white'
-                          stroke-width='3'
-                          stroke-linecap='round'
-                          stroke-linejoin='round'
-                        />
-                      </svg>
-                    </div>
-                  )}
-                </div>
-                {this.formatLabel(facetChild)}
-              </label>
-              {facetChild.children && facetChild.children.length > 0 && (
-                <div class='searchcraft-facet-child-list'>
-                  {facetChild.children.map((grandchild) => (
-                    <label
-                      key={grandchild.path}
-                      class='searchcraft-facet-list-checkbox-label searchcraft-facet-child-list-checkbox-label'
-                      style={{
-                        display: this.selectedPaths[facetChild.path]
-                          ? 'flex'
-                          : 'none',
-                      }}
-                    >
-                      <div class='searchcraft-facet-list-checkbox-input-wrapper searchcraft-facet-child-list-checkbox-input-wrapper'>
-                        <input
-                          class='searchcraft-facet-list-checkbox-input searchcraft-facet-child-list-checkbox-input'
-                          checked={this.selectedPaths[grandchild.path]}
-                          onChange={(_event: Event) => {
-                            this.handleCheckboxChange(grandchild.path);
-                          }}
-                          type='checkbox'
-                        />
-                        <div class='searchcraft-facet-list-checkbox-input-check-icon searchcraft-facet-child-list-checkbox-input-check-icon'>
-                          <svg
-                            width='16'
-                            height='16'
-                            viewBox='0 0 16 16'
-                            fill='none'
-                          >
-                            <title>Checkbox check</title>
-                            <path
-                              d='M13.9999 2L5.74988 10L1.99988 6.36364'
-                              stroke='white'
-                              stroke-width='3'
-                              stroke-linecap='round'
-                              stroke-linejoin='round'
-                            />
-                          </svg>
-                        </div>
-                      </div>
-                      {this.formatSubLabel(grandchild, facetChild)}
-                    </label>
-                  ))}
-                </div>
-              )}
-            </div>
-          );
-        })}
+        {this.renderFacet('@@root', this.facetTree)}
       </div>
     );
   }
