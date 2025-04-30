@@ -117,7 +117,9 @@
     outline: var(--sc-border-brand) solid 2px;
     outline-offset: -1px;
   }
+}
 
+.searchcraft-input-form-input.searchcraft-placeholder-hide-on-focus {
   &:focus::placeholder {
     opacity: 0;
   }

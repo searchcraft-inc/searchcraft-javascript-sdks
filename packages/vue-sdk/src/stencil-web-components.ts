@@ -19,6 +19,7 @@ export const SearchcraftInputForm = /*@__PURE__*/ defineContainer<JSX.Searchcraf
   'buttonLabel',
   'inputLabel',
   'placeholderValue',
+  'placeholderBehavior',
   'core',
   'inputFocus',
   'inputBlur',
