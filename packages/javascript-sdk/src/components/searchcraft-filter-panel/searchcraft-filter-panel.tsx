@@ -8,7 +8,6 @@ import type {
   MostRecentToggleFilterItem,
 } from '@searchcraft/core';
 import { searchcraftStore } from '@store';
-import { getDifferenceInUnits, getEndOf, getStartOf } from '@utils';
 
 /**
  * This web component represents a series of filters that allows users to refine and control their search queries by applying various filter criteria.
@@ -77,8 +76,8 @@ export class SearchcraftFilterPanel {
   }
 
   handleDateRangeChanged(item: DateRangeFilterItem, min: number, max: number) {
-    const start = new Date(getStartOf(item.options.granularity, new Date(min)));
-    const end = new Date(getEndOf(item.options.granularity, new Date(max)));
+    const start = new Date(min);
+    const end = new Date(max);
     this.searchStore.addRangeValueForIndexField({
       fieldName: item.fieldName,
       value: `${item.fieldName}:[${start.toISOString()} TO ${end.toISOString()}]`,
@@ -137,22 +136,6 @@ export class SearchcraftFilterPanel {
           switch (filterItem.type) {
             case 'dateRange': {
               const item = filterItem as DateRangeFilterItem;
-
-              const minMillis = getStartOf(
-                item.options.granularity,
-                item.options.minDate,
-              );
-              const maxMillis = getEndOf(
-                item.options.granularity,
-                item.options.maxDate,
-              );
-              const differenceInUnits = getDifferenceInUnits(
-                item.options.granularity,
-                item.options.minDate,
-                item.options.maxDate,
-              );
-              const stepAmount = (maxMillis - minMillis) / differenceInUnits;
-
               // return date range slider
               return (
                 <div class='searchcraft-filter-panel-section'>
@@ -160,10 +143,10 @@ export class SearchcraftFilterPanel {
                     {filterItem.label}
                   </p>
                   <searchcraft-slider
-                    min={minMillis}
-                    max={maxMillis}
-                    step={stepAmount}
+                    min={item.options.minDate.getTime()}
+                    max={item.options.maxDate.getTime()}
                     dataType='date'
+                    step={1}
                     dateGranularity={item.options.granularity}
                     onRangeChanged={(event) => {
                       this.handleDateRangeChanged(

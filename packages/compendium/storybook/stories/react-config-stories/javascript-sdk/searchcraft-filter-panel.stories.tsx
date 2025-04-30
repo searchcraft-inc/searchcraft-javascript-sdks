@@ -15,9 +15,7 @@ const componentMeta: Meta = {
   argTypes: {},
 };
 
-const today = new Date();
-const pastDate = new Date(today);
-pastDate.setFullYear(today.getFullYear() - 10);
+const now = new Date();
 
 const exactMatchItem: ExactMatchToggleFilterItem = {
   type: 'exactMatchToggle',
@@ -41,8 +39,8 @@ const dateRangeItemYears: DateRangeFilterItem = {
   fieldName: 'date_published',
   label: 'Date range example',
   options: {
-    minDate: pastDate,
-    maxDate: today,
+    minDate: new Date(now.getFullYear() - 10, 1, 1),
+    maxDate: now,
     granularity: 'year',
   },
 };
@@ -52,8 +50,8 @@ const dateRangeItemMonths: DateRangeFilterItem = {
   fieldName: 'date_published',
   label: 'Date range example',
   options: {
-    minDate: pastDate,
-    maxDate: today,
+    minDate: new Date(now.getFullYear() - 2, 1, 1),
+    maxDate: now,
     granularity: 'month',
   },
 };
@@ -63,8 +61,8 @@ const dateRangeItemDays: DateRangeFilterItem = {
   fieldName: 'date_published',
   label: 'Date range example',
   options: {
-    minDate: pastDate,
-    maxDate: today,
+    minDate: new Date(now.getFullYear(), now.getMonth() - 1, 1),
+    maxDate: now,
     granularity: 'day',
   },
 };
@@ -74,8 +72,8 @@ const dateRangeItemHours: DateRangeFilterItem = {
   fieldName: 'date_published',
   label: 'Date range example',
   options: {
-    minDate: pastDate,
-    maxDate: today,
+    minDate: new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1, 0),
+    maxDate: now,
     granularity: 'hour',
   },
 };

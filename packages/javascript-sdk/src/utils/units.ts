@@ -136,25 +136,35 @@ export function formatRelativeDate(
  * Given a date, returns the timestamp (in ms) for the start of the specified unit.
  *
  * @param unit - The unit to calculate the start of ('year' | 'month' | 'day' | 'hour').
- * @param date - The date to evaluate.
+ * @param timestamp - The date to evaluate.
+ * @param offset - The number of units to offset by.
  * @returns The timestamp (in ms) for the start of the specified unit.
  */
 export function getStartOf(
+  timestamp: number,
   unit: 'year' | 'month' | 'day' | 'hour',
-  date: Date,
+  offset = 0,
 ): number {
-  const d = new Date(date);
+  const d = new Date(timestamp);
 
   switch (unit) {
     case 'year':
-      return new Date(d.getFullYear(), 0, 1, 0, 0, 0, 0).getTime();
+      return new Date(d.getFullYear() + offset, 0, 1, 0, 0, 0, 0).getTime();
     case 'month':
-      return new Date(d.getFullYear(), d.getMonth(), 1, 0, 0, 0, 0).getTime();
+      return new Date(
+        d.getFullYear(),
+        d.getMonth() + offset,
+        1,
+        0,
+        0,
+        0,
+        0,
+      ).getTime();
     case 'day':
       return new Date(
         d.getFullYear(),
         d.getMonth(),
-        d.getDate(),
+        d.getDate() + offset,
         0,
         0,
         0,
@@ -165,7 +175,7 @@ export function getStartOf(
         d.getFullYear(),
         d.getMonth(),
         d.getDate(),
-        d.getHours(),
+        d.getHours() + offset,
         0,
         0,
         0,
@@ -176,96 +186,40 @@ export function getStartOf(
 }
 
 /**
- * Given a date, returns the timestamp (in ms) for the end of the specified unit.
- *
- * @param unit - The unit to calculate the end of ('year' | 'month' | 'day' | 'hour').
- * @param date - The date to evaluate.
- * @returns The timestamp (in ms) for the end of the specified unit.
- */
-export function getEndOf(
-  unit: 'year' | 'month' | 'day' | 'hour',
-  date: Date,
-): number {
-  const d = new Date(date);
-
-  switch (unit) {
-    case 'year':
-      return new Date(d.getFullYear(), 11, 31, 23, 59, 59, 999).getTime();
-    case 'month':
-      return new Date(
-        d.getFullYear(),
-        d.getMonth() + 1,
-        0,
-        23,
-        59,
-        59,
-        999,
-      ).getTime();
-    case 'day':
-      return new Date(
-        d.getFullYear(),
-        d.getMonth(),
-        d.getDate(),
-        23,
-        59,
-        59,
-        999,
-      ).getTime();
-    case 'hour':
-      return new Date(
-        d.getFullYear(),
-        d.getMonth(),
-        d.getDate(),
-        d.getHours(),
-        59,
-        59,
-        999,
-      ).getTime();
-    default:
-      throw new Error(`Unsupported unit: ${unit}`);
-  }
-}
-
-/**
- * Given a start and end date, returns the inclusive difference in the number of the specified units.
+ * Given a start and end date, returns the difference in the number of the specified units.
  *
  * @param units - The unit to measure ('year' | 'month' | 'day' | 'hour').
  * @param startDate - The start date.
  * @param endDate - The end date.
- * @returns The inclusive difference in the given unit.
+ * @returns The difference in the given unit.
  */
 export function getDifferenceInUnits(
   unit: 'year' | 'month' | 'day' | 'hour',
-  startDate: Date,
-  endDate: Date,
+  startTime: number,
+  endTime: number,
 ): number {
-  const start = new Date(startDate);
-  const end = new Date(endDate);
+  const start = new Date(startTime);
+  const end = new Date(endTime);
 
   switch (unit) {
     case 'year':
-      return Math.abs(end.getFullYear() - start.getFullYear()) + 1;
+      return Math.abs(end.getFullYear() - start.getFullYear());
 
     case 'month':
-      return (
-        Math.abs(
-          (end.getFullYear() - start.getFullYear()) * 12 +
-            (end.getMonth() - start.getMonth()),
-        ) + 1
+      return Math.abs(
+        end.getFullYear() * 12 +
+          end.getMonth() -
+          (start.getFullYear() * 12 + start.getMonth()),
       );
 
     case 'day':
-      return (
-        Math.floor(
-          Math.abs(end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24),
-        ) + 1
+      return Math.floor(
+        Math.abs(end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24),
       );
 
     case 'hour':
-      return (
-        Math.floor(
-          Math.abs(end.getTime() - start.getTime()) / (1000 * 60 * 60),
-        ) + 1
+      return Math.floor(
+        Math.abs(end.getTime() - start.getTime()) / (1000 * 60 * 60),
       );
 
     default:
