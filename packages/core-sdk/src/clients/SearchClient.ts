@@ -46,11 +46,19 @@ export class SearchClient {
     properties: SearchClientRequestProperties | string,
     sendTelemetry = true,
   ) => {
-    let response: SearchcraftResponse;
-    const searchTerm =
-      typeof properties === 'string' ? properties : properties.searchTerm;
-
     try {
+      let response: SearchcraftResponse;
+      let searchTerm = '';
+
+      // Sanitize the search term prior to any request
+      // The function will throw if it is not valid
+      if (typeof properties === 'string') {
+        searchTerm = sanitize(properties);
+      } else {
+        properties.searchTerm = sanitize(properties.searchTerm);
+        searchTerm = properties.searchTerm;
+      }
+
       this.parent.measureClient?.sendMeasureEvent('search_requested', {
         search_term: searchTerm,
       });
@@ -70,7 +78,7 @@ export class SearchClient {
 
       if (typeof properties === 'string') {
         response =
-          await this.handleGetSearchResponseItemsWithString(properties);
+          await this.handleGetSearchResponseItemsWithString(searchTerm);
       } else {
         response =
           await this.handleGetSearchResponseItemsWithObject(properties);
@@ -235,7 +243,7 @@ export class SearchClient {
       });
     }
 
-    const searchTerm = sanitize(properties.searchTerm);
+    const searchTerm = properties.searchTerm;
     const query =
       properties.mode === 'fuzzy'
         ? { fuzzy: { ctx: searchTerm } }
