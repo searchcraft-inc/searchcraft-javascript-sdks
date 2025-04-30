@@ -7,6 +7,7 @@ import {
   Prop,
 } from '@stencil/core';
 import { getMillis } from '@utils';
+import { throttle } from '@utils/throttle';
 import classNames from 'classnames';
 
 /**
@@ -38,6 +39,8 @@ export class SearchcraftSlider {
   @State() startValue = this.min;
   @State() lastFocusedHandle: 'min' | 'max' = 'max';
 
+  throttledEmitUpdate: () => void = () => {};
+
   /**
    * When the range has changed.
    * */
@@ -48,6 +51,10 @@ export class SearchcraftSlider {
   componentDidLoad() {
     this.startValue = this.min;
     this.endValue = this.max;
+  }
+
+  connectedCallback() {
+    this.throttledEmitUpdate = throttle(this.emitUpdate, 120);
   }
 
   private emitUpdate = async () => {
@@ -63,7 +70,7 @@ export class SearchcraftSlider {
     this.lastFocusedHandle = 'min';
     if (value <= this.endValue) {
       this.startValue = value;
-      this.emitUpdate();
+      this.throttledEmitUpdate();
     } else {
       this.startValue = this.endValue;
       inputElement.value = `${this.endValue}`;
@@ -76,7 +83,7 @@ export class SearchcraftSlider {
     this.lastFocusedHandle = 'max';
     if (value >= this.startValue) {
       this.endValue = value;
-      this.emitUpdate();
+      this.throttledEmitUpdate();
     } else {
       this.endValue = this.startValue;
       inputElement.value = `${this.startValue}`;
