@@ -131,3 +131,204 @@ export function formatRelativeDate(
 
   return new Intl.DateTimeFormat(locale, options).format(date);
 }
+
+/**
+ * Given a date, returns the timestamp (in ms) for the start of the specified unit.
+ *
+ * @param unit - The unit to calculate the start of ('year' | 'month' | 'day' | 'hour').
+ * @param date - The date to evaluate.
+ * @returns The timestamp (in ms) for the start of the specified unit.
+ */
+export function getStartOf(
+  unit: 'year' | 'month' | 'day' | 'hour',
+  date: Date,
+): number {
+  const d = new Date(date);
+
+  switch (unit) {
+    case 'year':
+      return new Date(d.getFullYear(), 0, 1, 0, 0, 0, 0).getTime();
+    case 'month':
+      return new Date(d.getFullYear(), d.getMonth(), 1, 0, 0, 0, 0).getTime();
+    case 'day':
+      return new Date(
+        d.getFullYear(),
+        d.getMonth(),
+        d.getDate(),
+        0,
+        0,
+        0,
+        0,
+      ).getTime();
+    case 'hour':
+      return new Date(
+        d.getFullYear(),
+        d.getMonth(),
+        d.getDate(),
+        d.getHours(),
+        0,
+        0,
+        0,
+      ).getTime();
+    default:
+      throw new Error(`Unsupported unit: ${unit}`);
+  }
+}
+
+/**
+ * Given a date, returns the timestamp (in ms) for the end of the specified unit.
+ *
+ * @param unit - The unit to calculate the end of ('year' | 'month' | 'day' | 'hour').
+ * @param date - The date to evaluate.
+ * @returns The timestamp (in ms) for the end of the specified unit.
+ */
+export function getEndOf(
+  unit: 'year' | 'month' | 'day' | 'hour',
+  date: Date,
+): number {
+  const d = new Date(date);
+
+  switch (unit) {
+    case 'year':
+      return new Date(d.getFullYear(), 11, 31, 23, 59, 59, 999).getTime();
+    case 'month':
+      return new Date(
+        d.getFullYear(),
+        d.getMonth() + 1,
+        0,
+        23,
+        59,
+        59,
+        999,
+      ).getTime();
+    case 'day':
+      return new Date(
+        d.getFullYear(),
+        d.getMonth(),
+        d.getDate(),
+        23,
+        59,
+        59,
+        999,
+      ).getTime();
+    case 'hour':
+      return new Date(
+        d.getFullYear(),
+        d.getMonth(),
+        d.getDate(),
+        d.getHours(),
+        59,
+        59,
+        999,
+      ).getTime();
+    default:
+      throw new Error(`Unsupported unit: ${unit}`);
+  }
+}
+
+/**
+ * Given a start and end date, returns the inclusive difference in the number of the specified units.
+ *
+ * @param units - The unit to measure ('year' | 'month' | 'day' | 'hour').
+ * @param startDate - The start date.
+ * @param endDate - The end date.
+ * @returns The inclusive difference in the given unit.
+ */
+export function getDifferenceInUnits(
+  unit: 'year' | 'month' | 'day' | 'hour',
+  startDate: Date,
+  endDate: Date,
+): number {
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+
+  switch (unit) {
+    case 'year':
+      return Math.abs(end.getFullYear() - start.getFullYear()) + 1;
+
+    case 'month':
+      return (
+        Math.abs(
+          (end.getFullYear() - start.getFullYear()) * 12 +
+            (end.getMonth() - start.getMonth()),
+        ) + 1
+      );
+
+    case 'day':
+      return (
+        Math.floor(
+          Math.abs(end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24),
+        ) + 1
+      );
+
+    case 'hour':
+      return (
+        Math.floor(
+          Math.abs(end.getTime() - start.getTime()) / (1000 * 60 * 60),
+        ) + 1
+      );
+
+    default:
+      throw new Error(`Unsupported unit: ${unit}`);
+  }
+}
+
+/**
+ * Returns the ordinal representation of a day of the month.
+ */
+const getOrdinal = (n: number): string => {
+  if (n >= 11 && n <= 13) return `${n}th`;
+  switch (n % 10) {
+    case 1:
+      return `${n}st`;
+    case 2:
+      return `${n}nd`;
+    case 3:
+      return `${n}rd`;
+    default:
+      return `${n}th`;
+  }
+};
+
+/**
+ * Given a granularity level, returns a formatted, human-readable, date string.
+ *
+ * @param granularity - The granularity level to display. The granularity level dictates how the date is formatted.
+ * @param date - The date to format.
+ *
+ * @returns A formatted string representing the date at the specified granularity.
+ *
+ * @example
+ * getFormattedDateString('year', new Date('2023-01-01')) // "2023"
+ * getFormattedDateString('month', new Date('2023-01-01')) // "Jan 2023"
+ * getFormattedDateString('day', new Date('2023-01-31')) // "Jan 31st, 2023"
+ * getFormattedDateString('hour', new Date('2023-01-31T12:00:00')) // "Jan 31st, 12:00 PM"
+ */
+export function getFormattedDateString(
+  granularity: 'year' | 'month' | 'day' | 'hour',
+  date: Date,
+): string {
+  const monthFormatter = new Intl.DateTimeFormat('en-US', { month: 'short' });
+
+  switch (granularity) {
+    case 'year':
+      return date.getFullYear().toString();
+
+    case 'month':
+      return `${monthFormatter.format(date)} ${date.getFullYear()}`;
+
+    case 'day':
+      return `${monthFormatter.format(date)} ${getOrdinal(date.getDate())}, ${date.getFullYear()}`;
+
+    case 'hour': {
+      const timeFormatter = new Intl.DateTimeFormat('en-US', {
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true,
+      });
+      return `${monthFormatter.format(date)} ${getOrdinal(date.getDate())}, ${timeFormatter.format(date)}`;
+    }
+    default:
+      throw new Error(`Unsupported granularity: ${granularity}`);
+  }
+}

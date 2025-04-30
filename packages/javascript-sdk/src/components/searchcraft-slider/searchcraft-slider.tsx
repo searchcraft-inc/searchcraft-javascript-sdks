@@ -6,7 +6,7 @@ import {
   State,
   Prop,
 } from '@stencil/core';
-import { getMillis } from '@utils';
+import { getFormattedDateString, getMillis } from '@utils';
 import { throttle } from '@utils/throttle';
 import classNames from 'classnames';
 
@@ -29,11 +29,13 @@ export class SearchcraftSlider {
    */
   @Prop() min = 0;
   /**
-   * The granularity that the value must adhere to.
+   * The step amount for the slider inputs.
    */
-  @Prop() granularity: number = getMillis('month');
-  /** The type of data allowed. */
+  @Prop() step: number = getMillis('month');
+  /** The type of data the sliders are using. */
   @Prop() dataType: 'number' | 'date' = 'number';
+  /** The date granularity to use. Used to format date labels. */
+  @Prop() dateGranularity?: 'year' | 'month' | 'day' | 'hour';
 
   @State() endValue = this.max;
   @State() startValue = this.min;
@@ -101,12 +103,18 @@ export class SearchcraftSlider {
     const startLabel =
       this.dataType === 'number'
         ? this.startValue
-        : new Date(this.startValue).getFullYear();
+        : getFormattedDateString(
+            this.dateGranularity || 'year',
+            new Date(this.startValue),
+          );
 
     const endLabel =
       this.dataType === 'number'
         ? this.endValue
-        : new Date(this.endValue).getFullYear();
+        : getFormattedDateString(
+            this.dateGranularity || 'year',
+            new Date(this.endValue),
+          );
 
     return (
       <div class='searchcraft-slider'>
@@ -126,7 +134,7 @@ export class SearchcraftSlider {
             max={this.max}
             min={this.min}
             onInput={this.handleStartValueChange.bind(this)}
-            step={this.granularity}
+            step={this.step}
             style={{ zIndex: this.lastFocusedHandle === 'min' ? '2' : '1' }}
             type='range'
             value={this.startValue}
@@ -139,7 +147,7 @@ export class SearchcraftSlider {
             max={this.max}
             min={this.min}
             onInput={this.handleEndValueChange.bind(this)}
-            step={this.granularity}
+            step={this.step}
             style={{ zIndex: this.lastFocusedHandle === 'max' ? '2' : '1' }}
             type='range'
             value={this.endValue}
