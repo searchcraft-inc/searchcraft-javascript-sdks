@@ -338,11 +338,7 @@ export class SearchcraftFacetList {
       Object.keys(this.facetTree.children).length === 0 &&
       (this.lastSearchTerm || '').trim().length === 0
     ) {
-      return (
-        <p class='searchcraft-facet-list-message'>
-          Enter a search to view facets.
-        </p>
-      );
+      return;
     }
 
     if (
