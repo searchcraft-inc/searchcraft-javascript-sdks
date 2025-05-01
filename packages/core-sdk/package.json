@@ -2,7 +2,7 @@
   "name": "@searchcraft/core",
   "private": true,
   "description": "The core functionality shared by SearchCraft's SDKs.",
-  "version": "0.10.4",
+  "version": "0.10.5",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
