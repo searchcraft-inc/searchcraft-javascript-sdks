@@ -502,13 +502,13 @@ export namespace Components {
      */
     interface SearchcraftSlider {
         /**
-          * The type of data allowed.
+          * The type of data the sliders are using.
          */
         "dataType": 'number' | 'date';
         /**
-          * The granularity that the value must adhere to.
+          * The date granularity to use. Used to format date labels.
          */
-        "granularity": number;
+        "dateGranularity"?: 'year' | 'month' | 'day' | 'hour';
         /**
           * The maximum value allowed.
          */
@@ -517,6 +517,10 @@ export namespace Components {
           * The minimum value allowed.
          */
         "min": number;
+        /**
+          * The step amount for the slider inputs.
+         */
+        "step": number;
     }
     /**
      * This web component adds Searchcraft's built-in css theme to your page. It does not render anything visible, its only function is to manage the css styles on the page.'
@@ -1620,13 +1624,13 @@ declare namespace LocalJSX {
      */
     interface SearchcraftSlider {
         /**
-          * The type of data allowed.
+          * The type of data the sliders are using.
          */
         "dataType"?: 'number' | 'date';
         /**
-          * The granularity that the value must adhere to.
+          * The date granularity to use. Used to format date labels.
          */
-        "granularity"?: number;
+        "dateGranularity"?: 'year' | 'month' | 'day' | 'hour';
         /**
           * The maximum value allowed.
          */
@@ -1639,6 +1643,10 @@ declare namespace LocalJSX {
           * When the range has changed.
          */
         "onRangeChanged"?: (event: SearchcraftSliderCustomEvent<any>) => void;
+        /**
+          * The step amount for the slider inputs.
+         */
+        "step"?: number;
     }
     /**
      * This web component adds Searchcraft's built-in css theme to your page. It does not render anything visible, its only function is to manage the css styles on the page.'

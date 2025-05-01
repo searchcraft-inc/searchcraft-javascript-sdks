@@ -6,7 +6,11 @@ import {
   State,
   Prop,
 } from '@stencil/core';
-import { getMillis } from '@utils';
+import {
+  getDifferenceInUnits,
+  getFormattedDateString,
+  getStartOf,
+} from '@utils';
 import { throttle } from '@utils/throttle';
 import classNames from 'classnames';
 
@@ -29,14 +33,18 @@ export class SearchcraftSlider {
    */
   @Prop() min = 0;
   /**
-   * The granularity that the value must adhere to.
+   * The step amount for the slider inputs.
    */
-  @Prop() granularity: number = getMillis('month');
-  /** The type of data allowed. */
+  @Prop() step = 1;
+  /** The type of data the sliders are using. */
   @Prop() dataType: 'number' | 'date' = 'number';
+  /** The date granularity to use. Used to format date labels. */
+  @Prop() dateGranularity?: 'year' | 'month' | 'day' | 'hour';
 
-  @State() endValue = this.max;
-  @State() startValue = this.min;
+  @State() lowerBound = 0;
+  @State() upperBound = 1;
+  @State() endValue = 0;
+  @State() startValue = 0;
   @State() lastFocusedHandle: 'min' | 'max' = 'max';
 
   throttledEmitUpdate: () => void = () => {};
@@ -48,26 +56,65 @@ export class SearchcraftSlider {
     | EventEmitter<{ startValue: number; endValue: number }>
     | undefined;
 
-  componentDidLoad() {
-    this.startValue = this.min;
-    this.endValue = this.max;
-  }
-
   connectedCallback() {
+    switch (this.dataType) {
+      case 'number':
+        this.startValue = this.min;
+        this.endValue = this.max;
+        this.lowerBound = this.min;
+        this.upperBound = this.max;
+        break;
+      case 'date': {
+        this.startValue = 0;
+        this.endValue = getDifferenceInUnits(
+          this.dateGranularity || 'year',
+          this.min,
+          this.max,
+        );
+        this.lowerBound = 0;
+        this.upperBound = this.endValue;
+
+        break;
+      }
+    }
+
     this.throttledEmitUpdate = throttle(this.emitUpdate, 120);
   }
 
   private emitUpdate = async () => {
-    this.rangeChanged?.emit({
-      startValue: this.startValue,
-      endValue: this.endValue,
-    });
+    switch (this.dataType) {
+      case 'number':
+        this.rangeChanged?.emit({
+          startValue: this.startValue,
+          endValue: this.endValue,
+        });
+        break;
+      case 'date': {
+        const granularity = this.dateGranularity || 'year';
+        const startTimestamp = getStartOf(
+          this.min,
+          granularity,
+          this.lowerBound + this.startValue,
+        );
+        const endTimestamp = getStartOf(
+          this.min,
+          granularity,
+          this.lowerBound + this.endValue + 1,
+        );
+        this.rangeChanged?.emit({
+          startValue: startTimestamp,
+          endValue: endTimestamp,
+        });
+        break;
+      }
+    }
   };
 
   private handleStartValueChange = (event: InputEvent) => {
     const inputElement = event.target as HTMLInputElement;
     const value = Number.parseInt(inputElement.value, 10);
     this.lastFocusedHandle = 'min';
+
     if (value <= this.endValue) {
       this.startValue = value;
       this.throttledEmitUpdate();
@@ -81,6 +128,7 @@ export class SearchcraftSlider {
     const inputElement = event.target as HTMLInputElement;
     const value = Number.parseInt(inputElement.value, 10);
     this.lastFocusedHandle = 'max';
+
     if (value >= this.startValue) {
       this.endValue = value;
       this.throttledEmitUpdate();
@@ -90,23 +138,35 @@ export class SearchcraftSlider {
     }
   };
 
+  private getLabel = (value): string => {
+    switch (this.dataType) {
+      case 'number':
+        return `${this.startValue}`;
+      case 'date': {
+        const granularity = this.dateGranularity || 'year';
+        const dateOffset = this.lowerBound + value;
+        const timestamp = getStartOf(this.min, granularity, dateOffset);
+
+        return getFormattedDateString(
+          this.dateGranularity || 'year',
+          new Date(timestamp),
+        );
+      }
+    }
+  };
+
   render() {
-    const rangeMin = this.min;
-    const rangeMax = this.max;
     const startPercent =
-      ((this.startValue - rangeMin) / (rangeMax - rangeMin)) * 100;
+      ((this.startValue - this.lowerBound) /
+        (this.upperBound - this.lowerBound)) *
+      100;
     const endPercent =
-      ((this.endValue - rangeMin) / (rangeMax - rangeMin)) * 100;
+      ((this.endValue - this.lowerBound) /
+        (this.upperBound - this.lowerBound)) *
+      100;
 
-    const startLabel =
-      this.dataType === 'number'
-        ? this.startValue
-        : new Date(this.startValue).getFullYear();
-
-    const endLabel =
-      this.dataType === 'number'
-        ? this.endValue
-        : new Date(this.endValue).getFullYear();
+    const startLabel = this.getLabel(this.startValue);
+    const endLabel = this.getLabel(this.endValue);
 
     return (
       <div class='searchcraft-slider'>
@@ -123,10 +183,10 @@ export class SearchcraftSlider {
               'searchcraft-slider-input',
               'searchcraft-slider-input-min-handle',
             )}
-            max={this.max}
-            min={this.min}
+            max={this.upperBound}
+            min={this.lowerBound}
             onInput={this.handleStartValueChange.bind(this)}
-            step={this.granularity}
+            step={this.step}
             style={{ zIndex: this.lastFocusedHandle === 'min' ? '2' : '1' }}
             type='range'
             value={this.startValue}
@@ -136,10 +196,10 @@ export class SearchcraftSlider {
               'searchcraft-slider-input',
               'searchcraft-slider-input-max-handle',
             )}
-            max={this.max}
-            min={this.min}
+            max={this.upperBound}
+            min={this.lowerBound}
             onInput={this.handleEndValueChange.bind(this)}
-            step={this.granularity}
+            step={this.step}
             style={{ zIndex: this.lastFocusedHandle === 'max' ? '2' : '1' }}
             type='range'
             value={this.endValue}

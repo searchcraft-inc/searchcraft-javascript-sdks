@@ -12,7 +12,7 @@ const componentMeta: Meta = {
     max: {
       control: 'number',
     },
-    granularity: {
+    step: {
       control: 'number',
     },
   },
@@ -21,7 +21,7 @@ const componentMeta: Meta = {
 const defaultProps: Components.SearchcraftSlider = {
   min: 0,
   max: 100,
-  granularity: 4,
+  step: 4,
   dataType: 'number',
 };
 

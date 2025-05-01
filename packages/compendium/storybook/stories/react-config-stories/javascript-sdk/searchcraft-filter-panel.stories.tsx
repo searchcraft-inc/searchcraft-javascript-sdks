@@ -5,7 +5,6 @@ import {
   type ExactMatchToggleFilterItem,
   type FacetsFilterItem,
   type MostRecentToggleFilterItem,
-  type NumericFilterItem,
 } from '@searchcraft/javascript-sdk';
 
 import type { Components } from '@searchcraft/javascript-sdk';
@@ -16,9 +15,7 @@ const componentMeta: Meta = {
   argTypes: {},
 };
 
-const today = new Date();
-const pastDate = new Date(today);
-pastDate.setFullYear(today.getFullYear() - 10);
+const now = new Date();
 
 const exactMatchItem: ExactMatchToggleFilterItem = {
   type: 'exactMatchToggle',
@@ -37,25 +34,47 @@ const mostRecentItem: MostRecentToggleFilterItem = {
   },
 };
 
-const dateRangeItem: DateRangeFilterItem = {
+const dateRangeItemYears: DateRangeFilterItem = {
   type: 'dateRange',
   fieldName: 'date_published',
   label: 'Date range example',
   options: {
-    minDate: pastDate,
-    maxDate: today,
+    minDate: new Date(now.getFullYear() - 10, 1, 1),
+    maxDate: now,
     granularity: 'year',
   },
 };
 
-const numericItem: NumericFilterItem = {
-  type: 'numericRange',
-  fieldName: 'number_field',
-  label: 'Numeric range example',
+const dateRangeItemMonths: DateRangeFilterItem = {
+  type: 'dateRange',
+  fieldName: 'date_published',
+  label: 'Date range example',
   options: {
-    min: 0,
-    max: 100,
-    granularity: 10,
+    minDate: new Date(now.getFullYear() - 2, 1, 1),
+    maxDate: now,
+    granularity: 'month',
+  },
+};
+
+const dateRangeItemDays: DateRangeFilterItem = {
+  type: 'dateRange',
+  fieldName: 'date_published',
+  label: 'Date range example',
+  options: {
+    minDate: new Date(now.getFullYear(), now.getMonth() - 1, 1),
+    maxDate: now,
+    granularity: 'day',
+  },
+};
+
+const dateRangeItemHours: DateRangeFilterItem = {
+  type: 'dateRange',
+  fieldName: 'date_published',
+  label: 'Date range example',
+  options: {
+    minDate: new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1, 0),
+    maxDate: now,
+    granularity: 'hour',
   },
 };
 
@@ -66,16 +85,6 @@ const facetItem: FacetsFilterItem = {
   options: {
     showSublevel: true,
   },
-};
-
-const defaultProps: Components.SearchcraftFilterPanel = {
-  items: [
-    exactMatchItem,
-    mostRecentItem,
-    dateRangeItem,
-    numericItem,
-    facetItem,
-  ],
 };
 
 export const Default: StoryObj<Components.SearchcraftFilterPanel> = {
@@ -90,7 +99,12 @@ export const Default: StoryObj<Components.SearchcraftFilterPanel> = {
         const filterPanel = document.querySelector('searchcraft-filter-panel');
 
         if (filterPanel) {
-          filterPanel.items = defaultProps.items;
+          filterPanel.items = [
+            exactMatchItem,
+            mostRecentItem,
+            dateRangeItemYears,
+            facetItem,
+          ];
         }
       }, []);
 
@@ -110,7 +124,127 @@ export const Default: StoryObj<Components.SearchcraftFilterPanel> = {
       </>
     );
   },
-  args: defaultProps,
+  args: {},
+};
+
+export const WithMonthsSlider: StoryObj<Components.SearchcraftFilterPanel> = {
+  decorators: [
+    (Story) => {
+      useEffect(() => {
+        new Searchcraft({
+          readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
+          endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
+          index: [import.meta.env.VITE_RUNEGARD_INDEX],
+        });
+        const filterPanel = document.querySelector('searchcraft-filter-panel');
+
+        if (filterPanel) {
+          filterPanel.items = [
+            exactMatchItem,
+            mostRecentItem,
+            dateRangeItemMonths,
+            facetItem,
+          ];
+        }
+      }, []);
+
+      return <Story />;
+    },
+  ],
+  render: () => {
+    return (
+      <>
+        <div style={{ marginBottom: 20 }}>
+          <searchcraft-input-form />
+        </div>
+        <div style={{ marginBottom: 20 }}>
+          <searchcraft-results-info />
+        </div>
+        <searchcraft-filter-panel />
+      </>
+    );
+  },
+  args: {},
+};
+
+export const WithDaysSlider: StoryObj<Components.SearchcraftFilterPanel> = {
+  decorators: [
+    (Story) => {
+      useEffect(() => {
+        new Searchcraft({
+          readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
+          endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
+          index: [import.meta.env.VITE_RUNEGARD_INDEX],
+        });
+        const filterPanel = document.querySelector('searchcraft-filter-panel');
+
+        if (filterPanel) {
+          filterPanel.items = [
+            exactMatchItem,
+            mostRecentItem,
+            dateRangeItemDays,
+            facetItem,
+          ];
+        }
+      }, []);
+
+      return <Story />;
+    },
+  ],
+  render: () => {
+    return (
+      <>
+        <div style={{ marginBottom: 20 }}>
+          <searchcraft-input-form />
+        </div>
+        <div style={{ marginBottom: 20 }}>
+          <searchcraft-results-info />
+        </div>
+        <searchcraft-filter-panel />
+      </>
+    );
+  },
+  args: {},
+};
+
+export const WithHoursSlider: StoryObj<Components.SearchcraftFilterPanel> = {
+  decorators: [
+    (Story) => {
+      useEffect(() => {
+        new Searchcraft({
+          readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
+          endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
+          index: [import.meta.env.VITE_RUNEGARD_INDEX],
+        });
+        const filterPanel = document.querySelector('searchcraft-filter-panel');
+
+        if (filterPanel) {
+          filterPanel.items = [
+            exactMatchItem,
+            mostRecentItem,
+            dateRangeItemHours,
+            facetItem,
+          ];
+        }
+      }, []);
+
+      return <Story />;
+    },
+  ],
+  render: () => {
+    return (
+      <>
+        <div style={{ marginBottom: 20 }}>
+          <searchcraft-input-form />
+        </div>
+        <div style={{ marginBottom: 20 }}>
+          <searchcraft-results-info />
+        </div>
+        <searchcraft-filter-panel />
+      </>
+    );
+  },
+  args: {},
 };
 
 export const WithDebounceDelay300: StoryObj<Components.SearchcraftFilterPanel> =
@@ -132,7 +266,12 @@ export const WithDebounceDelay300: StoryObj<Components.SearchcraftFilterPanel> =
           );
 
           if (filterPanel) {
-            filterPanel.items = defaultProps.items;
+            filterPanel.items = [
+              exactMatchItem,
+              mostRecentItem,
+              dateRangeItemYears,
+              facetItem,
+            ];
           }
         }, []);
 
@@ -152,7 +291,7 @@ export const WithDebounceDelay300: StoryObj<Components.SearchcraftFilterPanel> =
         </>
       );
     },
-    args: defaultProps,
+    args: {},
   };
 
 export default componentMeta;
