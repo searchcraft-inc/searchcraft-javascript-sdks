@@ -1,9 +1,12 @@
+@use "../typography.scss";
+
 .searchcraft-slider {
   align-items: center;
   display: flex;
   flex-direction: column;
   gap: 10px;
   width: 100%;
+  margin-top: 4px;
 }
 
 .searchcraft-slider-range {
@@ -52,22 +55,30 @@
     &::-webkit-slider-thumb {
       background-color: var(--sc-surface-neutral-light);
       border-radius: 50%;
-      border: 2px solid var(--sc-border-neutral);
+      border: 1px solid var(--sc-border-neutral);
       cursor: pointer;
-      height: 20px;
+      height: 18px;
       pointer-events: all;
-      width: 20px;
+      width: 18px;
       -webkit-appearance: none;
     }
 
     &::-moz-range-thumb {
       background-color: var(--sc-surface-neutral-light);
       border-radius: 50%;
-      border: 2px solid var(--sc-border-neutral);
+      border: 1px solid var(--sc-border-neutral);
       cursor: pointer;
-      height: 20px;
+      height: 18px;
       pointer-events: all;
-      width: 20px;
+      width: 18px;
+    }
+
+    &:focus::-webkit-slider-thumb {
+      outline: 2px solid var(--sc-surface-brand-primary);
+    }
+
+    &:focus::-moz-range-thumb {
+      outline: 2px solid var(--sc-surface-brand-primary);
     }
   }
 }
@@ -75,11 +86,9 @@
 .searchcraft-slider-label {
   color: var(--sc-content-primary);
   display: flex;
-  font-family: "Source Sans Pro", sans-serif;
-  font-size: 15px;
-  font-weight: 600;
+  @include typography.body-small();
   justify-content: space-between;
-  margin-top: 10px;
+  margin-top: 4px;
   width: 100%;
 }
 

@@ -8,7 +8,6 @@ import type {
   MostRecentToggleFilterItem,
 } from '@searchcraft/core';
 import { searchcraftStore } from '@store';
-import { getMillis } from '@utils';
 
 /**
  * This web component represents a series of filters that allows users to refine and control their search queries by applying various filter criteria.
@@ -76,12 +75,12 @@ export class SearchcraftFilterPanel {
     this.unsubscribe?.();
   }
 
-  handleDateRangeChanged(fieldName: string, min: number, max: number) {
-    const start = new Date(new Date(min).getFullYear(), 0, 1);
-    const end = new Date(new Date(max).getFullYear() + 1, 0, 0);
+  handleDateRangeChanged(item: DateRangeFilterItem, min: number, max: number) {
+    const start = new Date(min);
+    const end = new Date(max);
     this.searchStore.addRangeValueForIndexField({
-      fieldName,
-      value: `${fieldName}:[${start.toISOString()} TO ${end.toISOString()}]`,
+      fieldName: item.fieldName,
+      value: `${item.fieldName}:[${start.toISOString()} TO ${end.toISOString()}]`,
     });
 
     this.searchStore.search();
@@ -137,9 +136,6 @@ export class SearchcraftFilterPanel {
           switch (filterItem.type) {
             case 'dateRange': {
               const item = filterItem as DateRangeFilterItem;
-              const min = new Date(item.options.minDate).getTime();
-              const max = new Date(item.options.maxDate).getTime();
-              const granularityValue = getMillis(item.options.granularity);
               // return date range slider
               return (
                 <div class='searchcraft-filter-panel-section'>
@@ -147,13 +143,14 @@ export class SearchcraftFilterPanel {
                     {filterItem.label}
                   </p>
                   <searchcraft-slider
-                    min={min}
-                    max={max}
-                    granularity={granularityValue}
+                    min={item.options.minDate.getTime()}
+                    max={item.options.maxDate.getTime()}
                     dataType='date'
+                    step={1}
+                    dateGranularity={item.options.granularity}
                     onRangeChanged={(event) => {
                       this.handleDateRangeChanged(
-                        item.fieldName,
+                        item,
                         event.detail.startValue,
                         event.detail.endValue,
                       );
@@ -173,7 +170,7 @@ export class SearchcraftFilterPanel {
                   <searchcraft-slider
                     min={item.options.min}
                     max={item.options.max}
-                    granularity={item.options.granularity}
+                    step={item.options.granularity}
                     onRangeChanged={(event) => {
                       this.handleNumericRangeChanged(
                         item.fieldName,

@@ -68,6 +68,12 @@ export class SearchcraftInputForm {
    */
   @Prop() placeholderValue?: string = 'Enter Search';
   /**
+   * The placeholder's render behavior.
+   * 'hide-on-focus' - Hide the placeholder text immediately when the input form gains focus.
+   * 'hide-on-text-entered' - Only hide the placeholder when the input form has text entered into it.
+   */
+  @Prop() placeholderBehavior?: 'hide-on-focus' | 'hide-on-text-entered';
+  /**
    * When the input becomes focused.
    */
   @Event() inputFocus?: EventEmitter<void>;
@@ -198,7 +204,10 @@ export class SearchcraftInputForm {
           <div class='searchcraft-input-form-input-wrapper'>
             <input
               autoComplete='off'
-              class='searchcraft-input-form-input'
+              class={classNames('searchcraft-input-form-input', {
+                'searchcraft-placeholder-hide-on-focus':
+                  this.placeholderBehavior === 'hide-on-focus',
+              })}
               onFocus={() => this.inputFocus?.emit()}
               onBlur={() => this.inputBlur?.emit()}
               onInput={(event) => {

@@ -30,6 +30,7 @@ const initialSearchcraftStateValues: SearchcraftStateValues = {
   searchClientResponseItems: [],
   searchResponseTimeTaken: undefined,
   searchResponseFacetPrime: undefined,
+  supplementalFacetPrime: undefined,
   searchResultsCount: 0,
   searchResultsPerPage: 20,
   searchResultsPage: 1,
@@ -148,7 +149,11 @@ const searchcraftStore = createStore<SearchcraftState>((_set, get) => {
     },
     setAdClientResponseItems: (items: AdClientResponseItem[]) =>
       functions.set({ adClientResponseItems: items }),
-    setSearchClientResponseItemsFromResponse: (response, items) => {
+    setSearchClientResponseItemsFromResponse: (
+      response,
+      items,
+      supplementalResponse,
+    ) => {
       const { facets, count = 0, time_taken = 0 } = response.data;
       const state = functions.set((state) => {
         return {
@@ -160,6 +165,7 @@ const searchcraftStore = createStore<SearchcraftState>((_set, get) => {
             count === state.searchResultsCount ? state.searchResultsPage : 1,
           searchResultsCount: count,
           searchResponseFacetPrime: facets,
+          supplementalFacetPrime: supplementalResponse?.data.facets,
         };
       });
 

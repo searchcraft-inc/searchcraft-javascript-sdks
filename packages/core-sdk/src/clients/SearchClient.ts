@@ -39,16 +39,26 @@ export class SearchClient {
   /**
    * Make the request to get the search results.
    * @param {properties} properties - The properties for the search.
+   * @param sendTelemetry - Whether or not to emit measure and subscription events for this search.
    * @returns
    */
   getSearchResponseItems = async (
     properties: SearchClientRequestProperties | string,
+    sendTelemetry = true,
   ) => {
-    let response: SearchcraftResponse;
-    const searchTerm =
-      typeof properties === 'string' ? properties : properties.searchTerm;
-
     try {
+      let response: SearchcraftResponse;
+      let searchTerm = '';
+
+      // Sanitize the search term prior to any request
+      // The function will throw if it is not valid
+      if (typeof properties === 'string') {
+        searchTerm = sanitize(properties);
+      } else {
+        properties.searchTerm = sanitize(properties.searchTerm);
+        searchTerm = properties.searchTerm;
+      }
+
       this.parent.measureClient?.sendMeasureEvent('search_requested', {
         search_term: searchTerm,
       });
@@ -68,45 +78,49 @@ export class SearchClient {
 
       if (typeof properties === 'string') {
         response =
-          await this.handleGetSearchResponseItemsWithString(properties);
+          await this.handleGetSearchResponseItemsWithString(searchTerm);
       } else {
         response =
           await this.handleGetSearchResponseItemsWithObject(properties);
       }
 
-      this.parent.measureClient?.sendMeasureEvent('search_response_received', {
-        search_term: searchTerm,
-        number_of_documents: response.data.count,
-      });
+      if (sendTelemetry) {
+        this.parent.measureClient?.sendMeasureEvent(
+          'search_response_received',
+          {
+            search_term: searchTerm,
+            number_of_documents: response.data.count,
+          },
+        );
 
-      clearTimeout(this.searchCompletedEventTimeout);
+        clearTimeout(this.searchCompletedEventTimeout);
+        this.searchCompletedEventTimeout = setTimeout(() => {
+          this.parent.measureClient?.sendMeasureEvent('search_completed', {
+            search_term: searchTerm,
+            number_of_documents: response.data.count,
+          });
+        }, SEARCH_COMPLETED_EVENT_DEBOUNCE);
 
-      this.searchCompletedEventTimeout = setTimeout(() => {
-        this.parent.measureClient?.sendMeasureEvent('search_completed', {
-          search_term: searchTerm,
-          number_of_documents: response.data.count,
+        this.parent.emitEvent('query_fetched', {
+          name: 'query_fetched',
+          data: {
+            searchTerm,
+          },
         });
-      }, SEARCH_COMPLETED_EVENT_DEBOUNCE);
 
-      this.parent.emitEvent('query_fetched', {
-        name: 'query_fetched',
-        data: {
-          searchTerm,
-        },
-      });
+        if ((response.data.hits?.length || 0) === 0) {
+          this.parent.emitEvent('no_results_returned', {
+            name: 'no_results_returned',
+          });
+        }
 
-      if ((response.data.hits?.length || 0) === 0) {
-        this.parent.emitEvent('no_results_returned', {
-          name: 'no_results_returned',
-        });
+        this.parent.adClient?.onQueryFetched(
+          typeof properties === 'string'
+            ? { searchTerm, mode: 'exact' }
+            : properties,
+          response,
+        );
       }
-
-      this.parent.adClient?.onQueryFetched(
-        typeof properties === 'string'
-          ? { searchTerm, mode: 'exact' }
-          : properties,
-        response,
-      );
 
       return response;
     } catch (error) {
@@ -229,7 +243,7 @@ export class SearchClient {
       });
     }
 
-    const searchTerm = sanitize(properties.searchTerm);
+    const searchTerm = properties.searchTerm;
     const query =
       properties.mode === 'fuzzy'
         ? { fuzzy: { ctx: searchTerm } }
