@@ -1,4 +1,13 @@
-## 0.10.3 - 2025-04-25
+## 0.10.5 0 2025-05-1
+
+This release includes more bugfixes and style updates:
+
+- Bugfixes for the facets checkboxes and facet rendering in the searchcraft-filter-panel.
+- Bugfixes and improved support for `month`, `day`, and `hour` granularity levels for the date range selector in searchcraft-filter-panel.
+- Style updates to the slider & checkbox UI of filter items rendered in searchcraft-filter-panel
+- Other miscellaneous bugfixes.
+
+## 0.10.4 - 2025-04-25
 
 This release includes bugfixes and enhancements.
 
