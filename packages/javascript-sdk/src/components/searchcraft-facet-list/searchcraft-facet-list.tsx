@@ -315,7 +315,7 @@ export class SearchcraftFacetList {
             class='searchcraft-facet-list'
             style={{
               paddingLeft: keyName !== '@@root' ? '24px' : '0px',
-              paddingTop: keyName !== '@@rote' ? '6px' : '0px',
+              paddingTop: keyName !== '@@root' ? '6px' : '0px',
             }}
           >
             {Object.keys(facet.children).map((key) => {
