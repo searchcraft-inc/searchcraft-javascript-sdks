@@ -28,6 +28,12 @@ const componentMeta: Meta = {
       control: 'text',
       description: 'Placeholder text shown in the input field',
     },
+    placeholderBehavior: {
+      control: { type: 'select' },
+      options: ['hide-on-focus', 'hide-on-text-entered', undefined],
+      description:
+        'Whether to hide the placeholder on focus or when text entered.',
+    },
     debounceDelay: {
       control: 'number',
       description:
@@ -44,6 +50,7 @@ const defaultProps: Components.SearchcraftInputForm = {
   buttonLabel: 'Search',
   inputLabel: 'Search here',
   placeholderValue: 'Enter Search',
+  placeholderBehavior: 'hide-on-text-entered',
 };
 
 const buttonRightProps: Components.SearchcraftInputForm = {
@@ -52,6 +59,7 @@ const buttonRightProps: Components.SearchcraftInputForm = {
   buttonLabel: 'Search',
   inputLabel: 'Search here',
   placeholderValue: 'Enter Search',
+  placeholderBehavior: 'hide-on-text-entered',
 };
 
 const autoSearchProps: Components.SearchcraftInputForm = {
@@ -60,6 +68,7 @@ const autoSearchProps: Components.SearchcraftInputForm = {
   buttonLabel: 'Search',
   inputLabel: 'Start typing to auto search',
   placeholderValue: 'Enter Search',
+  placeholderBehavior: 'hide-on-text-entered',
 };
 
 export const Default: StoryObj<Components.SearchcraftInputForm> = {

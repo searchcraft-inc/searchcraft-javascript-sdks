@@ -153,6 +153,10 @@ export namespace Components {
          */
         "inputLabel"?: string;
         /**
+          * The placeholder's render behavior. 'hide-on-focus' - Hide the placeholder text immediately when the input form gains focus. 'hide-on-text-entered' - Only hide the placeholder when the input form has text entered into it.
+         */
+        "placeholderBehavior"?: 'hide-on-focus' | 'hide-on-text-entered';
+        /**
           * The input element's placeholder value.
          */
         "placeholderValue"?: string;
@@ -1266,6 +1270,10 @@ declare namespace LocalJSX {
           * Event emitted when input initializes.
          */
         "onInputInit"?: (event: SearchcraftInputFormCustomEvent<void>) => void;
+        /**
+          * The placeholder's render behavior. 'hide-on-focus' - Hide the placeholder text immediately when the input form gains focus. 'hide-on-text-entered' - Only hide the placeholder when the input form has text entered into it.
+         */
+        "placeholderBehavior"?: 'hide-on-focus' | 'hide-on-text-entered';
         /**
           * The input element's placeholder value.
          */
