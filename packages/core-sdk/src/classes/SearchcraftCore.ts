@@ -228,6 +228,7 @@ export class SearchcraftCore {
   getResponseItems = (
     properties: SearchClientRequestProperties | string,
     searchCallback: (
+      request: SearchClientRequestProperties | string,
       response: SearchcraftResponse,
       items: SearchClientResponseItem[],
       supplementalResponse: SearchcraftResponse | undefined,
@@ -239,11 +240,23 @@ export class SearchcraftCore {
        * Handles search response from the search client.
        */
       (async () => {
-        const response =
-          await this?.searchClient?.getSearchResponseItems(properties);
+        if (!this.searchClient) {
+          console.error('Search client was not initialized.');
+          return;
+        }
+
+        let response: SearchcraftResponse | undefined;
+
+        try {
+          response = await this.searchClient.getSearchResponseItems(properties);
+        } catch (error) {
+          console.info(`Search request error: ${error}`);
+          return;
+        }
 
         if (!response) {
-          throw new Error('Search client was not initialized.');
+          console.error('Search request error: Search response was undefined');
+          return;
         }
 
         const items: SearchClientResponseItem[] = (response.data.hits || [])
@@ -265,22 +278,20 @@ export class SearchcraftCore {
           );
           if (
             props.facetPathsForIndexFields &&
-            Object.keys(props.facetPathsForIndexFields).length > 0 &&
-            props.rangeValueForIndexFields &&
-            Object.keys(props.rangeValueForIndexFields).length > 0
+            Object.keys(props.facetPathsForIndexFields).length > 0
           ) {
             props.facetPathsForIndexFields = undefined;
 
-            supplementalResponse =
-              await this?.searchClient?.getSearchResponseItems(props, false);
-
-            if (response) {
-              console.log('Supplemental response:', supplementalResponse);
+            try {
+              supplementalResponse =
+                await this?.searchClient?.getSearchResponseItems(props, false);
+            } catch (error) {
+              console.info(`Search request error: ${error}`);
             }
           }
         }
 
-        searchCallback(response, items, supplementalResponse);
+        searchCallback(properties, response, items, supplementalResponse);
       })();
 
       /**

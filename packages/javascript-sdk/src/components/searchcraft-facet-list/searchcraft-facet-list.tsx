@@ -7,11 +7,17 @@ import {
   type EventEmitter,
 } from '@stencil/core';
 
-import type { FacetRoot, FacetWithChildrenObject } from '@searchcraft/core';
+import type {
+  FacetRoot,
+  FacetWithChildrenArray,
+  FacetWithChildrenObject,
+} from '@searchcraft/core';
 
 import { searchcraftStore, type SearchcraftState } from '@store';
 import {
+  deepMergeWithSpread,
   facetWithChildrenArrayToCompleteFacetTree,
+  getFacetTreeNodeAtPath,
   mergeFacetTrees,
   removeSubstringMatches,
 } from '@utils';
@@ -19,6 +25,7 @@ import {
 type HandlerActionType =
   | 'SEARCH_TERM_EMPTY'
   | 'NEW_SEARCH_TERM'
+  | 'NEW_SEARCH_TERM_WHILE_FACETS_ACTIVE'
   | 'RANGE_VALUE_UPDATE'
   | 'EXACT_MATCH_UPDATE'
   | 'SORT_ORDER_UPDATE'
@@ -62,18 +69,38 @@ export class SearchcraftFacetList {
   @Event() facetSelectionUpdated?: EventEmitter<{ paths: string[] }>;
 
   /**
-   * A Tree Representing all of the facets we know about to be rendered.
+   * The currently selected facet paths.
    */
-  @State() facetTree: FacetWithChildrenObject = {
+  @State() selectedPaths: Record<string, boolean> = {};
+
+  /**
+   * A Tree representing all of the facets collected from search responses.
+   */
+  @State() facetTreeCollectedFromSearchResponse: FacetWithChildrenObject = {
     path: '/',
     count: 0,
     children: {},
   };
 
   /**
-   * The currently selected facet paths.
+   * A Tree representing the facet paths that are selected, but were not included
+   * in any search response.
    */
-  @State() selectedPaths: Record<string, boolean> = {};
+  facetTreeFromFacetPathsNotInSearchResponse: FacetWithChildrenObject = {
+    path: '/',
+    count: 0,
+    children: {},
+  };
+
+  /**
+   * The facet tree that ultimately gets rendered.
+   * This is a mergin of the facetTreeCollectedFromSearchResponse and the facetTreeFromFacetPathsNotInSearchResponse tree
+   */
+  @State() renderedFacetTree: FacetWithChildrenObject = {
+    path: '/',
+    count: 0,
+    children: {},
+  };
 
   // Internal vars used to track when to perform various facet actions.
   private lastTimeTaken?: number;
@@ -84,6 +111,12 @@ export class SearchcraftFacetList {
   private lastFacetValues?: string;
 
   private unsubscribe?: () => void;
+
+  get areAnyFacetPathsSelected(): boolean {
+    return Object.keys(this.selectedPaths).some(
+      (key) => this.selectedPaths[key],
+    );
+  }
 
   handleIncomingSearchResponse(
     state: SearchcraftState,
@@ -101,18 +134,20 @@ export class SearchcraftFacetList {
       children: incomingFacetsWithChildrenArray || [],
     });
 
-    // Determine what action to take (merge with existing FacetTree vs overwrite FacetTree)
+    // Determine what action to take to accumulate items into the `facetTreeCollectedFromSearchResponse`.
+    // This facet tree gets accumulated in different ways depending on what action type occured.
     switch (actionType) {
       case 'SEARCH_TERM_EMPTY':
-        this.facetTree = {
+        this.facetTreeCollectedFromSearchResponse = {
           path: '/',
           count: 0,
           children: {},
         };
         break;
       case 'NEW_SEARCH_TERM':
-        this.facetTree = incomingFacetTree;
+        this.facetTreeCollectedFromSearchResponse = incomingFacetTree;
         break;
+      case 'NEW_SEARCH_TERM_WHILE_FACETS_ACTIVE':
       case 'EXACT_MATCH_UPDATE':
       case 'RANGE_VALUE_UPDATE': {
         if (state.supplementalFacetPrime) {
@@ -129,61 +164,115 @@ export class SearchcraftFacetList {
               children: supplementalFacetsWithChildrenArray || [],
             });
 
-          this.facetTree = mergeFacetTrees(
+          this.facetTreeCollectedFromSearchResponse = mergeFacetTrees(
             supplementalFacetTree,
             incomingFacetTree,
           );
         } else {
-          this.facetTree = incomingFacetTree;
+          this.facetTreeCollectedFromSearchResponse = incomingFacetTree;
         }
-
         break;
       }
       case 'FACET_UPDATE':
       case 'SORT_ORDER_UPDATE':
-        this.facetTree = mergeFacetTrees(this.facetTree, incomingFacetTree);
+        this.facetTreeCollectedFromSearchResponse = mergeFacetTrees(
+          this.facetTreeCollectedFromSearchResponse,
+          incomingFacetTree,
+        );
         break;
       default:
-        this.facetTree = mergeFacetTrees(this.facetTree, incomingFacetTree);
+        return;
     }
+
+    // Determine if there are any selected facet paths not in the current tree.
+    // If there are, we add them to "facetTreeFromFacetPathsNotInSearchResponse"
+    this.facetTreeFromFacetPathsNotInSearchResponse = {
+      path: '/',
+      count: 0,
+      children: {},
+    };
+    const collectedFacetArray: FacetWithChildrenArray = {
+      path: '/',
+      count: 0,
+      children: [],
+    };
+    for (const pathName of Object.keys(this.selectedPaths).filter(
+      (path) => this.selectedPaths[path],
+    )) {
+      const nodePaths = pathName.startsWith('/')
+        ? pathName.substring(1).split('/')
+        : pathName.split('/');
+
+      const wasFoundInFacetTree = !!getFacetTreeNodeAtPath(
+        this.facetTreeCollectedFromSearchResponse,
+        nodePaths,
+      );
+
+      const pathKeyName = nodePaths.at(-1);
+      if (!wasFoundInFacetTree && pathKeyName) {
+        collectedFacetArray.children?.push({
+          children: [],
+          count: 0,
+          path: pathName,
+        });
+      }
+    }
+    this.facetTreeFromFacetPathsNotInSearchResponse =
+      facetWithChildrenArrayToCompleteFacetTree(collectedFacetArray);
+
+    // Merges facetTreeCollectedFromSearchResponse with selectedFacetPathsNotInCurrentFacetTree.
+    // This results in a single, final facet tree that gets rendered in as Checkboxes
+    this.renderedFacetTree = deepMergeWithSpread(
+      this.facetTreeFromFacetPathsNotInSearchResponse,
+      this.facetTreeCollectedFromSearchResponse,
+    );
   }
 
-  handleStateUpdate(state: SearchcraftState) {
+  handleStateUpdate(_state: SearchcraftState) {
+    const state = { ..._state };
     // Determine what action to take based on the current State
-    if (
-      this.lastSearchTerm !== state.searchTerm &&
-      state.searchTerm.trim() === ''
-    ) {
+    if (state.searchTerm.trim() === '') {
       this.handleIncomingSearchResponse(state, 'SEARCH_TERM_EMPTY');
-    } else if (this.lastTimeTaken !== state.searchResponseTimeTaken) {
+      this.lastSearchTerm = '';
+    } else if (
+      this.lastTimeTaken !== state.searchResponseTimeTaken &&
+      state.searchClientRequest &&
+      typeof state.searchClientRequest === 'object'
+    ) {
+      const request = state.searchClientRequest;
       let actionType: HandlerActionType = 'UNKNOWN';
 
-      if (this.lastSearchTerm !== state.searchTerm) {
-        actionType = 'NEW_SEARCH_TERM';
+      if (this.lastSearchTerm !== request.searchTerm) {
+        if (this.areAnyFacetPathsSelected) {
+          actionType = 'NEW_SEARCH_TERM_WHILE_FACETS_ACTIVE';
+        } else {
+          actionType = 'NEW_SEARCH_TERM';
+        }
       } else if (
-        this.lastRangeValues !== JSON.stringify(state.rangeValueForIndexFields)
+        this.lastRangeValues !==
+        JSON.stringify(request.rangeValueForIndexFields)
       ) {
         actionType = 'RANGE_VALUE_UPDATE';
       } else if (
-        this.lastFacetValues !== JSON.stringify(state.facetPathsForIndexFields)
+        this.lastFacetValues !==
+        JSON.stringify(request.facetPathsForIndexFields)
       ) {
         actionType = 'FACET_UPDATE';
-      } else if (this.lastSortType !== state.sortType) {
+      } else if (this.lastSortType !== request.order_by) {
         actionType = 'SORT_ORDER_UPDATE';
-      } else if (this.lastSearchMode !== state.searchMode) {
+      } else if (this.lastSearchMode !== request.mode) {
         actionType = 'EXACT_MATCH_UPDATE';
       }
 
+      this.lastRangeValues = JSON.stringify(request.rangeValueForIndexFields);
+      this.lastFacetValues = JSON.stringify(request.facetPathsForIndexFields);
+      this.lastSortType = request.order_by;
+      this.lastSearchMode = request.mode;
+      this.lastSearchTerm = request.searchTerm;
+      this.lastTimeTaken = state.searchResponseTimeTaken;
       // Handle the incoming response, using the action we have determined.
       this.handleIncomingSearchResponse(state, actionType);
-      this.lastSearchTerm = state.searchTerm;
-      this.lastRangeValues = JSON.stringify(state.rangeValueForIndexFields);
-      this.lastFacetValues = JSON.stringify(state.facetPathsForIndexFields);
-      this.lastSortType = state.sortType;
-      this.lastSearchMode = state.searchMode;
     }
-
-    this.lastTimeTaken = state.searchResponseTimeTaken;
   }
 
   connectedCallback() {
@@ -335,14 +424,16 @@ export class SearchcraftFacetList {
     }
 
     if (
-      Object.keys(this.facetTree.children).length === 0 &&
+      Object.keys(this.facetTreeCollectedFromSearchResponse.children).length ===
+        0 &&
       (this.lastSearchTerm || '').trim().length === 0
     ) {
       return;
     }
 
     if (
-      Object.keys(this.facetTree.children).length === 0 &&
+      Object.keys(this.facetTreeCollectedFromSearchResponse.children).length ===
+        0 &&
       (this.lastSearchTerm || '').trim().length > 0
     ) {
       return (
@@ -354,7 +445,7 @@ export class SearchcraftFacetList {
 
     return (
       <div class='searchcraft-facet-list'>
-        {this.renderFacet('@@root', this.facetTree)}
+        {this.renderFacet('@@root', this.renderedFacetTree)}
       </div>
     );
   }

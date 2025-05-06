@@ -7,6 +7,7 @@ import type {
   SearchClientResponseItem,
   AdClientResponseItem,
   SearchcraftResponse,
+  SearchClientRequestProperties,
 } from '@searchcraft/core';
 
 /**
@@ -28,11 +29,13 @@ export interface SearchcraftStateFunctions {
   ) => SearchcraftState;
   setAdClientResponseItems: (items: AdClientResponseItem[]) => void;
   setSearchClientResponseItemsFromResponse: (
+    request: SearchClientRequestProperties | string,
     response: SearchcraftResponse,
     items: SearchClientResponseItem[],
     supplementalResponse: SearchcraftResponse | undefined,
   ) => void;
   setInitialSearchClientResponseItemsFromResponse: (
+    request: SearchClientRequestProperties | string,
     response: SearchcraftResponse,
     items: SearchClientResponseItem[],
   ) => void;
@@ -70,6 +73,11 @@ export interface SearchcraftStateValues {
   isSearchInProgress: boolean;
   rangeValueForIndexFields: Record<string, RangeValueForIndexField>;
   searchMode: 'fuzzy' | 'exact';
+  searchClientRequest:
+    | SearchClientRequestProperties
+    | string
+    | undefined
+    | null;
   searchClientResponseItems: SearchClientResponseItem[];
   searchResponseTimeTaken: number | undefined;
   searchResponseFacetPrime: FacetPrime | undefined | null;

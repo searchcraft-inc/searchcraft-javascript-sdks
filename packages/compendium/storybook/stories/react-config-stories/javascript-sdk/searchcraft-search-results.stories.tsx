@@ -61,6 +61,41 @@ export const Default: StoryObj<Components.SearchcraftSearchResults> = {
   args: {},
 };
 
+export const NoInitialQuery: StoryObj<Components.SearchcraftSearchResults> = {
+  decorators: [
+    (Story) => {
+      useEffect(() => {
+        new Searchcraft({
+          readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
+          endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
+          index: [import.meta.env.VITE_RUNEGARD_INDEX],
+        });
+
+        const searchResults = document.querySelector(
+          'searchcraft-search-results',
+        );
+
+        if (searchResults) {
+          searchResults.template = searchResultTemplate;
+        }
+      }, []);
+
+      return <Story />;
+    },
+  ],
+  render: () => {
+    return (
+      <>
+        <div style={{ marginBottom: 20 }}>
+          <searchcraft-input-form />
+        </div>
+        <searchcraft-search-results />
+      </>
+    );
+  },
+  args: {},
+};
+
 export const WithAdMarketplaceAds: StoryObj<Components.SearchcraftSearchResults> =
   {
     decorators: [

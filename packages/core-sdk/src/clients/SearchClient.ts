@@ -18,6 +18,7 @@ export class SearchClient {
   private userId: string;
   private parent: SearchcraftCore;
   private searchCompletedEventTimeout: NodeJS.Timeout | undefined;
+  private abortController: AbortController | undefined;
 
   constructor(
     parent: SearchcraftCore,
@@ -46,87 +47,81 @@ export class SearchClient {
     properties: SearchClientRequestProperties | string,
     sendTelemetry = true,
   ) => {
-    try {
-      let response: SearchcraftResponse;
-      let searchTerm = '';
+    this.abortController?.abort(
+      'A newer search request has replaced this one.',
+    );
+    this.abortController = new AbortController();
+    let response: SearchcraftResponse;
+    let searchTerm = '';
 
-      // Sanitize the search term prior to any request
-      // The function will throw if it is not valid
-      if (typeof properties === 'string') {
-        searchTerm = sanitize(properties);
-      } else {
-        properties.searchTerm = sanitize(properties.searchTerm);
-        searchTerm = properties.searchTerm;
-      }
+    // Sanitize the search term prior to any request
+    // The function will throw if it is not valid
+    if (typeof properties === 'string') {
+      searchTerm = sanitize(properties);
+    } else {
+      properties.searchTerm = sanitize(properties.searchTerm);
+      searchTerm = properties.searchTerm;
+    }
 
-      this.parent.measureClient?.sendMeasureEvent('search_requested', {
+    this.parent.measureClient?.sendMeasureEvent('search_requested', {
+      search_term: searchTerm,
+    });
+
+    this.parent.emitEvent('query_submitted', {
+      name: 'query_submitted',
+      data: {
+        searchTerm,
+      },
+    });
+
+    this.parent.adClient?.onQuerySubmitted(
+      typeof properties === 'string'
+        ? { searchTerm, mode: 'exact' }
+        : properties,
+    );
+
+    if (typeof properties === 'string') {
+      response = await this.handleGetSearchResponseItemsWithString(searchTerm);
+    } else {
+      response = await this.handleGetSearchResponseItemsWithObject(properties);
+    }
+
+    if (sendTelemetry) {
+      this.parent.measureClient?.sendMeasureEvent('search_response_received', {
         search_term: searchTerm,
+        number_of_documents: response.data.count,
       });
 
-      this.parent.emitEvent('query_submitted', {
-        name: 'query_submitted',
+      clearTimeout(this.searchCompletedEventTimeout);
+      this.searchCompletedEventTimeout = setTimeout(() => {
+        this.parent.measureClient?.sendMeasureEvent('search_completed', {
+          search_term: searchTerm,
+          number_of_documents: response.data.count,
+        });
+      }, SEARCH_COMPLETED_EVENT_DEBOUNCE);
+
+      this.parent.emitEvent('query_fetched', {
+        name: 'query_fetched',
         data: {
           searchTerm,
         },
       });
 
-      this.parent.adClient?.onQuerySubmitted(
+      if ((response.data.hits?.length || 0) === 0) {
+        this.parent.emitEvent('no_results_returned', {
+          name: 'no_results_returned',
+        });
+      }
+
+      this.parent.adClient?.onQueryFetched(
         typeof properties === 'string'
           ? { searchTerm, mode: 'exact' }
           : properties,
+        response,
       );
-
-      if (typeof properties === 'string') {
-        response =
-          await this.handleGetSearchResponseItemsWithString(searchTerm);
-      } else {
-        response =
-          await this.handleGetSearchResponseItemsWithObject(properties);
-      }
-
-      if (sendTelemetry) {
-        this.parent.measureClient?.sendMeasureEvent(
-          'search_response_received',
-          {
-            search_term: searchTerm,
-            number_of_documents: response.data.count,
-          },
-        );
-
-        clearTimeout(this.searchCompletedEventTimeout);
-        this.searchCompletedEventTimeout = setTimeout(() => {
-          this.parent.measureClient?.sendMeasureEvent('search_completed', {
-            search_term: searchTerm,
-            number_of_documents: response.data.count,
-          });
-        }, SEARCH_COMPLETED_EVENT_DEBOUNCE);
-
-        this.parent.emitEvent('query_fetched', {
-          name: 'query_fetched',
-          data: {
-            searchTerm,
-          },
-        });
-
-        if ((response.data.hits?.length || 0) === 0) {
-          this.parent.emitEvent('no_results_returned', {
-            name: 'no_results_returned',
-          });
-        }
-
-        this.parent.adClient?.onQueryFetched(
-          typeof properties === 'string'
-            ? { searchTerm, mode: 'exact' }
-            : properties,
-          response,
-        );
-      }
-
-      return response;
-    } catch (error) {
-      console.error('Error parsing response:', error);
-      throw error;
     }
+
+    return response;
   };
 
   private handleGetSearchResponseItemsWithString = async (
@@ -153,6 +148,7 @@ export class SearchClient {
         'X-Sc-Session-Id': this.parent.measureClient?.sessionId || nanoid(),
       },
       body: JSON.stringify(body),
+      signal: this.abortController?.signal,
     });
 
     if (!response.ok) {
@@ -167,39 +163,35 @@ export class SearchClient {
   private handleGetSearchResponseItemsWithObject = async (
     properties: SearchClientRequestProperties,
   ): Promise<SearchcraftResponse> => {
-    try {
-      const response = await fetch(this.baseSearchUrl, {
-        method: 'POST',
-        headers: {
-          Authorization: this.config.readKey,
-          'Content-Type': 'application/json',
-          'X-Sc-User-Id': this.userId,
-          'X-Sc-Session-Id': this.parent.measureClient?.sessionId || nanoid(),
-        },
-        body: JSON.stringify({
-          query: this.formatParamsForRequest(properties),
-          offset: properties.offset || 0,
-          limit: properties.limit || this.config.searchResultsPerPage || 20,
-          ...(properties.order_by && {
-            order_by: properties.order_by,
-          }),
-          ...(properties.sort && {
-            sort: properties.sort,
-          }),
-        } satisfies SearchClientRequest),
-      });
+    const response = await fetch(this.baseSearchUrl, {
+      method: 'POST',
+      headers: {
+        Authorization: this.config.readKey,
+        'Content-Type': 'application/json',
+        'X-Sc-User-Id': this.userId,
+        'X-Sc-Session-Id': this.parent.measureClient?.sessionId || nanoid(),
+      },
+      body: JSON.stringify({
+        query: this.formatParamsForRequest(properties),
+        offset: properties.offset || 0,
+        limit: properties.limit || this.config.searchResultsPerPage || 20,
+        ...(properties.order_by && {
+          order_by: properties.order_by,
+        }),
+        ...(properties.sort && {
+          sort: properties.sort,
+        }),
+      } satisfies SearchClientRequest),
+      signal: this.abortController?.signal,
+    });
 
-      if (!response.ok) {
-        throw new Error(
-          `Error: ${response.statusText} (Status: ${response.status})`,
-        );
-      }
-
-      return (await response.json()) as SearchcraftResponse;
-    } catch (error) {
-      console.error('Error parsing response:', error);
-      throw error;
+    if (!response.ok) {
+      throw new Error(
+        `Error: ${response.statusText} (Status: ${response.status})`,
+      );
     }
+
+    return (await response.json()) as SearchcraftResponse;
   };
 
   /**
