@@ -242,12 +242,6 @@ const searchcraftStore = createStore<SearchcraftState>((_set, get) => {
        */
       functions.set({
         searchTerm,
-        facetPathsForIndexFields: {},
-        ...(searchTerm.trim().length === 0 && {
-          searchMode: 'fuzzy',
-          sortType: null,
-          orderByField: null,
-        }),
       });
     },
     setSearchClientResponseItems: (items) =>

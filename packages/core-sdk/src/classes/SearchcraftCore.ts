@@ -266,9 +266,7 @@ export class SearchcraftCore {
           );
           if (
             props.facetPathsForIndexFields &&
-            Object.keys(props.facetPathsForIndexFields).length > 0 &&
-            props.rangeValueForIndexFields &&
-            Object.keys(props.rangeValueForIndexFields).length > 0
+            Object.keys(props.facetPathsForIndexFields).length > 0
           ) {
             props.facetPathsForIndexFields = undefined;
 

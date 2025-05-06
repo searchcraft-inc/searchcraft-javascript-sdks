@@ -126,7 +126,7 @@ export class SearchcraftInputForm {
   handleInput = (event: Event) => {
     const input = event.target as HTMLInputElement;
     this.inputValue = input.value;
-    this.searchcraftStore.setSearchTerm(input.value.trim());
+    this.searchcraftStore.setSearchTerm(input.value);
 
     if (!this.autoSearch) {
       return;

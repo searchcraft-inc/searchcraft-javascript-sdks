@@ -9,7 +9,7 @@ import type {
  * Helper function for getting a Node (FacetWithChildrenObject)
  * at a given path. Traverses the node tree to get the node.
  */
-const getNodeAtPath = (
+export const getFacetTreeNodeAtPath = (
   tree: FacetTree,
   nodePaths: string[],
 ): FacetWithChildrenObject | undefined => {
@@ -25,7 +25,7 @@ const getNodeAtPath = (
  * Helper function to perform a deep merge.
  * Used for merging two branches of a facet tree together.
  */
-const deepMergeWithSpread = (obj1, obj2) => {
+export const deepMergeWithSpread = (obj1, obj2) => {
   const result = { ...obj1 };
 
   for (const key in obj2) {
@@ -75,7 +75,7 @@ export const mergeFacetTrees = (
     nodePath: string[],
   ): FacetWithChildrenObject => {
     const mergedBranch = structuredClone(currentBranch);
-    const incomingBranch = getNodeAtPath(incomingTree, nodePath);
+    const incomingBranch = getFacetTreeNodeAtPath(incomingTree, nodePath);
 
     if (!incomingBranch) {
       return mergedBranch;
