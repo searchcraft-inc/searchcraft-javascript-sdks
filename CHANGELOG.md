@@ -1,4 +1,8 @@
-## 0.10.5 0 2025-05-1
+## 0.10.6 2025-05-06
+
+This release includes more bug fixes for the filter panel.
+
+## 0.10.5 0 2025-05-01
 
 This release includes more bugfixes and style updates:
 
