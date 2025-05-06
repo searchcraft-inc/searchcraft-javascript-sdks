@@ -144,18 +144,24 @@ export class SearchcraftFacetList {
         this.facetTree = mergeFacetTrees(this.facetTree, incomingFacetTree);
         break;
       default:
-        this.facetTree = mergeFacetTrees(this.facetTree, incomingFacetTree);
+        return;
     }
   }
 
-  handleStateUpdate(state: SearchcraftState) {
+  handleStateUpdate(_state: SearchcraftState) {
+    const state = { ..._state };
     // Determine what action to take based on the current State
     if (
       this.lastSearchTerm !== state.searchTerm &&
       state.searchTerm.trim() === ''
     ) {
       this.handleIncomingSearchResponse(state, 'SEARCH_TERM_EMPTY');
-    } else if (this.lastTimeTaken !== state.searchResponseTimeTaken) {
+    } else if (
+      this.lastTimeTaken !== state.searchResponseTimeTaken &&
+      state.searchClientRequest &&
+      typeof state.searchClientRequest === 'object'
+    ) {
+      const request = state.searchClientRequest;
       let actionType: HandlerActionType = 'UNKNOWN';
 
       if (this.lastSearchTerm !== state.searchTerm) {
@@ -174,16 +180,15 @@ export class SearchcraftFacetList {
         actionType = 'EXACT_MATCH_UPDATE';
       }
 
+      this.lastRangeValues = JSON.stringify(request.rangeValueForIndexFields);
+      this.lastFacetValues = JSON.stringify(request.facetPathsForIndexFields);
+      this.lastSortType = request.order_by;
+      this.lastSearchMode = request.mode;
+      this.lastSearchTerm = request.searchTerm;
+      this.lastTimeTaken = state.searchResponseTimeTaken;
       // Handle the incoming response, using the action we have determined.
       this.handleIncomingSearchResponse(state, actionType);
-      this.lastSearchTerm = state.searchTerm;
-      this.lastRangeValues = JSON.stringify(state.rangeValueForIndexFields);
-      this.lastFacetValues = JSON.stringify(state.facetPathsForIndexFields);
-      this.lastSortType = state.sortType;
-      this.lastSearchMode = state.searchMode;
     }
-
-    this.lastTimeTaken = state.searchResponseTimeTaken;
   }
 
   connectedCallback() {

@@ -228,6 +228,7 @@ export class SearchcraftCore {
   getResponseItems = (
     properties: SearchClientRequestProperties | string,
     searchCallback: (
+      request: SearchClientRequestProperties | string,
       response: SearchcraftResponse,
       items: SearchClientResponseItem[],
       supplementalResponse: SearchcraftResponse | undefined,
@@ -280,7 +281,7 @@ export class SearchcraftCore {
           }
         }
 
-        searchCallback(response, items, supplementalResponse);
+        searchCallback(properties, response, items, supplementalResponse);
       })();
 
       /**

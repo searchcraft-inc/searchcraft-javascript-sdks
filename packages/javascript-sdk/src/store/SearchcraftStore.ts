@@ -27,6 +27,7 @@ const initialSearchcraftStateValues: SearchcraftStateValues = {
   rangeValueForIndexFields: {},
   searchTerm: '',
   searchMode: 'fuzzy',
+  searchClientRequest: undefined,
   searchClientResponseItems: [],
   searchResponseTimeTaken: undefined,
   searchResponseFacetPrime: undefined,
@@ -150,6 +151,7 @@ const searchcraftStore = createStore<SearchcraftState>((_set, get) => {
     setAdClientResponseItems: (items: AdClientResponseItem[]) =>
       functions.set({ adClientResponseItems: items }),
     setSearchClientResponseItemsFromResponse: (
+      request,
       response,
       items,
       supplementalResponse,
@@ -166,6 +168,7 @@ const searchcraftStore = createStore<SearchcraftState>((_set, get) => {
           searchResultsCount: count,
           searchResponseFacetPrime: facets,
           supplementalFacetPrime: supplementalResponse?.data.facets,
+          searchClientRequest: request,
         };
       });
 
@@ -178,7 +181,11 @@ const searchcraftStore = createStore<SearchcraftState>((_set, get) => {
         `Facets from response: ${JSON.stringify(facets)}`,
       );
     },
-    setInitialSearchClientResponseItemsFromResponse: (response, items) => {
+    setInitialSearchClientResponseItemsFromResponse: (
+      request,
+      response,
+      items,
+    ) => {
       const state = get();
       const { count = 0, time_taken = 0 } = response.data;
       functions.set((state) => {
@@ -190,6 +197,7 @@ const searchcraftStore = createStore<SearchcraftState>((_set, get) => {
             // Reset to first page when response count changes
             count === state.searchResultsCount ? state.searchResultsPage : 1,
           searchResultsCount: count,
+          searchClientRequest: request,
         };
       });
 

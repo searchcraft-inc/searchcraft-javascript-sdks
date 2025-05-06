@@ -126,26 +126,21 @@ export class SearchcraftInputForm {
   handleInput = (event: Event) => {
     const input = event.target as HTMLInputElement;
     this.inputValue = input.value;
+    this.searchcraftStore.setSearchTerm(input.value.trim());
 
     if (!this.autoSearch) {
       return;
     }
 
-    this.performSearch(input.value);
+    this.performSearch();
   };
 
-  private performSearch = async (searchTerm: string) => {
-    if (searchTerm === this.searchTerm) {
-      return;
-    }
-
-    this.searchcraftStore.setSearchTerm(searchTerm.trim());
+  private performSearch = async () => {
     this.error = false;
 
     try {
       await this.searchcraftStore.search();
     } catch (error) {
-      console.error(`Search for ${searchTerm} failed:`, error);
       this.error = true;
     }
   };
@@ -163,7 +158,7 @@ export class SearchcraftInputForm {
 
   handleFormSubmit = async (event: Event) => {
     event.preventDefault();
-    await this.performSearch(this.inputValue);
+    await this.performSearch();
   };
 
   render() {
