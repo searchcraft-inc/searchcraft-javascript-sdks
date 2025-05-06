@@ -250,7 +250,7 @@ export class SearchcraftCore {
         try {
           response = await this.searchClient.getSearchResponseItems(properties);
         } catch (error) {
-          console.error(`Search request error: ${error}`);
+          console.info(`Search request error: ${error}`);
           return;
         }
 
@@ -286,7 +286,7 @@ export class SearchcraftCore {
               supplementalResponse =
                 await this?.searchClient?.getSearchResponseItems(props, false);
             } catch (error) {
-              console.error(`Search request error: ${error}`);
+              console.info(`Search request error: ${error}`);
             }
           }
         }
