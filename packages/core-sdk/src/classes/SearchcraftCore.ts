@@ -240,11 +240,23 @@ export class SearchcraftCore {
        * Handles search response from the search client.
        */
       (async () => {
-        const response =
-          await this?.searchClient?.getSearchResponseItems(properties);
+        if (!this.searchClient) {
+          console.error('Search client was not initialized.');
+          return;
+        }
+
+        let response: SearchcraftResponse | undefined;
+
+        try {
+          response = await this.searchClient.getSearchResponseItems(properties);
+        } catch (error) {
+          console.error(`Search request error: ${error}`);
+          return;
+        }
 
         if (!response) {
-          throw new Error('Search client was not initialized.');
+          console.error('Search request error: Search response was undefined');
+          return;
         }
 
         const items: SearchClientResponseItem[] = (response.data.hits || [])
@@ -270,8 +282,12 @@ export class SearchcraftCore {
           ) {
             props.facetPathsForIndexFields = undefined;
 
-            supplementalResponse =
-              await this?.searchClient?.getSearchResponseItems(props, false);
+            try {
+              supplementalResponse =
+                await this?.searchClient?.getSearchResponseItems(props, false);
+            } catch (error) {
+              console.error(`Search request error: ${error}`);
+            }
           }
         }
 
