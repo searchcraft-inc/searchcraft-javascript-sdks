@@ -164,19 +164,21 @@ export class SearchcraftFacetList {
       const request = state.searchClientRequest;
       let actionType: HandlerActionType = 'UNKNOWN';
 
-      if (this.lastSearchTerm !== state.searchTerm) {
+      if (this.lastSearchTerm !== request.searchTerm) {
         actionType = 'NEW_SEARCH_TERM';
       } else if (
-        this.lastRangeValues !== JSON.stringify(state.rangeValueForIndexFields)
+        this.lastRangeValues !==
+        JSON.stringify(request.rangeValueForIndexFields)
       ) {
         actionType = 'RANGE_VALUE_UPDATE';
       } else if (
-        this.lastFacetValues !== JSON.stringify(state.facetPathsForIndexFields)
+        this.lastFacetValues !==
+        JSON.stringify(request.facetPathsForIndexFields)
       ) {
         actionType = 'FACET_UPDATE';
-      } else if (this.lastSortType !== state.sortType) {
+      } else if (this.lastSortType !== request.order_by) {
         actionType = 'SORT_ORDER_UPDATE';
-      } else if (this.lastSearchMode !== state.searchMode) {
+      } else if (this.lastSearchMode !== request.mode) {
         actionType = 'EXACT_MATCH_UPDATE';
       }
 

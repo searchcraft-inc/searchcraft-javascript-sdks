@@ -274,10 +274,6 @@ export class SearchcraftCore {
 
             supplementalResponse =
               await this?.searchClient?.getSearchResponseItems(props, false);
-
-            if (response) {
-              console.log('Supplemental response:', supplementalResponse);
-            }
           }
         }
 
