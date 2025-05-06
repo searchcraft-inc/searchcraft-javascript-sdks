@@ -18,6 +18,7 @@ export class SearchClient {
   private userId: string;
   private parent: SearchcraftCore;
   private searchCompletedEventTimeout: NodeJS.Timeout | undefined;
+  private abortController: AbortController | undefined;
 
   constructor(
     parent: SearchcraftCore,
@@ -46,6 +47,8 @@ export class SearchClient {
     properties: SearchClientRequestProperties | string,
     sendTelemetry = true,
   ) => {
+    this.abortController?.abort();
+    this.abortController = new AbortController();
     try {
       let response: SearchcraftResponse;
       let searchTerm = '';
@@ -153,6 +156,7 @@ export class SearchClient {
         'X-Sc-Session-Id': this.parent.measureClient?.sessionId || nanoid(),
       },
       body: JSON.stringify(body),
+      signal: this.abortController?.signal,
     });
 
     if (!response.ok) {
@@ -187,6 +191,7 @@ export class SearchClient {
             sort: properties.sort,
           }),
         } satisfies SearchClientRequest),
+        signal: this.abortController?.signal,
       });
 
       if (!response.ok) {
