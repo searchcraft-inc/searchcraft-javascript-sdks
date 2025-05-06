@@ -156,6 +156,7 @@ export class SearchcraftFacetList {
       state.searchTerm.trim() === ''
     ) {
       this.handleIncomingSearchResponse(state, 'SEARCH_TERM_EMPTY');
+      this.lastSearchTerm = '';
     } else if (
       this.lastTimeTaken !== state.searchResponseTimeTaken &&
       state.searchClientRequest &&
