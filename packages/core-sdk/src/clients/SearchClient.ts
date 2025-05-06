@@ -19,6 +19,7 @@ export class SearchClient {
   private parent: SearchcraftCore;
   private searchCompletedEventTimeout: NodeJS.Timeout | undefined;
   private abortController: AbortController | undefined;
+  private supplementalAbortController: AbortController | undefined;
 
   constructor(
     parent: SearchcraftCore,
@@ -40,19 +41,30 @@ export class SearchClient {
   /**
    * Make the request to get the search results.
    * @param {properties} properties - The properties for the search.
-   * @param sendTelemetry - Whether or not to emit measure and subscription events for this search.
+   * @param isSupplemental - Whether or not this is a supplemental search request (for the purpose of getting top-level facet counts)
    * @returns
    */
   getSearchResponseItems = async (
     properties: SearchClientRequestProperties | string,
-    sendTelemetry = true,
+    isSupplemental = false,
   ) => {
-    this.abortController?.abort(
-      'A newer search request has replaced this one.',
-    );
-    this.abortController = new AbortController();
     let response: SearchcraftResponse;
     let searchTerm = '';
+
+    let abortController: AbortController;
+    if (isSupplemental) {
+      this.supplementalAbortController?.abort(
+        'A newer search request has replaced this one.',
+      );
+      abortController = new AbortController();
+      this.supplementalAbortController = abortController;
+    } else {
+      this.abortController?.abort(
+        'A newer search request has replaced this one.',
+      );
+      abortController = new AbortController();
+      this.abortController = abortController;
+    }
 
     // Sanitize the search term prior to any request
     // The function will throw if it is not valid
@@ -81,12 +93,18 @@ export class SearchClient {
     );
 
     if (typeof properties === 'string') {
-      response = await this.handleGetSearchResponseItemsWithString(searchTerm);
+      response = await this.handleGetSearchResponseItemsWithString(
+        searchTerm,
+        abortController,
+      );
     } else {
-      response = await this.handleGetSearchResponseItemsWithObject(properties);
+      response = await this.handleGetSearchResponseItemsWithObject(
+        properties,
+        abortController,
+      );
     }
 
-    if (sendTelemetry) {
+    if (!isSupplemental) {
       this.parent.measureClient?.sendMeasureEvent('search_response_received', {
         search_term: searchTerm,
         number_of_documents: response.data.count,
@@ -126,6 +144,7 @@ export class SearchClient {
 
   private handleGetSearchResponseItemsWithString = async (
     str: string,
+    abortController: AbortController,
   ): Promise<SearchcraftResponse> => {
     let body: SearchClientRequest;
 
@@ -148,7 +167,7 @@ export class SearchClient {
         'X-Sc-Session-Id': this.parent.measureClient?.sessionId || nanoid(),
       },
       body: JSON.stringify(body),
-      signal: this.abortController?.signal,
+      signal: abortController.signal,
     });
 
     if (!response.ok) {
@@ -162,6 +181,7 @@ export class SearchClient {
 
   private handleGetSearchResponseItemsWithObject = async (
     properties: SearchClientRequestProperties,
+    abortController: AbortController,
   ): Promise<SearchcraftResponse> => {
     const response = await fetch(this.baseSearchUrl, {
       method: 'POST',
@@ -182,7 +202,7 @@ export class SearchClient {
           sort: properties.sort,
         }),
       } satisfies SearchClientRequest),
-      signal: this.abortController?.signal,
+      signal: abortController.signal,
     });
 
     if (!response.ok) {
