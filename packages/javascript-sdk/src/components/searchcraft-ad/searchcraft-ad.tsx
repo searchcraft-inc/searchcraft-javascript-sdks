@@ -8,7 +8,7 @@ import { Component, Element, h, Prop, State } from '@stencil/core';
 import { nanoid } from 'nanoid';
 import classNames from 'classnames';
 
-import { searchcraftStore } from '@store';
+import { type SearchcraftState, searchcraftStore } from '@store';
 
 import { html } from '@utils';
 
@@ -24,10 +24,17 @@ import { html } from '@utils';
 export class SearchcraftPopoverListItemAd {
   @Prop() adSource: SearchcraftAdSource = 'Custom';
   @Prop() adClientResponseItem?: AdClientResponseItem;
-  @Prop() adContainerId: string = nanoid();
+
+  /**
+   * Where the ad is being rendered within the search results div.
+   * Lifecycle behavior differs for ads being rendered in different positions,
+   * so we need to be able to handle all of those cases.
+   */
+  @Prop() renderPosition: 'interstitial' | 'top' | 'bottom' = 'interstitial';
 
   @State() searchTerm?: string;
   @State() isSearchInProgress = false;
+  @State() searchResultCount = 0;
   @Element() hostElement?: HTMLElement;
 
   private core?: SearchcraftCore;
@@ -35,23 +42,91 @@ export class SearchcraftPopoverListItemAd {
   private intersectionObserver?: IntersectionObserver;
   private storeUnsubscribe?: () => void;
   private adContainerRenderedTimeout?: NodeJS.Timeout;
-  private isComponentConnected = true;
+  private isComponentConnected = false;
+  private timeTaken?: number;
+
+  @State() adContainerId = '';
+
+  /**
+   * Handles when an ad container is first rendered.
+   * Core emits an ad_container_rendered event and performs ad client side effects
+   *
+   */
+  handleAdRendered() {
+    this.adContainerId = nanoid();
+
+    if (this.isComponentConnected && this.searchResultCount > 0) {
+      clearTimeout(this.adContainerRenderedTimeout);
+      this.adContainerRenderedTimeout = setTimeout(() => {
+        this.core?.handleAdContainerRendered({
+          adClientResponseItem: this.adClientResponseItem,
+          adContainerId: this.adContainerId,
+          adSource: this.adSource,
+          searchTerm: this.searchTerm || '',
+        });
+      }, this.core?.config?.adContainerRenderedDebounceDelay || 300);
+    }
+  }
+
+  handleAdViewed() {
+    this.core?.handleAdContainerViewed({
+      adClientResponseItem: this.adClientResponseItem,
+      adContainerId: this.adContainerId,
+      adSource: this.adSource,
+      searchTerm: this.searchTerm || '',
+    });
+  }
+
+  /**
+   * Things to do when there's a new incoming search request.
+   */
+  handleNewIncomingSearchRequest(state: SearchcraftState) {
+    const request = state.searchClientRequest;
+    if (request && typeof request === 'object') {
+      this.searchTerm = request.searchTerm;
+    }
+
+    this.searchResultCount = state.searchClientResponseItems.length;
+
+    this.handleAdRendered();
+
+    this.startIntersectionObserver();
+  }
 
   connectedCallback() {
     const currentState = searchcraftStore.getState();
 
+    this.isComponentConnected = true;
     this.core = currentState.core;
-    this.searchTerm = currentState.searchTerm;
     this.isSearchInProgress = currentState.isSearchInProgress;
+    this.searchResultCount = currentState.searchClientResponseItems.length;
+    this.timeTaken = currentState.searchResponseTimeTaken;
+
+    const request = currentState.searchClientRequest;
+    if (request && typeof request === 'object') {
+      this.searchTerm = request.searchTerm;
+    }
+
+    /**
+     * Interstial ads have a different lifecycle, where we need handle an incoming search
+     * request immediately, because they are rendered alongside the search results.
+     */
+    if (this.renderPosition === 'interstitial') {
+      this.handleNewIncomingSearchRequest(currentState);
+    }
 
     // Subscribes to store changes (for search term).
     this.storeUnsubscribe = searchcraftStore.subscribe((state) => {
-      this.searchTerm = state.searchTerm;
+      if (this.timeTaken !== state.searchResponseTimeTaken) {
+        this.handleNewIncomingSearchRequest(state);
+      }
+      this.timeTaken = state.searchResponseTimeTaken;
       this.isSearchInProgress = state.isSearchInProgress;
     });
   }
 
-  componentDidLoad() {
+  startIntersectionObserver() {
+    this.intersectionObserver?.disconnect();
     /**
      * Handles when an ad container is viewable within the document,
      * Core emits an ad_container_viewed event and performs ad client side effects
@@ -59,13 +134,8 @@ export class SearchcraftPopoverListItemAd {
     if (this.hostElement) {
       this.intersectionObserver = new IntersectionObserver(
         ([entry]) => {
-          if (entry?.isIntersecting && !this.isSearchInProgress) {
-            this.core?.handleAdContainerViewed({
-              adClientResponseItem: this.adClientResponseItem,
-              adContainerId: this.adContainerId,
-              adSource: this.adSource,
-              searchTerm: this.searchTerm || '',
-            });
+          if (entry?.isIntersecting && this.searchResultCount > 0) {
+            this.handleAdViewed();
           }
         },
         { threshold: 0 },
@@ -142,27 +212,9 @@ export class SearchcraftPopoverListItemAd {
   }
 
   render() {
-    // Don't render ads while search is in progress
-    if (this.isSearchInProgress) {
+    // Don't render ads if no search results
+    if (this.searchResultCount === 0) {
       return;
-    }
-
-    /**
-     * Handles when an ad container is first rendered.
-     * Core emits an ad_container_rendered event and performs ad client side effects
-     *
-     */
-
-    if (this.isComponentConnected) {
-      clearTimeout(this.adContainerRenderedTimeout);
-      this.adContainerRenderedTimeout = setTimeout(() => {
-        this.core?.handleAdContainerRendered({
-          adClientResponseItem: this.adClientResponseItem,
-          adContainerId: this.adContainerId,
-          adSource: this.adSource,
-          searchTerm: this.searchTerm || '',
-        });
-      }, this.core?.config?.adContainerRenderedDebounceDelay || 500);
     }
 
     switch (this.adSource) {

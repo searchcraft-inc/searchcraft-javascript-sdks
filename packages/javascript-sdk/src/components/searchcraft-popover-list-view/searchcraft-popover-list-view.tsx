@@ -3,7 +3,6 @@ import type {
   SearchClientResponseItem,
 } from '@searchcraft/core';
 import { Component, h, Prop, type JSX } from '@stencil/core';
-import { nanoid } from 'nanoid';
 
 import type { PopoverResultMappings } from '@searchcraft/core';
 import { searchcraftStore } from '@store';
@@ -45,9 +44,9 @@ export class SearchcraftPopoverListView {
         {this.adClientResponseItems?.map((item) => (
           <searchcraft-ad
             adClientResponseItem={item}
-            adContainerId={nanoid()}
             adSource='adMarketplace'
             key={item.id}
+            renderPosition='top'
           />
         ))}
         {this.searchClientResponseItems?.map((item, index) => (
@@ -77,8 +76,8 @@ export class SearchcraftPopoverListView {
       itemsToRender.push(
         <searchcraft-ad
           adSource='Custom'
-          adContainerId={nanoid()}
           key={`${n}-ad`}
+          renderPosition='top'
         />,
       );
     }
@@ -95,8 +94,8 @@ export class SearchcraftPopoverListView {
           itemsToRender.push(
             <searchcraft-ad
               adSource='Custom'
-              adContainerId={nanoid()}
               key={`${item.id}-ad-${n}`}
+              renderPosition='interstitial'
             />,
           );
         }
@@ -119,8 +118,8 @@ export class SearchcraftPopoverListView {
       itemsToRender.push(
         <searchcraft-ad
           adSource='Custom'
-          adContainerId={nanoid()}
           key={`${n}-ad`}
+          renderPosition='bottom'
         />,
       );
     }
@@ -143,8 +142,8 @@ export class SearchcraftPopoverListView {
       itemsToRender.push(
         <searchcraft-ad
           adSource='Nativo'
-          adContainerId={nanoid()}
           key={`${n}-ad`}
+          renderPosition='top'
         />,
       );
     }
@@ -161,8 +160,8 @@ export class SearchcraftPopoverListView {
           itemsToRender.push(
             <searchcraft-ad
               adSource='Nativo'
-              adContainerId={nanoid()}
               key={`${item.id}-ad-${n}`}
+              renderPosition='interstitial'
             />,
           );
         }
@@ -185,8 +184,8 @@ export class SearchcraftPopoverListView {
       itemsToRender.push(
         <searchcraft-ad
           adSource='Nativo'
-          adContainerId={nanoid()}
           key={`${n}-ad`}
+          renderPosition='bottom'
         />,
       );
     }

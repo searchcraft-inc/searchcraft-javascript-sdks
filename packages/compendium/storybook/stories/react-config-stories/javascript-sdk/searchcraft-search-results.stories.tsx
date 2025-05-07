@@ -154,11 +154,23 @@ export const WithCustomAds: StoryObj<Components.SearchcraftSearchResults> = {
           customAdTemplate: customAdTemplate,
         });
 
-        const unsubscribe = searchcraft.subscribe(
+        const unsubscribe1 = searchcraft.subscribe(
           'ad_container_rendered',
           (event) => {
             console.log(
-              'Ad slot shown!',
+              '[ad_container_rendered]',
+              event.data.adSource,
+              event.data.adContainerId,
+              event.data.searchTerm,
+            );
+          },
+        );
+
+        const unsubscribe2 = searchcraft.subscribe(
+          'ad_container_viewed',
+          (event) => {
+            console.log(
+              '[ad_container_viewed]',
               event.data.adSource,
               event.data.adContainerId,
               event.data.searchTerm,
@@ -174,7 +186,10 @@ export const WithCustomAds: StoryObj<Components.SearchcraftSearchResults> = {
           searchResults.template = searchResultTemplate;
         }
 
-        return unsubscribe();
+        return () => {
+          unsubscribe1();
+          unsubscribe2();
+        };
       }, []);
 
       return <Story />;
