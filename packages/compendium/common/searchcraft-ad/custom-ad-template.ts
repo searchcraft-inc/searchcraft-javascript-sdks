@@ -4,6 +4,7 @@ import './custom-ad-template.scss';
 
 export const customAdTemplate: CustomAdTemplate = (data, { html }) => html`
   <div class="custom-ad" id="${data.adContainerId}">
-    Custom ad for <strong>${data.searchTerm}</strong>
+    <p>Custom ad for <strong>${data.searchTerm}</strong></p>
+    <p><small>adContainerId: ${data.adContainerId}</small></p>
   </div>
 `;

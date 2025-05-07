@@ -1,5 +1,4 @@
 import { Component, h, Prop, State, type JSX } from '@stencil/core';
-import { nanoid } from 'nanoid';
 
 import type {
   AdClientResponseItem,
@@ -158,8 +157,8 @@ export class SearchcraftSearchResults {
           <searchcraft-ad
             adSource='adMarketplace'
             adClientResponseItem={item}
-            adContainerId={nanoid()}
             key={item.id}
+            renderPosition='top'
           />
         ))}
         {items.map((item, index) => (
@@ -194,8 +193,8 @@ export class SearchcraftSearchResults {
       itemsToRender.push(
         <searchcraft-ad
           adSource='Custom'
-          adContainerId={nanoid()}
           key={`${n}-ad`}
+          renderPosition='top'
         />,
       );
     }
@@ -212,8 +211,8 @@ export class SearchcraftSearchResults {
           itemsToRender.push(
             <searchcraft-ad
               adSource='Custom'
-              adContainerId={nanoid()}
               key={`${item.id}-ad-${n}`}
+              renderPosition='interstitial'
             />,
           );
         }
@@ -236,8 +235,8 @@ export class SearchcraftSearchResults {
       itemsToRender.push(
         <searchcraft-ad
           adSource='Custom'
-          adContainerId={nanoid()}
           key={`${n}-ad`}
+          renderPosition='bottom'
         />,
       );
     }
@@ -264,8 +263,8 @@ export class SearchcraftSearchResults {
       itemsToRender.push(
         <searchcraft-ad
           adSource='Nativo'
-          adContainerId={nanoid()}
           key={`${n}-ad`}
+          renderPosition='top'
         />,
       );
     }
@@ -282,8 +281,8 @@ export class SearchcraftSearchResults {
           itemsToRender.push(
             <searchcraft-ad
               adSource='Nativo'
-              adContainerId={nanoid()}
               key={`${item.id}-ad-${n}`}
+              renderPosition='interstitial'
             />,
           );
         }
@@ -306,8 +305,8 @@ export class SearchcraftSearchResults {
       itemsToRender.push(
         <searchcraft-ad
           adSource='Nativo'
-          adContainerId={nanoid()}
           key={`${n}-ad`}
+          renderPosition='bottom'
         />,
       );
     }

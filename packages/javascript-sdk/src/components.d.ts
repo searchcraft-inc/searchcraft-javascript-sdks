@@ -15,8 +15,11 @@ export namespace Components {
      */
     interface SearchcraftAd {
         "adClientResponseItem"?: AdClientResponseItem;
-        "adContainerId": string;
         "adSource": SearchcraftAdSource;
+        /**
+          * Where the ad is being rendered within the search results div. Lifecycle behavior differs for ads being rendered in different positions, so we need to be able to handle all of those cases.
+         */
+        "renderPosition": 'interstitial' | 'top' | 'bottom';
     }
     /**
      * This web component represents a button.
@@ -1113,8 +1116,11 @@ declare namespace LocalJSX {
      */
     interface SearchcraftAd {
         "adClientResponseItem"?: AdClientResponseItem;
-        "adContainerId"?: string;
         "adSource"?: SearchcraftAdSource;
+        /**
+          * Where the ad is being rendered within the search results div. Lifecycle behavior differs for ads being rendered in different positions, so we need to be able to handle all of those cases.
+         */
+        "renderPosition"?: 'interstitial' | 'top' | 'bottom';
     }
     /**
      * This web component represents a button.
