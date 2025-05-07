@@ -248,7 +248,10 @@ export class SearchcraftCore {
         let response: SearchcraftResponse | undefined;
 
         try {
-          response = await this.searchClient.getSearchResponseItems(properties);
+          response = await this.searchClient.getSearchResponseItems(
+            properties,
+            false,
+          );
         } catch (error) {
           console.info(`Search request error: ${error}`);
           return;
@@ -284,9 +287,10 @@ export class SearchcraftCore {
 
             try {
               supplementalResponse =
-                await this?.searchClient?.getSearchResponseItems(props, false);
+                await this?.searchClient?.getSearchResponseItems(props, true);
             } catch (error) {
               console.info(`Search request error: ${error}`);
+              return;
             }
           }
         }
