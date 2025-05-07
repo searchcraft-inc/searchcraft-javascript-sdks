@@ -1,8 +1,15 @@
-## 0.10.6 2025-05-06
+## 0.10.7 - 2025-05-07
+
+This release includes:
+
+- Bug fixes to `searchcraft-filter-panel`.
+- Bug fixes to the ad container rendering and ad container events.
+
+## 0.10.6 - 2025-05-06
 
 This release includes more bug fixes for the filter panel.
 
-## 0.10.5 0 2025-05-01
+## 0.10.5 - 2025-05-01
 
 This release includes more bugfixes and style updates:
 
