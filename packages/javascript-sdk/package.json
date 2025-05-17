@@ -27,9 +27,7 @@
     "type": "git",
     "url": "https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/"
   },
-  "files": [
-    "dist/"
-  ],
+  "files": ["dist/"],
   "scripts": {
     "build": "stencil build",
     "docs": "typedoc --options typedoc.json",
@@ -50,6 +48,8 @@
     "@stencil/sass": "^3.0.12",
     "@stencil/vue-output-target": "^0.9.2",
     "@types/node": "^16.18.11",
-    "zustand": "^5.0.1"
+    "zustand": "^5.0.1",
+    "@thumbmarkjs/thumbmarkjs": "^0.16.1",
+    "nanoid": "^5.0.9"
   }
 }

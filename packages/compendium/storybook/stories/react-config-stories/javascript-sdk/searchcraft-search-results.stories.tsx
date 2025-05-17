@@ -26,6 +26,14 @@ export const Default: StoryObj<Components.SearchcraftSearchResults> = {
           readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
           endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
           index: [import.meta.env.VITE_RUNEGARD_INDEX],
+          initialQuery: JSON.stringify({
+            order_by: 'date_published',
+            query: {
+              exact: {
+                ctx: 'section_name:"Columns" OR section_name:"Prep" OR section_name:"Local" OR section_name:"Minnesota"',
+              },
+            },
+          }),
         });
 
         const searchResults = document.querySelector(
@@ -34,14 +42,6 @@ export const Default: StoryObj<Components.SearchcraftSearchResults> = {
 
         if (searchResults) {
           searchResults.template = searchResultTemplate;
-          searchResults.initialQuery = JSON.stringify({
-            order_by: 'date_published',
-            query: {
-              exact: {
-                ctx: 'section_name:"Columns" OR section_name:"Prep" OR section_name:"Local" OR section_name:"Minnesota"',
-              },
-            },
-          });
         }
       }, []);
 

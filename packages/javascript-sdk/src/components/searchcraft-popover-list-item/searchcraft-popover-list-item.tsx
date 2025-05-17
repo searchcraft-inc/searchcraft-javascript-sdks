@@ -1,11 +1,12 @@
-import { searchcraftStore } from '@store';
 import type {
   SearchDocument,
   SearchClientResponseItem,
   PopoverResultMappings,
-} from '@searchcraft/core';
+} from '@types';
 import { Component, h, Prop, State } from '@stencil/core';
 import { getDocumentValueFromSearchResultMapping } from '@utils';
+import type { SearchcraftCore } from '@classes';
+import { registry } from '@classes/CoreInstanceRegistry';
 
 /**
  * A single list item rendered in a searchcraft-popover-list-view.
@@ -21,12 +22,18 @@ export class SearchcraftPopoverListItem {
   @Prop() popoverResultMappings: PopoverResultMappings | undefined;
   /** The document position relative to the search results (For Measure) */
   @Prop() documentPosition = 0;
+  /**
+   * The id of the Searchcraft instance that this component should use.
+   */
+  @Prop() searchcraftId?: string;
 
   @State() title?: string;
   @State() subtitle?: string;
   @State() href?: string;
   @State() imageSource?: string;
   @State() imageAlt?: string;
+  core?: SearchcraftCore;
+  private cleanupCore?: () => void;
 
   mapValuesFromDocument(document: SearchDocument) {
     this.title = getDocumentValueFromSearchResultMapping(
@@ -51,24 +58,32 @@ export class SearchcraftPopoverListItem {
     );
   }
 
+  onCoreAvailable(core: SearchcraftCore) {
+    this.core = core;
+  }
+
   connectedCallback() {
     if (this.item) {
       this.mapValuesFromDocument(this.item.document);
     }
+    this.cleanupCore = registry.useCoreInstance(
+      this.searchcraftId,
+      this.onCoreAvailable.bind(this),
+    );
   }
 
-  disconnectedCallback() {}
+  disconnectedCallback() {
+    this.cleanupCore?.();
+  }
 
   handleLinkClick = () => {
-    const state = searchcraftStore.getState();
-    const core = state.getSearchcraftCore();
-
-    if (core) {
+    if (this.core) {
       const document_position = this.documentPosition;
-      const search_term = state.searchTerm;
-      const number_of_documents = state.searchClientResponseItems.length || 0;
+      const search_term = this.core.store.getState().searchTerm;
+      const number_of_documents =
+        this.core.store.getState().searchClientResponseItems.length || 0;
 
-      core.measureClient?.sendMeasureEvent('document_clicked', {
+      this.core.measureClient?.sendMeasureEvent('document_clicked', {
         document_position,
         number_of_documents,
         search_term,

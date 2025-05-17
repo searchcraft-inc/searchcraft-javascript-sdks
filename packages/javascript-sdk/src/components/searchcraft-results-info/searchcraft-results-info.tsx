@@ -1,8 +1,8 @@
+import type { SearchcraftCore } from '@classes';
+import { registry } from '@classes/CoreInstanceRegistry';
 import { Component, h, State, Prop } from '@stencil/core';
 
-import type { ResultsInfoTemplate } from '@searchcraft/core';
-
-import { searchcraftStore } from '@store';
+import type { ResultsInfoTemplate } from '@types';
 
 import { formatNumberWithCommas, html } from '@utils';
 
@@ -61,6 +61,10 @@ export class SearchcraftResultsInfo {
    * A callback function responsible for rendering the results info.
    */
   @Prop() template?: ResultsInfoTemplate;
+  /**
+   * The id of the Searchcraft instance that this component should use.
+   */
+  @Prop() searchcraftId?: string;
 
   // store vars
   @State() searchTerm;
@@ -74,9 +78,10 @@ export class SearchcraftResultsInfo {
   @State() responseTime = '0';
 
   unsubscribe: () => void = () => {};
+  private cleanupCore?: () => void;
 
-  connectedCallback() {
-    this.unsubscribe = searchcraftStore.subscribe((state) => {
+  onCoreAvailable(core: SearchcraftCore) {
+    this.unsubscribe = core.store.subscribe((state) => {
       // store vars
       this.searchTerm = state.searchTerm;
       this.searchResultsPage = state.searchResultsPage;
@@ -100,10 +105,16 @@ export class SearchcraftResultsInfo {
     });
   }
 
+  connectedCallback() {
+    this.cleanupCore = registry.useCoreInstance(
+      this.searchcraftId,
+      this.onCoreAvailable.bind(this),
+    );
+  }
+
   disconnectedCallback() {
-    if (this.unsubscribe) {
-      this.unsubscribe();
-    }
+    this.unsubscribe?.();
+    this.cleanupCore?.();
   }
 
   render() {

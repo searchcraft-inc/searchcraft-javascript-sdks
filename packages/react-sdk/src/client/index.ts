@@ -16,11 +16,18 @@ import { defineCustomElements } from '@searchcraft/javascript-sdk';
  * The consumer-facing Searchcraft class.
  */
 export class Searchcraft extends SearchcraftCore {
-  constructor(config: SearchcraftConfig) {
-    super(config, {
-      sdkName: packageJson.name,
-      sdkVersion: packageJson.version,
-    });
+  constructor(
+    config: SearchcraftConfig,
+    searchcraftId: string | undefined = undefined,
+  ) {
+    super(
+      config,
+      {
+        sdkName: packageJson.name,
+        sdkVersion: packageJson.version,
+      },
+      searchcraftId,
+    );
   }
 }
 

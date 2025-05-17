@@ -2,11 +2,12 @@ import type {
   SearchClientResponseItem,
   SearchResultTemplate,
   SearchResultTemplateData,
-} from '@searchcraft/core';
+} from '@types';
 import { Component, Element, h, Prop, State } from '@stencil/core';
 
 import { html } from '@utils';
-import { searchcraftStore } from '@store';
+import type { SearchcraftCore } from '@classes';
+import { registry } from '@classes/CoreInstanceRegistry';
 
 /**
  * This web component is designed to display detailed information for a single search result. Once a query is submitted, the component formats and presents the result.
@@ -31,11 +32,26 @@ export class SearchcraftSearchResult {
    * A callback function responsible for rendering a result.
    */
   @Prop() template?: SearchResultTemplate<SearchResultTemplateData>;
+  /**
+   * The id of the Searchcraft instance that this component should use.
+   */
+  @Prop() searchcraftId?: string;
 
   @State() templateHtml: string | undefined;
   @Element() hostElement?: HTMLElement;
+  core?: SearchcraftCore;
+  private cleanupCore?: () => void;
+
+  onCoreAvailable(core: SearchcraftCore) {
+    this.core = core;
+  }
 
   connectedCallback() {
+    this.cleanupCore = registry.useCoreInstance(
+      this.searchcraftId,
+      this.onCoreAvailable.bind(this),
+    );
+
     if (this.item) {
       try {
         this.templateHtml = this.template?.(this.item.document, this.index, {
@@ -48,10 +64,11 @@ export class SearchcraftSearchResult {
     }
   }
 
-  handleResultContainerClick = (event: MouseEvent) => {
-    const state = searchcraftStore.getState();
-    const core = state.getSearchcraftCore();
+  disconnectedCallback() {
+    this.cleanupCore?.();
+  }
 
+  handleResultContainerClick = (event: MouseEvent) => {
     if (!event.target) {
       return;
     }
@@ -62,17 +79,18 @@ export class SearchcraftSearchResult {
     if (
       !link ||
       !this.hostElement?.contains(link) ||
-      !core ||
-      !core.measureClient
+      !this.core ||
+      !this.core.measureClient
     ) {
       return;
     }
 
     const document_position = this.documentPosition;
-    const search_term = state.searchTerm;
-    const number_of_documents = state.searchClientResponseItems.length || 0;
+    const search_term = this.core.store.getState().searchTerm;
+    const number_of_documents =
+      this.core.store.getState().searchClientResponseItems.length || 0;
 
-    core.measureClient.sendMeasureEvent('document_clicked', {
+    this.core.measureClient.sendMeasureEvent('document_clicked', {
       document_position,
       number_of_documents,
       search_term,

@@ -9,9 +9,9 @@ import {
 } from '@stencil/core';
 import classNames from 'classnames';
 
-import type { SearchcraftCore } from '@searchcraft/core';
-
-import { searchcraftStore } from '@store';
+import type { SearchcraftCore } from '@classes';
+import type { SearchcraftState } from '@store';
+import { registry } from '@classes/CoreInstanceRegistry';
 
 /**
  * This web component provides a user-friendly interface for querying an indexed dataset, enabling users to easily search large collections of data.
@@ -47,6 +47,10 @@ import { searchcraftStore } from '@store';
   shadow: false,
 })
 export class SearchcraftInputForm {
+  /**
+   * The id of the Searchcraft instance that this component should use.
+   */
+  @Prop() searchcraftId?: string;
   /**
    * Whether or not to automatically submit the search term when the input changes.
    */
@@ -90,14 +94,12 @@ export class SearchcraftInputForm {
   @State() searchTerm = '';
   @State() error = false;
 
-  @Prop() core?: SearchcraftCore;
-
-  private searchcraftStore = searchcraftStore.getState();
-  private unsubscribe: () => void = () => {};
+  private core?: SearchcraftCore;
+  private unsubscribe?: () => void;
+  private cleanupCore?: () => void;
 
   init() {
     if (this.core) {
-      this.searchcraftStore.init(this.core);
       this.inputInit?.emit();
     }
   }
@@ -107,26 +109,31 @@ export class SearchcraftInputForm {
     this.init();
   }
 
-  connectedCallback() {
+  onCoreAvailable(core: SearchcraftCore) {
+    this.core = core;
     this.init();
-  }
-
-  componentDidLoad() {
-    this.unsubscribe = searchcraftStore.subscribe((state) => {
+    this.unsubscribe = core.store.subscribe((state: SearchcraftState) => {
       this.searchTerm = state.searchTerm;
       this.inputValue = state.searchTerm;
     });
   }
 
+  connectedCallback() {
+    this.cleanupCore = registry.useCoreInstance(
+      this.searchcraftId,
+      this.onCoreAvailable.bind(this),
+    );
+  }
+
   disconnectedCallback() {
-    this.handleReset();
     this.unsubscribe?.();
+    this.cleanupCore?.();
   }
 
   handleInput = (event: Event) => {
     const input = event.target as HTMLInputElement;
     this.inputValue = input.value;
-    this.searchcraftStore.setSearchTerm(input.value);
+    this.core?.store.getState().setSearchTerm(input.value);
 
     if (!this.autoSearch) {
       return;
@@ -139,21 +146,15 @@ export class SearchcraftInputForm {
     this.error = false;
 
     try {
-      await this.searchcraftStore.search();
+      await this.core?.store.getState().search();
     } catch (error) {
       this.error = true;
     }
   };
 
-  private handleReset = () => {
-    this.searchcraftStore.setSearchResultsCount(0);
-    this.searchcraftStore.setSearchTerm('');
-    this.searchcraftStore.setSearchClientResponseItems([]);
-    this.error = false;
-  };
-
   handleClearInput = () => {
-    this.handleReset();
+    this.core?.store.getState().resetSearchValues();
+    this.error = false;
   };
 
   handleFormSubmit = async (event: Event) => {

@@ -37,3 +37,19 @@ export const searchResultTemplate: SearchResultTemplate<
     </div>
   </a>
 `;
+
+type SearchResultTemplateDataKobol = {
+  link: string;
+  title: string;
+  price: string;
+  image: string;
+};
+
+export const searchResultTemplateKobol: SearchResultTemplate<
+  SearchResultTemplateDataKobol
+> = (data, index, { html }) => html`
+  <div>
+    <h2>${data.title}</h2>
+    <p>${data.link}
+  </div>
+`;

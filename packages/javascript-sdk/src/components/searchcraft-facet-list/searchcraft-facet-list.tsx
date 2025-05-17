@@ -11,9 +11,9 @@ import type {
   FacetRoot,
   FacetWithChildrenArray,
   FacetWithChildrenObject,
-} from '@searchcraft/core';
+} from '@types';
 
-import { searchcraftStore, type SearchcraftState } from '@store';
+import type { SearchcraftState } from '@store';
 import {
   deepMergeWithSpread,
   facetWithChildrenArrayToCompleteFacetTree,
@@ -21,6 +21,8 @@ import {
   mergeFacetTrees,
   removeSubstringMatches,
 } from '@utils';
+import type { SearchcraftCore } from '@classes';
+import { registry } from '@classes/CoreInstanceRegistry';
 
 type HandlerActionType =
   | 'SEARCH_TERM_EMPTY'
@@ -58,6 +60,10 @@ type HandlerActionType =
   shadow: false,
 })
 export class SearchcraftFacetList {
+  /**
+   * The id of the Searchcraft instance that this component should use.
+   */
+  @Prop() searchcraftId?: string;
   /**
    * The name of the field where facets are applied.
    */
@@ -111,6 +117,7 @@ export class SearchcraftFacetList {
   private lastFacetValues?: string;
 
   private unsubscribe?: () => void;
+  private cleanupCore?: () => void;
 
   get areAnyFacetPathsSelected(): boolean {
     return Object.keys(this.selectedPaths).some(
@@ -275,16 +282,24 @@ export class SearchcraftFacetList {
     }
   }
 
-  connectedCallback() {
-    this.handleStateUpdate(searchcraftStore.getState());
+  onCoreAvailable(core: SearchcraftCore) {
+    this.handleStateUpdate(core.store.getState());
 
-    this.unsubscribe = searchcraftStore.subscribe((state) => {
+    this.unsubscribe = core.store.subscribe((state) => {
       this.handleStateUpdate(state);
     });
   }
 
+  connectedCallback() {
+    this.cleanupCore = registry.useCoreInstance(
+      this.searchcraftId,
+      this.onCoreAvailable.bind(this),
+    );
+  }
+
   disconnectedCallback() {
     this.unsubscribe?.();
+    this.cleanupCore?.();
   }
 
   handleCheckboxChange(path: string) {

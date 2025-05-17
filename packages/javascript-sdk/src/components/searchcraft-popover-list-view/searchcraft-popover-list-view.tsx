@@ -1,11 +1,12 @@
 import type {
   AdClientResponseItem,
   SearchClientResponseItem,
-} from '@searchcraft/core';
+  PopoverResultMappings,
+  SearchcraftConfig,
+} from '@types';
 import { Component, h, Prop, type JSX } from '@stencil/core';
-
-import type { PopoverResultMappings } from '@searchcraft/core';
-import { searchcraftStore } from '@store';
+import type { SearchcraftCore } from '@classes';
+import { registry } from '@classes/CoreInstanceRegistry';
 
 /**
  * This web component is designed to display a list of results within a popover interface.
@@ -24,6 +25,10 @@ import { searchcraftStore } from '@store';
 })
 export class SearchcraftPopoverListView {
   /**
+   * The id of the Searchcraft instance that this component should use.
+   */
+  @Prop() searchcraftId?: string;
+  /**
    * The mappings that define how the data in the documents are mapped to the
    * list-view-item elements.
    */
@@ -36,13 +41,30 @@ export class SearchcraftPopoverListView {
   @Prop() searchResultsPage!: number;
   @Prop() searchResultsPerPage!: number;
 
-  private config = searchcraftStore.getState().core?.config;
+  private config?: SearchcraftConfig;
+  private cleanupCore?: () => void;
+
+  onCoreAvailable(core: SearchcraftCore) {
+    this.config = core.config;
+  }
+
+  connectedCallback() {
+    this.cleanupCore = registry.useCoreInstance(
+      this.searchcraftId,
+      this.onCoreAvailable.bind(this),
+    );
+  }
+
+  disconnectedCallback() {
+    this.cleanupCore?.();
+  }
 
   renderWithADMAds() {
     return (
       <div class='searchcraft-popover-list-view'>
         {this.adClientResponseItems?.map((item) => (
           <searchcraft-ad
+            searchcraft-id={this.searchcraftId}
             adClientResponseItem={item}
             adSource='adMarketplace'
             key={item.id}
@@ -51,6 +73,7 @@ export class SearchcraftPopoverListView {
         ))}
         {this.searchClientResponseItems?.map((item, index) => (
           <searchcraft-popover-list-item
+            searchcraft-id={this.searchcraftId}
             item={item}
             key={item.id}
             popoverResultMappings={this.popoverResultMappings}
@@ -75,6 +98,7 @@ export class SearchcraftPopoverListView {
     for (let n = 0; n < adStartQuantity; n++) {
       itemsToRender.push(
         <searchcraft-ad
+          searchcraft-id={this.searchcraftId}
           adSource='Custom'
           key={`${n}-ad`}
           renderPosition='top'
@@ -93,6 +117,7 @@ export class SearchcraftPopoverListView {
         for (let n = 0; n < interstitialQuantity; n++) {
           itemsToRender.push(
             <searchcraft-ad
+              searchcraft-id={this.searchcraftId}
               adSource='Custom'
               key={`${item.id}-ad-${n}`}
               renderPosition='interstitial'
@@ -103,6 +128,7 @@ export class SearchcraftPopoverListView {
 
       itemsToRender.push(
         <searchcraft-popover-list-item
+          searchcraft-id={this.searchcraftId}
           item={item}
           key={item.id}
           popoverResultMappings={this.popoverResultMappings}
@@ -117,6 +143,7 @@ export class SearchcraftPopoverListView {
     for (let n = 0; n < adEndQuantity; n++) {
       itemsToRender.push(
         <searchcraft-ad
+          searchcraft-id={this.searchcraftId}
           adSource='Custom'
           key={`${n}-ad`}
           renderPosition='bottom'
@@ -141,6 +168,7 @@ export class SearchcraftPopoverListView {
     for (let n = 0; n < adStartQuantity; n++) {
       itemsToRender.push(
         <searchcraft-ad
+          searchcraft-id={this.searchcraftId}
           adSource='Nativo'
           key={`${n}-ad`}
           renderPosition='top'
@@ -159,6 +187,7 @@ export class SearchcraftPopoverListView {
         for (let n = 0; n < interstitialQuantity; n++) {
           itemsToRender.push(
             <searchcraft-ad
+              searchcraft-id={this.searchcraftId}
               adSource='Nativo'
               key={`${item.id}-ad-${n}`}
               renderPosition='interstitial'
@@ -169,6 +198,7 @@ export class SearchcraftPopoverListView {
 
       itemsToRender.push(
         <searchcraft-popover-list-item
+          searchcraft-id={this.searchcraftId}
           item={item}
           key={item.id}
           popoverResultMappings={this.popoverResultMappings}
@@ -183,6 +213,7 @@ export class SearchcraftPopoverListView {
     for (let n = 0; n < adEndQuantity; n++) {
       itemsToRender.push(
         <searchcraft-ad
+          searchcraft-id={this.searchcraftId}
           adSource='Nativo'
           key={`${n}-ad`}
           renderPosition='bottom'
@@ -198,6 +229,7 @@ export class SearchcraftPopoverListView {
       <div class='searchcraft-popover-list-view'>
         {this.searchClientResponseItems?.map((item, index) => (
           <searchcraft-popover-list-item
+            searchcraft-id={this.searchcraftId}
             item={item}
             key={item.id}
             popoverResultMappings={this.popoverResultMappings}

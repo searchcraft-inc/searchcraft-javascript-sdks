@@ -1,8 +1,8 @@
+import type { SearchcraftCore } from '@classes';
+import { registry } from '@classes/CoreInstanceRegistry';
 import { Component, h, Prop, State } from '@stencil/core';
 
-import type { PopoverButtonTemplate } from '@searchcraft/core';
-
-import { searchcraftStore } from '@store';
+import type { PopoverButtonTemplate } from '@types';
 
 import { html } from '@utils';
 
@@ -71,6 +71,10 @@ export class SearchcraftPopoverButton {
    * The type of popover button to render.
    */
   @Prop() type?: 'skeuomorphic';
+  /**
+   * The id of the Searchcraft instance that this component should use.
+   */
+  @Prop() searchcraftId?: string;
 
   @State() hotkey;
   @State() hotkeyModifier;
@@ -79,28 +83,39 @@ export class SearchcraftPopoverButton {
   @State() userAgent;
 
   private unsubscribe: () => void = () => {};
+  private cleanupCore?: () => void;
+  private core?: SearchcraftCore;
 
-  handleOnClick() {
-    searchcraftStore.getState().setPopoverVisibility(true);
-  }
-
-  componentDidLoad() {
-    const state = searchcraftStore.getState();
+  onCoreAvailable(core: SearchcraftCore) {
+    this.core = core;
+    const state = core.store.getState();
     this.hotkey = state.hotkey.toUpperCase();
     this.hotkeyModifier = state.hotkeyModifier;
     this.isPopoverVisible = state.isPopoverVisible;
     this.userAgent = this.setUserAgent();
     this.hotkeyModifierSymbol = this.setHotkeyModifierSymbol();
 
-    this.unsubscribe = searchcraftStore.subscribe((state) => {
+    this.unsubscribe = core.store.subscribe((state) => {
       this.hotkey = state.hotkey.toUpperCase();
       this.hotkeyModifier = state.hotkeyModifier;
       this.hotkeyModifierSymbol = this.setHotkeyModifierSymbol();
     });
   }
 
+  connectedCallback() {
+    this.cleanupCore = registry.useCoreInstance(
+      this.searchcraftId,
+      this.onCoreAvailable.bind(this),
+    );
+  }
+
+  handleOnClick() {
+    this.core?.store.getState().setPopoverVisibility(true);
+  }
+
   disconnectedCallback() {
     this.unsubscribe?.();
+    this.cleanupCore?.();
   }
 
   setUserAgent() {

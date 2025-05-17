@@ -3,7 +3,7 @@ import type {
   FacetTree,
   FacetWithChildrenArray,
   FacetWithChildrenObject,
-} from '@searchcraft/core';
+} from '@types';
 
 /**
  * Helper function for getting a Node (FacetWithChildrenObject)
@@ -157,7 +157,7 @@ export const facetWithChildrenArrayToCompleteFacetTree = (
       cursor = cursor.children[segment];
     }
 
-    // 4) now `cursor` is the node matching `path` — assign its real count
+    // 4) Now `cursor` is the node matching `path` assign its real count
     cursor.count = count;
   }
 
