@@ -5,8 +5,8 @@ import { Searchcraft, type Components } from '@searchcraft/javascript-sdk';
 
 import {
   popoverResultMappings,
-  searchResultTemplate,
-  searchResultTemplateKobol,
+  searchResultTemplateBazaario,
+  searchResultTemplateEchostream,
 } from '@common/index.js';
 
 const componentMeta: Meta = {
@@ -21,9 +21,17 @@ export const TwoInlineInstances: StoryObj<Components.SearchcraftSearchResults> =
         const initInstance1 = useCallback(() => {
           new Searchcraft(
             {
-              readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
-              endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
-              index: [import.meta.env.VITE_RUNEGARD_INDEX],
+              readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
+              endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
+              index: [import.meta.env.VITE_INDEX_ECHOSTREAM],
+              initialQuery: JSON.stringify({
+                order_by: 'date_published',
+                query: {
+                  exact: {
+                    ctx: 'section_name:"Columns" OR section_name:"Prep" OR section_name:"Local" OR section_name:"Minnesota"',
+                  },
+                },
+              }),
             },
             'searchcraftInstance1',
           );
@@ -33,24 +41,23 @@ export const TwoInlineInstances: StoryObj<Components.SearchcraftSearchResults> =
           ) as HTMLSearchcraftSearchResultsElement;
 
           if (searchResults) {
-            searchResults.template = searchResultTemplate;
-            searchResults.initialQuery = JSON.stringify({
-              order_by: 'date_published',
-              query: {
-                exact: {
-                  ctx: 'section_name:"Columns" OR section_name:"Prep" OR section_name:"Local" OR section_name:"Minnesota"',
-                },
-              },
-            });
+            searchResults.template = searchResultTemplateEchostream;
           }
         }, []);
 
         const initInstance2 = useCallback(() => {
           new Searchcraft(
             {
-              readKey: import.meta.env.VITE_KOBOL_READ_KEY,
-              endpointURL: import.meta.env.VITE_KOBOL_ENDPOINT_URL,
-              index: [import.meta.env.VITE_KOBOL_INDEX],
+              readKey: import.meta.env.VITE_READ_KEY_BAZAARIO,
+              endpointURL: import.meta.env.VITE_ENDPOINT_URL_BAZAARIO,
+              index: [import.meta.env.VITE_INDEX_BAZAARIO],
+              initialQuery: JSON.stringify({
+                query: {
+                  fuzzy: {
+                    ctx: 'dogs',
+                  },
+                },
+              }),
             },
             'searchcraftInstance2',
           );
@@ -60,14 +67,7 @@ export const TwoInlineInstances: StoryObj<Components.SearchcraftSearchResults> =
           ) as HTMLSearchcraftSearchResultsElement;
 
           if (searchResults) {
-            searchResults.template = searchResultTemplateKobol;
-            searchResults.initialQuery = JSON.stringify({
-              query: {
-                fuzzy: {
-                  ctx: 'dogs',
-                },
-              },
-            });
+            searchResults.template = searchResultTemplateBazaario;
           }
         }, []);
 
@@ -124,9 +124,9 @@ export const InlineAndPopover: StoryObj<Components.SearchcraftSearchResults> = {
       const initInstance1 = useCallback(() => {
         new Searchcraft(
           {
-            readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
-            endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
-            index: [import.meta.env.VITE_RUNEGARD_INDEX],
+            readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
+            endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
+            index: [import.meta.env.VITE_INDEX_ECHOSTREAM],
           },
           'searchcraftInstance1',
         );
@@ -136,7 +136,7 @@ export const InlineAndPopover: StoryObj<Components.SearchcraftSearchResults> = {
         ) as HTMLSearchcraftSearchResultsElement;
 
         if (searchResults) {
-          searchResults.template = searchResultTemplate;
+          searchResults.template = searchResultTemplateEchostream;
           searchResults.initialQuery = JSON.stringify({
             order_by: 'date_published',
             query: {
@@ -151,9 +151,9 @@ export const InlineAndPopover: StoryObj<Components.SearchcraftSearchResults> = {
       const initInstance2 = useCallback(() => {
         new Searchcraft(
           {
-            readKey: import.meta.env.VITE_KOBOL_READ_KEY,
-            endpointURL: import.meta.env.VITE_KOBOL_ENDPOINT_URL,
-            index: [import.meta.env.VITE_KOBOL_INDEX],
+            readKey: import.meta.env.VITE_READ_KEY_BAZAARIO,
+            endpointURL: import.meta.env.VITE_ENDPOINT_URL_BAZAARIO,
+            index: [import.meta.env.VITE_INDEX_BAZAARIO],
           },
           'searchcraftInstance2',
         );
@@ -186,7 +186,7 @@ export const InlineAndPopover: StoryObj<Components.SearchcraftSearchResults> = {
             padding: 16,
           }}
         >
-          <h1>Instance 1 (Runegard)</h1>
+          <h1>Instance 1 (Echostream)</h1>
           <div style={{ marginBottom: 20 }}>
             <searchcraft-input-form searchcraft-id='searchcraftInstance1' />
           </div>
@@ -201,7 +201,7 @@ export const InlineAndPopover: StoryObj<Components.SearchcraftSearchResults> = {
             padding: 16,
           }}
         >
-          <h1>Instance 2 (Kobol)</h1>
+          <h1>Instance 2 (Bazaario)</h1>
           <searchcraft-popover-button searchcraft-id='searchcraftInstance2' />
           <searchcraft-popover-form
             type='modal'
