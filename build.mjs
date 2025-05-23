@@ -25,7 +25,6 @@
  *   node build.mjs pkg1 --watch --yalc  // Watch, Build, & publish to Yalc
  *
  * Aliases:
- *   core  -> @searchcraft/core
  *   hologram -> @searchcraft/hologram
  *   js    -> @searchcraft/javascript-sdk
  *   react -> @searchcraft/react-sdk
@@ -40,32 +39,13 @@ const isVerbose = args.includes('--verbose');
 const buildVariant = args.find((arg) => !arg.includes('--'));
 
 const buildVariants = {
-  core: ['core-build'],
   hologram: ['hologram-build'],
-  js: ['core-build', 'hologram-build', 'javascript-sdk-build'],
-  react: [
-    'core-build',
-    'hologram-build',
-    'javascript-sdk-build',
-    'react-sdk-build',
-  ],
-  vue: [
-    'core-build',
-    'hologram-build',
-    'javascript-sdk-build',
-    'vue-sdk-build',
-  ],
+  js: ['hologram-build', 'javascript-sdk-build'],
+  react: ['hologram-build', 'javascript-sdk-build', 'react-sdk-build'],
+  vue: ['hologram-build', 'javascript-sdk-build', 'vue-sdk-build'],
 };
 
 const buildSteps = [
-  {
-    label: 'core-build',
-    action: () => {
-      execSync('yarn workspace @searchcraft/core build', {
-        stdio: isVerbose ? 'inherit' : 'ignore',
-      });
-    },
-  },
   {
     label: 'hologram-build',
     action: () => {

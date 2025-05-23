@@ -9,7 +9,7 @@ import {
   type SearchcraftInputFormProps,
 } from '@searchcraft/react-sdk';
 
-import { searchResultTemplate } from '@common/index.js';
+import { searchResultTemplateEchostream } from '@common/index.js';
 
 const componentMeta: Meta = {
   title: 'React SDK/searchcraft-search-results',
@@ -23,9 +23,9 @@ export const Default: StoryObj<
     (Story) => {
       useEffect(() => {
         new Searchcraft({
-          readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
-          endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
-          index: [import.meta.env.VITE_RUNEGARD_INDEX],
+          readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
+          endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
+          index: [import.meta.env.VITE_INDEX_ECHOSTREAM],
         });
       }, []);
 
@@ -41,7 +41,7 @@ export const Default: StoryObj<
             placeholderValue={args.placeholderValue}
           />
         </div>
-        <SearchcraftSearchResults template={searchResultTemplate} />
+        <SearchcraftSearchResults template={searchResultTemplateEchostream} />
       </>
     );
   },

@@ -2,7 +2,7 @@ import type { SearchResultTemplate } from '@searchcraft/javascript-sdk';
 
 import './search-result-template.scss';
 
-type SearchResultTemplateData = {
+type SearchResultTemplateDataEchostream = {
   canonical_link: string;
   section_name: string;
   headline: string;
@@ -12,8 +12,8 @@ type SearchResultTemplateData = {
   medium_image: string;
 };
 
-export const searchResultTemplate: SearchResultTemplate<
-  SearchResultTemplateData
+export const searchResultTemplateEchostream: SearchResultTemplate<
+  SearchResultTemplateDataEchostream
 > = (data, index, { html }) => html`
   <a href="${data.canonical_link}" target="_blank" rel="noreferrer">
     <div class="search-result-content">
@@ -36,4 +36,20 @@ export const searchResultTemplate: SearchResultTemplate<
       <img src="${data.medium_image}" alt="${data.headline}" />
     </div>
   </a>
+`;
+
+type SearchResultTemplateDataBazaario = {
+  link: string;
+  title: string;
+  price: string;
+  image: string;
+};
+
+export const searchResultTemplateBazaario: SearchResultTemplate<
+  SearchResultTemplateDataBazaario
+> = (data, index, { html }) => html`
+  <div>
+    <h2>${data.title}</h2>
+    <p>${data.link}
+  </div>
 `;

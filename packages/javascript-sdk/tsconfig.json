@@ -8,8 +8,14 @@
     "noEmit": false,
     "paths": {
       "@assets/*": ["assets/*"],
+      "@classes": ["classes"],
+      "@classes/*": ["classes/*"],
+      "@clients": ["clients"],
+      "@clients/*": ["clients/*"],
       "@components/*": ["components/*"],
       "@store": ["store/index.ts"],
+      "@types": ["types"],
+      "@types/*": ["types/*"],
       "@utils": ["utils/index.ts"],
       "@utils/*": ["utils/*"]
     }

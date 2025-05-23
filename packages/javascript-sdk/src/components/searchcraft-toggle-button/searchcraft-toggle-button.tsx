@@ -1,4 +1,5 @@
-import { searchcraftStore } from '@store';
+import type { SearchcraftCore } from '@classes';
+import { registry } from '@classes/CoreInstanceRegistry';
 import {
   Component,
   Event,
@@ -27,6 +28,10 @@ export class SearchcraftToggleButton {
    * The secondary label displayed below the main label.
    */
   @Prop() subLabel: string | undefined;
+  /**
+   * The id of the Searchcraft instance that this component should use.
+   */
+  @Prop() searchcraftId?: string;
 
   /**
    * When the toggle element is changed.
@@ -34,17 +39,18 @@ export class SearchcraftToggleButton {
   @Event() toggleUpdated?: EventEmitter<boolean>;
 
   @State() isActive = false;
-  @State() unsubscribe: (() => void) | undefined;
   @State() lastSearchTerm: string | undefined;
+  private unsubscribe: (() => void) | undefined;
+  private cleanupCore?: () => void;
 
   private handleToggle = async () => {
     this.isActive = !this.isActive;
     this.toggleUpdated?.emit(this.isActive);
   };
 
-  connectedCallback() {
+  onCoreAvailable(core: SearchcraftCore) {
     /** When the query changes, sets toggle button state back to inactive. */
-    this.unsubscribe = searchcraftStore.subscribe((state) => {
+    this.unsubscribe = core.store.subscribe((state) => {
       if (
         state.searchTerm !== this.lastSearchTerm &&
         state.searchTerm.trim().length === 0
@@ -55,8 +61,16 @@ export class SearchcraftToggleButton {
     });
   }
 
+  connectedCallback() {
+    this.cleanupCore = registry.useCoreInstance(
+      this.searchcraftId,
+      this.onCoreAvailable.bind(this),
+    );
+  }
+
   disconnectedCallback() {
     this.unsubscribe?.();
+    this.cleanupCore?.();
   }
 
   render() {

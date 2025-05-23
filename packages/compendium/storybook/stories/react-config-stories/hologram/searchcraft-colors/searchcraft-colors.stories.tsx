@@ -107,9 +107,9 @@ export const Colors: StoryObj<{
     (Story) => {
       useEffect(() => {
         new Searchcraft({
-          readKey: import.meta.env.VITE_KOBOL_READ_KEY,
-          endpointURL: import.meta.env.VITE_KOBOL_ENDPOINT_URL,
-          index: [import.meta.env.VITE_KOBOL_INDEX],
+          readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
+          endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
+          index: [import.meta.env.VITE_INDEX_ECHOSTREAM],
         });
         const searchForm = document.querySelector('searchcraft-popover-form');
 

@@ -1,5 +1,6 @@
-import { searchcraftStore } from '@store';
-import { Component, h, State } from '@stencil/core';
+import type { SearchcraftCore } from '@classes';
+import { registry } from '@classes/CoreInstanceRegistry';
+import { Component, h, Prop, State } from '@stencil/core';
 
 import { formatNumberWithCommas } from '@utils';
 
@@ -13,20 +14,33 @@ import { formatNumberWithCommas } from '@utils';
   shadow: false,
 })
 export class SearchcraftPopoverFooter {
+  /**
+   * The id of the Searchcraft instance that this component should use.
+   */
+  @Prop() searchcraftId?: string;
   @State() searchResultsCount;
 
   private unsubscribe: () => void = () => {};
+  private cleanupCore?: () => void;
 
-  componentDidLoad() {
-    this.searchResultsCount = searchcraftStore.getState().searchResultsCount;
+  onCoreAvailable(core: SearchcraftCore) {
+    this.searchResultsCount = core.store.getState().searchResultsCount;
 
-    this.unsubscribe = searchcraftStore.subscribe((state) => {
+    this.unsubscribe = core.store.subscribe((state) => {
       this.searchResultsCount = state.searchResultsCount;
     });
   }
 
+  connectedCallback() {
+    this.cleanupCore = registry.useCoreInstance(
+      this.searchcraftId,
+      this.onCoreAvailable.bind(this),
+    );
+  }
+
   disconnectedCallback() {
     this.unsubscribe?.();
+    this.cleanupCore?.();
   }
 
   render() {

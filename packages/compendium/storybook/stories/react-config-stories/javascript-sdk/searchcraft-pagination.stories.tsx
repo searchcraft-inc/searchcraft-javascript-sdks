@@ -3,7 +3,10 @@ import { useEffect } from 'react';
 
 import { Searchcraft } from '@searchcraft/javascript-sdk';
 
-import { searchResultTemplate, customAdTemplate } from '@common/index.js';
+import {
+  customAdTemplate,
+  searchResultTemplateEchostream,
+} from '@common/index.js';
 
 const componentMeta: Meta = {
   title: 'Javascript SDK/searchcraft-pagination',
@@ -17,9 +20,9 @@ export const Default: StoryObj = {
     (Story) => {
       useEffect(() => {
         const searchcraft = new Searchcraft({
-          readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
-          endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
-          index: [import.meta.env.VITE_RUNEGARD_INDEX],
+          readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
+          endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
+          index: [import.meta.env.VITE_INDEX_ECHOSTREAM],
         });
         const callbacks: (() => void)[] = [];
 
@@ -50,7 +53,7 @@ export const Default: StoryObj = {
         );
 
         if (searchResults) {
-          searchResults.template = searchResultTemplate;
+          searchResults.template = searchResultTemplateEchostream;
         }
 
         const resultsInfo = document.querySelector('searchcraft-results-info');
@@ -103,9 +106,9 @@ export const WithCustomAds: StoryObj = {
         const callbacks: (() => void)[] = [];
 
         const searchcraft = new Searchcraft({
-          readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
-          endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
-          index: [import.meta.env.VITE_RUNEGARD_INDEX],
+          readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
+          endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
+          index: [import.meta.env.VITE_INDEX_ECHOSTREAM],
           adSource: 'Custom',
           adContainerRenderedDebounceDelay: 1000,
           customAdStartQuantity: 1,
@@ -142,7 +145,7 @@ export const WithCustomAds: StoryObj = {
         );
 
         if (searchResults) {
-          searchResults.template = searchResultTemplate;
+          searchResults.template = searchResultTemplateEchostream;
         }
 
         const resultsInfo = document.querySelector('searchcraft-results-info');
@@ -170,7 +173,7 @@ export const WithCustomAds: StoryObj = {
         <searchcraft-results-info />
       </div>
       <div style={{ marginBottom: 20 }}>
-        <searchcraft-search-results template={searchResultTemplate} />
+        <searchcraft-search-results template={searchResultTemplateEchostream} />
       </div>
       <div
         style={{
@@ -195,9 +198,9 @@ export const WithNativoAds: StoryObj = {
         const callbacks: (() => void)[] = [];
 
         const searchcraft = new Searchcraft({
-          readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
-          endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
-          index: [import.meta.env.VITE_RUNEGARD_INDEX],
+          readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
+          endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
+          index: [import.meta.env.VITE_INDEX_ECHOSTREAM],
           adSource: 'Nativo',
           nativoAdStartQuantity: 2,
           nativoAdInterstitialInterval: 4,
@@ -234,7 +237,7 @@ export const WithNativoAds: StoryObj = {
         );
 
         if (searchResults) {
-          searchResults.template = searchResultTemplate;
+          searchResults.template = searchResultTemplateEchostream;
         }
 
         const resultsInfo = document.querySelector('searchcraft-results-info');
@@ -262,7 +265,7 @@ export const WithNativoAds: StoryObj = {
         <searchcraft-results-info />
       </div>
       <div style={{ marginBottom: 20 }}>
-        <searchcraft-search-results template={searchResultTemplate} />
+        <searchcraft-search-results template={searchResultTemplateEchostream} />
       </div>
       <div
         style={{

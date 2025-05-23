@@ -1,6 +1,6 @@
 import DOMPurify from 'dompurify';
 
-import type { TemplateHtml } from '@searchcraft/core';
+import type { TemplateHtml } from '@types';
 /**
  * This allows you to parse a template string with a function.
  */

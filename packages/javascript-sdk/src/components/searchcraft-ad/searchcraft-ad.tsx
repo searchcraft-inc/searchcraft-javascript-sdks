@@ -1,16 +1,17 @@
 import type {
   AdClientResponseItem,
   ADMClientResponseItem,
-  SearchcraftCore,
   SearchcraftAdSource,
-} from '@searchcraft/core';
+} from '@types';
 import { Component, Element, h, Prop, State } from '@stencil/core';
 import { nanoid } from 'nanoid';
 import classNames from 'classnames';
 
-import { type SearchcraftState, searchcraftStore } from '@store';
+import type { SearchcraftState } from '@store';
 
 import { html } from '@utils';
+import type { SearchcraftCore } from '@classes';
+import { registry } from '@classes/CoreInstanceRegistry';
 
 /**
  * An inline ad meant to be rendered in a list of search results.
@@ -22,6 +23,10 @@ import { html } from '@utils';
   shadow: false,
 })
 export class SearchcraftPopoverListItemAd {
+  /**
+   * The id of the Searchcraft instance that this component should use.
+   */
+  @Prop() searchcraftId?: string;
   @Prop() adSource: SearchcraftAdSource = 'Custom';
   @Prop() adClientResponseItem?: AdClientResponseItem;
 
@@ -41,6 +46,7 @@ export class SearchcraftPopoverListItemAd {
 
   private intersectionObserver?: IntersectionObserver;
   private storeUnsubscribe?: () => void;
+  private cleanupCore?: () => void;
   private adContainerRenderedTimeout?: NodeJS.Timeout;
   private isComponentConnected = false;
   private timeTaken?: number;
@@ -93,8 +99,8 @@ export class SearchcraftPopoverListItemAd {
     this.startIntersectionObserver();
   }
 
-  connectedCallback() {
-    const currentState = searchcraftStore.getState();
+  onCoreAvailable(core: SearchcraftCore) {
+    const currentState = core.store.getState();
 
     this.isComponentConnected = true;
     this.core = currentState.core;
@@ -116,13 +122,20 @@ export class SearchcraftPopoverListItemAd {
     }
 
     // Subscribes to store changes (for search term).
-    this.storeUnsubscribe = searchcraftStore.subscribe((state) => {
+    this.storeUnsubscribe = core.store.subscribe((state) => {
       if (this.timeTaken !== state.searchResponseTimeTaken) {
         this.handleNewIncomingSearchRequest(state);
       }
       this.timeTaken = state.searchResponseTimeTaken;
       this.isSearchInProgress = state.isSearchInProgress;
     });
+  }
+
+  connectedCallback() {
+    this.cleanupCore = registry.useCoreInstance(
+      this.searchcraftId,
+      this.onCoreAvailable.bind(this),
+    );
   }
 
   startIntersectionObserver() {
@@ -147,6 +160,7 @@ export class SearchcraftPopoverListItemAd {
 
   disconnectedCallback() {
     this.storeUnsubscribe?.();
+    this.cleanupCore?.();
     this.intersectionObserver?.disconnect();
     this.isComponentConnected = false;
     clearTimeout(this.adContainerRenderedTimeout);

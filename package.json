@@ -12,7 +12,6 @@
   "private": true,
   "workspaces": [
     "packages/compendium",
-    "packages/core-sdk",
     "packages/hologram",
     "packages/react-sdk",
     "packages/javascript-sdk",

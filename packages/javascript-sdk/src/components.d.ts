@@ -5,9 +5,9 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { AdClientResponseItem, FilterItem, PopoverButtonTemplate, PopoverResultMappings, ResultsInfoTemplate, SearchClientResponseItem, SearchcraftAdSource, SearchcraftCore, SearchResultTemplate, SearchResultTemplateData } from "@searchcraft/core";
+import { AdClientResponseItem, FilterItem, PopoverButtonTemplate, PopoverResultMappings, ResultsInfoTemplate, SearchClientResponseItem, SearchcraftAdSource, SearchResultTemplate, SearchResultTemplateData } from "./types/index";
 import { SearchcraftSelectOption } from "./components/searchcraft-select/searchcraft-select";
-export { AdClientResponseItem, FilterItem, PopoverButtonTemplate, PopoverResultMappings, ResultsInfoTemplate, SearchClientResponseItem, SearchcraftAdSource, SearchcraftCore, SearchResultTemplate, SearchResultTemplateData } from "@searchcraft/core";
+export { AdClientResponseItem, FilterItem, PopoverButtonTemplate, PopoverResultMappings, ResultsInfoTemplate, SearchClientResponseItem, SearchcraftAdSource, SearchResultTemplate, SearchResultTemplateData } from "./types/index";
 export { SearchcraftSelectOption } from "./components/searchcraft-select/searchcraft-select";
 export namespace Components {
     /**
@@ -20,6 +20,10 @@ export namespace Components {
           * Where the ad is being rendered within the search results div. Lifecycle behavior differs for ads being rendered in different positions, so we need to be able to handle all of those cases.
          */
         "renderPosition": 'interstitial' | 'top' | 'bottom';
+        /**
+          * The id of the Searchcraft instance that this component should use.
+         */
+        "searchcraftId"?: string;
     }
     /**
      * This web component represents a button.
@@ -85,6 +89,10 @@ export namespace Components {
           * The name of the field where facets are applied.
          */
         "fieldName": string;
+        /**
+          * The id of the Searchcraft instance that this component should use.
+         */
+        "searchcraftId"?: string;
     }
     /**
      * This web component represents a series of filters that allows users to refine and control their search queries by applying various filter criteria.
@@ -117,6 +125,10 @@ export namespace Components {
           * The items to filter.
          */
         "items": FilterItem[];
+        /**
+          * The id of the Searchcraft instance that this component should use.
+         */
+        "searchcraftId"?: string;
     }
     /**
      * This web component provides a user-friendly interface for querying an indexed dataset, enabling users to easily search large collections of data.
@@ -150,7 +162,6 @@ export namespace Components {
           * Where to place the search button.
          */
         "buttonPlacement"?: 'left' | 'right' | 'none';
-        "core"?: SearchcraftCore;
         /**
           * The label rendered above the input.
          */
@@ -163,6 +174,10 @@ export namespace Components {
           * The input element's placeholder value.
          */
         "placeholderValue"?: string;
+        /**
+          * The id of the Searchcraft instance that this component should use.
+         */
+        "searchcraftId"?: string;
     }
     /**
      * This web component serves as the input label for the searchcraft-input-form component.
@@ -196,6 +211,10 @@ export namespace Components {
      * ```
      */
     interface SearchcraftPagination {
+        /**
+          * The id of the Searchcraft instance that this component should use.
+         */
+        "searchcraftId"?: string;
     }
     /**
      * Renders a button which, when clicked, turns on popover visibility.
@@ -239,6 +258,10 @@ export namespace Components {
      */
     interface SearchcraftPopoverButton {
         /**
+          * The id of the Searchcraft instance that this component should use.
+         */
+        "searchcraftId"?: string;
+        /**
           * A callback function responsible for rendering the button contents.
          */
         "template"?: PopoverButtonTemplate;
@@ -251,6 +274,10 @@ export namespace Components {
      * Renders the footer for the searchcraft-popover-form.
      */
     interface SearchcraftPopoverFooter {
+        /**
+          * The id of the Searchcraft instance that this component should use.
+         */
+        "searchcraftId"?: string;
     }
     /**
      * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field, or when a popover-button is pressed.
@@ -290,6 +317,10 @@ export namespace Components {
          */
         "popoverResultMappings"?: PopoverResultMappings;
         /**
+          * The id of the Searchcraft instance that this component should use.
+         */
+        "searchcraftId"?: string;
+        /**
           * The type of popover form to render. - `inline` - Renders inline with the rest of the content on the page. The search results pop over the page content. - `fullscreen` - Renders in fullscreen view. Used together with the `searchcraft-popover-button` component. - `modal` - Renders in a modal view. Used together with the `searchcraft-popover-button` component.
          */
         "type"?: 'inline' | 'fullscreen' | 'modal';
@@ -304,6 +335,10 @@ export namespace Components {
         "documentPosition": number;
         "item": SearchClientResponseItem | undefined;
         "popoverResultMappings": PopoverResultMappings | undefined;
+        /**
+          * The id of the Searchcraft instance that this component should use.
+         */
+        "searchcraftId"?: string;
     }
     /**
      * This web component is designed to display a list of results within a popover interface.
@@ -324,6 +359,10 @@ export namespace Components {
         "searchClientResponseItems": SearchClientResponseItem[] | undefined;
         "searchResultsPage": number;
         "searchResultsPerPage": number;
+        /**
+          * The id of the Searchcraft instance that this component should use.
+         */
+        "searchcraftId"?: string;
     }
     /**
      * This web component is designed to display the number of results returned from a search query.
@@ -361,6 +400,10 @@ export namespace Components {
      */
     interface SearchcraftResultsInfo {
         /**
+          * The id of the Searchcraft instance that this component should use.
+         */
+        "searchcraftId"?: string;
+        /**
           * A callback function responsible for rendering the results info.
          */
         "template"?: ResultsInfoTemplate;
@@ -378,6 +421,10 @@ export namespace Components {
          */
         "index": number;
         "item"?: SearchClientResponseItem;
+        /**
+          * The id of the Searchcraft instance that this component should use.
+         */
+        "searchcraftId"?: string;
         /**
           * A callback function responsible for rendering a result.
          */
@@ -430,6 +477,10 @@ export namespace Components {
          */
         "initialQuery"?: string;
         /**
+          * The id of the Searchcraft instance that this component should use.
+         */
+        "searchcraftId"?: string;
+        /**
           * A callback function responsible for rendering a result. Passed to `searchcraft-search-result`.
          */
         "template"?: SearchResultTemplate<SearchResultTemplateData>;
@@ -458,6 +509,10 @@ export namespace Components {
           * The amount the options will increase (e.g. 20 = [20, 40, 60, 80, 100]). The base value is defined by the `searchResultsPerPage` option in the configuration.
          */
         "increment": string | number;
+        /**
+          * The id of the Searchcraft instance that this component should use.
+         */
+        "searchcraftId"?: string;
     }
     /**
      * This web component is designed to allow users to select between a group of options.
@@ -553,6 +608,10 @@ export namespace Components {
           * The label.
          */
         "label": string;
+        /**
+          * The id of the Searchcraft instance that this component should use.
+         */
+        "searchcraftId"?: string;
         /**
           * The secondary label displayed below the main label.
          */
@@ -1121,6 +1180,10 @@ declare namespace LocalJSX {
           * Where the ad is being rendered within the search results div. Lifecycle behavior differs for ads being rendered in different positions, so we need to be able to handle all of those cases.
          */
         "renderPosition"?: 'interstitial' | 'top' | 'bottom';
+        /**
+          * The id of the Searchcraft instance that this component should use.
+         */
+        "searchcraftId"?: string;
     }
     /**
      * This web component represents a button.
@@ -1194,6 +1257,10 @@ declare namespace LocalJSX {
           * Emitted when the facets are updated.
          */
         "onFacetSelectionUpdated"?: (event: SearchcraftFacetListCustomEvent<{ paths: string[] }>) => void;
+        /**
+          * The id of the Searchcraft instance that this component should use.
+         */
+        "searchcraftId"?: string;
     }
     /**
      * This web component represents a series of filters that allows users to refine and control their search queries by applying various filter criteria.
@@ -1226,6 +1293,10 @@ declare namespace LocalJSX {
           * The items to filter.
          */
         "items"?: FilterItem[];
+        /**
+          * The id of the Searchcraft instance that this component should use.
+         */
+        "searchcraftId"?: string;
     }
     /**
      * This web component provides a user-friendly interface for querying an indexed dataset, enabling users to easily search large collections of data.
@@ -1259,7 +1330,6 @@ declare namespace LocalJSX {
           * Where to place the search button.
          */
         "buttonPlacement"?: 'left' | 'right' | 'none';
-        "core"?: SearchcraftCore;
         /**
           * The label rendered above the input.
          */
@@ -1284,6 +1354,10 @@ declare namespace LocalJSX {
           * The input element's placeholder value.
          */
         "placeholderValue"?: string;
+        /**
+          * The id of the Searchcraft instance that this component should use.
+         */
+        "searchcraftId"?: string;
     }
     /**
      * This web component serves as the input label for the searchcraft-input-form component.
@@ -1317,6 +1391,10 @@ declare namespace LocalJSX {
      * ```
      */
     interface SearchcraftPagination {
+        /**
+          * The id of the Searchcraft instance that this component should use.
+         */
+        "searchcraftId"?: string;
     }
     /**
      * Renders a button which, when clicked, turns on popover visibility.
@@ -1360,6 +1438,10 @@ declare namespace LocalJSX {
      */
     interface SearchcraftPopoverButton {
         /**
+          * The id of the Searchcraft instance that this component should use.
+         */
+        "searchcraftId"?: string;
+        /**
           * A callback function responsible for rendering the button contents.
          */
         "template"?: PopoverButtonTemplate;
@@ -1372,6 +1454,10 @@ declare namespace LocalJSX {
      * Renders the footer for the searchcraft-popover-form.
      */
     interface SearchcraftPopoverFooter {
+        /**
+          * The id of the Searchcraft instance that this component should use.
+         */
+        "searchcraftId"?: string;
     }
     /**
      * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field, or when a popover-button is pressed.
@@ -1411,6 +1497,10 @@ declare namespace LocalJSX {
          */
         "popoverResultMappings"?: PopoverResultMappings;
         /**
+          * The id of the Searchcraft instance that this component should use.
+         */
+        "searchcraftId"?: string;
+        /**
           * The type of popover form to render. - `inline` - Renders inline with the rest of the content on the page. The search results pop over the page content. - `fullscreen` - Renders in fullscreen view. Used together with the `searchcraft-popover-button` component. - `modal` - Renders in a modal view. Used together with the `searchcraft-popover-button` component.
          */
         "type"?: 'inline' | 'fullscreen' | 'modal';
@@ -1425,6 +1515,10 @@ declare namespace LocalJSX {
         "documentPosition"?: number;
         "item"?: SearchClientResponseItem | undefined;
         "popoverResultMappings"?: PopoverResultMappings | undefined;
+        /**
+          * The id of the Searchcraft instance that this component should use.
+         */
+        "searchcraftId"?: string;
     }
     /**
      * This web component is designed to display a list of results within a popover interface.
@@ -1445,6 +1539,10 @@ declare namespace LocalJSX {
         "searchClientResponseItems"?: SearchClientResponseItem[] | undefined;
         "searchResultsPage": number;
         "searchResultsPerPage": number;
+        /**
+          * The id of the Searchcraft instance that this component should use.
+         */
+        "searchcraftId"?: string;
     }
     /**
      * This web component is designed to display the number of results returned from a search query.
@@ -1482,6 +1580,10 @@ declare namespace LocalJSX {
      */
     interface SearchcraftResultsInfo {
         /**
+          * The id of the Searchcraft instance that this component should use.
+         */
+        "searchcraftId"?: string;
+        /**
           * A callback function responsible for rendering the results info.
          */
         "template"?: ResultsInfoTemplate;
@@ -1499,6 +1601,10 @@ declare namespace LocalJSX {
          */
         "index": number;
         "item"?: SearchClientResponseItem;
+        /**
+          * The id of the Searchcraft instance that this component should use.
+         */
+        "searchcraftId"?: string;
         /**
           * A callback function responsible for rendering a result.
          */
@@ -1551,6 +1657,10 @@ declare namespace LocalJSX {
          */
         "initialQuery"?: string;
         /**
+          * The id of the Searchcraft instance that this component should use.
+         */
+        "searchcraftId"?: string;
+        /**
           * A callback function responsible for rendering a result. Passed to `searchcraft-search-result`.
          */
         "template"?: SearchResultTemplate<SearchResultTemplateData>;
@@ -1579,6 +1689,10 @@ declare namespace LocalJSX {
           * The amount the options will increase (e.g. 20 = [20, 40, 60, 80, 100]). The base value is defined by the `searchResultsPerPage` option in the configuration.
          */
         "increment"?: string | number;
+        /**
+          * The id of the Searchcraft instance that this component should use.
+         */
+        "searchcraftId"?: string;
     }
     /**
      * This web component is designed to allow users to select between a group of options.
@@ -1686,6 +1800,10 @@ declare namespace LocalJSX {
           * When the toggle element is changed.
          */
         "onToggleUpdated"?: (event: SearchcraftToggleButtonCustomEvent<boolean>) => void;
+        /**
+          * The id of the Searchcraft instance that this component should use.
+         */
+        "searchcraftId"?: string;
         /**
           * The secondary label displayed below the main label.
          */

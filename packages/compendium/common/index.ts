@@ -1,4 +1,7 @@
-export { searchResultTemplate } from './searchcraft-search-results/search-result-template';
+export {
+  searchResultTemplateEchostream,
+  searchResultTemplateBazaario,
+} from './searchcraft-search-results/search-result-template';
 export { customAdTemplate } from './searchcraft-ad/custom-ad-template';
 export {
   popoverResultMappings,
