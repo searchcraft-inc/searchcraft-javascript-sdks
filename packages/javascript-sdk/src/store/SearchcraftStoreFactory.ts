@@ -162,11 +162,10 @@ const createSearchcraftStore = (
           state.core?.handleInputCleared();
         }
         /**
-         * When a new searchTerm is set, also reset the sort type, search mode, and facet paths.
+         * When a new searchTerm is set, also reset the sort type, search mode
          */
         set({
           searchTerm,
-          facetPathsForIndexFields: {},
           searchResultsPage: 1,
           ...(searchTerm.trim().length === 0 && {
             searchMode: 'fuzzy',
