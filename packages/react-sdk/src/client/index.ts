@@ -42,3 +42,4 @@ export * from './SearchcraftTheme';
 export * from './SearchcraftPagination';
 export * from './SearchcraftSearchResultsPerPage';
 export * from './SearchcraftSearchResults';
+export * from './SearchcraftSummaryBox';

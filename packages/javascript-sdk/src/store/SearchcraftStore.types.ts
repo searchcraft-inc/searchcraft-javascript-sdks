@@ -9,6 +9,7 @@ import type {
 } from '@types';
 
 import type { SearchcraftCore } from '@classes';
+import type { SummaryClient } from '@clients/SummaryClient';
 
 /**
  * Callable functions made available by the SearchcraftStore.
@@ -66,6 +67,10 @@ export interface SearchcraftStateValues {
   searchTerm: string;
   orderByField: string | undefined | null;
   sortType: 'asc' | 'desc' | undefined | null;
+  summary: string;
+  hasSummaryBox: boolean;
+  isSummaryLoading: boolean;
+  summaryClient?: SummaryClient;
 }
 
 export interface SearchcraftState

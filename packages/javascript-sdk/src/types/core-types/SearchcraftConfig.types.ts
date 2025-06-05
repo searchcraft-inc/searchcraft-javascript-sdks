@@ -40,6 +40,16 @@ export interface SearchcraftConfig {
   searchResultsPerPage?: number;
 
   /**
+   * Instructions provided to the LLM when creating search result summaries.
+   */
+  summaryInstructionsPrompt?: string;
+
+  /**
+   * The amount of delay, in milliseconds, to debounce summary requests. Defaults to `1000`
+   */
+  summaryDebounceDelay?: number;
+
+  /**
    * Name of the ad source to use.
    */
   adSource?: 'adMarketplace' | 'Nativo' | 'Custom' | 'None';

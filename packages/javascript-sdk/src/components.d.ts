@@ -193,6 +193,12 @@ export namespace Components {
         "label": string;
     }
     /**
+     * Renders a loading spinner/loading state for use in things like the summary box.
+     */
+    interface SearchcraftLoading {
+        "label"?: string;
+    }
+    /**
      * This web component is designed to facilitate pagination of search results. Once a query is submitted, calculates the number for pages.
      * @react-import ```jsx
      * import { SearchcraftPagination } from "@searchcraft/react-sdk";
@@ -581,6 +587,32 @@ export namespace Components {
         "step": number;
     }
     /**
+     * This component renders a summary box for AI-generated summaries of search results.
+     * When the user makes a search, a network call is made to retrieve the summary content, which is then
+     * rendered in this box.
+     * @react-import ```jsx
+     * import { SearchcraftSummaryBox } from "@searchcraft/react-sdk";
+     * ```
+     * @vue-import ```jsx
+     * import { SearchcraftSummaryBox } from "@searchcraft/vue-sdk";
+     * ```
+     * @js-example ```html
+     * <searchcraft-summary-box />
+     * ```
+     * @react-example ```jsx
+     * <SearchcraftSummaryBox />
+     * ```
+     * @vue-example ```jsx
+     * <SearchcraftSummaryBox />
+     * ```
+     */
+    interface SearchcraftSummaryBox {
+        /**
+          * The id of the Searchcraft instance that this component should use.
+         */
+        "searchcraftId"?: string;
+    }
+    /**
      * This web component adds Searchcraft's built-in css theme to your page. It does not render anything visible, its only function is to manage the css styles on the page.'
      * @react-import ```jsx
      * import { SearchcraftTheme } from "@searchcraft/react-sdk";
@@ -800,6 +832,15 @@ declare global {
     var HTMLSearchcraftInputLabelElement: {
         prototype: HTMLSearchcraftInputLabelElement;
         new (): HTMLSearchcraftInputLabelElement;
+    };
+    /**
+     * Renders a loading spinner/loading state for use in things like the summary box.
+     */
+    interface HTMLSearchcraftLoadingElement extends Components.SearchcraftLoading, HTMLStencilElement {
+    }
+    var HTMLSearchcraftLoadingElement: {
+        prototype: HTMLSearchcraftLoadingElement;
+        new (): HTMLSearchcraftLoadingElement;
     };
     /**
      * This web component is designed to facilitate pagination of search results. Once a query is submitted, calculates the number for pages.
@@ -1102,6 +1143,32 @@ declare global {
         new (): HTMLSearchcraftSliderElement;
     };
     /**
+     * This component renders a summary box for AI-generated summaries of search results.
+     * When the user makes a search, a network call is made to retrieve the summary content, which is then
+     * rendered in this box.
+     * @react-import ```jsx
+     * import { SearchcraftSummaryBox } from "@searchcraft/react-sdk";
+     * ```
+     * @vue-import ```jsx
+     * import { SearchcraftSummaryBox } from "@searchcraft/vue-sdk";
+     * ```
+     * @js-example ```html
+     * <searchcraft-summary-box />
+     * ```
+     * @react-example ```jsx
+     * <SearchcraftSummaryBox />
+     * ```
+     * @vue-example ```jsx
+     * <SearchcraftSummaryBox />
+     * ```
+     */
+    interface HTMLSearchcraftSummaryBoxElement extends Components.SearchcraftSummaryBox, HTMLStencilElement {
+    }
+    var HTMLSearchcraftSummaryBoxElement: {
+        prototype: HTMLSearchcraftSummaryBoxElement;
+        new (): HTMLSearchcraftSummaryBoxElement;
+    };
+    /**
      * This web component adds Searchcraft's built-in css theme to your page. It does not render anything visible, its only function is to manage the css styles on the page.'
      * @react-import ```jsx
      * import { SearchcraftTheme } from "@searchcraft/react-sdk";
@@ -1153,6 +1220,7 @@ declare global {
         "searchcraft-filter-panel": HTMLSearchcraftFilterPanelElement;
         "searchcraft-input-form": HTMLSearchcraftInputFormElement;
         "searchcraft-input-label": HTMLSearchcraftInputLabelElement;
+        "searchcraft-loading": HTMLSearchcraftLoadingElement;
         "searchcraft-pagination": HTMLSearchcraftPaginationElement;
         "searchcraft-popover-button": HTMLSearchcraftPopoverButtonElement;
         "searchcraft-popover-footer": HTMLSearchcraftPopoverFooterElement;
@@ -1165,6 +1233,7 @@ declare global {
         "searchcraft-search-results-per-page": HTMLSearchcraftSearchResultsPerPageElement;
         "searchcraft-select": HTMLSearchcraftSelectElement;
         "searchcraft-slider": HTMLSearchcraftSliderElement;
+        "searchcraft-summary-box": HTMLSearchcraftSummaryBoxElement;
         "searchcraft-theme": HTMLSearchcraftThemeElement;
         "searchcraft-toggle-button": HTMLSearchcraftToggleButtonElement;
     }
@@ -1370,6 +1439,12 @@ declare namespace LocalJSX {
           * The classname applied to the label element.
          */
         "inputLabelClassName"?: string | undefined;
+        "label"?: string;
+    }
+    /**
+     * Renders a loading spinner/loading state for use in things like the summary box.
+     */
+    interface SearchcraftLoading {
         "label"?: string;
     }
     /**
@@ -1769,6 +1844,32 @@ declare namespace LocalJSX {
         "step"?: number;
     }
     /**
+     * This component renders a summary box for AI-generated summaries of search results.
+     * When the user makes a search, a network call is made to retrieve the summary content, which is then
+     * rendered in this box.
+     * @react-import ```jsx
+     * import { SearchcraftSummaryBox } from "@searchcraft/react-sdk";
+     * ```
+     * @vue-import ```jsx
+     * import { SearchcraftSummaryBox } from "@searchcraft/vue-sdk";
+     * ```
+     * @js-example ```html
+     * <searchcraft-summary-box />
+     * ```
+     * @react-example ```jsx
+     * <SearchcraftSummaryBox />
+     * ```
+     * @vue-example ```jsx
+     * <SearchcraftSummaryBox />
+     * ```
+     */
+    interface SearchcraftSummaryBox {
+        /**
+          * The id of the Searchcraft instance that this component should use.
+         */
+        "searchcraftId"?: string;
+    }
+    /**
      * This web component adds Searchcraft's built-in css theme to your page. It does not render anything visible, its only function is to manage the css styles on the page.'
      * @react-import ```jsx
      * import { SearchcraftTheme } from "@searchcraft/react-sdk";
@@ -1817,6 +1918,7 @@ declare namespace LocalJSX {
         "searchcraft-filter-panel": SearchcraftFilterPanel;
         "searchcraft-input-form": SearchcraftInputForm;
         "searchcraft-input-label": SearchcraftInputLabel;
+        "searchcraft-loading": SearchcraftLoading;
         "searchcraft-pagination": SearchcraftPagination;
         "searchcraft-popover-button": SearchcraftPopoverButton;
         "searchcraft-popover-footer": SearchcraftPopoverFooter;
@@ -1829,6 +1931,7 @@ declare namespace LocalJSX {
         "searchcraft-search-results-per-page": SearchcraftSearchResultsPerPage;
         "searchcraft-select": SearchcraftSelect;
         "searchcraft-slider": SearchcraftSlider;
+        "searchcraft-summary-box": SearchcraftSummaryBox;
         "searchcraft-theme": SearchcraftTheme;
         "searchcraft-toggle-button": SearchcraftToggleButton;
     }
@@ -1925,6 +2028,10 @@ declare module "@stencil/core" {
              * ```
              */
             "searchcraft-input-label": LocalJSX.SearchcraftInputLabel & JSXBase.HTMLAttributes<HTMLSearchcraftInputLabelElement>;
+            /**
+             * Renders a loading spinner/loading state for use in things like the summary box.
+             */
+            "searchcraft-loading": LocalJSX.SearchcraftLoading & JSXBase.HTMLAttributes<HTMLSearchcraftLoadingElement>;
             /**
              * This web component is designed to facilitate pagination of search results. Once a query is submitted, calculates the number for pages.
              * @react-import ```jsx
@@ -2143,6 +2250,27 @@ declare module "@stencil/core" {
              * This web component is designed to allow users to select a value from a range defined by a minimum and maximum value. The component renders a slider interface, which can be used to visually choose a value between two boundaries.
              */
             "searchcraft-slider": LocalJSX.SearchcraftSlider & JSXBase.HTMLAttributes<HTMLSearchcraftSliderElement>;
+            /**
+             * This component renders a summary box for AI-generated summaries of search results.
+             * When the user makes a search, a network call is made to retrieve the summary content, which is then
+             * rendered in this box.
+             * @react-import ```jsx
+             * import { SearchcraftSummaryBox } from "@searchcraft/react-sdk";
+             * ```
+             * @vue-import ```jsx
+             * import { SearchcraftSummaryBox } from "@searchcraft/vue-sdk";
+             * ```
+             * @js-example ```html
+             * <searchcraft-summary-box />
+             * ```
+             * @react-example ```jsx
+             * <SearchcraftSummaryBox />
+             * ```
+             * @vue-example ```jsx
+             * <SearchcraftSummaryBox />
+             * ```
+             */
+            "searchcraft-summary-box": LocalJSX.SearchcraftSummaryBox & JSXBase.HTMLAttributes<HTMLSearchcraftSummaryBoxElement>;
             /**
              * This web component adds Searchcraft's built-in css theme to your page. It does not render anything visible, its only function is to manage the css styles on the page.'
              * @react-import ```jsx

@@ -231,7 +231,9 @@ export class SearchClient {
    * @param {properties} properties - The properties for the search.
    * @returns {SearchClientQuery} - A properly formatted SearchClient query object.
    */
-  private formatParamsForRequest(properties: SearchClientRequestProperties) {
+  private formatParamsForRequest(
+    properties: SearchClientRequestProperties,
+  ): SearchClientQuery[] {
     const queries: SearchClientQuery[] = [];
     let occur: 'must' | 'should' = 'should';
 
