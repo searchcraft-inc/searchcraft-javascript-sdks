@@ -70,6 +70,7 @@ export class SearchcraftFilterPanel {
 
   onCoreAvailable(core: SearchcraftCore) {
     this.core = core;
+    this.setInitialDateRanges();
     this.unsubscribe = core.store.subscribe((state) => {
       if (this.lastSearchTerm !== state.searchTerm) {
         // A place to put actions to do when the query changes
@@ -78,7 +79,7 @@ export class SearchcraftFilterPanel {
     });
   }
 
-  connectedCallback() {
+  componentDidLoad() {
     this.cleanupCore = registry.useCoreInstance(
       this.searchcraftId,
       this.onCoreAvailable.bind(this),
@@ -88,6 +89,25 @@ export class SearchcraftFilterPanel {
   disconnectedCallback() {
     this.unsubscribe?.();
     this.cleanupCore?.();
+  }
+
+  /**
+   * Sets the initial min/max date range values for search queries based on the filter items provided.
+   */
+  setInitialDateRanges() {
+    for (const item of this.items) {
+      if (item.type === 'dateRange') {
+        const dateItem = item as DateRangeFilterItem;
+
+        const startingMinDate = dateItem.options.minDate;
+        const startingMaxDate = dateItem.options.maxDate || new Date();
+
+        this.core?.store.getState()?.addRangeValueForIndexField({
+          fieldName: dateItem.fieldName,
+          value: `${dateItem.fieldName}:[${startingMinDate.toISOString()} TO ${startingMaxDate.toISOString()}]`,
+        });
+      }
+    }
   }
 
   handleDateRangeChanged(item: DateRangeFilterItem, min: number, max: number) {
@@ -151,6 +171,8 @@ export class SearchcraftFilterPanel {
           switch (filterItem.type) {
             case 'dateRange': {
               const item = filterItem as DateRangeFilterItem;
+              const maxDate = item.options.maxDate || new Date();
+
               // return date range slider
               return (
                 <div class='searchcraft-filter-panel-section'>
@@ -159,7 +181,7 @@ export class SearchcraftFilterPanel {
                   </p>
                   <searchcraft-slider
                     min={item.options.minDate.getTime()}
-                    max={item.options.maxDate.getTime()}
+                    max={maxDate.getTime()}
                     dataType='date'
                     step={1}
                     dateGranularity={item.options.granularity}
