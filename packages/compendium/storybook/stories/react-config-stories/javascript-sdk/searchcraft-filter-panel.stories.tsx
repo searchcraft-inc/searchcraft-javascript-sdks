@@ -50,8 +50,8 @@ const dateRangeItemMonths: DateRangeFilterItem = {
   fieldName: 'date_published',
   label: 'Date range example',
   options: {
-    minDate: new Date(now.getFullYear() - 2, 1, 1),
-    maxDate: now,
+    minDate: new Date(now.getFullYear() - 3, 1, 1),
+    maxDate: new Date(now.getFullYear() - 1, 1, 1),
     granularity: 'month',
   },
 };
@@ -103,6 +103,56 @@ export const Default: StoryObj<Components.SearchcraftFilterPanel> = {
             exactMatchItem,
             mostRecentItem,
             dateRangeItemYears,
+            facetItem,
+          ];
+        }
+      }, []);
+
+      return <Story />;
+    },
+  ],
+  render: () => {
+    return (
+      <>
+        <div style={{ marginBottom: 20 }}>
+          <searchcraft-input-form />
+        </div>
+        <div style={{ marginBottom: 20 }}>
+          <searchcraft-results-info />
+        </div>
+        <searchcraft-filter-panel />
+      </>
+    );
+  },
+  args: {},
+};
+
+export const WithNoMaxDate: StoryObj<Components.SearchcraftFilterPanel> = {
+  decorators: [
+    (Story) => {
+      useEffect(() => {
+        new Searchcraft({
+          readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
+          endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
+          index: [import.meta.env.VITE_INDEX_ECHOSTREAM],
+        });
+        const filterPanel = document.querySelector('searchcraft-filter-panel');
+
+        const dateRangeItem: DateRangeFilterItem = {
+          type: 'dateRange',
+          fieldName: 'date_published',
+          label: 'Date range example',
+          options: {
+            minDate: new Date(now.getFullYear() - 2, 1, 1),
+            granularity: 'month',
+          },
+        };
+
+        if (filterPanel) {
+          filterPanel.items = [
+            exactMatchItem,
+            mostRecentItem,
+            dateRangeItem,
             facetItem,
           ];
         }
