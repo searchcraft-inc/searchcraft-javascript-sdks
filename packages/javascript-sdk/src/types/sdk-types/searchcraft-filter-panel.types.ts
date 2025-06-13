@@ -32,7 +32,7 @@ export interface DateRangeFilterItem extends FilterItem {
   type: 'dateRange';
   options: {
     minDate: Date;
-    maxDate: Date;
+    maxDate?: Date;
     granularity: 'year' | 'month' | 'day' | 'hour';
   };
 }
