@@ -37,12 +37,14 @@ export class SummaryClient {
       try {
         const fetchResponse = await fetch(SUMMARY_BASE_URL, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: state.core?.config.readKey || '',
+          },
           body: JSON.stringify({
-            searchTerm: state.searchTerm,
+            searchQuery: state.searchClientRequest,
             summaryInstructionsPrompt:
               state.core?.config.summaryInstructionsPrompt,
-            readKey: state.core?.config.readKey,
             indexName: indexName,
             endpointUrl: state.core?.config.endpointURL,
           }),

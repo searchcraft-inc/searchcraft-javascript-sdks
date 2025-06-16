@@ -29,6 +29,7 @@ const initialSearchcraftStateValues: SearchcraftStateValues = {
   searchTerm: '',
   searchMode: 'fuzzy',
   searchClientRequest: undefined,
+  searchClientRequestProperties: undefined,
   searchClientResponseItems: [],
   cachedSearchClientResponseItems: [],
   searchResponseTimeTaken: undefined,

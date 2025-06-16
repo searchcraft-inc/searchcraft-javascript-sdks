@@ -6,6 +6,7 @@ import type {
   SearchClientResponseItem,
   AdClientResponseItem,
   SearchClientRequestProperties,
+  SearchClientRequest,
 } from '@types';
 
 import type { SearchcraftCore } from '@classes';
@@ -51,7 +52,8 @@ export interface SearchcraftStateValues {
   isSearchInProgress: boolean;
   rangeValueForIndexFields: Record<string, RangeValueForIndexField>;
   searchMode: 'fuzzy' | 'exact';
-  searchClientRequest:
+  searchClientRequest?: SearchClientRequest;
+  searchClientRequestProperties:
     | SearchClientRequestProperties
     | string
     | undefined

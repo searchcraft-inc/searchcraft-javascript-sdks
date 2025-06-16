@@ -158,17 +158,19 @@ export class SearchClient {
     str: string,
     abortController: AbortController,
   ): Promise<SearchcraftResponse> => {
-    let body: SearchClientRequest;
+    let searchClientRequest: SearchClientRequest;
 
     try {
-      body = JSON.parse(str);
-      body = {
+      searchClientRequest = JSON.parse(str);
+      searchClientRequest = {
         limit: this.config.searchResultsPerPage,
-        ...body,
+        ...searchClientRequest,
       };
     } catch {
       throw new Error('Error: Query string is not valid json.');
     }
+
+    this.parent.store.setState({ searchClientRequest });
 
     const response = await fetch(this.baseSearchUrl, {
       method: 'POST',
@@ -178,7 +180,7 @@ export class SearchClient {
         'X-Sc-User-Id': this.userId,
         'X-Sc-Session-Id': this.parent.measureClient?.sessionId || nanoid(),
       },
-      body: JSON.stringify(body),
+      body: JSON.stringify(searchClientRequest),
       signal: abortController.signal,
     });
 
@@ -195,6 +197,20 @@ export class SearchClient {
     properties: SearchClientRequestProperties,
     abortController: AbortController,
   ): Promise<SearchcraftResponse> => {
+    const searchClientRequest = {
+      query: this.formatParamsForRequest(properties),
+      offset: properties.offset || 0,
+      limit: properties.limit || this.config.searchResultsPerPage || 20,
+      ...(properties.order_by && {
+        order_by: properties.order_by,
+      }),
+      ...(properties.sort && {
+        sort: properties.sort,
+      }),
+    } satisfies SearchClientRequest;
+
+    this.parent.store.setState({ searchClientRequest });
+
     const response = await fetch(this.baseSearchUrl, {
       method: 'POST',
       headers: {
@@ -203,17 +219,7 @@ export class SearchClient {
         'X-Sc-User-Id': this.userId,
         'X-Sc-Session-Id': this.parent.measureClient?.sessionId || nanoid(),
       },
-      body: JSON.stringify({
-        query: this.formatParamsForRequest(properties),
-        offset: properties.offset || 0,
-        limit: properties.limit || this.config.searchResultsPerPage || 20,
-        ...(properties.order_by && {
-          order_by: properties.order_by,
-        }),
-        ...(properties.sort && {
-          sort: properties.sort,
-        }),
-      } satisfies SearchClientRequest),
+      body: JSON.stringify(searchClientRequest),
       signal: abortController.signal,
     });
 
