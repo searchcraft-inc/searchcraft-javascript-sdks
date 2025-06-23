@@ -14,7 +14,7 @@ type SearchResultTemplateDataEchostream = {
 
 export const searchResultTemplateEchostream: SearchResultTemplate<
   SearchResultTemplateDataEchostream
-> = (data, index, { html }) => html`
+> = (data, _index, { html }) => html`
   <a href="${data.canonical_link}" target="_blank" rel="noreferrer">
     <div class="search-result-content">
       <h3 class="search-result-content-subtitle">${data.section_name}</h3>
@@ -47,7 +47,7 @@ type SearchResultTemplateDataBazaario = {
 
 export const searchResultTemplateBazaario: SearchResultTemplate<
   SearchResultTemplateDataBazaario
-> = (data, index, { html }) => html`
+> = (data, _index, { html }) => html`
   <div>
     <h2>${data.title}</h2>
     <p>${data.link}
@@ -67,7 +67,7 @@ type SearchResultTemplateDataFoodAndWine = {
 
 export const searchResultTemplateFoodAndWine: SearchResultTemplate<
   SearchResultTemplateDataFoodAndWine
-> = (data, index, { html }) => html`
+> = (data, _index, { html }) => html`
   <a href="${data.link}" target="_blank" rel="noreferrer">
     <div class="search-result-content">
       <h3 class="search-result-content-subtitle">${data.category?.[0]}</h3>
