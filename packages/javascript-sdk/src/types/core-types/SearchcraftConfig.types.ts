@@ -40,6 +40,11 @@ export interface SearchcraftConfig {
   searchResultsPerPage?: number;
 
   /**
+   * The URL for Searchcraft's microservice responsible for LLM-related tasks such as RAG summaries and semantic search.
+   */
+  llmServiceURL?: string;
+
+  /**
    * Instructions provided to the LLM when creating search result summaries.
    */
   summaryInstructionsPrompt?: string;

@@ -27,6 +27,7 @@ export const Default: StoryObj<
           readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
           endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
           index: [import.meta.env.VITE_INDEX_ECHOSTREAM],
+          llmServiceURL: import.meta.env.VITE_CORTEX_URL,
         });
       }, []);
 
