@@ -19,7 +19,7 @@ export const Default: StoryObj<Components.SearchcraftErrorMessage> = {
         new Searchcraft({
           readKey: import.meta.env.VITE_READ_KEY_FOOD_WINE,
           endpointURL: import.meta.env.VITE_ENDPOINT_URL_FOOD_WINE,
-          index: [import.meta.env.VITE_READ_KEY_FOOD_WINE],
+          index: [import.meta.env.VITE_INDEX_FOOD_WINE],
         });
         const searchResults = document.querySelector(
           'searchcraft-search-results',
@@ -51,7 +51,7 @@ export const WithPromptInstructions: StoryObj<Components.SearchcraftErrorMessage
           new Searchcraft({
           readKey: import.meta.env.VITE_READ_KEY_FOOD_WINE,
           endpointURL: import.meta.env.VITE_ENDPOINT_URL_FOOD_WINE,
-          index: [import.meta.env.VITE_READ_KEY_FOOD_WINE],
+          index: [import.meta.env.VITE_INDEX_FOOD_WINE],
             summaryInstructionsPrompt: 'Reply in French.',
           });
         }, []);
