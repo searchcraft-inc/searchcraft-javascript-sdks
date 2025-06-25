@@ -5,9 +5,9 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { AdClientResponseItem, FilterItem, PopoverButtonTemplate, PopoverResultMappings, ResultsInfoTemplate, SearchClientResponseItem, SearchcraftAdSource, SearchResultTemplate, SearchResultTemplateData } from "./types/index";
+import { AdClientResponseItem, FilterItem, PopoverButtonTemplate, PopoverResultMappings, ResultsInfoTemplate, SearchClientResponseItem, unknown as SearchcraftAdSource, SearchResultTemplate, SearchResultTemplateData } from "./types/index";
 import { SearchcraftSelectOption } from "./components/searchcraft-select/searchcraft-select";
-export { AdClientResponseItem, FilterItem, PopoverButtonTemplate, PopoverResultMappings, ResultsInfoTemplate, SearchClientResponseItem, SearchcraftAdSource, SearchResultTemplate, SearchResultTemplateData } from "./types/index";
+export { AdClientResponseItem, FilterItem, PopoverButtonTemplate, PopoverResultMappings, ResultsInfoTemplate, SearchClientResponseItem, unknown as SearchcraftAdSource, SearchResultTemplate, SearchResultTemplateData } from "./types/index";
 export { SearchcraftSelectOption } from "./components/searchcraft-select/searchcraft-select";
 export namespace Components {
     /**

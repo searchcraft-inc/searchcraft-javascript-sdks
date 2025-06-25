@@ -20,7 +20,6 @@ import type {
   SearchIndexHit,
   SubscriptionEventMap,
   UnsubscribeFunction,
-  SearchcraftAdSource,
   SearchClientRequestProperties,
   SearchcraftResponse,
 } from '@types';
@@ -113,16 +112,12 @@ export class SearchcraftCore {
     this.measureClient = new MeasureClient(config, sdkInfo, userId);
     this.searchClient = new SearchClient(this, config, userId);
 
-    switch (config.adSource) {
-      case 'adMarketplace':
-        this.adClient = new AdMarketplaceClient(config);
-        break;
-      case 'Nativo':
-        this.adClient = new NativoClient(config);
-        break;
-      case 'Custom':
-        this.adClient = new CustomAdClient(config);
-        break;
+    if (config.customAdConfig) {
+      this.adClient = new CustomAdClient(config);
+    } else if (config.nativoConfig) {
+      this.adClient = new NativoClient(config);
+    } else if (config.admAdConfig) {
+      this.adClient = new AdMarketplaceClient(config);
     }
 
     this.emitEvent('initialized', {
@@ -163,7 +158,6 @@ export class SearchcraftCore {
   handleAdContainerRendered(data: {
     adClientResponseItem?: AdClientResponseItem;
     adContainerId: string;
-    adSource: SearchcraftAdSource;
     searchTerm: string;
   }) {
     this.adClient?.onAdContainerRendered(data);
@@ -173,7 +167,7 @@ export class SearchcraftCore {
       name: 'ad_container_rendered',
       data: {
         adContainerId: data.adContainerId,
-        adSource: data.adSource,
+        adSource: 'Custom',
         searchTerm: data.searchTerm,
       },
     });
@@ -185,7 +179,6 @@ export class SearchcraftCore {
   handleAdContainerViewed(data: {
     adClientResponseItem?: AdClientResponseItem;
     adContainerId: string;
-    adSource: SearchcraftAdSource;
     searchTerm: string;
   }) {
     this.adClient?.onAdContainerViewed(data);
@@ -195,7 +188,7 @@ export class SearchcraftCore {
       name: 'ad_container_viewed',
       data: {
         adContainerId: data.adContainerId,
-        adSource: data.adSource,
+        adSource: 'Custom',
         searchTerm: data.searchTerm,
       },
     });
