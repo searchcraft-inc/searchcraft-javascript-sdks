@@ -6,9 +6,11 @@ import DOMPurify from 'dompurify';
 import { marked } from 'marked';
 
 /**
- * This component renders a summary box for AI-generated summaries of search results.
+ * This component renders a summary box for RAG search result summaries.
  * When the user makes a search, a network call is made to retrieve the summary content, which is then
  * rendered in this box.
+ *
+ * NOTE: This component requires the usage of a read key that has "SUMMARY" permissions.
  *
  * @react-import
  * ```jsx

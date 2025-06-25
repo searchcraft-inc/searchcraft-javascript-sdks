@@ -587,9 +587,10 @@ export namespace Components {
         "step": number;
     }
     /**
-     * This component renders a summary box for AI-generated summaries of search results.
+     * This component renders a summary box for RAG search result summaries.
      * When the user makes a search, a network call is made to retrieve the summary content, which is then
      * rendered in this box.
+     * NOTE: This component requires the usage of a read key that has "SUMMARY" permissions.
      * @react-import ```jsx
      * import { SearchcraftSummaryBox } from "@searchcraft/react-sdk";
      * ```
@@ -1143,9 +1144,10 @@ declare global {
         new (): HTMLSearchcraftSliderElement;
     };
     /**
-     * This component renders a summary box for AI-generated summaries of search results.
+     * This component renders a summary box for RAG search result summaries.
      * When the user makes a search, a network call is made to retrieve the summary content, which is then
      * rendered in this box.
+     * NOTE: This component requires the usage of a read key that has "SUMMARY" permissions.
      * @react-import ```jsx
      * import { SearchcraftSummaryBox } from "@searchcraft/react-sdk";
      * ```
@@ -1844,9 +1846,10 @@ declare namespace LocalJSX {
         "step"?: number;
     }
     /**
-     * This component renders a summary box for AI-generated summaries of search results.
+     * This component renders a summary box for RAG search result summaries.
      * When the user makes a search, a network call is made to retrieve the summary content, which is then
      * rendered in this box.
+     * NOTE: This component requires the usage of a read key that has "SUMMARY" permissions.
      * @react-import ```jsx
      * import { SearchcraftSummaryBox } from "@searchcraft/react-sdk";
      * ```
@@ -2251,9 +2254,10 @@ declare module "@stencil/core" {
              */
             "searchcraft-slider": LocalJSX.SearchcraftSlider & JSXBase.HTMLAttributes<HTMLSearchcraftSliderElement>;
             /**
-             * This component renders a summary box for AI-generated summaries of search results.
+             * This component renders a summary box for RAG search result summaries.
              * When the user makes a search, a network call is made to retrieve the summary content, which is then
              * rendered in this box.
+             * NOTE: This component requires the usage of a read key that has "SUMMARY" permissions.
              * @react-import ```jsx
              * import { SearchcraftSummaryBox } from "@searchcraft/react-sdk";
              * ```
