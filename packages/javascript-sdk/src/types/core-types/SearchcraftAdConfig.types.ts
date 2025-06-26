@@ -29,7 +29,7 @@ export interface CustomAdConfig {
   /**
    * A callback function responsible for rendering the custom ad containers.
    */
-  template?: CustomAdTemplate;
+  template: CustomAdTemplate;
 }
 
 export interface NativoAdConfig {

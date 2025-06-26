@@ -1,1 +1,1 @@
-export * from './ReactJSXDeclarations';
+export * from './ReactJSXDeclarations.js';
