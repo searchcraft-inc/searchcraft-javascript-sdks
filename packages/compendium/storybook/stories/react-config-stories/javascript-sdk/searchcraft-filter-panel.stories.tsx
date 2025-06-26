@@ -94,7 +94,7 @@ export const Default: StoryObj<Components.SearchcraftFilterPanel> = {
         new Searchcraft({
           readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
           endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
-          index: [import.meta.env.VITE_INDEX_ECHOSTREAM],
+          indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
         });
         const filterPanel = document.querySelector('searchcraft-filter-panel');
 
@@ -134,7 +134,7 @@ export const WithNoMaxDate: StoryObj<Components.SearchcraftFilterPanel> = {
         new Searchcraft({
           readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
           endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
-          index: [import.meta.env.VITE_INDEX_ECHOSTREAM],
+          indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
         });
         const filterPanel = document.querySelector('searchcraft-filter-panel');
 
@@ -184,7 +184,7 @@ export const WithMonthsSlider: StoryObj<Components.SearchcraftFilterPanel> = {
         new Searchcraft({
           readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
           endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
-          index: [import.meta.env.VITE_INDEX_ECHOSTREAM],
+          indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
         });
         const filterPanel = document.querySelector('searchcraft-filter-panel');
 
@@ -224,7 +224,7 @@ export const WithDaysSlider: StoryObj<Components.SearchcraftFilterPanel> = {
         new Searchcraft({
           readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
           endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
-          index: [import.meta.env.VITE_INDEX_ECHOSTREAM],
+          indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
         });
         const filterPanel = document.querySelector('searchcraft-filter-panel');
 
@@ -264,7 +264,7 @@ export const WithHoursSlider: StoryObj<Components.SearchcraftFilterPanel> = {
         new Searchcraft({
           readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
           endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
-          index: [import.meta.env.VITE_INDEX_ECHOSTREAM],
+          indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
         });
         const filterPanel = document.querySelector('searchcraft-filter-panel');
 
@@ -308,7 +308,7 @@ export const WithDebounceDelay300: StoryObj<Components.SearchcraftFilterPanel> =
           new Searchcraft({
             readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
             endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
-            index: [import.meta.env.VITE_INDEX_ECHOSTREAM],
+            indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
             searchDebounceDelay: 300,
           });
           const filterPanel = document.querySelector(

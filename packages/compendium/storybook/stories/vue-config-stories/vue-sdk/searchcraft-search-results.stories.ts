@@ -5,8 +5,7 @@ import {
   SearchcraftSearchResults,
   SearchcraftInputForm,
 } from '@searchcraft/vue-sdk';
-
-import { searchResultTemplate } from '@common/index.js';
+import { searchResultTemplateEchostream } from '@common/index.js';
 
 export default {
   title: 'Vue SDK/searchcraft-search-results',
@@ -86,7 +85,7 @@ const defaultProps = {
   placeAdAtEnd: false,
   placeAdAtStart: false,
   resultImagePlacement: 'right',
-  template: searchResultTemplate,
+  template: searchResultTemplateEchostream,
   inputCaptionValue: 'Search',
   labelForInput: 'Search for something:',
   placeholderValue: 'Search here...',
@@ -101,7 +100,7 @@ export const Default: StoryFn = (args) => ({
     new Searchcraft({
       readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
       endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
-      index: [import.meta.env.VITE_INDEX_ECHOSTREAM],
+      indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
     });
     return { args };
   },

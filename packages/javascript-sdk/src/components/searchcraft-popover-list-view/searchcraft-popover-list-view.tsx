@@ -248,13 +248,14 @@ export class SearchcraftPopoverListView {
 
   render() {
     if (this.config?.customAdConfig) {
-      this.renderWithCustomAds();
-    } else if (this.config?.nativoConfig) {
-      this.renderWithNativoAds();
-    } else if (this.config?.admAdConfig) {
-      this.renderWithADMAds();
-    } else {
-      this.renderWithNoAds();
+      return this.renderWithCustomAds();
     }
+    if (this.config?.nativoConfig) {
+      return this.renderWithNativoAds();
+    }
+    if (this.config?.admAdConfig) {
+      return this.renderWithADMAds();
+    }
+    return this.renderWithNoAds();
   }
 }

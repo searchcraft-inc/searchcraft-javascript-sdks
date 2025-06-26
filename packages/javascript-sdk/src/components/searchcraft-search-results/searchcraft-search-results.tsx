@@ -356,13 +356,14 @@ export class SearchcraftSearchResults {
     }
 
     if (this.config?.customAdConfig) {
-      this.renderWithCustomAds();
-    } else if (this.config?.admAdConfig) {
-      this.renderWithNativoAds();
-    } else if (this.config?.nativoConfig) {
-      this.renderWithNativoAds();
-    } else {
-      this.renderWithNoAds();
+      return this.renderWithCustomAds();
     }
+    if (this.config?.admAdConfig) {
+      return this.renderWithNativoAds();
+    }
+    if (this.config?.nativoConfig) {
+      return this.renderWithNativoAds();
+    }
+    return this.renderWithNoAds();
   }
 }

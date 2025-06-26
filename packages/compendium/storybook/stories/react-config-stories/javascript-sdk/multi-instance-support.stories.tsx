@@ -23,7 +23,7 @@ export const TwoInlineInstances: StoryObj<Components.SearchcraftSearchResults> =
             {
               readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
               endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
-              index: [import.meta.env.VITE_INDEX_ECHOSTREAM],
+              indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
               initialQuery: JSON.stringify({
                 order_by: 'date_published',
                 query: {
@@ -50,7 +50,7 @@ export const TwoInlineInstances: StoryObj<Components.SearchcraftSearchResults> =
             {
               readKey: import.meta.env.VITE_READ_KEY_BAZAARIO,
               endpointURL: import.meta.env.VITE_ENDPOINT_URL_BAZAARIO,
-              index: [import.meta.env.VITE_INDEX_BAZAARIO],
+              indexName: import.meta.env.VITE_INDEX_BAZAARIO,
               initialQuery: JSON.stringify({
                 query: {
                   fuzzy: {
@@ -126,7 +126,7 @@ export const InlineAndPopover: StoryObj<Components.SearchcraftSearchResults> = {
           {
             readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
             endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
-            index: [import.meta.env.VITE_INDEX_ECHOSTREAM],
+            indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
           },
           'searchcraftInstance1',
         );
@@ -153,7 +153,7 @@ export const InlineAndPopover: StoryObj<Components.SearchcraftSearchResults> = {
           {
             readKey: import.meta.env.VITE_READ_KEY_BAZAARIO,
             endpointURL: import.meta.env.VITE_ENDPOINT_URL_BAZAARIO,
-            index: [import.meta.env.VITE_INDEX_BAZAARIO],
+            indexName: import.meta.env.VITE_INDEX_BAZAARIO,
           },
           'searchcraftInstance2',
         );

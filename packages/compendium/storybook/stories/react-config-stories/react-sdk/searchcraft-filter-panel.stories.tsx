@@ -87,7 +87,7 @@ export const Default: StoryObj<SearchcraftFilterPanelProps> = {
         new Searchcraft({
           readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
           endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
-          index: [import.meta.env.VITE_INDEX_ECHOSTREAM],
+          indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
         });
         const filterPanel = document.querySelector('searchcraft-filter-panel');
 

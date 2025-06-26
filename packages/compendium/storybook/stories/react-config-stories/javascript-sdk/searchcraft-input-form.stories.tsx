@@ -78,7 +78,7 @@ export const Default: StoryObj<Components.SearchcraftInputForm> = {
         new Searchcraft({
           readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
           endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
-          index: [import.meta.env.VITE_INDEX_ECHOSTREAM],
+          indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
         });
       }, []);
       return <Story />;
@@ -95,7 +95,7 @@ export const ButtonRight: StoryObj<Components.SearchcraftInputForm> = {
         new Searchcraft({
           readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
           endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
-          index: [import.meta.env.VITE_INDEX_ECHOSTREAM],
+          indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
         });
       }, []);
       return <Story />;
@@ -112,7 +112,7 @@ export const AutoSearch: StoryObj<Components.SearchcraftInputForm> = {
         new Searchcraft({
           readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
           endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
-          index: [import.meta.env.VITE_INDEX_ECHOSTREAM],
+          indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
         });
       }, []);
       return <Story />;
