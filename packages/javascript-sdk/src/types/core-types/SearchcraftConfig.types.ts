@@ -40,9 +40,9 @@ export interface SearchcraftConfig {
   searchResultsPerPage?: number;
 
   /**
-   * The URL for Searchcraft's microservice responsible for LLM-related tasks such as RAG summaries and semantic search.
+   * The URL pointing towards Searchcraft Cloud's semantic search and RAG summary processing layer. When using a `searchcraft-summary-box` component, this value must be specified.
    */
-  llmServiceURL?: string;
+  cortexURL?: string;
 
   /**
    * Instructions provided to the LLM when creating search result summaries.

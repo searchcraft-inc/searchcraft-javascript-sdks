@@ -21,8 +21,8 @@ export class SummaryClient {
       const state = this.get();
       const config = state.core?.config;
       console.log(config);
-      if (!config || !config.llmServiceURL) {
-        throw new Error('llmServiceURL was not specified in the config.');
+      if (!config || !config.cortexURL) {
+        throw new Error('cortexURL was not specified in the config.');
       }
 
       const indexName = state.core?.config.index.at(0);
@@ -39,7 +39,7 @@ export class SummaryClient {
         summary: '',
       });
 
-      const endpointUrl = `${config.llmServiceURL.replace(/\/$/, '')}/api/search/summary`;
+      const endpointUrl = `${config.cortexURL.replace(/\/$/, '')}/api/search/summary`;
 
       try {
         const fetchResponse = await fetch(endpointUrl, {

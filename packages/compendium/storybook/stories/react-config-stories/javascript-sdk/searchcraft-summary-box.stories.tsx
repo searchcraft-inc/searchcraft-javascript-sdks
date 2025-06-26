@@ -18,7 +18,7 @@ export const Default: StoryObj<Components.SearchcraftErrorMessage> = {
           readKey: import.meta.env.VITE_READ_KEY_FOOD_WINE,
           endpointURL: import.meta.env.VITE_ENDPOINT_URL_FOOD_WINE,
           index: [import.meta.env.VITE_INDEX_FOOD_WINE],
-          llmServiceURL: import.meta.env.VITE_CORTEX_URL,
+          cortexURL: import.meta.env.VITE_CORTEX_URL,
         });
         const searchResults = document.querySelector(
           'searchcraft-search-results',
@@ -51,7 +51,7 @@ export const WithPromptInstructions: StoryObj<Components.SearchcraftErrorMessage
             readKey: import.meta.env.VITE_READ_KEY_FOOD_WINE,
             endpointURL: import.meta.env.VITE_ENDPOINT_URL_FOOD_WINE,
             index: [import.meta.env.VITE_INDEX_FOOD_WINE],
-            llmServiceURL: import.meta.env.VITE_CORTEX_URL,
+            cortexURL: import.meta.env.VITE_CORTEX_URL,
             summaryInstructionsPrompt: 'Reply in French.',
           });
         }, []);
