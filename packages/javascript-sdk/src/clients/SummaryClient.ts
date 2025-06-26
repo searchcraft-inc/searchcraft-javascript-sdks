@@ -1,6 +1,5 @@
 import type { SearchcraftStore } from '@store';
 
-const SUMMARY_BASE_URL = 'http://localhost:3200/api/search/summary';
 const DEBOUNCE_DELAY = 1000;
 
 export class SummaryClient {
@@ -20,6 +19,12 @@ export class SummaryClient {
   streamSummaryData() {
     const begin = async () => {
       const state = this.get();
+      const config = state.core?.config;
+      console.log(config);
+      if (!config || !config.llmServiceURL) {
+        throw new Error('llmServiceURL was not specified in the config.');
+      }
+
       const indexName = state.core?.config.index.at(0);
 
       if (!state.hasSummaryBox || !indexName) {
@@ -34,8 +39,10 @@ export class SummaryClient {
         summary: '',
       });
 
+      const endpointUrl = `${config.llmServiceURL.replace(/\/$/, '')}/api/search/summary`;
+
       try {
-        const fetchResponse = await fetch(SUMMARY_BASE_URL, {
+        const fetchResponse = await fetch(endpointUrl, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
