@@ -19,9 +19,9 @@ export interface SearchcraftConfig {
   endpointURL: string;
 
   /**
-   * Name or names of search indices configured using Vektron. Given as an array of strings.
+   * Name of the Searchcraft search index to search within.
    */
-  index: string;
+  indexName: string;
 
   /**
    * Specifies an initial search query to search with. This should be a stringified search query object.

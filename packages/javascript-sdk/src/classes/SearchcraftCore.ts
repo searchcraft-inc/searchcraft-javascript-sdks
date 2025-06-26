@@ -55,10 +55,16 @@ export class SearchcraftCore {
     sdkInfo: SearchcraftSDKInfo,
     searchcraftId: string | undefined,
   ) {
-    if (!config.endpointURL || !config.index || !config.readKey) {
-      throw new Error(
-        'Endpoint URL, Index value(s), and Read Key must be provided',
-      );
+    if (!config.endpointURL) {
+      throw new Error('SDK Configuration Error: endpointURL not specified.');
+    }
+
+    if (!config.readKey) {
+      throw new Error('SDK Configuration Error: readKey not specified.');
+    }
+
+    if (!config.indexName) {
+      throw new Error('SDK Configuration Error: indexName not specified.');
     }
 
     this.config = {
@@ -167,7 +173,6 @@ export class SearchcraftCore {
       name: 'ad_container_rendered',
       data: {
         adContainerId: data.adContainerId,
-        adSource: 'Custom',
         searchTerm: data.searchTerm,
       },
     });
@@ -188,7 +193,6 @@ export class SearchcraftCore {
       name: 'ad_container_viewed',
       data: {
         adContainerId: data.adContainerId,
-        adSource: 'Custom',
         searchTerm: data.searchTerm,
       },
     });

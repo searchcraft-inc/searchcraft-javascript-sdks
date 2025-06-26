@@ -5,9 +5,9 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { AdClientResponseItem, FilterItem, PopoverButtonTemplate, PopoverResultMappings, ResultsInfoTemplate, SearchClientResponseItem, unknown as SearchcraftAdSource, SearchResultTemplate, SearchResultTemplateData } from "./types/index";
+import { AdClientResponseItem, FilterItem, PopoverButtonTemplate, PopoverResultMappings, ResultsInfoTemplate, SearchClientResponseItem, SearchResultTemplate, SearchResultTemplateData } from "./types/index";
 import { SearchcraftSelectOption } from "./components/searchcraft-select/searchcraft-select";
-export { AdClientResponseItem, FilterItem, PopoverButtonTemplate, PopoverResultMappings, ResultsInfoTemplate, SearchClientResponseItem, unknown as SearchcraftAdSource, SearchResultTemplate, SearchResultTemplateData } from "./types/index";
+export { AdClientResponseItem, FilterItem, PopoverButtonTemplate, PopoverResultMappings, ResultsInfoTemplate, SearchClientResponseItem, SearchResultTemplate, SearchResultTemplateData } from "./types/index";
 export { SearchcraftSelectOption } from "./components/searchcraft-select/searchcraft-select";
 export namespace Components {
     /**
@@ -15,7 +15,7 @@ export namespace Components {
      */
     interface SearchcraftAd {
         "adClientResponseItem"?: AdClientResponseItem;
-        "adSource": SearchcraftAdSource;
+        "adSource": 'Custom' | 'Nativo' | 'adMarketplace';
         /**
           * Where the ad is being rendered within the search results div. Lifecycle behavior differs for ads being rendered in different positions, so we need to be able to handle all of those cases.
          */
@@ -1175,7 +1175,7 @@ declare namespace LocalJSX {
      */
     interface SearchcraftAd {
         "adClientResponseItem"?: AdClientResponseItem;
-        "adSource"?: SearchcraftAdSource;
+        "adSource"?: 'Custom' | 'Nativo' | 'adMarketplace';
         /**
           * Where the ad is being rendered within the search results div. Lifecycle behavior differs for ads being rendered in different positions, so we need to be able to handle all of those cases.
          */

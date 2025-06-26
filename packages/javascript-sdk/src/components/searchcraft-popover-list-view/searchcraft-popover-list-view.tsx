@@ -88,10 +88,12 @@ export class SearchcraftPopoverListView {
 
   renderWithCustomAds() {
     const itemsToRender: JSX.Element[] = [];
-    const interstitialInterval = this.config?.customAdInterstitialInterval || 0;
-    const interstitialQuantity = this.config?.customAdInterstitialQuantity || 1;
-    const adStartQuantity = this.config?.customAdStartQuantity || 0;
-    const adEndQuantity = this.config?.customAdEndQuantity || 0;
+    const interstitialInterval =
+      this.config?.customAdConfig?.adInterstitialInterval || 0;
+    const interstitialQuantity =
+      this.config?.customAdConfig?.adInterstitialQuantity || 1;
+    const adStartQuantity = this.config?.customAdConfig?.adStartQuantity || 0;
+    const adEndQuantity = this.config?.customAdConfig?.adEndQuantity || 0;
     const searchItems = this.searchClientResponseItems || [];
 
     // Renders ads at beginning
@@ -157,11 +159,13 @@ export class SearchcraftPopoverListView {
   renderWithNativoAds() {
     const itemsToRender: JSX.Element[] = [];
     const interstitialStartIndex =
-      this.config?.nativoAdInterstialStartIndex || 0;
-    const interstitialInterval = this.config?.nativoAdInterstitialInterval || 0;
-    const interstitialQuantity = this.config?.nativoAdInterstitialQuantity || 1;
-    const adStartQuantity = this.config?.nativoAdStartQuantity || 0;
-    const adEndQuantity = this.config?.nativoAdEndQuantity || 0;
+      this.config?.nativoConfig?.adInterstialStartIndex || 0;
+    const interstitialInterval =
+      this.config?.nativoConfig?.adInterstitialInterval || 0;
+    const interstitialQuantity =
+      this.config?.nativoConfig?.adInterstitialQuantity || 1;
+    const adStartQuantity = this.config?.nativoConfig?.adStartQuantity || 0;
+    const adEndQuantity = this.config?.nativoConfig?.adEndQuantity || 0;
     const searchItems = this.searchClientResponseItems || [];
 
     // Renders ads at beginning
@@ -243,15 +247,14 @@ export class SearchcraftPopoverListView {
   }
 
   render() {
-    switch (this.config?.adSource || 'None') {
-      case 'adMarketplace':
-        return this.renderWithADMAds();
-      case 'Custom':
-        return this.renderWithCustomAds();
-      case 'Nativo':
-        return this.renderWithNativoAds();
-      default:
-        return this.renderWithNoAds();
+    if (this.config?.customAdConfig) {
+      this.renderWithCustomAds();
+    } else if (this.config?.nativoConfig) {
+      this.renderWithNativoAds();
+    } else if (this.config?.admAdConfig) {
+      this.renderWithADMAds();
+    } else {
+      this.renderWithNoAds();
     }
   }
 }

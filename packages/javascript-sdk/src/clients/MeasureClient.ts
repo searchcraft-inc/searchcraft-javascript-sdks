@@ -76,7 +76,7 @@ export class MeasureClient {
     const request: MeasureRequest = {
       event_name: eventName,
       properties: {
-        searchcraft_index_names: this.config.index,
+        searchcraft_index_names: [this.config.indexName],
         session_id: this.sessionId,
         ...properties,
       },

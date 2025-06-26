@@ -1,5 +1,3 @@
-import type { SearchcraftAdSource } from './SearchcraftConfig.types';
-
 export interface ADMResponse {
   partial_qt: string;
   text_ads: ADMAd[];
@@ -7,7 +5,6 @@ export interface ADMResponse {
 }
 export interface AdClientResponseItem {
   id: string;
-  adSource: SearchcraftAdSource;
 }
 
 export interface ADMClientResponseItem extends AdClientResponseItem {
