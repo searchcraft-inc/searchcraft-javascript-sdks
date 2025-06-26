@@ -72,5 +72,10 @@ export const SearchcraftSearchResultsPerPage = /*@__PURE__*/ defineContainer<JSX
 ]);
 
 
+export const SearchcraftSummaryBox = /*@__PURE__*/ defineContainer<JSX.SearchcraftSummaryBox>('searchcraft-summary-box', () => {}, [
+  'searchcraftId'
+]);
+
+
 export const SearchcraftTheme = /*@__PURE__*/ defineContainer<JSX.SearchcraftTheme>('searchcraft-theme', () => {});
 

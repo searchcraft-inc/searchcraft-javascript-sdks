@@ -4,12 +4,13 @@ import {
   Searchcraft,
   SearchcraftSearchResults,
   SearchcraftInputForm,
+  SearchcraftSummaryBox,
 } from '@searchcraft/vue-sdk';
 
 import { searchResultTemplateEchostream } from '@common/index.js';
 
 export default {
-  title: 'Vue SDK/searchcraft-search-results',
+  title: 'Vue SDK/searchcraft-summary-box',
   components: { SearchcraftSearchResults, SearchcraftInputForm },
   argTypes: {
     adInterval: {
@@ -96,12 +97,15 @@ export const Default: StoryFn = (args) => ({
   components: {
     SearchcraftSearchResults,
     SearchcraftInputForm,
+    SearchcraftSummaryBox,
   },
   setup() {
     new Searchcraft({
       readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
       endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
       index: [import.meta.env.VITE_INDEX_ECHOSTREAM],
+      summaryInstructionsPrompt: 'Speak like a pirate',
+      cortexURL: import.meta.env.VITE_CORTEX_URL,
     });
     return { args };
   },
@@ -116,6 +120,7 @@ export const Default: StoryFn = (args) => ({
           labelForInput: args.labelForInput,
         }"
       />
+      <SearchcraftSummaryBox />
       <SearchcraftSearchResults v-bind="args" />
     </div>
   `,

@@ -33,6 +33,8 @@ declare global {
       'searchcraft-slider': StencilFriendlyKeys<Components.SearchcraftSlider>;
       'searchcraft-theme': StencilFriendlyKeys<Components.SearchcraftTheme>;
       'searchcraft-toggle-button': StencilFriendlyKeys<Components.SearchcraftToggleButton>;
+      'searchcraft-summary-box': StencilFriendlyKeys<Components.SearchcraftSummaryBox>;
+      'searchcraft-loading': StencilFriendlyKeys<Components.SearchcraftLoading>;
     }
   }
 }
