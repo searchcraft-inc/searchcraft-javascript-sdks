@@ -108,7 +108,7 @@ export class SearchcraftCore {
     config: SearchcraftConfig,
     sdkInfo: SearchcraftSDKInfo,
   ) {
-    let userId = this.config.userId;
+    let userId = this.config.measureUserIdentifier;
 
     if (!userId) {
       const fingerprint = await getFingerprint();

@@ -42,7 +42,7 @@ export interface SearchcraftConfig {
    * A unique user identifier for end users of your product. This would typically correspond to a user id
    * in your consuming application's database. Used for data analysis and visualizations on Vektron.
    */
-  userId?: string;
+  measureUserIdentifier?: string;
 
   /**
    * Configuration object for specifying behavior of how custom ad containers render alongside search results.
