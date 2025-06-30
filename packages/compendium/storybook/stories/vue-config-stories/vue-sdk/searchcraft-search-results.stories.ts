@@ -5,7 +5,6 @@ import {
   SearchcraftSearchResults,
   SearchcraftInputForm,
 } from '@searchcraft/vue-sdk';
-
 import { searchResultTemplateEchostream } from '@common/index.js';
 
 export default {
@@ -101,7 +100,7 @@ export const Default: StoryFn = (args) => ({
     new Searchcraft({
       readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
       endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
-      index: [import.meta.env.VITE_INDEX_ECHOSTREAM],
+      indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
     });
     return { args };
   },

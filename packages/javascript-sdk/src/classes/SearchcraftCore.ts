@@ -20,7 +20,6 @@ import type {
   SearchIndexHit,
   SubscriptionEventMap,
   UnsubscribeFunction,
-  SearchcraftAdSource,
   SearchClientRequestProperties,
   SearchcraftResponse,
 } from '@types';
@@ -56,10 +55,16 @@ export class SearchcraftCore {
     sdkInfo: SearchcraftSDKInfo,
     searchcraftId: string | undefined,
   ) {
-    if (!config.endpointURL || !config.index || !config.readKey) {
-      throw new Error(
-        'Endpoint URL, Index value(s), and Read Key must be provided',
-      );
+    if (!config.endpointURL) {
+      throw new Error('SDK Configuration Error: endpointURL not specified.');
+    }
+
+    if (!config.readKey) {
+      throw new Error('SDK Configuration Error: readKey not specified.');
+    }
+
+    if (!config.indexName) {
+      throw new Error('SDK Configuration Error: indexName not specified.');
     }
 
     this.config = {
@@ -103,7 +108,7 @@ export class SearchcraftCore {
     config: SearchcraftConfig,
     sdkInfo: SearchcraftSDKInfo,
   ) {
-    let userId = this.config.userId;
+    let userId = this.config.measureUserIdentifier;
 
     if (!userId) {
       const fingerprint = await getFingerprint();
@@ -113,16 +118,12 @@ export class SearchcraftCore {
     this.measureClient = new MeasureClient(config, sdkInfo, userId);
     this.searchClient = new SearchClient(this, config, userId);
 
-    switch (config.adSource) {
-      case 'adMarketplace':
-        this.adClient = new AdMarketplaceClient(config);
-        break;
-      case 'Nativo':
-        this.adClient = new NativoClient(config);
-        break;
-      case 'Custom':
-        this.adClient = new CustomAdClient(config);
-        break;
+    if (config.customAdConfig) {
+      this.adClient = new CustomAdClient(config);
+    } else if (config.nativoConfig) {
+      this.adClient = new NativoClient(config);
+    } else if (config.admAdConfig) {
+      this.adClient = new AdMarketplaceClient(config);
     }
 
     this.emitEvent('initialized', {
@@ -163,7 +164,6 @@ export class SearchcraftCore {
   handleAdContainerRendered(data: {
     adClientResponseItem?: AdClientResponseItem;
     adContainerId: string;
-    adSource: SearchcraftAdSource;
     searchTerm: string;
   }) {
     this.adClient?.onAdContainerRendered(data);
@@ -173,7 +173,6 @@ export class SearchcraftCore {
       name: 'ad_container_rendered',
       data: {
         adContainerId: data.adContainerId,
-        adSource: data.adSource,
         searchTerm: data.searchTerm,
       },
     });
@@ -185,7 +184,6 @@ export class SearchcraftCore {
   handleAdContainerViewed(data: {
     adClientResponseItem?: AdClientResponseItem;
     adContainerId: string;
-    adSource: SearchcraftAdSource;
     searchTerm: string;
   }) {
     this.adClient?.onAdContainerViewed(data);
@@ -195,7 +193,6 @@ export class SearchcraftCore {
       name: 'ad_container_viewed',
       data: {
         adContainerId: data.adContainerId,
-        adSource: data.adSource,
         searchTerm: data.searchTerm,
       },
     });

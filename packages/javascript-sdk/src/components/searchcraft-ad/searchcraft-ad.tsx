@@ -1,8 +1,4 @@
-import type {
-  AdClientResponseItem,
-  ADMClientResponseItem,
-  SearchcraftAdSource,
-} from '@types';
+import type { AdClientResponseItem, ADMClientResponseItem } from '@types';
 import { Component, Element, h, Prop, State } from '@stencil/core';
 import { nanoid } from 'nanoid';
 import classNames from 'classnames';
@@ -27,7 +23,7 @@ export class SearchcraftPopoverListItemAd {
    * The id of the Searchcraft instance that this component should use.
    */
   @Prop() searchcraftId?: string;
-  @Prop() adSource: SearchcraftAdSource = 'Custom';
+  @Prop() adSource: 'Custom' | 'Nativo' | 'adMarketplace' = 'Custom';
   @Prop() adClientResponseItem?: AdClientResponseItem;
 
   /**
@@ -67,10 +63,10 @@ export class SearchcraftPopoverListItemAd {
         this.core?.handleAdContainerRendered({
           adClientResponseItem: this.adClientResponseItem,
           adContainerId: this.adContainerId,
-          adSource: this.adSource,
           searchTerm: this.searchTerm || '',
         });
-      }, this.core?.config?.adContainerRenderedDebounceDelay || 300);
+      }, this.core?.config?.customAdConfig?.adContainerRenderedDebounceDelay ||
+        300);
     }
   }
 
@@ -78,7 +74,6 @@ export class SearchcraftPopoverListItemAd {
     this.core?.handleAdContainerViewed({
       adClientResponseItem: this.adClientResponseItem,
       adContainerId: this.adContainerId,
-      adSource: this.adSource,
       searchTerm: this.searchTerm || '',
     });
   }
@@ -175,8 +170,10 @@ export class SearchcraftPopoverListItemAd {
 
     let templateHtml = '<p>Ad Marketplace Ad Placeholder</p>';
 
-    if (this.core?.config?.admAdTemplate) {
-      templateHtml = this.core?.config?.admAdTemplate(item.admAd, { html });
+    if (this.core?.config?.admAdConfig?.template) {
+      templateHtml = this.core?.config?.admAdConfig.template(item.admAd, {
+        html,
+      });
     }
 
     return (
@@ -190,7 +187,7 @@ export class SearchcraftPopoverListItemAd {
   }
 
   renderCustomAd() {
-    const templateRenderFunction = this.core?.config?.customAdTemplate;
+    const templateRenderFunction = this.core?.config?.customAdConfig?.template;
     const containerId = `searchcraft-custom-ad-${this.adContainerId}`;
     let templateHtml = '<p>Custom Ad Placeholder</p>';
 
@@ -215,7 +212,8 @@ export class SearchcraftPopoverListItemAd {
   }
 
   renderNativoAd() {
-    const nativoClassName = this.core?.config.nativoAdClassName || 'ntv-item';
+    const nativoClassName =
+      this.core?.config.nativoConfig?.adClassName || 'ntv-item';
     return (
       <div
         id={`searchcraft-native-ad-${this.adContainerId}`}

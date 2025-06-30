@@ -26,7 +26,7 @@ export const Default: StoryObj<
         new Searchcraft({
           readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
           endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
-          index: [import.meta.env.VITE_INDEX_ECHOSTREAM],
+          indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
           cortexURL: import.meta.env.VITE_CORTEX_URL,
         });
       }, []);

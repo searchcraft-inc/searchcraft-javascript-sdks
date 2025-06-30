@@ -25,7 +25,7 @@ export const Default: StoryObj<Components.SearchcraftSearchResults> = {
         new Searchcraft({
           readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
           endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
-          index: [import.meta.env.VITE_INDEX_ECHOSTREAM],
+          indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
           initialQuery: JSON.stringify({
             order_by: 'date_published',
             query: {
@@ -68,7 +68,7 @@ export const NoInitialQuery: StoryObj<Components.SearchcraftSearchResults> = {
         new Searchcraft({
           readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
           endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
-          index: [import.meta.env.VITE_INDEX_ECHOSTREAM],
+          indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
         });
 
         const searchResults = document.querySelector(
@@ -104,12 +104,13 @@ export const WithAdMarketplaceAds: StoryObj<Components.SearchcraftSearchResults>
           const adConfig: SearchcraftConfig = {
             readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
             endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
-            index: [import.meta.env.VITE_INDEX_ECHOSTREAM],
-            adSource: 'adMarketplace',
-            admSub: 'searchbox1',
-            admProductAdQuantity: 2,
-            admTextAdQuantity: 2,
-            admAdTemplate: admAdTemplate,
+            indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
+            admAdConfig: {
+              sub: 'searchbox1',
+              productAdQuantity: 2,
+              textAdQuantity: 2,
+              template: admAdTemplate,
+            },
           };
           new Searchcraft(adConfig);
 
@@ -145,13 +146,14 @@ export const WithCustomAds: StoryObj<Components.SearchcraftSearchResults> = {
         const searchcraft = new Searchcraft({
           readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
           endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
-          index: [import.meta.env.VITE_INDEX_ECHOSTREAM],
-          adSource: 'Custom',
-          customAdStartQuantity: 2,
-          customAdInterstitialInterval: 4,
-          customAdInterstitialQuantity: 3,
-          customAdEndQuantity: 4,
-          customAdTemplate: customAdTemplate,
+          indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
+          customAdConfig: {
+            adStartQuantity: 2,
+            adInterstitialInterval: 4,
+            adInterstitialQuantity: 3,
+            adEndQuantity: 4,
+            template: customAdTemplate,
+          },
         });
 
         const unsubscribe1 = searchcraft.subscribe(
@@ -159,7 +161,6 @@ export const WithCustomAds: StoryObj<Components.SearchcraftSearchResults> = {
           (event) => {
             console.log(
               '[ad_container_rendered]',
-              event.data.adSource,
               event.data.adContainerId,
               event.data.searchTerm,
             );
@@ -171,7 +172,6 @@ export const WithCustomAds: StoryObj<Components.SearchcraftSearchResults> = {
           (event) => {
             console.log(
               '[ad_container_viewed]',
-              event.data.adSource,
               event.data.adContainerId,
               event.data.searchTerm,
             );
@@ -215,7 +215,7 @@ export const WithoutATemplate: StoryObj<Components.SearchcraftSearchResults> = {
         new Searchcraft({
           readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
           endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
-          index: [import.meta.env.VITE_INDEX_ECHOSTREAM],
+          indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
         });
       }, []);
 

@@ -6,11 +6,7 @@ const config: StorybookConfig = {
   stories: [
     '../../stories/vue-config-stories/**/*.stories.@(js|jsx|ts|tsx|vue)',
   ],
-  addons: [
-    '@storybook/addon-essentials',
-    '@storybook/addon-interactions',
-    '@storybook/addon-docs',
-  ],
+  addons: [],
   framework: {
     name: '@storybook/vue3-vite',
     options: {},

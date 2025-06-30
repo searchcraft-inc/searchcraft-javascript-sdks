@@ -35,7 +35,7 @@ export class SearchClient {
    * Getter for the base url used by the /search endpoint.
    */
   private get baseSearchUrl(): string {
-    return `${this.config.endpointURL}/index/${this.config.index.join(',')}/search`;
+    return `${this.config.endpointURL}/index/${this.config.indexName}/search`;
   }
 
   /**

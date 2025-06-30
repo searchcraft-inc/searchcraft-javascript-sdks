@@ -25,7 +25,7 @@ export class SummaryClient {
         throw new Error('cortexURL was not specified in the config.');
       }
 
-      const indexName = state.core?.config.index.at(0);
+      const indexName = state.core?.config.indexName;
 
       if (!state.hasSummaryBox || !indexName) {
         return;

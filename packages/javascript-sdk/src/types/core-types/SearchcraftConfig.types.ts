@@ -1,41 +1,37 @@
-import type { ADMAdTemplate, CustomAdTemplate } from '../sdk-types';
+import type {
+  ADMAdConfig,
+  CustomAdConfig,
+  NativoAdConfig,
+} from './SearchcraftAdConfig.types';
 
 /**
- * The SearchcraftConfig object is used to initialize Searchcraft in your application.
+ * The SearchcraftConfig object is used to initialize the Searchcraft JavaScript SDK in your front-end application. See the [getting started page](https://docs.searchcraft.io/sdks/javascript/getting-started/) for a guide on how and where to use this configuration object.
  */
 export interface SearchcraftConfig {
   /**
-   * Host IP Address and port number configured and created using Vektron.
-   */
-  endpointURL: string;
-
-  /**
-   * Name or names of search indices configured using Vektron. Given as an array of strings.
-   */
-  index: string[];
-
-  /**
-   * Specifies an initial search query to search with. This should be a stringified search query object.
-   */
-  initialQuery?: string;
-
-  /**
-   * A unique user identifier for the end user.
-   */
-  userId?: string;
-
-  /**
-   * The Index read key provided by Vektron.
+   * The read key value to use when sending Searchcraft search requests. This value needs read key-specific permissions. If you are using Searchcraft Cloud, this value can be configured in Vektron.
    */
   readKey: string;
 
   /**
-   * The amount of delay, in milliseconds, to debounce search requests. Defaults to `0`.
+   * The endpoint url of your Searchcraft cluster where your specified search index exists. If you are using Searchcraft Cloud, this value can be found within the Vektron dashboard in the Code Snippets section when configuring a search index.
    */
-  searchDebounceDelay?: number;
+  endpointURL: string;
 
   /**
-   * The maximum number of results to return per page.
+   * Name of the Searchcraft search index to search for results within. If you are using Searchcraft Cloud, this value can be found within the Vektron dashboard in the Code Snippets section when configuring a search index.
+   */
+  indexName: string;
+
+  /**
+   * The initial search query to call when Searchcraft is first initialized in your front-end application. This parameter can be used when you want to populate a page with an initial set of search results based on a query.
+   *
+   * This value is a stringified Search query object. For a more in-depth reference on search queries, see the [search endpoint documentation](https://docs.searchcraft.io/api/search/).
+   */
+  initialQuery?: string;
+
+  /**
+   * The maximum number of documents to return per page of results.
    */
   searchResultsPerPage?: number;
 
@@ -57,99 +53,25 @@ export interface SearchcraftConfig {
   /**
    * Name of the ad source to use.
    */
-  adSource?: 'adMarketplace' | 'Nativo' | 'Custom' | 'None';
+  searchDebounceDelay?: number;
 
   /**
-   * The maximum number of product ads to show for a single search term.
+   * A unique user identifier for end users of your product. This would typically correspond to a user id
+   * in your consuming application's database. Used for data analysis and visualizations on Vektron.
    */
-  admProductAdQuantity?: number;
+  measureUserIdentifier?: string;
 
   /**
-   * The maximum number of text ads to show for a single search term.
+   * This object allows you to configure the quantity, number, template, and positioning of custom ad containers within your search results.
+   *
+   * To see more information on how to configure custom ads, see [the custom ads guide](https://docs.searchcraft.io/sdks/javascript/custom-ads/)
    */
-  admTextAdQuantity?: number;
+  customAdConfig?: CustomAdConfig;
 
-  /**
-   * The adm sub value.
-   */
-  admSub?: string;
+  nativoConfig?: NativoAdConfig;
 
-  /**
-   * The amount of debounce delay to add before calling the ad_container_rendered event
-   */
-  adContainerRenderedDebounceDelay?: number;
-
-  /**
-   * A callback function responsible for rendering the ADM ad containers.
-   */
-  admAdTemplate?: ADMAdTemplate;
-
-  /**
-   * The number of custom ads to render at the start of the search results page.
-   */
-  customAdStartQuantity?: number;
-
-  /**
-   * The number of custom ads to render at the end of the search results page.
-   */
-  customAdEndQuantity?: number;
-
-  /**
-   * Renders a custom ad in between search results, at the specified interval.
-   */
-  customAdInterstitialInterval?: number;
-
-  /**
-   * Specifies the number of ads to be rendered in each interstitial in between search results.
-   */
-  customAdInterstitialQuantity?: number;
-
-  /**
-   * A callback function responsible for rendering the custom ad containers.
-   */
-  customAdTemplate?: CustomAdTemplate;
-
-  /**
-   * The placement id to use for Nativo ads.
-   */
-  nativoPlacementId?: number;
-
-  /**
-   * The class name for nativo ad containers.
-   */
-  nativoAdClassName?: string;
-
-  /**
-   * The number of custom ads to render at the start of the search results page.
-   */
-  nativoAdStartQuantity?: number;
-
-  /**
-   * The number of custom ads to render at the end of the search results page.
-   */
-  nativoAdEndQuantity?: number;
-
-  /**
-   * Renders a custom ad in between search results, at the specified interval.
-   */
-  nativoAdInterstitialInterval?: number;
-
-  /**
-   * Specify how many normal search results to render before rendering the first interstitial ad grouping.
-   */
-  nativoAdInterstialStartIndex?: number;
-
-  /**
-   * Specifies the number of ads to be rendered in each interstitial in between search results.
-   */
-  nativoAdInterstitialQuantity?: number;
+  admAdConfig?: ADMAdConfig;
 }
-
-export type SearchcraftAdSource =
-  | 'adMarketplace'
-  | 'Nativo'
-  | 'Custom'
-  | 'None';
 
 /**
  * Used internally by consuming packages as part of the core sdk constructor.

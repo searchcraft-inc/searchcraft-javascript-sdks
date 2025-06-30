@@ -3,7 +3,6 @@ import type {
   AdClientResponseItem,
   ADMClientResponseItem,
   ADMResponse,
-  SearchcraftAdSource,
   SearchClientRequestProperties,
 } from '@types';
 import { AdClient } from './AdClient';
@@ -15,19 +14,21 @@ export class AdMarketplaceClient extends AdClient {
   async getAds(
     _properties: SearchClientRequestProperties,
   ): Promise<AdClientResponseItem[]> {
-    if (!this.config.admSub) {
+    const admConfig = this.config.admAdConfig;
+
+    if (!admConfig?.sub) {
       console.error('No admSub specified in config.');
       return [];
     }
 
     const paramString = new URLSearchParams({
       partner: 'demofeed',
-      sub1: this.config.admSub,
+      sub1: admConfig.sub,
       qt: _properties.searchTerm,
       v: '2.0',
       rfr: 'searchcraft.io',
-      'results-ta': `${this.config.admTextAdQuantity || 0}`,
-      'results-pa': `${this.config.admProductAdQuantity || 0}`,
+      'results-ta': `${admConfig.textAdQuantity || 0}`,
+      'results-pa': `${admConfig.productAdQuantity || 0}`,
     }).toString();
 
     const path = `https://demofeed.is.ampfeed.com/is?${paramString}`;
@@ -59,7 +60,6 @@ export class AdMarketplaceClient extends AdClient {
   async onAdContainerViewed(data: {
     adClientResponseItem?: AdClientResponseItem;
     adContainerId: string;
-    adSource: SearchcraftAdSource;
     searchTerm: string;
   }): Promise<void> {
     // Calls fetch on the impression url, to record an impression for adMarketplace

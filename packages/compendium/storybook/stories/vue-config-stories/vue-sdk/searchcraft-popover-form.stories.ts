@@ -22,7 +22,7 @@ export const Inline: StoryFn = (args) => ({
     new Searchcraft({
       readKey: import.meta.env.VITE_READ_KEY_BAZAARIO,
       endpointURL: import.meta.env.VITE_ENDPOINT_URL_BAZAARIO,
-      index: [import.meta.env.VITE_INDEX_BAZAARIO],
+      indexName: import.meta.env.VITE_INDEX_BAZAARIO,
     });
     return { args, popoverResultMappings };
   },
@@ -52,7 +52,7 @@ export const Modal: StoryFn = (args) => ({
     new Searchcraft({
       readKey: import.meta.env.VITE_READ_KEY_BAZAARIO,
       endpointURL: import.meta.env.VITE_ENDPOINT_URL_BAZAARIO,
-      index: [import.meta.env.VITE_INDEX_BAZAARIO],
+      indexName: import.meta.env.VITE_INDEX_BAZAARIO,
     });
     return { args, popoverResultMappings };
   },
@@ -81,7 +81,7 @@ export const Fullscreen: StoryFn = (args) => ({
     new Searchcraft({
       readKey: import.meta.env.VITE_READ_KEY_BAZAARIO,
       endpointURL: import.meta.env.VITE_ENDPOINT_URL_BAZAARIO,
-      index: [import.meta.env.VITE_INDEX_BAZAARIO],
+      indexName: import.meta.env.VITE_INDEX_BAZAARIO,
     });
     return { args, popoverResultMappings };
   },

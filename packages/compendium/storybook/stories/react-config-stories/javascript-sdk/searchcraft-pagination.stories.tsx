@@ -22,7 +22,7 @@ export const Default: StoryObj = {
         const searchcraft = new Searchcraft({
           readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
           endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
-          index: [import.meta.env.VITE_INDEX_ECHOSTREAM],
+          indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
         });
         const callbacks: (() => void)[] = [];
 
@@ -108,14 +108,15 @@ export const WithCustomAds: StoryObj = {
         const searchcraft = new Searchcraft({
           readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
           endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
-          index: [import.meta.env.VITE_INDEX_ECHOSTREAM],
-          adSource: 'Custom',
-          adContainerRenderedDebounceDelay: 1000,
-          customAdStartQuantity: 1,
-          customAdInterstitialInterval: 3,
-          customAdInterstitialQuantity: 1,
-          customAdEndQuantity: 1,
-          customAdTemplate: customAdTemplate,
+          indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
+          customAdConfig: {
+            adContainerRenderedDebounceDelay: 1000,
+            adStartQuantity: 1,
+            adInterstitialInterval: 3,
+            adInterstitialQuantity: 1,
+            adEndQuantity: 1,
+            template: customAdTemplate,
+          },
         });
 
         callbacks.push(
@@ -200,14 +201,15 @@ export const WithNativoAds: StoryObj = {
         const searchcraft = new Searchcraft({
           readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
           endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
-          index: [import.meta.env.VITE_INDEX_ECHOSTREAM],
-          adSource: 'Nativo',
-          nativoAdStartQuantity: 2,
-          nativoAdInterstitialInterval: 4,
-          nativoAdInterstitialQuantity: 3,
-          nativoAdEndQuantity: 4,
-          nativoAdClassName: 'nativo_1',
-          nativoPlacementId: 1593037,
+          indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
+          nativoConfig: {
+            adStartQuantity: 2,
+            adInterstitialInterval: 4,
+            adInterstitialQuantity: 3,
+            adEndQuantity: 4,
+            adClassName: 'nativo_1',
+            placementId: 1593037,
+          },
         });
 
         callbacks.push(

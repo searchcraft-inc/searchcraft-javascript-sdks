@@ -23,7 +23,7 @@ export const Inline: StoryObj = {
         new Searchcraft({
           readKey: import.meta.env.VITE_READ_KEY_BAZAARIO,
           endpointURL: import.meta.env.VITE_ENDPOINT_URL_BAZAARIO,
-          index: [import.meta.env.VITE_INDEX_BAZAARIO],
+          indexName: import.meta.env.VITE_INDEX_BAZAARIO,
         });
       }, []);
       return <Story />;
@@ -56,7 +56,7 @@ export const Modal: StoryObj = {
         new Searchcraft({
           readKey: import.meta.env.VITE_READ_KEY_BAZAARIO,
           endpointURL: import.meta.env.VITE_ENDPOINT_URL_BAZAARIO,
-          index: [import.meta.env.VITE_INDEX_BAZAARIO],
+          indexName: import.meta.env.VITE_INDEX_BAZAARIO,
         });
       }, []);
       return <Story />;
@@ -88,7 +88,7 @@ export const Fullscreen: StoryObj = {
         new Searchcraft({
           readKey: import.meta.env.VITE_READ_KEY_BAZAARIO,
           endpointURL: import.meta.env.VITE_ENDPOINT_URL_BAZAARIO,
-          index: [import.meta.env.VITE_INDEX_BAZAARIO],
+          indexName: import.meta.env.VITE_INDEX_BAZAARIO,
         });
       }, []);
       return <Story />;
