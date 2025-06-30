@@ -283,7 +283,7 @@ export class SearchcraftCore {
           searchResultsCount: response.data.count,
           searchResponseFacetPrime: response.data.facets,
           supplementalFacetPrime: supplementalResponse?.data.facets,
-          searchClientRequest: props.requestProperties,
+          searchClientRequestProperties: props.requestProperties,
           ...(props.shouldCacheResultsForEmptyState && {
             cachedSearchClientResponseItems: items,
           }),

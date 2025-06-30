@@ -82,9 +82,9 @@ export class SearchcraftPopoverListItemAd {
    * Things to do when there's a new incoming search request.
    */
   handleNewIncomingSearchRequest(state: SearchcraftState) {
-    const request = state.searchClientRequest;
-    if (request && typeof request === 'object') {
-      this.searchTerm = request.searchTerm;
+    const requestProperties = state.searchClientRequestProperties;
+    if (requestProperties && typeof requestProperties === 'object') {
+      this.searchTerm = requestProperties.searchTerm;
     }
 
     this.searchResultCount = state.searchClientResponseItems.length;
@@ -103,9 +103,9 @@ export class SearchcraftPopoverListItemAd {
     this.searchResultCount = currentState.searchClientResponseItems.length;
     this.timeTaken = currentState.searchResponseTimeTaken;
 
-    const request = currentState.searchClientRequest;
-    if (request && typeof request === 'object') {
-      this.searchTerm = request.searchTerm;
+    const requestProperties = currentState.searchClientRequestProperties;
+    if (requestProperties && typeof requestProperties === 'object') {
+      this.searchTerm = requestProperties.searchTerm;
     }
 
     /**

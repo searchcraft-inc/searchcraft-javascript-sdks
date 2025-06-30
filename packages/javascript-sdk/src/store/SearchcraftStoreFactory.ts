@@ -14,6 +14,7 @@ import type {
   SearchcraftStateValues,
 } from './SearchcraftStore.types';
 import { DEFAULT_CORE_INSTANCE_ID } from '@classes/CoreInstanceRegistry';
+import { SummaryClient } from '@clients/SummaryClient';
 
 const initialSearchcraftStateValues: SearchcraftStateValues = {
   adClientResponseItems: [],
@@ -28,6 +29,7 @@ const initialSearchcraftStateValues: SearchcraftStateValues = {
   searchTerm: '',
   searchMode: 'fuzzy',
   searchClientRequest: undefined,
+  searchClientRequestProperties: undefined,
   searchClientResponseItems: [],
   cachedSearchClientResponseItems: [],
   searchResponseTimeTaken: undefined,
@@ -38,6 +40,10 @@ const initialSearchcraftStateValues: SearchcraftStateValues = {
   searchResultsPage: 1,
   sortType: undefined,
   orderByField: undefined,
+  summary: '',
+  hasSummaryBox: false,
+  summaryClient: undefined,
+  isSummaryLoading: false,
 };
 
 // const logger = new Logger({ logLevel: LogLevel.NONE });
@@ -109,6 +115,8 @@ const createSearchcraftStore = (
       },
       search: async () => {
         const state = get();
+
+        state.summaryClient?.streamSummaryData();
 
         if (!state.core) {
           throw new Error('Searchcraft instance is not initialized.');
@@ -201,6 +209,9 @@ const createSearchcraftStore = (
       ...initialSearchcraftStateValues,
       ...initialState,
       ...functions,
+      ...{
+        summaryClient: new SummaryClient(get, set),
+      },
     };
 
     return stateObject;

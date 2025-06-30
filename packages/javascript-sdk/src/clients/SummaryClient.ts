@@ -1,0 +1,102 @@
+import type { SearchcraftStore } from '@store';
+
+const DEBOUNCE_DELAY = 1000;
+
+export class SummaryClient {
+  private set: SearchcraftStore['setState'];
+  private get: SearchcraftStore['getState'];
+  private abortController: AbortController | undefined;
+  private timeout: NodeJS.Timeout | undefined;
+
+  constructor(
+    get: SearchcraftStore['getState'],
+    set: SearchcraftStore['setState'],
+  ) {
+    this.get = get;
+    this.set = set;
+  }
+
+  streamSummaryData() {
+    const begin = async () => {
+      const state = this.get();
+      const config = state.core?.config;
+      console.log(config);
+      if (!config || !config.cortexURL) {
+        throw new Error('cortexURL was not specified in the config.');
+      }
+
+      const indexName = state.core?.config.indexName;
+
+      if (!state.hasSummaryBox || !indexName) {
+        return;
+      }
+
+      this.abortController?.abort('A newer request has replaced this one.');
+      this.abortController = new AbortController();
+
+      this.set({
+        isSummaryLoading: true,
+        summary: '',
+      });
+
+      const endpointUrl = `${config.cortexURL.replace(/\/$/, '')}/api/search/summary`;
+
+      try {
+        const fetchResponse = await fetch(endpointUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: state.core?.config.readKey || '',
+          },
+          body: JSON.stringify({
+            searchQuery: state.searchClientRequest,
+            summaryInstructionsPrompt:
+              state.core?.config.summaryInstructionsPrompt,
+            indexName: indexName,
+            endpointUrl: state.core?.config.endpointURL,
+          }),
+          signal: this.abortController.signal,
+        });
+
+        if (!fetchResponse) {
+          throw new Error('Invalid fetch response');
+        }
+
+        if (!fetchResponse.body) {
+          throw new Error('Invalid fetch response');
+        }
+
+        if (!fetchResponse.ok) {
+          throw new Error(`HTTP ${fetchResponse.status}`);
+        }
+
+        const reader = fetchResponse.body.getReader();
+        const decoder = new TextDecoder();
+
+        let finishedReading = false;
+        do {
+          const { done, value } = await reader.read();
+          finishedReading = done;
+
+          const chunk = decoder.decode(value, { stream: true });
+          this.set((state) => ({
+            isSummaryLoading: false,
+            summary: `${state.summary}${chunk}`,
+          }));
+        } while (!finishedReading);
+      } catch (error) {
+        if (error instanceof Error) {
+          console.error(error.message);
+        }
+        this.set({
+          isSummaryLoading: false,
+        });
+      }
+    };
+
+    const delay =
+      this.get().core?.config.summaryDebounceDelay || DEBOUNCE_DELAY;
+    clearTimeout(this.timeout);
+    this.timeout = setTimeout(() => begin(), delay);
+  }
+}

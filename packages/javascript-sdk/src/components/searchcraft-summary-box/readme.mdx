@@ -1,0 +1,53 @@
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+# searchcraft-summary-box
+
+This component renders a summary box for RAG search result summaries.
+When the user makes a search, a network call is made to retrieve the summary content, which is then
+rendered in this box.
+
+NOTE: This component requires the usage of a read key that has "SUMMARY" permissions.
+
+## Import
+
+<Tabs>
+<TabItem label="React">
+```jsx
+import { SearchcraftSummaryBox } from "@searchcraft/react-sdk";
+```
+</TabItem>
+<TabItem label="Vue">
+```jsx
+import { SearchcraftSummaryBox } from "@searchcraft/vue-sdk";
+```
+</TabItem>
+</Tabs>
+
+
+## Usage
+
+<Tabs>
+<TabItem label="JS">
+```html
+<searchcraft-summary-box />
+```
+</TabItem>
+<TabItem label="React">
+```jsx
+<SearchcraftSummaryBox />
+```
+</TabItem>
+<TabItem label="Vue">
+```jsx
+<SearchcraftSummaryBox />
+```
+</TabItem>
+</Tabs>
+
+
+## Properties
+
+| Property | Attribute | Description | Type | Default |
+| -------- | --------- | ----------- | ---- | ------- |
+| `searchcraftId` | `searchcraft-id` | The id of the Searchcraft instance that this component should use. | `string \| undefined` | `undefined` |
+

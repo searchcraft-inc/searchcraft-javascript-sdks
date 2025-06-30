@@ -15,6 +15,7 @@ import { SearchcraftPopoverForm as SearchcraftPopoverFormElement, defineCustomEl
 import { SearchcraftResultsInfo as SearchcraftResultsInfoElement, defineCustomElement as defineSearchcraftResultsInfo } from "@searchcraft/javascript-sdk/dist/components/searchcraft-results-info.js";
 import { SearchcraftSearchResultsPerPage as SearchcraftSearchResultsPerPageElement, defineCustomElement as defineSearchcraftSearchResultsPerPage } from "@searchcraft/javascript-sdk/dist/components/searchcraft-search-results-per-page.js";
 import { SearchcraftSearchResults as SearchcraftSearchResultsElement, defineCustomElement as defineSearchcraftSearchResults } from "@searchcraft/javascript-sdk/dist/components/searchcraft-search-results.js";
+import { SearchcraftSummaryBox as SearchcraftSummaryBoxElement, defineCustomElement as defineSearchcraftSummaryBox } from "@searchcraft/javascript-sdk/dist/components/searchcraft-summary-box.js";
 import { SearchcraftTheme as SearchcraftThemeElement, defineCustomElement as defineSearchcraftTheme } from "@searchcraft/javascript-sdk/dist/components/searchcraft-theme.js";
 import type { EventName, StencilReactComponent } from '@stencil/react-output-target/runtime';
 import { createComponent } from '@stencil/react-output-target/runtime';
@@ -114,6 +115,17 @@ export const SearchcraftSearchResultsPerPage: StencilReactComponent<SearchcraftS
     react: React,
     events: {} as SearchcraftSearchResultsPerPageEvents,
     defineCustomElement: defineSearchcraftSearchResultsPerPage
+});
+
+type SearchcraftSummaryBoxEvents = NonNullable<unknown>;
+
+export const SearchcraftSummaryBox: StencilReactComponent<SearchcraftSummaryBoxElement, SearchcraftSummaryBoxEvents> = /*@__PURE__*/ createComponent<SearchcraftSummaryBoxElement, SearchcraftSummaryBoxEvents>({
+    tagName: 'searchcraft-summary-box',
+    elementClass: SearchcraftSummaryBoxElement,
+    // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
+    react: React,
+    events: {} as SearchcraftSummaryBoxEvents,
+    defineCustomElement: defineSearchcraftSummaryBox
 });
 
 type SearchcraftThemeEvents = NonNullable<unknown>;
