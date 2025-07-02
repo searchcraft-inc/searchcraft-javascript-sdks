@@ -20,9 +20,9 @@ export const Inline: StoryFn = (args) => ({
   components: { SearchcraftPopoverForm },
   setup() {
     new Searchcraft({
-      readKey: import.meta.env.VITE_KOBOL_READ_KEY,
-      endpointURL: import.meta.env.VITE_KOBOL_ENDPOINT_URL,
-      index: [import.meta.env.VITE_KOBOL_INDEX],
+      readKey: import.meta.env.VITE_READ_KEY_BAZAARIO,
+      endpointURL: import.meta.env.VITE_ENDPOINT_URL_BAZAARIO,
+      indexName: import.meta.env.VITE_INDEX_BAZAARIO,
     });
     return { args, popoverResultMappings };
   },
@@ -50,9 +50,9 @@ export const Modal: StoryFn = (args) => ({
   },
   setup() {
     new Searchcraft({
-      readKey: import.meta.env.VITE_KOBOL_READ_KEY,
-      endpointURL: import.meta.env.VITE_KOBOL_ENDPOINT_URL,
-      index: [import.meta.env.VITE_KOBOL_INDEX],
+      readKey: import.meta.env.VITE_READ_KEY_BAZAARIO,
+      endpointURL: import.meta.env.VITE_ENDPOINT_URL_BAZAARIO,
+      indexName: import.meta.env.VITE_INDEX_BAZAARIO,
     });
     return { args, popoverResultMappings };
   },
@@ -79,9 +79,9 @@ export const Fullscreen: StoryFn = (args) => ({
   },
   setup() {
     new Searchcraft({
-      readKey: import.meta.env.VITE_KOBOL_READ_KEY,
-      endpointURL: import.meta.env.VITE_KOBOL_ENDPOINT_URL,
-      index: [import.meta.env.VITE_KOBOL_INDEX],
+      readKey: import.meta.env.VITE_READ_KEY_BAZAARIO,
+      endpointURL: import.meta.env.VITE_ENDPOINT_URL_BAZAARIO,
+      indexName: import.meta.env.VITE_INDEX_BAZAARIO,
     });
     return { args, popoverResultMappings };
   },

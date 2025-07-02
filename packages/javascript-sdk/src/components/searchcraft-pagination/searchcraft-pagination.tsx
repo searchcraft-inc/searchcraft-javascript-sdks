@@ -1,5 +1,6 @@
-import { searchcraftStore } from '@store';
-import { Component, h, State } from '@stencil/core';
+import type { SearchcraftCore } from '@classes';
+import { registry } from '@classes/CoreInstanceRegistry';
+import { Component, h, Prop, State } from '@stencil/core';
 import classNames from 'classnames';
 
 /**
@@ -35,6 +36,10 @@ import classNames from 'classnames';
   shadow: false,
 })
 export class SearchcraftPagination {
+  /**
+   * The id of the Searchcraft instance that this component should use.
+   */
+  @Prop() searchcraftId?: string;
   // store vars
   @State() searchTerm;
   @State() searchResultsPerPage;
@@ -50,9 +55,10 @@ export class SearchcraftPagination {
   @State() setSearchResultsPage: (page: number) => void = () => {};
 
   private unsubscribe: () => void = () => {};
+  private cleanupCore?: () => void;
 
-  componentDidLoad() {
-    this.unsubscribe = searchcraftStore.subscribe((state) => {
+  onCoreAvailable(core: SearchcraftCore) {
+    this.unsubscribe = core.store.subscribe((state) => {
       // store vars
       this.searchTerm = state.searchTerm;
       this.searchResultsPerPage = state.searchResultsPerPage;
@@ -74,8 +80,16 @@ export class SearchcraftPagination {
     });
   }
 
+  connectedCallback() {
+    this.cleanupCore = registry.useCoreInstance(
+      this.searchcraftId,
+      this.onCoreAvailable.bind(this),
+    );
+  }
+
   disconnectedCallback() {
     this.unsubscribe?.();
+    this.cleanupCore?.();
   }
 
   handleGoToPage(page: number) {

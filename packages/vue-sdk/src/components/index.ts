@@ -7,3 +7,4 @@ export * from './SearchcraftResultsInfo';
 export * from './SearchcraftTheme';
 export * from './SearchcraftPagination';
 export * from './SearchcraftSearchResultsPerPage';
+export * from './SearchcraftSummaryBox';

@@ -15,9 +15,9 @@ export const Default: StoryObj<Components.SearchcraftPopoverButton> = {
     (Story) => {
       useEffect(() => {
         new Searchcraft({
-          readKey: import.meta.env.VITE_KOBOL_READ_KEY,
-          endpointURL: import.meta.env.VITE_KOBOL_ENDPOINT_URL,
-          index: [import.meta.env.VITE_KOBOL_INDEX],
+          readKey: import.meta.env.VITE_READ_KEY_BAZAARIO,
+          endpointURL: import.meta.env.VITE_ENDPOINT_URL_BAZAARIO,
+          indexName: import.meta.env.VITE_INDEX_BAZAARIO,
         });
         const popoverForm = document.querySelector('searchcraft-popover-form');
 
@@ -56,9 +56,9 @@ export const WithoutATemplate: StoryObj<Components.SearchcraftPopoverButton> = {
     (Story) => {
       useEffect(() => {
         new Searchcraft({
-          readKey: import.meta.env.VITE_KOBOL_READ_KEY,
-          endpointURL: import.meta.env.VITE_KOBOL_ENDPOINT_URL,
-          index: [import.meta.env.VITE_KOBOL_INDEX],
+          readKey: import.meta.env.VITE_READ_KEY_BAZAARIO,
+          endpointURL: import.meta.env.VITE_ENDPOINT_URL_BAZAARIO,
+          indexName: import.meta.env.VITE_INDEX_BAZAARIO,
         });
         const popoverForm = document.querySelector('searchcraft-popover-form');
 
@@ -87,9 +87,9 @@ export const Skeuomorphic: StoryObj<Components.SearchcraftPopoverButton> = {
     (Story) => {
       useEffect(() => {
         new Searchcraft({
-          readKey: import.meta.env.VITE_KOBOL_READ_KEY,
-          endpointURL: import.meta.env.VITE_KOBOL_ENDPOINT_URL,
-          index: [import.meta.env.VITE_KOBOL_INDEX],
+          readKey: import.meta.env.VITE_READ_KEY_BAZAARIO,
+          endpointURL: import.meta.env.VITE_ENDPOINT_URL_BAZAARIO,
+          indexName: import.meta.env.VITE_INDEX_BAZAARIO,
         });
         const popoverForm = document.querySelector('searchcraft-popover-form');
 

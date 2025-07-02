@@ -8,9 +8,9 @@ import {
 } from '@searchcraft/javascript-sdk';
 
 import {
-  searchResultTemplate,
   customAdTemplate,
   admAdTemplate,
+  searchResultTemplateEchostream,
 } from '@common/index.js';
 
 const componentMeta: Meta = {
@@ -23,9 +23,17 @@ export const Default: StoryObj<Components.SearchcraftSearchResults> = {
     (Story) => {
       useEffect(() => {
         new Searchcraft({
-          readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
-          endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
-          index: [import.meta.env.VITE_RUNEGARD_INDEX],
+          readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
+          endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
+          indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
+          initialQuery: JSON.stringify({
+            order_by: 'date_published',
+            query: {
+              exact: {
+                ctx: 'section_name:"Columns" OR section_name:"Prep" OR section_name:"Local" OR section_name:"Minnesota"',
+              },
+            },
+          }),
         });
 
         const searchResults = document.querySelector(
@@ -33,15 +41,7 @@ export const Default: StoryObj<Components.SearchcraftSearchResults> = {
         );
 
         if (searchResults) {
-          searchResults.template = searchResultTemplate;
-          searchResults.initialQuery = JSON.stringify({
-            order_by: 'date_published',
-            query: {
-              exact: {
-                ctx: 'section_name:"Columns" OR section_name:"Prep" OR section_name:"Local" OR section_name:"Minnesota"',
-              },
-            },
-          });
+          searchResults.template = searchResultTemplateEchostream;
         }
       }, []);
 
@@ -66,9 +66,9 @@ export const NoInitialQuery: StoryObj<Components.SearchcraftSearchResults> = {
     (Story) => {
       useEffect(() => {
         new Searchcraft({
-          readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
-          endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
-          index: [import.meta.env.VITE_RUNEGARD_INDEX],
+          readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
+          endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
+          indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
         });
 
         const searchResults = document.querySelector(
@@ -76,7 +76,7 @@ export const NoInitialQuery: StoryObj<Components.SearchcraftSearchResults> = {
         );
 
         if (searchResults) {
-          searchResults.template = searchResultTemplate;
+          searchResults.template = searchResultTemplateEchostream;
         }
       }, []);
 
@@ -102,14 +102,15 @@ export const WithAdMarketplaceAds: StoryObj<Components.SearchcraftSearchResults>
       (Story) => {
         useEffect(() => {
           const adConfig: SearchcraftConfig = {
-            readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
-            endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
-            index: [import.meta.env.VITE_RUNEGARD_INDEX],
-            adSource: 'adMarketplace',
-            admSub: 'searchbox1',
-            admProductAdQuantity: 2,
-            admTextAdQuantity: 2,
-            admAdTemplate: admAdTemplate,
+            readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
+            endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
+            indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
+            admAdConfig: {
+              sub: 'searchbox1',
+              productAdQuantity: 2,
+              textAdQuantity: 2,
+              template: admAdTemplate,
+            },
           };
           new Searchcraft(adConfig);
 
@@ -118,7 +119,7 @@ export const WithAdMarketplaceAds: StoryObj<Components.SearchcraftSearchResults>
           );
 
           if (searchResults) {
-            searchResults.template = searchResultTemplate;
+            searchResults.template = searchResultTemplateEchostream;
           }
         }, []);
 
@@ -143,15 +144,16 @@ export const WithCustomAds: StoryObj<Components.SearchcraftSearchResults> = {
     (Story) => {
       useEffect(() => {
         const searchcraft = new Searchcraft({
-          readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
-          endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
-          index: [import.meta.env.VITE_RUNEGARD_INDEX],
-          adSource: 'Custom',
-          customAdStartQuantity: 2,
-          customAdInterstitialInterval: 4,
-          customAdInterstitialQuantity: 3,
-          customAdEndQuantity: 4,
-          customAdTemplate: customAdTemplate,
+          readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
+          endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
+          indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
+          customAdConfig: {
+            adStartQuantity: 2,
+            adInterstitialInterval: 4,
+            adInterstitialQuantity: 3,
+            adEndQuantity: 4,
+            template: customAdTemplate,
+          },
         });
 
         const unsubscribe1 = searchcraft.subscribe(
@@ -159,7 +161,6 @@ export const WithCustomAds: StoryObj<Components.SearchcraftSearchResults> = {
           (event) => {
             console.log(
               '[ad_container_rendered]',
-              event.data.adSource,
               event.data.adContainerId,
               event.data.searchTerm,
             );
@@ -171,7 +172,6 @@ export const WithCustomAds: StoryObj<Components.SearchcraftSearchResults> = {
           (event) => {
             console.log(
               '[ad_container_viewed]',
-              event.data.adSource,
               event.data.adContainerId,
               event.data.searchTerm,
             );
@@ -183,7 +183,7 @@ export const WithCustomAds: StoryObj<Components.SearchcraftSearchResults> = {
         );
 
         if (searchResults) {
-          searchResults.template = searchResultTemplate;
+          searchResults.template = searchResultTemplateEchostream;
         }
 
         return () => {
@@ -213,9 +213,9 @@ export const WithoutATemplate: StoryObj<Components.SearchcraftSearchResults> = {
     (Story) => {
       useEffect(() => {
         new Searchcraft({
-          readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
-          endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
-          index: [import.meta.env.VITE_RUNEGARD_INDEX],
+          readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
+          endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
+          indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
         });
       }, []);
 

@@ -1,16 +1,13 @@
-import type {
-  AdClientResponseItem,
-  ADMClientResponseItem,
-  SearchcraftCore,
-  SearchcraftAdSource,
-} from '@searchcraft/core';
+import type { AdClientResponseItem, ADMClientResponseItem } from '@types';
 import { Component, Element, h, Prop, State } from '@stencil/core';
 import { nanoid } from 'nanoid';
 import classNames from 'classnames';
 
-import { type SearchcraftState, searchcraftStore } from '@store';
+import type { SearchcraftState } from '@store';
 
 import { html } from '@utils';
+import type { SearchcraftCore } from '@classes';
+import { registry } from '@classes/CoreInstanceRegistry';
 
 /**
  * An inline ad meant to be rendered in a list of search results.
@@ -22,7 +19,11 @@ import { html } from '@utils';
   shadow: false,
 })
 export class SearchcraftPopoverListItemAd {
-  @Prop() adSource: SearchcraftAdSource = 'Custom';
+  /**
+   * The id of the Searchcraft instance that this component should use.
+   */
+  @Prop() searchcraftId?: string;
+  @Prop() adSource: 'Custom' | 'Nativo' | 'adMarketplace' = 'Custom';
   @Prop() adClientResponseItem?: AdClientResponseItem;
 
   /**
@@ -41,6 +42,7 @@ export class SearchcraftPopoverListItemAd {
 
   private intersectionObserver?: IntersectionObserver;
   private storeUnsubscribe?: () => void;
+  private cleanupCore?: () => void;
   private adContainerRenderedTimeout?: NodeJS.Timeout;
   private isComponentConnected = false;
   private timeTaken?: number;
@@ -61,10 +63,10 @@ export class SearchcraftPopoverListItemAd {
         this.core?.handleAdContainerRendered({
           adClientResponseItem: this.adClientResponseItem,
           adContainerId: this.adContainerId,
-          adSource: this.adSource,
           searchTerm: this.searchTerm || '',
         });
-      }, this.core?.config?.adContainerRenderedDebounceDelay || 300);
+      }, this.core?.config?.customAdConfig?.adContainerRenderedDebounceDelay ||
+        300);
     }
   }
 
@@ -72,7 +74,6 @@ export class SearchcraftPopoverListItemAd {
     this.core?.handleAdContainerViewed({
       adClientResponseItem: this.adClientResponseItem,
       adContainerId: this.adContainerId,
-      adSource: this.adSource,
       searchTerm: this.searchTerm || '',
     });
   }
@@ -81,9 +82,9 @@ export class SearchcraftPopoverListItemAd {
    * Things to do when there's a new incoming search request.
    */
   handleNewIncomingSearchRequest(state: SearchcraftState) {
-    const request = state.searchClientRequest;
-    if (request && typeof request === 'object') {
-      this.searchTerm = request.searchTerm;
+    const requestProperties = state.searchClientRequestProperties;
+    if (requestProperties && typeof requestProperties === 'object') {
+      this.searchTerm = requestProperties.searchTerm;
     }
 
     this.searchResultCount = state.searchClientResponseItems.length;
@@ -93,8 +94,8 @@ export class SearchcraftPopoverListItemAd {
     this.startIntersectionObserver();
   }
 
-  connectedCallback() {
-    const currentState = searchcraftStore.getState();
+  onCoreAvailable(core: SearchcraftCore) {
+    const currentState = core.store.getState();
 
     this.isComponentConnected = true;
     this.core = currentState.core;
@@ -102,9 +103,9 @@ export class SearchcraftPopoverListItemAd {
     this.searchResultCount = currentState.searchClientResponseItems.length;
     this.timeTaken = currentState.searchResponseTimeTaken;
 
-    const request = currentState.searchClientRequest;
-    if (request && typeof request === 'object') {
-      this.searchTerm = request.searchTerm;
+    const requestProperties = currentState.searchClientRequestProperties;
+    if (requestProperties && typeof requestProperties === 'object') {
+      this.searchTerm = requestProperties.searchTerm;
     }
 
     /**
@@ -116,13 +117,20 @@ export class SearchcraftPopoverListItemAd {
     }
 
     // Subscribes to store changes (for search term).
-    this.storeUnsubscribe = searchcraftStore.subscribe((state) => {
+    this.storeUnsubscribe = core.store.subscribe((state) => {
       if (this.timeTaken !== state.searchResponseTimeTaken) {
         this.handleNewIncomingSearchRequest(state);
       }
       this.timeTaken = state.searchResponseTimeTaken;
       this.isSearchInProgress = state.isSearchInProgress;
     });
+  }
+
+  connectedCallback() {
+    this.cleanupCore = registry.useCoreInstance(
+      this.searchcraftId,
+      this.onCoreAvailable.bind(this),
+    );
   }
 
   startIntersectionObserver() {
@@ -147,6 +155,7 @@ export class SearchcraftPopoverListItemAd {
 
   disconnectedCallback() {
     this.storeUnsubscribe?.();
+    this.cleanupCore?.();
     this.intersectionObserver?.disconnect();
     this.isComponentConnected = false;
     clearTimeout(this.adContainerRenderedTimeout);
@@ -161,8 +170,10 @@ export class SearchcraftPopoverListItemAd {
 
     let templateHtml = '<p>Ad Marketplace Ad Placeholder</p>';
 
-    if (this.core?.config?.admAdTemplate) {
-      templateHtml = this.core?.config?.admAdTemplate(item.admAd, { html });
+    if (this.core?.config?.admAdConfig?.template) {
+      templateHtml = this.core?.config?.admAdConfig.template(item.admAd, {
+        html,
+      });
     }
 
     return (
@@ -176,7 +187,7 @@ export class SearchcraftPopoverListItemAd {
   }
 
   renderCustomAd() {
-    const templateRenderFunction = this.core?.config?.customAdTemplate;
+    const templateRenderFunction = this.core?.config?.customAdConfig?.template;
     const containerId = `searchcraft-custom-ad-${this.adContainerId}`;
     let templateHtml = '<p>Custom Ad Placeholder</p>';
 
@@ -201,7 +212,8 @@ export class SearchcraftPopoverListItemAd {
   }
 
   renderNativoAd() {
-    const nativoClassName = this.core?.config.nativoAdClassName || 'ntv-item';
+    const nativoClassName =
+      this.core?.config.nativoConfig?.adClassName || 'ntv-item';
     return (
       <div
         id={`searchcraft-native-ad-${this.adContainerId}`}

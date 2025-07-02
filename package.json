@@ -12,7 +12,6 @@
   "private": true,
   "workspaces": [
     "packages/compendium",
-    "packages/core-sdk",
     "packages/hologram",
     "packages/react-sdk",
     "packages/javascript-sdk",
@@ -37,8 +36,7 @@
     "compendium:react": "yarn workspace compendium storybook:react",
     "compendium:vue": "yarn workspace compendium storybook:vue",
     "compendium:next": "cd packages/compendium && yarn next",
-    "test:all": "yarn test:core && yarn test:react-sdk && yarn test:javascript-sdk && yarn test:vue-sdk",
-    "test:core": "yarn workspace @searchcraft/core test",
+    "test:all": "yarn test:react-sdk && yarn test:javascript-sdk && yarn test:vue-sdk",
     "test:sdk-react": "yarn workspace @searchcraft/react-sdk test",
     "test:sdk-javascript": "yarn workspace @searchcraft/javascript-sdk test",
     "test:sdk-vue": "yarn workspace @searchcraft/vue-sdk test",

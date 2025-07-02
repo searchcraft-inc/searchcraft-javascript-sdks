@@ -1,3 +1,5 @@
+import type { SearchcraftCore } from '@classes';
+import { registry } from '@classes/CoreInstanceRegistry';
 import { Component, h, Prop, State } from '@stencil/core';
 import type {
   FilterItem,
@@ -6,8 +8,7 @@ import type {
   ExactMatchToggleFilterItem,
   FacetsFilterItem,
   MostRecentToggleFilterItem,
-} from '@searchcraft/core';
-import { searchcraftStore } from '@store';
+} from '@types';
 
 /**
  * This web component represents a series of filters that allows users to refine and control their search queries by applying various filter criteria.
@@ -53,17 +54,24 @@ import { searchcraftStore } from '@store';
 })
 export class SearchcraftFilterPanel {
   /**
+   * The id of the Searchcraft instance that this component should use.
+   */
+  @Prop() searchcraftId?: string;
+  /**
    * The items to filter.
    */
   @Prop() items: FilterItem[] = [];
 
-  @State() unsubscribe: (() => void) | undefined;
   @State() lastSearchTerm: string | undefined;
 
-  private searchStore = searchcraftStore.getState();
+  private core?: SearchcraftCore;
+  private unsubscribe?: () => void;
+  private cleanupCore?: () => void;
 
-  componentDidLoad() {
-    this.unsubscribe = searchcraftStore.subscribe((state) => {
+  onCoreAvailable(core: SearchcraftCore) {
+    this.core = core;
+    this.setInitialDateRanges();
+    this.unsubscribe = core.store.subscribe((state) => {
       if (this.lastSearchTerm !== state.searchTerm) {
         // A place to put actions to do when the query changes
       }
@@ -71,59 +79,86 @@ export class SearchcraftFilterPanel {
     });
   }
 
+  componentDidLoad() {
+    this.cleanupCore = registry.useCoreInstance(
+      this.searchcraftId,
+      this.onCoreAvailable.bind(this),
+    );
+  }
+
   disconnectedCallback() {
     this.unsubscribe?.();
+    this.cleanupCore?.();
+  }
+
+  /**
+   * Sets the initial min/max date range values for search queries based on the filter items provided.
+   */
+  setInitialDateRanges() {
+    for (const item of this.items) {
+      if (item.type === 'dateRange') {
+        const dateItem = item as DateRangeFilterItem;
+
+        const startingMinDate = dateItem.options.minDate;
+        const startingMaxDate = dateItem.options.maxDate || new Date();
+
+        this.core?.store.getState()?.addRangeValueForIndexField({
+          fieldName: dateItem.fieldName,
+          value: `${dateItem.fieldName}:[${startingMinDate.toISOString()} TO ${startingMaxDate.toISOString()}]`,
+        });
+      }
+    }
   }
 
   handleDateRangeChanged(item: DateRangeFilterItem, min: number, max: number) {
     const start = new Date(min);
     const end = new Date(max);
-    this.searchStore.addRangeValueForIndexField({
+    this.core?.store.getState()?.addRangeValueForIndexField({
       fieldName: item.fieldName,
       value: `${item.fieldName}:[${start.toISOString()} TO ${end.toISOString()}]`,
     });
 
-    this.searchStore.search();
+    this.core?.store.getState()?.search();
   }
 
   handleNumericRangeChanged(fieldName: string, min: number, max: number) {
-    this.searchStore.addRangeValueForIndexField({
+    this.core?.store.getState()?.addRangeValueForIndexField({
       fieldName,
       value: `${fieldName}:[${min} TO ${max}]`,
     });
-    this.searchStore.search();
+    this.core?.store.getState()?.search();
   }
 
   handleFacetSelectionUpdated(fieldName: string, paths: string[]) {
     if (paths.length > 0) {
-      this.searchStore.addFacetPathsForIndexField({
+      this.core?.store.getState()?.addFacetPathsForIndexField({
         fieldName,
         value: `${fieldName}: IN [${paths.join(' ')}]`,
       });
     } else {
-      this.searchStore.removeFacetPathsForIndexField(fieldName);
+      this.core?.store.getState()?.removeFacetPathsForIndexField(fieldName);
     }
-    this.searchStore.search();
+    this.core?.store.getState()?.search();
   }
 
   handleExactMatchToggleUpdated(isActive: boolean) {
-    this.searchStore.setSearchMode(isActive ? 'exact' : 'fuzzy');
-    this.searchStore.search();
+    this.core?.store.getState()?.setSearchMode(isActive ? 'exact' : 'fuzzy');
+    this.core?.store.getState()?.search();
   }
 
   handleMostRecentToggleUpdated(fieldName: string, isActive: boolean) {
     if (isActive) {
-      this.searchStore.setSortOrder({
+      this.core?.store.getState()?.setSortOrder({
         orderByField: fieldName,
         sortType: 'desc',
       });
     } else {
-      this.searchStore.setSortOrder({
+      this.core?.store.getState()?.setSortOrder({
         orderByField: null,
         sortType: null,
       });
     }
-    this.searchStore.search();
+    this.core?.store.getState()?.search();
   }
 
   /**
@@ -136,6 +171,8 @@ export class SearchcraftFilterPanel {
           switch (filterItem.type) {
             case 'dateRange': {
               const item = filterItem as DateRangeFilterItem;
+              const maxDate = item.options.maxDate || new Date();
+
               // return date range slider
               return (
                 <div class='searchcraft-filter-panel-section'>
@@ -144,7 +181,7 @@ export class SearchcraftFilterPanel {
                   </p>
                   <searchcraft-slider
                     min={item.options.minDate.getTime()}
-                    max={item.options.maxDate.getTime()}
+                    max={maxDate.getTime()}
                     dataType='date'
                     step={1}
                     dateGranularity={item.options.granularity}

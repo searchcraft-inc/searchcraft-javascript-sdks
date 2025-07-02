@@ -1,4 +1,4 @@
-import type { SearchResultMapping } from '@searchcraft/core';
+import type { SearchResultMapping } from '@types';
 
 /**
  * Given a document and a SearchResultMapping, return a mapped value from the document.

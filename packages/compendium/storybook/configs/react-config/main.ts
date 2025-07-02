@@ -11,12 +11,7 @@ const config: StorybookConfig = {
     '../../stories/react-config-stories/**/*.mdx',
     '../../stories/react-config-stories/**/*.stories.@(js|jsx|mjs|ts|tsx)',
   ],
-  addons: [
-    getAbsolutePath('@storybook/addon-essentials'),
-    getAbsolutePath('@chromatic-com/storybook'),
-    getAbsolutePath('@storybook/addon-interactions'),
-    getAbsolutePath('@storybook/addon-docs'),
-  ],
+  addons: [getAbsolutePath('@chromatic-com/storybook')],
   staticDirs: ['../../public'],
   framework: {
     name: getAbsolutePath('@storybook/react-vite'),

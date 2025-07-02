@@ -1,5 +1,5 @@
-import { type SearchcraftConfig, SearchcraftCore } from '@searchcraft/core';
-import { searchcraftStore } from '@store';
+import { SearchcraftCore } from '@classes';
+import type { SearchcraftConfig } from '@types';
 import packageJson from '../package.json';
 
 /**
@@ -16,11 +16,18 @@ import packageJson from '../package.json';
  * The consumer-facing `Searchcraft` class.
  */
 export class Searchcraft extends SearchcraftCore {
-  constructor(config: SearchcraftConfig) {
-    super(config, {
-      sdkName: packageJson.name,
-      sdkVersion: packageJson.version,
-    });
+  constructor(
+    config: SearchcraftConfig,
+    searchcraftId: string | undefined = undefined,
+  ) {
+    super(
+      config,
+      {
+        sdkName: packageJson.name,
+        sdkVersion: packageJson.version,
+      },
+      searchcraftId,
+    );
   }
 }
 
@@ -28,7 +35,6 @@ export class Searchcraft extends SearchcraftCore {
  * Exports the shared types that all SDKs need
  */
 export type { SearchcraftConfig };
-export { searchcraftStore };
 export type { Components, JSX } from './components';
 export { SearchcraftCore };
-export type * from '@searchcraft/core/dist/types/sdk-types';
+export type * from '@types';

@@ -6,9 +6,11 @@ import type {
   SearchcraftConfig,
   SearchResultTemplate,
   SearchResultTemplateData,
-} from '@searchcraft/core';
+} from '@types';
 
-import { type SearchcraftState, searchcraftStore } from '@store';
+import type { SearchcraftState } from '@store';
+import type { SearchcraftCore } from '@classes';
+import { registry } from '@classes/CoreInstanceRegistry';
 
 /**
  * This web component is responsible for displaying the results of a search query. Once a query is submitted, the component formats and presents an ordered list of the results.
@@ -69,6 +71,10 @@ import { type SearchcraftState, searchcraftStore } from '@store';
 })
 export class SearchcraftSearchResults {
   /**
+   * The id of the Searchcraft instance that this component should use.
+   */
+  @Prop() searchcraftId?: string;
+  /**
    * A query that will appears when the component initializes or the search term is ''..
    */
   @Prop() initialQuery?: string;
@@ -80,43 +86,42 @@ export class SearchcraftSearchResults {
 
   @State() adClientResponseItems: AdClientResponseItem[] = [];
   @State() config?: SearchcraftConfig;
-  @State() initialSearchClientResponseItems?: SearchClientResponseItem[];
   @State() isSearchInProgress = true;
   @State() searchClientResponseItems?: SearchClientResponseItem[];
   @State() searchResultsPage;
   @State() searchResultsPerPage;
   @State() searchTerm = '';
 
-  private unsubscribe: () => void = () => {};
+  private unsubscribe?: () => void;
+  private cleanupCore?: () => void;
 
-  componentDidLoad() {
-    const state = searchcraftStore.getState();
+  onCoreAvailable(core: SearchcraftCore) {
+    const state = core.store.getState();
     this.handleStateChange(state);
     this.searchClientResponseItems = state.searchClientResponseItems;
     this.searchTerm = state.searchTerm;
     this.config = state.core?.config;
 
-    state.afterInit = (state) => {
-      if (this.initialQuery) {
-        state.setInitialQuery(this.initialQuery);
-      }
-    };
-
-    this.unsubscribe = searchcraftStore.subscribe((state) =>
+    this.unsubscribe = core.store.subscribe((state) =>
       this.handleStateChange(state),
+    );
+  }
+
+  connectedCallback() {
+    this.cleanupCore = registry.useCoreInstance(
+      this.searchcraftId,
+      this.onCoreAvailable.bind(this),
     );
   }
 
   disconnectedCallback() {
     this.unsubscribe?.();
+    this.cleanupCore?.();
   }
 
   handleStateChange(state: SearchcraftState) {
     this.adClientResponseItems = [...state.adClientResponseItems];
     this.config = state.core?.config;
-    this.initialSearchClientResponseItems = [
-      ...state.initialSearchClientResponseItems,
-    ];
     this.isSearchInProgress = state.isSearchInProgress;
     this.searchClientResponseItems = [...state.searchClientResponseItems];
     this.searchResultsPage = state.searchResultsPage;
@@ -145,16 +150,13 @@ export class SearchcraftSearchResults {
   }
 
   renderWithADMAds() {
-    const items = this.searchClientResponseItems?.length
-      ? this.searchClientResponseItems
-      : this.initialSearchClientResponseItems?.length
-        ? this.initialSearchClientResponseItems
-        : [];
+    const items = this.searchClientResponseItems || [];
 
     return (
       <div class='searchcraft-search-results'>
         {this.adClientResponseItems?.map((item) => (
           <searchcraft-ad
+            searchcraft-id={this.searchcraftId}
             adSource='adMarketplace'
             adClientResponseItem={item}
             key={item.id}
@@ -163,6 +165,7 @@ export class SearchcraftSearchResults {
         ))}
         {items.map((item, index) => (
           <searchcraft-search-result
+            searchcraft-id={this.searchcraftId}
             key={item.id}
             document-position={
               this.searchResultsPerPage * (this.searchResultsPage - 1) + index
@@ -178,20 +181,18 @@ export class SearchcraftSearchResults {
 
   renderWithCustomAds() {
     const itemsToRender: JSX.Element[] = [];
-    const interstitialInterval = this.config?.customAdInterstitialInterval || 0;
-    const interstitialQuantity = this.config?.customAdInterstitialQuantity || 1;
-    const adStartQuantity = this.config?.customAdStartQuantity || 0;
-    const adEndQuantity = this.config?.customAdEndQuantity || 0;
-    const items = this.searchClientResponseItems?.length
-      ? this.searchClientResponseItems
-      : this.initialSearchClientResponseItems?.length
-        ? this.initialSearchClientResponseItems
-        : [];
-
+    const interstitialInterval =
+      this.config?.customAdConfig?.adInterstitialInterval || 0;
+    const interstitialQuantity =
+      this.config?.customAdConfig?.adInterstitialQuantity || 1;
+    const adStartQuantity = this.config?.customAdConfig?.adStartQuantity || 0;
+    const adEndQuantity = this.config?.customAdConfig?.adEndQuantity || 0;
+    const items = this.searchClientResponseItems || [];
     // Renders ads at beginning
     for (let n = 0; n < adStartQuantity; n++) {
       itemsToRender.push(
         <searchcraft-ad
+          searchcraft-id={this.searchcraftId}
           adSource='Custom'
           key={`${n}-ad`}
           renderPosition='top'
@@ -210,6 +211,7 @@ export class SearchcraftSearchResults {
         for (let n = 0; n < interstitialQuantity; n++) {
           itemsToRender.push(
             <searchcraft-ad
+              searchcraft-id={this.searchcraftId}
               adSource='Custom'
               key={`${item.id}-ad-${n}`}
               renderPosition='interstitial'
@@ -219,6 +221,7 @@ export class SearchcraftSearchResults {
       }
       itemsToRender.push(
         <searchcraft-search-result
+          searchcraft-id={this.searchcraftId}
           key={item.id}
           document-position={
             this.searchResultsPerPage * (this.searchResultsPage - 1) + index
@@ -234,6 +237,7 @@ export class SearchcraftSearchResults {
     for (let n = 0; n < adEndQuantity; n++) {
       itemsToRender.push(
         <searchcraft-ad
+          searchcraft-id={this.searchcraftId}
           adSource='Custom'
           key={`${n}-ad`}
           renderPosition='bottom'
@@ -247,21 +251,19 @@ export class SearchcraftSearchResults {
   renderWithNativoAds() {
     const itemsToRender: JSX.Element[] = [];
     const interstitialStartIndex =
-      this.config?.nativoAdInterstialStartIndex || 0;
-    const interstitialInterval = this.config?.nativoAdInterstitialInterval || 0;
-    const interstitialQuantity = this.config?.nativoAdInterstitialQuantity || 1;
-    const adStartQuantity = this.config?.nativoAdStartQuantity || 0;
-    const adEndQuantity = this.config?.nativoAdEndQuantity || 0;
-    const items = this.searchClientResponseItems?.length
-      ? this.searchClientResponseItems
-      : this.initialSearchClientResponseItems?.length
-        ? this.initialSearchClientResponseItems
-        : [];
-
+      this.config?.nativoConfig?.adInterstialStartIndex || 0;
+    const interstitialInterval =
+      this.config?.nativoConfig?.adInterstitialInterval || 0;
+    const interstitialQuantity =
+      this.config?.nativoConfig?.adInterstitialQuantity || 1;
+    const adStartQuantity = this.config?.nativoConfig?.adStartQuantity || 0;
+    const adEndQuantity = this.config?.nativoConfig?.adEndQuantity || 0;
+    const items = this.searchClientResponseItems || [];
     // Renders ads at beginning
     for (let n = 0; n < adStartQuantity; n++) {
       itemsToRender.push(
         <searchcraft-ad
+          searchcraft-id={this.searchcraftId}
           adSource='Nativo'
           key={`${n}-ad`}
           renderPosition='top'
@@ -280,6 +282,7 @@ export class SearchcraftSearchResults {
         for (let n = 0; n < interstitialQuantity; n++) {
           itemsToRender.push(
             <searchcraft-ad
+              searchcraft-id={this.searchcraftId}
               adSource='Nativo'
               key={`${item.id}-ad-${n}`}
               renderPosition='interstitial'
@@ -289,6 +292,7 @@ export class SearchcraftSearchResults {
       }
       itemsToRender.push(
         <searchcraft-search-result
+          searchcraft-id={this.searchcraftId}
           key={item.id}
           document-position={
             this.searchResultsPerPage * (this.searchResultsPage - 1) + index
@@ -304,6 +308,7 @@ export class SearchcraftSearchResults {
     for (let n = 0; n < adEndQuantity; n++) {
       itemsToRender.push(
         <searchcraft-ad
+          searchcraft-id={this.searchcraftId}
           adSource='Nativo'
           key={`${n}-ad`}
           renderPosition='bottom'
@@ -315,16 +320,13 @@ export class SearchcraftSearchResults {
   }
 
   renderWithNoAds() {
-    const items = this.searchClientResponseItems?.length
-      ? this.searchClientResponseItems
-      : this.initialSearchClientResponseItems?.length
-        ? this.initialSearchClientResponseItems
-        : [];
+    const items = this.searchClientResponseItems || [];
 
     return (
       <div class='searchcraft-search-results'>
         {items.map((item, index) => (
           <searchcraft-search-result
+            searchcraft-id={this.searchcraftId}
             key={item.id}
             document-position={
               this.searchResultsPerPage * (this.searchResultsPage - 1) + index
@@ -340,14 +342,8 @@ export class SearchcraftSearchResults {
 
   render() {
     const searchClientResponseItems = this.searchClientResponseItems || [];
-    const initialSearchClientResponseItems =
-      this.initialSearchClientResponseItems || [];
 
-    if (
-      this.searchTerm === '' &&
-      initialSearchClientResponseItems.length === 0 &&
-      !this.isSearchInProgress
-    ) {
+    if (searchClientResponseItems.length === 0 && !this.isSearchInProgress) {
       return this.renderEmptyState();
     }
 
@@ -359,15 +355,15 @@ export class SearchcraftSearchResults {
       return this.renderNoResultsFoundState();
     }
 
-    switch (this.config?.adSource || 'None') {
-      case 'adMarketplace':
-        return this.renderWithADMAds();
-      case 'Custom':
-        return this.renderWithCustomAds();
-      case 'Nativo':
-        return this.renderWithNativoAds();
-      default:
-        return this.renderWithNoAds();
+    if (this.config?.customAdConfig) {
+      return this.renderWithCustomAds();
     }
+    if (this.config?.admAdConfig) {
+      return this.renderWithNativoAds();
+    }
+    if (this.config?.nativoConfig) {
+      return this.renderWithNativoAds();
+    }
+    return this.renderWithNoAds();
   }
 }

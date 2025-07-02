@@ -11,9 +11,9 @@ import type {
   FacetRoot,
   FacetWithChildrenArray,
   FacetWithChildrenObject,
-} from '@searchcraft/core';
+} from '@types';
 
-import { searchcraftStore, type SearchcraftState } from '@store';
+import type { SearchcraftState } from '@store';
 import {
   deepMergeWithSpread,
   facetWithChildrenArrayToCompleteFacetTree,
@@ -21,6 +21,8 @@ import {
   mergeFacetTrees,
   removeSubstringMatches,
 } from '@utils';
+import type { SearchcraftCore } from '@classes';
+import { registry } from '@classes/CoreInstanceRegistry';
 
 type HandlerActionType =
   | 'SEARCH_TERM_EMPTY'
@@ -58,6 +60,10 @@ type HandlerActionType =
   shadow: false,
 })
 export class SearchcraftFacetList {
+  /**
+   * The id of the Searchcraft instance that this component should use.
+   */
+  @Prop() searchcraftId?: string;
   /**
    * The name of the field where facets are applied.
    */
@@ -111,6 +117,7 @@ export class SearchcraftFacetList {
   private lastFacetValues?: string;
 
   private unsubscribe?: () => void;
+  private cleanupCore?: () => void;
 
   get areAnyFacetPathsSelected(): boolean {
     return Object.keys(this.selectedPaths).some(
@@ -236,13 +243,13 @@ export class SearchcraftFacetList {
       this.lastSearchTerm = '';
     } else if (
       this.lastTimeTaken !== state.searchResponseTimeTaken &&
-      state.searchClientRequest &&
-      typeof state.searchClientRequest === 'object'
+      state.searchClientRequestProperties &&
+      typeof state.searchClientRequestProperties === 'object'
     ) {
-      const request = state.searchClientRequest;
+      const requestProperties = state.searchClientRequestProperties;
       let actionType: HandlerActionType = 'UNKNOWN';
 
-      if (this.lastSearchTerm !== request.searchTerm) {
+      if (this.lastSearchTerm !== requestProperties.searchTerm) {
         if (this.areAnyFacetPathsSelected) {
           actionType = 'NEW_SEARCH_TERM_WHILE_FACETS_ACTIVE';
         } else {
@@ -250,41 +257,53 @@ export class SearchcraftFacetList {
         }
       } else if (
         this.lastRangeValues !==
-        JSON.stringify(request.rangeValueForIndexFields)
+        JSON.stringify(requestProperties.rangeValueForIndexFields)
       ) {
         actionType = 'RANGE_VALUE_UPDATE';
       } else if (
         this.lastFacetValues !==
-        JSON.stringify(request.facetPathsForIndexFields)
+        JSON.stringify(requestProperties.facetPathsForIndexFields)
       ) {
         actionType = 'FACET_UPDATE';
-      } else if (this.lastSortType !== request.order_by) {
+      } else if (this.lastSortType !== requestProperties.order_by) {
         actionType = 'SORT_ORDER_UPDATE';
-      } else if (this.lastSearchMode !== request.mode) {
+      } else if (this.lastSearchMode !== requestProperties.mode) {
         actionType = 'EXACT_MATCH_UPDATE';
       }
 
-      this.lastRangeValues = JSON.stringify(request.rangeValueForIndexFields);
-      this.lastFacetValues = JSON.stringify(request.facetPathsForIndexFields);
-      this.lastSortType = request.order_by;
-      this.lastSearchMode = request.mode;
-      this.lastSearchTerm = request.searchTerm;
+      this.lastRangeValues = JSON.stringify(
+        requestProperties.rangeValueForIndexFields,
+      );
+      this.lastFacetValues = JSON.stringify(
+        requestProperties.facetPathsForIndexFields,
+      );
+      this.lastSortType = requestProperties.order_by;
+      this.lastSearchMode = requestProperties.mode;
+      this.lastSearchTerm = requestProperties.searchTerm;
       this.lastTimeTaken = state.searchResponseTimeTaken;
       // Handle the incoming response, using the action we have determined.
       this.handleIncomingSearchResponse(state, actionType);
     }
   }
 
-  connectedCallback() {
-    this.handleStateUpdate(searchcraftStore.getState());
+  onCoreAvailable(core: SearchcraftCore) {
+    this.handleStateUpdate(core.store.getState());
 
-    this.unsubscribe = searchcraftStore.subscribe((state) => {
+    this.unsubscribe = core.store.subscribe((state) => {
       this.handleStateUpdate(state);
     });
   }
 
+  connectedCallback() {
+    this.cleanupCore = registry.useCoreInstance(
+      this.searchcraftId,
+      this.onCoreAvailable.bind(this),
+    );
+  }
+
   disconnectedCallback() {
     this.unsubscribe?.();
+    this.cleanupCore?.();
   }
 
   handleCheckboxChange(path: string) {

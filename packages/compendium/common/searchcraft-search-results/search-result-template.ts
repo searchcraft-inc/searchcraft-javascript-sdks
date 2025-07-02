@@ -2,7 +2,7 @@ import type { SearchResultTemplate } from '@searchcraft/javascript-sdk';
 
 import './search-result-template.scss';
 
-type SearchResultTemplateData = {
+type SearchResultTemplateDataEchostream = {
   canonical_link: string;
   section_name: string;
   headline: string;
@@ -12,9 +12,9 @@ type SearchResultTemplateData = {
   medium_image: string;
 };
 
-export const searchResultTemplate: SearchResultTemplate<
-  SearchResultTemplateData
-> = (data, index, { html }) => html`
+export const searchResultTemplateEchostream: SearchResultTemplate<
+  SearchResultTemplateDataEchostream
+> = (data, _index, { html }) => html`
   <a href="${data.canonical_link}" target="_blank" rel="noreferrer">
     <div class="search-result-content">
       <h3 class="search-result-content-subtitle">${data.section_name}</h3>
@@ -34,6 +34,59 @@ export const searchResultTemplate: SearchResultTemplate<
     </div>
     <div class="search-result-image">
       <img src="${data.medium_image}" alt="${data.headline}" />
+    </div>
+  </a>
+`;
+
+type SearchResultTemplateDataBazaario = {
+  link: string;
+  title: string;
+  price: string;
+  image: string;
+};
+
+export const searchResultTemplateBazaario: SearchResultTemplate<
+  SearchResultTemplateDataBazaario
+> = (data, _index, { html }) => html`
+  <div>
+    <h2>${data.title}</h2>
+    <p>${data.link}
+  </div>
+`;
+
+
+type SearchResultTemplateDataFoodAndWine = {
+  link: string;
+  category: string;
+  title: string;
+  description: string;
+  pub_date: string;
+  dc_creator: string;
+  enclosure_url: string;
+};
+
+export const searchResultTemplateFoodAndWine: SearchResultTemplate<
+  SearchResultTemplateDataFoodAndWine
+> = (data, _index, { html }) => html`
+  <a href="${data.link}" target="_blank" rel="noreferrer">
+    <div class="search-result-content">
+      <h3 class="search-result-content-subtitle">${data.category?.[0]}</h3>
+      <h2 class="search-result-content-title">${data.title}</h2>
+      <p class="search-result-content-body">${data.description}</p>
+      <footer class="search-result-content-footer">
+        <time>
+          ${new Intl.DateTimeFormat('en-US', {
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric',
+          }).format(new Date(data.pub_date))}
+        </time>
+        •
+        <p>${data.dc_creator}</p>
+      </footer>
+    </div>
+    <div class="search-result-image">
+      <img src="${data.enclosure_url}" alt="${data.title}" />
     </div>
   </a>
 `;

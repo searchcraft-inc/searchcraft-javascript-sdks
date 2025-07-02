@@ -12,9 +12,9 @@ export const Default: StoryObj<Components.SearchcraftResultsInfo> = {
     (Story) => {
       useEffect(() => {
         new Searchcraft({
-          readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
-          endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
-          index: [import.meta.env.VITE_RUNEGARD_INDEX],
+          readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
+          endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
+          indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
         });
       }, []);
       return <Story />;

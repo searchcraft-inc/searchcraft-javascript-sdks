@@ -3,7 +3,10 @@ import { useEffect } from 'react';
 
 import { Searchcraft } from '@searchcraft/javascript-sdk';
 
-import { searchResultTemplate, customAdTemplate } from '@common/index.js';
+import {
+  customAdTemplate,
+  searchResultTemplateEchostream,
+} from '@common/index.js';
 
 const componentMeta: Meta = {
   title: 'Javascript SDK/searchcraft-pagination',
@@ -17,9 +20,9 @@ export const Default: StoryObj = {
     (Story) => {
       useEffect(() => {
         const searchcraft = new Searchcraft({
-          readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
-          endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
-          index: [import.meta.env.VITE_RUNEGARD_INDEX],
+          readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
+          endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
+          indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
         });
         const callbacks: (() => void)[] = [];
 
@@ -50,7 +53,7 @@ export const Default: StoryObj = {
         );
 
         if (searchResults) {
-          searchResults.template = searchResultTemplate;
+          searchResults.template = searchResultTemplateEchostream;
         }
 
         const resultsInfo = document.querySelector('searchcraft-results-info');
@@ -103,16 +106,17 @@ export const WithCustomAds: StoryObj = {
         const callbacks: (() => void)[] = [];
 
         const searchcraft = new Searchcraft({
-          readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
-          endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
-          index: [import.meta.env.VITE_RUNEGARD_INDEX],
-          adSource: 'Custom',
-          adContainerRenderedDebounceDelay: 1000,
-          customAdStartQuantity: 1,
-          customAdInterstitialInterval: 3,
-          customAdInterstitialQuantity: 1,
-          customAdEndQuantity: 1,
-          customAdTemplate: customAdTemplate,
+          readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
+          endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
+          indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
+          customAdConfig: {
+            adContainerRenderedDebounceDelay: 1000,
+            adStartQuantity: 1,
+            adInterstitialInterval: 3,
+            adInterstitialQuantity: 1,
+            adEndQuantity: 1,
+            template: customAdTemplate,
+          },
         });
 
         callbacks.push(
@@ -142,7 +146,7 @@ export const WithCustomAds: StoryObj = {
         );
 
         if (searchResults) {
-          searchResults.template = searchResultTemplate;
+          searchResults.template = searchResultTemplateEchostream;
         }
 
         const resultsInfo = document.querySelector('searchcraft-results-info');
@@ -170,7 +174,7 @@ export const WithCustomAds: StoryObj = {
         <searchcraft-results-info />
       </div>
       <div style={{ marginBottom: 20 }}>
-        <searchcraft-search-results template={searchResultTemplate} />
+        <searchcraft-search-results template={searchResultTemplateEchostream} />
       </div>
       <div
         style={{
@@ -195,16 +199,17 @@ export const WithNativoAds: StoryObj = {
         const callbacks: (() => void)[] = [];
 
         const searchcraft = new Searchcraft({
-          readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
-          endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
-          index: [import.meta.env.VITE_RUNEGARD_INDEX],
-          adSource: 'Nativo',
-          nativoAdStartQuantity: 2,
-          nativoAdInterstitialInterval: 4,
-          nativoAdInterstitialQuantity: 3,
-          nativoAdEndQuantity: 4,
-          nativoAdClassName: 'nativo_1',
-          nativoPlacementId: 1593037,
+          readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
+          endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
+          indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
+          nativoConfig: {
+            adStartQuantity: 2,
+            adInterstitialInterval: 4,
+            adInterstitialQuantity: 3,
+            adEndQuantity: 4,
+            adClassName: 'nativo_1',
+            placementId: 1593037,
+          },
         });
 
         callbacks.push(
@@ -234,7 +239,7 @@ export const WithNativoAds: StoryObj = {
         );
 
         if (searchResults) {
-          searchResults.template = searchResultTemplate;
+          searchResults.template = searchResultTemplateEchostream;
         }
 
         const resultsInfo = document.querySelector('searchcraft-results-info');
@@ -262,7 +267,7 @@ export const WithNativoAds: StoryObj = {
         <searchcraft-results-info />
       </div>
       <div style={{ marginBottom: 20 }}>
-        <searchcraft-search-results template={searchResultTemplate} />
+        <searchcraft-search-results template={searchResultTemplateEchostream} />
       </div>
       <div
         style={{

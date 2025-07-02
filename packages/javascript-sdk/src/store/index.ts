@@ -1,2 +1,2 @@
-export * from './SearchcraftStore';
+export * from './SearchcraftStoreFactory';
 export * from './SearchcraftStore.types';

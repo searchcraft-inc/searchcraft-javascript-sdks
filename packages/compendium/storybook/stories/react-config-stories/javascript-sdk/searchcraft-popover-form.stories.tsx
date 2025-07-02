@@ -21,9 +21,9 @@ export const Inline: StoryObj<Components.SearchcraftPopoverForm> = {
     (Story) => {
       useEffect(() => {
         new Searchcraft({
-          readKey: import.meta.env.VITE_KOBOL_READ_KEY,
-          endpointURL: import.meta.env.VITE_KOBOL_ENDPOINT_URL,
-          index: [import.meta.env.VITE_KOBOL_INDEX],
+          readKey: import.meta.env.VITE_READ_KEY_BAZAARIO,
+          endpointURL: import.meta.env.VITE_ENDPOINT_URL_BAZAARIO,
+          indexName: import.meta.env.VITE_INDEX_BAZAARIO,
         });
         const popoverForm = document.querySelector('searchcraft-popover-form');
 
@@ -61,14 +61,15 @@ export const InlineWithAds: StoryObj<Components.SearchcraftPopoverForm> = {
     (Story) => {
       useEffect(() => {
         new Searchcraft({
-          readKey: import.meta.env.VITE_KOBOL_READ_KEY,
-          endpointURL: import.meta.env.VITE_KOBOL_ENDPOINT_URL,
-          index: [import.meta.env.VITE_KOBOL_INDEX],
-          adSource: 'adMarketplace',
-          admSub: 'searchbox1',
-          admProductAdQuantity: 3,
-          admTextAdQuantity: 3,
-          admAdTemplate: admAdTemplatePopover,
+          readKey: import.meta.env.VITE_READ_KEY_BAZAARIO,
+          endpointURL: import.meta.env.VITE_ENDPOINT_URL_BAZAARIO,
+          indexName: import.meta.env.VITE_INDEX_BAZAARIO,
+          admAdConfig: {
+            sub: 'searchbox1',
+            productAdQuantity: 3,
+            textAdQuantity: 3,
+            template: admAdTemplatePopover,
+          },
         });
         const popoverForm = document.querySelector('searchcraft-popover-form');
 
@@ -106,9 +107,9 @@ export const Modal: StoryObj<Components.SearchcraftPopoverForm> = {
     (Story) => {
       useEffect(() => {
         new Searchcraft({
-          readKey: import.meta.env.VITE_KOBOL_READ_KEY,
-          endpointURL: import.meta.env.VITE_KOBOL_ENDPOINT_URL,
-          index: [import.meta.env.VITE_KOBOL_INDEX],
+          readKey: import.meta.env.VITE_READ_KEY_BAZAARIO,
+          endpointURL: import.meta.env.VITE_ENDPOINT_URL_BAZAARIO,
+          indexName: import.meta.env.VITE_INDEX_BAZAARIO,
         });
         const popoverForm = document.querySelector('searchcraft-popover-form');
 
@@ -145,9 +146,9 @@ export const Fullscreen: StoryObj<Components.SearchcraftPopoverForm> = {
     (Story) => {
       useEffect(() => {
         new Searchcraft({
-          readKey: import.meta.env.VITE_RUNEGARD_READ_KEY,
-          endpointURL: import.meta.env.VITE_RUNEGARD_ENDPOINT_URL,
-          index: [import.meta.env.VITE_RUNEGARD_INDEX],
+          readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
+          endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
+          indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
         });
         const popoverForm = document.querySelector('searchcraft-popover-form');
 
