@@ -1,3 +1,16 @@
+## 0.11.0 - 2025-07-02
+
+This release includes some big new features:
+
+- New Component, `searchcraft-summary-box`, for rendering RAG search result summaries.
+- Multi instance support - Now supports rendering multiple sets of search results, or search results from different indexes, on the same page.
+
+Other changes:
+
+- Updates to the SearchcraftConfig object to streamline and consolidate some of the config options.
+- Updates to the date filter configuration options, now supports an open-ended end date.
+- Miscellaneous bug fixes and enhancements.
+
 ## 0.10.7 - 2025-05-07
 
 This release includes:
