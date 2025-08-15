@@ -20,9 +20,17 @@ export class SummaryClient {
     const begin = async () => {
       const state = this.get();
       const config = state.core?.config;
-      console.log(config);
-      if (!config || !config.cortexURL) {
-        throw new Error('cortexURL was not specified in the config.');
+
+      if (!config) {
+        console.error('Could not stream summary data, no config found.');
+        return;
+      }
+
+      if (!config.cortexURL) {
+        console.error(
+          'Could not stream summary data, cortexURL was not specified in the config.',
+        );
+        return;
       }
 
       const indexName = state.core?.config.indexName;
