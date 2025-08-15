@@ -116,10 +116,12 @@ const createSearchcraftStore = (
       search: async () => {
         const state = get();
 
-        state.summaryClient?.streamSummaryData();
-
         if (!state.core) {
           throw new Error('Searchcraft instance is not initialized.');
+        }
+
+        if (state.core.config.cortexURL) {
+          state.summaryClient?.streamSummaryData();
         }
 
         if (!state.searchTerm.trim()) {
