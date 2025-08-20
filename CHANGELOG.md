@@ -1,3 +1,7 @@
+## 0.11.1 - 2025-08-20
+
+This release includes bugfixes and performance enhancements.
+
 ## 0.11.0 - 2025-07-02
 
 This release includes some big new features:
