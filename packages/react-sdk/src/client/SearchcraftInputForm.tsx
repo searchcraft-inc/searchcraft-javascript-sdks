@@ -48,7 +48,6 @@ interface SearchcraftInputFormProps extends Components.SearchcraftInputForm {}
  * ```
  */
 const SearchcraftInputForm: FC<SearchcraftInputFormProps> = (props) => {
-  // @ts-ignore
   return <Component {...props} />;
 };
 
