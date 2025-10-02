@@ -1,6 +1,6 @@
 import { SearchcraftCore } from '@classes';
 import type { SearchcraftConfig } from '@types';
-import packageJson from '../package.json';
+import { name as packageName, version as packageVersion } from '../package.json';
 
 /**
  * @fileoverview entry point for your component library
@@ -23,8 +23,8 @@ export class Searchcraft extends SearchcraftCore {
     super(
       config,
       {
-        sdkName: packageJson.name,
-        sdkVersion: packageJson.version,
+        sdkName: packageName,
+        sdkVersion: packageVersion,
       },
       searchcraftId,
     );
