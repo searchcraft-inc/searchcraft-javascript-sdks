@@ -40,7 +40,13 @@
     "test:sdk-react": "yarn workspace @searchcraft/react-sdk test",
     "test:sdk-javascript": "yarn workspace @searchcraft/javascript-sdk test",
     "test:sdk-vue": "yarn workspace @searchcraft/vue-sdk test",
-    "update-changelog": "node update-changelog.mjs"
+    "update-changelog": "node update-changelog.mjs",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "tsc --noEmit --watch",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "format": "biome format --write .",
+    "format:check": "biome format ."
   },
   "bugs": {
     "url": "https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/issues"

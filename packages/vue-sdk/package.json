@@ -35,8 +35,6 @@
       "import": "./dist/index.es.js",
       "require": "./dist/index.umd.js"
     },
-    "./components": "./dist/components/index.d.ts",
-    "./plugin": "./dist/plugin.d.ts",
     "./themes/*.css": "./dist/themes/*.css"
   },
   "files": [
