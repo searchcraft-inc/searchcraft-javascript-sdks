@@ -1,5 +1,8 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.5.3/schema.json",
+  "files": {
+    "ignore": ["**/dist/**", "**/node_modules/**"]
+  },
   "organizeImports": {
     "enabled": true
   },
@@ -17,8 +20,7 @@
     "formatWithErrors": false,
     "indentStyle": "space",
     "indentWidth": 2,
-    "lineWidth": 80,
-    "ignore": ["node_modules"]
+    "lineWidth": 80
   },
   "javascript": {
     "formatter": {
