@@ -40,6 +40,10 @@ For complete documentation on the build script, refer to the comment header in [
 
 **Note**: To use the `--yalc` flag, you must have yalc installed on your machine.
 
+### Building for WordPress
+
+To build the JavaScript SDK for WordPress, use the `--wordpress` flag. This will exclude the `AdMarketplaceClient` and `NativoClient` from the build. You'll then need to manually copy the `javascript-sdk` dist output to the `wordpress` plugin directory.
+
 ### Storybook
 The one of the workspaces in the project is `compendium`, which is responsible for managing the storybook stories for the SDKs.
 
