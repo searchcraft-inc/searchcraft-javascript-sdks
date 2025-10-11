@@ -7,6 +7,7 @@ import {
   popoverResultMappings,
   searchResultTemplateBazaario,
   searchResultTemplateEchostream,
+  searchResultTemplateGalaxyNews
 } from '@common/index.js';
 
 const componentMeta: Meta = {
@@ -267,7 +268,7 @@ export const IndexVsFederation: StoryObj<Components.SearchcraftSearchResults> = 
         ) as HTMLSearchcraftSearchResultsElement;
 
         if (searchResults) {
-          searchResults.template = searchResultTemplateEchostream;
+          searchResults.template = searchResultTemplateGalaxyNews;
         }
       }, []);
 
