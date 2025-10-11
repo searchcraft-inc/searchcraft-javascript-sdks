@@ -1,3 +1,8 @@
+## 0.11.2 - 2025-10-07
+
+- Support for Federation search
+- Bugfixes and performance enhancements.
+
 ## 0.11.1 - 2025-08-20
 
 This release includes bugfixes and performance enhancements.
@@ -233,7 +238,7 @@ Updates public path to use relative path
 
 Adds JSDoc comments for vue components
 
-Adds jsdoc comment for react components 
+Adds jsdoc comment for react components
 
 Updates typedoc publicPaths for core & react
 

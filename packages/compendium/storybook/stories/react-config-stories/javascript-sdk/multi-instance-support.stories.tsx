@@ -216,4 +216,112 @@ export const InlineAndPopover: StoryObj<Components.SearchcraftSearchResults> = {
   args: {},
 };
 
+export const IndexVsFederation: StoryObj<Components.SearchcraftSearchResults> = {
+  decorators: [
+    (Story) => {
+      const initIndexInstance = useCallback(() => {
+        new Searchcraft(
+          {
+            readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
+            endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
+            indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
+            initialQuery: JSON.stringify({
+              query: {
+                fuzzy: {
+                  ctx: 'news',
+                },
+              },
+            }),
+          },
+          'indexInstance',
+        );
+
+        const searchResults = document.querySelector(
+          'searchcraft-search-results[searchcraft-id="indexInstance"]',
+        ) as HTMLSearchcraftSearchResultsElement;
+
+        if (searchResults) {
+          searchResults.template = searchResultTemplateEchostream;
+        }
+      }, []);
+
+      const initFederationInstance = useCallback(() => {
+        new Searchcraft(
+          {
+            readKey: import.meta.env.VITE_READ_KEY_GALAXY_NEWS,
+            endpointURL: import.meta.env.VITE_ENDPOINT_URL_GALAXY_NEWS,
+            federationName: import.meta.env.VITE_FEDERATION_GALAXY_NEWS,
+            initialQuery: JSON.stringify({
+              query: {
+                fuzzy: {
+                  ctx: 'galaxy news',
+                },
+              },
+            }),
+          },
+          'federationInstance',
+        );
+
+        const searchResults = document.querySelector(
+          'searchcraft-search-results[searchcraft-id="federationInstance"]',
+        ) as HTMLSearchcraftSearchResultsElement;
+
+        if (searchResults) {
+          searchResults.template = searchResultTemplateEchostream;
+        }
+      }, []);
+
+      useEffect(() => {
+        initIndexInstance();
+        initFederationInstance();
+      }, [initIndexInstance, initFederationInstance]);
+
+      return <Story />;
+    },
+  ],
+  render: () => {
+    return (
+      <div style={{ display: 'flex', flexDirection: 'row', gap: 16 }}>
+        {/* Index Search */}
+        <div
+          style={{
+            width: 400,
+            backgroundColor: 'rgb(232 245 233)',
+            borderRadius: 16,
+            padding: 16,
+          }}
+        >
+          <h1>📄 Index Search</h1>
+          <p style={{ fontSize: '14px', color: '#424242', marginBottom: 16 }}>
+            Searches within a single index
+          </p>
+          <div style={{ marginBottom: 20 }}>
+            <searchcraft-input-form searchcraft-id='indexInstance' />
+          </div>
+          <searchcraft-search-results searchcraft-id='indexInstance' />
+        </div>
+        {/* Federation Search */}
+        <div
+          style={{
+            width: 400,
+            backgroundColor: 'rgb(227 242 253)',
+            borderRadius: 16,
+            padding: 16,
+          }}
+        >
+          <h1>🔗 Federation Search</h1>
+          <p style={{ fontSize: '14px', color: '#424242', marginBottom: 16 }}>
+            Searches across multiple indices simultaneously
+          </p>
+          <div style={{ marginBottom: 20 }}>
+            <searchcraft-input-form searchcraft-id='federationInstance' />
+          </div>
+          <searchcraft-search-results searchcraft-id='federationInstance' />
+        </div>
+      </div>
+    );
+  },
+  args: {},
+};
+
 export default componentMeta;

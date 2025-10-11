@@ -48,8 +48,17 @@ As early as possible in the app lifecycle, initialize the Searchcraft object:
 ```js
 import { Searchcraft } from '@searchcraft/vue-sdk';
 
+// Index Search Configuration
 const searchcraft = new Searchcraft({
   indexName: 'your_index_from_vektron',
+  readKey: 'your_read_key_from_vektron',
+  endpointURL: 'your_searchcraft_endpoint_url',
+  searchDebounceDelay: 50, // Optional debounce delay in milliseconds
+})
+
+// Alternatively, you can create a Federation Search Configuration which searches across multiple indices
+const federatedSearchcraft = new Searchcraft({
+  federationName: 'your_federation_name',
   readKey: 'your_read_key_from_vektron',
   endpointURL: 'your_searchcraft_endpoint_url',
   searchDebounceDelay: 50, // Optional debounce delay in milliseconds

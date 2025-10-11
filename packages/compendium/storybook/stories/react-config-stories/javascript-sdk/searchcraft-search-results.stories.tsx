@@ -11,6 +11,7 @@ import {
   customAdTemplate,
   admAdTemplate,
   searchResultTemplateEchostream,
+  searchResultTemplateGalaxyNews,
 } from '@common/index.js';
 
 const componentMeta: Meta = {
@@ -217,6 +218,49 @@ export const WithoutATemplate: StoryObj<Components.SearchcraftSearchResults> = {
           endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
           indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
         });
+      }, []);
+
+      return <Story />;
+    },
+  ],
+  render: () => {
+    return (
+      <>
+        <div style={{ marginBottom: 20 }}>
+          <searchcraft-input-form />
+        </div>
+        <searchcraft-search-results />
+      </>
+    );
+  },
+  args: {},
+};
+
+export const FederationSearch: StoryObj<Components.SearchcraftSearchResults> = {
+  decorators: [
+    (Story) => {
+      useEffect(() => {
+        // Galaxy News federation search configuration
+        new Searchcraft({
+          readKey: import.meta.env.VITE_READ_KEY_GALAXY_NEWS,
+          endpointURL: import.meta.env.VITE_ENDPOINT_URL_GALAXY_NEWS,
+          federationName: import.meta.env.VITE_FEDERATION_GALAXY_NEWS,
+          initialQuery: JSON.stringify({
+            query: {
+              fuzzy: {
+                ctx: 'samsung',
+              },
+            },
+          }),
+        });
+
+        const searchResults = document.querySelector(
+          'searchcraft-search-results',
+        );
+
+        if (searchResults) {
+          searchResults.template = searchResultTemplateGalaxyNews;
+        }
       }, []);
 
       return <Story />;

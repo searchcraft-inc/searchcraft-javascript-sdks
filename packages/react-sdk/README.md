@@ -41,8 +41,16 @@ As early as possible in the app lifecycle, initialize the Searchcraft object:
 ```jsx
 import { Searchcraft } from '@searchcraft/react-sdk';
 
+// Index Search Configuration
 const searchcraft = new Searchcraft({
-  index: ['your_index_from_vektron'],
+  indexName: 'your_index_from_vektron',
+  readKey: 'your_read_key_from_vektron',
+  endpointURL: 'your_searchcraft_endpoint_url',
+})
+
+// Alternatively, you can create a Federation Search Configuration which searches across multiple indices
+const federatedSearchcraft = new Searchcraft({
+  federationName: 'your_federation_name',
   readKey: 'your_read_key_from_vektron',
   endpointURL: 'your_searchcraft_endpoint_url',
 })

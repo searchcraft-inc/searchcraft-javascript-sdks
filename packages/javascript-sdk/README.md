@@ -49,8 +49,17 @@ As early as possible in your app's lifecycle, initialize searchcraft, passing in
 ```js
 import { Searchcraft } from '@searchcraft/javascript-sdk';
 
+// Index Search Configuration
 const searchcraft = new Searchcraft({
-  index: ['your_index_from_vektron'],
+  indexName: 'your_index_from_vektron',
+  readKey: 'your_read_key_from_vektron',
+  endpointURL: 'your_searchcraft_endpoint_url',
+  searchDebounceDelay: 50, // The amount of debounce, in millis, to add to search requests (optional)
+})
+
+// Federation Search Configuration (searches across multiple indices)
+const federationSearchcraft = new Searchcraft({
+  federationName: 'your_federation_name',
   readKey: 'your_read_key_from_vektron',
   endpointURL: 'your_searchcraft_endpoint_url',
   searchDebounceDelay: 50, // The amount of debounce, in millis, to add to search requests (optional)
@@ -170,7 +179,7 @@ You can subscribe to various events within Searchcraft:
 ```jsx
 
   const searchcraft = new Searchcraft({
-    index: ['your_index_from_vektron'],
+    indexName: 'your_index_from_vektron',
     readKey: 'your_read_key_from_vektron',
     endpointURL: 'your_searchcraft_endpoint_url',
   });
