@@ -5,7 +5,7 @@ import {
   SearchcraftSearchResults,
   SearchcraftInputForm,
 } from '@searchcraft/vue-sdk';
-import { searchResultTemplateEchostream } from '@common/index.js';
+import { searchResultTemplateEchostream, searchResultTemplateGalaxyNews } from '@common/index.js';
 
 export default {
   title: 'Vue SDK/searchcraft-search-results',
@@ -121,3 +121,34 @@ export const Default: StoryFn = (args) => ({
 });
 
 Default.args = defaultProps;
+
+export const FederationSearch: StoryFn = (args) => ({
+  components: {
+    SearchcraftSearchResults,
+    SearchcraftInputForm,
+  },
+  setup() {
+    new Searchcraft({
+      readKey: import.meta.env.VITE_READ_KEY_GALAXY_NEWS,
+      endpointURL: import.meta.env.VITE_ENDPOINT_URL_GALAXY_NEWS,
+      federationName: import.meta.env.VITE_FEDERATION_GALAXY_NEWS,
+    });
+    return { args, searchResultTemplateGalaxyNews };
+  },
+  template: `
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <SearchcraftInputForm
+        v-bind="{
+          autoSearch: args.autoSearch,
+          buttonPlacement: args.buttonPlacement,
+          placeholderValue: 'Search across multiple indices...',
+          inputCaptionValue: args.inputCaptionValue,
+          labelForInput: args.labelForInput,
+        }"
+      />
+      <SearchcraftSearchResults v-bind="args" :template="searchResultTemplateGalaxyNews" />
+    </div>
+  `,
+});
+
+FederationSearch.args = defaultProps;

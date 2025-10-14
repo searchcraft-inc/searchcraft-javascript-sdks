@@ -63,8 +63,12 @@ export class SearchcraftCore {
       throw new Error('SDK Configuration Error: readKey not specified.');
     }
 
-    if (!config.indexName) {
-      throw new Error('SDK Configuration Error: indexName not specified.');
+    if (!config.indexName && !config.federationName) {
+      throw new Error('SDK Configuration Error: Either indexName or federationName must be specified.');
+    }
+
+    if (config.indexName && config.federationName) {
+      throw new Error('SDK Configuration Error: Cannot specify both indexName and federationName. Please specify only one.');
     }
 
     this.config = {
