@@ -13,7 +13,17 @@ import '@common/searchcraft-popover-form/popover-form-with-content.scss';
 
 const componentMeta: Meta = {
   title: 'React SDK/searchcraft-popover-form',
-  argTypes: {},
+  argTypes: {
+    placeholderValue: {
+      control: 'text',
+      description: 'The input element\'s placeholder value.',
+    },
+    placeholderBehavior: {
+      control: { type: 'select' },
+      options: ['hide-on-focus', 'hide-on-text-entered', undefined],
+      description: 'The placeholder\'s render behavior.',
+    },
+  },
 };
 
 export const Inline: StoryObj = {
@@ -29,11 +39,12 @@ export const Inline: StoryObj = {
       return <Story />;
     },
   ],
-  render: () => (
+  render: (args) => (
     <>
       <div className='searchcraft-popover-form-with-content'>
         <p>Story Note: This story uses the Bazaario env vars</p>
         <SearchcraftPopoverForm
+          {...args}
           hotkey='k'
           hotkeyModifier='ctrl'
           popoverResultMappings={popoverResultMappings}
@@ -46,7 +57,10 @@ export const Inline: StoryObj = {
       </div>
     </>
   ),
-  args: {},
+  args: {
+    placeholderValue: "Search products...",
+    placeholderBehavior: "hide-on-text-entered"
+  },
 };
 
 export const Modal: StoryObj = {
