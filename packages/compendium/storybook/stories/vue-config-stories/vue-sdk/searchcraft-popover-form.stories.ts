@@ -13,7 +13,17 @@ import '@common/searchcraft-popover-form/popover-form-with-content.scss';
 export default {
   title: 'Vue SDK/searchcraft-popover-form',
   components: { SearchcraftPopoverForm, SearchcraftPopoverButton },
-  argTypes: {},
+  argTypes: {
+    placeholderValue: {
+      control: 'text',
+      description: 'The input element\'s placeholder value.',
+    },
+    placeholderBehavior: {
+      control: { type: 'select' },
+      options: ['hide-on-focus', 'hide-on-text-entered', undefined],
+      description: 'The placeholder\'s render behavior.',
+    },
+  },
 } as Meta;
 
 export const Inline: StoryFn = (args) => ({
@@ -34,6 +44,8 @@ export const Inline: StoryFn = (args) => ({
         hotkeyModifier="ctrl"
         :popoverResultMappings="popoverResultMappings"
         type="inline"
+        placeholderValue="Search products..."
+        placeholderBehavior="hide-on-text-entered"
       />
       <p>
         Here's some content that shows up underneath the popover. The popover

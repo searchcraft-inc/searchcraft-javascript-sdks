@@ -73,6 +73,16 @@ export class SearchcraftPopoverForm {
    * The id of the Searchcraft instance that this component should use.
    */
   @Prop() searchcraftId?: string;
+  /**
+   * The input element's placeholder value.
+   */
+  @Prop() placeholderValue?: string = 'Enter Search';
+  /**
+   * The placeholder's render behavior.
+   * 'hide-on-focus' - Hide the placeholder text immediately when the input form gains focus.
+   * 'hide-on-text-entered' - Only hide the placeholder when the input form has text entered into it.
+   */
+  @Prop() placeholderBehavior?: 'hide-on-focus' | 'hide-on-text-entered';
 
   @State() isPopoverVisibleInState = false;
   @State() searchClientResponseItems: SearchClientResponseItem[] = [];
@@ -216,6 +226,12 @@ export class SearchcraftPopoverForm {
         this.modalElement.popoverResultMappings = this.popoverResultMappings;
         this.modalElement.setAttribute('type', 'fullscreen');
         this.modalElement.setAttribute('searchcraft-id', this.searchcraftId);
+        if (this.placeholderValue) {
+          this.modalElement.setAttribute('placeholder-value', this.placeholderValue);
+        }
+        if (this.placeholderBehavior) {
+          this.modalElement.setAttribute('placeholder-behavior', this.placeholderBehavior);
+        }
         document.body.appendChild(this.modalElement);
       }
     }
@@ -315,6 +331,8 @@ export class SearchcraftPopoverForm {
           <searchcraft-input-form
             onInputFocus={this.handleInputFocus.bind(this)}
             searchcraftId={this.searchcraftId}
+            placeholderValue={this.placeholderValue}
+            placeholderBehavior={this.placeholderBehavior}
           />
         </div>
         {isListViewVisible && (
@@ -356,6 +374,8 @@ export class SearchcraftPopoverForm {
                 onInputFocus={this.handleInputFocus.bind(this)}
                 onInputInit={this.handleInputInit.bind(this)}
                 searchcraftId={this.searchcraftId}
+                placeholderValue={this.placeholderValue}
+                placeholderBehavior={this.placeholderBehavior}
               />
               <button
                 type='button'
@@ -400,6 +420,8 @@ export class SearchcraftPopoverForm {
               onInputFocus={this.handleInputFocus.bind(this)}
               onInputInit={this.handleInputInit.bind(this)}
               searchcraftId={this.searchcraftId}
+              placeholderValue={this.placeholderValue}
+              placeholderBehavior={this.placeholderBehavior}
             />
             <button
               type='button'

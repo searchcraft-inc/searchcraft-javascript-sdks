@@ -13,8 +13,28 @@ import '@common/searchcraft-popover-form/popover-form-with-content.scss';
 
 const componentMeta: Meta = {
   title: 'Javascript SDK/searchcraft-popover-form',
-  argTypes: {},
+  argTypes: {
+    placeholderValue: {
+      control: 'text',
+      description: 'The input element\'s placeholder value.',
+    },
+    placeholderBehavior: {
+      control: { type: 'select' },
+      options: ['hide-on-focus', 'hide-on-text-entered', undefined],
+      description: 'The placeholder\'s render behavior.',
+    },
+  },
 };
+
+const defaultProps: Components.SearchcraftPopoverForm = {
+  type: 'inline',
+  hotkey: 'k',
+  hotkeyModifier: 'ctrl',
+  placeholderValue: 'Search products...',
+  placeholderBehavior: 'hide-on-text-entered',
+};
+
+export default componentMeta;
 
 export const Inline: StoryObj<Components.SearchcraftPopoverForm> = {
   decorators: [
@@ -35,7 +55,7 @@ export const Inline: StoryObj<Components.SearchcraftPopoverForm> = {
       return <Story />;
     },
   ],
-  render: () => {
+  render: (args) => {
     return (
       <>
         <div className='searchcraft-popover-form-with-content'>
@@ -44,6 +64,8 @@ export const Inline: StoryObj<Components.SearchcraftPopoverForm> = {
             type='inline'
             hotkey='k'
             hotkey-modifier='ctrl'
+            placeholder-value={args.placeholderValue}
+            placeholder-behavior={args.placeholderBehavior}
           />
           <p>
             Here's some content that shows up underneath the popover. The
@@ -53,7 +75,7 @@ export const Inline: StoryObj<Components.SearchcraftPopoverForm> = {
       </>
     );
   },
-  args: {},
+  args: defaultProps,
 };
 
 export const InlineWithAds: StoryObj<Components.SearchcraftPopoverForm> = {
@@ -179,5 +201,3 @@ export const Fullscreen: StoryObj<Components.SearchcraftPopoverForm> = {
   },
   args: {},
 };
-
-export default componentMeta;
