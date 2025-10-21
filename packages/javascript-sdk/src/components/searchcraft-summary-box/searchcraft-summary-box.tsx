@@ -48,6 +48,7 @@ export class SearchcraftSummaryBox {
   @Prop() searchcraftId?: string;
   @State() summary = '';
   @State() isLoading = false;
+  @State() isSummaryNotEnabled = false;
   @Element() hostElement?: HTMLElement;
 
   private unsubscribe?: () => void;
@@ -55,20 +56,7 @@ export class SearchcraftSummaryBox {
 
   onCoreAvailable(core: SearchcraftCore) {
     core.store.setState({ hasSummaryBox: true });
-    this.unsubscribe = core.store.subscribe((state: SearchcraftState) => {
-      this.summary = DOMPurify.sanitize(marked.parse(state.summary) as string);
-      this.isLoading = state.isSummaryLoading;
-
-      const div = this.hostElement?.querySelector(
-        '.searchcraft-summary-box-content',
-      );
-
-      if (div) {
-        div.innerHTML = DOMPurify.sanitize(
-          marked.parse(state.summary) as string,
-        );
-      }
-    });
+    this.unsubscribe = core.store.subscribe(this.handleStateChange.bind(this));
   }
 
   connectedCallback() {
@@ -83,14 +71,58 @@ export class SearchcraftSummaryBox {
     this.cleanupCore?.();
   }
 
-  render() {
-    return (
-      <div class='searchcraft-summary-box'>
-        {this.isLoading && <searchcraft-loading label='LOADING' />}
-        {!this.isLoading && (
-          <div class='searchcraft-summary-box-content'>{this.summary}</div>
-        )}
-      </div>
+  /**
+   * Handles state changes from the store and updates component state.
+   */
+  private handleStateChange(state: SearchcraftState) {
+    this.isLoading = state.isSummaryLoading;
+    this.isSummaryNotEnabled = state.isSummaryNotEnabled;
+    this.summary = this.sanitizeMarkdown(state.summary);
+
+    // Update DOM directly for performance (avoids re-render)
+    this.updateContentElement(state.summary);
+  }
+
+  /**
+   * Sanitizes and converts markdown to HTML.
+   */
+  private sanitizeMarkdown(markdown: string): string {
+    return DOMPurify.sanitize(marked.parse(markdown) as string);
+  }
+
+  /**
+   * Updates the content element directly without triggering a re-render.
+   */
+  private updateContentElement(markdown: string) {
+    const contentElement = this.hostElement?.querySelector(
+      '.searchcraft-summary-box-content',
     );
+
+    if (contentElement) {
+      contentElement.innerHTML = this.sanitizeMarkdown(markdown);
+    }
+  }
+
+  /**
+   * Renders the appropriate content based on current state.
+   */
+  private renderContent() {
+    if (this.isLoading) {
+      return <searchcraft-loading label='LOADING' />;
+    }
+
+    if (this.isSummaryNotEnabled) {
+      return (
+        <div class='searchcraft-summary-box-content'>
+          AI summaries are not enabled
+        </div>
+      );
+    }
+
+    return <div class='searchcraft-summary-box-content'>{this.summary}</div>;
+  }
+
+  render() {
+    return <div class='searchcraft-summary-box'>{this.renderContent()}</div>;
   }
 }
