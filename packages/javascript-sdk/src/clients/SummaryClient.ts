@@ -75,6 +75,16 @@ export class SummaryClient {
         }
 
         if (!fetchResponse.ok) {
+          if (fetchResponse.status === 403) {
+            console.warn(
+              'Please contact Searchcraft to enable AI summaries with your account',
+            );
+            this.set({
+              isSummaryLoading: false,
+              isSummaryNotEnabled: true,
+            });
+            return;
+          }
           throw new Error(`HTTP ${fetchResponse.status}`);
         }
 

@@ -44,6 +44,7 @@ const initialSearchcraftStateValues: SearchcraftStateValues = {
   hasSummaryBox: false,
   summaryClient: undefined,
   isSummaryLoading: false,
+  isSummaryNotEnabled: false,
 };
 
 // const logger = new Logger({ logLevel: LogLevel.NONE });

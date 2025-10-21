@@ -73,6 +73,7 @@ export interface SearchcraftStateValues {
   hasSummaryBox: boolean;
   isSummaryLoading: boolean;
   summaryClient?: SummaryClient;
+  isSummaryNotEnabled: boolean;
 }
 
 export interface SearchcraftState
