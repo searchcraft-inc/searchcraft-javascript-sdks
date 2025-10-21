@@ -113,14 +113,14 @@ const createSearchcraftStore = (
           adClientResponseItems: [...state.cachedAdClientResponseItems],
         });
       },
-      search: async () => {
+      search: async (options?: { skipSummary?: boolean }) => {
         const state = get();
 
         if (!state.core) {
           throw new Error('Searchcraft instance is not initialized.');
         }
 
-        if (state.core.config.cortexURL) {
+        if (state.core.config.cortexURL && !options?.skipSummary) {
           state.summaryClient?.streamSummaryData();
         }
 
@@ -191,11 +191,11 @@ const createSearchcraftStore = (
       setSearchResultsCount: (count) => set({ searchResultsCount: count }),
       setSearchResultsPage: async (page) => {
         set({ searchResultsPage: page });
-        await functions.search();
+        await functions.search({ skipSummary: true });
       },
       setSearchResultsPerPage: async (perPage) => {
         set({ searchResultsPerPage: perPage });
-        await functions.search();
+        await functions.search({ skipSummary: true });
       },
       setHotKeyAndHotKeyModifier: (hotkey, hotkeyModifier) => {
         const { hotkey: initialHotkey, hotkeyModifier: initialHotkeyModifier } =
