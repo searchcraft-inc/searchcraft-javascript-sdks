@@ -1,13 +1,17 @@
-# Searchcraft Javascript SDKs
-
-This project is a monorepo containing framework-specific javascript SDKs for use in front-end consuming applications of Searchcraft.
+<img alt="Searchcraft" src="./header.png">
+<h1 align="center">Searchcraft JavaScript SDKs</h1>
+<p align="center">
+This project is a monorepo containing framework-specific javascript SDKs for use in front-end consuming applications of <a href="https://searchcraft.io">Searchcraft</a>, the developer-first vertical search engine.
+</p>
 
 Each SDK provides the following functionality to the consumer:
-- Pre-built components and functionality for the consuming application for the purpose of rendering search forms, search results, and filtering.
+- Pre-built components and functionality for the consuming application for the purpose of rendering search forms, search results, and filtering, AI summarization, and more. The SDKs are the quickest way to build a front-end application with Searchcraft.
 - Communicates with Searchcraft via the Searchcraft API.
 - State management of search results, filtering, and settings.
-- Ability to render ads in-line with search results.
-- Analytics events sent to the Searchcraft /measure endpoint for viewing on the Vektron dashboard.
+- Ability to render ads in-line with search results if that ability is enabled (reach out to Searchcraft to enable).
+- Analytics events sent to the Searchcraft anaytics platform for viewing on the Vektron dashboard. For self-hosted, this will go to your own Clickhouse cluster via the engine `/measure` endpoint (if enabled).
+
+You may also be interested in our [React](https://github.com/searchcraft-inc/vite-react-searchcraft-template) and [Vue](https://github.com/searchcraft-inc/vite-vue-searchcraft-template) Vite templates, which provide a starting point for building a front-end application with Searchcraft. The templates include the SDKs and all necessary configuration for getting started.
 
 ## Technologies
 - yarn workspaces (yarn classic)
@@ -22,7 +26,7 @@ Each SDK provides the following functionality to the consumer:
 - lerna
 - biomejs
 - nodemon
-- Bitbucket pipelines
+- Github Actions
 - `yalc`
 
 ## Local Development
@@ -59,20 +63,22 @@ We use [semver](https://semver.org/) (semantic versioning) for our versioning sy
 
 ### Publishing
 
-A Bitbucket pipeline is set up to handle publishing to NPM. `lerna.json` is the source of truth for our versioning system.
+A GitHub action is set up to handle publishing to NPM. `lerna.json` is the source of truth for our versioning system.
 
 To publish:
 1. From the `development` branch, create a new branch called `version-x.x.x`.
 2. Push this branch upstream.
-3. Run `yarn version:sdks` and follow the prompts to select a major, minor, or patch version. The script will automatically increment the yarn workspace package's version numbers and push a commit to your branch.
-4. On bitbucket, pull request to merge the changes up to main: `version-x.x.x` -> `development`, and then `development` -> `main`.
-5. When `development` is merged into `main`, the pipeline will run, which will publish the changes to npm.
+3. Update CHANGELOG.md with the changes for this version.
+4. Run `yarn create-version` and follow the prompts to select a major, minor, or patch version. The script will automatically increment the yarn workspace package's version numbers and push a commit to your branch.
+5. On GitHub, pull request to merge the changes up to main: `version-x.x.x` -> `development`, and then `development` -> `main`.
+6. When `development` is merged into `main`, the action will run, which will publish the changes to npm.
 
 ## Project Structure
 
 ### Core Package
 
-The Core SDK package (`core-sdk`), is a private package that contains the shared business logic for communicating with the Searchcraft API. The other SDKs in the monorepo consume this package.
+- `javascript-sdk` is the core package containing both the shared business logic (SearchcraftCore class) AND the Stencil web components
+- The other SDKs (react-sdk, vue-sdk) consume @searchcraft/javascript-sdk
 
 ### Stencil Web Components
 

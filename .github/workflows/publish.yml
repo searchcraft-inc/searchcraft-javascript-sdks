@@ -1,0 +1,88 @@
+name: Publish Packages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish:
+    name: Check for Version Change and Publish
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'yarn'
+
+      - name: Configure npm authentication
+        run: |
+          # Copy existing .npmrc to home directory and append auth token
+          cp .npmrc ~/.npmrc
+          printf "//registry.npmjs.org/:_authToken=%s\n" "$NPM_TOKEN" >> ~/.npmrc
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Install Lerna globally
+        run: yarn global add lerna
+
+      - name: Build packages
+        run: yarn build
+
+      - name: Publish packages
+        run: yarn lerna publish from-package --no-private --yes
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Get version from lerna.json
+        id: get_version
+        run: |
+          VERSION=$(node -p "require('./lerna.json').version")
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "tag=v$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Create Git Tag
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -a ${{ steps.get_version.outputs.tag }} -m "Release ${{ steps.get_version.outputs.tag }}"
+          git push origin ${{ steps.get_version.outputs.tag }}
+
+      - name: Extract changelog for release
+        id: changelog
+        run: |
+          VERSION="${{ steps.get_version.outputs.version }}"
+
+          # Extract the section for this version from CHANGELOG.md
+          # Find the line with the version header and extract until the next version header
+          CHANGELOG_SECTION=$(awk "/^## ${VERSION} -/,/^## [0-9]/" CHANGELOG.md | sed '$d')
+
+          # If no section found, use a default message
+          if [ -z "$CHANGELOG_SECTION" ]; then
+            CHANGELOG_SECTION="See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md) for details."
+          fi
+
+          # Create multiline output
+          echo "notes<<EOF" >> $GITHUB_OUTPUT
+          echo "$CHANGELOG_SECTION" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.get_version.outputs.tag }}
+          release_name: Release ${{ steps.get_version.outputs.tag }}
+          body: ${{ steps.changelog.outputs.notes }}
+          draft: false
+          prerelease: false
+

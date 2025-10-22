@@ -7,7 +7,11 @@
   "command": {
     "version": {
       "allowBranch": "version-*",
-      "message": "Increment versions for %v"
+      "message": "Increment versions for %v",
+      "updateInternalDependencies": "patch"
+    },
+    "publish": {
+      "ignoreChanges": ["*.md"]
     }
   },
   "npmClient": "yarn"
