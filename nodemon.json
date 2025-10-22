@@ -1,6 +1,5 @@
 {
   "watch": [
-    "./packages/core-sdk/src",
     "./packages/javascript-sdk/src",
     "./packages/react-sdk/src",
     "./packages/vue-sdk/src",
