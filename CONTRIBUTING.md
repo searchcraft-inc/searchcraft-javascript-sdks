@@ -69,7 +69,7 @@ Once it's filed:
 
 Enhancement suggestions are tracked as [GitHub issues](https://github.com/searchcraft-inc/searchcraft-issues/issues/new/choose).
 
-- Open an [Issue](ttps://github.com/searchcraft-inc/searchcraft-issues/issues/new/choose)
+- Open an [Issue](https://github.com/searchcraft-inc/searchcraft-issues/issues/new/choose)
 - Click `Feature request`
 - Follow the template and feel free to add more details
 
