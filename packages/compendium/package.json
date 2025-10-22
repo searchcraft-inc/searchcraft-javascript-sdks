@@ -1,7 +1,7 @@
 {
   "name": "compendium",
   "private": true,
-  "version": "0.11.1",
+  "version": "0.12.0",
   "type": "module",
   "scripts": {
     "next": "cd next && next dev",
@@ -18,9 +18,9 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^4.0.1",
-    "@searchcraft/javascript-sdk": "^0.11.1",
-    "@searchcraft/react-sdk": "^0.11.1",
-    "@searchcraft/vue-sdk": "^0.11.1",
+    "@searchcraft/javascript-sdk": "^0.12.0",
+    "@searchcraft/react-sdk": "^0.12.0",
+    "@searchcraft/vue-sdk": "^0.12.0",
     "@storybook/addon-backgrounds": "^9.0.8",
     "@storybook/addon-docs": "^9.0.13",
     "@storybook/react": "^9.0.13",
