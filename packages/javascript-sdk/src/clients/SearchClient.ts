@@ -33,9 +33,12 @@ export class SearchClient {
 
   /**
    * Getter for the base url used by the /search endpoint.
+   * Supports both index and federation search endpoints.
    */
   private get baseSearchUrl(): string {
-    return `${this.config.endpointURL}/index/${this.config.indexName}/search`;
+    return this.config.federationName
+      ? `${this.config.endpointURL}/federation/${this.config.federationName}/search`
+      : `${this.config.endpointURL}/index/${this.config.indexName}/search`;
   }
 
   /**

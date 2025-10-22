@@ -1,3 +1,13 @@
+## 0.12.0 - 2025-10-22
+
+- New Feature: Support for Federation search.
+- New Feature: Popover component now supports `placeholderValue` and `placeholderBehavior` props.
+- Bugfix: Vue SDK now inline with React and JavaScript SDKs, was previously utilizing an older set of components and configuration.
+- Bugfix: Conflict with vite template React peer dependency.
+- Bugfix: Pagination and results per page requests no longer re-trigger the generative AI summary.
+- Improvement: Better indication for access keys that don't have AI summaries enabled.
+- General bugfixes and performance improvements.
+
 ## 0.11.1 - 2025-08-20
 
 This release includes bugfixes and performance enhancements.
@@ -233,7 +243,7 @@ Updates public path to use relative path
 
 Adds JSDoc comments for vue components
 
-Adds jsdoc comment for react components 
+Adds jsdoc comment for react components
 
 Updates typedoc publicPaths for core & react
 

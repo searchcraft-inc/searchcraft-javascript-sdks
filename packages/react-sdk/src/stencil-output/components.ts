@@ -21,18 +21,18 @@ import type { EventName, StencilReactComponent } from '@stencil/react-output-tar
 import { createComponent } from '@stencil/react-output-target/runtime';
 import React from 'react';
 
-type SearchcraftFilterPanelEvents = NonNullable<unknown>;
+export type SearchcraftFilterPanelEvents = NonNullable<unknown>;
 
 export const SearchcraftFilterPanel: StencilReactComponent<SearchcraftFilterPanelElement, SearchcraftFilterPanelEvents> = /*@__PURE__*/ createComponent<SearchcraftFilterPanelElement, SearchcraftFilterPanelEvents>({
     tagName: 'searchcraft-filter-panel',
     elementClass: SearchcraftFilterPanelElement,
-    // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
+    // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
     react: React,
     events: {} as SearchcraftFilterPanelEvents,
     defineCustomElement: defineSearchcraftFilterPanel
 });
 
-type SearchcraftInputFormEvents = {
+export type SearchcraftInputFormEvents = {
     onInputFocus: EventName<CustomEvent<void>>,
     onInputBlur: EventName<CustomEvent<void>>,
     onInputInit: EventName<CustomEvent<void>>
@@ -41,7 +41,7 @@ type SearchcraftInputFormEvents = {
 export const SearchcraftInputForm: StencilReactComponent<SearchcraftInputFormElement, SearchcraftInputFormEvents> = /*@__PURE__*/ createComponent<SearchcraftInputFormElement, SearchcraftInputFormEvents>({
     tagName: 'searchcraft-input-form',
     elementClass: SearchcraftInputFormElement,
-    // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
+    // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
     react: React,
     events: {
         onInputFocus: 'inputFocus',
@@ -51,89 +51,89 @@ export const SearchcraftInputForm: StencilReactComponent<SearchcraftInputFormEle
     defineCustomElement: defineSearchcraftInputForm
 });
 
-type SearchcraftPaginationEvents = NonNullable<unknown>;
+export type SearchcraftPaginationEvents = NonNullable<unknown>;
 
 export const SearchcraftPagination: StencilReactComponent<SearchcraftPaginationElement, SearchcraftPaginationEvents> = /*@__PURE__*/ createComponent<SearchcraftPaginationElement, SearchcraftPaginationEvents>({
     tagName: 'searchcraft-pagination',
     elementClass: SearchcraftPaginationElement,
-    // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
+    // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
     react: React,
     events: {} as SearchcraftPaginationEvents,
     defineCustomElement: defineSearchcraftPagination
 });
 
-type SearchcraftPopoverButtonEvents = NonNullable<unknown>;
+export type SearchcraftPopoverButtonEvents = NonNullable<unknown>;
 
 export const SearchcraftPopoverButton: StencilReactComponent<SearchcraftPopoverButtonElement, SearchcraftPopoverButtonEvents> = /*@__PURE__*/ createComponent<SearchcraftPopoverButtonElement, SearchcraftPopoverButtonEvents>({
     tagName: 'searchcraft-popover-button',
     elementClass: SearchcraftPopoverButtonElement,
-    // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
+    // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
     react: React,
     events: {} as SearchcraftPopoverButtonEvents,
     defineCustomElement: defineSearchcraftPopoverButton
 });
 
-type SearchcraftPopoverFormEvents = NonNullable<unknown>;
+export type SearchcraftPopoverFormEvents = NonNullable<unknown>;
 
 export const SearchcraftPopoverForm: StencilReactComponent<SearchcraftPopoverFormElement, SearchcraftPopoverFormEvents> = /*@__PURE__*/ createComponent<SearchcraftPopoverFormElement, SearchcraftPopoverFormEvents>({
     tagName: 'searchcraft-popover-form',
     elementClass: SearchcraftPopoverFormElement,
-    // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
+    // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
     react: React,
     events: {} as SearchcraftPopoverFormEvents,
     defineCustomElement: defineSearchcraftPopoverForm
 });
 
-type SearchcraftResultsInfoEvents = NonNullable<unknown>;
+export type SearchcraftResultsInfoEvents = NonNullable<unknown>;
 
 export const SearchcraftResultsInfo: StencilReactComponent<SearchcraftResultsInfoElement, SearchcraftResultsInfoEvents> = /*@__PURE__*/ createComponent<SearchcraftResultsInfoElement, SearchcraftResultsInfoEvents>({
     tagName: 'searchcraft-results-info',
     elementClass: SearchcraftResultsInfoElement,
-    // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
+    // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
     react: React,
     events: {} as SearchcraftResultsInfoEvents,
     defineCustomElement: defineSearchcraftResultsInfo
 });
 
-type SearchcraftSearchResultsEvents = NonNullable<unknown>;
+export type SearchcraftSearchResultsEvents = NonNullable<unknown>;
 
 export const SearchcraftSearchResults: StencilReactComponent<SearchcraftSearchResultsElement, SearchcraftSearchResultsEvents> = /*@__PURE__*/ createComponent<SearchcraftSearchResultsElement, SearchcraftSearchResultsEvents>({
     tagName: 'searchcraft-search-results',
     elementClass: SearchcraftSearchResultsElement,
-    // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
+    // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
     react: React,
     events: {} as SearchcraftSearchResultsEvents,
     defineCustomElement: defineSearchcraftSearchResults
 });
 
-type SearchcraftSearchResultsPerPageEvents = NonNullable<unknown>;
+export type SearchcraftSearchResultsPerPageEvents = NonNullable<unknown>;
 
 export const SearchcraftSearchResultsPerPage: StencilReactComponent<SearchcraftSearchResultsPerPageElement, SearchcraftSearchResultsPerPageEvents> = /*@__PURE__*/ createComponent<SearchcraftSearchResultsPerPageElement, SearchcraftSearchResultsPerPageEvents>({
     tagName: 'searchcraft-search-results-per-page',
     elementClass: SearchcraftSearchResultsPerPageElement,
-    // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
+    // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
     react: React,
     events: {} as SearchcraftSearchResultsPerPageEvents,
     defineCustomElement: defineSearchcraftSearchResultsPerPage
 });
 
-type SearchcraftSummaryBoxEvents = NonNullable<unknown>;
+export type SearchcraftSummaryBoxEvents = NonNullable<unknown>;
 
 export const SearchcraftSummaryBox: StencilReactComponent<SearchcraftSummaryBoxElement, SearchcraftSummaryBoxEvents> = /*@__PURE__*/ createComponent<SearchcraftSummaryBoxElement, SearchcraftSummaryBoxEvents>({
     tagName: 'searchcraft-summary-box',
     elementClass: SearchcraftSummaryBoxElement,
-    // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
+    // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
     react: React,
     events: {} as SearchcraftSummaryBoxEvents,
     defineCustomElement: defineSearchcraftSummaryBox
 });
 
-type SearchcraftThemeEvents = NonNullable<unknown>;
+export type SearchcraftThemeEvents = NonNullable<unknown>;
 
 export const SearchcraftTheme: StencilReactComponent<SearchcraftThemeElement, SearchcraftThemeEvents> = /*@__PURE__*/ createComponent<SearchcraftThemeElement, SearchcraftThemeEvents>({
     tagName: 'searchcraft-theme',
     elementClass: SearchcraftThemeElement,
-    // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
+    // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
     react: React,
     events: {} as SearchcraftThemeEvents,
     defineCustomElement: defineSearchcraftTheme

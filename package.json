@@ -1,11 +1,11 @@
 {
   "name": "searchcraft-javascript-sdks",
-  "version": "0.1.0",
+  "version": "0.12.0",
   "description": "The monorepo encompassing the SearchCraft SDKs.",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://bitbucket.org/madebychalk/searchcraft-javascript-sdks.git"
+    "url": "https://github.com/searchcraft-inc/searchcraft-javascript-sdks.git"
   },
   "author": "Searchcraft",
   "license": "Apache-2.0",
@@ -32,7 +32,8 @@
   },
   "scripts": {
     "build": "node build.mjs",
-    "bump-version": "yarn lerna version",
+    "create-version": "yarn lerna version && node sync-root-version.mjs",
+    "sync-package-version": "node sync-root-version.mjs",
     "compendium:react": "yarn workspace compendium storybook:react",
     "compendium:vue": "yarn workspace compendium storybook:vue",
     "compendium:next": "cd packages/compendium && yarn next",
@@ -40,14 +41,20 @@
     "test:sdk-react": "yarn workspace @searchcraft/react-sdk test",
     "test:sdk-javascript": "yarn workspace @searchcraft/javascript-sdk test",
     "test:sdk-vue": "yarn workspace @searchcraft/vue-sdk test",
-    "update-changelog": "node update-changelog.mjs"
+    "update-changelog": "node update-changelog.mjs",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "tsc --noEmit --watch",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "format": "biome format --write .",
+    "format:check": "biome format ."
   },
   "bugs": {
-    "url": "https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/issues"
+    "url": "https://github.com/searchcraft-inc/searchcraft-issues"
   },
   "resolutions": {
     "vite": "6.0.11"
   },
-  "homepage": "https://bitbucket.org/madebychalk/searchcraft-javascript-sdks#readme",
+  "homepage": "https://github.com/searchcraft-inc/searchcraft-javascript-sdks",
   "dependencies": {}
 }

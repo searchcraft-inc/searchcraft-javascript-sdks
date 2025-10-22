@@ -17,12 +17,14 @@
  *   --watch         Rebuild on file changes (uses nodemon).
  *   --yalc          Publish built packages to Yalc.
  *   --verbose       Log build output in terminal.
+ *   --wordpress     Build for WordPress (excludes AdMarketplaceClient and NativoClient).
  *
  * Examples:
  *   node build.mjs                      // Build all packages
  *   node build.mjs pkg1 --watch         // Watch and rebuild pkg1
  *   node build.mjs pkg1 --yalc          // Build and publish pkg1 to Yalc
  *   node build.mjs pkg1 --watch --yalc  // Watch, Build, & publish to Yalc
+ *   node build.mjs js --wordpress       // Build JavaScript SDK for WordPress (excludes AdMarketplaceClient and NativoClient)
  *
  * Aliases:
  *   hologram -> @searchcraft/hologram
@@ -36,6 +38,7 @@ const args = process.argv.slice(2);
 const shouldWatch = args.includes('--watch');
 const shouldPublishToYalc = args.includes('--yalc');
 const isVerbose = args.includes('--verbose');
+const isWordPress = args.includes('--wordpress');
 const buildVariant = args.find((arg) => !arg.includes('--'));
 
 const buildVariants = {
@@ -57,6 +60,14 @@ const buildSteps = [
   {
     label: 'javascript-sdk-build',
     action: () => {
+      if (isWordPress) {
+        console.log('  Building for WordPress (will exclude AdMarketplaceClient and NativoClient)...');
+        // Apply WordPress modifications using the filter script
+        execSync('cd packages/javascript-sdk && node wordpress-filter.js', {
+          stdio: isVerbose ? 'inherit' : 'ignore'
+        });
+      }
+
       execSync('yarn workspace @searchcraft/javascript-sdk build', {
         stdio: isVerbose ? 'inherit' : 'ignore',
       });
@@ -76,6 +87,11 @@ const buildSteps = [
       );
       // Invokes the post-build javascript-sdk script
       execSync('cd packages/javascript-sdk && node post-build.js');
+
+      if (isWordPress) {
+        console.log('  Restoring original files...');
+        execSync('git restore packages/javascript-sdk/src/classes/SearchcraftCore.ts packages/javascript-sdk/src/clients/ad-clients/index.ts packages/javascript-sdk/src/clients/ad-clients/AdMarketplaceClient.ts packages/javascript-sdk/src/clients/ad-clients/NativoClient.ts');
+      }
       if (shouldPublishToYalc) {
         execSync('cd ./packages/javascript-sdk && yalc publish && yalc push', {
           stdio: isVerbose ? 'inherit' : 'ignore',
@@ -159,7 +175,7 @@ if (shouldWatch) {
       '--exec',
       `node ${process.argv[1]} ${buildVariant || ''} ${
         shouldPublishToYalc ? '--yalc' : ''
-      }  ${isVerbose ? '--verbose' : ''}`.trim(),
+      } ${isVerbose ? '--verbose' : ''} ${isWordPress ? '--wordpress' : ''}`.trim(),
     ],
     {
       stdio: 'inherit',

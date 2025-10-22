@@ -4,7 +4,7 @@ import {
 } from '@searchcraft/javascript-sdk';
 import { defineCustomElements } from '@searchcraft/javascript-sdk';
 
-import packageJson from '../package.json';
+import { name as packageName, version as packageVersion } from '../package.json';
 
 /**
  * Export all components and plugins for the Vue SDK here.
@@ -22,8 +22,8 @@ export class Searchcraft extends SearchcraftCore {
     super(
       config,
       {
-        sdkName: packageJson.name,
-        sdkVersion: packageJson.version,
+        sdkName: packageName,
+        sdkVersion: packageVersion,
       },
       searchcraftId,
     );

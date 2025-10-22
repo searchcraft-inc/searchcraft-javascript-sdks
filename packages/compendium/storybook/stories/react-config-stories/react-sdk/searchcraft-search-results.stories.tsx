@@ -9,7 +9,8 @@ import {
   type SearchcraftInputFormProps,
 } from '@searchcraft/react-sdk';
 
-import { searchResultTemplateEchostream } from '@common/index.js';
+import { searchResultTemplateEchostream, searchResultTemplateGalaxyNews,
+ } from '@common/index.js';
 
 const componentMeta: Meta = {
   title: 'React SDK/searchcraft-search-results',
@@ -42,6 +43,37 @@ export const Default: StoryObj<
           />
         </div>
         <SearchcraftSearchResults template={searchResultTemplateEchostream} />
+      </>
+    );
+  },
+};
+
+export const FederationSearch: StoryObj<
+  SearchcraftInputFormProps & SearchcraftSearchResultsProps
+> = {
+  decorators: [
+    (Story) => {
+      useEffect(() => {
+        new Searchcraft({
+          readKey: import.meta.env.VITE_READ_KEY_GALAXY_NEWS,
+          endpointURL: import.meta.env.VITE_ENDPOINT_URL_GALAXY_NEWS,
+          federationName: import.meta.env.VITE_FEDERATION_GALAXY_NEWS,
+        });
+      }, []);
+
+      return <Story />;
+    },
+  ],
+  render: (args) => {
+    return (
+      <>
+        <div style={{ marginBottom: 20 }}>
+          <SearchcraftInputForm
+            autoSearch={true}
+            placeholderValue="Search across multiple indices..."
+          />
+        </div>
+        <SearchcraftSearchResults template={searchResultTemplateGalaxyNews} />
       </>
     );
   },
