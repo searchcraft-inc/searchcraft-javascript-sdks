@@ -1,20 +1,20 @@
-import { createStore, type StoreApi } from 'zustand';
+import { type StoreApi, createStore } from 'zustand';
 
 import type {
-  FacetPathsForIndexField,
-  RangeValueForIndexField,
-  SearchClientRequestProperties,
+    FacetPathsForIndexField,
+    RangeValueForIndexField,
+    SearchClientRequestProperties,
 } from '@types';
 
 // import { Logger, LogLevel } from '@classes';
 
-import type {
-  SearchcraftState,
-  SearchcraftStateFunctions,
-  SearchcraftStateValues,
-} from './SearchcraftStore.types';
 import { DEFAULT_CORE_INSTANCE_ID } from '@classes/CoreInstanceRegistry';
 import { SummaryClient } from '@clients/SummaryClient';
+import type {
+    SearchcraftState,
+    SearchcraftStateFunctions,
+    SearchcraftStateValues,
+} from './SearchcraftStore.types';
 
 const initialSearchcraftStateValues: SearchcraftStateValues = {
   adClientResponseItems: [],
@@ -32,6 +32,11 @@ const initialSearchcraftStateValues: SearchcraftStateValues = {
   searchClientRequestProperties: undefined,
   searchClientResponseItems: [],
   cachedSearchClientResponseItems: [],
+  cachedSearchResponseFacetPrime: undefined,
+  cachedSupplementalFacetPrime: undefined,
+  cachedSearchResponseTimeTaken: undefined,
+  cachedSearchResultsCount: undefined,
+  cachedSearchClientRequestProperties: undefined,
   searchResponseTimeTaken: undefined,
   searchResponseFacetPrime: undefined,
   supplementalFacetPrime: undefined,
@@ -70,13 +75,15 @@ const createSearchcraftStore = (
 
   const newStore = createStore<SearchcraftState>((set, get) => {
     const functions: SearchcraftStateFunctions = {
-      addFacetPathsForIndexField: (facetPaths: FacetPathsForIndexField) =>
+      addFacetPathsForIndexField: (facetPaths: FacetPathsForIndexField) => {
         set((state) => ({
           facetPathsForIndexFields: {
             ...state.facetPathsForIndexFields,
             [facetPaths.fieldName]: facetPaths,
           },
-        })),
+          searchResultsPage: 1, // Reset to page 1 when filters change
+        }));
+      },
       addRangeValueForIndexField: (rangeValue: RangeValueForIndexField) =>
         set((state) => ({
           rangeValueForIndexFields: {
@@ -84,7 +91,12 @@ const createSearchcraftStore = (
             [rangeValue.fieldName]: rangeValue,
           },
         })),
-      removeFacetPathsForIndexField: (fieldName: string) =>
+      removeFacetPathsForIndexField: (fieldName: string) => {
+        console.log('[FACET] removeFacetPathsForIndexField', {
+          fieldName,
+          currentPage: get().searchResultsPage,
+          stackTrace: new Error().stack,
+        });
         set((state) => {
           const currentPaths = state.facetPathsForIndexFields;
           delete currentPaths[fieldName];
@@ -92,8 +104,10 @@ const createSearchcraftStore = (
             facetPathsForIndexFields: {
               ...currentPaths,
             },
+            searchResultsPage: 1, // Reset to page 1 when filters change
           };
-        }),
+        });
+      },
       removeRangeValueForIndexField: (fieldName: string) =>
         set((state) => {
           const currentValues = state.rangeValueForIndexFields;
@@ -125,14 +139,104 @@ const createSearchcraftStore = (
           state.summaryClient?.streamSummaryData();
         }
 
+        // Check if this is an initialQuery case (string requestProperties with empty searchTerm)
+        const isInitialQuery =
+          typeof state.cachedSearchClientRequestProperties === 'string' &&
+          state.searchTerm.trim() === '';
+
+        // Check if there are any active filters or pagination changes
+        const hasActiveFilters =
+          Object.keys(state.facetPathsForIndexFields).length > 0 ||
+          Object.keys(state.rangeValueForIndexFields).length > 0;
+        const hasNonDefaultPagination = state.searchResultsPage !== 1;
+        const hasNonDefaultSearchMode = state.searchMode !== 'fuzzy';
+
         if (!state.searchTerm.trim()) {
+          // If it's initialQuery and there are filters, pagination, or mode changes, perform a search
+          if (
+            isInitialQuery &&
+            (hasActiveFilters ||
+              hasNonDefaultPagination ||
+              hasNonDefaultSearchMode)
+          ) {
+            // Parse the initialQuery
+            const initialQueryObj = JSON.parse(
+              state.cachedSearchClientRequestProperties as string,
+            );
+
+            set({ isSearchInProgress: true });
+
+            // Build the modified query array starting with the base query
+            const baseQuery = Array.isArray(initialQueryObj.query)
+              ? initialQueryObj.query.filter((q: any) => !q.occur)
+              : [initialQueryObj.query];
+
+            const queries = [...baseQuery];
+
+            // Add facet filters
+            if (state.facetPathsForIndexFields) {
+              Object.keys(state.facetPathsForIndexFields).forEach(
+                (fieldName) => {
+                  const item = state.facetPathsForIndexFields?.[fieldName];
+                  if (item) {
+                    queries.push({
+                      occur: 'must',
+                      exact: {
+                        ctx: item.value,
+                      },
+                    });
+                  }
+                },
+              );
+            }
+
+            // Add range filters
+            if (state.rangeValueForIndexFields) {
+              Object.keys(state.rangeValueForIndexFields).forEach(
+                (fieldName) => {
+                  const item = state.rangeValueForIndexFields?.[fieldName];
+                  if (item) {
+                    queries.push({
+                      occur: 'must',
+                      exact: {
+                        ctx: item.value,
+                      },
+                    });
+                  }
+                },
+              );
+            }
+
+            // Build the modified request with filters and pagination
+            const modifiedRequest = {
+              ...initialQueryObj,
+              query: queries,
+              offset: state.searchResultsPerPage
+                ? state.searchResultsPerPage * (state.searchResultsPage - 1)
+                : 0,
+              limit: state.searchResultsPerPage,
+            };
+
+            state.core.getResponseItems({
+              requestProperties: JSON.stringify(modifiedRequest),
+              shouldCacheResultsForEmptyState: false,
+            });
+            return;
+          }
+
+          // Otherwise, restore cached results
           state.core?.searchClient?.abortRequests();
           set({
             searchClientResponseItems: [
               ...state.cachedSearchClientResponseItems,
             ],
             adClientResponseItems: [...state.cachedAdClientResponseItems],
-            searchResultsCount: 0,
+            searchResponseFacetPrime: state.cachedSearchResponseFacetPrime,
+            supplementalFacetPrime: state.cachedSupplementalFacetPrime,
+            searchResponseTimeTaken: state.cachedSearchResponseTimeTaken,
+            searchResultsCount: state.cachedSearchResultsCount || 0,
+            searchClientRequestProperties:
+              state.cachedSearchClientRequestProperties,
             searchResultsPage: 1,
             searchTerm: '',
           });
@@ -186,6 +290,12 @@ const createSearchcraftStore = (
               ...state.cachedSearchClientResponseItems,
             ],
             adClientResponseItems: [...state.cachedAdClientResponseItems],
+            searchResponseFacetPrime: state.cachedSearchResponseFacetPrime,
+            supplementalFacetPrime: state.cachedSupplementalFacetPrime,
+            searchResponseTimeTaken: state.cachedSearchResponseTimeTaken,
+            searchResultsCount: state.cachedSearchResultsCount || 0,
+            searchClientRequestProperties:
+              state.cachedSearchClientRequestProperties,
           }),
         });
       },

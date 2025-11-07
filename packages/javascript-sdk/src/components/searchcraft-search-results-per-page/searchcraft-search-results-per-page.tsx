@@ -1,6 +1,6 @@
 import type { SearchcraftCore } from '@classes';
 import { registry } from '@classes/CoreInstanceRegistry';
-import { Component, h, State, Prop } from '@stencil/core';
+import { Component, Prop, State, h } from '@stencil/core';
 
 /**
  * This web component is designed to choose the number of search results displayed.
@@ -52,6 +52,7 @@ export class SearchcraftSearchResultsPerPage {
   @State() searchResultsPerPage;
   @State() searchResultsCount;
   @State() searchResultsPagesCount;
+  @State() searchClientRequestProperties;
 
   // local vars
   @State() initialSearchResultsPerPage;
@@ -70,6 +71,7 @@ export class SearchcraftSearchResultsPerPage {
       this.searchResultsPerPage = state.searchResultsPerPage;
       this.searchResultsPage = state.searchResultsPage;
       this.searchResultsCount = state.searchResultsCount;
+      this.searchClientRequestProperties = state.searchClientRequestProperties;
 
       // local vars
       this.searchResultsPagesCount = Math.ceil(
@@ -98,8 +100,13 @@ export class SearchcraftSearchResultsPerPage {
   }
 
   render() {
-    // early return if there isn't a searchTerm or there is 1 or fewer pages of results
-    if (!this.searchTerm || this.searchResultsPagesCount <= 1) {
+    // Check if this is an initialQuery case (string requestProperties with empty searchTerm)
+    const isInitialQuery =
+      typeof this.searchClientRequestProperties === 'string' &&
+      this.searchTerm.trim() === '';
+
+    // early return if there isn't a searchTerm (unless it's initialQuery) or there is 1 or fewer pages of results
+    if ((!this.searchTerm && !isInitialQuery) || this.searchResultsPagesCount <= 1) {
       return;
     }
 
