@@ -1,15 +1,19 @@
-import { useEffect } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
+import { useEffect } from 'react';
 
 import {
-  Searchcraft,
-  type SearchcraftConfig,
   type Components,
+  type DateRangeFilterItem,
+  type ExactMatchToggleFilterItem,
+  type FacetsFilterItem,
+  type MostRecentToggleFilterItem,
+  Searchcraft,
+  type SearchcraftConfig
 } from '@searchcraft/javascript-sdk';
 
 import {
-  customAdTemplate,
   admAdTemplate,
+  customAdTemplate,
   searchResultTemplateEchostream,
   searchResultTemplateGalaxyNews,
 } from '@common/index.js';
@@ -17,6 +21,45 @@ import {
 const componentMeta: Meta = {
   title: 'Javascript SDK/searchcraft-search-results',
   argTypes: {},
+};
+
+const now = new Date();
+
+const exactMatchItem: ExactMatchToggleFilterItem = {
+  type: 'exactMatchToggle',
+  label: 'Exact Match',
+  options: {
+    subLabel: 'Specify to use exact matching or fuzzy matching.',
+  },
+};
+
+const mostRecentItem: MostRecentToggleFilterItem = {
+  fieldName: 'date_published',
+  type: 'mostRecentToggle',
+  label: 'Most Recent',
+  options: {
+    subLabel: 'Choose whether to sort by most recent.',
+  },
+};
+
+const dateRangeItemYears: DateRangeFilterItem = {
+  type: 'dateRange',
+  fieldName: 'date_published',
+  label: 'Date range example',
+  options: {
+    minDate: new Date(now.getFullYear() - 10, 1, 1),
+    maxDate: now,
+    granularity: 'year',
+  },
+};
+
+const facetItem: FacetsFilterItem = {
+  type: 'facets',
+  fieldName: 'section',
+  label: 'Filters',
+  options: {
+    showSublevel: true,
+  },
 };
 
 export const Default: StoryObj<Components.SearchcraftSearchResults> = {
@@ -273,6 +316,73 @@ export const FederationSearch: StoryObj<Components.SearchcraftSearchResults> = {
           <searchcraft-input-form />
         </div>
         <searchcraft-search-results />
+      </>
+    );
+  },
+  args: {},
+};
+
+export const WithFilterPanelInitialQueryPagination: StoryObj<
+  Components.SearchcraftSearchResults
+> = {
+  decorators: [
+    (Story) => {
+      useEffect(() => {
+        new Searchcraft({
+          readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
+          endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
+          indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
+          initialQuery: JSON.stringify({
+            query: {
+              occur: 'must',
+              fuzzy: {
+                ctx: 'steak',
+              },
+            },
+          }),
+        });
+
+        const filterPanel = document.querySelector('searchcraft-filter-panel');
+        if (filterPanel) {
+          filterPanel.items = [
+            exactMatchItem,
+            mostRecentItem,
+            dateRangeItemYears,
+            facetItem,
+          ];
+        }
+
+        const searchResults = document.querySelector(
+          'searchcraft-search-results',
+        );
+        if (searchResults) {
+          searchResults.template = searchResultTemplateEchostream;
+        }
+      }, []);
+
+      return <Story />;
+    },
+  ],
+  render: () => {
+    return (
+      <>
+        <div style={{ marginBottom: 20 }}>
+          <searchcraft-input-form />
+        </div>
+        <div style={{ marginBottom: 20 }}>
+          <searchcraft-results-info />
+        </div>
+        <div style={{ display: 'flex', gap: 20 }}>
+          <div style={{ flex: '0 0 300px' }}>
+            <searchcraft-filter-panel />
+          </div>
+          <div style={{ flex: 1 }}>
+            <searchcraft-search-results />
+            <div style={{ marginTop: 20 }}>
+              <searchcraft-pagination />
+            </div>
+          </div>
+        </div>
       </>
     );
   },
