@@ -12,21 +12,21 @@ import {
 
 import type {
   AdClientResponseItem,
-  SearchClientResponseItem,
-  SearchcraftConfig,
-  SearchcraftSDKInfo,
-  SubscriptionEventName,
-  SubscriptionEventCallback,
-  SearchIndexHit,
-  SubscriptionEventMap,
-  UnsubscribeFunction,
   SearchClientRequestProperties,
+  SearchClientResponseItem,
+  SearchIndexHit,
+  SearchcraftConfig,
   SearchcraftResponse,
+  SearchcraftSDKInfo,
+  SubscriptionEventCallback,
+  SubscriptionEventMap,
+  SubscriptionEventName,
+  UnsubscribeFunction,
 } from '@types';
 
+import { type SearchcraftStore, createSearchcraftStore } from '@store';
 import { removeTrailingSlashFromURL } from '@utils/core-utils';
 import { registry } from './CoreInstanceRegistry';
-import { createSearchcraftStore, type SearchcraftStore } from '@store';
 import { Logger } from './Logger';
 
 /**
@@ -278,6 +278,35 @@ export class SearchcraftCore {
               return;
             }
           }
+        } else if (typeof props.requestProperties === 'string') {
+          // Handle supplemental search for initialQuery with filters
+          const requestObj = JSON.parse(props.requestProperties);
+          // Check if there are any filter queries (queries beyond the base query)
+          const queryArray = Array.isArray(requestObj.query)
+            ? requestObj.query
+            : [requestObj.query];
+
+          if (queryArray.length > 1) {
+            // Remove filter queries to get base query for supplemental search
+            const baseQuery = queryArray.filter(
+              (q: { occur?: string }) => q.occur !== 'must',
+            );
+            const supplementalRequest = {
+              ...requestObj,
+              query: baseQuery.length > 0 ? baseQuery : queryArray.slice(0, 1),
+            };
+
+            try {
+              supplementalResponse =
+                await this?.searchClient?.getSearchResponseItems(
+                  JSON.stringify(supplementalRequest),
+                  true,
+                );
+            } catch (error) {
+              Logger.info(`Search request error: ${error}`);
+              return;
+            }
+          }
         }
 
         this.store.setState({
@@ -290,6 +319,11 @@ export class SearchcraftCore {
           searchClientRequestProperties: props.requestProperties,
           ...(props.shouldCacheResultsForEmptyState && {
             cachedSearchClientResponseItems: items,
+            cachedSearchResponseFacetPrime: response.data.facets,
+            cachedSupplementalFacetPrime: supplementalResponse?.data.facets,
+            cachedSearchResponseTimeTaken: response.data.time_taken,
+            cachedSearchResultsCount: response.data.count,
+            cachedSearchClientRequestProperties: props.requestProperties,
           }),
         });
       })();
