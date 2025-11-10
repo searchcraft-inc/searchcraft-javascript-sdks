@@ -1,3 +1,8 @@
+## 0.12.1 - 2025-11-10
+
+- New Feature: Added support for `value` prop on `searchcraft-input-form` component.
+- Bugfix: Results info, pagination and filter panel components now properly respond to search requests made by `initialQuery`.
+
 ## 0.12.0 - 2025-10-22
 
 - New Feature: Support for Federation search.

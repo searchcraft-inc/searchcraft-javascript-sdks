@@ -2,7 +2,7 @@
   "name": "@searchcraft/react-sdk",
   "private": false,
   "author": "Searchcraft Inc.",
-  "version": "0.12.0",
+  "version": "0.12.1",
   "description": "Searchcraft React SDK.",
   "type": "module",
   "license": "Apache-2.0",
@@ -43,7 +43,7 @@
     "./themes/*.css": "./dist/client/themes/*.css"
   },
   "dependencies": {
-    "@searchcraft/javascript-sdk": "^0.12.0",
+    "@searchcraft/javascript-sdk": "^0.12.1",
     "classnames": "^2.3.2"
   },
   "peerDependencies": {
