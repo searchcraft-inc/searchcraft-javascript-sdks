@@ -1,17 +1,17 @@
 import {
   Component,
-  h,
-  Prop,
-  State,
   Event,
   type EventEmitter,
+  Prop,
+  State,
   Watch,
+  h,
 } from '@stencil/core';
 import classNames from 'classnames';
 
 import type { SearchcraftCore } from '@classes';
-import type { SearchcraftState } from '@store';
 import { registry } from '@classes/CoreInstanceRegistry';
+import type { SearchcraftState } from '@store';
 
 /**
  * This web component provides a user-friendly interface for querying an indexed dataset, enabling users to easily search large collections of data.
@@ -78,6 +78,10 @@ export class SearchcraftInputForm {
    */
   @Prop() placeholderBehavior?: 'hide-on-focus' | 'hide-on-text-entered';
   /**
+   * The value to display in the input field.
+   */
+  @Prop() value?: string;
+  /**
    * When the input becomes focused.
    */
   @Event() inputFocus?: EventEmitter<void>;
@@ -100,6 +104,15 @@ export class SearchcraftInputForm {
 
   init() {
     if (this.core) {
+      // Initialize inputValue from prop if provided
+      if (this.value !== undefined && this.value.trim().length > 0) {
+        this.inputValue = this.value;
+        this.core.store.getState().setSearchTerm(this.value);
+        // Trigger search if autoSearch is enabled
+        if (this.autoSearch) {
+          this.core.store.getState().search();
+        }
+      }
       this.inputInit?.emit();
     }
   }
@@ -109,12 +122,28 @@ export class SearchcraftInputForm {
     this.init();
   }
 
+  @Watch('value')
+  onValueChange(newValue: string | undefined) {
+    if (newValue !== undefined && newValue !== this.inputValue) {
+      this.inputValue = newValue;
+      this.core?.store.getState().setSearchTerm(newValue);
+      // Trigger search if autoSearch is enabled and value is not empty
+      if (this.autoSearch && newValue.trim().length > 0) {
+        this.core?.store.getState().search();
+      }
+    }
+  }
+
   onCoreAvailable(core: SearchcraftCore) {
     this.core = core;
     this.init();
     this.unsubscribe = core.store.subscribe((state: SearchcraftState) => {
       this.searchTerm = state.searchTerm;
-      this.inputValue = state.searchTerm;
+      // Only update inputValue from store if value prop is not set
+      // OR if the store was cleared (empty string)
+      if (this.value === undefined || state.searchTerm === '') {
+        this.inputValue = state.searchTerm;
+      }
     });
   }
 
@@ -153,6 +182,8 @@ export class SearchcraftInputForm {
   };
 
   handleClearInput = () => {
+    // Clear the input value even if controlled by prop
+    this.inputValue = '';
     this.core?.store.getState().resetSearchValues();
     this.error = false;
   };

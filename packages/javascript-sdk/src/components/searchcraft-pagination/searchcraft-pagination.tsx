@@ -1,6 +1,6 @@
 import type { SearchcraftCore } from '@classes';
 import { registry } from '@classes/CoreInstanceRegistry';
-import { Component, h, Prop, State } from '@stencil/core';
+import { Component, Prop, State, h } from '@stencil/core';
 import classNames from 'classnames';
 
 /**
@@ -45,6 +45,7 @@ export class SearchcraftPagination {
   @State() searchResultsPerPage;
   @State() searchResultsPage;
   @State() searchResultsCount;
+  @State() searchClientRequestProperties;
 
   // local vars
   @State() searchResultsPagesCount = 1;
@@ -64,6 +65,7 @@ export class SearchcraftPagination {
       this.searchResultsPerPage = state.searchResultsPerPage;
       this.searchResultsPage = state.searchResultsPage;
       this.searchResultsCount = state.searchResultsCount;
+      this.searchClientRequestProperties = state.searchClientRequestProperties;
 
       // local vars
       this.searchResultsPagesCount = Math.ceil(
@@ -192,8 +194,13 @@ export class SearchcraftPagination {
   }
 
   render() {
-    // early return if there isn't a searchTerm or there is 1 or fewer pages of results
-    if (!this.searchTerm || this.searchResultsPagesCount <= 1) {
+    // Check if this is an initialQuery case (string requestProperties with empty searchTerm)
+    const isInitialQuery =
+      typeof this.searchClientRequestProperties === 'string' &&
+      this.searchTerm.trim() === '';
+
+    // early return if there isn't a searchTerm (unless it's initialQuery) or there is 1 or fewer pages of results
+    if ((!this.searchTerm && !isInitialQuery) || this.searchResultsPagesCount <= 1) {
       return;
     }
 

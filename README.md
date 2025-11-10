@@ -3,10 +3,14 @@
 <p align="center">
 This project is a monorepo containing framework-specific javascript SDKs for use in front-end consuming applications of <a href="https://searchcraft.io">Searchcraft</a>, the developer-first vertical search engine.
 </p>
+<p align="center">
+To use these SDKs, you either install the <a href="https://www.npmjs.com/package/@searchcraft/javascript-sdk">JS</a>, <a href="https://www.npmjs.com/package/@searchcraft/react-sdk">React</a> or <a href="https://www.npmjs.com/package/@searchcraft/vue-sdk">Vue</a> SDK via NPM. Svelte and SolidJS developers may use the JS SDK web components.
+</p>
 
-## Table of Contents
 
-- [Table of Contents](#table-of-contents)
+## Development Documentation
+
+- [Development Documentation](#development-documentation)
 - [Technologies](#technologies)
 - [Tooling](#tooling)
 - [Local Development](#local-development)
