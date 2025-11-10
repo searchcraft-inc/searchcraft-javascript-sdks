@@ -25,8 +25,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.org/madebychalk/searchcraft-javascript-sdks/"
+    "url": "https://github.com/searchcraft-inc/searchcraft-javascript-sdks"
   },
+  "homepage": "https://github.com/searchcraft-inc/searchcraft-javascript-sdks#readme",
   "files": [
     "dist/"
   ],
