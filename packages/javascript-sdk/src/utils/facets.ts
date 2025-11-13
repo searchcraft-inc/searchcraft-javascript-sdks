@@ -1,8 +1,8 @@
 import type {
-  Facet,
-  FacetTree,
-  FacetWithChildrenArray,
-  FacetWithChildrenObject,
+    Facet,
+    FacetTree,
+    FacetWithChildrenArray,
+    FacetWithChildrenObject,
 } from '@types';
 
 /**
@@ -110,9 +110,11 @@ export const mergeFacetTrees = (
  * It uses the `path` of each Facet to build the tree.
  *
  * @param facetWithChildArray
+ * @param exclude - Optional array of facet values to exclude from the tree
  */
 export const facetWithChildrenArrayToCompleteFacetTree = (
   rootArray: FacetWithChildrenArray,
+  exclude?: string[],
 ): FacetTree => {
   // 1) Start with an empty tree at root "/"
   const tree: FacetTree = {
@@ -138,6 +140,15 @@ export const facetWithChildrenArrayToCompleteFacetTree = (
   // 3) Insert each flat node into our tree, creating missing ancestors
   for (const { path, count } of allFacets) {
     const segments = path.split('/').filter(Boolean); // "/sports/outdoors" -> ["sports","outdoors"]
+
+    // Skip this facet if any of its segments match an excluded value
+    if (exclude && exclude.length > 0) {
+      const shouldExclude = segments.some(segment => exclude.includes(segment));
+      if (shouldExclude) {
+        continue;
+      }
+    }
+
     let cursor: FacetWithChildrenObject = tree; // start at the root
     for (const segment of segments) {
       // Build the full path of this level

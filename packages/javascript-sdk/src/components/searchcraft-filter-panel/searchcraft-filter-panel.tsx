@@ -229,6 +229,7 @@ export class SearchcraftFilterPanel {
                   </p>
                   <searchcraft-facet-list
                     fieldName={item.fieldName}
+                    exclude={item.options.exclude}
                     onFacetSelectionUpdated={(event) => {
                       this.handleFacetSelectionUpdated(
                         item.fieldName,
