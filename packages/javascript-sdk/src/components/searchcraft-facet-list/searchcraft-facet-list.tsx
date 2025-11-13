@@ -11,6 +11,7 @@ import type {
   FacetRoot,
   FacetWithChildrenArray,
   FacetWithChildrenObject,
+  SearchClientQuery,
 } from '@types';
 
 import type { SearchcraftCore } from '@classes';
@@ -68,6 +69,10 @@ export class SearchcraftFacetList {
    * The name of the field where facets are applied.
    */
   @Prop() fieldName = '';
+  /**
+   * Array of facet values to exclude from rendering.
+   */
+  @Prop() exclude?: string[];
 
   /**
    * Emitted when the facets are updated.
@@ -135,11 +140,14 @@ export class SearchcraftFacetList {
         (facet) => this.fieldName === Object.keys(facet)[0],
       );
     const incomingFacetsWithChildrenArray = incomingFacetRoot?.[this.fieldName];
-    const incomingFacetTree = facetWithChildrenArrayToCompleteFacetTree({
-      path: '/',
-      count: 0,
-      children: incomingFacetsWithChildrenArray || [],
-    });
+    const incomingFacetTree = facetWithChildrenArrayToCompleteFacetTree(
+      {
+        path: '/',
+        count: 0,
+        children: incomingFacetsWithChildrenArray || [],
+      },
+      this.exclude,
+    );
 
     // Determine what action to take to accumulate items into the `facetTreeCollectedFromSearchResponse`.
     // This facet tree gets accumulated in different ways depending on what action type occured.
@@ -165,11 +173,14 @@ export class SearchcraftFacetList {
           const supplementalFacetsWithChildrenArray =
             supplementalFacetRoot?.[this.fieldName];
           const supplementalFacetTree =
-            facetWithChildrenArrayToCompleteFacetTree({
-              path: '/',
-              count: 0,
-              children: supplementalFacetsWithChildrenArray || [],
-            });
+            facetWithChildrenArrayToCompleteFacetTree(
+              {
+                path: '/',
+                count: 0,
+                children: supplementalFacetsWithChildrenArray || [],
+              },
+              this.exclude,
+            );
 
           this.facetTreeCollectedFromSearchResponse = mergeFacetTrees(
             supplementalFacetTree,
@@ -225,7 +236,7 @@ export class SearchcraftFacetList {
       }
     }
     this.facetTreeFromFacetPathsNotInSearchResponse =
-      facetWithChildrenArrayToCompleteFacetTree(collectedFacetArray);
+      facetWithChildrenArrayToCompleteFacetTree(collectedFacetArray, this.exclude);
 
     // Merges facetTreeCollectedFromSearchResponse with selectedFacetPathsNotInCurrentFacetTree.
     // This results in a single, final facet tree that gets rendered in as Checkboxes
@@ -302,7 +313,7 @@ export class SearchcraftFacetList {
           : [requestObj.query];
 
         // Extract filter queries (those with occur: 'must')
-        const filterQueries = queryArray.filter((q: any) => q.occur === 'must');
+        const filterQueries = queryArray.filter((q: SearchClientQuery) => q.occur === 'must');
         const currentFilters = JSON.stringify(filterQueries);
 
         // Determine the action type based on what changed
