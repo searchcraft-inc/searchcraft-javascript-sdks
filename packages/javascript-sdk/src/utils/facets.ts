@@ -110,9 +110,14 @@ export const mergeFacetTrees = (
  * It uses the `path` of each Facet to build the tree.
  *
  * @param facetWithChildArray
+ * @param exclude - Optional array of facet values or paths to exclude from the tree.
+ *                  - Values starting with "/" are treated as full paths and exclude the path and all children
+ *                    (e.g., "/news" excludes "/news", "/news/local", "/news/national", etc.)
+ *                  - Values without "/" are treated as segment names (e.g., "local" excludes all paths containing "local")
  */
 export const facetWithChildrenArrayToCompleteFacetTree = (
   rootArray: FacetWithChildrenArray,
+  exclude?: string[],
 ): FacetTree => {
   // 1) Start with an empty tree at root "/"
   const tree: FacetTree = {
@@ -138,6 +143,32 @@ export const facetWithChildrenArrayToCompleteFacetTree = (
   // 3) Insert each flat node into our tree, creating missing ancestors
   for (const { path, count } of allFacets) {
     const segments = path.split('/').filter(Boolean); // "/sports/outdoors" -> ["sports","outdoors"]
+
+    // Skip this facet if it matches any excluded value
+    if (exclude && exclude.length > 0) {
+      let shouldExclude = false;
+
+      for (const excludeValue of exclude) {
+        if (excludeValue.startsWith('/')) {
+          // Full path exclusion: prefix match (excludes the path and all children)
+          if (path === excludeValue || path.startsWith(`${excludeValue}/`)) {
+            shouldExclude = true;
+            break;
+          }
+        } else {
+          // Segment exclusion: check if any segment matches
+          if (segments.includes(excludeValue)) {
+            shouldExclude = true;
+            break;
+          }
+        }
+      }
+
+      if (shouldExclude) {
+        continue;
+      }
+    }
+
     let cursor: FacetWithChildrenObject = tree; // start at the root
     for (const segment of segments) {
       // Build the full path of this level

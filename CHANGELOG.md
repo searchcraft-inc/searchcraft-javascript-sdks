@@ -1,3 +1,7 @@
+## 0.12.2 - 2025-11-13
+
+- New Feature: Added support for `exclude` prop on `searchcraft-filter-panel` `FacetsFilterItem` item type. This allows hiding of facets that match a particular value without the need for updating the data in the index.
+
 ## 0.12.1 - 2025-11-10
 
 - New Feature: Added support for `value` prop on `searchcraft-input-form` component.
