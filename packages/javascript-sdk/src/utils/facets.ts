@@ -1,8 +1,8 @@
 import type {
-    Facet,
-    FacetTree,
-    FacetWithChildrenArray,
-    FacetWithChildrenObject,
+  Facet,
+  FacetTree,
+  FacetWithChildrenArray,
+  FacetWithChildrenObject,
 } from '@types';
 
 /**
@@ -110,7 +110,10 @@ export const mergeFacetTrees = (
  * It uses the `path` of each Facet to build the tree.
  *
  * @param facetWithChildArray
- * @param exclude - Optional array of facet values to exclude from the tree
+ * @param exclude - Optional array of facet values or paths to exclude from the tree.
+ *                  - Values starting with "/" are treated as full paths and exclude the path and all children
+ *                    (e.g., "/news" excludes "/news", "/news/local", "/news/national", etc.)
+ *                  - Values without "/" are treated as segment names (e.g., "local" excludes all paths containing "local")
  */
 export const facetWithChildrenArrayToCompleteFacetTree = (
   rootArray: FacetWithChildrenArray,
@@ -141,9 +144,26 @@ export const facetWithChildrenArrayToCompleteFacetTree = (
   for (const { path, count } of allFacets) {
     const segments = path.split('/').filter(Boolean); // "/sports/outdoors" -> ["sports","outdoors"]
 
-    // Skip this facet if any of its segments match an excluded value
+    // Skip this facet if it matches any excluded value
     if (exclude && exclude.length > 0) {
-      const shouldExclude = segments.some(segment => exclude.includes(segment));
+      let shouldExclude = false;
+
+      for (const excludeValue of exclude) {
+        if (excludeValue.startsWith('/')) {
+          // Full path exclusion: prefix match (excludes the path and all children)
+          if (path === excludeValue || path.startsWith(`${excludeValue}/`)) {
+            shouldExclude = true;
+            break;
+          }
+        } else {
+          // Segment exclusion: check if any segment matches
+          if (segments.includes(excludeValue)) {
+            shouldExclude = true;
+            break;
+          }
+        }
+      }
+
       if (shouldExclude) {
         continue;
       }
