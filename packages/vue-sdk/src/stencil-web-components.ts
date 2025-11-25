@@ -10,7 +10,9 @@ import type { JSX } from '@searchcraft/javascript-sdk';
 
 export const SearchcraftFilterPanel = /*@__PURE__*/ defineContainer<JSX.SearchcraftFilterPanel>('searchcraft-filter-panel', () => {}, [
   'searchcraftId',
-  'items'
+  'items',
+  'responsiveBreakpoint',
+  'responsiveBehavior'
 ]);
 
 

@@ -23,6 +23,7 @@ const initialSearchcraftStateValues: SearchcraftStateValues = {
   hotkey: 'k',
   hotkeyModifier: 'meta',
   facetPathsForIndexFields: {},
+  isFilterPanelVisible: true,
   isPopoverVisible: false,
   isSearchInProgress: false,
   rangeValueForIndexFields: {},
@@ -263,6 +264,10 @@ const createSearchcraftStore = (
           shouldCacheResultsForEmptyState: false,
         });
       },
+      setFilterPanelVisibility: (isVisible) =>
+        set({
+          isFilterPanelVisible: isVisible,
+        }),
       setPopoverVisibility: (isVisible) =>
         set({
           isPopoverVisible: isVisible,
