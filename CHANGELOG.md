@@ -1,3 +1,7 @@
+## 0.13.0 - 2025-11-25
+
+- New Feature: On mobile layouts, the `searchcraft-filter-panel` component can collapse via new `responsiveBehavior` prop and make the display controllable via `data-toggle-filter-panel` data attribute that can be added to any element. Also adds configurable breakpoint support via `responsiveBreakpoint`.
+
 ## 0.12.2 - 2025-11-13
 
 - New Feature: Added support for `exclude` prop on `searchcraft-filter-panel` `FacetsFilterItem` item type. This allows hiding of facets that match a particular value without the need for updating the data in the index.
