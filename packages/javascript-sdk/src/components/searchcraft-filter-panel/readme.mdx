@@ -56,5 +56,7 @@ if (filterPanel) {
 | Property | Attribute | Description | Type | Default |
 | -------- | --------- | ----------- | ---- | ------- |
 | `items` | -- | The items to filter. | `FilterItem[]` | `[]` |
+| `responsiveBehavior` | `responsive-behavior` | Controls whether the filter panel automatically hides/shows based on window size. - 'auto': Automatically hide/show based on window width - 'manual': User controls visibility manually | `"auto" \| "manual" \| undefined` | `'auto'` |
+| `responsiveBreakpoint` | `responsive-breakpoint` | The breakpoint (in pixels) below which the filter panel will be hidden. Defaults to 768px (--sc-breakpoint-md). | `number \| undefined` | `768` |
 | `searchcraftId` | `searchcraft-id` | The id of the Searchcraft instance that this component should use. | `string \| undefined` | `undefined` |
 

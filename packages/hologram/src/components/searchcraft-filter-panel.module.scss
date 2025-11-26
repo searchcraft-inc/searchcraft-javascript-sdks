@@ -1,4 +1,5 @@
 @use "../typography.scss";
+@use "../breakpoints.scss";
 
 .searchcraft-filter-panel {
   display: flex;
@@ -15,4 +16,44 @@
 .searchcraft-filter-panel-label {
   @include typography.body-small();
   font-weight: var(--sc-font-bold);
+}
+
+// Styles for elements with data-toggle-filter-panel attribute
+[data-toggle-filter-panel] {
+  // Only show chevron and make clickable on mobile
+  @media (max-width: breakpoints.$breakpoint-md - 1px) {
+    cursor: pointer;
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    &::after {
+      content: '›';
+      display: inline-block;
+      font-size: 1.5em;
+      line-height: 1;
+      margin-left: auto;
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+      transform-origin: center;
+    }
+
+    &[data-filter-panel-collapsed]::after {
+      transform: rotate(90deg);
+    }
+
+    &[data-filter-panel-expanded]::after {
+      transform: rotate(-90deg);
+    }
+  }
+
+  // On desktop, remove pointer cursor
+  @media (min-width: breakpoints.$breakpoint-md) {
+    cursor: default;
+
+    &::after {
+      display: none;
+    }
+  }
 }
