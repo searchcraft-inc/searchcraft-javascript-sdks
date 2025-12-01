@@ -1,12 +1,12 @@
-import { nanoid } from 'nanoid';
 import type { SearchcraftCore } from '@classes';
+import { nanoid } from 'nanoid';
 
 import type {
   SearchClientQuery,
+  SearchClientRequest,
+  SearchClientRequestProperties,
   SearchcraftConfig,
   SearchcraftResponse,
-  SearchClientRequestProperties,
-  SearchClientRequest,
 } from '@types';
 
 import { sanitize } from '@utils/core-utils';
@@ -182,6 +182,7 @@ export class SearchClient {
         'Content-Type': 'application/json',
         'X-Sc-User-Id': this.userId,
         'X-Sc-Session-Id': this.parent.measureClient?.sessionId || nanoid(),
+        'X-Sc-User-Type': this.parent.userType,
       },
       body: JSON.stringify(searchClientRequest),
       signal: abortController.signal,
@@ -221,6 +222,7 @@ export class SearchClient {
         'Content-Type': 'application/json',
         'X-Sc-User-Id': this.userId,
         'X-Sc-Session-Id': this.parent.measureClient?.sessionId || nanoid(),
+        'X-Sc-User-Type': this.parent.userType,
       },
       body: JSON.stringify(searchClientRequest),
       signal: abortController.signal,

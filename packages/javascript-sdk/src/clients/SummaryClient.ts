@@ -55,6 +55,9 @@ export class SummaryClient {
           headers: {
             'Content-Type': 'application/json',
             Authorization: state.core?.config.readKey || '',
+            'X-Sc-User-Id': state.core?.userId || '',
+            'X-Sc-Session-Id': state.core?.measureClient?.sessionId || '',
+            'X-Sc-User-Type': state.core?.userType || 'anonymous',
           },
           body: JSON.stringify({
             searchQuery: state.searchClientRequest,

@@ -39,6 +39,7 @@ export class SearchcraftCore {
   searchClient: SearchClient | undefined;
   adClient: AdClient | undefined;
   userId: string;
+  userType: 'authenticated' | 'anonymous';
 
   private requestTimeout: NodeJS.Timeout | undefined;
   private subscriptionEvents: {
@@ -77,6 +78,7 @@ export class SearchcraftCore {
       endpointURL: removeTrailingSlashFromURL(config.endpointURL),
     };
     this.userId = '';
+    this.userType = 'anonymous';
 
     if (
       typeof window !== 'undefined' &&
@@ -117,9 +119,12 @@ export class SearchcraftCore {
     if (!userId) {
       const fingerprint = await getFingerprint();
       userId = fingerprint;
+      this.userType = 'anonymous';
+    } else {
+      this.userType = 'authenticated';
     }
 
-    this.measureClient = new MeasureClient(config, sdkInfo, userId);
+    this.measureClient = new MeasureClient(config, sdkInfo, userId, this.userType);
     this.searchClient = new SearchClient(this, config, userId);
 
     if (config.customAdConfig) {
