@@ -1,4 +1,3 @@
-import { nanoid } from 'nanoid';
 import type {
   MeasureEventName,
   MeasureRequest,
@@ -7,6 +6,7 @@ import type {
   SearchcraftConfig,
   SearchcraftSDKInfo,
 } from '@types';
+import { nanoid } from 'nanoid';
 
 const MEASURE_REQUEST_DEBOUNCE = 600;
 
@@ -16,16 +16,19 @@ export class MeasureClient {
   private config: SearchcraftConfig;
   private sdkInfo: SearchcraftSDKInfo;
   private userId: string;
+  private userType: 'authenticated' | 'anonymous';
   sessionId: string;
 
   constructor(
     config: SearchcraftConfig,
     sdkInfo: SearchcraftSDKInfo,
     userId: string,
+    userType: 'authenticated' | 'anonymous',
   ) {
     this.config = config;
     this.sdkInfo = sdkInfo;
     this.userId = userId;
+    this.userType = userType;
     this.sessionId = nanoid();
     this.sendMeasureEvent('sdk_initialized');
   }
@@ -100,6 +103,7 @@ export class MeasureClient {
             Authorization: this.config.readKey,
             'X-Sc-User-Id': this.userId,
             'X-Sc-Session-Id': this.sessionId,
+            'X-Sc-User-Type': this.userType,
           },
           body,
           keepalive: true,
@@ -131,6 +135,7 @@ export class MeasureClient {
               Authorization: this.config.readKey,
               'X-Sc-User-Id': this.userId,
               'X-Sc-Session-Id': this.sessionId,
+              'X-Sc-User-Type': this.userType,
             },
             body: payload,
             keepalive: true,
