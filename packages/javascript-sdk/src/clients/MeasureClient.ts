@@ -1,10 +1,10 @@
 import type {
-  MeasureEventName,
-  MeasureRequest,
-  MeasureRequestProperties,
-  MeasureRequestUser,
-  SearchcraftConfig,
-  SearchcraftSDKInfo,
+    MeasureEventName,
+    MeasureRequest,
+    MeasureRequestProperties,
+    MeasureRequestUser,
+    SearchcraftConfig,
+    SearchcraftSDKInfo,
 } from '@types';
 import { nanoid } from 'nanoid';
 
@@ -110,13 +110,12 @@ export class MeasureClient {
         });
 
         if (!response.ok) {
-          throw new Error(
-            `Failed to send request: ${response.status} ${response.statusText}`,
+          console.error(
+            `Error sending MeasureRequest: ${response.status} ${response.statusText}`,
           );
         }
       } catch (error) {
         console.error('Error sending MeasureRequest:', error);
-        throw error;
       }
     } else {
       // Otherwise send in batches
@@ -143,15 +142,13 @@ export class MeasureClient {
 
           this.measureRequestsBatched = [];
           if (!response.ok) {
-            throw new Error(
-              `Failed to send request: ${response.status} ${response.statusText}`,
+            console.error(
+              `Error sending MeasureRequest: ${response.status} ${response.statusText}`,
             );
           }
-          return;
         } catch (error) {
           this.measureRequestsBatched = [];
           console.error('Error sending MeasureRequest:', error);
-          throw error;
         }
       }, MEASURE_REQUEST_DEBOUNCE);
     }
