@@ -1,10 +1,10 @@
 import type {
-    MeasureEventName,
-    MeasureRequest,
-    MeasureRequestProperties,
-    MeasureRequestUser,
-    SearchcraftConfig,
-    SearchcraftSDKInfo,
+  MeasureEventName,
+  MeasureRequest,
+  MeasureRequestProperties,
+  MeasureRequestUser,
+  SearchcraftConfig,
+  SearchcraftSDKInfo,
 } from '@types';
 import { nanoid } from 'nanoid';
 
@@ -122,34 +122,38 @@ export class MeasureClient {
       this.measureRequestsBatched.push(request);
       clearTimeout(this.measureRequestTimeout);
 
-      this.measureRequestTimeout = setTimeout(async () => {
+      this.measureRequestTimeout = setTimeout(() => {
         const payload = JSON.stringify({ items: this.measureRequestsBatched });
         const url = `${this.baseMeasureUrl}/batch`;
 
-        try {
-          const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: this.config.readKey,
-              'X-Sc-User-Id': this.userId,
-              'X-Sc-Session-Id': this.sessionId,
-              'X-Sc-User-Type': this.userType,
-            },
-            body: payload,
-            keepalive: true,
-          });
+        (async () => {
+          try {
+            const response = await fetch(url, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: this.config.readKey,
+                'X-Sc-User-Id': this.userId,
+                'X-Sc-Session-Id': this.sessionId,
+                'X-Sc-User-Type': this.userType,
+              },
+              body: payload,
+              keepalive: true,
+            });
 
-          this.measureRequestsBatched = [];
-          if (!response.ok) {
-            console.error(
-              `Error sending MeasureRequest: ${response.status} ${response.statusText}`,
-            );
+            this.measureRequestsBatched = [];
+            if (!response.ok) {
+              console.error(
+                `Error sending MeasureRequest: ${response.status} ${response.statusText}`,
+              );
+            }
+          } catch (error) {
+            this.measureRequestsBatched = [];
+            console.error('Error sending MeasureRequest:', error);
           }
-        } catch (error) {
-          this.measureRequestsBatched = [];
-          console.error('Error sending MeasureRequest:', error);
-        }
+        })().catch((error) => {
+          console.error('Unhandled error in MeasureRequest batch:', error);
+        });
       }, MEASURE_REQUEST_DEBOUNCE);
     }
   };
