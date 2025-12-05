@@ -1,3 +1,10 @@
+## 0.13.1 - 2025-12-05
+
+- New Feature: Measure events can now differentiate between authenticated and anonymous users for report generation.
+- Bugfix: Fixed edge case with MeasureClient where certain analytics event errors could cause SDK components not to load.
+- Bugfix: Fixed bug where utilizing measureUserIdentifier would result in an unresolved async promise.
+
+
 ## 0.13.0 - 2025-11-25
 
 - New Feature: On mobile layouts, the `searchcraft-filter-panel` component can collapse via new `responsiveBehavior` prop and make the display controllable via `data-toggle-filter-panel` data attribute that can be added to any element. Also adds configurable breakpoint support via `responsiveBreakpoint`.
