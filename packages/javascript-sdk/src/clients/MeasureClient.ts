@@ -30,7 +30,9 @@ export class MeasureClient {
     this.userId = userId;
     this.userType = userType;
     this.sessionId = nanoid();
-    this.sendMeasureEvent('sdk_initialized');
+    this.sendMeasureEvent('sdk_initialized').catch((error) => {
+      console.error('Error sending sdk_initialized event:', error);
+    });
   }
 
   /**
@@ -110,49 +112,50 @@ export class MeasureClient {
         });
 
         if (!response.ok) {
-          throw new Error(
-            `Failed to send request: ${response.status} ${response.statusText}`,
+          console.error(
+            `Error sending MeasureRequest: ${response.status} ${response.statusText}`,
           );
         }
       } catch (error) {
         console.error('Error sending MeasureRequest:', error);
-        throw error;
       }
     } else {
       // Otherwise send in batches
       this.measureRequestsBatched.push(request);
       clearTimeout(this.measureRequestTimeout);
 
-      this.measureRequestTimeout = setTimeout(async () => {
+      this.measureRequestTimeout = setTimeout(() => {
         const payload = JSON.stringify({ items: this.measureRequestsBatched });
         const url = `${this.baseMeasureUrl}/batch`;
 
-        try {
-          const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: this.config.readKey,
-              'X-Sc-User-Id': this.userId,
-              'X-Sc-Session-Id': this.sessionId,
-              'X-Sc-User-Type': this.userType,
-            },
-            body: payload,
-            keepalive: true,
-          });
+        (async () => {
+          try {
+            const response = await fetch(url, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: this.config.readKey,
+                'X-Sc-User-Id': this.userId,
+                'X-Sc-Session-Id': this.sessionId,
+                'X-Sc-User-Type': this.userType,
+              },
+              body: payload,
+              keepalive: true,
+            });
 
-          this.measureRequestsBatched = [];
-          if (!response.ok) {
-            throw new Error(
-              `Failed to send request: ${response.status} ${response.statusText}`,
-            );
+            this.measureRequestsBatched = [];
+            if (!response.ok) {
+              console.error(
+                `Error sending MeasureRequest: ${response.status} ${response.statusText}`,
+              );
+            }
+          } catch (error) {
+            this.measureRequestsBatched = [];
+            console.error('Error sending MeasureRequest:', error);
           }
-          return;
-        } catch (error) {
-          this.measureRequestsBatched = [];
-          console.error('Error sending MeasureRequest:', error);
-          throw error;
-        }
+        })().catch((error) => {
+          console.error('Unhandled error in MeasureRequest batch:', error);
+        });
       }, MEASURE_REQUEST_DEBOUNCE);
     }
   };

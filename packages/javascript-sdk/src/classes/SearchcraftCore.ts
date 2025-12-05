@@ -122,6 +122,7 @@ export class SearchcraftCore {
       this.userType = 'anonymous';
     } else {
       this.userType = 'authenticated';
+      await Promise.resolve();
     }
 
     this.measureClient = new MeasureClient(config, sdkInfo, userId, this.userType);
