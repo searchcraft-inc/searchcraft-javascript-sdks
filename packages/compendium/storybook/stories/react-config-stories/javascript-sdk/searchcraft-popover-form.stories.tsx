@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
+import { useEffect } from 'react';
 
-import { Searchcraft, type Components } from '@searchcraft/javascript-sdk';
+import { type Components, Searchcraft } from '@searchcraft/javascript-sdk';
 
 import {
   admAdTemplatePopover,
@@ -16,12 +16,12 @@ const componentMeta: Meta = {
   argTypes: {
     placeholderValue: {
       control: 'text',
-      description: 'The input element\'s placeholder value.',
+      description: "The input element's placeholder value.",
     },
     placeholderBehavior: {
       control: { type: 'select' },
       options: ['hide-on-focus', 'hide-on-text-entered', undefined],
-      description: 'The placeholder\'s render behavior.',
+      description: "The placeholder's render behavior.",
     },
   },
 };

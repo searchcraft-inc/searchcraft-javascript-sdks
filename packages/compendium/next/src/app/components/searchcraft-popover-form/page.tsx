@@ -1,10 +1,10 @@
 import Link from 'next/link';
 
+import { SearchcraftInit } from '@components/index';
 import {
   SearchcraftPopoverButton,
   SearchcraftPopoverForm,
 } from '@searchcraft/react-sdk/server';
-import { SearchcraftInit } from '@components/index';
 
 export default async function Page() {
   return (

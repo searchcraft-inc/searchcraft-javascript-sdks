@@ -3,7 +3,10 @@ import {
   SearchcraftCore,
 } from '@searchcraft/javascript-sdk';
 
-import { name as packageName, version as packageVersion } from '../../package.json';
+import {
+  name as packageName,
+  version as packageVersion,
+} from '../../package.json';
 
 /**
  * Exports the shared types that all SDKs need

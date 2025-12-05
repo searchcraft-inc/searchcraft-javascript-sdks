@@ -103,7 +103,8 @@ export class SearchcraftFilterPanel {
       // Check if visibility was manually changed (not by auto-resize)
       if (prevState.isFilterPanelVisible !== state.isFilterPanelVisible) {
         const windowWidth = window.innerWidth;
-        const autoVisibility = windowWidth >= (this.responsiveBreakpoint || 768);
+        const autoVisibility =
+          windowWidth >= (this.responsiveBreakpoint || 768);
 
         // If the new state differs from what auto mode would set, it was manual
         if (state.isFilterPanelVisible !== autoVisibility) {
@@ -136,7 +137,8 @@ export class SearchcraftFilterPanel {
     // Use setTimeout to ensure this runs after the store is initialized
     setTimeout(() => {
       if (this.core) {
-        const currentVisibility = this.core.store.getState().isFilterPanelVisible;
+        const currentVisibility =
+          this.core.store.getState().isFilterPanelVisible;
         this.updateToggleElementAttributes(currentVisibility);
       }
     }, 0);
@@ -215,13 +217,16 @@ export class SearchcraftFilterPanel {
 
       event.preventDefault();
       if (this.core) {
-        const currentVisibility = this.core.store.getState().isFilterPanelVisible;
+        const currentVisibility =
+          this.core.store.getState().isFilterPanelVisible;
         this.core.store.getState().setFilterPanelVisibility(!currentVisibility);
       }
     };
 
     // Find all elements with the data attribute
-    const toggleElements = document.querySelectorAll('[data-toggle-filter-panel]');
+    const toggleElements = document.querySelectorAll(
+      '[data-toggle-filter-panel]',
+    );
     toggleElements.forEach((element) => {
       if (this.toggleClickHandler) {
         element.addEventListener('click', this.toggleClickHandler);
@@ -235,7 +240,9 @@ export class SearchcraftFilterPanel {
   updateToggleElementAttributes(isVisible: boolean) {
     if (typeof document === 'undefined') return;
 
-    const toggleElements = document.querySelectorAll('[data-toggle-filter-panel]');
+    const toggleElements = document.querySelectorAll(
+      '[data-toggle-filter-panel]',
+    );
     toggleElements.forEach((element) => {
       if (isVisible) {
         element.removeAttribute('data-filter-panel-collapsed');
@@ -253,7 +260,9 @@ export class SearchcraftFilterPanel {
   cleanupToggleClickHandlers() {
     if (typeof document === 'undefined' || !this.toggleClickHandler) return;
 
-    const toggleElements = document.querySelectorAll('[data-toggle-filter-panel]');
+    const toggleElements = document.querySelectorAll(
+      '[data-toggle-filter-panel]',
+    );
     toggleElements.forEach((element) => {
       if (this.toggleClickHandler) {
         element.removeEventListener('click', this.toggleClickHandler);

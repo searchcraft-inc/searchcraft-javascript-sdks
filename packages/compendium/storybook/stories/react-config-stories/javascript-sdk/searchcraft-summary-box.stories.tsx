@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
+import { useEffect } from 'react';
 
-import { Searchcraft, type Components } from '@searchcraft/javascript-sdk';
 import { searchResultTemplateFoodAndWine } from '@common/index.js';
+import { type Components, Searchcraft } from '@searchcraft/javascript-sdk';
 
 const componentMeta: Meta = {
   title: 'Javascript SDK/searchcraft-summary-box',

@@ -200,7 +200,10 @@ export class SearchcraftPagination {
       this.searchTerm.trim() === '';
 
     // early return if there isn't a searchTerm (unless it's initialQuery) or there is 1 or fewer pages of results
-    if ((!this.searchTerm && !isInitialQuery) || this.searchResultsPagesCount <= 1) {
+    if (
+      (!this.searchTerm && !isInitialQuery) ||
+      this.searchResultsPagesCount <= 1
+    ) {
       return;
     }
 

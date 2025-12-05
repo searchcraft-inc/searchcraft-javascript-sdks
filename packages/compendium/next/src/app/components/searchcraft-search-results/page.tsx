@@ -1,10 +1,10 @@
 import Link from 'next/link';
 
+import { SearchcraftInit } from '@components/SearchcraftInit';
 import {
   SearchcraftInputForm,
   SearchcraftSearchResults,
 } from '@searchcraft/react-sdk/server';
-import { SearchcraftInit } from '@components/SearchcraftInit';
 
 export default function Page() {
   return (

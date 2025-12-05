@@ -8,8 +8,8 @@ import {
 } from '@searchcraft/react-sdk/server';
 
 import {
-  searchResultTemplate,
   popoverResultMappingsRunegard,
+  searchResultTemplate,
 } from '@common/index';
 
 export const SearchcraftInit = () => {

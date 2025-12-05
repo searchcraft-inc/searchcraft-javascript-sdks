@@ -1,10 +1,10 @@
-import { useEffect } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
+import { useEffect } from 'react';
 
 import './searchcraft-colors.scss';
 import {
-  Searchcraft,
   type PopoverResultMappings,
+  Searchcraft,
 } from '@searchcraft/javascript-sdk';
 
 const mappings: PopoverResultMappings = {

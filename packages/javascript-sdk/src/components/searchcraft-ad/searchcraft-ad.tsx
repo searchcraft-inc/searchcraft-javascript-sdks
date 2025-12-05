@@ -1,13 +1,13 @@
-import type { AdClientResponseItem, ADMClientResponseItem } from '@types';
-import { Component, Element, h, Prop, State } from '@stencil/core';
-import { nanoid } from 'nanoid';
+import { Component, Element, Prop, State, h } from '@stencil/core';
+import type { ADMClientResponseItem, AdClientResponseItem } from '@types';
 import classNames from 'classnames';
+import { nanoid } from 'nanoid';
 
 import type { SearchcraftState } from '@store';
 
-import { html } from '@utils';
 import type { SearchcraftCore } from '@classes';
 import { registry } from '@classes/CoreInstanceRegistry';
+import { html } from '@utils';
 
 /**
  * An inline ad meant to be rendered in a list of search results.
