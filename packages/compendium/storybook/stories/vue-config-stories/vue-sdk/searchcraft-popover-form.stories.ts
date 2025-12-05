@@ -16,12 +16,12 @@ export default {
   argTypes: {
     placeholderValue: {
       control: 'text',
-      description: 'The input element\'s placeholder value.',
+      description: "The input element's placeholder value.",
     },
     placeholderBehavior: {
       control: { type: 'select' },
       options: ['hide-on-focus', 'hide-on-text-entered', undefined],
-      description: 'The placeholder\'s render behavior.',
+      description: "The placeholder's render behavior.",
     },
   },
 } as Meta;

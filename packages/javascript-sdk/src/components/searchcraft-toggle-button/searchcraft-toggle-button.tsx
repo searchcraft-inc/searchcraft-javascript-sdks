@@ -3,10 +3,10 @@ import { registry } from '@classes/CoreInstanceRegistry';
 import {
   Component,
   Event,
-  h,
+  type EventEmitter,
   Prop,
   State,
-  type EventEmitter,
+  h,
 } from '@stencil/core';
 import classNames from 'classnames';
 

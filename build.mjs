@@ -61,10 +61,12 @@ const buildSteps = [
     label: 'javascript-sdk-build',
     action: () => {
       if (isWordPress) {
-        console.log('  Building for WordPress (will exclude AdMarketplaceClient and NativoClient)...');
+        console.log(
+          '  Building for WordPress (will exclude AdMarketplaceClient and NativoClient)...',
+        );
         // Apply WordPress modifications using the filter script
         execSync('cd packages/javascript-sdk && node wordpress-filter.js', {
-          stdio: isVerbose ? 'inherit' : 'ignore'
+          stdio: isVerbose ? 'inherit' : 'ignore',
         });
       }
 
@@ -90,7 +92,9 @@ const buildSteps = [
 
       if (isWordPress) {
         console.log('  Restoring original files...');
-        execSync('git restore packages/javascript-sdk/src/classes/SearchcraftCore.ts packages/javascript-sdk/src/clients/ad-clients/index.ts packages/javascript-sdk/src/clients/ad-clients/AdMarketplaceClient.ts packages/javascript-sdk/src/clients/ad-clients/NativoClient.ts');
+        execSync(
+          'git restore packages/javascript-sdk/src/classes/SearchcraftCore.ts packages/javascript-sdk/src/clients/ad-clients/index.ts packages/javascript-sdk/src/clients/ad-clients/AdMarketplaceClient.ts packages/javascript-sdk/src/clients/ad-clients/NativoClient.ts',
+        );
       }
       if (shouldPublishToYalc) {
         execSync('cd ./packages/javascript-sdk && yalc publish && yalc push', {

@@ -236,7 +236,10 @@ export class SearchcraftFacetList {
       }
     }
     this.facetTreeFromFacetPathsNotInSearchResponse =
-      facetWithChildrenArrayToCompleteFacetTree(collectedFacetArray, this.exclude);
+      facetWithChildrenArrayToCompleteFacetTree(
+        collectedFacetArray,
+        this.exclude,
+      );
 
     // Merges facetTreeCollectedFromSearchResponse with selectedFacetPathsNotInCurrentFacetTree.
     // This results in a single, final facet tree that gets rendered in as Checkboxes
@@ -313,14 +316,22 @@ export class SearchcraftFacetList {
           : [requestObj.query];
 
         // Extract filter queries (those with occur: 'must')
-        const filterQueries = queryArray.filter((q: SearchClientQuery) => q.occur === 'must');
+        const filterQueries = queryArray.filter(
+          (q: SearchClientQuery) => q.occur === 'must',
+        );
         const currentFilters = JSON.stringify(filterQueries);
 
         // Determine the action type based on what changed
-        if (this.lastFacetValues !== undefined && this.lastFacetValues !== currentFilters) {
+        if (
+          this.lastFacetValues !== undefined &&
+          this.lastFacetValues !== currentFilters
+        ) {
           // Filters have changed (not initial load)
           actionType = 'FACET_UPDATE';
-        } else if (state.searchTerm.trim() === '' && this.lastSearchTerm === '') {
+        } else if (
+          state.searchTerm.trim() === '' &&
+          this.lastSearchTerm === ''
+        ) {
           // Initial load or no changes with empty search term
           actionType = 'NEW_SEARCH_TERM';
         } else if (this.lastSearchTerm !== state.searchTerm) {

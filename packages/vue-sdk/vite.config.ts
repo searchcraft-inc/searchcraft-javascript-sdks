@@ -1,7 +1,7 @@
-import vue from '@vitejs/plugin-vue';
-import vueJsx from '@vitejs/plugin-vue-jsx';
 import { copyFileSync, mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
+import vue from '@vitejs/plugin-vue';
+import vueJsx from '@vitejs/plugin-vue-jsx';
 import { defineConfig } from 'vite';
 import dtsPlugin from 'vite-plugin-dts';
 
@@ -16,19 +16,17 @@ const copyThemesPlugin = () => ({
       mkdirSync(themesDir, { recursive: true });
       copyFileSync(
         resolve(sourceThemesDir, 'hologram.css'),
-        resolve(themesDir, 'hologram.css')
+        resolve(themesDir, 'hologram.css'),
       );
       copyFileSync(
         resolve(sourceThemesDir, 'hologram.css.map'),
-        resolve(themesDir, 'hologram.css.map')
+        resolve(themesDir, 'hologram.css.map'),
       );
     } catch (error) {
       console.warn('Could not copy themes:', error);
     }
   },
 });
-
-
 
 export default defineConfig({
   plugins: [

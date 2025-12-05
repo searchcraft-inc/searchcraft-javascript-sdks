@@ -1,13 +1,13 @@
+import { Component, Element, Prop, State, h } from '@stencil/core';
 import type {
   SearchClientResponseItem,
   SearchResultTemplate,
   SearchResultTemplateData,
 } from '@types';
-import { Component, Element, h, Prop, State } from '@stencil/core';
 
-import { html } from '@utils';
 import type { SearchcraftCore } from '@classes';
 import { registry } from '@classes/CoreInstanceRegistry';
+import { html } from '@utils';
 
 /**
  * This web component is designed to display detailed information for a single search result. Once a query is submitted, the component formats and presents the result.

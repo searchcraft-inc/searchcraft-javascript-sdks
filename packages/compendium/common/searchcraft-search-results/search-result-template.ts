@@ -54,7 +54,6 @@ export const searchResultTemplateBazaario: SearchResultTemplate<
   </div>
 `;
 
-
 type SearchResultDataFoodAndWine = {
   link: string;
   category: string;
@@ -75,9 +74,7 @@ export const searchResultTemplateFoodAndWine: SearchResultTemplate<
       <p class="search-result-content-body">${data.description}</p>
       <footer class="search-result-content-footer">
         <span class='result-date'>
-          ${new Date(
-            data.pub_date,
-          ).toLocaleDateString()}
+          ${new Date(data.pub_date).toLocaleDateString()}
         </span>
         •
         <p>${data.dc_creator}</p>
@@ -98,7 +95,6 @@ type SearchResultDataGalaxyNews = {
   link: string;
 };
 
-
 export const searchResultTemplateGalaxyNews: SearchResultTemplate<
   SearchResultDataGalaxyNews
 > = (data, _index, { html, source_index }) => html`
@@ -108,19 +104,21 @@ export const searchResultTemplateGalaxyNews: SearchResultTemplate<
       <p class="search-result-content-body">${data.description}</p>
       <footer class="search-result-content-footer">
         <span class='result-date'>
-          ${new Date(
-            data.pub_date,
-          ).toLocaleDateString()}
+          ${new Date(data.pub_date).toLocaleDateString()}
         </span>
         •
         <p>${data.dc_creator}</p>
         ${source_index ? html`• <span class="source-index-badge">Source: ${source_index}</span>` : ''}
       </footer>
     </div>
-    ${data.media_thumbnail_url ? html`
+    ${
+      data.media_thumbnail_url
+        ? html`
       <div class="search-result-image">
         <img src="${data.media_thumbnail_url}" alt="${data.title}" />
       </div>
-    ` : ''}
+    `
+        : ''
+    }
   </a>
 `;

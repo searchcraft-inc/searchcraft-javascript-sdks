@@ -1,9 +1,9 @@
 import {
-    type DateRangeFilterItem,
-    type ExactMatchToggleFilterItem,
-    type FacetsFilterItem,
-    type MostRecentToggleFilterItem,
-    Searchcraft,
+  type DateRangeFilterItem,
+  type ExactMatchToggleFilterItem,
+  type FacetsFilterItem,
+  type MostRecentToggleFilterItem,
+  Searchcraft,
 } from '@searchcraft/javascript-sdk';
 import type { Meta, StoryObj } from '@storybook/react';
 

@@ -13,8 +13,14 @@ console.log('[WordPress Filter] Modifying source files for WordPress build...');
 const indexPath = 'src/clients/ad-clients/index.ts';
 if (fs.existsSync(indexPath)) {
   let indexContent = fs.readFileSync(indexPath, 'utf8');
-  indexContent = indexContent.replace(/export \* from '\.\/AdMarketplaceClient';\s*/g, '');
-  indexContent = indexContent.replace(/export \* from '\.\/NativoClient';\s*/g, '');
+  indexContent = indexContent.replace(
+    /export \* from '\.\/AdMarketplaceClient';\s*/g,
+    '',
+  );
+  indexContent = indexContent.replace(
+    /export \* from '\.\/NativoClient';\s*/g,
+    '',
+  );
   fs.writeFileSync(indexPath, indexContent);
   console.log('[WordPress Filter] Modified ad-clients index');
 }
@@ -31,8 +37,14 @@ if (fs.existsSync(corePath)) {
   coreContent = coreContent.replace(/,\s*NativoClient/g, '');
 
   // Remove the initialization logic for these clients
-  coreContent = coreContent.replace(/} else if \(config\.nativoConfig\) \{\s*this\.adClient = new NativoClient\(config\);\s*/g, '');
-  coreContent = coreContent.replace(/} else if \(config\.admAdConfig\) \{\s*this\.adClient = new AdMarketplaceClient\(config\);\s*/g, '');
+  coreContent = coreContent.replace(
+    /} else if \(config\.nativoConfig\) \{\s*this\.adClient = new NativoClient\(config\);\s*/g,
+    '',
+  );
+  coreContent = coreContent.replace(
+    /} else if \(config\.admAdConfig\) \{\s*this\.adClient = new AdMarketplaceClient\(config\);\s*/g,
+    '',
+  );
 
   fs.writeFileSync(corePath, coreContent);
   console.log('[WordPress Filter] Modified SearchcraftCore');

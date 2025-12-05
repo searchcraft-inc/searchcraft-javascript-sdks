@@ -1,12 +1,12 @@
-import type {
-  SearchDocument,
-  SearchClientResponseItem,
-  PopoverResultMappings,
-} from '@types';
-import { Component, h, Prop, State } from '@stencil/core';
-import { getDocumentValueFromSearchResultMapping } from '@utils';
 import type { SearchcraftCore } from '@classes';
 import { registry } from '@classes/CoreInstanceRegistry';
+import { Component, Prop, State, h } from '@stencil/core';
+import type {
+  PopoverResultMappings,
+  SearchClientResponseItem,
+  SearchDocument,
+} from '@types';
+import { getDocumentValueFromSearchResultMapping } from '@utils';
 
 /**
  * A single list item rendered in a searchcraft-popover-list-view.

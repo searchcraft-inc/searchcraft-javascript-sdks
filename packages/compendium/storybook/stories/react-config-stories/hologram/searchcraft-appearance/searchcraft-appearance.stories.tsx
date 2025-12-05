@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import './searchcraft-appearance.scss';
-import { useEffect } from 'react';
 import { Searchcraft } from '@searchcraft/javascript-sdk';
+import { useEffect } from 'react';
 
 const componentMeta: Meta = {
   title: 'Hologram/searchcraft-theme',

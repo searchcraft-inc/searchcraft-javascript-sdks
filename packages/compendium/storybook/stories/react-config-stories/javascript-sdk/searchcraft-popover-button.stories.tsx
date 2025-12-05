@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
+import { useEffect } from 'react';
 
-import { Searchcraft, type Components } from '@searchcraft/javascript-sdk';
+import { type Components, Searchcraft } from '@searchcraft/javascript-sdk';
 
 import { popoverResultMappings } from '@common/index.js';
 

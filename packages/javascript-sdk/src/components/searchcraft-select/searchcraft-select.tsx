@@ -1,10 +1,10 @@
 import {
   Component,
-  h,
-  State,
-  Prop,
-  type EventEmitter,
   Event,
+  type EventEmitter,
+  Prop,
+  State,
+  h,
 } from '@stencil/core';
 
 export type SearchcraftSelectOption = {

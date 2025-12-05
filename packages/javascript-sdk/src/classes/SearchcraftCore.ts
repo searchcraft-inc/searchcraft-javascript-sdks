@@ -65,11 +65,15 @@ export class SearchcraftCore {
     }
 
     if (!config.indexName && !config.federationName) {
-      throw new Error('SDK Configuration Error: Either indexName or federationName must be specified.');
+      throw new Error(
+        'SDK Configuration Error: Either indexName or federationName must be specified.',
+      );
     }
 
     if (config.indexName && config.federationName) {
-      throw new Error('SDK Configuration Error: Cannot specify both indexName and federationName. Please specify only one.');
+      throw new Error(
+        'SDK Configuration Error: Cannot specify both indexName and federationName. Please specify only one.',
+      );
     }
 
     this.config = {
@@ -125,7 +129,12 @@ export class SearchcraftCore {
       await Promise.resolve();
     }
 
-    this.measureClient = new MeasureClient(config, sdkInfo, userId, this.userType);
+    this.measureClient = new MeasureClient(
+      config,
+      sdkInfo,
+      userId,
+      this.userType,
+    );
     this.searchClient = new SearchClient(this, config, userId);
 
     if (config.customAdConfig) {

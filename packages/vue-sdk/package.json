@@ -6,9 +6,7 @@
   "description": "Searchcraft Vue SDK.",
   "type": "module",
   "license": "Apache-2.0",
-  "keywords": [
-    "searchcraft"
-  ],
+  "keywords": ["searchcraft"],
   "scripts": {
     "dev": "vite",
     "clean": "rm -rf dist",
@@ -38,9 +36,7 @@
     },
     "./themes/*.css": "./dist/themes/*.css"
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "peerDependencies": {
     "vue": "^3.5.13"
   },

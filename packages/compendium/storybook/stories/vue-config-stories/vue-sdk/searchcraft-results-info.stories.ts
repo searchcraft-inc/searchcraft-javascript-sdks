@@ -1,10 +1,10 @@
 import type { Meta, StoryFn } from '@storybook/vue3';
 
 import {
-  SearchcraftResultsInfo,
-  SearchcraftInputForm,
-  type SearchcraftResultsInfoProps,
   Searchcraft,
+  SearchcraftInputForm,
+  SearchcraftResultsInfo,
+  type SearchcraftResultsInfoProps,
 } from '@searchcraft/vue-sdk';
 
 export default {

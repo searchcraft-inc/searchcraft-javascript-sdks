@@ -6,8 +6,8 @@
  */
 
 import { readFileSync, writeFileSync } from 'fs';
-import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -32,11 +32,16 @@ try {
   packageJson.version = lernaVersion;
 
   // Write back to package.json with proper formatting
-  writeFileSync(packagePath, JSON.stringify(packageJson, null, 2) + '\n', 'utf-8');
+  writeFileSync(
+    packagePath,
+    JSON.stringify(packageJson, null, 2) + '\n',
+    'utf-8',
+  );
 
-  console.log(`✓ Synced root package.json version: ${packageJson.version} → ${lernaVersion}`);
+  console.log(
+    `✓ Synced root package.json version: ${packageJson.version} → ${lernaVersion}`,
+  );
 } catch (error) {
   console.error('Error syncing root package.json version:', error.message);
   process.exit(1);
 }
-

@@ -1,4 +1,4 @@
-import { Component, h, Prop } from '@stencil/core';
+import { Component, Prop, h } from '@stencil/core';
 
 /**
  * Renders a loading spinner/loading state for use in things like the summary box.

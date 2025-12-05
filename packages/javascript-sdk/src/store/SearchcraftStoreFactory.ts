@@ -1,9 +1,9 @@
 import { type StoreApi, createStore } from 'zustand';
 
 import type {
-    FacetPathsForIndexField,
-    RangeValueForIndexField,
-    SearchClientRequestProperties,
+  FacetPathsForIndexField,
+  RangeValueForIndexField,
+  SearchClientRequestProperties,
 } from '@types';
 
 // import { Logger, LogLevel } from '@classes';
@@ -11,9 +11,9 @@ import type {
 import { DEFAULT_CORE_INSTANCE_ID } from '@classes/CoreInstanceRegistry';
 import { SummaryClient } from '@clients/SummaryClient';
 import type {
-    SearchcraftState,
-    SearchcraftStateFunctions,
-    SearchcraftStateValues,
+  SearchcraftState,
+  SearchcraftStateFunctions,
+  SearchcraftStateValues,
 } from './SearchcraftStore.types';
 
 const initialSearchcraftStateValues: SearchcraftStateValues = {

@@ -1,6 +1,6 @@
 import type { SearchcraftCore } from '@classes';
 import { registry } from '@classes/CoreInstanceRegistry';
-import { Component, Element, h, Prop, State } from '@stencil/core';
+import { Component, Element, Prop, State, h } from '@stencil/core';
 import type { SearchcraftState } from '@store';
 import DOMPurify from 'dompurify';
 import { marked } from 'marked';
