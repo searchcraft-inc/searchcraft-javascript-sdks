@@ -102,3 +102,41 @@ if (existsSync(INDEX_DTS_FILE)) {
 const VUE_FILE = '../vue-sdk/src/stencil-web-components.ts';
 const vueFileContent = readFileSync(VUE_FILE, 'utf-8');
 writeFileSync(VUE_FILE, vueFileContent.replace(/undefined/g, '() => {}'));
+
+// Fix components.d.ts to use import type and export type
+const COMPONENTS_DTS_FILE = './src/components.d.ts';
+if (existsSync(COMPONENTS_DTS_FILE)) {
+  let componentsDtsContent = readFileSync(COMPONENTS_DTS_FILE, 'utf-8');
+
+  // Convert type-only imports to use 'import type'
+  // Convert @stencil/core/internal import to import type
+  componentsDtsContent = componentsDtsContent.replace(
+    /^import \{ (HTMLStencilElement, JSXBase) \} from "@stencil\/core\/internal";$/gm,
+    'import type { $1 } from "@stencil/core/internal";'
+  );
+
+  // Match imports from "./types/index" and "./components/searchcraft-select/searchcraft-select"
+  componentsDtsContent = componentsDtsContent.replace(
+    /^import \{ (AdClientResponseItem[^}]+) \} from "\.\/types\/index";$/gm,
+    'import type { $1 } from "./types/index";'
+  );
+
+  componentsDtsContent = componentsDtsContent.replace(
+    /^import \{ (SearchcraftSelectOption) \} from "\.\/components\/searchcraft-select\/searchcraft-select";$/gm,
+    'import type { $1 } from "./components/searchcraft-select/searchcraft-select";'
+  );
+
+  // Convert type-only exports to use 'export type'
+  componentsDtsContent = componentsDtsContent.replace(
+    /^export \{ (AdClientResponseItem[^}]+) \} from "\.\/types\/index";$/gm,
+    'export type { $1 } from "./types/index";'
+  );
+
+  componentsDtsContent = componentsDtsContent.replace(
+    /^export \{ (SearchcraftSelectOption) \} from "\.\/components\/searchcraft-select\/searchcraft-select";$/gm,
+    'export type { $1 } from "./components/searchcraft-select/searchcraft-select";'
+  );
+
+  writeFileSync(COMPONENTS_DTS_FILE, componentsDtsContent);
+  console.log('[Stencil Plugin] Fixed components.d.ts to use import type and export type.');
+}

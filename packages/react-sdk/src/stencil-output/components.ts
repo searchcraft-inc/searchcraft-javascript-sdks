@@ -7,227 +7,134 @@
 
 /* eslint-disable */
 
-import {
-  SearchcraftFilterPanel as SearchcraftFilterPanelElement,
-  defineCustomElement as defineSearchcraftFilterPanel,
-} from '@searchcraft/javascript-sdk/dist/components/searchcraft-filter-panel.js';
-import {
-  SearchcraftInputForm as SearchcraftInputFormElement,
-  defineCustomElement as defineSearchcraftInputForm,
-} from '@searchcraft/javascript-sdk/dist/components/searchcraft-input-form.js';
-import {
-  SearchcraftPagination as SearchcraftPaginationElement,
-  defineCustomElement as defineSearchcraftPagination,
-} from '@searchcraft/javascript-sdk/dist/components/searchcraft-pagination.js';
-import {
-  SearchcraftPopoverButton as SearchcraftPopoverButtonElement,
-  defineCustomElement as defineSearchcraftPopoverButton,
-} from '@searchcraft/javascript-sdk/dist/components/searchcraft-popover-button.js';
-import {
-  SearchcraftPopoverForm as SearchcraftPopoverFormElement,
-  defineCustomElement as defineSearchcraftPopoverForm,
-} from '@searchcraft/javascript-sdk/dist/components/searchcraft-popover-form.js';
-import {
-  SearchcraftResultsInfo as SearchcraftResultsInfoElement,
-  defineCustomElement as defineSearchcraftResultsInfo,
-} from '@searchcraft/javascript-sdk/dist/components/searchcraft-results-info.js';
-import {
-  SearchcraftSearchResultsPerPage as SearchcraftSearchResultsPerPageElement,
-  defineCustomElement as defineSearchcraftSearchResultsPerPage,
-} from '@searchcraft/javascript-sdk/dist/components/searchcraft-search-results-per-page.js';
-import {
-  SearchcraftSearchResults as SearchcraftSearchResultsElement,
-  defineCustomElement as defineSearchcraftSearchResults,
-} from '@searchcraft/javascript-sdk/dist/components/searchcraft-search-results.js';
-import {
-  SearchcraftSummaryBox as SearchcraftSummaryBoxElement,
-  defineCustomElement as defineSearchcraftSummaryBox,
-} from '@searchcraft/javascript-sdk/dist/components/searchcraft-summary-box.js';
-import {
-  SearchcraftTheme as SearchcraftThemeElement,
-  defineCustomElement as defineSearchcraftTheme,
-} from '@searchcraft/javascript-sdk/dist/components/searchcraft-theme.js';
-import type {
-  EventName,
-  StencilReactComponent,
-} from '@stencil/react-output-target/runtime';
+import { SearchcraftFilterPanel as SearchcraftFilterPanelElement, defineCustomElement as defineSearchcraftFilterPanel } from "@searchcraft/javascript-sdk/dist/components/searchcraft-filter-panel.js";
+import { SearchcraftInputForm as SearchcraftInputFormElement, defineCustomElement as defineSearchcraftInputForm } from "@searchcraft/javascript-sdk/dist/components/searchcraft-input-form.js";
+import { SearchcraftPagination as SearchcraftPaginationElement, defineCustomElement as defineSearchcraftPagination } from "@searchcraft/javascript-sdk/dist/components/searchcraft-pagination.js";
+import { SearchcraftPopoverButton as SearchcraftPopoverButtonElement, defineCustomElement as defineSearchcraftPopoverButton } from "@searchcraft/javascript-sdk/dist/components/searchcraft-popover-button.js";
+import { SearchcraftPopoverForm as SearchcraftPopoverFormElement, defineCustomElement as defineSearchcraftPopoverForm } from "@searchcraft/javascript-sdk/dist/components/searchcraft-popover-form.js";
+import { SearchcraftResultsInfo as SearchcraftResultsInfoElement, defineCustomElement as defineSearchcraftResultsInfo } from "@searchcraft/javascript-sdk/dist/components/searchcraft-results-info.js";
+import { SearchcraftSearchResultsPerPage as SearchcraftSearchResultsPerPageElement, defineCustomElement as defineSearchcraftSearchResultsPerPage } from "@searchcraft/javascript-sdk/dist/components/searchcraft-search-results-per-page.js";
+import { SearchcraftSearchResults as SearchcraftSearchResultsElement, defineCustomElement as defineSearchcraftSearchResults } from "@searchcraft/javascript-sdk/dist/components/searchcraft-search-results.js";
+import { SearchcraftSummaryBox as SearchcraftSummaryBoxElement, defineCustomElement as defineSearchcraftSummaryBox } from "@searchcraft/javascript-sdk/dist/components/searchcraft-summary-box.js";
+import { SearchcraftTheme as SearchcraftThemeElement, defineCustomElement as defineSearchcraftTheme } from "@searchcraft/javascript-sdk/dist/components/searchcraft-theme.js";
+import type { EventName, StencilReactComponent } from '@stencil/react-output-target/runtime';
 import { createComponent } from '@stencil/react-output-target/runtime';
 import React from 'react';
 
 export type SearchcraftFilterPanelEvents = NonNullable<unknown>;
 
-export const SearchcraftFilterPanel: StencilReactComponent<
-  SearchcraftFilterPanelElement,
-  SearchcraftFilterPanelEvents
-> = /*@__PURE__*/ createComponent<
-  SearchcraftFilterPanelElement,
-  SearchcraftFilterPanelEvents
->({
-  tagName: 'searchcraft-filter-panel',
-  elementClass: SearchcraftFilterPanelElement,
-  // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
-  react: React,
-  events: {} as SearchcraftFilterPanelEvents,
-  defineCustomElement: defineSearchcraftFilterPanel,
+export const SearchcraftFilterPanel: StencilReactComponent<SearchcraftFilterPanelElement, SearchcraftFilterPanelEvents> = /*@__PURE__*/ createComponent<SearchcraftFilterPanelElement, SearchcraftFilterPanelEvents>({
+    tagName: 'searchcraft-filter-panel',
+    elementClass: SearchcraftFilterPanelElement,
+    // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
+    react: React,
+    events: {} as SearchcraftFilterPanelEvents,
+    defineCustomElement: defineSearchcraftFilterPanel
 });
 
 export type SearchcraftInputFormEvents = {
-  onInputFocus: EventName<CustomEvent<void>>;
-  onInputBlur: EventName<CustomEvent<void>>;
-  onInputInit: EventName<CustomEvent<void>>;
+    onInputFocus: EventName<CustomEvent<void>>,
+    onInputBlur: EventName<CustomEvent<void>>,
+    onInputInit: EventName<CustomEvent<void>>
 };
 
-export const SearchcraftInputForm: StencilReactComponent<
-  SearchcraftInputFormElement,
-  SearchcraftInputFormEvents
-> = /*@__PURE__*/ createComponent<
-  SearchcraftInputFormElement,
-  SearchcraftInputFormEvents
->({
-  tagName: 'searchcraft-input-form',
-  elementClass: SearchcraftInputFormElement,
-  // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
-  react: React,
-  events: {
-    onInputFocus: 'inputFocus',
-    onInputBlur: 'inputBlur',
-    onInputInit: 'inputInit',
-  } as SearchcraftInputFormEvents,
-  defineCustomElement: defineSearchcraftInputForm,
+export const SearchcraftInputForm: StencilReactComponent<SearchcraftInputFormElement, SearchcraftInputFormEvents> = /*@__PURE__*/ createComponent<SearchcraftInputFormElement, SearchcraftInputFormEvents>({
+    tagName: 'searchcraft-input-form',
+    elementClass: SearchcraftInputFormElement,
+    // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
+    react: React,
+    events: {
+        onInputFocus: 'inputFocus',
+        onInputBlur: 'inputBlur',
+        onInputInit: 'inputInit'
+    } as SearchcraftInputFormEvents,
+    defineCustomElement: defineSearchcraftInputForm
 });
 
 export type SearchcraftPaginationEvents = NonNullable<unknown>;
 
-export const SearchcraftPagination: StencilReactComponent<
-  SearchcraftPaginationElement,
-  SearchcraftPaginationEvents
-> = /*@__PURE__*/ createComponent<
-  SearchcraftPaginationElement,
-  SearchcraftPaginationEvents
->({
-  tagName: 'searchcraft-pagination',
-  elementClass: SearchcraftPaginationElement,
-  // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
-  react: React,
-  events: {} as SearchcraftPaginationEvents,
-  defineCustomElement: defineSearchcraftPagination,
+export const SearchcraftPagination: StencilReactComponent<SearchcraftPaginationElement, SearchcraftPaginationEvents> = /*@__PURE__*/ createComponent<SearchcraftPaginationElement, SearchcraftPaginationEvents>({
+    tagName: 'searchcraft-pagination',
+    elementClass: SearchcraftPaginationElement,
+    // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
+    react: React,
+    events: {} as SearchcraftPaginationEvents,
+    defineCustomElement: defineSearchcraftPagination
 });
 
 export type SearchcraftPopoverButtonEvents = NonNullable<unknown>;
 
-export const SearchcraftPopoverButton: StencilReactComponent<
-  SearchcraftPopoverButtonElement,
-  SearchcraftPopoverButtonEvents
-> = /*@__PURE__*/ createComponent<
-  SearchcraftPopoverButtonElement,
-  SearchcraftPopoverButtonEvents
->({
-  tagName: 'searchcraft-popover-button',
-  elementClass: SearchcraftPopoverButtonElement,
-  // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
-  react: React,
-  events: {} as SearchcraftPopoverButtonEvents,
-  defineCustomElement: defineSearchcraftPopoverButton,
+export const SearchcraftPopoverButton: StencilReactComponent<SearchcraftPopoverButtonElement, SearchcraftPopoverButtonEvents> = /*@__PURE__*/ createComponent<SearchcraftPopoverButtonElement, SearchcraftPopoverButtonEvents>({
+    tagName: 'searchcraft-popover-button',
+    elementClass: SearchcraftPopoverButtonElement,
+    // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
+    react: React,
+    events: {} as SearchcraftPopoverButtonEvents,
+    defineCustomElement: defineSearchcraftPopoverButton
 });
 
 export type SearchcraftPopoverFormEvents = NonNullable<unknown>;
 
-export const SearchcraftPopoverForm: StencilReactComponent<
-  SearchcraftPopoverFormElement,
-  SearchcraftPopoverFormEvents
-> = /*@__PURE__*/ createComponent<
-  SearchcraftPopoverFormElement,
-  SearchcraftPopoverFormEvents
->({
-  tagName: 'searchcraft-popover-form',
-  elementClass: SearchcraftPopoverFormElement,
-  // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
-  react: React,
-  events: {} as SearchcraftPopoverFormEvents,
-  defineCustomElement: defineSearchcraftPopoverForm,
+export const SearchcraftPopoverForm: StencilReactComponent<SearchcraftPopoverFormElement, SearchcraftPopoverFormEvents> = /*@__PURE__*/ createComponent<SearchcraftPopoverFormElement, SearchcraftPopoverFormEvents>({
+    tagName: 'searchcraft-popover-form',
+    elementClass: SearchcraftPopoverFormElement,
+    // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
+    react: React,
+    events: {} as SearchcraftPopoverFormEvents,
+    defineCustomElement: defineSearchcraftPopoverForm
 });
 
 export type SearchcraftResultsInfoEvents = NonNullable<unknown>;
 
-export const SearchcraftResultsInfo: StencilReactComponent<
-  SearchcraftResultsInfoElement,
-  SearchcraftResultsInfoEvents
-> = /*@__PURE__*/ createComponent<
-  SearchcraftResultsInfoElement,
-  SearchcraftResultsInfoEvents
->({
-  tagName: 'searchcraft-results-info',
-  elementClass: SearchcraftResultsInfoElement,
-  // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
-  react: React,
-  events: {} as SearchcraftResultsInfoEvents,
-  defineCustomElement: defineSearchcraftResultsInfo,
+export const SearchcraftResultsInfo: StencilReactComponent<SearchcraftResultsInfoElement, SearchcraftResultsInfoEvents> = /*@__PURE__*/ createComponent<SearchcraftResultsInfoElement, SearchcraftResultsInfoEvents>({
+    tagName: 'searchcraft-results-info',
+    elementClass: SearchcraftResultsInfoElement,
+    // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
+    react: React,
+    events: {} as SearchcraftResultsInfoEvents,
+    defineCustomElement: defineSearchcraftResultsInfo
 });
 
 export type SearchcraftSearchResultsEvents = NonNullable<unknown>;
 
-export const SearchcraftSearchResults: StencilReactComponent<
-  SearchcraftSearchResultsElement,
-  SearchcraftSearchResultsEvents
-> = /*@__PURE__*/ createComponent<
-  SearchcraftSearchResultsElement,
-  SearchcraftSearchResultsEvents
->({
-  tagName: 'searchcraft-search-results',
-  elementClass: SearchcraftSearchResultsElement,
-  // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
-  react: React,
-  events: {} as SearchcraftSearchResultsEvents,
-  defineCustomElement: defineSearchcraftSearchResults,
+export const SearchcraftSearchResults: StencilReactComponent<SearchcraftSearchResultsElement, SearchcraftSearchResultsEvents> = /*@__PURE__*/ createComponent<SearchcraftSearchResultsElement, SearchcraftSearchResultsEvents>({
+    tagName: 'searchcraft-search-results',
+    elementClass: SearchcraftSearchResultsElement,
+    // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
+    react: React,
+    events: {} as SearchcraftSearchResultsEvents,
+    defineCustomElement: defineSearchcraftSearchResults
 });
 
 export type SearchcraftSearchResultsPerPageEvents = NonNullable<unknown>;
 
-export const SearchcraftSearchResultsPerPage: StencilReactComponent<
-  SearchcraftSearchResultsPerPageElement,
-  SearchcraftSearchResultsPerPageEvents
-> = /*@__PURE__*/ createComponent<
-  SearchcraftSearchResultsPerPageElement,
-  SearchcraftSearchResultsPerPageEvents
->({
-  tagName: 'searchcraft-search-results-per-page',
-  elementClass: SearchcraftSearchResultsPerPageElement,
-  // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
-  react: React,
-  events: {} as SearchcraftSearchResultsPerPageEvents,
-  defineCustomElement: defineSearchcraftSearchResultsPerPage,
+export const SearchcraftSearchResultsPerPage: StencilReactComponent<SearchcraftSearchResultsPerPageElement, SearchcraftSearchResultsPerPageEvents> = /*@__PURE__*/ createComponent<SearchcraftSearchResultsPerPageElement, SearchcraftSearchResultsPerPageEvents>({
+    tagName: 'searchcraft-search-results-per-page',
+    elementClass: SearchcraftSearchResultsPerPageElement,
+    // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
+    react: React,
+    events: {} as SearchcraftSearchResultsPerPageEvents,
+    defineCustomElement: defineSearchcraftSearchResultsPerPage
 });
 
 export type SearchcraftSummaryBoxEvents = NonNullable<unknown>;
 
-export const SearchcraftSummaryBox: StencilReactComponent<
-  SearchcraftSummaryBoxElement,
-  SearchcraftSummaryBoxEvents
-> = /*@__PURE__*/ createComponent<
-  SearchcraftSummaryBoxElement,
-  SearchcraftSummaryBoxEvents
->({
-  tagName: 'searchcraft-summary-box',
-  elementClass: SearchcraftSummaryBoxElement,
-  // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
-  react: React,
-  events: {} as SearchcraftSummaryBoxEvents,
-  defineCustomElement: defineSearchcraftSummaryBox,
+export const SearchcraftSummaryBox: StencilReactComponent<SearchcraftSummaryBoxElement, SearchcraftSummaryBoxEvents> = /*@__PURE__*/ createComponent<SearchcraftSummaryBoxElement, SearchcraftSummaryBoxEvents>({
+    tagName: 'searchcraft-summary-box',
+    elementClass: SearchcraftSummaryBoxElement,
+    // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
+    react: React,
+    events: {} as SearchcraftSummaryBoxEvents,
+    defineCustomElement: defineSearchcraftSummaryBox
 });
 
 export type SearchcraftThemeEvents = NonNullable<unknown>;
 
-export const SearchcraftTheme: StencilReactComponent<
-  SearchcraftThemeElement,
-  SearchcraftThemeEvents
-> = /*@__PURE__*/ createComponent<
-  SearchcraftThemeElement,
-  SearchcraftThemeEvents
->({
-  tagName: 'searchcraft-theme',
-  elementClass: SearchcraftThemeElement,
-  // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
-  react: React,
-  events: {} as SearchcraftThemeEvents,
-  defineCustomElement: defineSearchcraftTheme,
+export const SearchcraftTheme: StencilReactComponent<SearchcraftThemeElement, SearchcraftThemeEvents> = /*@__PURE__*/ createComponent<SearchcraftThemeElement, SearchcraftThemeEvents>({
+    tagName: 'searchcraft-theme',
+    elementClass: SearchcraftThemeElement,
+    // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
+    react: React,
+    events: {} as SearchcraftThemeEvents,
+    defineCustomElement: defineSearchcraftTheme
 });
