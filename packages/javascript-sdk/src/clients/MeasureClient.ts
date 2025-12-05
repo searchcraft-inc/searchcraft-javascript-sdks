@@ -30,7 +30,9 @@ export class MeasureClient {
     this.userId = userId;
     this.userType = userType;
     this.sessionId = nanoid();
-    this.sendMeasureEvent('sdk_initialized');
+    this.sendMeasureEvent('sdk_initialized').catch((error) => {
+      console.error('Error sending sdk_initialized event:', error);
+    });
   }
 
   /**
