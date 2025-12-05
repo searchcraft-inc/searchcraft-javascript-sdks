@@ -1,12 +1,12 @@
+import type { SearchcraftCore } from '@classes';
+import { registry } from '@classes/CoreInstanceRegistry';
 import { Component, Element, Prop, State, h } from '@stencil/core';
-import classNames from 'classnames';
 import type {
-  SearchClientResponseItem,
   AdClientResponseItem,
   PopoverResultMappings,
+  SearchClientResponseItem,
 } from '@types';
-import { registry } from '@classes/CoreInstanceRegistry';
-import type { SearchcraftCore } from '@classes';
+import classNames from 'classnames';
 
 /**
  * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field, or when a popover-button is pressed.
@@ -227,10 +227,16 @@ export class SearchcraftPopoverForm {
         this.modalElement.setAttribute('type', 'fullscreen');
         this.modalElement.setAttribute('searchcraft-id', this.searchcraftId);
         if (this.placeholderValue) {
-          this.modalElement.setAttribute('placeholder-value', this.placeholderValue);
+          this.modalElement.setAttribute(
+            'placeholder-value',
+            this.placeholderValue,
+          );
         }
         if (this.placeholderBehavior) {
-          this.modalElement.setAttribute('placeholder-behavior', this.placeholderBehavior);
+          this.modalElement.setAttribute(
+            'placeholder-behavior',
+            this.placeholderBehavior,
+          );
         }
         document.body.appendChild(this.modalElement);
       }

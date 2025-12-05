@@ -2,9 +2,9 @@ import {
   Component,
   Event,
   type EventEmitter,
+  Fragment,
   Prop,
   h,
-  Fragment,
 } from '@stencil/core';
 import classNames from 'classnames';
 

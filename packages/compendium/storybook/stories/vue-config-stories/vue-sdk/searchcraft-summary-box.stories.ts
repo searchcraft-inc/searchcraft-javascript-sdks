@@ -2,8 +2,8 @@ import type { Meta, StoryFn } from '@storybook/vue3';
 
 import {
   Searchcraft,
-  SearchcraftSearchResults,
   SearchcraftInputForm,
+  SearchcraftSearchResults,
   SearchcraftSummaryBox,
 } from '@searchcraft/vue-sdk';
 

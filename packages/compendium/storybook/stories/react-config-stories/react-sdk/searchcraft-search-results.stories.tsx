@@ -13,11 +13,12 @@ import {
   SearchcraftPagination,
   SearchcraftResultsInfo,
   SearchcraftSearchResults,
-  type SearchcraftSearchResultsProps
+  type SearchcraftSearchResultsProps,
 } from '@searchcraft/react-sdk';
 
 import {
-  searchResultTemplateEchostream, searchResultTemplateGalaxyNews,
+  searchResultTemplateEchostream,
+  searchResultTemplateGalaxyNews,
 } from '@common/index.js';
 
 const componentMeta: Meta = {
@@ -117,7 +118,7 @@ export const FederationSearch: StoryObj<
         <div style={{ marginBottom: 20 }}>
           <SearchcraftInputForm
             autoSearch={true}
-            placeholderValue="Search across multiple indices..."
+            placeholderValue='Search across multiple indices...'
           />
         </div>
         <SearchcraftSearchResults template={searchResultTemplateGalaxyNews} />
@@ -171,7 +172,9 @@ export const WithFilterPanelInitialQueryPagination: StoryObj<
             />
           </div>
           <div style={{ flex: 1 }}>
-            <SearchcraftSearchResults template={searchResultTemplateEchostream} />
+            <SearchcraftSearchResults
+              template={searchResultTemplateEchostream}
+            />
             <div style={{ marginTop: 20 }}>
               <SearchcraftPagination />
             </div>

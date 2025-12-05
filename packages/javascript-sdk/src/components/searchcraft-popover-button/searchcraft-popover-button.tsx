@@ -1,6 +1,6 @@
 import type { SearchcraftCore } from '@classes';
 import { registry } from '@classes/CoreInstanceRegistry';
-import { Component, h, Prop, State } from '@stencil/core';
+import { Component, Prop, State, h } from '@stencil/core';
 
 import type { PopoverButtonTemplate } from '@types';
 

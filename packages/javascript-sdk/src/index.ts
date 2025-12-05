@@ -1,6 +1,9 @@
 import { SearchcraftCore } from '@classes';
 import type { SearchcraftConfig } from '@types';
-import { name as packageName, version as packageVersion } from '../package.json';
+import {
+  name as packageName,
+  version as packageVersion,
+} from '../package.json';
 
 /**
  * @fileoverview entry point for your component library

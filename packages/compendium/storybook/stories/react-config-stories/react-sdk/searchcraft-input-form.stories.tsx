@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react';
 import {
   Searchcraft,
   SearchcraftInputForm,
   type SearchcraftInputFormProps,
 } from '@searchcraft/react-sdk';
+import type { Meta, StoryObj } from '@storybook/react';
 import { useEffect } from 'react';
 
 const componentMeta: Meta = {

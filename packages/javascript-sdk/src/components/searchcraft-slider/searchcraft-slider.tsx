@@ -2,9 +2,9 @@ import {
   Component,
   Event,
   type EventEmitter,
-  h,
-  State,
   Prop,
+  State,
+  h,
 } from '@stencil/core';
 import {
   getDifferenceInUnits,

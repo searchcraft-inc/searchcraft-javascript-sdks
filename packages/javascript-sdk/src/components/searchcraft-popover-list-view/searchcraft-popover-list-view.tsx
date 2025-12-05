@@ -1,12 +1,12 @@
-import type {
-  AdClientResponseItem,
-  SearchClientResponseItem,
-  PopoverResultMappings,
-  SearchcraftConfig,
-} from '@types';
-import { Component, h, Prop, type JSX } from '@stencil/core';
 import type { SearchcraftCore } from '@classes';
 import { registry } from '@classes/CoreInstanceRegistry';
+import { Component, type JSX, Prop, h } from '@stencil/core';
+import type {
+  AdClientResponseItem,
+  PopoverResultMappings,
+  SearchClientResponseItem,
+  SearchcraftConfig,
+} from '@types';
 
 /**
  * This web component is designed to display a list of results within a popover interface.

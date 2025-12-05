@@ -1,8 +1,8 @@
 import type {
   AdClientResponseItem,
+  SearchClientRequestProperties,
   SearchcraftConfig,
   SearchcraftResponse,
-  SearchClientRequestProperties,
 } from '@types';
 
 import { AdClient } from './AdClient';

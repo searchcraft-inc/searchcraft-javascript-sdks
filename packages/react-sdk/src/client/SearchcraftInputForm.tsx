@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 
-import { SearchcraftInputForm as Component } from '../stencil-output/components';
 import type { Components } from '@searchcraft/javascript-sdk';
+import { SearchcraftInputForm as Component } from '../stencil-output/components';
 
 /**
  * The props for the SearchcraftInputForm.

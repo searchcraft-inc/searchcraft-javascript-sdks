@@ -4,7 +4,10 @@ import {
 } from '@searchcraft/javascript-sdk';
 import { defineCustomElements } from '@searchcraft/javascript-sdk';
 
-import { name as packageName, version as packageVersion } from '../package.json';
+import {
+  name as packageName,
+  version as packageVersion,
+} from '../package.json';
 
 /**
  * Export all components and plugins for the Vue SDK here.

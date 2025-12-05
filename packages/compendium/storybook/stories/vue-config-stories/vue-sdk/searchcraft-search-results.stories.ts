@@ -1,11 +1,14 @@
 import type { Meta, StoryFn } from '@storybook/vue3';
 
 import {
+  searchResultTemplateEchostream,
+  searchResultTemplateGalaxyNews,
+} from '@common/index.js';
+import {
   Searchcraft,
-  SearchcraftSearchResults,
   SearchcraftInputForm,
+  SearchcraftSearchResults,
 } from '@searchcraft/vue-sdk';
-import { searchResultTemplateEchostream, searchResultTemplateGalaxyNews } from '@common/index.js';
 
 export default {
   title: 'Vue SDK/searchcraft-search-results',

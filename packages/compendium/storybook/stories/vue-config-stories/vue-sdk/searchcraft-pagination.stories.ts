@@ -1,12 +1,12 @@
 import type { Meta, StoryFn } from '@storybook/vue3';
 
 import {
+  Searchcraft,
   SearchcraftInputForm,
+  SearchcraftPagination,
   SearchcraftResultsInfo,
   SearchcraftSearchResults,
-  SearchcraftPagination,
   SearchcraftSearchResultsPerPage,
-  Searchcraft,
 } from '@searchcraft/vue-sdk';
 
 import { searchResultTemplateEchostream } from '@common/index.js';

@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 
-import { SearchcraftFilterPanel as Component } from '../stencil-output/components';
 import type { Components } from '@searchcraft/javascript-sdk';
+import { SearchcraftFilterPanel as Component } from '../stencil-output/components';
 
 /**
  * The props for the SearchcraftFilterPanel.

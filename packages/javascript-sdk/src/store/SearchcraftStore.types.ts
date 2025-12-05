@@ -1,11 +1,11 @@
 import type {
-    AdClientResponseItem,
-    FacetPathsForIndexField,
-    FacetPrime,
-    RangeValueForIndexField,
-    SearchClientRequest,
-    SearchClientRequestProperties,
-    SearchClientResponseItem,
+  AdClientResponseItem,
+  FacetPathsForIndexField,
+  FacetPrime,
+  RangeValueForIndexField,
+  SearchClientRequest,
+  SearchClientRequestProperties,
+  SearchClientResponseItem,
 } from '@types';
 import type { StoreApi } from 'zustand';
 

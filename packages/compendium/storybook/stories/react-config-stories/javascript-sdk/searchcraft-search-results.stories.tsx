@@ -8,7 +8,7 @@ import {
   type FacetsFilterItem,
   type MostRecentToggleFilterItem,
   Searchcraft,
-  type SearchcraftConfig
+  type SearchcraftConfig,
 } from '@searchcraft/javascript-sdk';
 
 import {
@@ -322,71 +322,72 @@ export const FederationSearch: StoryObj<Components.SearchcraftSearchResults> = {
   args: {},
 };
 
-export const WithFilterPanelInitialQueryPagination: StoryObj<
-  Components.SearchcraftSearchResults
-> = {
-  decorators: [
-    (Story) => {
-      useEffect(() => {
-        new Searchcraft({
-          readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
-          endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
-          indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
-          initialQuery: JSON.stringify({
-            query: {
-              occur: 'must',
-              fuzzy: {
-                ctx: 'steak',
+export const WithFilterPanelInitialQueryPagination: StoryObj<Components.SearchcraftSearchResults> =
+  {
+    decorators: [
+      (Story) => {
+        useEffect(() => {
+          new Searchcraft({
+            readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
+            endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
+            indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
+            initialQuery: JSON.stringify({
+              query: {
+                occur: 'must',
+                fuzzy: {
+                  ctx: 'steak',
+                },
               },
-            },
-          }),
-        });
+            }),
+          });
 
-        const filterPanel = document.querySelector('searchcraft-filter-panel');
-        if (filterPanel) {
-          filterPanel.items = [
-            exactMatchItem,
-            mostRecentItem,
-            dateRangeItemYears,
-            facetItem,
-          ];
-        }
+          const filterPanel = document.querySelector(
+            'searchcraft-filter-panel',
+          );
+          if (filterPanel) {
+            filterPanel.items = [
+              exactMatchItem,
+              mostRecentItem,
+              dateRangeItemYears,
+              facetItem,
+            ];
+          }
 
-        const searchResults = document.querySelector(
-          'searchcraft-search-results',
-        );
-        if (searchResults) {
-          searchResults.template = searchResultTemplateEchostream;
-        }
-      }, []);
+          const searchResults = document.querySelector(
+            'searchcraft-search-results',
+          );
+          if (searchResults) {
+            searchResults.template = searchResultTemplateEchostream;
+          }
+        }, []);
 
-      return <Story />;
-    },
-  ],
-  render: () => {
-    return (
-      <>
-        <div style={{ marginBottom: 20 }}>
-          <searchcraft-input-form />
-        </div>
-        <div style={{ marginBottom: 20 }}>
-          <searchcraft-results-info />
-        </div>
-        <div style={{ display: 'flex', gap: 20 }}>
-          <div style={{ flex: '0 0 300px' }}>
-            <searchcraft-filter-panel />
+        return <Story />;
+      },
+    ],
+    render: () => {
+      return (
+        <>
+          <div style={{ marginBottom: 20 }}>
+            <searchcraft-input-form />
           </div>
-          <div style={{ flex: 1 }}>
-            <searchcraft-search-results />
-            <div style={{ marginTop: 20 }}>
-              <searchcraft-pagination />
+          <div style={{ marginBottom: 20 }}>
+            <searchcraft-results-info />
+          </div>
+          <div style={{ display: 'flex', gap: 20 }}>
+            <div style={{ flex: '0 0 300px' }}>
+              <searchcraft-filter-panel />
+            </div>
+            <div style={{ flex: 1 }}>
+              <searchcraft-search-results />
+              <div style={{ marginTop: 20 }}>
+                <searchcraft-pagination />
+              </div>
             </div>
           </div>
-        </div>
-      </>
-    );
-  },
-  args: {},
-};
+        </>
+      );
+    },
+    args: {},
+  };
 
 export default componentMeta;

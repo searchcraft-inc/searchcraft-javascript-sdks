@@ -1,16 +1,16 @@
-import { Component, h, Prop, State, type JSX } from '@stencil/core';
+import { Component, type JSX, Prop, State, h } from '@stencil/core';
 
 import type {
   AdClientResponseItem,
   SearchClientResponseItem,
-  SearchcraftConfig,
   SearchResultTemplate,
   SearchResultTemplateData,
+  SearchcraftConfig,
 } from '@types';
 
-import type { SearchcraftState } from '@store';
 import type { SearchcraftCore } from '@classes';
 import { registry } from '@classes/CoreInstanceRegistry';
+import type { SearchcraftState } from '@store';
 
 /**
  * This web component is responsible for displaying the results of a search query. Once a query is submitted, the component formats and presents an ordered list of the results.

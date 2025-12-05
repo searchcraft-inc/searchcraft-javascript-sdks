@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 
-import { SearchcraftTheme as Component } from '../stencil-output/components';
 import type { Components } from '@searchcraft/javascript-sdk';
+import { SearchcraftTheme as Component } from '../stencil-output/components';
 
 /**
  * The Props for the SearchcraftTheme component.

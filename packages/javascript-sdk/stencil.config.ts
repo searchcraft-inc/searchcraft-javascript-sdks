@@ -1,14 +1,14 @@
-import { readFileSync, promises as fs } from 'node:fs';
+import { promises as fs, readFileSync } from 'node:fs';
 
 import type { Config } from '@stencil/core';
-import { reactOutputTarget } from '@stencil/react-output-target';
-import { vueOutputTarget } from '@stencil/vue-output-target';
 import type {
   JsonDocs,
   JsonDocsEvent,
   JsonDocsProp,
   JsonDocsTag,
 } from '@stencil/core/internal';
+import { reactOutputTarget } from '@stencil/react-output-target';
+import { vueOutputTarget } from '@stencil/vue-output-target';
 
 const loadRawAsStringPlugin = {
   name: 'loadRawAsString',
