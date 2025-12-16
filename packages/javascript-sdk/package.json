@@ -28,7 +28,9 @@
     "url": "https://github.com/searchcraft-inc/searchcraft-javascript-sdks"
   },
   "homepage": "https://github.com/searchcraft-inc/searchcraft-javascript-sdks#readme",
-  "files": ["dist/"],
+  "files": [
+    "dist/"
+  ],
   "scripts": {
     "build": "stencil build",
     "docs": "typedoc --options typedoc.json",
@@ -44,7 +46,7 @@
     "nanoid": "^5.0.9"
   },
   "devDependencies": {
-    "@stencil/core": "^4.7.0",
+    "@stencil/core": "4.39.0",
     "@stencil/react-output-target": "^1.2.0",
     "@stencil/sass": "^3.0.12",
     "@stencil/vue-output-target": "^0.9.2",
