@@ -7,6 +7,8 @@
  * `defineCustomElements` does not automatically exist when building with stencil's `single-output-target` option.
  *
  * - Update the vue-sdk's output target file so that it does not produce typescript errors.
+ *
+ * - Add version query parameters to all imports for better cache invalidation.
  */
 const { join } = require('node:path');
 const {
@@ -16,6 +18,10 @@ const {
   readdirSync,
 } = require('node:fs');
 
+// Read package version
+const packageJson = JSON.parse(readFileSync('./package.json', 'utf-8'));
+const version = packageJson.version;
+
 const OUTPUT_DIR = './dist/components';
 const GENERATED_JS_FILE = join(OUTPUT_DIR, 'defineCustomElements.js');
 const GENERATED_DTS_FILE = join(OUTPUT_DIR, 'defineCustomElements.d.ts');
@@ -24,7 +30,9 @@ const INDEX_DTS_FILE = join(OUTPUT_DIR, 'index.d.ts');
 
 const files = readdirSync(OUTPUT_DIR)
   .filter((file) => file.endsWith('.js'))
-  .filter((fileName) => fileName.startsWith('searchcraft'));
+  .filter((fileName) => fileName.startsWith('searchcraft'))
+  // Exclude chunk files (e.g., searchcraft-ad2.js, index2.js, etc.)
+  .filter((fileName) => !fileName.match(/\d+\.js$/));
 
 const importString = files
   .map((file) => {
@@ -140,3 +148,32 @@ if (existsSync(COMPONENTS_DTS_FILE)) {
   writeFileSync(COMPONENTS_DTS_FILE, componentsDtsContent);
   console.log('[Stencil Plugin] Fixed components.d.ts to use import type and export type.');
 }
+
+// Add version query parameters to all imports for cache busting
+function addVersionToImports() {
+  const allJsFiles = readdirSync(OUTPUT_DIR)
+    .filter((file) => file.endsWith('.js'));
+
+  let filesModified = 0;
+
+  allJsFiles.forEach((file) => {
+    const filePath = join(OUTPUT_DIR, file);
+    const content = readFileSync(filePath, 'utf-8');
+
+    // Replace all relative imports with versioned imports
+    // Matches: from './filename.js' or from "./filename.js"
+    const newContent = content.replace(
+      /(from\s+['"]\.\/[^'"]+\.js)(['"])/g,
+      `$1?v=${version}$2`
+    );
+
+    if (newContent !== content) {
+      writeFileSync(filePath, newContent);
+      filesModified++;
+    }
+  });
+
+  console.log(`[Stencil Plugin] Added version query parameters to ${filesModified} files.`);
+}
+
+addVersionToImports();
