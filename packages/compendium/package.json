@@ -1,7 +1,7 @@
 {
   "name": "compendium",
   "private": true,
-  "version": "0.13.1",
+  "version": "0.13.2",
   "type": "module",
   "scripts": {
     "next": "cd next && next dev",
@@ -11,16 +11,16 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "next": "15.4.8",
+    "next": "15.4.10",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "vue": "^3.5.13"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^4.1.3",
-    "@searchcraft/javascript-sdk": "^0.13.1",
-    "@searchcraft/react-sdk": "^0.13.1",
-    "@searchcraft/vue-sdk": "^0.13.1",
+    "@searchcraft/javascript-sdk": "^0.13.2",
+    "@searchcraft/react-sdk": "^0.13.2",
+    "@searchcraft/vue-sdk": "^0.13.2",
     "@storybook/react": "^10.1.4",
     "@storybook/react-vite": "^10.1.4",
     "@storybook/vue3": "^10.1.4",

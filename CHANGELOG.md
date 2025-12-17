@@ -1,3 +1,8 @@
+## 0.13.2 - 2025-12-16
+
+- Enhancement: Change internal component import/export paths for improved browser cache handling.
+- Update internal Stencil core package used for build.
+
 ## 0.13.1 - 2025-12-05
 
 - New Feature: Measure events can now differentiate between authenticated and anonymous users for report generation.
