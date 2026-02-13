@@ -4,16 +4,23 @@ import { useEffect } from 'react';
 import { Searchcraft } from '@searchcraft/javascript-sdk';
 
 import {
-  customAdTemplate,
-  searchResultTemplateEchostream,
+    customAdTemplate,
+    searchResultTemplateEchostream,
 } from '@common/index.js';
 
 const componentMeta: Meta = {
   title: 'Javascript SDK/searchcraft-pagination',
-  argTypes: {},
+  argTypes: {
+    scrollToTop: {
+      control: 'boolean',
+      description: 'Whether to scroll to the top of the search results when pagination buttons are clicked',
+    },
+  },
 };
 
-const defaultProps = {};
+const defaultProps = {
+  scrollToTop: true,
+};
 
 export const Default: StoryObj = {
   decorators: [
@@ -72,7 +79,7 @@ export const Default: StoryObj = {
       return <Story />;
     },
   ],
-  render: () => (
+  render: (args) => (
     <>
       <div style={{ marginBottom: 20 }}>
         <searchcraft-input-form />
@@ -92,7 +99,7 @@ export const Default: StoryObj = {
         }}
       >
         <searchcraft-search-results-per-page />
-        <searchcraft-pagination />
+        <searchcraft-pagination scroll-to-top={args.scrollToTop} />
       </div>
     </>
   ),
@@ -165,7 +172,7 @@ export const WithCustomAds: StoryObj = {
       return <Story />;
     },
   ],
-  render: () => (
+  render: (args) => (
     <>
       <div style={{ marginBottom: 20 }}>
         <searchcraft-input-form />
@@ -185,7 +192,7 @@ export const WithCustomAds: StoryObj = {
         }}
       >
         <searchcraft-search-results-per-page />
-        <searchcraft-pagination />
+        <searchcraft-pagination scroll-to-top={args.scrollToTop} />
       </div>
     </>
   ),
@@ -258,7 +265,7 @@ export const WithNativoAds: StoryObj = {
       return <Story />;
     },
   ],
-  render: () => (
+  render: (args) => (
     <>
       <div style={{ marginBottom: 20 }}>
         <searchcraft-input-form />
@@ -278,7 +285,7 @@ export const WithNativoAds: StoryObj = {
         }}
       >
         <searchcraft-search-results-per-page />
-        <searchcraft-pagination />
+        <searchcraft-pagination scroll-to-top={args.scrollToTop} />
       </div>
     </>
   ),

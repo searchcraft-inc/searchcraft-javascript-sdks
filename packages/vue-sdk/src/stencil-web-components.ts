@@ -36,7 +36,8 @@ export const SearchcraftInputForm = /*@__PURE__*/ defineContainer<JSX.Searchcraf
 
 
 export const SearchcraftPagination = /*@__PURE__*/ defineContainer<JSX.SearchcraftPagination>('searchcraft-pagination', () => {}, [
-  'searchcraftId'
+  'searchcraftId',
+  'scrollToTop'
 ]);
 
 

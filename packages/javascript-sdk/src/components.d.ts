@@ -255,6 +255,11 @@ export namespace Components {
      */
     interface SearchcraftPagination {
         /**
+          * Whether to scroll to the top of the search results when pagination buttons are clicked.
+          * @default true
+         */
+        "scrollToTop"?: boolean;
+        /**
           * The id of the Searchcraft instance that this component should use.
          */
         "searchcraftId"?: string;
@@ -1564,6 +1569,11 @@ declare namespace LocalJSX {
      * ```
      */
     interface SearchcraftPagination {
+        /**
+          * Whether to scroll to the top of the search results when pagination buttons are clicked.
+          * @default true
+         */
+        "scrollToTop"?: boolean;
         /**
           * The id of the Searchcraft instance that this component should use.
          */
