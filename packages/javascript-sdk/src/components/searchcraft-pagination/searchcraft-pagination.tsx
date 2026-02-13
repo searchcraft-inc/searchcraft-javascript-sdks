@@ -40,6 +40,11 @@ export class SearchcraftPagination {
    * The id of the Searchcraft instance that this component should use.
    */
   @Prop() searchcraftId?: string;
+  /**
+   * Whether to scroll to the top of the search results when pagination buttons are clicked.
+   * @default true
+   */
+  @Prop() scrollToTop?: boolean = true;
   // store vars
   @State() searchTerm;
   @State() searchResultsPerPage;
@@ -94,8 +99,57 @@ export class SearchcraftPagination {
     this.cleanupCore?.();
   }
 
+  /**
+   * Smooth scroll to the top of the search results component
+   */
+  private smoothScrollToSearchResults() {
+    if (!this.scrollToTop) {
+      return;
+    }
+
+    const searchResultsElement = document.querySelector('searchcraft-search-results .searchcraft-search-results');
+
+    if (!searchResultsElement) {
+      return;
+    }
+
+    const elementRect = searchResultsElement.getBoundingClientRect();
+    const scrollOffset = 200; // Offset in pixels above the element
+    const targetPosition = elementRect.top + window.scrollY - scrollOffset;
+    const startPosition = window.scrollY;
+    const distance = targetPosition - startPosition;
+    const duration = 1500;
+    let startTime: number | null = null;
+
+    // smooth scrolling
+    const easeOutExpo = (t: number): number => {
+      return t === 1 ? 1 : 1 - 2 ** (-10 * t);
+    };
+
+    const animation = (currentTime: number) => {
+      if (startTime === null) {
+        startTime = currentTime;
+      }
+
+      const timeElapsed = currentTime - startTime;
+      const progress = Math.min(timeElapsed / duration, 1);
+      const ease = easeOutExpo(progress);
+
+      window.scrollTo(0, startPosition + distance * ease);
+
+      if (progress < 1) {
+        requestAnimationFrame(animation);
+      }
+    };
+
+    requestAnimationFrame(animation);
+  }
+
   handleGoToPage(page: number) {
     this.setSearchResultsPage(page);
+    if (this.scrollToTop) {
+      this.smoothScrollToSearchResults();
+    }
   }
 
   renderOddPaginationItem(page: number) {
