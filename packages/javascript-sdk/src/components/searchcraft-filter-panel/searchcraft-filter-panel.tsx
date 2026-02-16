@@ -405,15 +405,63 @@ export class SearchcraftFilterPanel {
             }
             case 'facets': {
               const item = filterItem as FacetsFilterItem;
+              let facetListElement: HTMLElement | null = null;
+              let labelElement: HTMLElement | null = null;
+
+              const updateLabelAttributes = (isCollapsed: boolean) => {
+                if (labelElement) {
+                  if (isCollapsed) {
+                    labelElement.removeAttribute('data-facet-section-expanded');
+                    labelElement.setAttribute('data-facet-section-collapsed', '');
+                    labelElement.setAttribute('aria-expanded', 'false');
+                  } else {
+                    labelElement.removeAttribute('data-facet-section-collapsed');
+                    labelElement.setAttribute('data-facet-section-expanded', '');
+                    labelElement.setAttribute('aria-expanded', 'true');
+                  }
+                }
+              };
+
+              const handleToggle = async () => {
+                if (facetListElement && 'handleCollapseToggle' in facetListElement && 'getIsCollapsed' in facetListElement) {
+                  await (facetListElement as { handleCollapseToggle: () => Promise<void>; getIsCollapsed: () => Promise<boolean> }).handleCollapseToggle();
+                  const isCollapsed = await (facetListElement as { getIsCollapsed: () => Promise<boolean> }).getIsCollapsed();
+                  updateLabelAttributes(isCollapsed);
+                }
+              };
+
               // return "filters-list"
               return (
                 <div class='searchcraft-filter-panel-section'>
-                  <p class='searchcraft-filter-panel-label'>
+                  <p
+                    ref={(el) => {
+                      labelElement = el || null;
+                    }}
+                    class='searchcraft-filter-panel-label'
+                    data-toggle-facet-section
+                    data-facet-section-expanded={item.options.initialCollapseState !== 'closed' ? '' : undefined}
+                    data-facet-section-collapsed={item.options.initialCollapseState === 'closed' ? '' : undefined}
+                    onClick={handleToggle}
+                    onKeyDown={async (event: KeyboardEvent) => {
+                      if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        await handleToggle();
+                      }
+                    }}
+                    tabIndex={0}
+                    role='button'
+                    aria-expanded={item.options.initialCollapseState !== 'closed'}
+                  >
                     {filterItem.label}
                   </p>
                   <searchcraft-facet-list
+                    ref={(el) => {
+                      facetListElement = el || null;
+                    }}
                     fieldName={item.fieldName}
                     exclude={item.options.exclude}
+                    initialCollapseState={item.options.initialCollapseState}
+                    viewMoreThreshold={item.options.viewMoreThreshold}
                     onFacetSelectionUpdated={(event) => {
                       this.handleFacetSelectionUpdated(
                         item.fieldName,
