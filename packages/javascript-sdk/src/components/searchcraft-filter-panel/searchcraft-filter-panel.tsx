@@ -413,10 +413,20 @@ export class SearchcraftFilterPanel {
                   if (isCollapsed) {
                     labelElement.removeAttribute('data-facet-section-expanded');
                     labelElement.setAttribute('data-facet-section-collapsed', '');
+                    labelElement.setAttribute('aria-expanded', 'false');
                   } else {
                     labelElement.removeAttribute('data-facet-section-collapsed');
                     labelElement.setAttribute('data-facet-section-expanded', '');
+                    labelElement.setAttribute('aria-expanded', 'true');
                   }
+                }
+              };
+
+              const handleToggle = async () => {
+                if (facetListElement && 'handleCollapseToggle' in facetListElement && 'getIsCollapsed' in facetListElement) {
+                  await (facetListElement as { handleCollapseToggle: () => Promise<void>; getIsCollapsed: () => Promise<boolean> }).handleCollapseToggle();
+                  const isCollapsed = await (facetListElement as { getIsCollapsed: () => Promise<boolean> }).getIsCollapsed();
+                  updateLabelAttributes(isCollapsed);
                 }
               };
 
@@ -431,23 +441,11 @@ export class SearchcraftFilterPanel {
                     data-toggle-facet-section
                     data-facet-section-expanded={item.options.initialCollapseState !== 'closed' ? '' : undefined}
                     data-facet-section-collapsed={item.options.initialCollapseState === 'closed' ? '' : undefined}
-                    onClick={async () => {
-                      if (facetListElement && 'handleCollapseToggle' in facetListElement && 'getIsCollapsed' in facetListElement) {
-                        await (facetListElement as { handleCollapseToggle: () => Promise<void>; getIsCollapsed: () => Promise<boolean> }).handleCollapseToggle();
-                        // Update label attributes after toggle
-                        const isCollapsed = await (facetListElement as { getIsCollapsed: () => Promise<boolean> }).getIsCollapsed();
-                        updateLabelAttributes(isCollapsed);
-                      }
-                    }}
+                    onClick={handleToggle}
                     onKeyDown={async (event: KeyboardEvent) => {
                       if (event.key === 'Enter' || event.key === ' ') {
                         event.preventDefault();
-                        if (facetListElement && 'handleCollapseToggle' in facetListElement && 'getIsCollapsed' in facetListElement) {
-                          await (facetListElement as { handleCollapseToggle: () => Promise<void>; getIsCollapsed: () => Promise<boolean> }).handleCollapseToggle();
-                          // Update label attributes after toggle
-                          const isCollapsed = await (facetListElement as { getIsCollapsed: () => Promise<boolean> }).getIsCollapsed();
-                          updateLabelAttributes(isCollapsed);
-                        }
+                        await handleToggle();
                       }
                     }}
                     tabIndex={0}
