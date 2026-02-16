@@ -118,7 +118,15 @@ export namespace Components {
           * @default ''
          */
         "fieldName": string;
+        /**
+          * Returns whether the facet section is currently collapsed.
+          * @returns A promise that resolves to true if collapsed, false if expanded.
+         */
         "getIsCollapsed": () => Promise<boolean>;
+        /**
+          * Toggles the collapsed state of the facet section.
+          * @returns A promise that resolves when the toggle is complete.
+         */
         "handleCollapseToggle": () => Promise<void>;
         /**
           * Initial collapse state of the facet section.

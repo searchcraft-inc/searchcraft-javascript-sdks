@@ -459,11 +459,19 @@ export class SearchcraftFacetList {
     return `${label.replace(/-/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase())}`;
   };
 
+  /**
+   * Toggles the collapsed state of the facet section.
+   * @returns A promise that resolves when the toggle is complete.
+   */
   @Method()
   async handleCollapseToggle() {
     this.isCollapsed = !this.isCollapsed;
   }
 
+  /**
+   * Returns whether the facet section is currently collapsed.
+   * @returns A promise that resolves to true if collapsed, false if expanded.
+   */
   @Method()
   async getIsCollapsed() {
     return this.isCollapsed;
