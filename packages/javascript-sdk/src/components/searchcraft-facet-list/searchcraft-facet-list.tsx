@@ -2,6 +2,7 @@ import {
   Component,
   Event,
   type EventEmitter,
+  Method,
   Prop,
   State,
   h,
@@ -42,7 +43,21 @@ type HandlerActionType =
  * @js-example
  * ```html
  * <!-- index.html -->
+ * <!-- Basic usage -->
  * <searchcraft-facet-list field-name="title" />
+ *
+ * <!-- With collapsible section (initially closed) and view more threshold -->
+ * <searchcraft-facet-list
+ *   field-name="category"
+ *   initial-collapse-state="closed"
+ *   view-more-threshold="5"
+ * />
+ *
+ * <!-- Show all facets without "view more" link -->
+ * <searchcraft-facet-list
+ *   field-name="brand"
+ *   view-more-threshold="0"
+ * />
  * ```
  *
  * ```js
@@ -52,6 +67,9 @@ type HandlerActionType =
  * facetList.addEventListener('facetSelectionUpdated', () => {
  *   console.log('Facet selection updated');
  * });
+ *
+ * // Programmatically toggle collapse state
+ * await facetList.handleCollapseToggle();
  * ```
  *
  * @internal
@@ -73,6 +91,17 @@ export class SearchcraftFacetList {
    * Array of facet values to exclude from rendering.
    */
   @Prop() exclude?: string[];
+  /**
+   * Initial collapse state of the facet section.
+   * @default 'open'
+   */
+  @Prop() initialCollapseState?: 'open' | 'closed' = 'open';
+  /**
+   * The number of facets to show before displaying a "view more" link.
+   * Set to 0 to show all facets without a "view more" link.
+   * @default 8
+   */
+  @Prop() viewMoreThreshold?: number = 8;
 
   /**
    * Emitted when the facets are updated.
@@ -112,6 +141,16 @@ export class SearchcraftFacetList {
     count: 0,
     children: {},
   };
+
+  /**
+   * Tracks whether the facet section is collapsed or expanded.
+   */
+  @State() isCollapsed = false;
+
+  /**
+   * Tracks whether all facets are shown or limited by the threshold.
+   */
+  @State() showAllFacets = false;
 
   // Internal vars used to track when to perform various facet actions.
   private lastTimeTaken?: number;
@@ -361,6 +400,9 @@ export class SearchcraftFacetList {
   }
 
   connectedCallback() {
+    // Initialize collapse state based on prop
+    this.isCollapsed = this.initialCollapseState === 'closed';
+
     this.cleanupCore = registry.useCoreInstance(
       this.searchcraftId,
       this.onCoreAvailable.bind(this),
@@ -415,6 +457,20 @@ export class SearchcraftFacetList {
   formatFacetName = (name: string): string => {
     const label = name.replace(/^\//, '');
     return `${label.replace(/-/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase())}`;
+  };
+
+  @Method()
+  async handleCollapseToggle() {
+    this.isCollapsed = !this.isCollapsed;
+  }
+
+  @Method()
+  async getIsCollapsed() {
+    return this.isCollapsed;
+  }
+
+  handleViewMoreToggle = () => {
+    this.showAllFacets = !this.showAllFacets;
   };
 
   renderFacet(keyName: string, facet: FacetWithChildrenObject) {
@@ -528,9 +584,40 @@ export class SearchcraftFacetList {
       );
     }
 
+    // Get root-level facets for view more functionality
+    const rootFacets = Object.keys(this.renderedFacetTree.children);
+    const threshold = this.viewMoreThreshold ?? 8;
+    const shouldShowViewMore = threshold > 0 && rootFacets.length > threshold;
+    const visibleFacets = shouldShowViewMore && !this.showAllFacets
+      ? rootFacets.slice(0, threshold)
+      : rootFacets;
+
     return (
-      <div class='searchcraft-facet-list'>
-        {this.renderFacet('@@root', this.renderedFacetTree)}
+      <div
+        class='searchcraft-facet-list-wrapper'
+        data-facet-section-collapsed={this.isCollapsed ? '' : undefined}
+        data-facet-section-expanded={!this.isCollapsed ? '' : undefined}
+      >
+        {!this.isCollapsed && (
+          <div class='searchcraft-facet-list-content'>
+            <div class='searchcraft-facet-list'>
+              {visibleFacets.map((key) => {
+                if (this.renderedFacetTree.children[key]) {
+                  return this.renderFacet(key, this.renderedFacetTree.children[key]);
+                }
+              })}
+            </div>
+            {shouldShowViewMore && (
+              <button
+                class='searchcraft-facet-list-view-more'
+                onClick={this.handleViewMoreToggle}
+                type='button'
+              >
+                {this.showAllFacets ? 'View less' : 'View more...'}
+              </button>
+            )}
+          </div>
+        )}
       </div>
     );
   }

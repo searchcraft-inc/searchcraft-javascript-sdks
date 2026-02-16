@@ -84,7 +84,19 @@ export namespace Components {
      * It is consumed within the `searchcraft-filter-panel`.
      * @js-example ```html
      * <!-- index.html -->
+     * <!-- Basic usage -->
      * <searchcraft-facet-list field-name="title" />
+     * <!-- With collapsible section (initially closed) and view more threshold -->
+     * <searchcraft-facet-list
+     *   field-name="category"
+     *   initial-collapse-state="closed"
+     *   view-more-threshold="5"
+     * />
+     * <!-- Show all facets without "view more" link -->
+     * <searchcraft-facet-list
+     *   field-name="brand"
+     *   view-more-threshold="0"
+     * />
      * ```
      * ```js
      * // index.js
@@ -92,6 +104,8 @@ export namespace Components {
      * facetList.addEventListener('facetSelectionUpdated', () => {
      *   console.log('Facet selection updated');
      * });
+     * // Programmatically toggle collapse state
+     * await facetList.handleCollapseToggle();
      * ```
      */
     interface SearchcraftFacetList {
@@ -104,10 +118,22 @@ export namespace Components {
           * @default ''
          */
         "fieldName": string;
+        "getIsCollapsed": () => Promise<boolean>;
+        "handleCollapseToggle": () => Promise<void>;
+        /**
+          * Initial collapse state of the facet section.
+          * @default 'open'
+         */
+        "initialCollapseState"?: 'open' | 'closed';
         /**
           * The id of the Searchcraft instance that this component should use.
          */
         "searchcraftId"?: string;
+        /**
+          * The number of facets to show before displaying a "view more" link. Set to 0 to show all facets without a "view more" link.
+          * @default 8
+         */
+        "viewMoreThreshold"?: number;
     }
     /**
      * This web component represents a series of filters that allows users to refine and control their search queries by applying various filter criteria.
@@ -792,7 +818,19 @@ declare global {
      * It is consumed within the `searchcraft-filter-panel`.
      * @js-example ```html
      * <!-- index.html -->
+     * <!-- Basic usage -->
      * <searchcraft-facet-list field-name="title" />
+     * <!-- With collapsible section (initially closed) and view more threshold -->
+     * <searchcraft-facet-list
+     *   field-name="category"
+     *   initial-collapse-state="closed"
+     *   view-more-threshold="5"
+     * />
+     * <!-- Show all facets without "view more" link -->
+     * <searchcraft-facet-list
+     *   field-name="brand"
+     *   view-more-threshold="0"
+     * />
      * ```
      * ```js
      * // index.js
@@ -800,6 +838,8 @@ declare global {
      * facetList.addEventListener('facetSelectionUpdated', () => {
      *   console.log('Facet selection updated');
      * });
+     * // Programmatically toggle collapse state
+     * await facetList.handleCollapseToggle();
      * ```
      */
     interface HTMLSearchcraftFacetListElement extends Components.SearchcraftFacetList, HTMLStencilElement {
@@ -1383,7 +1423,19 @@ declare namespace LocalJSX {
      * It is consumed within the `searchcraft-filter-panel`.
      * @js-example ```html
      * <!-- index.html -->
+     * <!-- Basic usage -->
      * <searchcraft-facet-list field-name="title" />
+     * <!-- With collapsible section (initially closed) and view more threshold -->
+     * <searchcraft-facet-list
+     *   field-name="category"
+     *   initial-collapse-state="closed"
+     *   view-more-threshold="5"
+     * />
+     * <!-- Show all facets without "view more" link -->
+     * <searchcraft-facet-list
+     *   field-name="brand"
+     *   view-more-threshold="0"
+     * />
      * ```
      * ```js
      * // index.js
@@ -1391,6 +1443,8 @@ declare namespace LocalJSX {
      * facetList.addEventListener('facetSelectionUpdated', () => {
      *   console.log('Facet selection updated');
      * });
+     * // Programmatically toggle collapse state
+     * await facetList.handleCollapseToggle();
      * ```
      */
     interface SearchcraftFacetList {
@@ -1404,6 +1458,11 @@ declare namespace LocalJSX {
          */
         "fieldName"?: string;
         /**
+          * Initial collapse state of the facet section.
+          * @default 'open'
+         */
+        "initialCollapseState"?: 'open' | 'closed';
+        /**
           * Emitted when the facets are updated.
          */
         "onFacetSelectionUpdated"?: (event: SearchcraftFacetListCustomEvent<{ paths: string[] }>) => void;
@@ -1411,6 +1470,11 @@ declare namespace LocalJSX {
           * The id of the Searchcraft instance that this component should use.
          */
         "searchcraftId"?: string;
+        /**
+          * The number of facets to show before displaying a "view more" link. Set to 0 to show all facets without a "view more" link.
+          * @default 8
+         */
+        "viewMoreThreshold"?: number;
     }
     /**
      * This web component represents a series of filters that allows users to refine and control their search queries by applying various filter criteria.
@@ -2094,7 +2158,19 @@ declare module "@stencil/core" {
              * It is consumed within the `searchcraft-filter-panel`.
              * @js-example ```html
              * <!-- index.html -->
+             * <!-- Basic usage -->
              * <searchcraft-facet-list field-name="title" />
+             * <!-- With collapsible section (initially closed) and view more threshold -->
+             * <searchcraft-facet-list
+             *   field-name="category"
+             *   initial-collapse-state="closed"
+             *   view-more-threshold="5"
+             * />
+             * <!-- Show all facets without "view more" link -->
+             * <searchcraft-facet-list
+             *   field-name="brand"
+             *   view-more-threshold="0"
+             * />
              * ```
              * ```js
              * // index.js
@@ -2102,6 +2178,8 @@ declare module "@stencil/core" {
              * facetList.addEventListener('facetSelectionUpdated', () => {
              *   console.log('Facet selection updated');
              * });
+             * // Programmatically toggle collapse state
+             * await facetList.handleCollapseToggle();
              * ```
              */
             "searchcraft-facet-list": LocalJSX.SearchcraftFacetList & JSXBase.HTMLAttributes<HTMLSearchcraftFacetListElement>;
