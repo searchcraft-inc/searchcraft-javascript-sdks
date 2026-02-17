@@ -102,6 +102,7 @@ export class SearchcraftPagination {
   /**
    * Smooth scroll to the top of the search results component
    */
+  private scrollAnimationId?: number;
   private smoothScrollToSearchResults() {
     if (!this.scrollToTop) {
       return;
@@ -113,15 +114,19 @@ export class SearchcraftPagination {
       return;
     }
 
+    // Cancel any in-flight scroll animation
+    if (this.scrollAnimationId) {
+      cancelAnimationFrame(this.scrollAnimationId);
+    }
+
     const elementRect = searchResultsElement.getBoundingClientRect();
-    const scrollOffset = 200; // Offset in pixels above the element
+    const scrollOffset = 200;
     const targetPosition = elementRect.top + window.scrollY - scrollOffset;
     const startPosition = window.scrollY;
     const distance = targetPosition - startPosition;
     const duration = 1500;
     let startTime: number | null = null;
 
-    // smooth scrolling
     const easeOutExpo = (t: number): number => {
       return t === 1 ? 1 : 1 - 2 ** (-10 * t);
     };
@@ -138,11 +143,13 @@ export class SearchcraftPagination {
       window.scrollTo(0, startPosition + distance * ease);
 
       if (progress < 1) {
-        requestAnimationFrame(animation);
+        this.scrollAnimationId = requestAnimationFrame(animation);
+      } else {
+        this.scrollAnimationId = undefined;
       }
     };
 
-    requestAnimationFrame(animation);
+    this.scrollAnimationId = requestAnimationFrame(animation);
   }
 
   handleGoToPage(page: number) {
