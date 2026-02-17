@@ -1,8 +1,8 @@
 # Contributing to `searchcraft-javascript-sdks`
 
-All types of contributions are encouraged and valued. See the [Table of Contents](#table-of-contents) for different ways to help and details about how this project handles them. Please make sure to read the relevant section before making your contribution.
+All types of contributions are encouraged and valued. Please take the time to read through the existing code to get a feel for the project and familiarize yourself prior to contributing. Before spending time contributing you may want to create an issue first to discuss what you are wanting to accomplish.
 
-> And if you like the project, but just don't have time to contribute, that's fine. There are other easy ways to support the project and show your appreciation, which we would also be very happy about:
+> If you like the project, but just don't have time to contribute, that's fine. There are other easy ways to support the project and show your appreciation, which we would also be very happy about:
 > - Follow [Searchcraft](https://github.com/searchcraft-inc) on GitHub
 > - Star the repository
 > - Mention the Searchcraft SDKs at local meetups and tell your friends/colleagues

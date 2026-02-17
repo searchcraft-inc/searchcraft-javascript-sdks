@@ -18,6 +18,35 @@
   font-weight: var(--sc-font-bold);
 }
 
+// Styles for facet section toggle
+[data-toggle-facet-section] {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  position: relative;
+
+  &::after {
+    content: '›';
+    display: inline-block;
+    font-size: 1.5em;
+    line-height: 1;
+    margin-left: auto;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+    transform-origin: center;
+  }
+
+  &[data-facet-section-collapsed]::after {
+    transform: rotate(90deg);
+  }
+
+  &[data-facet-section-expanded]::after {
+    transform: rotate(-90deg);
+  }
+}
+
 // Styles for elements with data-toggle-filter-panel attribute
 [data-toggle-filter-panel] {
   // Only show chevron and make clickable on mobile

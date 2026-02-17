@@ -57,69 +57,83 @@ jobs:
 
       - name: Format commit info and get PR data
         id: commit-info
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_NUMBER: ${{ github.event.pull_request.number || github.event.issue.number }}
+          PR_TITLE: ${{ github.event.pull_request.title || github.event.issue.title }}
+          PR_URL: ${{ github.event.pull_request.html_url || github.event.issue.html_url }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login || github.event.issue.user.login }}
+          PR_AUTHOR_URL: ${{ github.event.pull_request.user.html_url || github.event.issue.user.html_url }}
+          PR_HEAD_REF: ${{ github.event.pull_request.head.ref }}
+          PR_BASE_REF: ${{ github.event.pull_request.base.ref }}
+          PR_ADDITIONS: ${{ github.event.pull_request.additions }}
+          PR_DELETIONS: ${{ github.event.pull_request.deletions }}
+          PR_CHANGED_FILES: ${{ github.event.pull_request.changed_files }}
+          PR_COMMITS: ${{ github.event.pull_request.commits }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+          PR_UPDATED_AT: ${{ github.event.pull_request.updated_at }}
+          REVIEW_BODY: ${{ github.event.review.body }}
+          REVIEW_SUBMITTED_AT: ${{ github.event.review.submitted_at }}
+          COMMENT_BODY: ${{ github.event.comment.body }}
+          COMMENT_UPDATED_AT: ${{ github.event.comment.updated_at }}
         run: |
-          # Determine PR data source based on event type
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            pr_number="${{ github.event.pull_request.number }}"
-            pr_title="${{ github.event.pull_request.title }}"
-            pr_url="${{ github.event.pull_request.html_url }}"
-            pr_author="${{ github.event.pull_request.user.login }}"
-            pr_author_url="${{ github.event.pull_request.user.html_url }}"
-            pr_head_ref="${{ github.event.pull_request.head.ref }}"
-            pr_base_ref="${{ github.event.pull_request.base.ref }}"
-            pr_additions="${{ github.event.pull_request.additions }}"
-            pr_deletions="${{ github.event.pull_request.deletions }}"
-            pr_changed_files="${{ github.event.pull_request.changed_files }}"
-            pr_commits="${{ github.event.pull_request.commits }}"
-            pr_body="${{ github.event.pull_request.body }}"
-            pr_updated_at="${{ github.event.pull_request.updated_at }}"
-          elif [ "${{ github.event_name }}" = "issue_comment" ]; then
-            pr_number="${{ github.event.issue.number }}"
-            pr_title="${{ github.event.issue.title }}"
-            pr_url="${{ github.event.issue.html_url }}"
-            pr_author="${{ github.event.issue.user.login }}"
-            pr_author_url="${{ github.event.issue.user.html_url }}"
-            # For comments, we don't have all PR details readily available
+          if [ "$EVENT_NAME" = "pull_request" ]; then
+            pr_number="$PR_NUMBER"
+            pr_title="$PR_TITLE"
+            pr_url="$PR_URL"
+            pr_author="$PR_AUTHOR"
+            pr_author_url="$PR_AUTHOR_URL"
+            pr_head_ref="$PR_HEAD_REF"
+            pr_base_ref="$PR_BASE_REF"
+            pr_additions="$PR_ADDITIONS"
+            pr_deletions="$PR_DELETIONS"
+            pr_changed_files="$PR_CHANGED_FILES"
+            pr_commits="$PR_COMMITS"
+            pr_body="$PR_BODY"
+            pr_updated_at="$PR_UPDATED_AT"
+          elif [ "$EVENT_NAME" = "issue_comment" ]; then
+            pr_number="$PR_NUMBER"
+            pr_title="$PR_TITLE"
+            pr_url="$PR_URL"
+            pr_author="$PR_AUTHOR"
+            pr_author_url="$PR_AUTHOR_URL"
             pr_head_ref="N/A"
             pr_base_ref="N/A"
             pr_additions="N/A"
             pr_deletions="N/A"
             pr_changed_files="N/A"
             pr_commits="N/A"
-            pr_body="${{ github.event.comment.body }}"
-            pr_updated_at="${{ github.event.comment.updated_at }}"
+            pr_body="$COMMENT_BODY"
+            pr_updated_at="$COMMENT_UPDATED_AT"
           else
-            # For review events
-            pr_number="${{ github.event.pull_request.number }}"
-            pr_title="${{ github.event.pull_request.title }}"
-            pr_url="${{ github.event.pull_request.html_url }}"
-            pr_author="${{ github.event.pull_request.user.login }}"
-            pr_author_url="${{ github.event.pull_request.user.html_url }}"
-            pr_head_ref="${{ github.event.pull_request.head.ref }}"
-            pr_base_ref="${{ github.event.pull_request.base.ref }}"
-            pr_additions="${{ github.event.pull_request.additions }}"
-            pr_deletions="${{ github.event.pull_request.deletions }}"
-            pr_changed_files="${{ github.event.pull_request.changed_files }}"
-            pr_commits="${{ github.event.pull_request.commits }}"
-            if [ "${{ github.event_name }}" = "pull_request_review" ]; then
-              pr_body="${{ github.event.review.body }}"
-              pr_updated_at="${{ github.event.review.submitted_at }}"
+            pr_number="$PR_NUMBER"
+            pr_title="$PR_TITLE"
+            pr_url="$PR_URL"
+            pr_author="$PR_AUTHOR"
+            pr_author_url="$PR_AUTHOR_URL"
+            pr_head_ref="$PR_HEAD_REF"
+            pr_base_ref="$PR_BASE_REF"
+            pr_additions="$PR_ADDITIONS"
+            pr_deletions="$PR_DELETIONS"
+            pr_changed_files="$PR_CHANGED_FILES"
+            pr_commits="$PR_COMMITS"
+            if [ "$EVENT_NAME" = "pull_request_review" ]; then
+              pr_body="$REVIEW_BODY"
+              pr_updated_at="$REVIEW_SUBMITTED_AT"
             else
-              pr_body="${{ github.event.comment.body }}"
-              pr_updated_at="${{ github.event.comment.updated_at }}"
+              pr_body="$COMMENT_BODY"
+              pr_updated_at="$COMMENT_UPDATED_AT"
             fi
           fi
 
-          # Format commit text
           if [ "$pr_commits" = "1" ]; then
             commit_text="1 commit"
-          elif [ "$pr_commits" = "N/A" ]; then
+          elif [ "$pr_commits" = "N/A" ] || [ -z "$pr_commits" ]; then
             commit_text="N/A"
           else
             commit_text="${pr_commits} commits"
           fi
 
-          # Export all variables using proper format for multiline values
           echo "pr_number=${pr_number}" >> $GITHUB_OUTPUT
           {
             echo "pr_title<<EOF"

@@ -1,0 +1,123 @@
+language: en-US
+
+tone_instructions: "Be constructive and educational. Explain the 'why' behind suggestions. Recognize good patterns. Use clear, concise language with code examples when helpful."
+early_access: false
+enable_free_tier: true
+
+# Review settings
+reviews:
+  request_changes_workflow: true
+  high_level_summary: true
+  profile: "chill"
+  poem: false
+  review_status: true
+  collapse_walkthrough: false
+
+  # Auto-review settings
+  auto_review:
+    enabled: true
+    base_branches: ["development"]
+    auto_incremental_review: true
+    ignore_title_keywords:
+      - "WIP"
+      - "DO NOT MERGE"
+      - "DRAFT"
+      - "Version"
+
+    drafts: false
+
+  path_instructions:
+    # JavaScript SDK - core web components
+    - path: "packages/javascript-sdk/src/components/**/*.tsx"
+      instructions: |
+        - Verify Stencil.js best practices (proper use of @Prop, @State, @Event decorators)
+        - Check that JSDoc comments are complete for all public props and methods
+        - Ensure shadow DOM configuration is appropriate (shadow: false is used consistently)
+        - Verify that component lifecycle methods are used correctly
+        - Check for proper TypeScript typing
+        - Ensure accessibility attributes are present where needed
+
+    - path: "packages/javascript-sdk/src/components/**/*.css"
+      instructions: |
+        - Verify CSS follows BEM naming conventions where applicable
+        - Check for responsive design considerations
+        - Ensure no hardcoded colors (should use CSS variables)
+
+    - path: "packages/react-sdk/**/*"
+      instructions: |
+        - This is mostly auto-generated code from Stencil output targets
+        - Focus on manual customizations and ensure they don't break auto-generation
+        - Verify React-specific prop naming (camelCase vs kebab-case)
+
+    - path: "packages/vue-sdk/**/*"
+      instructions: |
+        - This is mostly auto-generated code from Stencil output targets
+        - Focus on manual customizations and ensure they don't break auto-generation
+        - Verify Vue-specific prop bindings
+
+    - path: "packages/compendium/storybook/**/*.stories.tsx"
+      instructions: |
+        - Verify stories demonstrate all component props and variations
+        - Check that argTypes are properly configured for Storybook controls
+        - Ensure stories include proper decorators and setup
+        - Verify environment variables are used correctly (import.meta.env)
+
+    - path: "**/*.md"
+      instructions: |
+        - Check for clarity, grammar, and completeness
+        - Verify code examples are accurate and up-to-date
+        - Ensure links are valid
+        - Check that examples cover all three SDKs (JS, React, Vue)
+
+    - path: "**/*.mdx"
+      instructions: |
+        - Verify MDX syntax is correct
+        - Check that Tabs components are used properly for multi-SDK examples
+        - Ensure code blocks have proper language tags
+        - Verify property tables are accurate and complete
+
+    - path: "**/package.json"
+      instructions: |
+        - Verify version numbers are consistent across monorepo
+        - Check for security vulnerabilities in dependencies
+        - Ensure scripts are properly defined
+        - Verify workspace configuration is correct
+
+    - path: "**/tsconfig.json"
+      instructions: |
+        - Ensure TypeScript strict mode is enabled
+        - Verify compiler options are consistent across packages
+        - Check that paths and references are correct
+
+    - path: "**/*.mjs"
+      instructions: |
+        - Verify build scripts are efficient and error-handled
+        - Check for proper logging and error messages
+        - Ensure cross-platform compatibility
+
+  tools:
+    github-checks:
+      enabled: true
+      timeout_ms: 90000
+
+    languagetool:
+      enabled: true
+      enabled_only: false
+      level: "default"
+
+    markdownlint:
+      enabled: true
+
+    yamllint:
+      enabled: true
+
+chat:
+  # Enable AI chat for questions about the PR
+  auto_reply: true
+
+# Knowledge base - help CodeRabbit understand the project
+knowledge_base:
+  # Learnings from the codebase
+  learnings:
+    scope: auto
+

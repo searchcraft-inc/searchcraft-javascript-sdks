@@ -93,3 +93,38 @@
   color: var(--sc-content-disabled);
   text-align: center;
 }
+
+.searchcraft-facet-list-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 0;
+}
+
+.searchcraft-facet-list-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 0;
+  flex-shrink: 0;
+}
+
+.searchcraft-facet-list-view-more {
+  @include typography.body();
+  background: none;
+  border: none;
+  color: var(--sc-content-brand);
+  cursor: pointer;
+  padding: 8px 0;
+  text-align: left;
+  text-decoration: underline;
+
+  &:hover {
+    color: var(--sc-surface-brand-primary-hover);
+  }
+
+  &:focus {
+    outline: 2px solid var(--sc-surface-brand-primary);
+    outline-offset: 2px;
+  }
+}

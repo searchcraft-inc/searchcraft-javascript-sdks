@@ -1,3 +1,9 @@
+## 0.13.3 - 2026-02-16
+
+- New Feature: Added collapsible facet sections to `searchcraft-facet-list` component with `initialCollapseState` prop ('open' or 'closed').
+- New Feature: Added "view more" functionality to `searchcraft-facet-list` with configurable `viewMoreThreshold` prop to limit displayed facets.
+- New Feature: Added public methods `handleCollapseToggle()` and `getIsCollapsed()` to `searchcraft-facet-list` for programmatic control.
+
 ## 0.13.2 - 2025-12-16
 
 - Enhancement: Change internal component import/export paths for improved browser cache handling.

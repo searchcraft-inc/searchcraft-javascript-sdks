@@ -135,6 +135,11 @@ export const filterPanelItems = [
     type: 'facets',
     fieldName: 'section',
     label: 'Filter by Section',
+    options: {
+      showSublevel: false,
+      initialCollapseState: 'open', // 'open' or 'closed' - controls if section starts expanded or collapsed
+      viewMoreThreshold: 8, // Number of facets to show before "view more" link appears (0 = show all)
+    },
   },
 ];
 
