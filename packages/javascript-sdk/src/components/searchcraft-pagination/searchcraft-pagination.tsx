@@ -108,7 +108,9 @@ export class SearchcraftPagination {
       return;
     }
 
-    const searchResultsElement = document.querySelector('searchcraft-search-results .searchcraft-search-results');
+    const searchResultsElement = document.querySelector(
+      'searchcraft-search-results .searchcraft-search-results',
+    );
 
     if (!searchResultsElement) {
       return;

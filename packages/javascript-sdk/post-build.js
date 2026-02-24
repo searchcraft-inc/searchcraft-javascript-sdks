@@ -120,33 +120,35 @@ if (existsSync(COMPONENTS_DTS_FILE)) {
   // Convert @stencil/core/internal import to import type
   componentsDtsContent = componentsDtsContent.replace(
     /^import \{ (HTMLStencilElement, JSXBase) \} from "@stencil\/core\/internal";$/gm,
-    'import type { $1 } from "@stencil/core/internal";'
+    'import type { $1 } from "@stencil/core/internal";',
   );
 
   // Match imports from "./types/index" and "./components/searchcraft-select/searchcraft-select"
   componentsDtsContent = componentsDtsContent.replace(
     /^import \{ (AdClientResponseItem[^}]+) \} from "\.\/types\/index";$/gm,
-    'import type { $1 } from "./types/index";'
+    'import type { $1 } from "./types/index";',
   );
 
   componentsDtsContent = componentsDtsContent.replace(
     /^import \{ (SearchcraftSelectOption) \} from "\.\/components\/searchcraft-select\/searchcraft-select";$/gm,
-    'import type { $1 } from "./components/searchcraft-select/searchcraft-select";'
+    'import type { $1 } from "./components/searchcraft-select/searchcraft-select";',
   );
 
   // Convert type-only exports to use 'export type'
   componentsDtsContent = componentsDtsContent.replace(
     /^export \{ (AdClientResponseItem[^}]+) \} from "\.\/types\/index";$/gm,
-    'export type { $1 } from "./types/index";'
+    'export type { $1 } from "./types/index";',
   );
 
   componentsDtsContent = componentsDtsContent.replace(
     /^export \{ (SearchcraftSelectOption) \} from "\.\/components\/searchcraft-select\/searchcraft-select";$/gm,
-    'export type { $1 } from "./components/searchcraft-select/searchcraft-select";'
+    'export type { $1 } from "./components/searchcraft-select/searchcraft-select";',
   );
 
   writeFileSync(COMPONENTS_DTS_FILE, componentsDtsContent);
-  console.log('[Stencil Plugin] Fixed components.d.ts to use import type and export type.');
+  console.log(
+    '[Stencil Plugin] Fixed components.d.ts to use import type and export type.',
+  );
 }
 
 // Add version query parameters to all imports for cache busting.
@@ -162,8 +164,9 @@ if (existsSync(COMPONENTS_DTS_FILE)) {
 const VERSION_QUERY_KEY = 'scv';
 
 function addVersionToImports() {
-  const allJsFiles = readdirSync(OUTPUT_DIR)
-    .filter((file) => file.endsWith('.js'));
+  const allJsFiles = readdirSync(OUTPUT_DIR).filter((file) =>
+    file.endsWith('.js'),
+  );
 
   let filesModified = 0;
 
@@ -192,7 +195,9 @@ function addVersionToImports() {
     }
   });
 
-  console.log(`[Stencil Plugin] Added version query parameters to ${filesModified} files.`);
+  console.log(
+    `[Stencil Plugin] Added version query parameters to ${filesModified} files.`,
+  );
 }
 
 addVersionToImports();

@@ -1,8 +1,8 @@
 import {
   type SearchcraftConfig,
   SearchcraftCore,
+  defineCustomElements,
 } from '@searchcraft/javascript-sdk';
-import { defineCustomElements } from '@searchcraft/javascript-sdk';
 
 import {
   name as packageName,

@@ -5,7 +5,7 @@
  * AdMarketplaceClient and NativoClient.
  */
 
-const fs = require('fs');
+const fs = require('node:fs');
 
 console.log('[WordPress Filter] Modifying source files for WordPress build...');
 

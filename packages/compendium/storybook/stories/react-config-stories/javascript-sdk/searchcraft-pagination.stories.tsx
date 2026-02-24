@@ -4,8 +4,8 @@ import { useEffect } from 'react';
 import { Searchcraft } from '@searchcraft/javascript-sdk';
 
 import {
-    customAdTemplate,
-    searchResultTemplateEchostream,
+  customAdTemplate,
+  searchResultTemplateEchostream,
 } from '@common/index.js';
 
 const componentMeta: Meta = {
@@ -13,7 +13,8 @@ const componentMeta: Meta = {
   argTypes: {
     scrollToTop: {
       control: 'boolean',
-      description: 'Whether to scroll to the top of the search results when pagination buttons are clicked',
+      description:
+        'Whether to scroll to the top of the search results when pagination buttons are clicked',
     },
   },
 };
