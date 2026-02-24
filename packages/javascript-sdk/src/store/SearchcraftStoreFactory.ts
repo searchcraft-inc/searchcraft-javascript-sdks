@@ -3,6 +3,7 @@ import { type StoreApi, createStore } from 'zustand';
 import type {
   FacetPathsForIndexField,
   RangeValueForIndexField,
+  SearchClientQuery,
   SearchClientRequestProperties,
 } from '@types';
 
@@ -169,7 +170,7 @@ const createSearchcraftStore = (
 
             // Build the modified query array starting with the base query
             const baseQuery = Array.isArray(initialQueryObj.query)
-              ? initialQueryObj.query.filter((q: any) => !q.occur)
+              ? initialQueryObj.query.filter((q: SearchClientQuery) => !q.occur)
               : [initialQueryObj.query];
 
             const queries = [...baseQuery];

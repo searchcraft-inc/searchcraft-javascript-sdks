@@ -36,7 +36,7 @@ interface SearchcraftPopoverFormProps
  * ```
  */
 const SearchcraftPopoverForm: FC<SearchcraftPopoverFormProps> = (props) => (
-  <Component {...props} />
+  <Component sdkVariant='react' {...props} />
 );
 
 export { SearchcraftPopoverForm };

@@ -357,6 +357,11 @@ export namespace Components {
      */
     interface SearchcraftPopoverFooter {
         /**
+          * The SDK variant used to render this component. Used for UTM attribution. This isn't exposed for developer consumption, it's set automatically.
+          * @default 'js'
+         */
+        "sdkVariant"?: 'js' | 'react' | 'vue';
+        /**
           * The id of the Searchcraft instance that this component should use.
          */
         "searchcraftId"?: string;
@@ -409,6 +414,11 @@ export namespace Components {
           * Formats the content rendered for each result.
          */
         "popoverResultMappings"?: PopoverResultMappings;
+        /**
+          * The SDK variant used to render this component. Used for UTM attribution on the footer link.
+          * @default 'js'
+         */
+        "sdkVariant"?: 'js' | 'react' | 'vue';
         /**
           * The id of the Searchcraft instance that this component should use.
          */
@@ -1710,6 +1720,11 @@ declare namespace LocalJSX {
      */
     interface SearchcraftPopoverFooter {
         /**
+          * The SDK variant used to render this component. Used for UTM attribution. This isn't exposed for developer consumption, it's set automatically.
+          * @default 'js'
+         */
+        "sdkVariant"?: 'js' | 'react' | 'vue';
+        /**
           * The id of the Searchcraft instance that this component should use.
          */
         "searchcraftId"?: string;
@@ -1762,6 +1777,11 @@ declare namespace LocalJSX {
           * Formats the content rendered for each result.
          */
         "popoverResultMappings"?: PopoverResultMappings;
+        /**
+          * The SDK variant used to render this component. Used for UTM attribution on the footer link.
+          * @default 'js'
+         */
+        "sdkVariant"?: 'js' | 'react' | 'vue';
         /**
           * The id of the Searchcraft instance that this component should use.
          */

@@ -83,6 +83,12 @@ export class SearchcraftPopoverForm {
    * 'hide-on-text-entered' - Only hide the placeholder when the input form has text entered into it.
    */
   @Prop() placeholderBehavior?: 'hide-on-focus' | 'hide-on-text-entered';
+  /**
+   * The SDK variant used to render this component. Used for UTM attribution on the footer link.
+   *
+   * @internal
+   */
+  @Prop() sdkVariant?: 'js' | 'react' | 'vue' = 'js';
 
   @State() isPopoverVisibleInState = false;
   @State() searchClientResponseItems: SearchClientResponseItem[] = [];
@@ -351,7 +357,10 @@ export class SearchcraftPopoverForm {
               searchResultsPerPage={this.searchResultsPerPage}
               searchcraftId={this.searchcraftId}
             />
-            <searchcraft-popover-footer searchcraftId={this.searchcraftId} />
+            <searchcraft-popover-footer
+              searchcraftId={this.searchcraftId}
+              sdkVariant={this.sdkVariant}
+            />
           </div>
         )}
       </div>
@@ -403,7 +412,10 @@ export class SearchcraftPopoverForm {
                 />
               )}
             </div>
-            <searchcraft-popover-footer searchcraftId={this.searchcraftId} />
+            <searchcraft-popover-footer
+              searchcraftId={this.searchcraftId}
+              sdkVariant={this.sdkVariant}
+            />
           </div>
         </div>
       );
@@ -449,7 +461,10 @@ export class SearchcraftPopoverForm {
               />
             )}
           </div>
-          <searchcraft-popover-footer searchcraftId={this.searchcraftId} />
+          <searchcraft-popover-footer
+            searchcraftId={this.searchcraftId}
+            sdkVariant={this.sdkVariant}
+          />
         </div>
       );
     }
