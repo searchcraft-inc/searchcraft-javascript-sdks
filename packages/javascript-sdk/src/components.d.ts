@@ -365,6 +365,14 @@ export namespace Components {
           * The id of the Searchcraft instance that this component should use.
          */
         "searchcraftId"?: string;
+        /**
+          * Optional href for the "View all results" button.
+         */
+        "viewAllResultsHref"?: string;
+        /**
+          * Optional label for the "View all results" button.
+         */
+        "viewAllResultsLabel"?: string;
     }
     /**
      * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field, or when a popover-button is pressed.
@@ -428,6 +436,14 @@ export namespace Components {
           * @default 'inline'
          */
         "type"?: 'inline' | 'fullscreen' | 'modal';
+        /**
+          * Base URL for the "View all results" footer link. The current search term will be appended (URL encoded).  For example, in a CMS-backed site you might set this to `/?s=` so the final URL becomes `/?s=<search-term>`.
+         */
+        "viewAllResultsBaseUrl"?: string;
+        /**
+          * Optional label for the "View all results" footer button. Defaults to "View All Results".
+         */
+        "viewAllResultsLabel"?: string;
     }
     /**
      * A single list item rendered in a searchcraft-popover-list-view.
@@ -1728,6 +1744,14 @@ declare namespace LocalJSX {
           * The id of the Searchcraft instance that this component should use.
          */
         "searchcraftId"?: string;
+        /**
+          * Optional href for the "View all results" button.
+         */
+        "viewAllResultsHref"?: string;
+        /**
+          * Optional label for the "View all results" button.
+         */
+        "viewAllResultsLabel"?: string;
     }
     /**
      * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field, or when a popover-button is pressed.
@@ -1791,6 +1815,14 @@ declare namespace LocalJSX {
           * @default 'inline'
          */
         "type"?: 'inline' | 'fullscreen' | 'modal';
+        /**
+          * Base URL for the "View all results" footer link. The current search term will be appended (URL encoded).  For example, in a CMS-backed site you might set this to `/?s=` so the final URL becomes `/?s=<search-term>`.
+         */
+        "viewAllResultsBaseUrl"?: string;
+        /**
+          * Optional label for the "View all results" footer button. Defaults to "View All Results".
+         */
+        "viewAllResultsLabel"?: string;
     }
     /**
      * A single list item rendered in a searchcraft-popover-list-view.

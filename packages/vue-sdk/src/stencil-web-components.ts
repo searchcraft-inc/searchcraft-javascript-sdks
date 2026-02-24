@@ -56,6 +56,8 @@ export const SearchcraftPopoverForm = /*@__PURE__*/ defineContainer<JSX.Searchcr
   'searchcraftId',
   'placeholderValue',
   'placeholderBehavior',
+  'viewAllResultsBaseUrl',
+  'viewAllResultsLabel',
   'sdkVariant'
 ]);
 

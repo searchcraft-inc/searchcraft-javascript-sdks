@@ -84,6 +84,16 @@ export class SearchcraftPopoverForm {
    */
   @Prop() placeholderBehavior?: 'hide-on-focus' | 'hide-on-text-entered';
   /**
+   * Base URL for the "View all results" footer link. The current search term will be appended (URL encoded).
+   *
+   * For example, in a CMS-backed site you might set this to `/?s=` so the final URL becomes `/?s=<search-term>`.
+   */
+  @Prop() viewAllResultsBaseUrl?: string;
+  /**
+   * Optional label for the "View all results" footer button. Defaults to "View All Results".
+   */
+  @Prop() viewAllResultsLabel?: string;
+  /**
    * The SDK variant used to render this component. Used for UTM attribution on the footer link.
    *
    * @internal
@@ -200,6 +210,16 @@ export class SearchcraftPopoverForm {
       case 'Escape':
         this.core?.store.getState().setPopoverVisibility(false);
         break;
+      case 'Enter':
+        if (
+          (event.metaKey || event.ctrlKey) &&
+          this.viewAllResultsHref &&
+          this.hasResultsToShow
+        ) {
+          event.preventDefault();
+          this.navigateToViewAllResults();
+        }
+        break;
       default:
         return;
     }
@@ -242,6 +262,18 @@ export class SearchcraftPopoverForm {
           this.modalElement.setAttribute(
             'placeholder-behavior',
             this.placeholderBehavior,
+          );
+        }
+        if (this.viewAllResultsBaseUrl) {
+          this.modalElement.setAttribute(
+            'view-all-results-base-url',
+            this.viewAllResultsBaseUrl,
+          );
+        }
+        if (this.viewAllResultsLabel) {
+          this.modalElement.setAttribute(
+            'view-all-results-label',
+            this.viewAllResultsLabel,
           );
         }
         document.body.appendChild(this.modalElement);
@@ -327,6 +359,36 @@ export class SearchcraftPopoverForm {
     );
   }
 
+  get viewAllResultsHref() {
+    const baseUrl = this.viewAllResultsBaseUrl;
+    if (!baseUrl) {
+      return undefined;
+    }
+
+    const term = this.searchTerm?.trim();
+    if (!term) {
+      return baseUrl;
+    }
+
+    return `${baseUrl}${encodeURIComponent(term).replace(/%20/g, '+')}`;
+  }
+
+  get resolvedViewAllResultsLabel() {
+    return this.viewAllResultsLabel ?? 'View All Results';
+  }
+
+  navigateToViewAllResults() {
+    const href = this.viewAllResultsHref;
+
+    if (!href || !this.hasResultsToShow) {
+      return;
+    }
+
+    if (typeof window !== 'undefined') {
+      window.location.href = href;
+    }
+  }
+
   renderInlinePopover() {
     const isListViewVisible = this.hasResultsToShow && this.isFocused;
 
@@ -360,6 +422,8 @@ export class SearchcraftPopoverForm {
             <searchcraft-popover-footer
               searchcraftId={this.searchcraftId}
               sdkVariant={this.sdkVariant}
+              viewAllResultsHref={this.viewAllResultsHref}
+              viewAllResultsLabel={this.resolvedViewAllResultsLabel}
             />
           </div>
         )}
@@ -415,6 +479,8 @@ export class SearchcraftPopoverForm {
             <searchcraft-popover-footer
               searchcraftId={this.searchcraftId}
               sdkVariant={this.sdkVariant}
+              viewAllResultsHref={this.viewAllResultsHref}
+              viewAllResultsLabel={this.resolvedViewAllResultsLabel}
             />
           </div>
         </div>
@@ -464,6 +530,8 @@ export class SearchcraftPopoverForm {
           <searchcraft-popover-footer
             searchcraftId={this.searchcraftId}
             sdkVariant={this.sdkVariant}
+            viewAllResultsHref={this.viewAllResultsHref}
+            viewAllResultsLabel={this.resolvedViewAllResultsLabel}
           />
         </div>
       );

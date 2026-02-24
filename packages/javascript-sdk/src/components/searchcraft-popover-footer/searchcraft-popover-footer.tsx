@@ -25,6 +25,14 @@ export class SearchcraftPopoverFooter {
    * @internal
    */
   @Prop() sdkVariant?: 'js' | 'react' | 'vue' = 'js';
+  /**
+   * Optional href for the "View all results" button.
+   */
+  @Prop() viewAllResultsHref?: string;
+  /**
+   * Optional label for the "View all results" button.
+   */
+  @Prop() viewAllResultsLabel?: string;
   @State() searchResultsCount;
 
   private unsubscribe: () => void = () => {};
@@ -61,6 +69,10 @@ export class SearchcraftPopoverFooter {
       sc_sdk_version: sdkVersion,
     });
     const href = `https://searchcraft.io/?${utmParams.toString()}`;
+    const hasResults =
+      typeof this.searchResultsCount === 'number' &&
+      this.searchResultsCount > 0;
+    const showViewAll = !!this.viewAllResultsHref && hasResults;
 
     return (
       <footer class='searchcraft-popover-footer'>
@@ -73,8 +85,8 @@ export class SearchcraftPopoverFooter {
           <svg
             class='searchcraft-popover-footer-link-image'
             width='169'
-            height='16'
-            viewBox='0 0 169 16'
+            height='20'
+            viewBox='0 0 169 20'
             fill='none'
             xmlns='http://www.w3.org/2000/svg'
           >
@@ -85,11 +97,27 @@ export class SearchcraftPopoverFooter {
             />
           </svg>
         </a>
-        <p class='searchcraft-popover-footer-results-info'>
-          {this.searchResultsCount
-            ? `${formatNumberWithCommas(this.searchResultsCount)} Results Found`
-            : ' '}
-        </p>
+        <div class='searchcraft-popover-footer-results'>
+          <p class='searchcraft-popover-footer-results-info'>
+            {hasResults
+              ? `${formatNumberWithCommas(this.searchResultsCount)} Results Found`
+              : ' '}
+          </p>
+          {showViewAll && (
+            <a
+              class='searchcraft-popover-footer-view-all'
+              href={this.viewAllResultsHref}
+            >
+              <span class='searchcraft-popover-footer-view-all-label'>
+                {this.viewAllResultsLabel}
+              </span>
+              <span class='searchcraft-popover-footer-view-all-shortcut'>
+                <kbd>⌘</kbd>
+                <kbd>↵</kbd>
+              </span>
+            </a>
+          )}
+        </div>
       </footer>
     );
   }
