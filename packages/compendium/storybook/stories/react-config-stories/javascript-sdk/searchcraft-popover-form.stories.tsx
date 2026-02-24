@@ -44,6 +44,7 @@ export const Inline: StoryObj<Components.SearchcraftPopoverForm> = {
           readKey: import.meta.env.VITE_READ_KEY_BAZAARIO,
           endpointURL: import.meta.env.VITE_ENDPOINT_URL_BAZAARIO,
           indexName: import.meta.env.VITE_INDEX_BAZAARIO,
+          searchResultsPerPage: 5
         });
         const popoverForm = document.querySelector('searchcraft-popover-form');
 
