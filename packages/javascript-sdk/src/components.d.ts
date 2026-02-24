@@ -366,11 +366,11 @@ export namespace Components {
          */
         "searchcraftId"?: string;
         /**
-          * Optional href for the "View all results" button.
+          * Optional href for the "View all" button.
          */
         "viewAllResultsHref"?: string;
         /**
-          * Optional label for the "View all results" button.
+          * Optional label for the "View all" button.
          */
         "viewAllResultsLabel"?: string;
     }
@@ -442,11 +442,11 @@ export namespace Components {
          */
         "type"?: 'inline' | 'fullscreen' | 'modal';
         /**
-          * Base URL for the "View all results" footer link. The current search term will be appended (URL encoded).  For example, in a CMS-backed site you might set this to `/?s=` so the final URL becomes `/?s=<search-term>`.
+          * Base URL for the "View all" footer link. The current search term will be appended (URL encoded).  For example, in a CMS-backed site you might set this to `/?s=` so the final URL becomes `/?s=<search-term>`.
          */
         "viewAllResultsBaseUrl"?: string;
         /**
-          * Optional label for the "View all results" footer button. Defaults to "View All Results".
+          * Optional label for the "View All" footer button. Defaults to "View All".
          */
         "viewAllResultsLabel"?: string;
     }
@@ -1750,11 +1750,11 @@ declare namespace LocalJSX {
          */
         "searchcraftId"?: string;
         /**
-          * Optional href for the "View all results" button.
+          * Optional href for the "View all" button.
          */
         "viewAllResultsHref"?: string;
         /**
-          * Optional label for the "View all results" button.
+          * Optional label for the "View all" button.
          */
         "viewAllResultsLabel"?: string;
     }
@@ -1826,11 +1826,11 @@ declare namespace LocalJSX {
          */
         "type"?: 'inline' | 'fullscreen' | 'modal';
         /**
-          * Base URL for the "View all results" footer link. The current search term will be appended (URL encoded).  For example, in a CMS-backed site you might set this to `/?s=` so the final URL becomes `/?s=<search-term>`.
+          * Base URL for the "View all" footer link. The current search term will be appended (URL encoded).  For example, in a CMS-backed site you might set this to `/?s=` so the final URL becomes `/?s=<search-term>`.
          */
         "viewAllResultsBaseUrl"?: string;
         /**
-          * Optional label for the "View all results" footer button. Defaults to "View All Results".
+          * Optional label for the "View All" footer button. Defaults to "View All".
          */
         "viewAllResultsLabel"?: string;
     }

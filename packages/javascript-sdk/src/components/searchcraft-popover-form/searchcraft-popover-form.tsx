@@ -84,13 +84,13 @@ export class SearchcraftPopoverForm {
    */
   @Prop() placeholderBehavior?: 'hide-on-focus' | 'hide-on-text-entered';
   /**
-   * Base URL for the "View all results" footer link. The current search term will be appended (URL encoded).
+   * Base URL for the "View all" footer link. The current search term will be appended (URL encoded).
    *
    * For example, in a CMS-backed site you might set this to `/?s=` so the final URL becomes `/?s=<search-term>`.
    */
   @Prop() viewAllResultsBaseUrl?: string;
   /**
-   * Optional label for the "View all results" footer button. Defaults to "View All Results".
+   * Optional label for the "View All" footer button. Defaults to "View All".
    */
   @Prop() viewAllResultsLabel?: string;
   /**
@@ -379,7 +379,7 @@ export class SearchcraftPopoverForm {
   }
 
   get resolvedViewAllResultsLabel() {
-    return this.viewAllResultsLabel ?? 'View All Results';
+    return this.viewAllResultsLabel ?? 'View All';
   }
 
   navigateToViewAllResults() {

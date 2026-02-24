@@ -26,11 +26,11 @@ export class SearchcraftPopoverFooter {
    */
   @Prop() sdkVariant?: 'js' | 'react' | 'vue' = 'js';
   /**
-   * Optional href for the "View all results" button.
+   * Optional href for the "View all" button.
    */
   @Prop() viewAllResultsHref?: string;
   /**
-   * Optional label for the "View all results" button.
+   * Optional label for the "View all" button.
    */
   @Prop() viewAllResultsLabel?: string;
   @State() searchResultsCount;
