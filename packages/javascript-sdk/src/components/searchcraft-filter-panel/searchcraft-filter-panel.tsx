@@ -458,6 +458,9 @@ export class SearchcraftFilterPanel {
                     ref={(el) => {
                       labelElement = el || null;
                     }}
+                    aria-expanded={
+                      item.options.initialCollapseState !== 'closed'
+                    }
                     class='searchcraft-filter-panel-label'
                     data-toggle-facet-section
                     data-facet-section-expanded={
@@ -471,18 +474,16 @@ export class SearchcraftFilterPanel {
                         : undefined
                     }
                     onClick={handleToggle}
-                    onKeyDown={async (event: KeyboardEvent) => {
+                    onKeyDown={(event) => {
                       if (event.key === 'Enter' || event.key === ' ') {
                         event.preventDefault();
-                        await handleToggle();
+                        void handleToggle();
                       }
                     }}
-                    tabIndex={0}
-                    // biome-ignore lint/a11y/noNoninteractiveElementToInteractiveRole: no change at this time
+                    /* biome-ignore lint/a11y/useSemanticElements: This label is intentionally a <p> for styling/layout; it behaves like a button. */
+                    /* biome-ignore lint/a11y/noNoninteractiveElementToInteractiveRole: This <p> is intentionally used as an interactive control. */
                     role='button'
-                    aria-expanded={
-                      item.options.initialCollapseState !== 'closed'
-                    }
+                    tabIndex={0}
                   >
                     {filterItem.label}
                   </p>
