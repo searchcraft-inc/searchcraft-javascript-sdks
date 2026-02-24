@@ -94,6 +94,11 @@ export class SearchcraftPopoverForm {
    */
   @Prop() viewAllResultsLabel?: string;
   /**
+   * Whether to display the AI generative summary box before the search results.
+   * NOTE: This requires the usage of a read key that has "SUMMARY" permissions and either a subscription to Searchcraft Cloud with AI features enabled or a self-hosted model connected.
+   */
+  @Prop() showSummaryBox?: boolean = false;
+  /**
    * The SDK variant used to render this component. Used for UTM attribution on the footer link.
    *
    * @internal
@@ -411,6 +416,9 @@ export class SearchcraftPopoverForm {
         </div>
         {isListViewVisible && (
           <div class='searchcraft-popover-form-inline-wrapper'>
+            {this.showSummaryBox && (
+              <searchcraft-summary-box searchcraftId={this.searchcraftId} />
+            )}
             <searchcraft-popover-list-view
               popoverResultMappings={this.popoverResultMappings}
               searchClientResponseItems={this.searchClientResponseItems}
@@ -465,6 +473,9 @@ export class SearchcraftPopoverForm {
               </button>
             </div>
             <div class='searchcraft-popover-form-modal-popover-list-view'>
+              {this.showSummaryBox && this.hasResultsToShow && (
+                <searchcraft-summary-box searchcraftId={this.searchcraftId} />
+              )}
               {this.hasResultsToShow && (
                 <searchcraft-popover-list-view
                   popoverResultMappings={this.popoverResultMappings}
@@ -516,6 +527,9 @@ export class SearchcraftPopoverForm {
             </button>
           </div>
           <div class='searchcraft-popover-form-fullscreen-popover-list-view'>
+            {this.showSummaryBox && this.hasResultsToShow && (
+              <searchcraft-summary-box searchcraftId={this.searchcraftId} />
+            )}
             {this.hasResultsToShow && (
               <searchcraft-popover-list-view
                 popoverResultMappings={this.popoverResultMappings}

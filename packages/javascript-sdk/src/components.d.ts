@@ -432,6 +432,11 @@ export namespace Components {
          */
         "searchcraftId"?: string;
         /**
+          * Whether to display the AI generative summary box before the search results. NOTE: This requires the usage of a read key that has "SUMMARY" permissions and either a subscription to Searchcraft Cloud with AI features enabled or a self-hosted model connected.
+          * @default false
+         */
+        "showSummaryBox"?: boolean;
+        /**
           * The type of popover form to render. - `inline` - Renders inline with the rest of the content on the page. The search results pop over the page content. - `fullscreen` - Renders in fullscreen view. Used together with the `searchcraft-popover-button` component. - `modal` - Renders in a modal view. Used together with the `searchcraft-popover-button` component.
           * @default 'inline'
          */
@@ -1810,6 +1815,11 @@ declare namespace LocalJSX {
           * The id of the Searchcraft instance that this component should use.
          */
         "searchcraftId"?: string;
+        /**
+          * Whether to display the AI generative summary box before the search results. NOTE: This requires the usage of a read key that has "SUMMARY" permissions and either a subscription to Searchcraft Cloud with AI features enabled or a self-hosted model connected.
+          * @default false
+         */
+        "showSummaryBox"?: boolean;
         /**
           * The type of popover form to render. - `inline` - Renders inline with the rest of the content on the page. The search results pop over the page content. - `fullscreen` - Renders in fullscreen view. Used together with the `searchcraft-popover-button` component. - `modal` - Renders in a modal view. Used together with the `searchcraft-popover-button` component.
           * @default 'inline'
