@@ -58,6 +58,19 @@ export class SearchcraftPopoverFooter {
     this.cleanupCore?.();
   }
 
+  private get safeViewAllHref(): string | undefined {
+    const href = this.viewAllResultsHref;
+    if (!href) return undefined;
+    try {
+      const url = new URL(href, window.location.href);
+      return url.protocol === 'https:' || url.protocol === 'http:'
+        ? href
+        : undefined;
+    } catch {
+      return undefined;
+    }
+  }
+
   render() {
     const hostname =
       typeof window !== 'undefined' ? window.location.hostname : '';
@@ -72,7 +85,7 @@ export class SearchcraftPopoverFooter {
     const hasResults =
       typeof this.searchResultsCount === 'number' &&
       this.searchResultsCount > 0;
-    const showViewAll = !!this.viewAllResultsHref && hasResults;
+    const showViewAll = !!this.safeViewAllHref && hasResults;
 
     return (
       <footer class='searchcraft-popover-footer'>
@@ -106,7 +119,7 @@ export class SearchcraftPopoverFooter {
           {showViewAll && (
             <a
               class='searchcraft-popover-footer-view-all'
-              href={this.viewAllResultsHref}
+              href={this.safeViewAllHref}
             >
               <span class='searchcraft-popover-footer-view-all-label'>
                 {this.viewAllResultsLabel}
