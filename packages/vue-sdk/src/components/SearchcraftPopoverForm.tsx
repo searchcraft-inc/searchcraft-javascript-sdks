@@ -35,7 +35,7 @@ const SearchcraftPopoverForm = defineComponent({
   name: 'SearchcraftPopoverForm',
   inheritAttrs: false,
   setup(_, { attrs, slots }) {
-    return () => h(Component, { sdkVariant: 'vue', ...attrs }, slots);
+    return () => h(Component, { ...attrs, sdkVariant: 'vue' }, slots);
   },
 });
 

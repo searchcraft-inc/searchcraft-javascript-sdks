@@ -83,6 +83,7 @@ export const Inline: StoryObj<Components.SearchcraftPopoverForm> = {
             hotkey-modifier='ctrl'
             placeholder-value={args.placeholderValue}
             placeholder-behavior={args.placeholderBehavior}
+            show-summary-box={args.showSummaryBox ? 'true' : 'false'}
             view-all-results-base-url={args.viewAllResultsBaseUrl}
             view-all-results-label={args.viewAllResultsLabel}
           />
@@ -134,6 +135,7 @@ export const InlineWithViewAllResults: StoryObj<Components.SearchcraftPopoverFor
               hotkey-modifier='ctrl'
               placeholder-value={args.placeholderValue}
               placeholder-behavior={args.placeholderBehavior}
+              show-summary-box={args.showSummaryBox ? 'true' : 'false'}
               view-all-results-base-url={args.viewAllResultsBaseUrl}
               view-all-results-label={args.viewAllResultsLabel}
             />

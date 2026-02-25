@@ -59,7 +59,7 @@ globalThis.__scDefineCustomElements__ = defineCustomElements;
 
 `.trim();
 
-globalThis.__my_monorepo_generated_fn__ = () => 'Hello from B';
+//globalThis.__my_monorepo_generated_fn__ = () => 'Hello from B';
 
 // Write the generated file
 writeFileSync(GENERATED_JS_FILE, jsContent);
