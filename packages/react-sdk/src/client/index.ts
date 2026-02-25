@@ -35,11 +35,11 @@ export { defineCustomElements };
 
 export * from './SearchcraftFilterPanel';
 export * from './SearchcraftInputForm';
+export * from './SearchcraftPagination';
 export * from './SearchcraftPopoverButton';
 export * from './SearchcraftPopoverForm';
 export * from './SearchcraftResultsInfo';
-export * from './SearchcraftTheme';
-export * from './SearchcraftPagination';
-export * from './SearchcraftSearchResultsPerPage';
 export * from './SearchcraftSearchResults';
+export * from './SearchcraftSearchResultsPerPage';
 export * from './SearchcraftSummaryBox';
+export * from './SearchcraftTheme';

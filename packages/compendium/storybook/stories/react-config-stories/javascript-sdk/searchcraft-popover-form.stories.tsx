@@ -23,6 +23,20 @@ const componentMeta: Meta = {
       options: ['hide-on-focus', 'hide-on-text-entered', undefined],
       description: "The placeholder's render behavior.",
     },
+    showSummaryBox: {
+      control: 'boolean',
+      description:
+        'Whether to display the summary box before the search results. Note: This requires a read key with "SUMMARY" permissions.',
+    },
+    viewAllResultsBaseUrl: {
+      control: 'text',
+      description:
+        'Base URL for the "View All Results" link. The search term will be appended to this URL.',
+    },
+    viewAllResultsLabel: {
+      control: 'text',
+      description: 'Label text for the "View All Results" link.',
+    },
   },
 };
 
@@ -32,6 +46,8 @@ const defaultProps: Components.SearchcraftPopoverForm = {
   hotkeyModifier: 'ctrl',
   placeholderValue: 'Search products...',
   placeholderBehavior: 'hide-on-text-entered',
+  viewAllResultsBaseUrl: '/?s=',
+  viewAllResultsLabel: 'View All Results',
 };
 
 export default componentMeta;
@@ -44,6 +60,7 @@ export const Inline: StoryObj<Components.SearchcraftPopoverForm> = {
           readKey: import.meta.env.VITE_READ_KEY_BAZAARIO,
           endpointURL: import.meta.env.VITE_ENDPOINT_URL_BAZAARIO,
           indexName: import.meta.env.VITE_INDEX_BAZAARIO,
+          searchResultsPerPage: 5,
         });
         const popoverForm = document.querySelector('searchcraft-popover-form');
 
@@ -66,6 +83,9 @@ export const Inline: StoryObj<Components.SearchcraftPopoverForm> = {
             hotkey-modifier='ctrl'
             placeholder-value={args.placeholderValue}
             placeholder-behavior={args.placeholderBehavior}
+            show-summary-box={args.showSummaryBox ? 'true' : 'false'}
+            view-all-results-base-url={args.viewAllResultsBaseUrl}
+            view-all-results-label={args.viewAllResultsLabel}
           />
           <p>
             Here's some content that shows up underneath the popover. The
@@ -77,6 +97,58 @@ export const Inline: StoryObj<Components.SearchcraftPopoverForm> = {
   },
   args: defaultProps,
 };
+
+export const InlineWithViewAllResults: StoryObj<Components.SearchcraftPopoverForm> =
+  {
+    decorators: [
+      (Story) => {
+        useEffect(() => {
+          new Searchcraft({
+            readKey: import.meta.env.VITE_READ_KEY_BAZAARIO,
+            endpointURL: import.meta.env.VITE_ENDPOINT_URL_BAZAARIO,
+            indexName: import.meta.env.VITE_INDEX_BAZAARIO,
+            searchResultsPerPage: 5,
+          });
+          const popoverForm = document.querySelector(
+            'searchcraft-popover-form',
+          );
+
+          if (popoverForm) {
+            popoverForm.popoverResultMappings = popoverResultMappings;
+          }
+        }, []);
+
+        return <Story />;
+      },
+    ],
+    render: (args) => {
+      return (
+        <>
+          <div className='searchcraft-popover-form-with-content'>
+            <p>
+              Story Note: This story uses the Bazaario env vars and enables the
+              View All Results footer button
+            </p>
+            <searchcraft-popover-form
+              type='inline'
+              hotkey='k'
+              hotkey-modifier='ctrl'
+              placeholder-value={args.placeholderValue}
+              placeholder-behavior={args.placeholderBehavior}
+              show-summary-box={args.showSummaryBox ? 'true' : 'false'}
+              view-all-results-base-url={args.viewAllResultsBaseUrl}
+              view-all-results-label={args.viewAllResultsLabel}
+            />
+            <p>
+              Here's some content that shows up underneath the popover. The
+              popover should render above this content when it is active.
+            </p>
+          </div>
+        </>
+      );
+    },
+    args: defaultProps,
+  };
 
 export const InlineWithAds: StoryObj<Components.SearchcraftPopoverForm> = {
   decorators: [
@@ -122,6 +194,56 @@ export const InlineWithAds: StoryObj<Components.SearchcraftPopoverForm> = {
     );
   },
   args: {},
+};
+
+export const InlineWithSummaryBox: StoryObj<Components.SearchcraftPopoverForm> = {
+  decorators: [
+    (Story) => {
+      useEffect(() => {
+        new Searchcraft({
+          readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
+          endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
+          indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
+          cortexURL: import.meta.env.VITE_CORTEX_URL,
+        });
+        const popoverForm = document.querySelector('searchcraft-popover-form');
+
+        if (popoverForm) {
+          popoverForm.popoverResultMappings = popoverResultMappingsRunegard;
+        }
+      }, []);
+
+      return <Story />;
+    },
+  ],
+  render: (args) => {
+    return (
+      <>
+        <div className='searchcraft-popover-form-with-content'>
+          <p>
+            Story Note: This story uses the Echostream env vars and displays a
+            summary box before the search results. Note: This requires a read
+            key with "SUMMARY" permissions.
+          </p>
+          <searchcraft-popover-form
+            type='inline'
+            hotkey='k'
+            hotkey-modifier='ctrl'
+            placeholder-value={args.placeholderValue}
+            placeholder-behavior={args.placeholderBehavior}
+            show-summary-box={args.showSummaryBox ? 'true' : 'false'}
+            view-all-results-base-url={args.viewAllResultsBaseUrl}
+            view-all-results-label={args.viewAllResultsLabel}
+          />
+          <p>
+            Here's some content that shows up underneath the popover. The
+            popover should render above this content when it is active.
+          </p>
+        </div>
+      </>
+    );
+  },
+  args: { ...defaultProps, showSummaryBox: true },
 };
 
 export const Modal: StoryObj<Components.SearchcraftPopoverForm> = {

@@ -596,9 +596,10 @@ export class SearchcraftFacetList {
     const rootFacets = Object.keys(this.renderedFacetTree.children);
     const threshold = this.viewMoreThreshold ?? 8;
     const shouldShowViewMore = threshold > 0 && rootFacets.length > threshold;
-    const visibleFacets = shouldShowViewMore && !this.showAllFacets
-      ? rootFacets.slice(0, threshold)
-      : rootFacets;
+    const visibleFacets =
+      shouldShowViewMore && !this.showAllFacets
+        ? rootFacets.slice(0, threshold)
+        : rootFacets;
 
     return (
       <div
@@ -611,7 +612,10 @@ export class SearchcraftFacetList {
             <div class='searchcraft-facet-list'>
               {visibleFacets.map((key) => {
                 if (this.renderedFacetTree.children[key]) {
-                  return this.renderFacet(key, this.renderedFacetTree.children[key]);
+                  return this.renderFacet(
+                    key,
+                    this.renderedFacetTree.children[key],
+                  );
                 }
               })}
             </div>

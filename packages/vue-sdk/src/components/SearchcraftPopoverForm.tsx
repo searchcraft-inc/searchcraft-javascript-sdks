@@ -1,4 +1,5 @@
 import type { Components } from '@searchcraft/javascript-sdk';
+import { defineComponent, h } from 'vue';
 import { SearchcraftPopoverForm as Component } from '../stencil-web-components';
 
 /**
@@ -30,6 +31,12 @@ export interface SearchcraftPopoverFormProps
  * </template>
  * ```
  */
-const SearchcraftPopoverForm = Component;
+const SearchcraftPopoverForm = defineComponent({
+  name: 'SearchcraftPopoverForm',
+  inheritAttrs: false,
+  setup(_, { attrs, slots }) {
+    return () => h(Component, { ...attrs, sdkVariant: 'vue' }, slots);
+  },
+});
 
 export { SearchcraftPopoverForm };

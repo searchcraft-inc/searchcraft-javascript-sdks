@@ -28,9 +28,7 @@
     "url": "https://github.com/searchcraft-inc/searchcraft-javascript-sdks"
   },
   "homepage": "https://github.com/searchcraft-inc/searchcraft-javascript-sdks#readme",
-  "files": [
-    "dist/"
-  ],
+  "files": ["dist/"],
   "scripts": {
     "build": "stencil build",
     "docs": "typedoc --options typedoc.json",
