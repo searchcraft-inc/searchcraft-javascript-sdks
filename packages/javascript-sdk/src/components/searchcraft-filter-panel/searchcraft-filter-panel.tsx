@@ -473,7 +473,7 @@ export class SearchcraftFilterPanel {
                         ? ''
                         : undefined
                     }
-                    onClick={handleToggle}
+                    onClick={() => void handleToggle()}
                     onKeyDown={(event) => {
                       if (event.key === 'Enter' || event.key === ' ') {
                         event.preventDefault();
