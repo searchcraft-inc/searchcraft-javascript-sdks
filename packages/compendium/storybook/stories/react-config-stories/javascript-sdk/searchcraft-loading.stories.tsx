@@ -8,7 +8,8 @@ const componentMeta: Meta = {
   argTypes: {
     label: {
       control: 'text',
-      description: 'Optional label text to display below the loading animation.',
+      description:
+        'Optional label text to display below the loading animation.',
     },
   },
 };
@@ -71,4 +72,3 @@ export const CustomLabel: StoryObj<Components.SearchcraftLoading> = {
 };
 
 export default componentMeta;
-
