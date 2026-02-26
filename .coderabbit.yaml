@@ -26,6 +26,9 @@ reviews:
 
     drafts: false
 
+  path_filters:
+    - "!**/hologram.css"
+
   path_instructions:
     # JavaScript SDK - core web components
     - path: "packages/javascript-sdk/src/components/**/*.tsx"

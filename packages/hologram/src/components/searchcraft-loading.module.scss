@@ -1,73 +1,56 @@
 @use "../typography.scss";
 
-.searchcraft-loading-label {
+.searchcraft-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translateY(-50%) translateX(-50%);
-  margin-top: 40px;
-  letter-spacing: 2px;
-  color: #828282;
-
-  @include typography.body-small();
 }
 
-.searchcraft-loading-bars {
-  margin: 0 auto;
-  width: 60px;
-  height: 50px;
-  text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translateY(-50%) translateX(-50%);
+.searchcraft-loading-dots {
   display: flex;
-  gap: 2px;
+  gap: 8px;
+  align-items: center;
+  height: 40px;
 
   & > div {
-    height: 100%;
-    width: 8px;
-    -webkit-animation: delay 0.8s infinite ease-in-out;
-    animation: delay 0.8s infinite ease-in-out;
-    opacity: 0.2;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--sc-surface-brand-primary);
+    animation: searchcraft-jump 0.6s ease-in-out infinite;
   }
 
-  & .searchcraft-loading-bar-1 {
-    background-color: var(--sc-surface-brand-primary);
-    opacity: 0.1;
+  & .searchcraft-loading-dot-2 {
+    animation-delay: 0.15s;
   }
 
-  & .searchcraft-loading-bar-2 {
-    background-color: var(--sc-surface-brand-primary);
-    animation-delay: -0.7s;
-    opacity: 0.2;
-  }
-  & .searchcraft-loading-bar-3 {
-    background-color: var(--sc-surface-brand-primary);
-    animation-delay: -0.6s;
-    opacity: 0.3;
-  }
-  & .searchcraft-loading-bar-4 {
-    background-color: var(--sc-surface-brand-primary);
-    animation-delay: -0.5s;
-    opacity: 0.4;
-  }
-  & .searchcraft-loading-bar-5 {
-    background-color: var(--sc-surface-brand-primary);
-    animation-delay: -0.4s;
-    opacity: 0.5;
-  }
-  & .searchcraft-loading-bar-6 {
-    background-color: var(--sc-surface-brand-primary);
-    animation-delay: -0.3s;
-    opacity: 0.6;
+  & .searchcraft-loading-dot-3 {
+    animation-delay: 0.3s;
   }
 }
 
-@keyframes delay {
-  0%, 40%, 100% {
-    transform: scaleY(0.05);
-  }  20% {
-    transform: scaleY(1.0);
+.searchcraft-loading-label {
+  @include typography.body-small();
+  letter-spacing: 2px;
+  color: #828282;
+  margin: 0;
+}
+
+@keyframes searchcraft-jump {
+  0% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
+  }
+  50% {
+    transform: translateY(-20px);
+    animation-timing-function: cubic-bezier(0.32, 0, 0.67, 0);
+  }
+  100% {
+    transform: translateY(0);
   }
 }
