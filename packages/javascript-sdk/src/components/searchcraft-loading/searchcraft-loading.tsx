@@ -15,13 +15,10 @@ export class SearchcraftInputLabel {
   render() {
     return (
       <div class='searchcraft-loading'>
-        <div class='searchcraft-loading-bars'>
-          <div class='searchcraft-loading-bar-1' />
-          <div class='searchcraft-loading-bar-2' />
-          <div class='searchcraft-loading-bar-3' />
-          <div class='searchcraft-loading-bar-4' />
-          <div class='searchcraft-loading-bar-5' />
-          <div class='searchcraft-loading-bar-6' />
+        <div class='searchcraft-loading-dots'>
+          <div class='searchcraft-loading-dot-1' />
+          <div class='searchcraft-loading-dot-2' />
+          <div class='searchcraft-loading-dot-3' />
         </div>
         <p class='searchcraft-loading-label'>{this.label}</p>
       </div>
