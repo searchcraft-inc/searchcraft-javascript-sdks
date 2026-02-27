@@ -289,6 +289,11 @@ export namespace Components {
      */
     interface SearchcraftPagination {
         /**
+          * The URL query string parameter name used to track the current page. When a user navigates to a URL that contains this parameter, the pagination component will automatically navigate to that page.
+          * @default "p"
+         */
+        "pageQueryParam": string;
+        /**
           * Whether to scroll to the top of the search results when pagination buttons are clicked.
           * @default true
          */
@@ -297,6 +302,11 @@ export namespace Components {
           * The id of the Searchcraft instance that this component should use.
          */
         "searchcraftId"?: string;
+        /**
+          * Whether to use a query string parameter to track and restore the current page. Set to `false` to disable query string synchronisation entirely.
+          * @default true
+         */
+        "usePageQueryParam": boolean;
     }
     /**
      * Renders a button which, when clicked, turns on popover visibility.
@@ -1673,6 +1683,11 @@ declare namespace LocalJSX {
      */
     interface SearchcraftPagination {
         /**
+          * The URL query string parameter name used to track the current page. When a user navigates to a URL that contains this parameter, the pagination component will automatically navigate to that page.
+          * @default "p"
+         */
+        "pageQueryParam"?: string;
+        /**
           * Whether to scroll to the top of the search results when pagination buttons are clicked.
           * @default true
          */
@@ -1681,6 +1696,11 @@ declare namespace LocalJSX {
           * The id of the Searchcraft instance that this component should use.
          */
         "searchcraftId"?: string;
+        /**
+          * Whether to use a query string parameter to track and restore the current page. Set to `false` to disable query string synchronisation entirely.
+          * @default true
+         */
+        "usePageQueryParam"?: boolean;
     }
     /**
      * Renders a button which, when clicked, turns on popover visibility.

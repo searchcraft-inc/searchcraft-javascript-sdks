@@ -45,6 +45,8 @@ import { SearchcraftPagination } from "@searchcraft/vue-sdk";
 
 | Property | Attribute | Description | Type | Default |
 | -------- | --------- | ----------- | ---- | ------- |
+| `pageQueryParam` | `page-query-param` | The URL query string parameter name used to track the current page. When a user navigates to a URL that contains this parameter, the pagination component will automatically navigate to that page. | `string` | `'p'` |
 | `scrollToTop` | `scroll-to-top` | Whether to scroll to the top of the search results when pagination buttons are clicked. | `boolean \| undefined` | `true` |
 | `searchcraftId` | `searchcraft-id` | The id of the Searchcraft instance that this component should use. | `string \| undefined` | `undefined` |
+| `usePageQueryParam` | `use-page-query-param` | Whether to use a query string parameter to track and restore the current page. Set to `false` to disable query string synchronisation entirely. | `boolean` | `true` |
 
