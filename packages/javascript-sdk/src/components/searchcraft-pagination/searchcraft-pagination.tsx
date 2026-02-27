@@ -233,7 +233,11 @@ export class SearchcraftPagination {
     } else {
       url.searchParams.set(this.pageQueryParam, String(page));
     }
-    targetWindow.history.replaceState(null, '', url.toString());
+    targetWindow.history.replaceState(
+      targetWindow.history.state,
+      '',
+      url.toString(),
+    );
   }
 
   handleGoToPage(page: number) {
