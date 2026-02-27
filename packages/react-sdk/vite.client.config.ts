@@ -1,6 +1,6 @@
+import { resolve } from 'node:path';
 // <reference types="vitest" />
 import react from '@vitejs/plugin-react-swc';
-import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 import dtsPlugin from 'vite-plugin-dts';
 

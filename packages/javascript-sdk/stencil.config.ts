@@ -2,10 +2,10 @@ import { promises as fs, readFileSync } from 'node:fs';
 
 import type { Config } from '@stencil/core';
 import type {
-    JsonDocs,
-    JsonDocsEvent,
-    JsonDocsProp,
-    JsonDocsTag,
+  JsonDocs,
+  JsonDocsEvent,
+  JsonDocsProp,
+  JsonDocsTag,
 } from '@stencil/core/internal';
 import { reactOutputTarget } from '@stencil/react-output-target';
 import { vueOutputTarget } from '@stencil/vue-output-target';
@@ -179,12 +179,33 @@ export const propsToMarkdown = (props: JsonDocsProp[]) => {
     return content;
   }
 
+  const publicProps = props.filter((prop) => {
+    const p = prop as JsonDocsProp & {
+      internal?: boolean;
+      docsTags?: JsonDocsTag[];
+    };
+
+    if (p.internal) {
+      return false;
+    }
+
+    if (p.docsTags?.some((tag) => tag.name === 'internal')) {
+      return false;
+    }
+
+    return true;
+  });
+
+  if (publicProps.length === 0) {
+    return content;
+  }
+
   content.push('## Properties');
   content.push('');
   const headers = ['Property', 'Attribute', 'Description', 'Type', 'Default'];
   const rows: string[][] = [];
 
-  props.forEach((prop) => {
+  publicProps.forEach((prop) => {
     rows.push([
       getPropertyValue(prop),
       getAttributeValue(prop),

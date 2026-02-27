@@ -2,12 +2,26 @@
   "name": "@searchcraft/react-sdk",
   "private": false,
   "author": "Searchcraft Inc.",
-  "version": "0.13.3",
+  "version": "0.14.0",
   "description": "Searchcraft React SDK.",
   "type": "module",
   "license": "Apache-2.0",
   "keywords": [
-    "searchcraft"
+    "searchcraft",
+    "search",
+    "search-ui",
+    "search-sdk",
+    "search-api",
+    "facets",
+    "filters",
+    "pagination",
+    "fuzzy-search",
+    "semantic-search",
+    "react-sdk",
+    "full-text-search",
+    "search-components",
+    "federated-search",
+    "react"
   ],
   "scripts": {
     "build": "rm -rf dist && vite build --config vite.client.config.ts && vite build --config vite.server.config.ts",
@@ -43,7 +57,7 @@
     "./themes/*.css": "./dist/client/themes/*.css"
   },
   "dependencies": {
-    "@searchcraft/javascript-sdk": "^0.13.3",
+    "@searchcraft/javascript-sdk": "^0.14.0",
     "classnames": "^2.3.2"
   },
   "peerDependencies": {
@@ -55,11 +69,11 @@
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.1",
     "@types/node": "^20.11.25",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
     "jsdom": "^24.0.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
     "sass": "^1.56.1"
   }
 }

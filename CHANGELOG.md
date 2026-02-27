@@ -1,3 +1,14 @@
+## 0.14.0 - 2026-02-27
+
+- New Feature: Added "View All Results" option to popover footer. This adds two new optional props, `viewAllResultsBaseUrl` and `viewAllResultsLabel` which allow configuration for these values. View all allows the popover component to link to a stand-alone results page for a query. This page is application definable.
+- New Feature: Added ability to load the AI summary box component within the popover component.
+- New Feature: Added two new properties to pagination component, `pageQueryParam` and `usePageQueryParam` which will allow navigation back to a specific results page.
+- Enhancement: Replaced the loading animation in the summary box component with a less jittery one.
+- Re-ordered layout in popover footer layout.
+- Minor bugfixes and improvements.
+- Utm attribution on back links.
+- Documentation updates.
+
 ## 0.13.3 - 2026-02-16
 
 - New Feature: Added collapsible facet sections to `searchcraft-facet-list` component with `initialCollapseState` prop ('open' or 'closed').

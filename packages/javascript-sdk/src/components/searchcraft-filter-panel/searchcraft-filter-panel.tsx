@@ -412,20 +412,41 @@ export class SearchcraftFilterPanel {
                 if (labelElement) {
                   if (isCollapsed) {
                     labelElement.removeAttribute('data-facet-section-expanded');
-                    labelElement.setAttribute('data-facet-section-collapsed', '');
+                    labelElement.setAttribute(
+                      'data-facet-section-collapsed',
+                      '',
+                    );
                     labelElement.setAttribute('aria-expanded', 'false');
                   } else {
-                    labelElement.removeAttribute('data-facet-section-collapsed');
-                    labelElement.setAttribute('data-facet-section-expanded', '');
+                    labelElement.removeAttribute(
+                      'data-facet-section-collapsed',
+                    );
+                    labelElement.setAttribute(
+                      'data-facet-section-expanded',
+                      '',
+                    );
                     labelElement.setAttribute('aria-expanded', 'true');
                   }
                 }
               };
 
               const handleToggle = async () => {
-                if (facetListElement && 'handleCollapseToggle' in facetListElement && 'getIsCollapsed' in facetListElement) {
-                  await (facetListElement as { handleCollapseToggle: () => Promise<void>; getIsCollapsed: () => Promise<boolean> }).handleCollapseToggle();
-                  const isCollapsed = await (facetListElement as { getIsCollapsed: () => Promise<boolean> }).getIsCollapsed();
+                if (
+                  facetListElement &&
+                  'handleCollapseToggle' in facetListElement &&
+                  'getIsCollapsed' in facetListElement
+                ) {
+                  await (
+                    facetListElement as {
+                      handleCollapseToggle: () => Promise<void>;
+                      getIsCollapsed: () => Promise<boolean>;
+                    }
+                  ).handleCollapseToggle();
+                  const isCollapsed = await (
+                    facetListElement as {
+                      getIsCollapsed: () => Promise<boolean>;
+                    }
+                  ).getIsCollapsed();
                   updateLabelAttributes(isCollapsed);
                 }
               };
@@ -437,20 +458,32 @@ export class SearchcraftFilterPanel {
                     ref={(el) => {
                       labelElement = el || null;
                     }}
+                    aria-expanded={
+                      item.options.initialCollapseState !== 'closed'
+                    }
                     class='searchcraft-filter-panel-label'
                     data-toggle-facet-section
-                    data-facet-section-expanded={item.options.initialCollapseState !== 'closed' ? '' : undefined}
-                    data-facet-section-collapsed={item.options.initialCollapseState === 'closed' ? '' : undefined}
-                    onClick={handleToggle}
-                    onKeyDown={async (event: KeyboardEvent) => {
+                    data-facet-section-expanded={
+                      item.options.initialCollapseState !== 'closed'
+                        ? ''
+                        : undefined
+                    }
+                    data-facet-section-collapsed={
+                      item.options.initialCollapseState === 'closed'
+                        ? ''
+                        : undefined
+                    }
+                    onClick={() => void handleToggle()}
+                    onKeyDown={(event) => {
                       if (event.key === 'Enter' || event.key === ' ') {
                         event.preventDefault();
-                        await handleToggle();
+                        void handleToggle();
                       }
                     }}
-                    tabIndex={0}
+                    /* biome-ignore lint/a11y/useSemanticElements: This label is intentionally a <p> for styling/layout; it behaves like a button. */
+                    /* biome-ignore lint/a11y/noNoninteractiveElementToInteractiveRole: This <p> is intentionally used as an interactive control. */
                     role='button'
-                    aria-expanded={item.options.initialCollapseState !== 'closed'}
+                    tabIndex={0}
                   >
                     {filterItem.label}
                   </p>

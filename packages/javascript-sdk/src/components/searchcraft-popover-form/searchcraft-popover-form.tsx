@@ -83,6 +83,27 @@ export class SearchcraftPopoverForm {
    * 'hide-on-text-entered' - Only hide the placeholder when the input form has text entered into it.
    */
   @Prop() placeholderBehavior?: 'hide-on-focus' | 'hide-on-text-entered';
+  /**
+   * Base URL for the "View all" footer link. The current search term will be appended (URL encoded).
+   *
+   * For example, in a CMS-backed site you might set this to `/?s=` so the final URL becomes `/?s=<search-term>`.
+   */
+  @Prop() viewAllResultsBaseUrl?: string;
+  /**
+   * Optional label for the "View All" footer button. Defaults to "View All".
+   */
+  @Prop() viewAllResultsLabel?: string;
+  /**
+   * Whether to display the AI generative summary box before the search results.
+   * NOTE: This requires the usage of a read key that has "SUMMARY" permissions and either a subscription to Searchcraft Cloud with AI features enabled or a self-hosted model connected.
+   */
+  @Prop() showSummaryBox?: boolean = false;
+  /**
+   * The SDK variant used to render this component. Used for UTM attribution on the footer link.
+   *
+   * @internal
+   */
+  @Prop() sdkVariant?: 'js' | 'react' | 'vue' = 'js';
 
   @State() isPopoverVisibleInState = false;
   @State() searchClientResponseItems: SearchClientResponseItem[] = [];
@@ -194,6 +215,16 @@ export class SearchcraftPopoverForm {
       case 'Escape':
         this.core?.store.getState().setPopoverVisibility(false);
         break;
+      case 'Enter':
+        if (
+          (event.metaKey || event.ctrlKey) &&
+          this.viewAllResultsHref &&
+          this.hasResultsToShow
+        ) {
+          event.preventDefault();
+          this.navigateToViewAllResults();
+        }
+        break;
       default:
         return;
     }
@@ -236,6 +267,18 @@ export class SearchcraftPopoverForm {
           this.modalElement.setAttribute(
             'placeholder-behavior',
             this.placeholderBehavior,
+          );
+        }
+        if (this.viewAllResultsBaseUrl) {
+          this.modalElement.setAttribute(
+            'view-all-results-base-url',
+            this.viewAllResultsBaseUrl,
+          );
+        }
+        if (this.viewAllResultsLabel) {
+          this.modalElement.setAttribute(
+            'view-all-results-label',
+            this.viewAllResultsLabel,
           );
         }
         document.body.appendChild(this.modalElement);
@@ -321,6 +364,36 @@ export class SearchcraftPopoverForm {
     );
   }
 
+  get viewAllResultsHref() {
+    const baseUrl = this.viewAllResultsBaseUrl;
+    if (!baseUrl) {
+      return undefined;
+    }
+
+    const term = this.searchTerm?.trim();
+    if (!term) {
+      return baseUrl;
+    }
+
+    return `${baseUrl}${encodeURIComponent(term).replace(/%20/g, '+')}`;
+  }
+
+  get resolvedViewAllResultsLabel() {
+    return this.viewAllResultsLabel ?? 'View All';
+  }
+
+  navigateToViewAllResults() {
+    const href = this.viewAllResultsHref;
+
+    if (!href || !this.hasResultsToShow) {
+      return;
+    }
+
+    if (typeof window !== 'undefined') {
+      window.location.href = href;
+    }
+  }
+
   renderInlinePopover() {
     const isListViewVisible = this.hasResultsToShow && this.isFocused;
 
@@ -343,6 +416,9 @@ export class SearchcraftPopoverForm {
         </div>
         {isListViewVisible && (
           <div class='searchcraft-popover-form-inline-wrapper'>
+            {this.showSummaryBox && (
+              <searchcraft-summary-box searchcraftId={this.searchcraftId} />
+            )}
             <searchcraft-popover-list-view
               popoverResultMappings={this.popoverResultMappings}
               searchClientResponseItems={this.searchClientResponseItems}
@@ -351,7 +427,12 @@ export class SearchcraftPopoverForm {
               searchResultsPerPage={this.searchResultsPerPage}
               searchcraftId={this.searchcraftId}
             />
-            <searchcraft-popover-footer searchcraftId={this.searchcraftId} />
+            <searchcraft-popover-footer
+              searchcraftId={this.searchcraftId}
+              sdkVariant={this.sdkVariant}
+              viewAllResultsHref={this.viewAllResultsHref}
+              viewAllResultsLabel={this.resolvedViewAllResultsLabel}
+            />
           </div>
         )}
       </div>
@@ -392,6 +473,9 @@ export class SearchcraftPopoverForm {
               </button>
             </div>
             <div class='searchcraft-popover-form-modal-popover-list-view'>
+              {this.showSummaryBox && this.hasResultsToShow && (
+                <searchcraft-summary-box searchcraftId={this.searchcraftId} />
+              )}
               {this.hasResultsToShow && (
                 <searchcraft-popover-list-view
                   popoverResultMappings={this.popoverResultMappings}
@@ -403,7 +487,12 @@ export class SearchcraftPopoverForm {
                 />
               )}
             </div>
-            <searchcraft-popover-footer searchcraftId={this.searchcraftId} />
+            <searchcraft-popover-footer
+              searchcraftId={this.searchcraftId}
+              sdkVariant={this.sdkVariant}
+              viewAllResultsHref={this.viewAllResultsHref}
+              viewAllResultsLabel={this.resolvedViewAllResultsLabel}
+            />
           </div>
         </div>
       );
@@ -438,6 +527,9 @@ export class SearchcraftPopoverForm {
             </button>
           </div>
           <div class='searchcraft-popover-form-fullscreen-popover-list-view'>
+            {this.showSummaryBox && this.hasResultsToShow && (
+              <searchcraft-summary-box searchcraftId={this.searchcraftId} />
+            )}
             {this.hasResultsToShow && (
               <searchcraft-popover-list-view
                 popoverResultMappings={this.popoverResultMappings}
@@ -449,7 +541,12 @@ export class SearchcraftPopoverForm {
               />
             )}
           </div>
-          <searchcraft-popover-footer searchcraftId={this.searchcraftId} />
+          <searchcraft-popover-footer
+            searchcraftId={this.searchcraftId}
+            sdkVariant={this.sdkVariant}
+            viewAllResultsHref={this.viewAllResultsHref}
+            viewAllResultsLabel={this.resolvedViewAllResultsLabel}
+          />
         </div>
       );
     }

@@ -37,7 +37,9 @@ export const SearchcraftInputForm = /*@__PURE__*/ defineContainer<JSX.Searchcraf
 
 export const SearchcraftPagination = /*@__PURE__*/ defineContainer<JSX.SearchcraftPagination>('searchcraft-pagination', () => {}, [
   'searchcraftId',
-  'scrollToTop'
+  'scrollToTop',
+  'pageQueryParam',
+  'usePageQueryParam'
 ]);
 
 
@@ -55,7 +57,11 @@ export const SearchcraftPopoverForm = /*@__PURE__*/ defineContainer<JSX.Searchcr
   'hotkeyModifier',
   'searchcraftId',
   'placeholderValue',
-  'placeholderBehavior'
+  'placeholderBehavior',
+  'viewAllResultsBaseUrl',
+  'viewAllResultsLabel',
+  'showSummaryBox',
+  'sdkVariant'
 ]);
 
 

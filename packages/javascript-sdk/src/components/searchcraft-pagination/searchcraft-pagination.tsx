@@ -45,6 +45,19 @@ export class SearchcraftPagination {
    * @default true
    */
   @Prop() scrollToTop?: boolean = true;
+  /**
+   * The URL query string parameter name used to track the current page. When a user navigates
+   * to a URL that contains this parameter, the pagination component will automatically navigate
+   * to that page.
+   * @default "p"
+   */
+  @Prop() pageQueryParam = 'p';
+  /**
+   * Whether to use a query string parameter to track and restore the current page.
+   * Set to `false` to disable query string synchronisation entirely.
+   * @default true
+   */
+  @Prop() usePageQueryParam = true;
   // store vars
   @State() searchTerm;
   @State() searchResultsPerPage;
@@ -62,6 +75,7 @@ export class SearchcraftPagination {
 
   private unsubscribe: () => void = () => {};
   private cleanupCore?: () => void;
+  private _initialPageApplied = false;
 
   onCoreAvailable(core: SearchcraftCore) {
     this.unsubscribe = core.store.subscribe((state) => {
@@ -84,6 +98,15 @@ export class SearchcraftPagination {
 
       // store functions
       this.setSearchResultsPage = state.setSearchResultsPage;
+
+      // Apply initial page from URL query param (only once, on first subscription tick)
+      if (!this._initialPageApplied) {
+        this._initialPageApplied = true;
+        const initialPage = this.getPageFromUrl();
+        if (initialPage !== null && initialPage !== state.searchResultsPage) {
+          state.setSearchResultsPage(initialPage);
+        }
+      }
     });
   }
 
@@ -102,26 +125,33 @@ export class SearchcraftPagination {
   /**
    * Smooth scroll to the top of the search results component
    */
+  private scrollAnimationId?: number;
   private smoothScrollToSearchResults() {
     if (!this.scrollToTop) {
       return;
     }
 
-    const searchResultsElement = document.querySelector('searchcraft-search-results .searchcraft-search-results');
+    const searchResultsElement = document.querySelector(
+      'searchcraft-search-results .searchcraft-search-results',
+    );
 
     if (!searchResultsElement) {
       return;
     }
 
+    // Cancel any in-flight scroll animation
+    if (this.scrollAnimationId) {
+      cancelAnimationFrame(this.scrollAnimationId);
+    }
+
     const elementRect = searchResultsElement.getBoundingClientRect();
-    const scrollOffset = 200; // Offset in pixels above the element
+    const scrollOffset = 200;
     const targetPosition = elementRect.top + window.scrollY - scrollOffset;
     const startPosition = window.scrollY;
     const distance = targetPosition - startPosition;
     const duration = 1500;
     let startTime: number | null = null;
 
-    // smooth scrolling
     const easeOutExpo = (t: number): number => {
       return t === 1 ? 1 : 1 - 2 ** (-10 * t);
     };
@@ -138,15 +168,81 @@ export class SearchcraftPagination {
       window.scrollTo(0, startPosition + distance * ease);
 
       if (progress < 1) {
-        requestAnimationFrame(animation);
+        this.scrollAnimationId = requestAnimationFrame(animation);
+      } else {
+        this.scrollAnimationId = undefined;
       }
     };
 
-    requestAnimationFrame(animation);
+    this.scrollAnimationId = requestAnimationFrame(animation);
+  }
+
+  /**
+   * Returns the page number from the URL query string, or null if not present / disabled.
+   * Reads from the top-level window when inside a same-origin iframe so that the
+   * address-bar URL is the source of truth (consistent with updateUrlPage).
+   */
+  private getPageFromUrl(): number | null {
+    if (!this.usePageQueryParam || typeof window === 'undefined') {
+      return null;
+    }
+
+    let targetWindow: Window = window;
+    try {
+      if (window.top && window.top !== window && window.top.location.href) {
+        targetWindow = window.top;
+      }
+    } catch {
+      // Cross-origin iframe — stay with the current window
+    }
+
+    const params = new URLSearchParams(targetWindow.location.search);
+    const raw = params.get(this.pageQueryParam);
+    if (raw === null) {
+      return null;
+    }
+    const page = Number.parseInt(raw, 10);
+    return Number.isNaN(page) || page < 1 ? null : page;
+  }
+
+  /**
+   * Updates (or removes) the page query string parameter in the browser URL without
+   * triggering a navigation/reload.
+   * When running inside a same-origin iframe (e.g. Storybook), the top-level window's
+   * URL is updated so the change is visible in the address bar.
+   */
+  private updateUrlPage(page: number) {
+    if (!this.usePageQueryParam || typeof window === 'undefined') {
+      return;
+    }
+
+    // Prefer the top-level window so the address bar updates even inside iframes
+    // (e.g. Storybook). Falls back to the current window for cross-origin iframes.
+    let targetWindow: Window = window;
+    try {
+      if (window.top && window.top !== window && window.top.location.href) {
+        targetWindow = window.top;
+      }
+    } catch {
+      // Cross-origin iframe — stay with the current window
+    }
+
+    const url = new URL(targetWindow.location.href);
+    if (page <= 1) {
+      url.searchParams.delete(this.pageQueryParam);
+    } else {
+      url.searchParams.set(this.pageQueryParam, String(page));
+    }
+    targetWindow.history.replaceState(
+      targetWindow.history.state,
+      '',
+      url.toString(),
+    );
   }
 
   handleGoToPage(page: number) {
     this.setSearchResultsPage(page);
+    this.updateUrlPage(page);
     if (this.scrollToTop) {
       this.smoothScrollToSearchResults();
     }

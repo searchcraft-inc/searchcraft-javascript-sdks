@@ -1,7 +1,7 @@
 {
   "name": "@searchcraft/javascript-sdk",
   "private": false,
-  "version": "0.13.3",
+  "version": "0.14.0",
   "description": "Searchcraft Javascript SDK",
   "author": "Searchcraft Inc.",
   "license": "Apache-2.0",
@@ -30,6 +30,23 @@
   "homepage": "https://github.com/searchcraft-inc/searchcraft-javascript-sdks#readme",
   "files": [
     "dist/"
+  ],
+  "keywords": [
+    "searchcraft",
+    "search",
+    "search-ui",
+    "search-sdk",
+    "search-api",
+    "facets",
+    "filters",
+    "pagination",
+    "fuzzy-search",
+    "semantic-search",
+    "javascript-sdk",
+    "full-text-search",
+    "search-components",
+    "federated-search",
+    "web-components"
   ],
   "scripts": {
     "build": "stencil build",

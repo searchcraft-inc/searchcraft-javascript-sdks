@@ -3,6 +3,7 @@ import { registry } from '@classes/CoreInstanceRegistry';
 import { Component, Prop, State, h } from '@stencil/core';
 
 import { formatNumberWithCommas } from '@utils';
+import { version as sdkVersion } from '../../../package.json';
 
 /**
  * Renders the footer for the searchcraft-popover-form.
@@ -18,6 +19,20 @@ export class SearchcraftPopoverFooter {
    * The id of the Searchcraft instance that this component should use.
    */
   @Prop() searchcraftId?: string;
+  /**
+   * The SDK variant used to render this component. Used for UTM attribution. This isn't exposed for developer consumption, it's set automatically.
+   *
+   * @internal
+   */
+  @Prop() sdkVariant?: 'js' | 'react' | 'vue' = 'js';
+  /**
+   * Optional href for the "View all" button.
+   */
+  @Prop() viewAllResultsHref?: string;
+  /**
+   * Optional label for the "View all" button.
+   */
+  @Prop() viewAllResultsLabel?: string;
   @State() searchResultsCount;
 
   private unsubscribe: () => void = () => {};
@@ -43,25 +58,48 @@ export class SearchcraftPopoverFooter {
     this.cleanupCore?.();
   }
 
+  private get safeViewAllHref(): string | undefined {
+    const href = this.viewAllResultsHref;
+    if (!href) return undefined;
+    try {
+      const url = new URL(href, window.location.href);
+      return url.protocol === 'https:' || url.protocol === 'http:'
+        ? href
+        : undefined;
+    } catch {
+      return undefined;
+    }
+  }
+
   render() {
+    const hostname =
+      typeof window !== 'undefined' ? window.location.hostname : '';
+    const utmParams = new URLSearchParams({
+      utm_source: hostname,
+      utm_medium: this.sdkVariant ?? 'js',
+      utm_campaign: 'powered-by',
+      utm_content: 'popover-footer',
+      sc_sdk_version: sdkVersion,
+    });
+    const href = `https://searchcraft.io/?${utmParams.toString()}`;
+    const hasResults =
+      typeof this.searchResultsCount === 'number' &&
+      this.searchResultsCount > 0;
+    const showViewAll = !!this.safeViewAllHref && hasResults;
+
     return (
       <footer class='searchcraft-popover-footer'>
-        <p class='searchcraft-popover-footer-results-info'>
-          {this.searchResultsCount
-            ? `${formatNumberWithCommas(this.searchResultsCount)} Results Found`
-            : ' '}
-        </p>
         <a
           class='searchcraft-popover-footer-link'
-          href='https://searchcraft.io/'
+          href={href}
           target='_blank'
           rel='noreferrer'
         >
           <svg
             class='searchcraft-popover-footer-link-image'
             width='169'
-            height='16'
-            viewBox='0 0 169 16'
+            height='20'
+            viewBox='0 0 169 20'
             fill='none'
             xmlns='http://www.w3.org/2000/svg'
           >
@@ -72,6 +110,30 @@ export class SearchcraftPopoverFooter {
             />
           </svg>
         </a>
+        <div class='searchcraft-popover-footer-results'>
+          <p class='searchcraft-popover-footer-results-info'>
+            {hasResults
+              ? `${formatNumberWithCommas(this.searchResultsCount)} Results Found`
+              : ' '}
+          </p>
+          {showViewAll && (
+            <a
+              class='searchcraft-popover-footer-view-all'
+              href={this.safeViewAllHref}
+            >
+              <span class='searchcraft-popover-footer-view-all-label'>
+                {this.viewAllResultsLabel}
+              </span>
+              <span
+                class='searchcraft-popover-footer-view-all-shortcut'
+                aria-hidden='true'
+              >
+                <kbd>⌘</kbd>
+                <kbd>↵</kbd>
+              </span>
+            </a>
+          )}
+        </div>
       </footer>
     );
   }
