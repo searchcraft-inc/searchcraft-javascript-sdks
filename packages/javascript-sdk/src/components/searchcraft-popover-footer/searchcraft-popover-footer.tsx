@@ -124,7 +124,10 @@ export class SearchcraftPopoverFooter {
               <span class='searchcraft-popover-footer-view-all-label'>
                 {this.viewAllResultsLabel}
               </span>
-              <span class='searchcraft-popover-footer-view-all-shortcut' aria-hidden='true'>
+              <span
+                class='searchcraft-popover-footer-view-all-shortcut'
+                aria-hidden='true'
+              >
                 <kbd>⌘</kbd>
                 <kbd>↵</kbd>
               </span>

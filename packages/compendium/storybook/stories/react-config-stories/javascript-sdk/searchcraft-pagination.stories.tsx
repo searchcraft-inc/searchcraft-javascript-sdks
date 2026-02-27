@@ -16,11 +16,23 @@ const componentMeta: Meta = {
       description:
         'Whether to scroll to the top of the search results when pagination buttons are clicked',
     },
+    pageQueryParam: {
+      control: 'text',
+      description:
+        'The URL query string parameter name used to track the current page. When a user navigates to a URL containing this parameter, the pagination component will automatically navigate to that page.',
+    },
+    usePageQueryParam: {
+      control: 'boolean',
+      description:
+        'Whether to sync the current page with a URL query string parameter. Set to false to disable entirely.',
+    },
   },
 };
 
 const defaultProps = {
   scrollToTop: true,
+  pageQueryParam: 'p',
+  usePageQueryParam: true,
 };
 
 export const Default: StoryObj = {
@@ -100,7 +112,11 @@ export const Default: StoryObj = {
         }}
       >
         <searchcraft-search-results-per-page />
-        <searchcraft-pagination scroll-to-top={args.scrollToTop} />
+        <searchcraft-pagination
+          scroll-to-top={args.scrollToTop}
+          page-query-param={args.pageQueryParam}
+          use-page-query-param={args.usePageQueryParam}
+        />
       </div>
     </>
   ),
@@ -193,7 +209,11 @@ export const WithCustomAds: StoryObj = {
         }}
       >
         <searchcraft-search-results-per-page />
-        <searchcraft-pagination scroll-to-top={args.scrollToTop} />
+        <searchcraft-pagination
+          scroll-to-top={args.scrollToTop}
+          page-query-param={args.pageQueryParam}
+          use-page-query-param={args.usePageQueryParam}
+        />
       </div>
     </>
   ),
@@ -286,7 +306,11 @@ export const WithNativoAds: StoryObj = {
         }}
       >
         <searchcraft-search-results-per-page />
-        <searchcraft-pagination scroll-to-top={args.scrollToTop} />
+        <searchcraft-pagination
+          scroll-to-top={args.scrollToTop}
+          page-query-param={args.pageQueryParam}
+          use-page-query-param={args.usePageQueryParam}
+        />
       </div>
     </>
   ),

@@ -196,55 +196,58 @@ export const InlineWithAds: StoryObj<Components.SearchcraftPopoverForm> = {
   args: {},
 };
 
-export const InlineWithSummaryBox: StoryObj<Components.SearchcraftPopoverForm> = {
-  decorators: [
-    (Story) => {
-      useEffect(() => {
-        new Searchcraft({
-          readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
-          endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
-          indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
-          cortexURL: import.meta.env.VITE_CORTEX_URL,
-        });
-        const popoverForm = document.querySelector('searchcraft-popover-form');
+export const InlineWithSummaryBox: StoryObj<Components.SearchcraftPopoverForm> =
+  {
+    decorators: [
+      (Story) => {
+        useEffect(() => {
+          new Searchcraft({
+            readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
+            endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
+            indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
+            cortexURL: import.meta.env.VITE_CORTEX_URL,
+          });
+          const popoverForm = document.querySelector(
+            'searchcraft-popover-form',
+          );
 
-        if (popoverForm) {
-          popoverForm.popoverResultMappings = popoverResultMappingsRunegard;
-        }
-      }, []);
+          if (popoverForm) {
+            popoverForm.popoverResultMappings = popoverResultMappingsRunegard;
+          }
+        }, []);
 
-      return <Story />;
+        return <Story />;
+      },
+    ],
+    render: (args) => {
+      return (
+        <>
+          <div className='searchcraft-popover-form-with-content'>
+            <p>
+              Story Note: This story uses the Echostream env vars and displays a
+              summary box before the search results. Note: This requires a read
+              key with "SUMMARY" permissions.
+            </p>
+            <searchcraft-popover-form
+              type='inline'
+              hotkey='k'
+              hotkey-modifier='ctrl'
+              placeholder-value={args.placeholderValue}
+              placeholder-behavior={args.placeholderBehavior}
+              show-summary-box={args.showSummaryBox ? 'true' : 'false'}
+              view-all-results-base-url={args.viewAllResultsBaseUrl}
+              view-all-results-label={args.viewAllResultsLabel}
+            />
+            <p>
+              Here's some content that shows up underneath the popover. The
+              popover should render above this content when it is active.
+            </p>
+          </div>
+        </>
+      );
     },
-  ],
-  render: (args) => {
-    return (
-      <>
-        <div className='searchcraft-popover-form-with-content'>
-          <p>
-            Story Note: This story uses the Echostream env vars and displays a
-            summary box before the search results. Note: This requires a read
-            key with "SUMMARY" permissions.
-          </p>
-          <searchcraft-popover-form
-            type='inline'
-            hotkey='k'
-            hotkey-modifier='ctrl'
-            placeholder-value={args.placeholderValue}
-            placeholder-behavior={args.placeholderBehavior}
-            show-summary-box={args.showSummaryBox ? 'true' : 'false'}
-            view-all-results-base-url={args.viewAllResultsBaseUrl}
-            view-all-results-label={args.viewAllResultsLabel}
-          />
-          <p>
-            Here's some content that shows up underneath the popover. The
-            popover should render above this content when it is active.
-          </p>
-        </div>
-      </>
-    );
-  },
-  args: { ...defaultProps, showSummaryBox: true },
-};
+    args: { ...defaultProps, showSummaryBox: true },
+  };
 
 export const Modal: StoryObj<Components.SearchcraftPopoverForm> = {
   decorators: [
