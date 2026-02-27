@@ -7,7 +7,21 @@
   "type": "module",
   "license": "Apache-2.0",
   "keywords": [
-    "searchcraft"
+    "searchcraft",
+    "search",
+    "search-ui",
+    "search-sdk",
+    "search-api",
+    "facets",
+    "filters",
+    "pagination",
+    "fuzzy-search",
+    "semantic-search",
+    "vue-sdk",
+    "full-text-search",
+    "search-components",
+    "federated-search",
+    "vue"
   ],
   "scripts": {
     "dev": "vite",
