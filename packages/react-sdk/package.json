@@ -7,7 +7,21 @@
   "type": "module",
   "license": "Apache-2.0",
   "keywords": [
-    "searchcraft"
+    "searchcraft",
+    "search",
+    "search-ui",
+    "search-sdk",
+    "search-api",
+    "facets",
+    "filters",
+    "pagination",
+    "fuzzy-search",
+    "semantic-search",
+    "react-sdk",
+    "full-text-search",
+    "search-components",
+    "federated-search",
+    "react"
   ],
   "scripts": {
     "build": "rm -rf dist && vite build --config vite.client.config.ts && vite build --config vite.server.config.ts",
