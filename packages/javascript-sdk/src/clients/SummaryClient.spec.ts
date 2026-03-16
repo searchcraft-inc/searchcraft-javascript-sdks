@@ -9,6 +9,7 @@ declare const afterEach: (fn: () => void | Promise<void>) => void;
 declare const expect: (actual: unknown) => {
   toBe(expected: unknown): void;
   toHaveBeenCalledTimes(expected: number): void;
+  toHaveBeenCalledWith(...expected: unknown[]): void;
 };
 declare const jest: {
   useFakeTimers(): void;
@@ -181,5 +182,140 @@ describe('SummaryClient', () => {
     await jest.runAllTimersAsync();
 
     expect(warnSpy).toHaveBeenCalledTimes(1);
+  });
+
+  it('gracefully handles malformed summary request payloads', async () => {
+    const errorSpy = jest.spyOn(console, 'error');
+    errorSpy.mockImplementation(() => undefined);
+
+    let state: SummaryClientTestState = {
+      hasSummaryBox: true,
+      isSummaryLoading: false,
+      isSummaryNotEnabled: false,
+      searchClientResponseItems: [],
+      summary: '',
+      summaryErrorMessage: '',
+      core: {
+        config: {
+          endpointURL: 'https://example.com',
+          indexName: 'docs',
+          readKey: 'read-key',
+          searchResultsPerPage: 10,
+          summaryDebounceDelay: 1,
+        },
+        measureClient: { sessionId: 'session-id' },
+        userId: 'user-id',
+        userType: 'authenticated',
+      },
+    };
+
+    const get = (() => state) as SearchcraftStore['getState'];
+    const set = ((
+      update:
+        | Partial<SummaryClientTestState>
+        | ((
+            current: SummaryClientTestState,
+          ) => Partial<SummaryClientTestState>),
+    ) => {
+      const nextState = typeof update === 'function' ? update(state) : update;
+      state = { ...state, ...nextState };
+    }) as unknown as SearchcraftStore['setState'];
+
+    const fetchMock = jest.fn();
+    global.fetch = fetchMock as unknown as typeof fetch;
+
+    const client = new SummaryClient(get, set);
+
+    client.streamSummaryData('{bad json');
+
+    await jest.runAllTimersAsync();
+
+    expect(errorSpy).toHaveBeenCalledTimes(1);
+    expect(fetchMock).toHaveBeenCalledTimes(0);
+    expect(state.isSummaryLoading).toBe(false);
+  });
+
+  it('logs a specific error for malformed SSE payloads', async () => {
+    const errorSpy = jest.spyOn(console, 'error');
+    errorSpy.mockImplementation(() => undefined);
+
+    let state: SummaryClientTestState = {
+      hasSummaryBox: true,
+      isSummaryLoading: false,
+      isSummaryNotEnabled: false,
+      searchClientResponseItems: [],
+      summary: '',
+      summaryErrorMessage: '',
+      core: {
+        config: {
+          endpointURL: 'https://example.com',
+          indexName: 'docs',
+          readKey: 'read-key',
+          searchResultsPerPage: 10,
+          summaryDebounceDelay: 1,
+        },
+        measureClient: { sessionId: 'session-id' },
+        userId: 'user-id',
+        userType: 'authenticated',
+      },
+    };
+
+    const get = (() => state) as SearchcraftStore['getState'];
+    const set = ((
+      update:
+        | Partial<SummaryClientTestState>
+        | ((
+            current: SummaryClientTestState,
+          ) => Partial<SummaryClientTestState>),
+    ) => {
+      const nextState = typeof update === 'function' ? update(state) : update;
+      state = { ...state, ...nextState };
+    }) as unknown as SearchcraftStore['setState'];
+
+    const fetchMock = jest.fn().mockResolvedValue({
+      ok: true,
+      body: {
+        getReader: () => {
+          let hasRead = false;
+
+          return {
+            read: async () => {
+              if (hasRead) {
+                return { done: true, value: undefined };
+              }
+
+              hasRead = true;
+              return {
+                done: false,
+                value: new TextEncoder().encode(
+                  'event: delta\ndata: {bad json\n\n',
+                ),
+              };
+            },
+          };
+        },
+      },
+    } as Response);
+    global.fetch = fetchMock as typeof fetch;
+
+    const client = new SummaryClient(get, set);
+
+    client.streamSummaryData({
+      searchTerm: 'chalk',
+      mode: 'fuzzy',
+      facetPathsForIndexFields: {},
+      rangeValueForIndexFields: {},
+    });
+
+    await jest.runAllTimersAsync();
+    await Promise.resolve();
+    await Promise.resolve();
+
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(errorSpy).toHaveBeenCalledWith(
+      'Invalid summary SSE payload for "delta" event.',
+    );
+    expect(state.isSummaryLoading).toBe(false);
+    expect(state.summary).toBe('');
   });
 });

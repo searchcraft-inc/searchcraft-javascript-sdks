@@ -182,9 +182,14 @@ export class SummaryClient {
     defaultLimit?: number,
   ): SearchClientRequest {
     if (typeof requestProperties === 'string') {
-      const parsedRequest = JSON.parse(
-        requestProperties,
-      ) as SearchClientRequest;
+      let parsedRequest: SearchClientRequest;
+
+      try {
+        parsedRequest = JSON.parse(requestProperties) as SearchClientRequest;
+      } catch {
+        throw new Error('Invalid summary request payload.');
+      }
+
       return {
         limit: defaultLimit,
         ...parsedRequest,
@@ -283,7 +288,25 @@ export class SummaryClient {
       return;
     }
 
-    const payload = parsedEvent.data ? JSON.parse(parsedEvent.data) : undefined;
+    let payload:
+      | {
+          content?: string;
+          message?: string;
+        }
+      | undefined;
+
+    if (parsedEvent.data) {
+      try {
+        payload = JSON.parse(parsedEvent.data) as {
+          content?: string;
+          message?: string;
+        };
+      } catch {
+        throw new Error(
+          `Invalid summary SSE payload for "${parsedEvent.event}" event.`,
+        );
+      }
+    }
 
     if (parsedEvent.event === 'delta') {
       const content =

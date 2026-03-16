@@ -158,10 +158,23 @@ const createSearchcraftStore = (
               hasNonDefaultPagination ||
               hasNonDefaultSearchMode)
           ) {
-            // Parse the initialQuery
-            const initialQueryObj = JSON.parse(
-              state.cachedSearchClientRequestProperties as string,
-            );
+            let initialQueryObj: {
+              query?: SearchClientQuery | SearchClientQuery[];
+              [key: string]: unknown;
+            };
+
+            try {
+              initialQueryObj = JSON.parse(
+                state.cachedSearchClientRequestProperties as string,
+              ) as {
+                query?: SearchClientQuery | SearchClientQuery[];
+                [key: string]: unknown;
+              };
+            } catch {
+              console.error('Invalid cached initial query payload.');
+              set({ isSearchInProgress: false });
+              return;
+            }
 
             set({ isSearchInProgress: true });
 
