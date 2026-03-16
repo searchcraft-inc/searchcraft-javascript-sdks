@@ -1,6 +1,6 @@
 import type { SearchcraftCore } from '@classes';
 import { registry } from '@classes/CoreInstanceRegistry';
-import { Component, Element, Prop, State, h } from '@stencil/core';
+import { Component, Prop, State, h } from '@stencil/core';
 import type { SearchcraftState } from '@store';
 import DOMPurify from 'dompurify';
 import { marked } from 'marked';
@@ -47,9 +47,9 @@ export class SearchcraftSummaryBox {
    */
   @Prop() searchcraftId?: string;
   @State() summary = '';
+  @State() summaryErrorMessage = '';
   @State() isLoading = false;
   @State() isSummaryNotEnabled = false;
-  @Element() hostElement?: HTMLElement;
 
   private unsubscribe?: () => void;
   private cleanupCore?: () => void;
@@ -77,10 +77,8 @@ export class SearchcraftSummaryBox {
   private handleStateChange(state: SearchcraftState) {
     this.isLoading = state.isSummaryLoading;
     this.isSummaryNotEnabled = state.isSummaryNotEnabled;
+    this.summaryErrorMessage = state.summaryErrorMessage;
     this.summary = this.sanitizeMarkdown(state.summary);
-
-    // Update DOM directly for performance (avoids re-render)
-    this.updateContentElement(state.summary);
   }
 
   /**
@@ -88,19 +86,6 @@ export class SearchcraftSummaryBox {
    */
   private sanitizeMarkdown(markdown: string): string {
     return DOMPurify.sanitize(marked.parse(markdown) as string);
-  }
-
-  /**
-   * Updates the content element directly without triggering a re-render.
-   */
-  private updateContentElement(markdown: string) {
-    const contentElement = this.hostElement?.querySelector(
-      '.searchcraft-summary-box-content',
-    );
-
-    if (contentElement) {
-      contentElement.innerHTML = this.sanitizeMarkdown(markdown);
-    }
   }
 
   /**
@@ -114,12 +99,14 @@ export class SearchcraftSummaryBox {
     if (this.isSummaryNotEnabled) {
       return (
         <div class='searchcraft-summary-box-content'>
-          AI summaries are not enabled
+          {this.summaryErrorMessage || 'AI summaries are not enabled'}
         </div>
       );
     }
 
-    return <div class='searchcraft-summary-box-content'>{this.summary}</div>;
+    return (
+      <div class='searchcraft-summary-box-content' innerHTML={this.summary} />
+    );
   }
 
   render() {

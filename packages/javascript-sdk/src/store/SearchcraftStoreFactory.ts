@@ -48,6 +48,7 @@ const initialSearchcraftStateValues: SearchcraftStateValues = {
   sortType: undefined,
   orderByField: undefined,
   summary: '',
+  summaryErrorMessage: '',
   hasSummaryBox: false,
   summaryClient: undefined,
   isSummaryLoading: false,
@@ -137,10 +138,6 @@ const createSearchcraftStore = (
           throw new Error('Searchcraft instance is not initialized.');
         }
 
-        if (state.core.config.cortexURL && !options?.skipSummary) {
-          state.summaryClient?.streamSummaryData();
-        }
-
         // Check if this is an initialQuery case (string requestProperties with empty searchTerm)
         const isInitialQuery =
           typeof state.cachedSearchClientRequestProperties === 'string' &&
@@ -161,10 +158,23 @@ const createSearchcraftStore = (
               hasNonDefaultPagination ||
               hasNonDefaultSearchMode)
           ) {
-            // Parse the initialQuery
-            const initialQueryObj = JSON.parse(
-              state.cachedSearchClientRequestProperties as string,
-            );
+            let initialQueryObj: {
+              query?: SearchClientQuery | SearchClientQuery[];
+              [key: string]: unknown;
+            };
+
+            try {
+              initialQueryObj = JSON.parse(
+                state.cachedSearchClientRequestProperties as string,
+              ) as {
+                query?: SearchClientQuery | SearchClientQuery[];
+                [key: string]: unknown;
+              };
+            } catch {
+              console.error('Invalid cached initial query payload.');
+              set({ isSearchInProgress: false });
+              return;
+            }
 
             set({ isSearchInProgress: true });
 
@@ -219,6 +229,12 @@ const createSearchcraftStore = (
               limit: state.searchResultsPerPage,
             };
 
+            if (!options?.skipSummary) {
+              state.summaryClient?.streamSummaryData(
+                JSON.stringify(modifiedRequest),
+              );
+            }
+
             state.core.getResponseItems({
               requestProperties: JSON.stringify(modifiedRequest),
               shouldCacheResultsForEmptyState: false,
@@ -259,6 +275,10 @@ const createSearchcraftStore = (
             : 0,
           limit: state.searchResultsPerPage,
         };
+
+        if (!options?.skipSummary) {
+          state.summaryClient?.streamSummaryData(searchClientRequestProperites);
+        }
 
         state.core.getResponseItems({
           requestProperties: searchClientRequestProperites,

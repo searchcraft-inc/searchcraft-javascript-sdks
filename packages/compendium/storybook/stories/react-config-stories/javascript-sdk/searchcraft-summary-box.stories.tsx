@@ -18,7 +18,6 @@ export const Default: StoryObj<Components.SearchcraftErrorMessage> = {
           readKey: import.meta.env.VITE_READ_KEY_FOOD_WINE,
           endpointURL: import.meta.env.VITE_ENDPOINT_URL_FOOD_WINE,
           indexName: import.meta.env.VITE_INDEX_FOOD_WINE,
-          cortexURL: import.meta.env.VITE_CORTEX_URL,
         });
         const searchResults = document.querySelector(
           'searchcraft-search-results',
@@ -42,31 +41,29 @@ export const Default: StoryObj<Components.SearchcraftErrorMessage> = {
   args: defaultProps,
 };
 
-export const WithPromptInstructions: StoryObj<Components.SearchcraftErrorMessage> =
-  {
-    decorators: [
-      (Story) => {
-        useEffect(() => {
-          new Searchcraft({
-            readKey: import.meta.env.VITE_READ_KEY_FOOD_WINE,
-            endpointURL: import.meta.env.VITE_ENDPOINT_URL_FOOD_WINE,
-            indexName: import.meta.env.VITE_INDEX_FOOD_WINE,
-            cortexURL: import.meta.env.VITE_CORTEX_URL,
-            summaryInstructionsPrompt: 'Reply in French.',
-          });
-        }, []);
-        return <Story />;
-      },
-    ],
-    render: () => (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-        <searchcraft-input-form auto-search='true' button-placement='none' />
-        <searchcraft-summary-box />
-        <searchcraft-search-results />
-      </div>
-    ),
-    args: defaultProps,
-  };
+export const EchoStream: StoryObj<Components.SearchcraftErrorMessage> = {
+  decorators: [
+    (Story) => {
+      useEffect(() => {
+        new Searchcraft({
+          endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
+          indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
+          //readKey: import.meta.env.VITE_READ_KEY_WITH_AI_ECHOSTREAM,
+          readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
+        });
+      }, []);
+      return <Story />;
+    },
+  ],
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+      <searchcraft-input-form auto-search='true' button-placement='none' />
+      <searchcraft-summary-box />
+      <searchcraft-search-results />
+    </div>
+  ),
+  args: defaultProps,
+};
 
 export const WithPagination: StoryObj<Components.SearchcraftErrorMessage> = {
   decorators: [
