@@ -154,3 +154,62 @@
     }
   }
 }
+
+/**
+ * Styles applied to `magnifying-glass` popover buttons.
+ */
+:root {
+  /**
+   * Size of the magnifying glass icon rendered inside the popover button.
+   */
+  --sc-popover-button-magnifying-glass-icon-size: 20px;
+  /**
+   * Color of the magnifying glass icon rendered inside the popover button.
+   */
+  --sc-popover-button-magnifying-glass-icon-color: var(--sc-content-neutral-secondary);
+  /**
+   * Color of the magnifying glass icon on hover.
+   */
+  --sc-popover-button-magnifying-glass-icon-color-hover: var(--sc-content-brand);
+  /**
+   * Padding around the icon inside the popover button.
+   */
+  --sc-popover-button-magnifying-glass-padding: 12px;
+
+  @media (min-width: breakpoints.$breakpoint-sm) {
+    --sc-popover-button-magnifying-glass-padding: 16px;
+  }
+}
+
+.searchcraft-popover-button-magnifying-glass {
+  appearance: none;
+  background: none;
+  border: none;
+  color: var(--sc-content-neutral-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & .searchcraft-popover-button-input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--sc-popover-button-magnifying-glass-padding);
+  }
+
+  & .searchcraft-popover-button-input-search-icon {
+    color: var(--sc-popover-button-magnifying-glass-icon-color);
+    display: block;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    width: var(--sc-popover-button-magnifying-glass-icon-size);
+    height: var(--sc-popover-button-magnifying-glass-icon-size);
+    transition: color 0.2s ease;
+  }
+}
+
+.searchcraft-popover-button-magnifying-glass:hover .searchcraft-popover-button-input-search-icon {
+  color: var(--sc-popover-button-magnifying-glass-icon-color-hover);
+}

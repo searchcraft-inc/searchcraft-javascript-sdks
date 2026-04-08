@@ -113,4 +113,35 @@ export const Skeuomorphic: StoryObj<Components.SearchcraftPopoverButton> = {
   args: {},
 };
 
+export const MagnifyingGlass: StoryObj<Components.SearchcraftPopoverButton> = {
+  decorators: [
+    (Story) => {
+      useEffect(() => {
+        new Searchcraft({
+          readKey: import.meta.env.VITE_READ_KEY_BAZAARIO,
+          endpointURL: import.meta.env.VITE_ENDPOINT_URL_BAZAARIO,
+          indexName: import.meta.env.VITE_INDEX_BAZAARIO,
+        });
+        const popoverForm = document.querySelector('searchcraft-popover-form');
+
+        if (popoverForm) {
+          popoverForm.popoverResultMappings = popoverResultMappings;
+        }
+      }, []);
+
+      return <Story />;
+    },
+  ],
+  render: () => {
+    return (
+      <>
+        <searchcraft-theme />
+        <searchcraft-popover-button type='magnifying-glass' />
+        <searchcraft-popover-form type='modal' />
+      </>
+    );
+  },
+  args: {},
+};
+
 export default componentMeta;
