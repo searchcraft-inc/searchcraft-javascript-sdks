@@ -70,7 +70,7 @@ export class SearchcraftPopoverButton {
   /**
    * The type of popover button to render.
    */
-  @Prop() type?: 'skeuomorphic';
+  @Prop() type?: 'skeuomorphic' | 'magnifying-glass';
   /**
    * The id of the Searchcraft instance that this component should use.
    */
@@ -265,6 +265,27 @@ export class SearchcraftPopoverButton {
     switch (this.type) {
       case 'skeuomorphic':
         return this.renderSkeuomorphicSlot();
+      case 'magnifying-glass':
+        return (
+          <div class='searchcraft-popover-button-input'>
+            <svg
+              class='searchcraft-popover-button-input-search-icon'
+              viewBox='0 0 20 20'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'
+              version='1.1'
+              aria-hidden='true'
+            >
+              <path
+                d='M17.5 17.5L13.875 13.875M15.8333 9.16667C15.8333 12.8486 12.8486 15.8333 9.16667 15.8333C5.48477 15.8333 2.5 12.8486 2.5 9.16667C2.5 5.48477 5.48477 2.5 9.16667 2.5C12.8486 2.5 15.8333 5.48477 15.8333 9.16667Z'
+                stroke='currentColor'
+                stroke-width='1.5'
+                stroke-linecap='round'
+                stroke-linejoin='round'
+              />
+            </svg>
+          </div>
+        );
       default:
         return (
           <div>
@@ -277,6 +298,7 @@ export class SearchcraftPopoverButton {
   render() {
     return (
       <button
+        aria-label={this.type === 'magnifying-glass' ? 'Search' : undefined}
         class={`searchcraft-popover-button ${this.type ? ` searchcraft-popover-button-${this.type}` : ''}`}
         innerHTML={
           typeof this.template !== 'undefined'

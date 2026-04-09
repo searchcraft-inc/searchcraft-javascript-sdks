@@ -360,7 +360,7 @@ export namespace Components {
         /**
           * The type of popover button to render.
          */
-        "type"?: 'skeuomorphic';
+        "type"?: 'skeuomorphic' | 'magnifying-glass';
     }
     /**
      * Renders the footer for the searchcraft-popover-form.
@@ -1754,7 +1754,7 @@ declare namespace LocalJSX {
         /**
           * The type of popover button to render.
          */
-        "type"?: 'skeuomorphic';
+        "type"?: 'skeuomorphic' | 'magnifying-glass';
     }
     /**
      * Renders the footer for the searchcraft-popover-form.

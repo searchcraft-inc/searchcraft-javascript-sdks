@@ -40,16 +40,12 @@ describe('createSearchcraftStore', () => {
       },
       core: {
         getResponseItems,
-      } as unknown as SearchcraftStore['getState'] extends () => infer T
-        ? T['core']
-        : never,
+      } as unknown as ReturnType<SearchcraftStore['getState']>['core'],
       hasSummaryBox: true,
       searchTerm: '',
       summaryClient: {
         streamSummaryData,
-      } as unknown as SearchcraftStore['getState'] extends () => infer T
-        ? T['summaryClient']
-        : never,
+      } as unknown as ReturnType<SearchcraftStore['getState']>['summaryClient'],
     });
 
     await store.getState().search();
