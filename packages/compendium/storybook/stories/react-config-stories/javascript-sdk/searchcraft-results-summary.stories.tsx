@@ -10,7 +10,7 @@ const componentMeta: Meta = {
 
 const defaultProps = {};
 
-export const Default: StoryObj<Components.SearchcraftErrorMessage> = {
+export const Default: StoryObj<Components.SearchcraftResultsSummary> = {
   decorators: [
     (Story) => {
       useEffect(() => {
@@ -41,7 +41,7 @@ export const Default: StoryObj<Components.SearchcraftErrorMessage> = {
   args: defaultProps,
 };
 
-export const EchoStream: StoryObj<Components.SearchcraftErrorMessage> = {
+export const EchoStream: StoryObj<Components.SearchcraftResultsSummary> = {
   decorators: [
     (Story) => {
       useEffect(() => {
@@ -65,7 +65,7 @@ export const EchoStream: StoryObj<Components.SearchcraftErrorMessage> = {
   args: defaultProps,
 };
 
-export const WithPagination: StoryObj<Components.SearchcraftErrorMessage> = {
+export const WithPagination: StoryObj<Components.SearchcraftResultsSummary> = {
   decorators: [
     (Story) => {
       useEffect(() => {
