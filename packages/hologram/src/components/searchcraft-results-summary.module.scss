@@ -11,7 +11,11 @@
 
   @include typography.body();
 
-  & h1, h2, h3, h4, h5 {
+  & h1,
+  & h2,
+  & h3,
+  & h4,
+  & h5 {
     padding-top: 10px;
     padding-bottom: 10px;
   }
@@ -24,7 +28,8 @@
     max-width: 200px;
   }
 
-  & ol, ul {
+  & ol,
+  & ul {
     padding-left: 1em;
     padding-bottom: 10px;
   }
