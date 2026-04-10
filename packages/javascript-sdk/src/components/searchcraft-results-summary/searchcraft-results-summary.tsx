@@ -54,6 +54,9 @@ export class SearchcraftResultsSummary {
   private unsubscribe?: () => void;
   private cleanupCore?: () => void;
 
+  /**
+  * Callback invoked when the Searchcraft core instance is available.
+  */
   onCoreAvailable(core: SearchcraftCore) {
     core.store.setState({ hasSummaryBox: true });
     this.unsubscribe = core.store.subscribe(this.handleStateChange.bind(this));
