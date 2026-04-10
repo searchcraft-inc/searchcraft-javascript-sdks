@@ -108,6 +108,7 @@ export class SearchcraftResultsSummary {
       <div
         class='searchcraft-results-summary-content'
         innerHTML={this.summary}
+        aria-live="polite"
       />
     );
   }
