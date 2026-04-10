@@ -4,6 +4,7 @@ export * from './SearchcraftInputForm';
 export * from './SearchcraftPopoverButton';
 export * from './SearchcraftPopoverForm';
 export * from './SearchcraftResultsInfo';
+export * from './SearchcraftResultsSummary';
 export * from './SearchcraftTheme';
 export * from './SearchcraftPagination';
 export * from './SearchcraftSearchResultsPerPage';

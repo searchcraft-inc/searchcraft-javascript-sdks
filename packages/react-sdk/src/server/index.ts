@@ -1,11 +1,11 @@
 import {
-  type SearchcraftConfig,
-  SearchcraftCore,
+    type SearchcraftConfig,
+    SearchcraftCore,
 } from '@searchcraft/javascript-sdk';
 
 import {
-  name as packageName,
-  version as packageVersion,
+    name as packageName,
+    version as packageVersion,
 } from '../../package.json';
 
 /**
@@ -46,13 +46,15 @@ export const hydrateSearchcraftComponents = () => {
 
 export { defineCustomElements };
 
-export * from './SearchcraftSearchResults';
-export * from './SearchcraftFilterPanel';
-export * from './SearchcraftInputForm';
-export * from './SearchcraftPopoverButton';
-export * from './SearchcraftPopoverForm';
-export * from './SearchcraftResultsInfo';
-export * from './SearchcraftTheme';
-export * from './SearchcraftPagination';
-export * from './SearchcraftSearchResultsPerPage';
-export * from './SearchcraftSummaryBox';
+    export * from './SearchcraftFilterPanel';
+    export * from './SearchcraftInputForm';
+    export * from './SearchcraftPagination';
+    export * from './SearchcraftPopoverButton';
+    export * from './SearchcraftPopoverForm';
+    export * from './SearchcraftResultsInfo';
+    export * from './SearchcraftResultsSummary';
+    export * from './SearchcraftSearchResults';
+    export * from './SearchcraftSearchResultsPerPage';
+    export * from './SearchcraftSummaryBox';
+    export * from './SearchcraftTheme';
+

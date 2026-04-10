@@ -6,11 +6,7 @@ import DOMPurify from 'dompurify';
 import { marked } from 'marked';
 
 /**
- * @deprecated Use `searchcraft-results-summary` instead.
- * This component is deprecated and will be removed in a future version.
- * Please update to use `searchcraft-results-summary` which has the same functionality.
- *
- * This component renders a summary box for RAG search result summaries.
+ * This component renders a results summary for RAG search result summaries.
  * When the user makes a search, a network call is made to retrieve the summary content, which is then
  * rendered in this box.
  *
@@ -18,34 +14,34 @@ import { marked } from 'marked';
  *
  * @react-import
  * ```jsx
- * import { SearchcraftSummaryBox } from "@searchcraft/react-sdk";
+ * import { SearchcraftResultsSummary } from "@searchcraft/react-sdk";
  * ```
  *
  * @vue-import
  * ```jsx
- * import { SearchcraftSummaryBox } from "@searchcraft/vue-sdk";
+ * import { SearchcraftResultsSummary } from "@searchcraft/vue-sdk";
  * ```
  *
  * @js-example
  * ```html
- * <searchcraft-summary-box />
+ * <searchcraft-results-summary />
  * ```
  *
  * @react-example
  * ```jsx
- * <SearchcraftSummaryBox />
+ * <SearchcraftResultsSummary />
  * ```
  *
  * @vue-example
  * ```jsx
- * <SearchcraftSummaryBox />
+ * <SearchcraftResultsSummary />
  * ```
  */
 @Component({
-  tag: 'searchcraft-summary-box',
+  tag: 'searchcraft-results-summary',
   shadow: false,
 })
-export class SearchcraftSummaryBox {
+export class SearchcraftResultsSummary {
   /**
    * The id of the Searchcraft instance that this component should use.
    */
@@ -102,18 +98,23 @@ export class SearchcraftSummaryBox {
 
     if (this.isSummaryNotEnabled) {
       return (
-        <div class='searchcraft-summary-box-content'>
+        <div class='searchcraft-results-summary-content'>
           {this.summaryErrorMessage || 'AI summaries are not enabled'}
         </div>
       );
     }
 
     return (
-      <div class='searchcraft-summary-box-content' innerHTML={this.summary} />
+      <div
+        class='searchcraft-results-summary-content'
+        innerHTML={this.summary}
+      />
     );
   }
 
   render() {
-    return <div class='searchcraft-summary-box'>{this.renderContent()}</div>;
+    return (
+      <div class='searchcraft-results-summary'>{this.renderContent()}</div>
+    );
   }
 }
