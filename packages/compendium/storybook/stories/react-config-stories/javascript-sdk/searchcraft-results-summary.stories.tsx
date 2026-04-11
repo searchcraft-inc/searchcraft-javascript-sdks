@@ -5,12 +5,12 @@ import { searchResultTemplateFoodAndWine } from '@common/index.js';
 import { type Components, Searchcraft } from '@searchcraft/javascript-sdk';
 
 const componentMeta: Meta = {
-  title: 'Javascript SDK/searchcraft-summary-box',
+  title: 'Javascript SDK/searchcraft-results-summary',
 };
 
 const defaultProps = {};
 
-export const Default: StoryObj<Components.SearchcraftErrorMessage> = {
+export const Default: StoryObj<Components.SearchcraftResultsSummary> = {
   decorators: [
     (Story) => {
       useEffect(() => {
@@ -34,14 +34,14 @@ export const Default: StoryObj<Components.SearchcraftErrorMessage> = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
       <searchcraft-input-form auto-search='true' button-placement='none' />
-      <searchcraft-summary-box />
+      <searchcraft-results-summary />
       <searchcraft-search-results />
     </div>
   ),
   args: defaultProps,
 };
 
-export const EchoStream: StoryObj<Components.SearchcraftErrorMessage> = {
+export const EchoStream: StoryObj<Components.SearchcraftResultsSummary> = {
   decorators: [
     (Story) => {
       useEffect(() => {
@@ -58,14 +58,14 @@ export const EchoStream: StoryObj<Components.SearchcraftErrorMessage> = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
       <searchcraft-input-form auto-search='true' button-placement='none' />
-      <searchcraft-summary-box />
+      <searchcraft-results-summary />
       <searchcraft-search-results />
     </div>
   ),
   args: defaultProps,
 };
 
-export const WithPagination: StoryObj<Components.SearchcraftErrorMessage> = {
+export const WithPagination: StoryObj<Components.SearchcraftResultsSummary> = {
   decorators: [
     (Story) => {
       useEffect(() => {
@@ -89,7 +89,7 @@ export const WithPagination: StoryObj<Components.SearchcraftErrorMessage> = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
       <searchcraft-input-form auto-search='true' button-placement='none' />
-      <searchcraft-summary-box />
+      <searchcraft-results-summary />
       <searchcraft-search-results />
       <div
         style={{

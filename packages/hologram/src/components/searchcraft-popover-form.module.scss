@@ -41,6 +41,7 @@
     padding: 0 24px;
   }
 
+  & searchcraft-results-summary,
   & searchcraft-summary-box {
     margin-bottom: 16px;
   }
@@ -87,6 +88,7 @@
   overflow: auto;
   padding: 0 24px;
 
+  & searchcraft-results-summary,
   & searchcraft-summary-box {
     padding: 20px 0;
     margin-bottom: 0;
@@ -138,6 +140,7 @@
   right: -1px;
   top: 100%;
 
+  & searchcraft-results-summary,
   & searchcraft-summary-box {
     padding: 16px 12px;
     margin-bottom: 0;

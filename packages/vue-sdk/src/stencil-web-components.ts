@@ -71,6 +71,11 @@ export const SearchcraftResultsInfo = /*@__PURE__*/ defineContainer<JSX.Searchcr
 ]);
 
 
+export const SearchcraftResultsSummary = /*@__PURE__*/ defineContainer<JSX.SearchcraftResultsSummary>('searchcraft-results-summary', () => {}, [
+  'searchcraftId'
+]);
+
+
 export const SearchcraftSearchResults = /*@__PURE__*/ defineContainer<JSX.SearchcraftSearchResults>('searchcraft-search-results', () => {}, [
   'searchcraftId',
   'initialQuery',

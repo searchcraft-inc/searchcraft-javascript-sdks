@@ -46,13 +46,14 @@ export const hydrateSearchcraftComponents = () => {
 
 export { defineCustomElements };
 
-export * from './SearchcraftSearchResults';
 export * from './SearchcraftFilterPanel';
 export * from './SearchcraftInputForm';
+export * from './SearchcraftPagination';
 export * from './SearchcraftPopoverButton';
 export * from './SearchcraftPopoverForm';
 export * from './SearchcraftResultsInfo';
-export * from './SearchcraftTheme';
-export * from './SearchcraftPagination';
+export * from './SearchcraftResultsSummary';
+export * from './SearchcraftSearchResults';
 export * from './SearchcraftSearchResultsPerPage';
 export * from './SearchcraftSummaryBox';
+export * from './SearchcraftTheme';

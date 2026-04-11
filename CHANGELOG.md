@@ -1,3 +1,8 @@
+## Unreleased
+
+- **Component Rename**: Renamed `searchcraft-summary-box` to `searchcraft-results-summary` for better clarity and consistency. The old component name is preserved and marked as deprecated for backwards compatibility.
+- New Feature: Added `SearchcraftResultsSummary` React server component for server-side rendering support.
+
 ## 0.14.0 - 2026-02-27
 
 - New Feature: Added "View All Results" option to popover footer. This adds two new optional props, `viewAllResultsBaseUrl` and `viewAllResultsLabel` which allow configuration for these values. View all allows the popover component to link to a stand-alone results page for a query. This page is application definable.

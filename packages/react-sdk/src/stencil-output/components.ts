@@ -13,6 +13,7 @@ import { SearchcraftPagination as SearchcraftPaginationElement, defineCustomElem
 import { SearchcraftPopoverButton as SearchcraftPopoverButtonElement, defineCustomElement as defineSearchcraftPopoverButton } from "@searchcraft/javascript-sdk/dist/components/searchcraft-popover-button.js";
 import { SearchcraftPopoverForm as SearchcraftPopoverFormElement, defineCustomElement as defineSearchcraftPopoverForm } from "@searchcraft/javascript-sdk/dist/components/searchcraft-popover-form.js";
 import { SearchcraftResultsInfo as SearchcraftResultsInfoElement, defineCustomElement as defineSearchcraftResultsInfo } from "@searchcraft/javascript-sdk/dist/components/searchcraft-results-info.js";
+import { SearchcraftResultsSummary as SearchcraftResultsSummaryElement, defineCustomElement as defineSearchcraftResultsSummary } from "@searchcraft/javascript-sdk/dist/components/searchcraft-results-summary.js";
 import { SearchcraftSearchResultsPerPage as SearchcraftSearchResultsPerPageElement, defineCustomElement as defineSearchcraftSearchResultsPerPage } from "@searchcraft/javascript-sdk/dist/components/searchcraft-search-results-per-page.js";
 import { SearchcraftSearchResults as SearchcraftSearchResultsElement, defineCustomElement as defineSearchcraftSearchResults } from "@searchcraft/javascript-sdk/dist/components/searchcraft-search-results.js";
 import { SearchcraftSummaryBox as SearchcraftSummaryBoxElement, defineCustomElement as defineSearchcraftSummaryBox } from "@searchcraft/javascript-sdk/dist/components/searchcraft-summary-box.js";
@@ -93,6 +94,17 @@ export const SearchcraftResultsInfo: StencilReactComponent<SearchcraftResultsInf
     react: React,
     events: {} as SearchcraftResultsInfoEvents,
     defineCustomElement: defineSearchcraftResultsInfo
+});
+
+export type SearchcraftResultsSummaryEvents = NonNullable<unknown>;
+
+export const SearchcraftResultsSummary: StencilReactComponent<SearchcraftResultsSummaryElement, SearchcraftResultsSummaryEvents> = /*@__PURE__*/ createComponent<SearchcraftResultsSummaryElement, SearchcraftResultsSummaryEvents>({
+    tagName: 'searchcraft-results-summary',
+    elementClass: SearchcraftResultsSummaryElement,
+    // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
+    react: React,
+    events: {} as SearchcraftResultsSummaryEvents,
+    defineCustomElement: defineSearchcraftResultsSummary
 });
 
 export type SearchcraftSearchResultsEvents = NonNullable<unknown>;
