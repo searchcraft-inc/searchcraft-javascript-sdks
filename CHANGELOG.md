@@ -1,3 +1,13 @@
+## 0.15.0 - 2026-04-14
+
+- **Component Rename**: Renamed `searchcraft-summary-box` to `searchcraft-results-summary` for better clarity and consistency. The old component name is preserved and marked as deprecated for backwards compatibility.
+- New Feature: Added `SearchcraftResultsSummary` React server component for server-side rendering support.
+- New Feature: Added `magnifying-glass` variant to `searchcraft-popover-button` component.
+- Enhancement: AI result summaries now stream via SSE directly from the search engine core via the new `/index/<index_name>/search/summary` endpoint, replacing the previous Cortex micro-service integration. `SummaryClient` stream handling has been updated from HTML chunking to SSE streaming. The `cortexUrl` and `summaryInstructionsPrompt` config properties are now deprecated.
+- Enhancement: Popover footer styling improvements.
+- Enhancement: Removed drop shadows from the popover component to make styling less opinionated.
+- Accessibility: Added `aria-live` attribute to `searchcraft-results-summary-content` for improved screen reader support.
+
 ## 0.14.0 - 2026-02-27
 
 - New Feature: Added "View All Results" option to popover footer. This adds two new optional props, `viewAllResultsBaseUrl` and `viewAllResultsLabel` which allow configuration for these values. View all allows the popover component to link to a stand-alone results page for a query. This page is application definable.

@@ -5,15 +5,15 @@ import {
   Searchcraft,
   SearchcraftInputForm,
   type SearchcraftInputFormProps,
+  SearchcraftResultsSummary,
   SearchcraftSearchResults,
   type SearchcraftSearchResultsProps,
-  SearchcraftSummaryBox,
 } from '@searchcraft/react-sdk';
 
 import { searchResultTemplateEchostream } from '@common/index.js';
 
 const componentMeta: Meta = {
-  title: 'React SDK/searchcraft-summary-box',
+  title: 'React SDK/searchcraft-results-summary',
   argTypes: {},
 };
 
@@ -28,6 +28,12 @@ export const Default: StoryObj<
           endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
           indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
         });
+        const searchResults = document.querySelector(
+          'searchcraft-search-results',
+        );
+        if (searchResults) {
+          searchResults.template = searchResultTemplateEchostream;
+        }
       }, []);
 
       return <Story />;
@@ -42,7 +48,7 @@ export const Default: StoryObj<
             placeholderValue={args.placeholderValue}
           />
         </div>
-        <SearchcraftSummaryBox />
+        <SearchcraftResultsSummary />
         <SearchcraftSearchResults />
       </>
     );

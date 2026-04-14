@@ -105,7 +105,6 @@ export const Default: StoryFn = (args) => ({
       endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
       indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
       summaryInstructionsPrompt: 'Speak like a pirate',
-      cortexURL: import.meta.env.VITE_CORTEX_URL,
     });
     return { args };
   },

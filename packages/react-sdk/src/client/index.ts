@@ -39,6 +39,7 @@ export * from './SearchcraftPagination';
 export * from './SearchcraftPopoverButton';
 export * from './SearchcraftPopoverForm';
 export * from './SearchcraftResultsInfo';
+export * from './SearchcraftResultsSummary';
 export * from './SearchcraftSearchResults';
 export * from './SearchcraftSearchResultsPerPage';
 export * from './SearchcraftSummaryBox';

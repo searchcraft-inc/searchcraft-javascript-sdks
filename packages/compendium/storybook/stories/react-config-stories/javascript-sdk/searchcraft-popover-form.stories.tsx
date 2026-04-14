@@ -47,7 +47,7 @@ const defaultProps: Components.SearchcraftPopoverForm = {
   placeholderValue: 'Search products...',
   placeholderBehavior: 'hide-on-text-entered',
   viewAllResultsBaseUrl: '/?s=',
-  viewAllResultsLabel: 'View All Results',
+  viewAllResultsLabel: 'View All',
 };
 
 export default componentMeta;
@@ -205,7 +205,6 @@ export const InlineWithSummaryBox: StoryObj<Components.SearchcraftPopoverForm> =
             readKey: import.meta.env.VITE_READ_KEY_ECHOSTREAM,
             endpointURL: import.meta.env.VITE_ENDPOINT_URL_ECHOSTREAM,
             indexName: import.meta.env.VITE_INDEX_ECHOSTREAM,
-            cortexURL: import.meta.env.VITE_CORTEX_URL,
           });
           const popoverForm = document.querySelector(
             'searchcraft-popover-form',

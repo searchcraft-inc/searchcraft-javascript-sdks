@@ -1,6 +1,6 @@
 {
   "name": "searchcraft-javascript-sdks",
-  "version": "0.14.0",
+  "version": "0.15.0",
   "description": "The monorepo encompassing the SearchCraft SDKs.",
   "main": "index.js",
   "repository": {

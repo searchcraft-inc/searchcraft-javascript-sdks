@@ -417,7 +417,7 @@ export class SearchcraftPopoverForm {
         {isListViewVisible && (
           <div class='searchcraft-popover-form-inline-wrapper'>
             {this.showSummaryBox && (
-              <searchcraft-summary-box searchcraftId={this.searchcraftId} />
+              <searchcraft-results-summary searchcraftId={this.searchcraftId} />
             )}
             <searchcraft-popover-list-view
               popoverResultMappings={this.popoverResultMappings}
@@ -474,7 +474,9 @@ export class SearchcraftPopoverForm {
             </div>
             <div class='searchcraft-popover-form-modal-popover-list-view'>
               {this.showSummaryBox && this.hasResultsToShow && (
-                <searchcraft-summary-box searchcraftId={this.searchcraftId} />
+                <searchcraft-results-summary
+                  searchcraftId={this.searchcraftId}
+                />
               )}
               {this.hasResultsToShow && (
                 <searchcraft-popover-list-view
@@ -528,7 +530,7 @@ export class SearchcraftPopoverForm {
           </div>
           <div class='searchcraft-popover-form-fullscreen-popover-list-view'>
             {this.showSummaryBox && this.hasResultsToShow && (
-              <searchcraft-summary-box searchcraftId={this.searchcraftId} />
+              <searchcraft-results-summary searchcraftId={this.searchcraftId} />
             )}
             {this.hasResultsToShow && (
               <searchcraft-popover-list-view
