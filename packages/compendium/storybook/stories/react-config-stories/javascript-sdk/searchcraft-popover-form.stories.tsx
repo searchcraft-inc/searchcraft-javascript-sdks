@@ -47,7 +47,7 @@ const defaultProps: Components.SearchcraftPopoverForm = {
   placeholderValue: 'Search products...',
   placeholderBehavior: 'hide-on-text-entered',
   viewAllResultsBaseUrl: '/?s=',
-  viewAllResultsLabel: 'View All Results',
+  viewAllResultsLabel: 'View All',
 };
 
 export default componentMeta;
