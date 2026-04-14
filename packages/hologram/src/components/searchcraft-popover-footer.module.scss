@@ -4,19 +4,20 @@
 
 .searchcraft-popover-footer {
   @include typography.font-base();
+  align-items: center;
   background-color: var(--sc-surface-neutral-secondary);
   box-shadow:
     0 1px 1px rgb(from var(--sc-content-neutral-primary) r g b / 10%) inset,
     0 2px 2px rgb(from var(--sc-content-neutral-primary) r g b / 5%) inset,
     0 4px 4px rgb(from var(--sc-content-neutral-primary) r g b / 5%) inset;
   display: flex;
-  gap: 8px;
+  gap: 0.5rem;
   justify-content: space-between;
   line-height: 1;
-  padding: 20px 24px;
+  padding: 1.25rem 1.5rem;
 
   @media (min-width: breakpoints.$breakpoint-sm) {
-    padding: 20px 32px;
+    padding: 1.25rem 2rem;
   }
 }
 
@@ -24,44 +25,72 @@
   margin: 0;
 }
 
+.searchcraft-popover-footer-results-found {
+  display: none;
+
+  @media (min-width: breakpoints.$breakpoint-sm) {
+    display: inline;
+  }
+}
+
 .searchcraft-popover-footer-link {
   align-items: center;
   color: var(--sc-content-neutral-primary);
   display: flex;
-  max-width: 160px;
-  padding-top: 6px;
-  width: 100%;
+  font-weight: var(--sc-font-bold);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.searchcraft-popover-footer-link-prefix {
+  display: none;
+  font-weight: var(--sc-font-normal);
+
+  @media (min-width: breakpoints.$breakpoint-sm) {
+    display: inline;
+  }
 }
 
 .searchcraft-popover-footer-results {
   align-items: center;
   display: flex;
-  gap: 8px;
+  gap: 0.5rem;
 }
 
 .searchcraft-popover-footer-view-all {
   align-items: center;
   border-radius: 999px;
-  border: 1px solid var(--sc-border-neutral-strong);
+  border: 0.0625rem solid var(--sc-border-neutral-strong);
   color: var(--sc-content-neutral-primary);
   display: inline-flex;
   font-size: var(--sc-body-font-size);
   font-weight: var(--sc-font-bold);
-  gap: 6px;
+  gap: 0.375rem;
   line-height: 1;
-  padding: 6px 10px;
+  padding: 0.375rem 0.625rem;
   text-decoration: none;
 }
 
 .searchcraft-popover-footer-view-all-shortcut {
-  display: inline-flex;
-  gap: 2px;
+  display: none;
 
-  kbd {
-    background-color: var(--sc-surface-neutral-primary);
-    border-radius: 4px;
-    border: 1px solid var(--sc-border-neutral-subtle);
-    line-height: 1;
-    padding: 1px 4px;
+  @media (min-width: breakpoints.$breakpoint-sm) {
+    display: inline-flex;
+    gap: 0.125rem;
+
+    kbd {
+      align-items: center;
+      border-radius: 0.25rem;
+      border: 1px solid var(--sc-content-neutral-primary);
+      display: flex;
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 0.75rem;
+      font-style: normal;
+      font-weight: 400;
+      height: 1.5rem;
+      justify-content: center;
+      line-height: 1rem;
+      width: 1.5rem;
+    }
   }
 }
