@@ -72,3 +72,4 @@ packages/javascript-sdk/hydrate
 
 _bmad/*
 .opencode/*
+.claude/*
