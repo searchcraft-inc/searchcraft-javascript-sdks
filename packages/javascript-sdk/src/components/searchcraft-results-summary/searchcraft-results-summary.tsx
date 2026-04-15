@@ -18,7 +18,7 @@ import { marked } from 'marked';
  * ```
  *
  * @vue-import
- * ```jsx
+ * ```ts
  * import { SearchcraftResultsSummary } from "@searchcraft/vue-sdk";
  * ```
  *

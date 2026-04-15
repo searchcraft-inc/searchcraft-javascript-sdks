@@ -552,7 +552,7 @@ export namespace Components {
      * @react-import ```jsx
      * import { SearchcraftResultsSummary } from "@searchcraft/react-sdk";
      * ```
-     * @vue-import ```jsx
+     * @vue-import ```ts
      * import { SearchcraftResultsSummary } from "@searchcraft/vue-sdk";
      * ```
      * @js-example ```html
@@ -1205,7 +1205,7 @@ declare global {
      * @react-import ```jsx
      * import { SearchcraftResultsSummary } from "@searchcraft/react-sdk";
      * ```
-     * @vue-import ```jsx
+     * @vue-import ```ts
      * import { SearchcraftResultsSummary } from "@searchcraft/vue-sdk";
      * ```
      * @js-example ```html
@@ -2007,7 +2007,7 @@ declare namespace LocalJSX {
      * @react-import ```jsx
      * import { SearchcraftResultsSummary } from "@searchcraft/react-sdk";
      * ```
-     * @vue-import ```jsx
+     * @vue-import ```ts
      * import { SearchcraftResultsSummary } from "@searchcraft/vue-sdk";
      * ```
      * @js-example ```html
@@ -2567,7 +2567,7 @@ declare module "@stencil/core" {
              * @react-import ```jsx
              * import { SearchcraftResultsSummary } from "@searchcraft/react-sdk";
              * ```
-             * @vue-import ```jsx
+             * @vue-import ```ts
              * import { SearchcraftResultsSummary } from "@searchcraft/vue-sdk";
              * ```
              * @js-example ```html
