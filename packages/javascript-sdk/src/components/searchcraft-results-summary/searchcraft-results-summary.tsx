@@ -59,6 +59,7 @@ export class SearchcraftResultsSummary {
    */
   onCoreAvailable(core: SearchcraftCore) {
     core.store.setState({ hasSummaryBox: true });
+    this.handleStateChange(core.store.getState());
     this.unsubscribe = core.store.subscribe(this.handleStateChange.bind(this));
   }
 
