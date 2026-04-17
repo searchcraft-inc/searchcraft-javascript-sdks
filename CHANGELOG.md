@@ -1,3 +1,11 @@
+## 0.15.1 - 2026-04-16
+
+- Bugfix: `searchcraft-results-summary` now properly reads current store state on mount, fixing an issue where unfocusing and then refocusing a popover component's summary caused the summary text to disappear until the input received keystrokes.
+- Bugfix: Removed padding background color around the collapsed popover.
+- Bugfix: Added margins to the summary when contained within the popover so the summary scrolls along with the search results.
+- Enhancement: Defined popover footer font size.
+- Maintenance: Upgraded `packages/compendium` dependencies to address Snyk-reported vulnerabilities (SNYK-JS-NEXT-15954202).
+
 ## 0.15.0 - 2026-04-14
 
 - **Component Rename**: Renamed `searchcraft-summary-box` to `searchcraft-results-summary` for better clarity and consistency. The old component name is preserved and marked as deprecated for backwards compatibility.

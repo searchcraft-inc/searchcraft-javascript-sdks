@@ -55,10 +55,11 @@ export class SearchcraftResultsSummary {
   private cleanupCore?: () => void;
 
   /**
-  * Callback invoked when the Searchcraft core instance is available.
-  */
+   * Callback invoked when the Searchcraft core instance is available.
+   */
   onCoreAvailable(core: SearchcraftCore) {
     core.store.setState({ hasSummaryBox: true });
+    this.handleStateChange(core.store.getState());
     this.unsubscribe = core.store.subscribe(this.handleStateChange.bind(this));
   }
 
@@ -111,7 +112,7 @@ export class SearchcraftResultsSummary {
       <div
         class='searchcraft-results-summary-content'
         innerHTML={this.summary}
-        aria-live="polite"
+        aria-live='polite'
       />
     );
   }

@@ -4,6 +4,7 @@
 
 .searchcraft-popover-footer {
   @include typography.font-base();
+  font-size: 1rem;
   align-items: center;
   background-color: var(--sc-surface-neutral-secondary);
   display: flex;
