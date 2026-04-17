@@ -416,17 +416,21 @@ export class SearchcraftPopoverForm {
         </div>
         {isListViewVisible && (
           <div class='searchcraft-popover-form-inline-wrapper'>
-            {this.showSummaryBox && (
-              <searchcraft-results-summary searchcraftId={this.searchcraftId} />
-            )}
-            <searchcraft-popover-list-view
-              popoverResultMappings={this.popoverResultMappings}
-              searchClientResponseItems={this.searchClientResponseItems}
-              adClientResponseItems={this.adClientResponseItems}
-              searchResultsPage={this.searchResultsPage}
-              searchResultsPerPage={this.searchResultsPerPage}
-              searchcraftId={this.searchcraftId}
-            />
+            <div class='searchcraft-popover-form-inline-scroll-area'>
+              {this.showSummaryBox && (
+                <searchcraft-results-summary
+                  searchcraftId={this.searchcraftId}
+                />
+              )}
+              <searchcraft-popover-list-view
+                popoverResultMappings={this.popoverResultMappings}
+                searchClientResponseItems={this.searchClientResponseItems}
+                adClientResponseItems={this.adClientResponseItems}
+                searchResultsPage={this.searchResultsPage}
+                searchResultsPerPage={this.searchResultsPerPage}
+                searchcraftId={this.searchcraftId}
+              />
+            </div>
             <searchcraft-popover-footer
               searchcraftId={this.searchcraftId}
               sdkVariant={this.sdkVariant}
