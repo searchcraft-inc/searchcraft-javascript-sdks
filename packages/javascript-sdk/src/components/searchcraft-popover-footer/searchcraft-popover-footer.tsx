@@ -95,7 +95,10 @@ export class SearchcraftPopoverFooter {
           target='_blank'
           rel='noreferrer'
         >
-          <span class='searchcraft-popover-footer-link-prefix'>Powered by&nbsp;</span> Searchcraft
+          <span class='searchcraft-popover-footer-link-prefix'>
+            Powered by&nbsp;
+          </span>{' '}
+          Searchcraft
         </a>
         <div class='searchcraft-popover-footer-results'>
           <p class='searchcraft-popover-footer-results-info'>

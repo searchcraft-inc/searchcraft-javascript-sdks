@@ -90,6 +90,11 @@
     margin-bottom: 0;
     border-bottom: 1px solid var(--sc-border-neutral-subtle);
   }
+
+  & searchcraft-popover-list-view {
+    overflow: visible;
+    height: auto;
+  }
 }
 
 /**
@@ -141,6 +146,18 @@
     padding: 16px 12px;
     margin-bottom: 0;
     border-bottom: 1px solid var(--sc-border-neutral-subtle);
+  }
+}
+
+.searchcraft-popover-form-inline-scroll-area {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 0 12px;
+  & searchcraft-popover-list-view {
+    overflow: visible;
+    height: auto;
+    padding: 0;
   }
 }
 

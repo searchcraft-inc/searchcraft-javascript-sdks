@@ -22,7 +22,7 @@ searchcraft-popover-list-item:last-child .searchcraft-popover-list-item {
   color: var(--sc-content-neutral-primary);
   display: flex;
   gap: 24px;
-  padding: 12px;
+  padding: 12px 0;
   text-decoration: none;
 
   &:focus,
