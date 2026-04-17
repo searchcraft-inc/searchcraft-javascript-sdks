@@ -101,13 +101,13 @@
  * Styles applied to `inline` popover forms.
  */
 .searchcraft-popover-form-inline {
-  background-color: var(--sc-surface-neutral-primary);
   border: 1px solid transparent;
   border-radius: var(--sc-border-radius-xl);
   padding: 12px;
   position: relative;
 
   &.searchcraft-popover-form-active {
+    background-color: var(--sc-surface-neutral-primary);
     border: 1px solid var(--sc-border-neutral);
     border-bottom: none;
     border-bottom-left-radius: 0;
