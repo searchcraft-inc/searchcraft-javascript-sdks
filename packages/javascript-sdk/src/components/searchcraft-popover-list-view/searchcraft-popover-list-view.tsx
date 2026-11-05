@@ -5,6 +5,8 @@ import type {
   AdClientResponseItem,
   PopoverResultMappings,
   SearchClientResponseItem,
+  SearchResultTemplate,
+  SearchResultTemplateData,
   SearchcraftConfig,
 } from '@types';
 
@@ -33,6 +35,10 @@ export class SearchcraftPopoverListView {
    * list-view-item elements.
    */
   @Prop() popoverResultMappings: PopoverResultMappings | undefined;
+  /**
+   * A callback function responsible for rendering a result. Passed to `searchcraft-popover-list-item`.
+   */
+  @Prop() template?: SearchResultTemplate<SearchResultTemplateData>;
   /**
    * The items to render in the list view.
    */
@@ -77,6 +83,8 @@ export class SearchcraftPopoverListView {
             item={item}
             key={item.id}
             popoverResultMappings={this.popoverResultMappings}
+            template={this.template}
+            index={index}
             documentPosition={
               this.searchResultsPerPage * (this.searchResultsPage - 1) + index
             }
@@ -134,6 +142,8 @@ export class SearchcraftPopoverListView {
           item={item}
           key={item.id}
           popoverResultMappings={this.popoverResultMappings}
+          template={this.template}
+          index={index}
           documentPosition={
             this.searchResultsPerPage * (this.searchResultsPage - 1) + index
           }
@@ -206,6 +216,8 @@ export class SearchcraftPopoverListView {
           item={item}
           key={item.id}
           popoverResultMappings={this.popoverResultMappings}
+          template={this.template}
+          index={index}
           documentPosition={
             this.searchResultsPerPage * (this.searchResultsPage - 1) + index
           }
@@ -237,6 +249,8 @@ export class SearchcraftPopoverListView {
             item={item}
             key={item.id}
             popoverResultMappings={this.popoverResultMappings}
+            template={this.template}
+            index={index}
             documentPosition={
               this.searchResultsPerPage * (this.searchResultsPage - 1) + index
             }

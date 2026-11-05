@@ -5,6 +5,8 @@ import type {
   AdClientResponseItem,
   PopoverResultMappings,
   SearchClientResponseItem,
+  SearchResultTemplate,
+  SearchResultTemplateData,
 } from '@types';
 import classNames from 'classnames';
 
@@ -32,6 +34,11 @@ import classNames from 'classnames';
  * const popoverForm = document.querySelector('searchcraft-popover-form');
  *
  * popoverForm.popoverResultMappings = {};
+ *
+ * // Or render each result with a template instead of `popoverResultMappings`.
+ * popoverForm.template = (item, index, { html }) => html`
+ *  <a href="${item.url}">${item.title}</a>
+ * `;
  * ```
  *
  * @react-example
@@ -61,6 +68,10 @@ export class SearchcraftPopoverForm {
    * Formats the content rendered for each result.
    */
   @Prop() popoverResultMappings?: PopoverResultMappings;
+  /**
+   * A callback function responsible for rendering a result. When provided, it is used instead of `popoverResultMappings`.
+   */
+  @Prop() template?: SearchResultTemplate<SearchResultTemplateData>;
   /**
    * The hotkey that activates the popover.
    */
@@ -255,6 +266,7 @@ export class SearchcraftPopoverForm {
       if (!this.modalElement) {
         this.modalElement = document.createElement('searchcraft-popover-form');
         this.modalElement.popoverResultMappings = this.popoverResultMappings;
+        this.modalElement.template = this.template;
         this.modalElement.setAttribute('type', 'fullscreen');
         this.modalElement.setAttribute('searchcraft-id', this.searchcraftId);
         if (this.placeholderValue) {
@@ -325,11 +337,15 @@ export class SearchcraftPopoverForm {
    * @param direction
    */
   focusOnNextListItem(direction: 'ArrowDown' | 'ArrowUp') {
+    // The first link in each list item, so results rendered by a `template` are included.
     const listItems = Array.from(
-      document.querySelectorAll<HTMLAnchorElement>(
-        '.searchcraft-popover-list-item-link',
-      ),
-    ).filter((el) => !el.hasAttribute('disabled') && el.offsetParent !== null);
+      document.querySelectorAll<HTMLElement>('.searchcraft-popover-list-item'),
+    )
+      .map((listItem) => listItem.querySelector<HTMLAnchorElement>('a'))
+      .filter(
+        (el): el is HTMLAnchorElement =>
+          !!el && !el.hasAttribute('disabled') && el.offsetParent !== null,
+      );
 
     const currentIndex = listItems.indexOf(
       document.activeElement as HTMLAnchorElement,
@@ -424,6 +440,7 @@ export class SearchcraftPopoverForm {
               )}
               <searchcraft-popover-list-view
                 popoverResultMappings={this.popoverResultMappings}
+                template={this.template}
                 searchClientResponseItems={this.searchClientResponseItems}
                 adClientResponseItems={this.adClientResponseItems}
                 searchResultsPage={this.searchResultsPage}
@@ -485,6 +502,7 @@ export class SearchcraftPopoverForm {
               {this.hasResultsToShow && (
                 <searchcraft-popover-list-view
                   popoverResultMappings={this.popoverResultMappings}
+                  template={this.template}
                   searchClientResponseItems={this.searchClientResponseItems}
                   adClientResponseItems={this.adClientResponseItems}
                   searchResultsPage={this.searchResultsPage}
@@ -539,6 +557,7 @@ export class SearchcraftPopoverForm {
             {this.hasResultsToShow && (
               <searchcraft-popover-list-view
                 popoverResultMappings={this.popoverResultMappings}
+                template={this.template}
                 searchClientResponseItems={this.searchClientResponseItems}
                 adClientResponseItems={this.adClientResponseItems}
                 searchResultsPage={this.searchResultsPage}

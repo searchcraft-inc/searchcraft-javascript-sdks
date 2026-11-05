@@ -53,6 +53,7 @@ export const SearchcraftPopoverButton = /*@__PURE__*/ defineContainer<JSX.Search
 export const SearchcraftPopoverForm = /*@__PURE__*/ defineContainer<JSX.SearchcraftPopoverForm>('searchcraft-popover-form', () => {}, [
   'type',
   'popoverResultMappings',
+  'template',
   'hotkey',
   'hotkeyModifier',
   'searchcraftId',
