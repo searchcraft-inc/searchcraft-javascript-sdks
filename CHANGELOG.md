@@ -1,3 +1,7 @@
+## Unreleased
+
+- New Feature: Added a `template` prop to `searchcraft-popover-form` that renders each popover result with a template callback, the same way `searchcraft-search-results` does. Without it, results still render from `popoverResultMappings`.
+
 ## 0.15.1 - 2026-04-16
 
 - Bugfix: `searchcraft-results-summary` now properly reads current store state on mount, fixing an issue where unfocusing and then refocusing a popover component's summary caused the summary text to disappear until the input received keystrokes.
