@@ -1,6 +1,6 @@
 import type { SearchcraftCore } from '@classes';
 import { registry } from '@classes/CoreInstanceRegistry';
-import { Component, Element, Prop, State, h } from '@stencil/core';
+import { Component, Element, Prop, State, Watch, h } from '@stencil/core';
 import type {
   PopoverResultMappings,
   SearchClientResponseItem,
@@ -23,7 +23,7 @@ export class SearchcraftPopoverListItem {
   @Prop() item: SearchClientResponseItem | undefined;
   @Prop() popoverResultMappings: PopoverResultMappings | undefined;
   /**
-   * A callback function responsible for rendering the result. When provided, it is used instead of `popoverResultMappings`.
+   * A callback function responsible for rendering the result. When provided, it is used instead of `popoverResultMappings`, which are still used if the template throws.
    */
   @Prop() template?: SearchResultTemplate<SearchResultTemplateData>;
   /**
@@ -70,25 +70,41 @@ export class SearchcraftPopoverListItem {
     );
   }
 
+  /**
+   * Maps the document values and renders the template, if there is one. The mapped values are
+   * always kept so the result can fall back to them if the template throws or is removed.
+   */
+  @Watch('item')
+  @Watch('popoverResultMappings')
+  @Watch('template')
+  @Watch('index')
+  updateRenderedValues() {
+    this.templateHtml = undefined;
+
+    if (!this.item) {
+      return;
+    }
+
+    this.mapValuesFromDocument(this.item.document);
+
+    if (this.template) {
+      try {
+        this.templateHtml = this.template(this.item.document, this.index, {
+          html,
+          source_index: this.item.source_index,
+        });
+      } catch (error) {
+        console.error('Invalid popover result template:', error);
+      }
+    }
+  }
+
   onCoreAvailable(core: SearchcraftCore) {
     this.core = core;
   }
 
   connectedCallback() {
-    if (this.item) {
-      if (this.template) {
-        try {
-          this.templateHtml = this.template(this.item.document, this.index, {
-            html,
-            source_index: this.item.source_index,
-          });
-        } catch (error) {
-          console.error('Invalid popover result template:', error);
-        }
-      } else {
-        this.mapValuesFromDocument(this.item.document);
-      }
-    }
+    this.updateRenderedValues();
     this.cleanupCore = registry.useCoreInstance(
       this.searchcraftId,
       this.onCoreAvailable.bind(this),
@@ -132,7 +148,7 @@ export class SearchcraftPopoverListItem {
   handleKeyDown = () => {};
 
   render() {
-    if (this.template) {
+    if (this.template && typeof this.templateHtml === 'string') {
       return (
         <div
           class='searchcraft-popover-list-item searchcraft-popover-list-item-template'

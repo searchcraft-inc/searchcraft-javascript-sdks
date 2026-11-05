@@ -113,7 +113,7 @@ describe('searchcraft-popover-list-item', () => {
     ).toBeNull();
   });
 
-  it('logs an error when the template throws', async () => {
+  it('logs an error and falls back to popoverResultMappings when the template throws', async () => {
     const consoleError = jest.fn();
     jest.spyOn(console, 'error').mockImplementation(consoleError);
 
@@ -123,9 +123,31 @@ describe('searchcraft-popover-list-item', () => {
 
     expect(consoleError).toHaveBeenCalledTimes(1);
     expect(
-      page.root?.querySelector('.searchcraft-popover-list-item-template')
-        ?.innerHTML,
-    ).toBe('');
+      page.root?.querySelector('.searchcraft-popover-list-item-template'),
+    ).toBeNull();
+    expect(
+      page.root
+        ?.querySelector('.searchcraft-popover-list-item-link')
+        ?.getAttribute('href'),
+    ).toBe('https://example.com/hello-world');
+  });
+
+  it('renders the template when it is set after the item renders', async () => {
+    const page = await renderListItem();
+    const listItem = page.root as HTMLElement & {
+      template?: SearchResultTemplate<SearchResultTemplateData>;
+    };
+
+    listItem.template = (data, _index, { html }) =>
+      html`<a class="custom-link" href="${data.url}">${data.title}</a>`;
+    await page.waitForChanges();
+
+    expect(page.root?.querySelector('.custom-link')?.textContent).toBe(
+      'Hello World',
+    );
+    expect(
+      page.root?.querySelector('.searchcraft-popover-list-item-link'),
+    ).toBeNull();
   });
 
   it('sends document_clicked when a link in the template is clicked', async () => {
