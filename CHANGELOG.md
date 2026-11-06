@@ -1,6 +1,6 @@
 ## Unreleased
 
-- New Feature: Added a `template` prop to `searchcraft-popover-form` that renders each popover result with a template callback, the same way `searchcraft-search-results` does. Without it, results still render from `popoverResultMappings`. The template's markup is sanitized with DOMPurify before it is rendered, so `javascript:` URLs, event handler attributes and custom elements are removed.
+- New Feature: Added a `template` prop to `searchcraft-popover-form` that renders each popover result with a template callback, the same way `searchcraft-search-results` does. Without it, results still render from `popoverResultMappings`.
 
 ## 0.15.1 - 2026-04-16
 
