@@ -36,8 +36,8 @@ const popoverForm = document.querySelector('searchcraft-popover-form');
 popoverForm.popoverResultMappings = {};
 
 // Or render each result with a template instead of `popoverResultMappings`.
-popoverForm.template = (item, index, { html }) => html`
- <a href="${item.url}">${item.title}</a>
+popoverForm.template = (item, index, { html, safeUrl }) => html`
+ <a href="${safeUrl(item.url)}">${item.title}</a>
 `;
 ```
 </TabItem>
@@ -65,7 +65,7 @@ popoverForm.template = (item, index, { html }) => html`
 | `popoverResultMappings` | -- | Formats the content rendered for each result. | `undefined \| { title?: SearchResultMapping \| undefined; subtitle?: SearchResultMapping \| undefined; imageSource?: SearchResultMapping \| undefined; imageAlt?: SearchResultMapping \| undefined; href?: SearchResultMapping \| undefined; }` | `undefined` |
 | `searchcraftId` | `searchcraft-id` | The id of the Searchcraft instance that this component should use. | `string \| undefined` | `undefined` |
 | `showSummaryBox` | `show-summary-box` | Whether to display the AI generative summary box before the search results. NOTE: This requires the usage of a read key that has "SUMMARY" permissions and either a subscription to Searchcraft Cloud with AI features enabled or a self-hosted model connected. | `boolean \| undefined` | `false` |
-| `template` | -- | A callback function responsible for rendering a result. When provided, it is used instead of `popoverResultMappings`. | `((data: any, index: number, utils: { html: TemplateHtml; source_index?: string \| undefined; }) => string) \| undefined` | `undefined` |
+| `template` | -- | A callback function responsible for rendering a result. When provided, it is used instead of `popoverResultMappings`. Pass URLs from the result through the `safeUrl` helper before placing them in an `href` or `src`. | `((data: any, index: number, utils: TemplateUtils & { source_index?: string \| undefined; }) => string) \| undefined` | `undefined` |
 | `type` | `type` | The type of popover form to render. - `inline` - Renders inline with the rest of the content on the page. The search results pop over the page content. - `fullscreen` - Renders in fullscreen view. Used together with the `searchcraft-popover-button` component. - `modal` - Renders in a modal view. Used together with the `searchcraft-popover-button` component. | `"fullscreen" \| "inline" \| "modal" \| undefined` | `'inline'` |
 | `viewAllResultsBaseUrl` | `view-all-results-base-url` | Base URL for the "View all" footer link. The current search term will be appended (URL encoded).  For example, in a CMS-backed site you might set this to `/?s=` so the final URL becomes `/?s=<search-term>`. | `string \| undefined` | `undefined` |
 | `viewAllResultsLabel` | `view-all-results-label` | Optional label for the "View All" footer button. Defaults to "View All". | `string \| undefined` | `undefined` |

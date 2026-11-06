@@ -401,8 +401,8 @@ export namespace Components {
      * const popoverForm = document.querySelector('searchcraft-popover-form');
      * popoverForm.popoverResultMappings = {};
      * // Or render each result with a template instead of `popoverResultMappings`.
-     * popoverForm.template = (item, index, { html }) => html`
-     *  <a href="${item.url}">${item.title}</a>
+     * popoverForm.template = (item, index, { html, safeUrl }) => html`
+     *  <a href="${safeUrl(item.url)}">${item.title}</a>
      * `;
      * ```
      * @react-example ```jsx
@@ -451,7 +451,7 @@ export namespace Components {
          */
         "showSummaryBox"?: boolean;
         /**
-          * A callback function responsible for rendering a result. When provided, it is used instead of `popoverResultMappings`.
+          * A callback function responsible for rendering a result. When provided, it is used instead of `popoverResultMappings`. Pass URLs from the result through the `safeUrl` helper before placing them in an `href` or `src`.
          */
         "template"?: SearchResultTemplate<SearchResultTemplateData>;
         /**
@@ -666,7 +666,7 @@ export namespace Components {
          */
         "searchcraftId"?: string;
         /**
-          * A callback function responsible for rendering a result. Passed to `searchcraft-search-result`.
+          * A callback function responsible for rendering a result. Passed to `searchcraft-search-result`. Pass URLs from the result through the `safeUrl` helper before placing them in an `href` or `src`.
          */
         "template"?: SearchResultTemplate<SearchResultTemplateData>;
     }
@@ -1143,8 +1143,8 @@ declare global {
      * const popoverForm = document.querySelector('searchcraft-popover-form');
      * popoverForm.popoverResultMappings = {};
      * // Or render each result with a template instead of `popoverResultMappings`.
-     * popoverForm.template = (item, index, { html }) => html`
-     *  <a href="${item.url}">${item.title}</a>
+     * popoverForm.template = (item, index, { html, safeUrl }) => html`
+     *  <a href="${safeUrl(item.url)}">${item.title}</a>
      * `;
      * ```
      * @react-example ```jsx
@@ -1881,8 +1881,8 @@ declare namespace LocalJSX {
      * const popoverForm = document.querySelector('searchcraft-popover-form');
      * popoverForm.popoverResultMappings = {};
      * // Or render each result with a template instead of `popoverResultMappings`.
-     * popoverForm.template = (item, index, { html }) => html`
-     *  <a href="${item.url}">${item.title}</a>
+     * popoverForm.template = (item, index, { html, safeUrl }) => html`
+     *  <a href="${safeUrl(item.url)}">${item.title}</a>
      * `;
      * ```
      * @react-example ```jsx
@@ -1931,7 +1931,7 @@ declare namespace LocalJSX {
          */
         "showSummaryBox"?: boolean;
         /**
-          * A callback function responsible for rendering a result. When provided, it is used instead of `popoverResultMappings`.
+          * A callback function responsible for rendering a result. When provided, it is used instead of `popoverResultMappings`. Pass URLs from the result through the `safeUrl` helper before placing them in an `href` or `src`.
          */
         "template"?: SearchResultTemplate<SearchResultTemplateData>;
         /**
@@ -2146,7 +2146,7 @@ declare namespace LocalJSX {
          */
         "searchcraftId"?: string;
         /**
-          * A callback function responsible for rendering a result. Passed to `searchcraft-search-result`.
+          * A callback function responsible for rendering a result. Passed to `searchcraft-search-result`. Pass URLs from the result through the `safeUrl` helper before placing them in an `href` or `src`.
          */
         "template"?: SearchResultTemplate<SearchResultTemplateData>;
     }
@@ -2550,8 +2550,8 @@ declare module "@stencil/core" {
              * const popoverForm = document.querySelector('searchcraft-popover-form');
              * popoverForm.popoverResultMappings = {};
              * // Or render each result with a template instead of `popoverResultMappings`.
-             * popoverForm.template = (item, index, { html }) => html`
-             *  <a href="${item.url}">${item.title}</a>
+             * popoverForm.template = (item, index, { html, safeUrl }) => html`
+             *  <a href="${safeUrl(item.url)}">${item.title}</a>
              * `;
              * ```
              * @react-example ```jsx

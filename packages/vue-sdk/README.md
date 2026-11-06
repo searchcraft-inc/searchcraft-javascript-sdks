@@ -162,9 +162,9 @@ The Vue SDK supports custom search result templates using template functions. Yo
 ```js
 import { html } from '@searchcraft/vue-sdk';
 
-export const customSearchResultTemplate = (data, index, { html }) => {
+export const customSearchResultTemplate = (data, index, { html, safeUrl }) => {
   return html`
-    <a href="${data.canonical_link}" target="_blank" rel="noreferrer">
+    <a href="${safeUrl(data.canonical_link)}" target="_blank" rel="noreferrer">
       <div class="search-result-content">
         <h3 class="search-result-content-subtitle">${data.section_name}</h3>
         <h2 class="search-result-content-title">${data.headline}</h2>
@@ -182,12 +182,17 @@ export const customSearchResultTemplate = (data, index, { html }) => {
         </footer>
       </div>
       <div class="search-result-image">
-        <img src="${data.medium_image}" alt="${data.headline}" />
+        <img src="${safeUrl(data.medium_image)}" alt="${data.headline}" />
       </div>
     </a>
   `;
 };
 ```
+
+The template receives two helpers:
+
+- `html` sanitizes each value, so a value is safe in text and inside a quoted attribute.
+- `safeUrl` checks a URL before it is placed in an `href` or `src`. It returns relative, `http:`, `https:`, `mailto:`, `tel:`, `sms:` and `data:image/` URLs unchanged, and returns `#` for anything else, such as a `javascript:` URL. To allow your app's own scheme, pass it in `schemes`: `safeUrl(data.app_link, { schemes: ['myapp'] })`.
 
 Then apply the template to your search results component:
 

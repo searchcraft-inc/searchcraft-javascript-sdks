@@ -14,8 +14,8 @@ type SearchResultDataEchostream = {
 
 export const searchResultTemplateEchostream: SearchResultTemplate<
   SearchResultDataEchostream
-> = (data, _index, { html }) => html`
-  <a href="${data.canonical_link}" target="_blank" rel="noreferrer">
+> = (data, _index, { html, safeUrl }) => html`
+  <a href="${safeUrl(data.canonical_link)}" target="_blank" rel="noreferrer">
     <div class="search-result-content">
       <h3 class="search-result-content-subtitle">${data.section_name}</h3>
       <h2 class="search-result-content-title">${data.headline}</h2>
@@ -33,7 +33,7 @@ export const searchResultTemplateEchostream: SearchResultTemplate<
       </footer>
     </div>
     <div class="search-result-image">
-      <img src="${data.medium_image}" alt="${data.headline}" />
+      <img src="${safeUrl(data.medium_image)}" alt="${data.headline}" />
     </div>
   </a>
 `;
@@ -66,8 +66,8 @@ type SearchResultDataFoodAndWine = {
 
 export const searchResultTemplateFoodAndWine: SearchResultTemplate<
   SearchResultDataFoodAndWine
-> = (data, _index, { html }) => html`
-  <a href="${data.link}" target="_blank" rel="noreferrer">
+> = (data, _index, { html, safeUrl }) => html`
+  <a href="${safeUrl(data.link)}" target="_blank" rel="noreferrer">
     <div class="search-result-content">
       <h3 class="search-result-content-subtitle">${data.category?.[0]}</h3>
       <h2 class="search-result-content-title">${data.title}</h2>
@@ -81,7 +81,7 @@ export const searchResultTemplateFoodAndWine: SearchResultTemplate<
       </footer>
     </div>
     <div class="search-result-image">
-      <img src="${data.enclosure_url}" alt="${data.title}" />
+      <img src="${safeUrl(data.enclosure_url)}" alt="${data.title}" />
     </div>
   </a>
 `;
@@ -97,8 +97,8 @@ type SearchResultDataGalaxyNews = {
 
 export const searchResultTemplateGalaxyNews: SearchResultTemplate<
   SearchResultDataGalaxyNews
-> = (data, _index, { html, source_index }) => html`
-  <a href="${data.link}" target="_blank" rel="noreferrer">
+> = (data, _index, { html, safeUrl, source_index }) => html`
+  <a href="${safeUrl(data.link)}" target="_blank" rel="noreferrer">
     <div class="search-result-content">
       <h2 class="search-result-content-title">${data.title}</h2>
       <p class="search-result-content-body">${data.description}</p>
@@ -115,7 +115,7 @@ export const searchResultTemplateGalaxyNews: SearchResultTemplate<
       data.media_thumbnail_url
         ? html`
       <div class="search-result-image">
-        <img src="${data.media_thumbnail_url}" alt="${data.title}" />
+        <img src="${safeUrl(data.media_thumbnail_url)}" alt="${data.title}" />
       </div>
     `
         : ''
