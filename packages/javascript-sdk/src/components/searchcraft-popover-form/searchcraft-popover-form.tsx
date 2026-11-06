@@ -1,10 +1,12 @@
 import type { SearchcraftCore } from '@classes';
 import { registry } from '@classes/CoreInstanceRegistry';
-import { Component, Element, Prop, State, h } from '@stencil/core';
+import { Component, Element, Prop, State, Watch, h } from '@stencil/core';
 import type {
   AdClientResponseItem,
   PopoverResultMappings,
   SearchClientResponseItem,
+  SearchResultTemplate,
+  SearchResultTemplateData,
 } from '@types';
 import classNames from 'classnames';
 
@@ -32,6 +34,11 @@ import classNames from 'classnames';
  * const popoverForm = document.querySelector('searchcraft-popover-form');
  *
  * popoverForm.popoverResultMappings = {};
+ *
+ * // Or render each result with a template instead of `popoverResultMappings`.
+ * popoverForm.template = (item, index, { html }) => html`
+ *  <a href="${item.url}">${item.title}</a>
+ * `;
  * ```
  *
  * @react-example
@@ -61,6 +68,10 @@ export class SearchcraftPopoverForm {
    * Formats the content rendered for each result.
    */
   @Prop() popoverResultMappings?: PopoverResultMappings;
+  /**
+   * A callback function responsible for rendering a result. When provided, it is used instead of `popoverResultMappings`.
+   */
+  @Prop() template?: SearchResultTemplate<SearchResultTemplateData>;
   /**
    * The hotkey that activates the popover.
    */
@@ -255,6 +266,7 @@ export class SearchcraftPopoverForm {
       if (!this.modalElement) {
         this.modalElement = document.createElement('searchcraft-popover-form');
         this.modalElement.popoverResultMappings = this.popoverResultMappings;
+        this.modalElement.template = this.template;
         this.modalElement.setAttribute('type', 'fullscreen');
         this.modalElement.setAttribute('searchcraft-id', this.searchcraftId);
         if (this.placeholderValue) {
@@ -283,6 +295,19 @@ export class SearchcraftPopoverForm {
         }
         document.body.appendChild(this.modalElement);
       }
+    }
+  }
+
+  /**
+   * Passes result rendering changes on to the fullscreen form created for small viewports,
+   * which only receives these props when it is first created.
+   */
+  @Watch('popoverResultMappings')
+  @Watch('template')
+  syncModalElementResultRendering() {
+    if (this.modalElement) {
+      this.modalElement.popoverResultMappings = this.popoverResultMappings;
+      this.modalElement.template = this.template;
     }
   }
 
@@ -325,14 +350,29 @@ export class SearchcraftPopoverForm {
    * @param direction
    */
   focusOnNextListItem(direction: 'ArrowDown' | 'ArrowUp') {
-    const listItems = Array.from(
-      document.querySelectorAll<HTMLAnchorElement>(
-        '.searchcraft-popover-list-item-link',
+    // Results rendered by a `template` are reached through the first link in the template.
+    const links = Array.from(
+      document.querySelectorAll<HTMLElement>(
+        '.searchcraft-popover-list-item-link, .searchcraft-popover-list-item-template',
       ),
-    ).filter((el) => !el.hasAttribute('disabled') && el.offsetParent !== null);
+    ).map((el) =>
+      el.classList.contains('searchcraft-popover-list-item-template')
+        ? el.querySelector('a')
+        : el,
+    );
+    const listItems = Array.from(new Set(links)).filter(
+      (el): el is HTMLAnchorElement =>
+        !!el && !el.hasAttribute('disabled') && el.offsetParent !== null,
+    );
 
-    const currentIndex = listItems.indexOf(
-      document.activeElement as HTMLAnchorElement,
+    // Focus may be on another link inside a templated result, so match on the result too.
+    const activeElement = document.activeElement;
+    const currentIndex = listItems.findIndex(
+      (el) =>
+        el === activeElement ||
+        !!el
+          .closest('.searchcraft-popover-list-item-template')
+          ?.contains(activeElement),
     );
 
     if (direction === 'ArrowDown') {
@@ -424,6 +464,7 @@ export class SearchcraftPopoverForm {
               )}
               <searchcraft-popover-list-view
                 popoverResultMappings={this.popoverResultMappings}
+                template={this.template}
                 searchClientResponseItems={this.searchClientResponseItems}
                 adClientResponseItems={this.adClientResponseItems}
                 searchResultsPage={this.searchResultsPage}
@@ -485,6 +526,7 @@ export class SearchcraftPopoverForm {
               {this.hasResultsToShow && (
                 <searchcraft-popover-list-view
                   popoverResultMappings={this.popoverResultMappings}
+                  template={this.template}
                   searchClientResponseItems={this.searchClientResponseItems}
                   adClientResponseItems={this.adClientResponseItems}
                   searchResultsPage={this.searchResultsPage}
@@ -539,6 +581,7 @@ export class SearchcraftPopoverForm {
             {this.hasResultsToShow && (
               <searchcraft-popover-list-view
                 popoverResultMappings={this.popoverResultMappings}
+                template={this.template}
                 searchClientResponseItems={this.searchClientResponseItems}
                 adClientResponseItems={this.adClientResponseItems}
                 searchResultsPage={this.searchResultsPage}
