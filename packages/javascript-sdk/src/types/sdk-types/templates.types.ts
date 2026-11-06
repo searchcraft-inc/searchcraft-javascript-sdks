@@ -5,6 +5,23 @@ export type TemplateHtml = (
   ...values: (string | number | undefined)[]
 ) => string;
 
+/**
+ * Options for the `safeUrl` template helper.
+ */
+export type SafeUrlOptions = {
+  /**
+   * More URL schemes to allow, such as an app's own scheme (`['myapp']`).
+   */
+  schemes?: string[];
+};
+
+/**
+ * Returns `url` unchanged when it is safe to place in an `href` or `src` attribute, and `#` when
+ * it is not. Relative URLs, `http:`, `https:`, `mailto:`, `tel:`, `sms:` and `data:image/` URLs
+ * are safe, along with any scheme passed in `options.schemes`.
+ */
+export type SafeUrl = (url: unknown, options?: SafeUrlOptions) => string;
+
 export type SearchResultTemplate<T> = (
   data: T,
   index: number,
