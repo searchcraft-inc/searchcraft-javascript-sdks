@@ -38,6 +38,7 @@ const SEARCHCRAFT_ID = 'popover-list-item-spec';
 const item: SearchClientResponseItem = {
   id: '1',
   document: {
+    id: 1,
     title: 'Hello World',
     excerpt: 'An excerpt',
     url: 'https://example.com/hello-world',
