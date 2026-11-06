@@ -1,6 +1,6 @@
 import type { SearchcraftCore } from '@classes';
 import { registry } from '@classes/CoreInstanceRegistry';
-import { Component, Element, Prop, State, h } from '@stencil/core';
+import { Component, Element, Prop, State, Watch, h } from '@stencil/core';
 import type {
   AdClientResponseItem,
   PopoverResultMappings,
@@ -295,6 +295,19 @@ export class SearchcraftPopoverForm {
         }
         document.body.appendChild(this.modalElement);
       }
+    }
+  }
+
+  /**
+   * Passes result rendering changes on to the fullscreen form created for small viewports,
+   * which only receives these props when it is first created.
+   */
+  @Watch('popoverResultMappings')
+  @Watch('template')
+  syncModalElementResultRendering() {
+    if (this.modalElement) {
+      this.modalElement.popoverResultMappings = this.popoverResultMappings;
+      this.modalElement.template = this.template;
     }
   }
 
