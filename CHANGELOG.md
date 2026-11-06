@@ -1,6 +1,9 @@
 ## Unreleased
 
 - New Feature: Added a `template` prop to `searchcraft-popover-form` that renders each popover result with a template callback, the same way `searchcraft-search-results` does. Without it, results still render from `popoverResultMappings`.
+- New Feature: Every template now receives a `safeUrl` helper alongside `html`. Use it for URLs from indexed data that go in an `href` or `src`: `href="${safeUrl(item.url)}"`. It returns relative, `http:`, `https:`, `mailto:`, `tel:`, `sms:` and `data:image/` URLs unchanged, and returns `#` for anything else, such as a `javascript:` URL. Allow your app's own scheme with `safeUrl(url, { schemes: ['myapp'] })`.
+- Security: The `html` template helper now escapes quotes in values that contain no markup, so a value can no longer end a quoted attribute and add attributes such as event handlers. This also fixes broken markup when a value with quotes, like `He said "hi"`, is placed in an attribute. Values display exactly as before.
+  - One pattern changes: building attribute text as a plain string and inserting it as a value, such as `${isActive ? 'aria-current="page"' : ''}`, now produces an escaped attribute. Keep the attribute in the template and insert only its value (`aria-current="${isActive ? 'page' : 'false'}"`), or build it with a nested `html` call (`${isActive ? html\`aria-current="page"\` : ''}`).
 
 ## 0.15.1 - 2026-04-16
 
