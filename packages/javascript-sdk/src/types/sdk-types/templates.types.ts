@@ -22,10 +22,25 @@ export type SafeUrlOptions = {
  */
 export type SafeUrl = (url: unknown, options?: SafeUrlOptions) => string;
 
+/**
+ * The helpers passed to every template.
+ */
+export type TemplateUtils = {
+  /**
+   * Builds the template's markup. Values are sanitized and safe in text and quoted attributes.
+   */
+  html: TemplateHtml;
+  /**
+   * Checks a URL before it is placed in an `href` or `src`. Returns `#` for unsafe URLs,
+   * such as `javascript:` URLs.
+   */
+  safeUrl: SafeUrl;
+};
+
 export type SearchResultTemplate<T> = (
   data: T,
   index: number,
-  utils: { html: TemplateHtml; source_index?: string },
+  utils: TemplateUtils & { source_index?: string },
 ) => string;
 
 // biome-ignore lint/suspicious/noExplicitAny: Index fields object need to support arbitrary key/value pairs.
@@ -37,7 +52,7 @@ export type ResultsInfoTemplate = (
     count: number;
     responseTime: string;
   },
-  utils: { html: TemplateHtml },
+  utils: TemplateUtils,
 ) => string;
 
 export type CustomAdTemplate = (
@@ -45,17 +60,14 @@ export type CustomAdTemplate = (
     adContainerId: string;
     searchTerm: string;
   },
-  utils: { html: TemplateHtml },
+  utils: TemplateUtils,
 ) => string;
 
 export type PopoverButtonTemplate = (
   data: {
     isPopoverVisible: boolean;
   },
-  utils: { html: TemplateHtml },
+  utils: TemplateUtils,
 ) => string;
 
-export type ADMAdTemplate = (
-  data: ADMAd,
-  utils: { html: TemplateHtml },
-) => string;
+export type ADMAdTemplate = (data: ADMAd, utils: TemplateUtils) => string;

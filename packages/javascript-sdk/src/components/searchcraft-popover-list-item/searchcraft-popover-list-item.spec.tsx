@@ -114,6 +114,20 @@ describe('searchcraft-popover-list-item', () => {
     ).toBeNull();
   });
 
+  it('passes safeUrl to the template', async () => {
+    const page = await renderListItem(
+      (data, _index, { html, safeUrl }) =>
+        html`<a class="safe-link" href="${safeUrl(data.url)}">Safe</a><a class="unsafe-link" href="${safeUrl('javascript:alert(1)')}">Unsafe</a>`,
+    );
+
+    expect(page.root?.querySelector('.safe-link')?.getAttribute('href')).toBe(
+      'https://example.com/hello-world',
+    );
+    expect(page.root?.querySelector('.unsafe-link')?.getAttribute('href')).toBe(
+      '#',
+    );
+  });
+
   it('logs an error and falls back to popoverResultMappings when the template throws', async () => {
     const consoleError = jest.fn();
     jest.spyOn(console, 'error').mockImplementation(consoleError);

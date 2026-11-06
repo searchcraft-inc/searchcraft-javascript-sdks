@@ -4,7 +4,7 @@ import { Component, Prop, State, h } from '@stencil/core';
 
 import type { PopoverButtonTemplate } from '@types';
 
-import { html } from '@utils';
+import { html, safeUrl } from '@utils';
 
 /**
  * Renders a button which, when clicked, turns on popover visibility.
@@ -304,7 +304,7 @@ export class SearchcraftPopoverButton {
           typeof this.template !== 'undefined'
             ? this.template(
                 { isPopoverVisible: this.isPopoverVisible },
-                { html },
+                { html, safeUrl },
               )
             : undefined
         }
