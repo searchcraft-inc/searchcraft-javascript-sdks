@@ -9,6 +9,7 @@ import type {
   SearchResultTemplateData,
 } from '@types';
 import { getDocumentValueFromSearchResultMapping, html } from '@utils';
+import DOMPurify from 'dompurify';
 
 /**
  * A single list item rendered in a searchcraft-popover-list-view.
@@ -89,10 +90,15 @@ export class SearchcraftPopoverListItem {
 
     if (this.template) {
       try {
-        this.templateHtml = this.template(this.item.document, this.index, {
-          html,
-          source_index: this.item.source_index,
-        });
+        // `html` only sanitizes each value on its own, so a value placed in an attribute
+        // (such as a `javascript:` URL in an `href`) is checked here once the markup is complete.
+        this.templateHtml = DOMPurify.sanitize(
+          this.template(this.item.document, this.index, {
+            html,
+            source_index: this.item.source_index,
+          }),
+          { ADD_ATTR: ['target'] },
+        );
       } catch (error) {
         console.error('Invalid popover result template:', error);
       }

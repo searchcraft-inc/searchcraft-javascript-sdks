@@ -8,6 +8,7 @@ import type {
   SearchResultTemplate,
   SearchResultTemplateData,
 } from '@types';
+import DOMPurify from 'dompurify';
 
 import { SearchcraftPopoverListItem } from './searchcraft-popover-list-item';
 
@@ -112,6 +113,29 @@ describe('searchcraft-popover-list-item', () => {
     expect(
       page.root?.querySelector('.searchcraft-popover-list-item-link'),
     ).toBeNull();
+  });
+
+  // DOMPurify cannot sanitize in the spec test's mock document, so this checks that the
+  // completed markup goes through it and that its result is what gets rendered.
+  it('sanitizes the completed template markup before rendering it', async () => {
+    const sanitize = jest.fn();
+    jest.spyOn(DOMPurify, 'sanitize').mockImplementation((...args) => {
+      sanitize(...args);
+      return '<a class="custom-link" target="_blank">Read</a>';
+    });
+
+    const page = await renderListItem(
+      () =>
+        '<a class="custom-link" href="javascript:alert(1)" target="_blank">Read</a>',
+    );
+
+    expect(sanitize).toHaveBeenCalledWith(
+      '<a class="custom-link" href="javascript:alert(1)" target="_blank">Read</a>',
+      { ADD_ATTR: ['target'] },
+    );
+    const link = page.root?.querySelector('.custom-link');
+    expect(link?.getAttribute('href')).toBeNull();
+    expect(link?.getAttribute('target')).toBe('_blank');
   });
 
   it('logs an error and falls back to popoverResultMappings when the template throws', async () => {
