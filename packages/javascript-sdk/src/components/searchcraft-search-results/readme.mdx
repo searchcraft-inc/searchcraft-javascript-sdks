@@ -72,5 +72,5 @@ searchResults.template = (item, index, { html }) => html`
 | -------- | --------- | ----------- | ---- | ------- |
 | `initialQuery` | `initial-query` | A query that will appears when the component initializes or the search term is ''.. | `string \| undefined` | `undefined` |
 | `searchcraftId` | `searchcraft-id` | The id of the Searchcraft instance that this component should use. | `string \| undefined` | `undefined` |
-| `template` | -- | A callback function responsible for rendering a result. Passed to `searchcraft-search-result`. Pass URLs from the result through the `safeUrl` helper before placing them in an `href` or `src`. | `((data: any, index: number, utils: TemplateUtils & { source_index?: string \| undefined; }) => string) \| undefined` | `undefined` |
+| `template` | -- | A callback function responsible for rendering a result. Passed to `searchcraft-search-result`. Pass URLs from the result through the `safeUrl` helper before placing them in an `href` or `src`. Never place result values in event handler attributes such as `onclick`, or in `style`. | `((data: any, index: number, utils: TemplateUtils & { source_index?: string \| undefined; }) => string) \| undefined` | `undefined` |
 

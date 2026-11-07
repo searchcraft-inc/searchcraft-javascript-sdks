@@ -27,7 +27,9 @@ export type SafeUrl = (url: unknown, options?: SafeUrlOptions) => string;
  */
 export type TemplateUtils = {
   /**
-   * Builds the template's markup. Values are sanitized and safe in text and quoted attributes.
+   * Builds the template's markup. Values in text are sanitized, and values in attributes are
+   * escaped so they stay inside their attribute. Values in event handler attributes such as
+   * `onclick`, or in `style`, are not made safe, so never place result values there.
    */
   html: TemplateHtml;
   /**
