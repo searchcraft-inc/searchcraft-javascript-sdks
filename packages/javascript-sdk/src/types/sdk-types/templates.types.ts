@@ -10,7 +10,9 @@ export type TemplateHtml = (
  */
 export type SafeUrlOptions = {
   /**
-   * More URL schemes to allow, such as an app's own scheme (`['myapp']`).
+   * More URL schemes to allow, such as an app's own scheme (`['myapp']`). A link with such a
+   * scheme must be written in the template's own markup. If its markup is placed as a value in
+   * the text of another `html` call, DOMPurify removes the URL.
    */
   schemes?: string[];
 };
