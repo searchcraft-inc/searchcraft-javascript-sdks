@@ -54,12 +54,13 @@ const popoverResultMappings: PopoverResultMappings = {
 
 const renderListItem = (
   template?: SearchResultTemplate<SearchResultTemplateData>,
+  listItem: SearchClientResponseItem = item,
 ) =>
   newSpecPage({
     components: [SearchcraftPopoverListItem],
     template: () => (
       <searchcraft-popover-list-item
-        item={item}
+        item={listItem}
         index={3}
         documentPosition={7}
         popoverResultMappings={popoverResultMappings}
@@ -95,6 +96,19 @@ describe('searchcraft-popover-list-item', () => {
     ).toBeNull();
   });
 
+  it('blocks an unsafe URL in the mapped href', async () => {
+    const page = await renderListItem(undefined, {
+      ...item,
+      document: { ...item.document, url: 'javascript:alert(1)' },
+    });
+
+    expect(
+      page.root
+        ?.querySelector('.searchcraft-popover-list-item-link')
+        ?.getAttribute('href'),
+    ).toBe('#');
+  });
+
   it('renders the template instead of popoverResultMappings', async () => {
     const templateArgs = jest.fn();
     const page = await renderListItem((data, index, { html, source_index }) => {
@@ -112,6 +126,20 @@ describe('searchcraft-popover-list-item', () => {
     expect(
       page.root?.querySelector('.searchcraft-popover-list-item-link'),
     ).toBeNull();
+  });
+
+  it('passes safeUrl to the template', async () => {
+    const page = await renderListItem(
+      (data, _index, { html, safeUrl }) =>
+        html`<a class="safe-link" href="${safeUrl(data.url)}">Safe</a><a class="unsafe-link" href="${safeUrl('javascript:alert(1)')}">Unsafe</a>`,
+    );
+
+    expect(page.root?.querySelector('.safe-link')?.getAttribute('href')).toBe(
+      'https://example.com/hello-world',
+    );
+    expect(page.root?.querySelector('.unsafe-link')?.getAttribute('href')).toBe(
+      '#',
+    );
   });
 
   it('logs an error and falls back to popoverResultMappings when the template throws', async () => {

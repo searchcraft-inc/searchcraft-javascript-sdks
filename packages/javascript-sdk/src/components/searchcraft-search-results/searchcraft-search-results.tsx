@@ -81,6 +81,8 @@ export class SearchcraftSearchResults {
 
   /**
    * A callback function responsible for rendering a result. Passed to `searchcraft-search-result`.
+   * Pass URLs from the result through the `safeUrl` helper before placing them in an `href` or `src`.
+   * Never place result values in event handler attributes such as `onclick`, or in `style`.
    */
   @Prop() template?: SearchResultTemplate<SearchResultTemplateData>;
 

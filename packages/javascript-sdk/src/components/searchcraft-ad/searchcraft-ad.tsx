@@ -7,7 +7,7 @@ import type { SearchcraftState } from '@store';
 
 import type { SearchcraftCore } from '@classes';
 import { registry } from '@classes/CoreInstanceRegistry';
-import { html } from '@utils';
+import { html, safeUrl } from '@utils';
 
 /**
  * An inline ad meant to be rendered in a list of search results.
@@ -173,6 +173,7 @@ export class SearchcraftPopoverListItemAd {
     if (this.core?.config?.admAdConfig?.template) {
       templateHtml = this.core?.config?.admAdConfig.template(item.admAd, {
         html,
+        safeUrl,
       });
     }
 
@@ -197,7 +198,7 @@ export class SearchcraftPopoverListItemAd {
           searchTerm: this.searchTerm || '',
           adContainerId: this.adContainerId,
         },
-        { html },
+        { html, safeUrl },
       );
     }
 

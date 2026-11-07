@@ -4,7 +4,7 @@ import { Component, Prop, State, h } from '@stencil/core';
 
 import type { ResultsInfoTemplate } from '@types';
 
-import { formatNumberWithCommas, html } from '@utils';
+import { formatNumberWithCommas, html, safeUrl } from '@utils';
 
 /**
  * This web component is designed to display the number of results returned from a search query.
@@ -142,7 +142,7 @@ export class SearchcraftResultsInfo {
                 count: this.count,
                 responseTime: this.responseTime,
               },
-              { html },
+              { html, safeUrl },
             )
           : `${formatNumberWithCommas(this.count)} results found in ${this.responseTime}ms`}
       </p>

@@ -36,8 +36,8 @@ import classNames from 'classnames';
  * popoverForm.popoverResultMappings = {};
  *
  * // Or render each result with a template instead of `popoverResultMappings`.
- * popoverForm.template = (item, index, { html }) => html`
- *  <a href="${item.url}">${item.title}</a>
+ * popoverForm.template = (item, index, { html, safeUrl }) => html`
+ *  <a href="${safeUrl(item.url)}">${item.title}</a>
  * `;
  * ```
  *
@@ -70,6 +70,8 @@ export class SearchcraftPopoverForm {
   @Prop() popoverResultMappings?: PopoverResultMappings;
   /**
    * A callback function responsible for rendering a result. When provided, it is used instead of `popoverResultMappings`.
+   * Pass URLs from the result through the `safeUrl` helper before placing them in an `href` or `src`.
+   * Never place result values in event handler attributes such as `onclick`, or in `style`.
    */
   @Prop() template?: SearchResultTemplate<SearchResultTemplateData>;
   /**

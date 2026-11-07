@@ -8,7 +8,7 @@ import type {
   SearchResultTemplate,
   SearchResultTemplateData,
 } from '@types';
-import { getDocumentValueFromSearchResultMapping, html } from '@utils';
+import { getDocumentValueFromSearchResultMapping, html, safeUrl } from '@utils';
 
 /**
  * A single list item rendered in a searchcraft-popover-list-view.
@@ -91,6 +91,7 @@ export class SearchcraftPopoverListItem {
       try {
         this.templateHtml = this.template(this.item.document, this.index, {
           html,
+          safeUrl,
           source_index: this.item.source_index,
         });
       } catch (error) {
@@ -163,7 +164,7 @@ export class SearchcraftPopoverListItem {
       <div class='searchcraft-popover-list-item'>
         <a
           class='searchcraft-popover-list-item-link'
-          href={this.href}
+          href={this.href ? safeUrl(this.href) : undefined}
           onClick={this.handleLinkClick.bind(this)}
         >
           {this.imageSource && (

@@ -160,11 +160,9 @@ export const filterPanelItems = [
 The Vue SDK supports custom search result templates using template functions. You can customize the appearance and behavior of search results by providing a template function:
 
 ```js
-import { html } from '@searchcraft/vue-sdk';
-
-export const customSearchResultTemplate = (data, index, { html }) => {
+export const customSearchResultTemplate = (data, index, { html, safeUrl }) => {
   return html`
-    <a href="${data.canonical_link}" target="_blank" rel="noreferrer">
+    <a href="${safeUrl(data.canonical_link)}" target="_blank" rel="noreferrer">
       <div class="search-result-content">
         <h3 class="search-result-content-subtitle">${data.section_name}</h3>
         <h2 class="search-result-content-title">${data.headline}</h2>
@@ -182,12 +180,17 @@ export const customSearchResultTemplate = (data, index, { html }) => {
         </footer>
       </div>
       <div class="search-result-image">
-        <img src="${data.medium_image}" alt="${data.headline}" />
+        <img src="${safeUrl(data.medium_image)}" alt="${data.headline}" />
       </div>
     </a>
   `;
 };
 ```
+
+The template receives two helpers:
+
+- `html` sanitizes values placed in text, and escapes values placed in an attribute so they stay inside it. Never place result values in event handler attributes such as `onclick`, or in `style`, since they would still run as script or apply as CSS.
+- `safeUrl` checks a URL before it is placed in an `href` or `src`. It returns relative, `http:`, `https:`, `mailto:`, `tel:`, `sms:` and `data:image/` URLs unchanged, and returns `#` for anything else, such as a `javascript:` URL. To allow your app's own scheme, pass it in `schemes`: `safeUrl(data.app_link, { schemes: ['myapp'] })`. Write links with such a scheme in the template's own markup. If the link's markup is placed as a value in the text of another `html` call, DOMPurify removes the URL.
 
 Then apply the template to your search results component:
 
