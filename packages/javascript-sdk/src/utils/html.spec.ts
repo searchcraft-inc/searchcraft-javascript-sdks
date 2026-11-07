@@ -151,4 +151,7 @@ describe('html', () => {
     );
   });
 
+  it('renders 0 and leaves out empty values', () => {
+    expect(html`${0} results${undefined}${''}`).toBe('0 results');
+  });
 });

@@ -314,7 +314,7 @@ export const html: TemplateHtml = (strings, ...values) => {
 
     result +=
       placeValue(
-        value ? String(value) : '',
+        value || value === 0 ? String(value) : '',
         attributeTokenizer
           ? [tokenizer.state, attributeTokenizer.state]
           : [tokenizer.state],
