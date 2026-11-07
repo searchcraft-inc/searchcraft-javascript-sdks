@@ -164,7 +164,7 @@ export class SearchcraftPopoverListItem {
       <div class='searchcraft-popover-list-item'>
         <a
           class='searchcraft-popover-list-item-link'
-          href={this.href}
+          href={this.href ? safeUrl(this.href) : undefined}
           onClick={this.handleLinkClick.bind(this)}
         >
           {this.imageSource && (

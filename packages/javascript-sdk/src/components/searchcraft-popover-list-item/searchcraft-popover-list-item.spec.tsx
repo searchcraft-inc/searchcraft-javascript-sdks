@@ -54,12 +54,13 @@ const popoverResultMappings: PopoverResultMappings = {
 
 const renderListItem = (
   template?: SearchResultTemplate<SearchResultTemplateData>,
+  listItem: SearchClientResponseItem = item,
 ) =>
   newSpecPage({
     components: [SearchcraftPopoverListItem],
     template: () => (
       <searchcraft-popover-list-item
-        item={item}
+        item={listItem}
         index={3}
         documentPosition={7}
         popoverResultMappings={popoverResultMappings}
@@ -93,6 +94,19 @@ describe('searchcraft-popover-list-item', () => {
     expect(
       page.root?.querySelector('.searchcraft-popover-list-item-template'),
     ).toBeNull();
+  });
+
+  it('blocks an unsafe URL in the mapped href', async () => {
+    const page = await renderListItem(undefined, {
+      ...item,
+      document: { ...item.document, url: 'javascript:alert(1)' },
+    });
+
+    expect(
+      page.root
+        ?.querySelector('.searchcraft-popover-list-item-link')
+        ?.getAttribute('href'),
+    ).toBe('#');
   });
 
   it('renders the template instead of popoverResultMappings', async () => {
