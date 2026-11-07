@@ -43,10 +43,33 @@ describe('html', () => {
     expect(heading?.textContent).toBe(title);
   });
 
-  it('leaves values that contain markup unchanged', () => {
-    expect(html`<p>${'<em class="highlight">Hello</em> "World"'}</p>`).toBe(
-      '<p><em class="highlight">Hello</em> "World"</p>',
+  it('keeps the markup in a value while removing its quotes', () => {
+    const value =
+      '<a href="/post?a=1&amp;b=2" class="result link">It\'s</a> "here"';
+    const markup = html`<p>${value}</p>`;
+    const paragraph = parse(markup);
+    const link = paragraph?.querySelector('a');
+
+    expect(/["']/.test(markup.slice(3, -4))).toBe(false);
+    expect(link?.getAttribute('href')).toBe('/post?a=1&b=2');
+    expect(link?.getAttribute('class')).toBe('result link');
+    expect(paragraph?.textContent).toBe(`It's "here"`);
+  });
+
+  it('keeps a value with markup inside its attribute', () => {
+    const afterTag = '<b>x</b>" onmouseover="alert(1)';
+    const inTag = '<img title=" onmouseover=alert(1) ">';
+    const link = parse(
+      html`<a title="${afterTag}" data-label="${inTag}">Read</a>`,
     );
+
+    expect(link?.getAttribute('onmouseover')).toBeNull();
+    expect(
+      Array.from(link?.attributes ?? [])
+        .map((attribute) => attribute.name)
+        .join(),
+    ).toBe('title,data-label');
+    expect(link?.textContent).toBe('Read');
   });
 
   it('places the output of a nested html call as is', () => {

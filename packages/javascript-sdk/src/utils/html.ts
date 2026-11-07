@@ -21,22 +21,81 @@ const rememberOutput = (output: string) => {
   }
 };
 
-const MARKUP_PATTERN = /<[a-z!/?]/i;
+const TAG_START_PATTERN = /[a-z/]/i;
 
 /**
- * Escapes the quotes in a value that has no markup, so it cannot end a quoted attribute.
- * The browser decodes them again, so the value displays the same in text and attributes.
+ * Characters that cannot appear as is in an unquoted attribute value.
  */
-const escapeQuotes = (value: string) =>
-  value.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+const UNQUOTED_VALUE_SPECIAL_PATTERN = /[\s"'=<>`]/g;
+
+const encodeCharacter = (character: string) => `&#${character.charCodeAt(0)};`;
+
+/**
+ * Removes every quote from a sanitized value, so it cannot end a quoted attribute, while
+ * keeping the same markup. The browser decodes the escaped characters again, so the value
+ * displays the same in text and attributes.
+ *
+ * Quotes in text are escaped. Inside a tag, each quoted attribute value is written without
+ * quotes, with the characters an unquoted value cannot hold escaped. DOMPurify writes every
+ * attribute value in `"`, escapes any `"` inside it, and may leave a `>` inside it, so a value
+ * runs to the next `"`.
+ */
+const escapeQuotes = (value: string) => {
+  if (!value.includes('"') && !value.includes("'")) {
+    return value;
+  }
+
+  let escaped = '';
+  let isInTag = false;
+
+  for (let i = 0; i < value.length; i++) {
+    const character = value.charAt(i);
+
+    if (character === "'") {
+      escaped += '&#39;';
+    } else if (!isInTag) {
+      if (character === '"') {
+        escaped += '&quot;';
+      } else {
+        isInTag =
+          character === '<' && TAG_START_PATTERN.test(value.charAt(i + 1));
+        escaped += character;
+      }
+    } else if (character === '"') {
+      const valueEnd = value.indexOf('"', i + 1);
+      const end = valueEnd === -1 ? value.length : valueEnd;
+      const attributeValue = value.slice(i + 1, end);
+
+      // An empty value is written as the attribute name alone, which has the same meaning.
+      escaped = attributeValue
+        ? escaped +
+          attributeValue.replace(
+            UNQUOTED_VALUE_SPECIAL_PATTERN,
+            encodeCharacter,
+          )
+        : escaped.replace(/\s*=\s*$/, '');
+      i = end;
+
+      // An unquoted value runs to the next space or `>`, so keep the next attribute apart.
+      if (!/^[\s>]?$/.test(value.charAt(i + 1))) {
+        escaped += ' ';
+      }
+    } else {
+      isInTag = character !== '>';
+      escaped += character;
+    }
+  }
+
+  return escaped;
+};
 
 /**
  * This allows you to parse a template string with a function.
  *
- * Each value is sanitized with DOMPurify. Quotes in values that contain no markup are escaped,
- * so a value is safe inside a quoted attribute as well as in text. The output of a nested
- * `html` call is placed as is. URLs from indexed data should also go through `safeUrl`
- * before they are placed in an `href` or `src`.
+ * Each value is sanitized with DOMPurify and its quotes are escaped, so a value is safe inside
+ * a quoted attribute as well as in text. The output of a nested `html` call is placed as is.
+ * URLs from indexed data should also go through `safeUrl` before they are placed in an `href`
+ * or `src`.
  */
 export const html: TemplateHtml = (strings, ...values) => {
   let result = strings[0];
@@ -48,9 +107,8 @@ export const html: TemplateHtml = (strings, ...values) => {
       typeof value === 'string' && recentOutputs.has(value);
 
     result +=
-      (isNestedOutput || MARKUP_PATTERN.test(sanitizedValue)
-        ? sanitizedValue
-        : escapeQuotes(sanitizedValue)) + strings[i + 1];
+      (isNestedOutput ? sanitizedValue : escapeQuotes(sanitizedValue)) +
+      strings[i + 1];
   }
 
   const output = result || '';
