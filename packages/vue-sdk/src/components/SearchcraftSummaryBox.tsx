@@ -12,7 +12,7 @@ interface SearchcraftSummaryBoxProps extends Components.SearchcraftSummaryBox {}
  * @example
  * ```vue
  * <script setup>
- * import SearchcraftSummaryBox from '@searchcraft/vue-sdk';
+ * import { SearchcraftSummaryBox } from '@searchcraft/vue-sdk';
  * </script>
  *
  * <template>

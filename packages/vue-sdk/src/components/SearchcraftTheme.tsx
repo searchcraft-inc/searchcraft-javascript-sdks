@@ -13,7 +13,7 @@ export interface SearchcraftThemeProps extends Components.SearchcraftTheme {}
  * @example
  * ```vue
  * <script setup>
- * import SearchcraftTheme from '@searchcraft/vue-sdk';
+ * import { SearchcraftTheme } from '@searchcraft/vue-sdk';
  * </script>
  *
  * <template>
