@@ -39,6 +39,11 @@ popoverForm.popoverResultMappings = {};
 popoverForm.template = (item, index, { html, safeUrl }) => html`
  <a href="${safeUrl(item.url)}">${item.title}</a>
 `;
+
+// Change the message shown when a search returns no results.
+popoverForm.noResultsTemplate = ({ searchTerm }, { html }) => html`
+ <p>Nothing matched "${searchTerm}".</p>
+`;
 ```
 </TabItem>
 <TabItem label="React">
@@ -60,6 +65,7 @@ popoverForm.template = (item, index, { html, safeUrl }) => html`
 | -------- | --------- | ----------- | ---- | ------- |
 | `hotkey` | `hotkey` | The hotkey that activates the popover. | `string \| undefined` | `'k'` |
 | `hotkeyModifier` | `hotkey-modifier` | The hotkey modifier that activates the popover. Used together with the `hotkey` prop. | `"alt" \| "ctrl" \| "meta" \| "option" \| undefined` | `'meta'` |
+| `noResultsTemplate` | -- | A callback function responsible for rendering the message shown when a search returns no results. When it is not provided, the popover shows `No results found for "<search term>".` | `((data: { searchTerm: string; }, utils: TemplateUtils) => string) \| undefined` | `undefined` |
 | `placeholderBehavior` | `placeholder-behavior` | The placeholder's render behavior. 'hide-on-focus' - Hide the placeholder text immediately when the input form gains focus. 'hide-on-text-entered' - Only hide the placeholder when the input form has text entered into it. | `"hide-on-focus" \| "hide-on-text-entered" \| undefined` | `undefined` |
 | `placeholderValue` | `placeholder-value` | The input element's placeholder value. | `string \| undefined` | `'Enter Search'` |
 | `popoverResultMappings` | -- | Formats the content rendered for each result. | `undefined \| { title?: SearchResultMapping \| undefined; subtitle?: SearchResultMapping \| undefined; imageSource?: SearchResultMapping \| undefined; imageAlt?: SearchResultMapping \| undefined; href?: SearchResultMapping \| undefined; }` | `undefined` |

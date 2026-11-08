@@ -3,11 +3,13 @@ import { registry } from '@classes/CoreInstanceRegistry';
 import { Component, Element, Prop, State, Watch, h } from '@stencil/core';
 import type {
   AdClientResponseItem,
+  PopoverNoResultsTemplate,
   PopoverResultMappings,
   SearchClientResponseItem,
   SearchResultTemplate,
   SearchResultTemplateData,
 } from '@types';
+import { html, safeUrl } from '@utils';
 import classNames from 'classnames';
 
 /**
@@ -38,6 +40,11 @@ import classNames from 'classnames';
  * // Or render each result with a template instead of `popoverResultMappings`.
  * popoverForm.template = (item, index, { html, safeUrl }) => html`
  *  <a href="${safeUrl(item.url)}">${item.title}</a>
+ * `;
+ *
+ * // Change the message shown when a search returns no results.
+ * popoverForm.noResultsTemplate = ({ searchTerm }, { html }) => html`
+ *  <p>Nothing matched "${searchTerm}".</p>
  * `;
  * ```
  *
@@ -74,6 +81,11 @@ export class SearchcraftPopoverForm {
    * Never place result values in event handler attributes such as `onclick`, or in `style`.
    */
   @Prop() template?: SearchResultTemplate<SearchResultTemplateData>;
+  /**
+   * A callback function responsible for rendering the message shown when a search returns no results.
+   * When it is not provided, the popover shows `No results found for "<search term>".`
+   */
+  @Prop() noResultsTemplate?: PopoverNoResultsTemplate;
   /**
    * The hotkey that activates the popover.
    */
@@ -122,6 +134,11 @@ export class SearchcraftPopoverForm {
   @State() searchClientResponseItems: SearchClientResponseItem[] = [];
   @State() adClientResponseItems: AdClientResponseItem[] = [];
   @State() searchTerm: string | undefined;
+  @State() isSearchInProgress = false;
+  /**
+   * The search term of the most recent search response.
+   */
+  @State() completedSearchTerm: string | undefined;
   @State() isFocused = false;
   @State() breakpointSm = 576;
   @State() breakpointMd = 768;
@@ -166,6 +183,12 @@ export class SearchcraftPopoverForm {
       this.searchClientResponseItems = [...state.searchClientResponseItems];
       this.adClientResponseItems = [...state.adClientResponseItems];
       this.searchTerm = state.searchTerm;
+      this.isSearchInProgress = state.isSearchInProgress;
+      const requestProperties = state.searchClientRequestProperties;
+      this.completedSearchTerm =
+        requestProperties && typeof requestProperties === 'object'
+          ? requestProperties.searchTerm
+          : undefined;
       this.searchResultsPage = state.searchResultsPage;
       this.searchResultsPerPage = state.searchResultsPerPage;
     });
@@ -269,6 +292,7 @@ export class SearchcraftPopoverForm {
         this.modalElement = document.createElement('searchcraft-popover-form');
         this.modalElement.popoverResultMappings = this.popoverResultMappings;
         this.modalElement.template = this.template;
+        this.modalElement.noResultsTemplate = this.noResultsTemplate;
         this.modalElement.setAttribute('type', 'fullscreen');
         this.modalElement.setAttribute('searchcraft-id', this.searchcraftId);
         if (this.placeholderValue) {
@@ -306,10 +330,12 @@ export class SearchcraftPopoverForm {
    */
   @Watch('popoverResultMappings')
   @Watch('template')
+  @Watch('noResultsTemplate')
   syncModalElementResultRendering() {
     if (this.modalElement) {
       this.modalElement.popoverResultMappings = this.popoverResultMappings;
       this.modalElement.template = this.template;
+      this.modalElement.noResultsTemplate = this.noResultsTemplate;
     }
   }
 
@@ -406,6 +432,48 @@ export class SearchcraftPopoverForm {
     );
   }
 
+  /**
+   * Whether the search for the current search term finished without results.
+   */
+  get hasNoResultsToShow() {
+    const searchTerm = this.searchTerm?.trim();
+
+    return (
+      !!searchTerm &&
+      !this.isSearchInProgress &&
+      this.searchClientResponseItems.length === 0 &&
+      this.completedSearchTerm?.trim() === searchTerm
+    );
+  }
+
+  renderNoResults() {
+    const searchTerm = this.searchTerm?.trim() || '';
+
+    if (this.noResultsTemplate) {
+      try {
+        return (
+          <div
+            class='searchcraft-popover-form-no-results'
+            innerHTML={this.noResultsTemplate(
+              { searchTerm },
+              { html, safeUrl },
+            )}
+          />
+        );
+      } catch (error) {
+        console.error('Invalid popover no results template:', error);
+      }
+    }
+
+    return (
+      <div class='searchcraft-popover-form-no-results'>
+        <p class='searchcraft-popover-form-no-results-message'>
+          No results found for "{searchTerm}".
+        </p>
+      </div>
+    );
+  }
+
   get viewAllResultsHref() {
     const baseUrl = this.viewAllResultsBaseUrl;
     if (!baseUrl) {
@@ -438,13 +506,15 @@ export class SearchcraftPopoverForm {
 
   renderInlinePopover() {
     const isListViewVisible = this.hasResultsToShow && this.isFocused;
+    const isNoResultsVisible = this.hasNoResultsToShow && this.isFocused;
+    const isDropdownVisible = isListViewVisible || isNoResultsVisible;
 
     return (
       <div
         class={classNames(
           'searchcraft-popover-form searchcraft-popover-form-inline',
           {
-            'searchcraft-popover-form-active': isListViewVisible,
+            'searchcraft-popover-form-active': isDropdownVisible,
           },
         )}
       >
@@ -456,23 +526,27 @@ export class SearchcraftPopoverForm {
             placeholderBehavior={this.placeholderBehavior}
           />
         </div>
-        {isListViewVisible && (
+        {isDropdownVisible && (
           <div class='searchcraft-popover-form-inline-wrapper'>
             <div class='searchcraft-popover-form-inline-scroll-area'>
-              {this.showSummaryBox && (
+              {isListViewVisible && this.showSummaryBox && (
                 <searchcraft-results-summary
                   searchcraftId={this.searchcraftId}
                 />
               )}
-              <searchcraft-popover-list-view
-                popoverResultMappings={this.popoverResultMappings}
-                template={this.template}
-                searchClientResponseItems={this.searchClientResponseItems}
-                adClientResponseItems={this.adClientResponseItems}
-                searchResultsPage={this.searchResultsPage}
-                searchResultsPerPage={this.searchResultsPerPage}
-                searchcraftId={this.searchcraftId}
-              />
+              {isListViewVisible ? (
+                <searchcraft-popover-list-view
+                  popoverResultMappings={this.popoverResultMappings}
+                  template={this.template}
+                  searchClientResponseItems={this.searchClientResponseItems}
+                  adClientResponseItems={this.adClientResponseItems}
+                  searchResultsPage={this.searchResultsPage}
+                  searchResultsPerPage={this.searchResultsPerPage}
+                  searchcraftId={this.searchcraftId}
+                />
+              ) : (
+                this.renderNoResults()
+              )}
             </div>
             <searchcraft-popover-footer
               searchcraftId={this.searchcraftId}
@@ -493,7 +567,8 @@ export class SearchcraftPopoverForm {
           class={classNames(
             'searchcraft-popover-form searchcraft-popover-form-modal',
             {
-              'searchcraft-popover-form-active': this.hasResultsToShow,
+              'searchcraft-popover-form-active':
+                this.hasResultsToShow || this.hasNoResultsToShow,
             },
           )}
         >
@@ -536,6 +611,7 @@ export class SearchcraftPopoverForm {
                   searchcraftId={this.searchcraftId}
                 />
               )}
+              {this.hasNoResultsToShow && this.renderNoResults()}
             </div>
             <searchcraft-popover-footer
               searchcraftId={this.searchcraftId}
@@ -556,7 +632,8 @@ export class SearchcraftPopoverForm {
           class={classNames(
             'searchcraft-popover-form searchcraft-popover-form-fullscreen',
             {
-              'searchcraft-popover-form-active': this.hasResultsToShow,
+              'searchcraft-popover-form-active':
+                this.hasResultsToShow || this.hasNoResultsToShow,
             },
           )}
         >
@@ -591,6 +668,7 @@ export class SearchcraftPopoverForm {
                 searchcraftId={this.searchcraftId}
               />
             )}
+            {this.hasNoResultsToShow && this.renderNoResults()}
           </div>
           <searchcraft-popover-footer
             searchcraftId={this.searchcraftId}

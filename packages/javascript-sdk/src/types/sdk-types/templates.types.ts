@@ -74,4 +74,11 @@ export type PopoverButtonTemplate = (
   utils: TemplateUtils,
 ) => string;
 
+export type PopoverNoResultsTemplate = (
+  data: {
+    searchTerm: string;
+  },
+  utils: TemplateUtils,
+) => string;
+
 export type ADMAdTemplate = (data: ADMAd, utils: TemplateUtils) => string;
