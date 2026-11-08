@@ -5,9 +5,9 @@
  * It contains typing information for all components that exist in this project.
  */
 import type { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import type { AdClientResponseItem, FilterItem, PopoverButtonTemplate, PopoverResultMappings, ResultsInfoTemplate, SearchClientResponseItem, SearchResultTemplate, SearchResultTemplateData } from "./types/index";
+import type { AdClientResponseItem, FilterItem, PopoverButtonTemplate, PopoverNoResultsTemplate, PopoverResultMappings, ResultsInfoTemplate, SearchClientResponseItem, SearchResultTemplate, SearchResultTemplateData } from "./types/index";
 import type { SearchcraftSelectOption } from "./components/searchcraft-select/searchcraft-select";
-export type { AdClientResponseItem, FilterItem, PopoverButtonTemplate, PopoverResultMappings, ResultsInfoTemplate, SearchClientResponseItem, SearchResultTemplate, SearchResultTemplateData } from "./types/index";
+export type { AdClientResponseItem, FilterItem, PopoverButtonTemplate, PopoverNoResultsTemplate, PopoverResultMappings, ResultsInfoTemplate, SearchClientResponseItem, SearchResultTemplate, SearchResultTemplateData } from "./types/index";
 export type { SearchcraftSelectOption } from "./components/searchcraft-select/searchcraft-select";
 export namespace Components {
     /**
@@ -404,6 +404,10 @@ export namespace Components {
      * popoverForm.template = (item, index, { html, safeUrl }) => html`
      *  <a href="${safeUrl(item.url)}">${item.title}</a>
      * `;
+     * // Change the message shown when a search returns no results.
+     * popoverForm.noResultsTemplate = ({ searchTerm }, { html }) => html`
+     *  <p>Nothing matched "${searchTerm}".</p>
+     * `;
      * ```
      * @react-example ```jsx
      * <SearchcraftPopoverForm type="inline" popoverResultMappings={[]} />
@@ -423,6 +427,10 @@ export namespace Components {
           * @default 'meta'
          */
         "hotkeyModifier"?: 'ctrl' | 'meta' | 'alt' | 'option';
+        /**
+          * A callback function responsible for rendering the message shown when a search returns no results. When it is not provided, the popover shows `No results found for "<search term>".`
+         */
+        "noResultsTemplate"?: PopoverNoResultsTemplate;
         /**
           * The placeholder's render behavior. 'hide-on-focus' - Hide the placeholder text immediately when the input form gains focus. 'hide-on-text-entered' - Only hide the placeholder when the input form has text entered into it.
          */
@@ -1145,6 +1153,10 @@ declare global {
      * // Or render each result with a template instead of `popoverResultMappings`.
      * popoverForm.template = (item, index, { html, safeUrl }) => html`
      *  <a href="${safeUrl(item.url)}">${item.title}</a>
+     * `;
+     * // Change the message shown when a search returns no results.
+     * popoverForm.noResultsTemplate = ({ searchTerm }, { html }) => html`
+     *  <p>Nothing matched "${searchTerm}".</p>
      * `;
      * ```
      * @react-example ```jsx
@@ -1884,6 +1896,10 @@ declare namespace LocalJSX {
      * popoverForm.template = (item, index, { html, safeUrl }) => html`
      *  <a href="${safeUrl(item.url)}">${item.title}</a>
      * `;
+     * // Change the message shown when a search returns no results.
+     * popoverForm.noResultsTemplate = ({ searchTerm }, { html }) => html`
+     *  <p>Nothing matched "${searchTerm}".</p>
+     * `;
      * ```
      * @react-example ```jsx
      * <SearchcraftPopoverForm type="inline" popoverResultMappings={[]} />
@@ -1903,6 +1919,10 @@ declare namespace LocalJSX {
           * @default 'meta'
          */
         "hotkeyModifier"?: 'ctrl' | 'meta' | 'alt' | 'option';
+        /**
+          * A callback function responsible for rendering the message shown when a search returns no results. When it is not provided, the popover shows `No results found for "<search term>".`
+         */
+        "noResultsTemplate"?: PopoverNoResultsTemplate;
         /**
           * The placeholder's render behavior. 'hide-on-focus' - Hide the placeholder text immediately when the input form gains focus. 'hide-on-text-entered' - Only hide the placeholder when the input form has text entered into it.
          */
@@ -2552,6 +2572,10 @@ declare module "@stencil/core" {
              * // Or render each result with a template instead of `popoverResultMappings`.
              * popoverForm.template = (item, index, { html, safeUrl }) => html`
              *  <a href="${safeUrl(item.url)}">${item.title}</a>
+             * `;
+             * // Change the message shown when a search returns no results.
+             * popoverForm.noResultsTemplate = ({ searchTerm }, { html }) => html`
+             *  <p>Nothing matched "${searchTerm}".</p>
              * `;
              * ```
              * @react-example ```jsx
