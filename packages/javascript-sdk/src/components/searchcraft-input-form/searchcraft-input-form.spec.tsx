@@ -1,48 +1,26 @@
-import { h } from '@stencil/core';
-import { newSpecPage } from '@stencil/core/testing';
+import { h, render } from '@stencil/vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
-import { SearchcraftInputForm } from './searchcraft-input-form';
-
-declare const describe: (name: string, fn: () => void) => void;
-declare const it: (name: string, fn: () => void | Promise<void>) => void;
-declare const afterEach: (fn: () => void | Promise<void>) => void;
-declare const expect: (actual: unknown) => {
-  toBe(expected: unknown): void;
-  toHaveBeenCalledTimes(expected: number): void;
-  not: { toHaveBeenCalled(): void };
-};
-declare const jest: {
-  fn(): ((...args: unknown[]) => unknown) & { mock: { calls: unknown[][] } };
-  restoreAllMocks(): void;
-  spyOn<T extends object, K extends keyof T>(
-    object: T,
-    method: K,
-  ): {
-    mockImplementation(impl: (...args: never[]) => unknown): void;
-  };
-};
+import './searchcraft-input-form';
 
 const renderInputForm = () =>
-  newSpecPage({
-    components: [SearchcraftInputForm],
-    template: () => <searchcraft-input-form searchcraftId='input-form-spec' />,
-  });
+  render(<searchcraft-input-form searchcraftId='input-form-spec' />);
 
-const mockPointer = (
-  page: Awaited<ReturnType<typeof renderInputForm>>,
-  isTouch: boolean,
-) => {
-  jest.spyOn(page.win, 'matchMedia').mockImplementation((query: string) => ({
-    media: query,
-    matches: isTouch && query === '(hover: none) and (pointer: coarse)',
-  }));
+const mockPointer = (isTouch: boolean) => {
+  vi.spyOn(window, 'matchMedia').mockImplementation(
+    (query: string) =>
+      ({
+        media: query,
+        matches: isTouch && query === '(hover: none) and (pointer: coarse)',
+      }) as MediaQueryList,
+  );
 };
 
 const submitForm = async (
   page: Awaited<ReturnType<typeof renderInputForm>>,
 ) => {
   const input = page.root?.querySelector('input') as HTMLInputElement;
-  const blur = jest.fn();
+  const blur = vi.fn();
   input.blur = blur;
   page.root
     ?.querySelector('form')
@@ -53,7 +31,7 @@ const submitForm = async (
 
 describe('searchcraft-input-form', () => {
   afterEach(() => {
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 
   it('labels the on-screen keyboard enter key as search', async () => {
@@ -66,7 +44,7 @@ describe('searchcraft-input-form', () => {
 
   it('closes the on-screen keyboard when a search is submitted on a touch device', async () => {
     const page = await renderInputForm();
-    mockPointer(page, true);
+    mockPointer(true);
 
     const blur = await submitForm(page);
 
@@ -75,7 +53,7 @@ describe('searchcraft-input-form', () => {
 
   it('keeps focus in the input when a search is submitted on a device with a mouse', async () => {
     const page = await renderInputForm();
-    mockPointer(page, false);
+    mockPointer(false);
 
     const blur = await submitForm(page);
 

@@ -1,38 +1,20 @@
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { SearchcraftStore } from './SearchcraftStore.types';
 
 import { createSearchcraftStore } from './SearchcraftStoreFactory';
 
-declare const describe: (name: string, fn: () => void) => void;
-declare const it: (name: string, fn: () => void | Promise<void>) => void;
-declare const beforeEach: (fn: () => void | Promise<void>) => void;
-declare const afterEach: (fn: () => void | Promise<void>) => void;
-declare const expect: (actual: unknown) => {
-  toBe(expected: unknown): void;
-  toHaveBeenCalledTimes(expected: number): void;
-};
-declare const jest: {
-  restoreAllMocks(): void;
-  spyOn<T extends object, K extends keyof T>(
-    object: T,
-    method: K,
-  ): {
-    mockImplementation(impl: (...args: never[]) => unknown): void;
-  };
-  fn(): unknown;
-};
-
 describe('createSearchcraftStore', () => {
   beforeEach(() => {
-    jest.spyOn(console, 'error').mockImplementation(() => undefined);
+    vi.spyOn(console, 'error').mockImplementation(() => undefined);
   });
 
   afterEach(() => {
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 
   it('gracefully handles malformed cached initial query payloads', async () => {
-    const getResponseItems = jest.fn();
-    const streamSummaryData = jest.fn();
+    const getResponseItems = vi.fn();
+    const streamSummaryData = vi.fn();
     const store = createSearchcraftStore('malformed-initial-query-spec', {
       cachedSearchClientRequestProperties: '{bad json',
       facetPathsForIndexFields: {

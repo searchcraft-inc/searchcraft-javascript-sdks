@@ -1,37 +1,15 @@
 import type { SearchcraftCore } from '@classes';
 import { registry } from '@classes/CoreInstanceRegistry';
-import { h } from '@stencil/core';
-import { newSpecPage } from '@stencil/core/testing';
+import { h, render } from '@stencil/vitest';
 import type {
   PopoverResultMappings,
   SearchClientResponseItem,
   SearchResultTemplate,
   SearchResultTemplateData,
 } from '@types';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
-import { SearchcraftPopoverListItem } from './searchcraft-popover-list-item';
-
-declare const describe: (name: string, fn: () => void) => void;
-declare const it: (name: string, fn: () => void | Promise<void>) => void;
-declare const afterEach: (fn: () => void | Promise<void>) => void;
-declare const expect: (actual: unknown) => {
-  toBe(expected: unknown): void;
-  toBeNull(): void;
-  toContain(expected: string): void;
-  toHaveBeenCalledTimes(expected: number): void;
-  toHaveBeenCalledWith(...expected: unknown[]): void;
-  not: { toHaveBeenCalled(): void };
-};
-declare const jest: {
-  fn(): ((...args: unknown[]) => unknown) & { mock: { calls: unknown[][] } };
-  restoreAllMocks(): void;
-  spyOn<T extends object, K extends keyof T>(
-    object: T,
-    method: K,
-  ): {
-    mockImplementation(impl: (...args: never[]) => unknown): void;
-  };
-};
+import './searchcraft-popover-list-item';
 
 const SEARCHCRAFT_ID = 'popover-list-item-spec';
 
@@ -56,23 +34,20 @@ const renderListItem = (
   template?: SearchResultTemplate<SearchResultTemplateData>,
   listItem: SearchClientResponseItem = item,
 ) =>
-  newSpecPage({
-    components: [SearchcraftPopoverListItem],
-    template: () => (
-      <searchcraft-popover-list-item
-        item={listItem}
-        index={3}
-        documentPosition={7}
-        popoverResultMappings={popoverResultMappings}
-        template={template}
-        searchcraftId={SEARCHCRAFT_ID}
-      />
-    ),
-  });
+  render(
+    <searchcraft-popover-list-item
+      item={listItem}
+      index={3}
+      documentPosition={7}
+      popoverResultMappings={popoverResultMappings}
+      template={template}
+      searchcraftId={SEARCHCRAFT_ID}
+    />,
+  );
 
 describe('searchcraft-popover-list-item', () => {
   afterEach(() => {
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 
   it('renders popoverResultMappings when no template is provided', async () => {
@@ -110,7 +85,7 @@ describe('searchcraft-popover-list-item', () => {
   });
 
   it('renders the template instead of popoverResultMappings', async () => {
-    const templateArgs = jest.fn();
+    const templateArgs = vi.fn();
     const page = await renderListItem((data, index, { html, source_index }) => {
       templateArgs(data, index, source_index);
       return html`<a class="custom-link" href="${data.url}">${data.title}</a>`;
@@ -143,8 +118,8 @@ describe('searchcraft-popover-list-item', () => {
   });
 
   it('logs an error and falls back to popoverResultMappings when the template throws', async () => {
-    const consoleError = jest.fn();
-    jest.spyOn(console, 'error').mockImplementation(consoleError);
+    const consoleError = vi.fn();
+    vi.spyOn(console, 'error').mockImplementation(consoleError);
 
     const page = await renderListItem(() => {
       throw new Error('bad template');
@@ -180,7 +155,7 @@ describe('searchcraft-popover-list-item', () => {
   });
 
   it('sends document_clicked when a link in the template is clicked', async () => {
-    const sendMeasureEvent = jest.fn();
+    const sendMeasureEvent = vi.fn();
     registry.addCoreInstance(
       {
         store: {

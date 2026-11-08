@@ -1,25 +1,8 @@
 import DOMPurify from 'dompurify';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { html } from './html';
 import { safeUrl } from './safeUrl';
-
-declare const describe: (name: string, fn: () => void) => void;
-declare const it: (name: string, fn: () => void | Promise<void>) => void;
-declare const afterEach: (fn: () => void | Promise<void>) => void;
-declare const expect: (actual: unknown) => {
-  toBe(expected: unknown): void;
-  toBeNull(): void;
-  not: { toHaveBeenCalled(): void };
-};
-declare const jest: {
-  restoreAllMocks(): void;
-  spyOn<T extends object, K extends keyof T>(
-    object: T,
-    method: K,
-  ): {
-    mockImplementation(impl: (...args: never[]) => unknown): void;
-  };
-};
 
 const parse = (markup: string) => {
   const container = document.createElement('div');
@@ -36,13 +19,13 @@ const attributeNames = (element: Element | null | undefined) =>
  * DOMPurify cannot sanitize in Stencil's mock document, so mark the values it is given instead.
  */
 const markSanitizedValues = () =>
-  jest
+  vi
     .spyOn(DOMPurify, 'sanitize')
-    .mockImplementation((value: string) => `[${value}]`);
+    .mockImplementation((value: string | Node) => `[${String(value)}]`);
 
 describe('html', () => {
   afterEach(() => {
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 
   it('leaves values without quotes unchanged', () => {
@@ -101,7 +84,7 @@ describe('html', () => {
   });
 
   it('places a URL from safeUrl as is', () => {
-    const sanitize = jest.spyOn(DOMPurify, 'sanitize');
+    const sanitize = vi.spyOn(DOMPurify, 'sanitize');
     const url = '<x>javascript:alert(1)</x>';
 
     expect(html`<a href="${safeUrl(url)}">Read</a>`).toBe(

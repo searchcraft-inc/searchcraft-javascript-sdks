@@ -34,7 +34,7 @@ hologram → javascript-sdk → react-sdk / vue-sdk
 - **Stencil** — web-component compiler; produces the `javascript-sdk` dist and auto-generates React/Vue proxies
 - **TypeScript** — strict mode, `es2022` target, `Bundler` module resolution
 - **Biome** — linter + formatter (replaces ESLint/Prettier)
-- **Vite + vitest** — build + test for React/Vue SDKs
+- **Vite + vitest** — build for React/Vue SDKs, and tests for every SDK
 - **Lerna** — versioning and changelogs
 - **Storybook** — component development / visual testing (via `compendium`)
 - **typedoc** — API documentation generation
@@ -75,7 +75,7 @@ node build.mjs js --wordpress
 
 ```bash
 yarn test:all                  # Run all SDK tests
-yarn test:sdk-javascript       # javascript-sdk tests (Stencil spec)
+yarn test:sdk-javascript       # javascript-sdk tests (vitest)
 yarn test:sdk-react            # react-sdk tests (vitest)
 yarn test:sdk-vue              # vue-sdk tests (vitest)
 ```
@@ -225,6 +225,7 @@ The root `tsconfig.json` applies to the whole monorepo with strict settings. Key
 ## Testing Guidelines
 
 - Unit/spec tests use `.spec.ts` suffix and live alongside the source file they test.
-- `javascript-sdk` tests run via Stencil (`stencil test --spec`). There are no e2e tests; add `puppeteer` as a dev dependency and the `--e2e` flag when the first one is written.
-- `react-sdk` and `vue-sdk` tests run via **vitest**.
+- All packages run tests via **vitest**.
+- `javascript-sdk` specs use `@stencil/vitest`: import the component's source file, then `render()` it. The plugin in `vitest.config.mts` compiles the source as it is imported, so `vi.mock()` works on a component's imports. The specs run against the source, so they do not need a build.
+- `react-sdk` and `vue-sdk` tests import the built `javascript-sdk`, so run `node build.mjs` first.
 - Do not create test files outside the package they belong to.

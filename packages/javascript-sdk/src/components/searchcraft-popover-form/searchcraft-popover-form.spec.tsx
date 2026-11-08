@@ -1,34 +1,14 @@
 import type { SearchcraftCore } from '@classes';
 import { registry } from '@classes/CoreInstanceRegistry';
-import { h } from '@stencil/core';
-import { newSpecPage } from '@stencil/core/testing';
+import { h, render } from '@stencil/vitest';
 import { createSearchcraftStore } from '@store';
 import type {
   PopoverNoResultsTemplate,
   SearchClientResponseItem,
 } from '@types';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
-import { SearchcraftPopoverForm } from './searchcraft-popover-form';
-
-declare const describe: (name: string, fn: () => void) => void;
-declare const it: (name: string, fn: () => void | Promise<void>) => void;
-declare const afterEach: (fn: () => void | Promise<void>) => void;
-declare const expect: (actual: unknown) => {
-  toBe(expected: unknown): void;
-  toBeNull(): void;
-  toHaveBeenCalledTimes(expected: number): void;
-  not: { toBeNull(): void };
-};
-declare const jest: {
-  fn(): ((...args: unknown[]) => unknown) & { mock: { calls: unknown[][] } };
-  restoreAllMocks(): void;
-  spyOn<T extends object, K extends keyof T>(
-    object: T,
-    method: K,
-  ): {
-    mockImplementation(impl: (...args: never[]) => unknown): void;
-  };
-};
+import './searchcraft-popover-form';
 
 const SEARCHCRAFT_ID = 'popover-form-spec';
 
@@ -68,16 +48,13 @@ const renderPopoverForm = async (
     searchClientRequestProperties: undefined,
   });
 
-  const page = await newSpecPage({
-    components: [SearchcraftPopoverForm],
-    template: () => (
-      <searchcraft-popover-form
-        type={type}
-        noResultsTemplate={noResultsTemplate}
-        searchcraftId={SEARCHCRAFT_ID}
-      />
-    ),
-  });
+  const page = await render(
+    <searchcraft-popover-form
+      type={type}
+      noResultsTemplate={noResultsTemplate}
+      searchcraftId={SEARCHCRAFT_ID}
+    />,
+  );
 
   if (type === 'inline') {
     page.root
@@ -94,7 +71,7 @@ const noResults = (page: Awaited<ReturnType<typeof renderPopoverForm>>) =>
 
 describe('searchcraft-popover-form no results state', () => {
   afterEach(() => {
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 
   for (const type of ['inline', 'modal', 'fullscreen'] as const) {
@@ -168,8 +145,8 @@ describe('searchcraft-popover-form no results state', () => {
   });
 
   it('logs an error and shows the default message when noResultsTemplate throws', async () => {
-    const consoleError = jest.fn();
-    jest.spyOn(console, 'error').mockImplementation(consoleError);
+    const consoleError = vi.fn();
+    vi.spyOn(console, 'error').mockImplementation(consoleError);
 
     const page = await renderPopoverForm('modal', () => {
       throw new Error('bad template');
