@@ -9,6 +9,7 @@
   - Escaping cannot make event handler attributes such as `onclick`, or `style`, safe. Never place result values there.
 - Security: Without a `template`, `searchcraft-popover-list-item` now passes the `href` mapped from `popoverResultMappings` through `safeUrl`, so a `javascript:` URL in indexed data no longer runs when the result is clicked. A URL with any other scheme, such as an app's own scheme, renders as `#`. To allow it, render results with a `template` and `safeUrl(url, { schemes: ['myapp'] })`.
 - Bugfix: The `html` template helper now renders a value of `0` instead of leaving it out.
+- Enhancement: Mobile keyboards now show a search key in place of the return key in `searchcraft-input-form` and the popover form. On touch devices, submitting a search closes the keyboard so it no longer covers the results. On devices with a mouse, the input keeps focus.
 
 ## 0.15.1 - 2026-04-16
 
