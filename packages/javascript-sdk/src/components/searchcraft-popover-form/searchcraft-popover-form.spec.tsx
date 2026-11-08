@@ -52,7 +52,7 @@ const completeSearch = (
     searchTerm,
     isSearchInProgress: false,
     searchClientResponseItems: items,
-    searchClientRequestProperties: { searchTerm },
+    searchClientRequestProperties: { mode: 'fuzzy', searchTerm },
   });
 };
 
