@@ -40,6 +40,9 @@ jobs:
       - name: Build packages
         run: yarn build
 
+      - name: Test
+        run: yarn test:all
+
       - name: Publish packages
         run: yarn lerna publish from-package --no-private --yes
         env:

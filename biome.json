@@ -8,7 +8,8 @@
       "**/src/themes/hologram.css",
       "**/src/stencil-output/*",
       "**/src/stencil-web-components.ts",
-      "**/package.json"
+      "**/package.json",
+      "lerna.json"
     ]
   },
   "organizeImports": {
