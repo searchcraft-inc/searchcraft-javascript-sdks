@@ -13,7 +13,7 @@ interface SearchcraftResultsSummaryProps
  * @example
  * ```vue
  * <script setup>
- * import SearchcraftResultsSummary from '@searchcraft/vue-sdk';
+ * import { SearchcraftResultsSummary } from '@searchcraft/vue-sdk';
  * </script>
  *
  * <template>

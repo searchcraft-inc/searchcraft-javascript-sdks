@@ -15,19 +15,15 @@ interface SearchcraftResultsInfoProps
  *
  * @example
  * ```tsx
- * import React, { useEffect, useRef } from 'react';
  * import { SearchcraftResultsInfo } from '@searchcraft/react-sdk';
  *
- * const MyResultsInfo = () => {
- *   const ref = useRef();
- *
- *   useEffect(() => {
- *     ref.current.customFormatter = (range, count, responseTime) =>
- *       `${range[0]}-${range[1]} of ${count} results in ${responseTime}ms`;
- *   });
- *
- *   return <SearchcraftResultsInfo ref={ref} />;
- * };
+ * const MyResultsInfo = () => (
+ *   <SearchcraftResultsInfo
+ *     template={({ range, count, responseTime }, { html }) => html`
+ *       ${range[0]}-${range[1]} of ${count} results in ${responseTime}ms
+ *     `}
+ *   />
+ * );
  *
  * export default MyResultsInfo;
  * ```

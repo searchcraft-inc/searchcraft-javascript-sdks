@@ -21,7 +21,7 @@ export async function SearchcraftSearchResultsPerPage(
   return (
     <div
       data-sc-component
-      data-sc-tag-name='searchraft-search-results-per-page'
+      data-sc-tag-name='searchcraft-search-results-per-page'
       data-sc-tag={tag}
       // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
       dangerouslySetInnerHTML={{ __html: html as TrustedHTML }}

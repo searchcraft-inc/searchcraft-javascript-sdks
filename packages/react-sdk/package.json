@@ -2,7 +2,7 @@
   "name": "@searchcraft/react-sdk",
   "private": false,
   "author": "Searchcraft Inc.",
-  "version": "0.15.1",
+  "version": "0.16.0",
   "description": "Searchcraft React SDK.",
   "type": "module",
   "license": "Apache-2.0",
@@ -28,7 +28,8 @@
     "docs": "typedoc --options typedoc.json",
     "lint": "biome format lint ./src",
     "test": "vitest --watch=false",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "type-check": "tsc --noEmit -p tsconfig.json"
   },
   "repository": {
     "type": "git",
@@ -57,7 +58,7 @@
     "./themes/*.css": "./dist/client/themes/*.css"
   },
   "dependencies": {
-    "@searchcraft/javascript-sdk": "^0.15.1",
+    "@searchcraft/javascript-sdk": "^0.16.0",
     "classnames": "^2.3.2"
   },
   "peerDependencies": {
@@ -68,7 +69,7 @@
     "@biomejs/biome": "^1.8.1",
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.1",
-    "@types/node": "^20.11.25",
+    "@types/node": "^24.19.2",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "jsdom": "^24.0.0",

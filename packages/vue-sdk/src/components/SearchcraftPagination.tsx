@@ -15,7 +15,7 @@ export interface SearchcraftPaginationProps
  * @example
  * ```vue
  * <script setup>
- *   import SearchcraftPagination from '@searchcraft/vue-sdk';
+ *   import { SearchcraftPagination } from '@searchcraft/vue-sdk';
  * </script>
  *
  * <template>

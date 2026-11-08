@@ -13,8 +13,8 @@ const getCurrencySymbol = (currency: string) =>
     .replace(/\d/g, '')
     .trim();
 
-export const admAdTemplate: ADMAdTemplate = (data, { html }) => html`
- <a href="${data.click_url}" target="_blank" rel="noreferrer">
+export const admAdTemplate: ADMAdTemplate = (data, { html, safeUrl }) => html`
+ <a href="${safeUrl(data.click_url)}" target="_blank" rel="noreferrer">
     <div class="ad">
       <h2 class="ad-title">${data.term}</h2>
       <footer class="ad-footer">
@@ -23,19 +23,22 @@ export const admAdTemplate: ADMAdTemplate = (data, { html }) => html`
       </footer>
     </div>
     <div class="ad-image">
-      <img src="${data.image_url}" alt="${data.term}" />
+      <img src="${safeUrl(data.image_url)}" alt="${data.term}" />
     </div>
   </a>
 `;
 
-export const admAdTemplatePopover: ADMAdTemplate = (data, { html }) => html`
+export const admAdTemplatePopover: ADMAdTemplate = (
+  data,
+  { html, safeUrl },
+) => html`
  <div class="searchcraft-popover-list-item">
     <a
       class="searchcraft-popover-list-item-link"
-      href="${data.click_url}"
+      href="${safeUrl(data.click_url)}"
     >
       <div class="searchcraft-popover-list-item-image-wrapper">
-        <img class="searchcraft-popover-list-item-image" src="${data.image_url}" alt="${data.term}" />
+        <img class="searchcraft-popover-list-item-image" src="${safeUrl(data.image_url)}" alt="${data.term}" />
       </div>
       <div class="searchcraft-popover-list-item-content">
         <p class="searchcraft-popover-list-item-content-title">

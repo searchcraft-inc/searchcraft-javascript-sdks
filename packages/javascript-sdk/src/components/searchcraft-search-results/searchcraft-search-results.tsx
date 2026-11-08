@@ -29,10 +29,7 @@ import type { SearchcraftState } from '@store';
  * @js-example
  * ```html
  * <!-- index.html -->
- * <searchcraft-search-results
- *   ad-interval="4"
- *   place-ad-at-start="true"
- * />
+ * <searchcraft-search-results></searchcraft-search-results>
  * ```
  *
  * ```js
@@ -47,8 +44,6 @@ import type { SearchcraftState } from '@store';
  * @react-example
  * ```jsx
  * <SearchcraftSearchResults
- *   adInterval={4}
- *   placeAdAtState={true}
  *   template={(item, index, { html }) => html`
  *     <h2>${item.title}</h2>
  *   `}
@@ -58,8 +53,6 @@ import type { SearchcraftState } from '@store';
  * @vue-example
  * ```jsx
  * <SearchcraftSearchResults
- *   adInterval={4}
- *   placeAdAtState={true}
  *   :template={(item, index, { html }) => html`
  *     <h2>${item.title}</h2>
  *   `}
@@ -81,6 +74,8 @@ export class SearchcraftSearchResults {
 
   /**
    * A callback function responsible for rendering a result. Passed to `searchcraft-search-result`.
+   * Pass URLs from the result through the `safeUrl` helper before placing them in an `href` or `src`.
+   * Never place result values in event handler attributes such as `onclick`, or in `style`.
    */
   @Prop() template?: SearchResultTemplate<SearchResultTemplateData>;
 
@@ -91,6 +86,11 @@ export class SearchcraftSearchResults {
   @State() searchResultsPage;
   @State() searchResultsPerPage;
   @State() searchTerm = '';
+  /**
+   * The search term of the most recent search request, used to tell a
+   * completed search apart from a term that has not been searched yet.
+   */
+  @State() completedSearchTerm: string | undefined;
 
   private unsubscribe?: () => void;
   private cleanupCore?: () => void;
@@ -127,6 +127,26 @@ export class SearchcraftSearchResults {
     this.searchResultsPage = state.searchResultsPage;
     this.searchResultsPerPage = state.searchResultsPerPage;
     this.searchTerm = state.searchTerm;
+    const requestProperties = state.searchClientRequestProperties;
+    this.completedSearchTerm =
+      requestProperties && typeof requestProperties === 'object'
+        ? requestProperties.searchTerm
+        : undefined;
+  }
+
+  /**
+   * Whether the search for the current search term has completed with no
+   * results. False while the term is empty, while a search is in progress, and
+   * after the term changes until its search completes.
+   */
+  get hasNoResultsToShow() {
+    const searchTerm = this.searchTerm.trim();
+    return (
+      !!searchTerm &&
+      !this.isSearchInProgress &&
+      (this.searchClientResponseItems || []).length === 0 &&
+      this.completedSearchTerm?.trim() === searchTerm
+    );
   }
 
   renderEmptyState() {
@@ -139,12 +159,10 @@ export class SearchcraftSearchResults {
 
   renderNoResultsFoundState() {
     return (
-      <div class='searchcraft-search-results'>
-        <div class='searchcraft-search-results-error-message'>
-          <searchcraft-error-message>
-            No search results found for "{this.searchTerm}" query.
-          </searchcraft-error-message>
-        </div>
+      <div class='searchcraft-search-results-no-results'>
+        <p class='searchcraft-search-results-no-results-message'>
+          No results found for "{this.searchTerm.trim()}".
+        </p>
       </div>
     );
   }
@@ -343,16 +361,12 @@ export class SearchcraftSearchResults {
   render() {
     const searchClientResponseItems = this.searchClientResponseItems || [];
 
-    if (searchClientResponseItems.length === 0 && !this.isSearchInProgress) {
-      return this.renderEmptyState();
+    if (this.hasNoResultsToShow) {
+      return this.renderNoResultsFoundState();
     }
 
-    if (
-      this.searchTerm.length > 0 &&
-      searchClientResponseItems.length === 0 &&
-      !this.isSearchInProgress
-    ) {
-      return this.renderNoResultsFoundState();
+    if (searchClientResponseItems.length === 0 && !this.isSearchInProgress) {
+      return this.renderEmptyState();
     }
 
     if (this.config?.customAdConfig) {

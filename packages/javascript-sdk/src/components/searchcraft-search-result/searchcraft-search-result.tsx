@@ -7,7 +7,7 @@ import type {
 
 import type { SearchcraftCore } from '@classes';
 import { registry } from '@classes/CoreInstanceRegistry';
-import { html } from '@utils';
+import { html, safeUrl } from '@utils';
 
 /**
  * This web component is designed to display detailed information for a single search result. Once a query is submitted, the component formats and presents the result.
@@ -56,6 +56,7 @@ export class SearchcraftSearchResult {
       try {
         this.templateHtml = this.template?.(this.item.document, this.index, {
           html,
+          safeUrl,
           source_index: this.item.source_index,
         });
       } catch (error) {

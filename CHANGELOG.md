@@ -1,3 +1,16 @@
+## 0.16.0 - 2026-11-07
+
+- New Feature: Added a `template` prop to `searchcraft-popover-form` that renders each result with a template callback, like `searchcraft-search-results`.
+- New Feature: Templates now get a `safeUrl` helper for URLs in `href` and `src`, which turns unsafe URLs such as `javascript:` into `#`. Allow your app's own scheme with `safeUrl(url, { schemes: ['myapp'] })`. TypeScript code that calls a template directly now needs to pass `safeUrl` along with `html`.
+- New Feature: `searchcraft-popover-form` now shows `No results found for "<search term>".` when a search returns no results. Customize it with the `noResultsTemplate` prop, whose output is sanitized with DOMPurify.
+- Security: The `html` template helper now escapes values in attribute values, so they can't add attributes such as event handlers. Never place result values in event handler or `style` attributes.
+- Security: Popover results rendered from `popoverResultMappings` now pass their `href` through `safeUrl`. Links with a custom scheme render as `#`; use a `template` to allow them.
+- Bugfix: `searchcraft-search-results` now shows `No results found for "<search term>".` when a search returns no results, instead of the `empty-search` slot. Move any "no results" content out of that slot.
+- Bugfix: The `html` template helper now renders `0` instead of leaving it out.
+- Bugfix: Added a `placeholderValue` prop to `searchcraft-popover-button`, which replaces the hardcoded "Search" text.
+- Enhancement: Mobile keyboards now show a search key, and submitting a search on a touch device closes the keyboard.
+- Documentation: Fixed React and Vue component examples that used props and events that no longer exist.
+
 ## 0.15.1 - 2026-04-16
 
 - Bugfix: `searchcraft-results-summary` now properly reads current store state on mount, fixing an issue where unfocusing and then refocusing a popover component's summary caused the summary text to disappear until the input received keystrokes.

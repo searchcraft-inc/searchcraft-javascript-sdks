@@ -14,7 +14,7 @@ export interface SearchcraftSearchResultsPerPageProps
  * @example
  * ```vue
  * <script setup>
- *   import SearchcraftSearchResultsPerPage from '@searchcraft/vue-sdk';
+ *   import { SearchcraftSearchResultsPerPage } from '@searchcraft/vue-sdk';
  * </script>
  *
  * <template>

@@ -19,7 +19,7 @@ export async function SearchcraftPagination(props: SearchcraftPaginationProps) {
   return (
     <div
       data-sc-component
-      data-sc-tag-name='searchraft-pagination'
+      data-sc-tag-name='searchcraft-pagination'
       data-sc-tag={tag}
       // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
       dangerouslySetInnerHTML={{ __html: html as TrustedHTML }}

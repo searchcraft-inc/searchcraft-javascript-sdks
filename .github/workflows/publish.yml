@@ -15,12 +15,12 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
-          node-version: '20'
+          node-version-file: '.nvmrc'
           cache: 'yarn'
 
       - name: Configure npm authentication
@@ -39,6 +39,9 @@ jobs:
 
       - name: Build packages
         run: yarn build
+
+      - name: Test
+        run: yarn test:all
 
       - name: Publish packages
         run: yarn lerna publish from-package --no-private --yes
@@ -72,13 +75,13 @@ jobs:
           echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Create GitHub Release
-        uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ steps.get_version.outputs.tag }}
-          release_name: Release ${{ steps.get_version.outputs.tag }}
-          body: ${{ steps.changelog.outputs.notes }}
-          draft: false
-          prerelease: false
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ steps.get_version.outputs.tag }}
+          NOTES: ${{ steps.changelog.outputs.notes }}
+        run: |
+          gh release create "$TAG" \
+            --title "Release $TAG" \
+            --notes "$NOTES" \
+            --target "$GITHUB_SHA"
 

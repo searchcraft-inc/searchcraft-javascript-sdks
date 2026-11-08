@@ -4,7 +4,7 @@ import { Component, Prop, State, h } from '@stencil/core';
 
 import type { PopoverButtonTemplate } from '@types';
 
-import { html } from '@utils';
+import { html, safeUrl } from '@utils';
 
 /**
  * Renders a button which, when clicked, turns on popover visibility.
@@ -71,6 +71,14 @@ export class SearchcraftPopoverButton {
    * The type of popover button to render.
    */
   @Prop() type?: 'skeuomorphic' | 'magnifying-glass';
+  /**
+   * The placeholder text shown in the `skeuomorphic` button, and the
+   * accessible label of the `magnifying-glass` button. Set it to the same
+   * value as the `placeholderValue` of `searchcraft-popover-form` so the
+   * button matches the form it opens. When it is blank, the
+   * `magnifying-glass` button is labeled "Search".
+   */
+  @Prop() placeholderValue?: string = 'Search';
   /**
    * The id of the Searchcraft instance that this component should use.
    */
@@ -247,7 +255,7 @@ export class SearchcraftPopoverButton {
               stroke-linejoin='round'
             />
           </svg>
-          <span>Search</span>
+          <span>{this.placeholderValue}</span>
         </div>
         <div class='searchcraft-popover-button-keycaps'>
           <div class='searchcraft-popover-button-keycaps-keycap searchcraft-popover-button-keycaps-keycap-modifier'>
@@ -298,13 +306,17 @@ export class SearchcraftPopoverButton {
   render() {
     return (
       <button
-        aria-label={this.type === 'magnifying-glass' ? 'Search' : undefined}
+        aria-label={
+          this.type === 'magnifying-glass'
+            ? this.placeholderValue?.trim() || 'Search'
+            : undefined
+        }
         class={`searchcraft-popover-button ${this.type ? ` searchcraft-popover-button-${this.type}` : ''}`}
         innerHTML={
           typeof this.template !== 'undefined'
             ? this.template(
                 { isPopoverVisible: this.isPopoverVisible },
-                { html },
+                { html, safeUrl },
               )
             : undefined
         }
