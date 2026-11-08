@@ -28,7 +28,8 @@
     "docs": "typedoc --options typedoc.json",
     "lint": "biome format lint ./src",
     "test": "vitest --watch=false",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "type-check": "tsc --noEmit -p tsconfig.json"
   },
   "repository": {
     "type": "git",

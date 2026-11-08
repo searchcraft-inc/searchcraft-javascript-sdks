@@ -54,6 +54,7 @@
     "dev": "stencil build --dev --watch",
     "test": "vitest --watch=false",
     "test.watch": "vitest",
+    "type-check": "tsc --noEmit -p tsconfig.json",
     "generate": "stencil generate"
   },
   "dependencies": {
