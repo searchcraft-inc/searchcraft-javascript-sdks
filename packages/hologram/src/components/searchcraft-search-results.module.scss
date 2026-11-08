@@ -9,6 +9,12 @@
   text-align: center;
 }
 
-.searchcraft-search-results-error-message {
+.searchcraft-search-results-no-results {
+  color: var(--sc-content-neutral-secondary);
+  padding: 24px 0;
   text-align: center;
+}
+
+.searchcraft-search-results-no-results-message {
+  margin: 0;
 }
