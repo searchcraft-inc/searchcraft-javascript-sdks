@@ -15,14 +15,12 @@ export interface SearchcraftPopoverFormProps
  * @example
  * ```vue
  * <script setup>
- * import SearchcraftPopoverForm from '@searchcraft/vue-sdk';
- * import searchcraftConfig from './searchcraftConfig';
+ * import { SearchcraftPopoverForm } from '@searchcraft/vue-sdk';
  * import popoverResultMappings from './popoverResultMappings';
  * </script>
  *
  * <template>
  *   <SearchcraftPopoverForm
- *     :config="searchcraftConfig"
  *     type="fullscreen"
  *     :popoverResultMappings="popoverResultMappings"
  *     hotkey="k"

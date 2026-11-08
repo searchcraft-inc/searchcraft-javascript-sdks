@@ -15,30 +15,18 @@ export interface SearchcraftInputFormProps
  * @example
  * ```vue
  * <script setup>
- * import SearchcraftInputForm from '@searchcraft/vue-sdk';
- * import searchcraftConfig from './searchcraftConfig';
- *
- * const handleQuerySubmit = (event) => {
- *   console.log("Query submitted", event.detail);
- * };
+ * import { SearchcraftInputForm } from '@searchcraft/vue-sdk';
  * </script>
  *
  * <template>
  *   <SearchcraftInputForm
- *     :config="searchcraftConfig"
  *     :autoSearch="true"
  *     buttonPlacement="right"
  *     buttonLabel="Search"
- *     inputLabel="Search Database"
- *     :customStyles="{ border: '1px solid gray', padding: '5px' }"
+ *     inputLabel="Search articles"
  *     placeholderValue="Search here..."
- *     searchTerm=""
- *     @querySubmit="handleQuerySubmit"
- *     @inputCleared="() => console.log('Input cleared')"
- *     @noResultsReceived="() => console.log('No results found')"
  *     @inputFocus="() => console.log('Input focused')"
  *     @inputBlur="() => console.log('Input blurred')"
- *     @inputInit="() => console.log('Input initialized')"
  *   />
  * </template>
  * ```

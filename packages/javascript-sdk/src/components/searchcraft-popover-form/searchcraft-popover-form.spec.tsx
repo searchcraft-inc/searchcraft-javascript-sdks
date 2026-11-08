@@ -6,6 +6,7 @@ import type {
   PopoverNoResultsTemplate,
   SearchClientResponseItem,
 } from '@types';
+import DOMPurify from 'dompurify';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import './searchcraft-popover-form';
@@ -142,6 +143,30 @@ describe('searchcraft-popover-form no results state', () => {
     expect(page.root?.querySelector('.custom-no-results')?.textContent).toBe(
       'Nada para "zzzz"',
     );
+  });
+
+  it('sanitizes the noResultsTemplate output with DOMPurify', async () => {
+    // DOMPurify cannot sanitize in Stencil's mock document, so check that the
+    // template's output is passed through it and that its result is rendered.
+    const sanitize = vi
+      .spyOn(DOMPurify, 'sanitize')
+      .mockReturnValue('<p class="sanitized">Sanitized</p>');
+
+    const page = await renderPopoverForm(
+      'modal',
+      ({ searchTerm }) => `<p>${searchTerm}</p>`,
+    );
+
+    completeSearch('<img src=x onerror=alert(1)>');
+    await page.waitForChanges();
+
+    expect(sanitize.mock.calls[0]?.[0]).toBe(
+      '<p><img src=x onerror=alert(1)></p>',
+    );
+    expect(page.root?.querySelector('.sanitized')?.textContent).toBe(
+      'Sanitized',
+    );
+    expect(page.root?.querySelector('img')).toBeNull();
   });
 
   it('logs an error and shows the default message when noResultsTemplate throws', async () => {

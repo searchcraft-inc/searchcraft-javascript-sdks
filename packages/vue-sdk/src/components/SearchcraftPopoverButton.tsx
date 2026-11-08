@@ -13,7 +13,7 @@ export interface SearchcraftPopoverButtonProps
  * @example
  * ```vue
  * <script setup>
- * import SearchcraftPopoverButton from '@searchcraft/vue-sdk';
+ * import { SearchcraftPopoverButton } from '@searchcraft/vue-sdk';
  * </script>
  *
  * <template>
