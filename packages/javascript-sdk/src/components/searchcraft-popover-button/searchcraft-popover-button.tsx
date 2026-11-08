@@ -72,6 +72,13 @@ export class SearchcraftPopoverButton {
    */
   @Prop() type?: 'skeuomorphic' | 'magnifying-glass';
   /**
+   * The placeholder text shown in the `skeuomorphic` button, and the
+   * accessible label of the `magnifying-glass` button. Set it to the same
+   * value as the `placeholderValue` of `searchcraft-popover-form` so the
+   * button matches the form it opens.
+   */
+  @Prop() placeholderValue?: string = 'Search';
+  /**
    * The id of the Searchcraft instance that this component should use.
    */
   @Prop() searchcraftId?: string;
@@ -247,7 +254,7 @@ export class SearchcraftPopoverButton {
               stroke-linejoin='round'
             />
           </svg>
-          <span>Search</span>
+          <span>{this.placeholderValue}</span>
         </div>
         <div class='searchcraft-popover-button-keycaps'>
           <div class='searchcraft-popover-button-keycaps-keycap searchcraft-popover-button-keycaps-keycap-modifier'>
@@ -298,7 +305,9 @@ export class SearchcraftPopoverButton {
   render() {
     return (
       <button
-        aria-label={this.type === 'magnifying-glass' ? 'Search' : undefined}
+        aria-label={
+          this.type === 'magnifying-glass' ? this.placeholderValue : undefined
+        }
         class={`searchcraft-popover-button ${this.type ? ` searchcraft-popover-button-${this.type}` : ''}`}
         innerHTML={
           typeof this.template !== 'undefined'

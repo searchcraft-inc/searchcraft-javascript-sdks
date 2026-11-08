@@ -350,6 +350,11 @@ export namespace Components {
      */
     interface SearchcraftPopoverButton {
         /**
+          * The placeholder text shown in the `skeuomorphic` button, and the accessible label of the `magnifying-glass` button. Set it to the same value as the `placeholderValue` of `searchcraft-popover-form` so the button matches the form it opens.
+          * @default 'Search'
+         */
+        "placeholderValue"?: string;
+        /**
           * The id of the Searchcraft instance that this component should use.
          */
         "searchcraftId"?: string;
@@ -1829,6 +1834,11 @@ declare namespace LocalJSX {
      * ```
      */
     interface SearchcraftPopoverButton {
+        /**
+          * The placeholder text shown in the `skeuomorphic` button, and the accessible label of the `magnifying-glass` button. Set it to the same value as the `placeholderValue` of `searchcraft-popover-form` so the button matches the form it opens.
+          * @default 'Search'
+         */
+        "placeholderValue"?: string;
         /**
           * The id of the Searchcraft instance that this component should use.
          */
