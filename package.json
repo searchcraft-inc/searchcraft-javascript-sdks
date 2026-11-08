@@ -37,7 +37,7 @@
     "compendium:react": "yarn workspace compendium storybook:react",
     "compendium:vue": "yarn workspace compendium storybook:vue",
     "compendium:next": "cd packages/compendium && yarn next",
-    "test:all": "yarn test:react-sdk && yarn test:javascript-sdk && yarn test:vue-sdk",
+    "test:all": "yarn test:sdk-javascript && yarn test:sdk-react && yarn test:sdk-vue",
     "test:sdk-react": "yarn workspace @searchcraft/react-sdk test",
     "test:sdk-javascript": "yarn workspace @searchcraft/javascript-sdk test",
     "test:sdk-vue": "yarn workspace @searchcraft/vue-sdk test",

@@ -75,7 +75,7 @@ node build.mjs js --wordpress
 
 ```bash
 yarn test:all                  # Run all SDK tests
-yarn test:sdk-javascript       # javascript-sdk tests (Stencil spec + e2e)
+yarn test:sdk-javascript       # javascript-sdk tests (Stencil spec)
 yarn test:sdk-react            # react-sdk tests (vitest)
 yarn test:sdk-vue              # vue-sdk tests (vitest)
 ```
@@ -225,6 +225,6 @@ The root `tsconfig.json` applies to the whole monorepo with strict settings. Key
 ## Testing Guidelines
 
 - Unit/spec tests use `.spec.ts` suffix and live alongside the source file they test.
-- `javascript-sdk` tests run via Stencil (`stencil test --spec --e2e`).
+- `javascript-sdk` tests run via Stencil (`stencil test --spec`). There are no e2e tests; add `puppeteer` as a dev dependency and the `--e2e` flag when the first one is written.
 - `react-sdk` and `vue-sdk` tests run via **vitest**.
 - Do not create test files outside the package they belong to.

@@ -52,8 +52,8 @@
     "build": "stencil build",
     "docs": "typedoc --options typedoc.json",
     "dev": "stencil build --dev --watch",
-    "test": "stencil test --spec --e2e",
-    "test.watch": "stencil test --spec --e2e --watchAll",
+    "test": "stencil test --spec",
+    "test.watch": "stencil test --spec --watchAll",
     "generate": "stencil generate"
   },
   "dependencies": {
