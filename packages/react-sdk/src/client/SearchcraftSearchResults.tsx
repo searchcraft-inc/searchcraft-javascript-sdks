@@ -15,26 +15,19 @@ interface SearchcraftSearchResultsProps
  *
  * @example
  * ```tsx
- * import React from 'react';
  * import { SearchcraftSearchResults } from '@searchcraft/react-sdk';
- * import searchResultMappings from './searchResultMappings';
  *
- * const MySearchComponent = () => {
- *   return (
- *     <SearchcraftSearchResults
- *       searchResultMappings={searchResultMappings}
- *       resultImagePlacement="left"
- *       buttonLabel="View More"
- *       buttonTarget="_blank"
- *       buttonRel="noopener"
- *       containerTarget="_self"
- *       containerRel="nofollow"
- *       onNoResults={() => console.log("No search results found")}
- *     />
- *   );
- * };
+ * const MySearchResults = () => (
+ *   <SearchcraftSearchResults
+ *     template={(item, index, { html, safeUrl }) => html`
+ *       <a href="${safeUrl(item.url)}">
+ *         <h2>${item.title}</h2>
+ *       </a>
+ *     `}
+ *   />
+ * );
  *
- * export default MySearchComponent;
+ * export default MySearchResults;
  * ```
  */
 const SearchcraftSearchResults: FC<SearchcraftSearchResultsProps> = (props) => (

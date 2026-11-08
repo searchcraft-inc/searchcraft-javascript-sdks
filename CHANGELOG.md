@@ -13,6 +13,7 @@
 - Bugfix: Added a `placeholderValue` prop to `searchcraft-popover-button`. It sets the text in the `skeuomorphic` button, which was always "Search", and the accessible label of the `magnifying-glass` button. Set it to the `placeholderValue` of `searchcraft-popover-form` so the button matches the form it opens. It defaults to "Search".
 - Bugfix: `searchcraft-search-results` now shows `No results found for "<search term>".` when a search returns no results. Before, it showed the `empty-search` slot, the same as when there was no search term. The `empty-search` slot no longer shows after a search returns no results, so move any "no results" content you placed in it. Style the message with the `searchcraft-search-results-no-results` class.
 - Enhancement: Mobile keyboards now show a search key in place of the return key in `searchcraft-input-form` and the popover form. On touch devices, submitting a search closes the keyboard so it no longer covers the results. On devices with a mouse, the input keeps focus.
+- Documentation: Fixed the examples for the React and Vue `SearchcraftSearchResults`, `SearchcraftInputForm`, `SearchcraftResultsInfo` and `SearchcraftPopoverForm` components, which used props and events that no longer exist, and the `searchcraft-search-results` examples, which used `ad-interval` and `place-ad-at-start`. The Vue examples now use named imports.
 
 ## 0.15.1 - 2026-04-16
 

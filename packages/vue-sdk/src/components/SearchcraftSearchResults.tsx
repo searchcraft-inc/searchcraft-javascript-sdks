@@ -13,25 +13,17 @@ interface SearchcraftSearchResultsProps
  * @example
  * ```vue
  * <script setup>
- * import SearchcraftSearchResults from '@searchcraft/vue-sdk';
- * import searchResultMappings from './searchResultMappings';
+ * import { SearchcraftSearchResults } from '@searchcraft/vue-sdk';
  *
- * const handleNoResults = () => {
- *   console.log("No search results found");
- * };
+ * const template = (item, index, { html, safeUrl }) => html`
+ *   <a href="${safeUrl(item.url)}">
+ *     <h2>${item.title}</h2>
+ *   </a>
+ * `;
  * </script>
  *
  * <template>
- *   <SearchcraftSearchResults
- *     :searchResultMappings="searchResultMappings"
- *     resultImagePlacement="left"
- *     buttonLabel="View More"
- *     buttonTarget="_blank"
- *     buttonRel="noopener"
- *     containerTarget="_self"
- *     containerRel="nofollow"
- *     @noResults="handleNoResults"
- *   />
+ *   <SearchcraftSearchResults :template="template" />
  * </template>
  * ```
  */

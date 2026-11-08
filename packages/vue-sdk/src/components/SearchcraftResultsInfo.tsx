@@ -14,14 +14,15 @@ export interface SearchcraftResultsInfoProps
  * @example
  * ```vue
  * <script setup>
- *   import SearchcraftResultsInfo from '@searchcraft/vue-sdk';
+ * import { SearchcraftResultsInfo } from '@searchcraft/vue-sdk';
  *
- *   const customFormatter =  (range, count, responseTime) =>
- *     `${range[0]}-${range[1]} of ${count} results in ${responseTime}ms`;
+ * const template = ({ range, count, responseTime }, { html }) => html`
+ *   ${range[0]}-${range[1]} of ${count} results in ${responseTime}ms
+ * `;
  * </script>
  *
  * <template>
- *   <SearchcraftResultsInfo :customFormatter="customFormatter" />
+ *   <SearchcraftResultsInfo :template="template" />
  * </template>
  * ```
  */
