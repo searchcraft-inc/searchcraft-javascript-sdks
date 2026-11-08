@@ -101,6 +101,7 @@ export class SearchcraftInputForm {
   private core?: SearchcraftCore;
   private unsubscribe?: () => void;
   private cleanupCore?: () => void;
+  private inputElement?: HTMLInputElement;
 
   init() {
     if (this.core) {
@@ -190,8 +191,20 @@ export class SearchcraftInputForm {
 
   handleFormSubmit = async (event: Event) => {
     event.preventDefault();
+    this.dismissOnScreenKeyboard();
     await this.performSearch();
   };
+
+  /**
+   * Closes the on-screen keyboard after a search is submitted on touch devices,
+   * so it no longer covers the results. Devices with a mouse keep focus in the
+   * input, so the user can keep typing and use the arrow keys.
+   */
+  private dismissOnScreenKeyboard() {
+    if (window.matchMedia?.('(hover: none) and (pointer: coarse)').matches) {
+      this.inputElement?.blur();
+    }
+  }
 
   render() {
     const isShowingClearButton = this.inputValue.length > 0;
@@ -235,6 +248,10 @@ export class SearchcraftInputForm {
                 'searchcraft-placeholder-hide-on-focus':
                   this.placeholderBehavior === 'hide-on-focus',
               })}
+              enterkeyhint='search'
+              ref={(el) => {
+                this.inputElement = el;
+              }}
               onFocus={() => this.inputFocus?.emit()}
               onBlur={() => this.inputBlur?.emit()}
               onInput={(event) => {

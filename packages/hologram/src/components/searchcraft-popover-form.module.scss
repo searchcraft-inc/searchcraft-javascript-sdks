@@ -68,6 +68,19 @@
 }
 
 /**
+ * The message shown when a search returns no results.
+ */
+.searchcraft-popover-form-no-results {
+  color: var(--sc-content-neutral-secondary);
+  padding: 24px 0;
+  text-align: center;
+}
+
+.searchcraft-popover-form-no-results-message {
+  margin: 0;
+}
+
+/**
  * Styles shared by multiple types.
  */
 
