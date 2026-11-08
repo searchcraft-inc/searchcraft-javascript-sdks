@@ -75,7 +75,8 @@ export class SearchcraftPopoverButton {
    * The placeholder text shown in the `skeuomorphic` button, and the
    * accessible label of the `magnifying-glass` button. Set it to the same
    * value as the `placeholderValue` of `searchcraft-popover-form` so the
-   * button matches the form it opens.
+   * button matches the form it opens. When it is blank, the
+   * `magnifying-glass` button is labeled "Search".
    */
   @Prop() placeholderValue?: string = 'Search';
   /**
@@ -306,7 +307,9 @@ export class SearchcraftPopoverButton {
     return (
       <button
         aria-label={
-          this.type === 'magnifying-glass' ? this.placeholderValue : undefined
+          this.type === 'magnifying-glass'
+            ? this.placeholderValue?.trim() || 'Search'
+            : undefined
         }
         class={`searchcraft-popover-button ${this.type ? ` searchcraft-popover-button-${this.type}` : ''}`}
         innerHTML={

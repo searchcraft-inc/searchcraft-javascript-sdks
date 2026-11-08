@@ -54,4 +54,13 @@ describe('searchcraft-popover-button', () => {
       'Buscar',
     );
   });
+
+  it('labels the magnifying-glass button "Search" when placeholderValue is blank', async () => {
+    for (const placeholderValue of ['', '   ']) {
+      const page = await renderButton('magnifying-glass', placeholderValue);
+      expect(
+        page.root?.querySelector('button')?.getAttribute('aria-label'),
+      ).toBe('Search');
+    }
+  });
 });
