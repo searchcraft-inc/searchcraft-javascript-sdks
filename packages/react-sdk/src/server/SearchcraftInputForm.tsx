@@ -20,7 +20,7 @@ export async function SearchcraftInputForm(props: SearchcraftInputFormProps) {
   return (
     <div
       data-sc-component
-      data-sc-tag-name='searchraft-input-form'
+      data-sc-tag-name='searchcraft-input-form'
       data-sc-tag={tag}
       // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
       dangerouslySetInnerHTML={{ __html: html as TrustedHTML }}

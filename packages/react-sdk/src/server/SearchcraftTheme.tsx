@@ -16,7 +16,7 @@ export async function SearchcraftTheme(props: SearchcraftThemeProps) {
   return (
     <div
       data-sc-component
-      data-sc-tag-name='searchraft-theme'
+      data-sc-tag-name='searchcraft-theme'
       data-sc-tag={tag}
       // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
       dangerouslySetInnerHTML={{ __html: html as TrustedHTML }}
