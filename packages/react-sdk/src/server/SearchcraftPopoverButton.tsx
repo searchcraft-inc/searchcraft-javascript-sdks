@@ -21,7 +21,7 @@ export async function SearchcraftPopoverButton(
   return (
     <div
       data-sc-component
-      data-sc-tag-name='searchraft-popover-button'
+      data-sc-tag-name='searchcraft-popover-button'
       data-sc-tag={tag}
       // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
       dangerouslySetInnerHTML={{ __html: html as TrustedHTML }}

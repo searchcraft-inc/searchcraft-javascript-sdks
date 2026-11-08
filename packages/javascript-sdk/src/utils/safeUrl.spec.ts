@@ -1,10 +1,5 @@
+import { describe, expect, it } from 'vitest';
 import { safeUrl } from './safeUrl';
-
-declare const describe: (name: string, fn: () => void) => void;
-declare const it: (name: string, fn: () => void | Promise<void>) => void;
-declare const expect: (actual: unknown) => {
-  toBe(expected: unknown): void;
-};
 
 describe('safeUrl', () => {
   it('returns relative URLs unchanged', () => {

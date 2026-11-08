@@ -6,6 +6,7 @@
     "jsxFactory": "h",
     "moduleResolution": "node",
     "noEmit": false,
+    "skipLibCheck": true,
     "verbatimModuleSyntax": true,
     "paths": {
       "@assets/*": ["assets/*"],

@@ -1,28 +1,19 @@
-import { h } from '@stencil/core';
-import { newSpecPage } from '@stencil/core/testing';
+import { h, render } from '@stencil/vitest';
+import { describe, expect, it } from 'vitest';
 
-import { SearchcraftPopoverButton } from './searchcraft-popover-button';
-
-declare const describe: (name: string, fn: () => void) => void;
-declare const it: (name: string, fn: () => void | Promise<void>) => void;
-declare const expect: (actual: unknown) => {
-  toBe(expected: unknown): void;
-};
+import './searchcraft-popover-button';
 
 const renderButton = (
   type: 'skeuomorphic' | 'magnifying-glass',
   placeholderValue?: string,
 ) =>
-  newSpecPage({
-    components: [SearchcraftPopoverButton],
-    template: () => (
-      <searchcraft-popover-button
-        type={type}
-        placeholderValue={placeholderValue}
-        searchcraftId='popover-button-spec'
-      />
-    ),
-  });
+  render(
+    <searchcraft-popover-button
+      type={type}
+      placeholderValue={placeholderValue}
+      searchcraftId='popover-button-spec'
+    />,
+  );
 
 describe('searchcraft-popover-button', () => {
   it('shows "Search" in the skeuomorphic button by default', async () => {

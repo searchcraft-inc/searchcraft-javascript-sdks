@@ -5,7 +5,8 @@
     "outDir": "dist",
     "rootDir": "./src",
     "sourceMap": true,
-    "noEmit": false
+    "noEmit": false,
+    "skipLibCheck": true
   },
   "extends": "../../tsconfig.json",
   "include": ["src"]

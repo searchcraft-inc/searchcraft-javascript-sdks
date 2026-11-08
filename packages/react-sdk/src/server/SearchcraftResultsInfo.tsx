@@ -21,7 +21,7 @@ export async function SearchcraftResultsInfo(
   return (
     <div
       data-sc-component
-      data-sc-tag-name='searchraft-results-info'
+      data-sc-tag-name='searchcraft-results-info'
       data-sc-tag={tag}
       // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
       dangerouslySetInnerHTML={{ __html: html as TrustedHTML }}

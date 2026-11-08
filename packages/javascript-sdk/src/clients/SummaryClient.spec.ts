@@ -1,31 +1,7 @@
 import type { SearchcraftStore } from '@store';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { SummaryClient } from './SummaryClient';
-
-declare const describe: (name: string, fn: () => void) => void;
-declare const it: (name: string, fn: () => void | Promise<void>) => void;
-declare const beforeEach: (fn: () => void | Promise<void>) => void;
-declare const afterEach: (fn: () => void | Promise<void>) => void;
-declare const expect: (actual: unknown) => {
-  toBe(expected: unknown): void;
-  toHaveBeenCalledTimes(expected: number): void;
-  toHaveBeenCalledWith(...expected: unknown[]): void;
-};
-declare const jest: {
-  useFakeTimers(): void;
-  useRealTimers(): void;
-  restoreAllMocks(): void;
-  runAllTimersAsync(): Promise<void>;
-  spyOn<T extends object, K extends keyof T>(
-    object: T,
-    method: K,
-  ): {
-    mockImplementation(impl: (...args: never[]) => unknown): void;
-  };
-  fn(): {
-    mockResolvedValue(value: unknown): unknown;
-  };
-};
 
 type SummaryClientTestState = {
   hasSummaryBox: boolean;
@@ -51,14 +27,14 @@ type SummaryClientTestState = {
 
 describe('SummaryClient', () => {
   beforeEach(() => {
-    jest.useFakeTimers();
-    jest.spyOn(console, 'warn').mockImplementation(() => undefined);
-    jest.spyOn(console, 'error').mockImplementation(() => undefined);
+    vi.useFakeTimers();
+    vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+    vi.spyOn(console, 'error').mockImplementation(() => undefined);
   });
 
   afterEach(() => {
-    jest.restoreAllMocks();
-    jest.useRealTimers();
+    vi.restoreAllMocks();
+    vi.useRealTimers();
   });
 
   it('gracefully handles 401 summary responses without disrupting search results', async () => {
@@ -96,7 +72,7 @@ describe('SummaryClient', () => {
       state = { ...state, ...nextState };
     }) as unknown as SearchcraftStore['setState'];
 
-    const fetchMock = jest.fn().mockResolvedValue({
+    const fetchMock = vi.fn().mockResolvedValue({
       ok: false,
       status: 401,
     } as Response);
@@ -111,7 +87,7 @@ describe('SummaryClient', () => {
       rangeValueForIndexFields: {},
     });
 
-    await jest.runAllTimersAsync();
+    await vi.runAllTimersAsync();
 
     expect(fetchMock).toHaveBeenCalledTimes(1);
     expect(state.isSummaryLoading).toBe(false);
@@ -124,7 +100,7 @@ describe('SummaryClient', () => {
   });
 
   it('warns once when deprecated cortexURL is provided', async () => {
-    const warnSpy = jest.spyOn(console, 'warn');
+    const warnSpy = vi.spyOn(console, 'warn');
     warnSpy.mockImplementation(() => undefined);
 
     let state: SummaryClientTestState = {
@@ -170,7 +146,7 @@ describe('SummaryClient', () => {
       rangeValueForIndexFields: {},
     });
 
-    await jest.runAllTimersAsync();
+    await vi.runAllTimersAsync();
 
     client.streamSummaryData({
       searchTerm: 'chalk',
@@ -179,13 +155,13 @@ describe('SummaryClient', () => {
       rangeValueForIndexFields: {},
     });
 
-    await jest.runAllTimersAsync();
+    await vi.runAllTimersAsync();
 
     expect(warnSpy).toHaveBeenCalledTimes(1);
   });
 
   it('gracefully handles malformed summary request payloads', async () => {
-    const errorSpy = jest.spyOn(console, 'error');
+    const errorSpy = vi.spyOn(console, 'error');
     errorSpy.mockImplementation(() => undefined);
 
     let state: SummaryClientTestState = {
@@ -221,14 +197,14 @@ describe('SummaryClient', () => {
       state = { ...state, ...nextState };
     }) as unknown as SearchcraftStore['setState'];
 
-    const fetchMock = jest.fn();
+    const fetchMock = vi.fn();
     global.fetch = fetchMock as unknown as typeof fetch;
 
     const client = new SummaryClient(get, set);
 
     client.streamSummaryData('{bad json');
 
-    await jest.runAllTimersAsync();
+    await vi.runAllTimersAsync();
 
     expect(errorSpy).toHaveBeenCalledTimes(1);
     expect(fetchMock).toHaveBeenCalledTimes(0);
@@ -236,7 +212,7 @@ describe('SummaryClient', () => {
   });
 
   it('logs a specific error for malformed SSE payloads', async () => {
-    const errorSpy = jest.spyOn(console, 'error');
+    const errorSpy = vi.spyOn(console, 'error');
     errorSpy.mockImplementation(() => undefined);
 
     let state: SummaryClientTestState = {
@@ -272,7 +248,7 @@ describe('SummaryClient', () => {
       state = { ...state, ...nextState };
     }) as unknown as SearchcraftStore['setState'];
 
-    const fetchMock = jest.fn().mockResolvedValue({
+    const fetchMock = vi.fn().mockResolvedValue({
       ok: true,
       body: {
         getReader: () => {
@@ -307,7 +283,7 @@ describe('SummaryClient', () => {
       rangeValueForIndexFields: {},
     });
 
-    await jest.runAllTimersAsync();
+    await vi.runAllTimersAsync();
     await Promise.resolve();
     await Promise.resolve();
 

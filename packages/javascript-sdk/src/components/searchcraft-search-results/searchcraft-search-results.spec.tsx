@@ -1,19 +1,11 @@
 import type { SearchcraftCore } from '@classes';
 import { registry } from '@classes/CoreInstanceRegistry';
-import { h } from '@stencil/core';
-import { newSpecPage } from '@stencil/core/testing';
+import { h, render } from '@stencil/vitest';
 import { createSearchcraftStore } from '@store';
 import type { SearchClientResponseItem } from '@types';
+import { describe, expect, it } from 'vitest';
 
-import { SearchcraftSearchResults } from './searchcraft-search-results';
-
-declare const describe: (name: string, fn: () => void) => void;
-declare const it: (name: string, fn: () => void | Promise<void>) => void;
-declare const expect: (actual: unknown) => {
-  toBe(expected: unknown): void;
-  toBeNull(): void;
-  not: { toBeNull(): void };
-};
+import './searchcraft-search-results';
 
 const SEARCHCRAFT_ID = 'search-results-spec';
 
@@ -37,7 +29,7 @@ const completeSearch = (
     searchTerm,
     isSearchInProgress: false,
     searchClientResponseItems: items,
-    searchClientRequestProperties: { searchTerm },
+    searchClientRequestProperties: { mode: 'fuzzy', searchTerm },
   });
 };
 
@@ -49,12 +41,7 @@ const renderSearchResults = async () => {
     searchClientRequestProperties: undefined,
   });
 
-  return newSpecPage({
-    components: [SearchcraftSearchResults],
-    template: () => (
-      <searchcraft-search-results searchcraftId={SEARCHCRAFT_ID} />
-    ),
-  });
+  return render(<searchcraft-search-results searchcraftId={SEARCHCRAFT_ID} />);
 };
 
 const noResultsMessage = (root?: Element | null) =>

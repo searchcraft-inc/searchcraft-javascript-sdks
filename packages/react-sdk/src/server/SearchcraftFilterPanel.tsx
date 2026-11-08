@@ -21,7 +21,7 @@ export async function SearchcraftFilterPanel(
   return (
     <div
       data-sc-component
-      data-sc-tag-name='searchraft-filter-panel'
+      data-sc-tag-name='searchcraft-filter-panel'
       data-sc-tag={tag}
       // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
       dangerouslySetInnerHTML={{ __html: html as TrustedHTML }}
