@@ -1,3 +1,5 @@
+@use "../typography.scss";
+
 .searchcraft-search-results {
   display: flex;
   flex-direction: column;
@@ -10,6 +12,7 @@
 }
 
 .searchcraft-search-results-no-results {
+  @include typography.body();
   color: var(--sc-content-neutral-secondary);
   padding: 24px 0;
   text-align: center;
