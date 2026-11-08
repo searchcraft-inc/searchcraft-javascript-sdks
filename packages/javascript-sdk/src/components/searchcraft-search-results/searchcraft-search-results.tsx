@@ -29,10 +29,7 @@ import type { SearchcraftState } from '@store';
  * @js-example
  * ```html
  * <!-- index.html -->
- * <searchcraft-search-results
- *   ad-interval="4"
- *   place-ad-at-start="true"
- * />
+ * <searchcraft-search-results></searchcraft-search-results>
  * ```
  *
  * ```js
@@ -47,8 +44,6 @@ import type { SearchcraftState } from '@store';
  * @react-example
  * ```jsx
  * <SearchcraftSearchResults
- *   adInterval={4}
- *   placeAdAtState={true}
  *   template={(item, index, { html }) => html`
  *     <h2>${item.title}</h2>
  *   `}
@@ -58,8 +53,6 @@ import type { SearchcraftState } from '@store';
  * @vue-example
  * ```jsx
  * <SearchcraftSearchResults
- *   adInterval={4}
- *   placeAdAtState={true}
  *   :template={(item, index, { html }) => html`
  *     <h2>${item.title}</h2>
  *   `}

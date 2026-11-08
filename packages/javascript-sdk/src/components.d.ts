@@ -638,10 +638,7 @@ export namespace Components {
      * ```
      * @js-example ```html
      * <!-- index.html -->
-     * <searchcraft-search-results
-     *   ad-interval="4"
-     *   place-ad-at-start="true"
-     * />
+     * <searchcraft-search-results></searchcraft-search-results>
      * ```
      * ```js
      * // index.js
@@ -652,8 +649,6 @@ export namespace Components {
      * ```
      * @react-example ```jsx
      * <SearchcraftSearchResults
-     *   adInterval={4}
-     *   placeAdAtState={true}
      *   template={(item, index, { html }) => html`
      *     <h2>${item.title}</h2>
      *   `}
@@ -661,8 +656,6 @@ export namespace Components {
      * ```
      * @vue-example ```jsx
      * <SearchcraftSearchResults
-     *   adInterval={4}
-     *   placeAdAtState={true}
      *   :template={(item, index, { html }) => html`
      *     <h2>${item.title}</h2>
      *   `}
@@ -1285,10 +1278,7 @@ declare global {
      * ```
      * @js-example ```html
      * <!-- index.html -->
-     * <searchcraft-search-results
-     *   ad-interval="4"
-     *   place-ad-at-start="true"
-     * />
+     * <searchcraft-search-results></searchcraft-search-results>
      * ```
      * ```js
      * // index.js
@@ -1299,8 +1289,6 @@ declare global {
      * ```
      * @react-example ```jsx
      * <SearchcraftSearchResults
-     *   adInterval={4}
-     *   placeAdAtState={true}
      *   template={(item, index, { html }) => html`
      *     <h2>${item.title}</h2>
      *   `}
@@ -1308,8 +1296,6 @@ declare global {
      * ```
      * @vue-example ```jsx
      * <SearchcraftSearchResults
-     *   adInterval={4}
-     *   placeAdAtState={true}
      *   :template={(item, index, { html }) => html`
      *     <h2>${item.title}</h2>
      *   `}
@@ -2135,10 +2121,7 @@ declare namespace LocalJSX {
      * ```
      * @js-example ```html
      * <!-- index.html -->
-     * <searchcraft-search-results
-     *   ad-interval="4"
-     *   place-ad-at-start="true"
-     * />
+     * <searchcraft-search-results></searchcraft-search-results>
      * ```
      * ```js
      * // index.js
@@ -2149,8 +2132,6 @@ declare namespace LocalJSX {
      * ```
      * @react-example ```jsx
      * <SearchcraftSearchResults
-     *   adInterval={4}
-     *   placeAdAtState={true}
      *   template={(item, index, { html }) => html`
      *     <h2>${item.title}</h2>
      *   `}
@@ -2158,8 +2139,6 @@ declare namespace LocalJSX {
      * ```
      * @vue-example ```jsx
      * <SearchcraftSearchResults
-     *   adInterval={4}
-     *   placeAdAtState={true}
      *   :template={(item, index, { html }) => html`
      *     <h2>${item.title}</h2>
      *   `}
@@ -2679,10 +2658,7 @@ declare module "@stencil/core" {
              * ```
              * @js-example ```html
              * <!-- index.html -->
-             * <searchcraft-search-results
-             *   ad-interval="4"
-             *   place-ad-at-start="true"
-             * />
+             * <searchcraft-search-results></searchcraft-search-results>
              * ```
              * ```js
              * // index.js
@@ -2693,8 +2669,6 @@ declare module "@stencil/core" {
              * ```
              * @react-example ```jsx
              * <SearchcraftSearchResults
-             *   adInterval={4}
-             *   placeAdAtState={true}
              *   template={(item, index, { html }) => html`
              *     <h2>${item.title}</h2>
              *   `}
@@ -2702,8 +2676,6 @@ declare module "@stencil/core" {
              * ```
              * @vue-example ```jsx
              * <SearchcraftSearchResults
-             *   adInterval={4}
-             *   placeAdAtState={true}
              *   :template={(item, index, { html }) => html`
              *     <h2>${item.title}</h2>
              *   `}
