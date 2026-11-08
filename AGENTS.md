@@ -45,7 +45,10 @@ hologram → javascript-sdk → react-sdk / vue-sdk
 
 ### Install
 
+Use the Node version in `.nvmrc` (Node 24). CI reads the same file. Some dev dependencies require Node 22.12 or later.
+
 ```bash
+nvm use
 yarn install
 ```
 
