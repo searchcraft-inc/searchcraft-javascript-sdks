@@ -9,6 +9,7 @@
   - Escaping cannot make event handler attributes such as `onclick`, or `style`, safe. Never place result values there.
 - Security: Without a `template`, `searchcraft-popover-list-item` now passes the `href` mapped from `popoverResultMappings` through `safeUrl`, so a `javascript:` URL in indexed data no longer runs when the result is clicked. A URL with any other scheme, such as an app's own scheme, renders as `#`. To allow it, render results with a `template` and `safeUrl(url, { schemes: ['myapp'] })`.
 - Bugfix: The `html` template helper now renders a value of `0` instead of leaving it out.
+- Bugfix: Added a `placeholderValue` prop to `searchcraft-popover-button`. It sets the text in the `skeuomorphic` button, which was always "Search", and the accessible label of the `magnifying-glass` button. Set it to the `placeholderValue` of `searchcraft-popover-form` so the button matches the form it opens. It defaults to "Search".
 
 ## 0.15.1 - 2026-04-16
 
