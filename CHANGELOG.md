@@ -12,6 +12,7 @@
 - Bugfix: The `html` template helper now renders a value of `0` instead of leaving it out.
 - Bugfix: Added a `placeholderValue` prop to `searchcraft-popover-button`. It sets the text in the `skeuomorphic` button, which was always "Search", and the accessible label of the `magnifying-glass` button. Set it to the `placeholderValue` of `searchcraft-popover-form` so the button matches the form it opens. It defaults to "Search".
 - Enhancement: Mobile keyboards now show a search key in place of the return key in `searchcraft-input-form` and the popover form. On touch devices, submitting a search closes the keyboard so it no longer covers the results. On devices with a mouse, the input keeps focus.
+- Documentation: Fixed the examples for the React and Vue `SearchcraftSearchResults`, `SearchcraftInputForm`, `SearchcraftResultsInfo` and `SearchcraftPopoverForm` components, which used props and events that no longer exist, and the `searchcraft-search-results` examples, which used `ad-interval` and `place-ad-at-start`. The Vue examples now use named imports.
 
 ## 0.15.1 - 2026-04-16
 
