@@ -433,7 +433,7 @@ export namespace Components {
          */
         "hotkeyModifier"?: 'ctrl' | 'meta' | 'alt' | 'option';
         /**
-          * A callback function responsible for rendering the message shown when a search returns no results. When it is not provided, the popover shows `No results found for "<search term>".`
+          * A callback function responsible for rendering the message shown when a search returns no results. When it is not provided, the popover shows `No results found for "<search term>".` The returned markup is sanitized with DOMPurify, which removes scripts, event handler attributes such as `onclick`, and links with schemes it does not allow, such as an app's own scheme.
          */
         "noResultsTemplate"?: PopoverNoResultsTemplate;
         /**
@@ -1916,7 +1916,7 @@ declare namespace LocalJSX {
          */
         "hotkeyModifier"?: 'ctrl' | 'meta' | 'alt' | 'option';
         /**
-          * A callback function responsible for rendering the message shown when a search returns no results. When it is not provided, the popover shows `No results found for "<search term>".`
+          * A callback function responsible for rendering the message shown when a search returns no results. When it is not provided, the popover shows `No results found for "<search term>".` The returned markup is sanitized with DOMPurify, which removes scripts, event handler attributes such as `onclick`, and links with schemes it does not allow, such as an app's own scheme.
          */
         "noResultsTemplate"?: PopoverNoResultsTemplate;
         /**

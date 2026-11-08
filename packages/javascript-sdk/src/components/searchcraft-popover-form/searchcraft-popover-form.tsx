@@ -11,6 +11,7 @@ import type {
 } from '@types';
 import { html, safeUrl } from '@utils';
 import classNames from 'classnames';
+import DOMPurify from 'dompurify';
 
 /**
  * This web component is designed to display search results in a popover container that dynamically appears when the user interacts with a search input field, or when a popover-button is pressed.
@@ -84,6 +85,8 @@ export class SearchcraftPopoverForm {
   /**
    * A callback function responsible for rendering the message shown when a search returns no results.
    * When it is not provided, the popover shows `No results found for "<search term>".`
+   * The returned markup is sanitized with DOMPurify, which removes scripts, event handler
+   * attributes such as `onclick`, and links with schemes it does not allow, such as an app's own scheme.
    */
   @Prop() noResultsTemplate?: PopoverNoResultsTemplate;
   /**
@@ -454,9 +457,8 @@ export class SearchcraftPopoverForm {
         return (
           <div
             class='searchcraft-popover-form-no-results'
-            innerHTML={this.noResultsTemplate(
-              { searchTerm },
-              { html, safeUrl },
+            innerHTML={DOMPurify.sanitize(
+              this.noResultsTemplate({ searchTerm }, { html, safeUrl }),
             )}
           />
         );
